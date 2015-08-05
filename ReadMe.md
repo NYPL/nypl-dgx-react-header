@@ -22,8 +22,6 @@ $ npm install
 Work in progress...
 
 
-```
-
 ### Production
 To run the server in ***Production Mode***, use the following options:
 
@@ -45,4 +43,3 @@ $ npm run start-prod  (builds minified assets, runs Node Server with default NOD
 
 License
 ----
-
