@@ -1,0 +1,97 @@
+@import 'utils/colors';
+@import 'utils/normalize';
+@import 'utils/globals';
+@import 'utils/viewports';
+
+$headerHeight: 175px;
+$headerPaddingR: 70px;
+$headerPaddingL: 120px;
+
+/* NYPL HEADER RULES
+ * -----------------
+ * -- Following BEM naming convention
+ *
+ *
+*/
+#Header {
+  /* Global rules for repetitive elements */
+  a {
+    text-decoration: none;
+  }
+
+  .signIn-up-arrow {
+		&:before, &:after {
+			content: ' ';
+			height: 0;
+			position: absolute;
+			width: 0;
+			border-style: solid;
+			border-width: 10px;
+			border-top-color: transparent;
+			border-left-color: transparent;
+			border-right-color: transparent;
+			border-bottom-color: #666666;
+			top: -19px;
+			left: 171px;
+		}
+
+		/* top-stacked, smaller arrow */
+		&:before {
+			z-index: 2;
+		}
+
+		/* arrow which acts as a background shadow */
+		&:after {
+			z-index: 1;
+		} 	
+  }
+
+  .EmailSubscribeForm-Wrapper {
+  	&.up-arrow {
+			&:before, &:after {
+				content: ' ';
+				height: 0;
+				position: absolute;
+				width: 0;
+				border-style: solid;
+				border-width: 10px;
+				border-top-color: transparent;
+				border-left-color: transparent;
+				border-right-color: transparent;
+				border-bottom-color: #EEE;
+				top: -19px;
+				left: 212px;
+			}
+
+			/* top-stacked, smaller arrow */
+			&:before {
+				z-index: 2;
+			}
+
+			/* arrow which acts as a background shadow */
+			&:after {
+				z-index: 1;
+			}
+  	}
+  }
+
+  /* MAIN NAVIGATION */
+  .NavMenu {
+  	/* Top-level Links Wrapper */
+	  &-linkslist {
+	  	margin: 0;
+	  	padding: 0;
+	  	max-width: 1200px;
+	  	margin: 0 auto;
+	  	list-style-type: none;
+
+	  	li {
+	  		display: inline-block;
+
+	  		a {
+	  			color: #000;
+	  		}
+	  	}
+	  }
+  }
+}

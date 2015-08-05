@@ -1,0 +1,15 @@
+/* first for IE 4–8 */
+@font-face {
+  font-family: KievitScWeb-Book;
+  src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitScWeb-Book.eot");
+}
+
+/* then for WOFF-capable browsers */
+@font-face {
+  font-family: KievitScWeb-Book;
+  src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitScWeb-Book.woff") format("woff");
+}
+
+body {
+  font-family: KievitScWeb-Book, sans-serif;
+}
