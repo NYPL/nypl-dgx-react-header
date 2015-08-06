@@ -4,12 +4,10 @@
   "description": "NYPL React Header with Navigation",
   "main": "src/server/index.js",
   "scripts": {
-    "webpack-dev": "NODE_ENV=development webpack-dev-server --progress --colors --hot --inline",
-    "webpack-prod": "NODE_ENV=production webpack --config webpack.config.js",
-    "build": "npm run webpack-prod",
+    "webpack": "webpack --config webpack.config.js",
+    "build": "npm run webpack",
     "start": "node src/server/index.js",
-    "start-dev": "npm run webpack-dev && npm run start",
-    "start-prod": "npm run build && npm run start"
+    "build-start": "npm run build && npm run start"
   },
   "keywords": [
     "react",

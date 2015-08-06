@@ -10,7 +10,7 @@ var ROOT_PATH = path.resolve(__dirname);
 
 // Sets the variable as
 // either development or production
-var ENV = process.env.NODE_ENV;
+var ENV = process.env.NODE_ENV || 'development';
 
 // Holds the common settings for any environment
 var commonSettings = {
