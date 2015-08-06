@@ -11,7 +11,7 @@ let MegaMenuFeatures = React.createClass({
     }, this);
 
     return (
-      <div className='features'>
+      <div className='MegaMenu-Features'>
         {items}
       </div>
     );

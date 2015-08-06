@@ -8,7 +8,7 @@ let MegaMenuFeatureItem = React.createClass({
 	}
 	
 	return (
-	    <a href={this.props.feature.link} className='feature-item'>
+	    <a href={this.props.feature.link} className='MegaMenu-Features-Item'>
 	    <div className="image-column">
 	    {img}
 	    </div>

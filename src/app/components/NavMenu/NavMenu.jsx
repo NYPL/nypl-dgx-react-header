@@ -47,7 +47,7 @@ class NavMenu extends React.Component {
     }, this);
     return (
       <nav className='NavMenu' onMouseLeave={this._deactivate}>
-        <ul className='NavMenu-linkslist'>
+        <ul className='NavMenu-TopLevelLinks'>
           {items}
         </ul>
         {megas}

@@ -10,11 +10,11 @@ let MegaMenu = React.createClass({
   },
   render: function () {
     let divStyle = {display: "none"},
-      classes = "mega-menu";
+      classes = "MegaMenu";
 
     if (this.props.isActive) {
       divStyle = {};
-      classes = "mega-menu active";
+      classes = "MegaMenu--active";
     }
 
     return (

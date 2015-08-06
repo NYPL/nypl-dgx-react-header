@@ -60,7 +60,6 @@ app.listen(serverPort, () => {
 });
 
 
-console.log(isProduction);
 /* Development Environment Configuration
  * -------------------------------------
  * - Using Webpack Dev Server

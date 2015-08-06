@@ -2,11 +2,11 @@
   "name": "nypl-dgx-react-header",
   "version": "0.0.1",
   "description": "NYPL React Header with Navigation",
-  "main": "src/server/index.js",
+  "main": "index.js",
   "scripts": {
     "webpack": "webpack --config webpack.config.js",
     "build": "npm run webpack",
-    "start": "node src/server/index.js",
+    "start": "node index.js",
     "build-start": "npm run build && npm run start"
   },
   "keywords": [

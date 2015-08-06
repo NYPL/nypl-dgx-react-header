@@ -26,7 +26,7 @@ let MegaMenuSubNav = React.createClass({
     }, this);
 
     return (
-      <div className='sub-nav'>
+      <div className='MegaMenu-SubNav'>
         <h2>{this.props.label[this.props.lang]}</h2>
         <ul>{items}</ul>
       </div>
