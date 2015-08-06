@@ -1,12 +1,11 @@
 import path from 'path';
 import express from 'express';
 import React from 'react';
-import Header from '../app/components/Header/Header.jsx';
-// Used to setup Development Environment
-//import WebpackConfig from '../../webpack.config.js';
+import Header from './src/app/components/Header/Header.jsx';
 
-const DIST_PATH = path.resolve(__dirname, '../../dist');
-const INDEX_PATH = path.resolve(__dirname, '../client/');
+const ROOT_PATH = __dirname;
+const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
+const INDEX_PATH = path.resolve(ROOT_PATH, 'src/client');
 
 // Boolean flag that determines if we are running
 // our application in Production Mode.

@@ -34,11 +34,13 @@ class Header extends React.Component {
   render () {
     return (
       <header id='Header' className='Header' style={styles.base}>
-        <Logo className='Header-Logo' style={styles.logo} />
-        <div id='Header-Buttons' style={styles.topButtons}>
-          <SSOContainer />
-          <SubscribeButton label='Subscribe' lang={this.props.lang} />
-          <DonateButton lang={this.props.lang} />
+        <div className='Header-TopWrapper' style={styles.wrapper}>
+          <Logo className='Header-Logo' style={styles.logo} />
+          <div id='Header-Buttons' style={styles.topButtons}>
+            <SSOContainer />
+            <SubscribeButton label='Subscribe' lang={this.props.lang} />
+            <DonateButton lang={this.props.lang} />
+          </div>
         </div>
         <NavMenu className='Header-NavMenu' items={this.state.data} lang={this.props.lang} />
       </header>
@@ -55,21 +57,24 @@ const styles = {
     position: 'fixed',
     top: 0,
     width: '100%',
-    height: '175px',
     backgroundColor: 'white',
     boxSizing: 'border-box',
     color: 'black'
+  },
+  wrapper: {
+    position: 'relative',
+    margin: '0 auto'
   },
   logo: {
     display: 'block',
     width: '230px',
     position: 'relative',
-    left: '120px'
+    left: '0px'
   },
   topButtons: {
     position: 'absolute',
     top: '20px',
-    right: '70px',
+    right: '2px',
     fontFamily: 'Helvetica, Arial',
     fontSize: '10px',
     textTransform: 'uppercase',

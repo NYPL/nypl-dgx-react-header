@@ -47,6 +47,7 @@
     "radium": "^0.13.5",
     "react": "^0.13.3",
     "react-cookie": "^0.2.5",
+    "rootpath": "^0.1.2",
     "underscore": "^1.8.3"
   }
 }

@@ -1,3 +1,4 @@
+require('rootpath')();
 require('babel/register');
 
-module.exports = require('./src/server/server');
+module.exports = require('serverConfig');

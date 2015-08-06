@@ -19,6 +19,12 @@ $headerPaddingL: 120px;
     text-decoration: none;
   }
 
+  .Header-TopWrapper {
+  	@include min-screen(1024px) {
+  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+  	}
+  }
+
   .signIn-up-arrow {
 		&:before, &:after {
 			content: ' ';
@@ -79,12 +85,14 @@ $headerPaddingL: 120px;
   .NavMenu {
   	/* Top-level Links Wrapper */
 	  &-TopLevelLinks {
-	  	margin: 0;
 	  	padding: 0;
-	  	max-width: 1200px;
 	  	margin: 0 auto;
 	  	list-style-type: none;
 	  	text-align: right;
+
+	  	@include min-screen(1024px) {
+	  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+	  	}
 
 	  	li {
 	  		display: inline-block;
@@ -96,6 +104,26 @@ $headerPaddingL: 120px;
 	  	}
 	  }
 
-	  
+	  .MegaMenu {
+	  	width: 100%;
+
+	  	&-Wrapper {
+		  	@include min-screen(1024px) {
+		  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+		  		margin: 0 auto;
+		  	}
+	  	}
+
+	  	&-SubNav {
+	  		display: table-cell;
+	  		vertical-align: baseline;
+	  	}
+
+	  	&-Features {
+	  		display: table-cell;
+	  		width: 100%;
+	  		vertical-align: baseline;
+	  	}
+	  }
   }
 }
