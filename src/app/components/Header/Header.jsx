@@ -69,7 +69,7 @@ const styles = {
     display: 'block',
     width: '230px',
     position: 'relative',
-    left: '0px'
+    left: '-8px'
   },
   topButtons: {
     position: 'absolute',
