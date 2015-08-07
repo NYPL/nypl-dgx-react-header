@@ -3,10 +3,6 @@
 @import 'utils/globals';
 @import 'utils/viewports';
 
-$headerHeight: 175px;
-$headerPaddingR: 70px;
-$headerPaddingL: 120px;
-
 /* NYPL HEADER RULES
  * -----------------
  * -- Following BEM naming convention
@@ -106,23 +102,110 @@ $headerPaddingL: 120px;
 
 	  .MegaMenu {
 	  	width: 100%;
+	  	color: #FFFFFF;
+	  	background-color: $BG_MENU_BROWSE_RIGHT;
+
+	  	&--active {
+	  		background-color: $BG_MENU_BROWSE_RIGHT;
+	  	}
+
+	  	&-LeftBgWrapper {
+				height: $MAIN_MENU_DESKTOP_HEIGHT;
+				width: 50%;
+				position: absolute;
+				left: 0;
+				background-color: $BG_MENU_BROWSE_LEFT;
+				z-index: 0;
+	  	}
 
 	  	&-Wrapper {
-		  	@include min-screen(1024px) {
-		  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-		  		margin: 0 auto;
-		  	}
+	  		width: 100%;
+		  	display: block;
+		  	min-height: $MAIN_MENU_DESKTOP_HEIGHT;
+		  	margin: 0 auto;
+		  	max-width: 1312px;
+		  	z-index: 1;
+		  	position: relative;
+	  	}
+
+	  	&-SubNavWrapper {
+	  		position: relative;
+	  		width: 325px;
+	  		float: left;
+	  		display: table-cell;
+	  		margin: 0;
+	  		padding: 0;
+	  		background-color: $BG_MENU_BROWSE_LEFT;
+	  		height: $MAIN_MENU_DESKTOP_HEIGHT;
 	  	}
 
 	  	&-SubNav {
+	  		height: 100%;
+	  		position: absolute;
+	  		right: 20px;
+	  		width: 225px;
+
+	  		a {
+	  			color: #FFFFFF;
+	  		}
+
+	  		h2 {
+	  			color: #FFFFFF;
+	  			border-top: 2px solid #FFFFFF;
+	  			margin: 20px 0px;
+	  			padding: 10px 0 0 0;
+	  		}
+
+	  		ul {
+	  			margin: 0;
+	  			padding: 0;
+	  			list-style-type: none;
+
+	  			li {
+	  				&:first-child {
+	  					margin-top: 0px;
+	  				}
+	  				margin: 7px 0px;
+	  			}
+	  		}
+	  	}
+
+	  	&-FeaturesWrapper {
 	  		display: table-cell;
-	  		vertical-align: baseline;
+	  		margin: 0;
+	  		padding: 0;
+	  		height: $MAIN_MENU_DESKTOP_HEIGHT;
+	  		background-color: $BG_MENU_BROWSE_RIGHT;
 	  	}
 
 	  	&-Features {
-	  		display: table-cell;
+	  		display: block;
+	  		margin: 0;
 	  		width: 100%;
-	  		vertical-align: baseline;
+	  	}
+
+	  	&-FeatureItem {
+	  		display: inline-table;
+	  		width: 48%;
+	  		margin: 0 0 0 2%;
+	  		vertical-align: top;
+
+	  		.FeatureItem {
+	  			&-Image {
+	  				width: 90px;
+	  				position: relative;
+	  				top: 80px;
+	  				margin: 0 10px 0 0;
+	  			}
+
+	  			&-Content {
+	  				color: #FFFFFF;
+	  				display: table-cell;
+	  				vertical-align: top;
+	  				position: relative;
+	  				top: 60px;
+	  			}
+	  		}
 	  	}
 	  }
   }

@@ -19,9 +19,18 @@ let MegaMenu = React.createClass({
 
     return (
       <div style={divStyle} className={classes}>
+        <div className='MegaMenu-LeftBgWrapper'>
+        </div>
         <div className='MegaMenu-Wrapper'>
-          <MegaMenuSubNav label={this.props.label} items={this.props.items} lang={this.props.lang} />
-          <MegaMenuFeatures features={this.props.features} />
+          <div className='MegaMenu-SubNavWrapper'>
+            <MegaMenuSubNav 
+            label={this.props.label} 
+            items={this.props.items} 
+            lang={this.props.lang} />
+          </div>
+          <div className='MegaMenu-FeaturesWrapper'>
+            <MegaMenuFeatures features={this.props.features} />
+          </div>
         </div>
       </div>
     );

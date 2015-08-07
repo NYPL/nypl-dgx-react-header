@@ -8,15 +8,15 @@ let MegaMenuFeatureItem = React.createClass({
 	}
 	
 	return (
-	    <a href={this.props.feature.link} className='MegaMenu-Features-Item'>
-	    <div className="image-column">
-	    {img}
-	    </div>
-	    <div>
-            <div className='feature-item-tag'>{this.props.feature.tag}</div>
-            <h3>{this.props.feature.title}</h3>
-            <div className='feature-item-desc'>{this.props.feature.desc}</div>
-	    </div>
+	    <a href={this.props.feature.link} className='MegaMenu-FeatureItem'>
+		    <div className="FeatureItem-Image">
+		    	{img}
+		    </div>
+		    <div className="FeatureItem-Content">
+	        <div className='FeatureItem-Content-Tag'>{this.props.feature.tag}</div>
+	        <h3 className='FeatureItem-Content-Title'>{this.props.feature.title}</h3>
+	        <div className='FeatureItem-Content-Desc'>{this.props.feature.desc}</div>
+		    </div>
       </a>
     );
   }

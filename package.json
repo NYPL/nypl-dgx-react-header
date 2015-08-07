@@ -4,7 +4,7 @@
   "description": "NYPL React Header with Navigation",
   "main": "index.js",
   "scripts": {
-    "webpack": "webpack --config webpack.config.js",
+    "build-dev": "webpack --progress --colors --watch",
     "build": "NODE_ENV=production webpack --config webpack.config.js",
     "start": "node index.js",
     "postinstall": "npm run build",
