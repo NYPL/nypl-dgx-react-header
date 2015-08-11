@@ -1,6 +1,4 @@
 import alt from '../alt.js';
-// small http request library for client/server
-import request from 'superagent';
 
 class Actions {
 
