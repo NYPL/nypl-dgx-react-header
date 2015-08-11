@@ -2,6 +2,9 @@
 import React from 'react';
 import Radium from 'radium';
 
+import Store from '../../stores/Store.js';
+import Actions from '../../actions/Actions.js';
+
 // NYPL module imports
 import Logo from '../Logo/Logo.jsx';
 import SSOContainer from '../SSOContainer/SSOContainer.jsx';
@@ -10,7 +13,7 @@ import SubscribeButton from '../SubscribeButton/SubscribeButton.jsx';
 import NavMenu from '../NavMenu/NavMenu.jsx';
 
 // API Mocked Data
-import API from '../../utils/ApiService';
+//import API from '../../utils/ApiService';
 
 /* Reads from local storage (i.e. Refinery) */
 // If we follow the FLUX architecture
@@ -18,7 +21,12 @@ import API from '../../utils/ApiService';
 // load the data via Store Actions and update our
 // App Constants. As of now, we are mocking an API
 // call to fetch the data.
-const data = API.getData();
+
+function getHeaderState() {
+  return {
+    headerData: TodoStore.getState().headerData
+  };
+}
 
 class Header extends React.Component {
 
@@ -26,14 +34,26 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     // replaces getInitialState()
-    this.state = {
-      data: data
-    };
+    this.state = Store.getState();
+  }
+
+  componentDidMount() {
+    Store.listen(this._onChange.bind(this));
+    // Here we would fetch our data async
+    //Actions.fetchHeaderData();
+  }
+
+  componentWillUnmount() {
+    Store.unlisten(this._onChange.bind(this));
+  }
+
+  _onChange() {
+    this.setState(Store.getState());
   }
 
   render () {
     return (
-      <header id='Header' className='Header' style={styles.base}>
+      <header id='Header' className='Header'>
         <div className='Header-TopWrapper' style={styles.wrapper}>
           <Logo className='Header-Logo' style={styles.logo} />
           <div id='Header-Buttons' style={styles.topButtons}>
@@ -42,7 +62,7 @@ class Header extends React.Component {
             <DonateButton lang={this.props.lang} />
           </div>
         </div>
-        <NavMenu className='Header-NavMenu' items={this.state.data} lang={this.props.lang} />
+        <NavMenu className='Header-NavMenu' items={this.state.headerData} lang={this.props.lang} />
       </header>
     );
   }
@@ -53,14 +73,6 @@ Header.defaultProps = {
 };
 
 const styles = {
-  base: {
-    position: 'fixed',
-    top: 0,
-    width: '100%',
-    backgroundColor: 'white',
-    boxSizing: 'border-box',
-    color: 'black'
-  },
   wrapper: {
     position: 'relative',
     margin: '0 auto'

@@ -10,6 +10,11 @@
  *
 */
 #Header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+
   /* Global rules for repetitive elements */
   a {
     text-decoration: none;
