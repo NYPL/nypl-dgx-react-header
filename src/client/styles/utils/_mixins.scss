@@ -1,0 +1,66 @@
+/* FONT FACE MIXIN
+ * ---------------
+ * Usage: @include font-face('Kievit-Regular', 'http://...');
+ * Desc: Do not include the font file extension, this mixin
+ * will generate the proper extensions.
+*/ 
+@mixin font-face($font-family, $file-path) {
+  @font-face {
+    font-family: $font-family;
+    src: url('#{$file-path}.eot');
+    src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'),
+         url('#{$file-path}.woff') format('woff'),
+         url('#{$file-path}.ttf') format('truetype');
+  }
+}
+
+/* Calculate REM FUNCTION
+ * ----------------------
+ * Usage: calculate-rem(12px);
+ * Desc: Calculates REM size for RWD
+ * Rem is similar to the em value, but instead 
+ * of being relative to the parent element it’s
+ * relative to the font-size set in the <html>.
+*/ 
+@function calculate-rem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+/* FONT SIZE MIXIN
+ * ---------------
+ * Usage: @include font-size(16px);
+ * Desc: Calculates REM size and PX size for RWD
+*/
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculate-rem($size);
+}
+
+/* OPACITY MIXIN
+ * ---------------
+ * Usage: @include opacity(0.8);
+ * Desc: Supports cross-browser Opacity rules
+*/
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+/* CLEARFIX EXTEND MIXIN
+ * ---------------------
+ * Usage: @extend %clearfix;
+ * Desc: Provides IE6 and up support
+ * to clear floated elements.
+*/
+%clearfix {
+  *zoom: 1;
+  &:before, &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}

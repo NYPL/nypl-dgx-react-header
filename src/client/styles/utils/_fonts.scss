@@ -1,0 +1,39 @@
+@import 'mixins';
+
+/* FONT DEFINITIONS
+ * ---------------------------
+ * - Kievit
+ * - Milo
+*/
+@include font-face(Kievit-Regular, 'http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb');
+@include font-face(Kievit-Bold, 'http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Bold');
+@include font-face(Kievit-Book, 'http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Book');
+@include font-face(Kievit-Light, 'http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Light');
+@include font-face(Kievit-Thin, 'http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitWeb-Thin');
+
+/* Small Caps */
+@include font-face(Kievit-SC, 'http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitScWeb');
+
+@mixin Kievit-Regular {
+  font-family: 'Kievit-Regular', sans-serif, arial;
+}
+
+@mixin Kievit-Bold {
+  font-family: 'Kievit-Bold', sans-serif, arial;
+}
+
+@mixin Kievit-Book {
+  font-family: 'Kievit-Book', sans-serif, arial;
+}
+
+@mixin Kievit-Light {
+  font-family: 'Kievit-Light', sans-serif, arial;
+}
+
+@mixin Kievit-Thin {
+  font-family: 'Kievit-Thin', sans-serif, arial;
+}
+
+@mixin Kievit-SC {
+  font-family: 'Kievit-SC', sans-serif, arial;
+}

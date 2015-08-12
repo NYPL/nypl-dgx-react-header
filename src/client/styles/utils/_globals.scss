@@ -1,19 +1,19 @@
-/* first for IE 4–8 */
-@font-face {
-  font-family: KievitScWeb-Book;
-  src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitScWeb-Book.eot");
-}
-
-/* then for WOFF-capable browsers */
-@font-face {
-  font-family: KievitScWeb-Book;
-  src: url("http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/ff_kievit_web/KievitScWeb-Book.woff") format("woff");
-}
+@import 'fonts';
 
 body {
-  font-family: KievitScWeb-Book, sans-serif;
+  @include Kievit-Regular;
 }
 
-$PAGE_WIDTH_WRAPPER_DESKTOP: 1312px;
+/* GLOBAL VARIABLE DEFINITIONS
+ * ---------------------------
+ * - PAGE WIDTHS & HEIGHTS
+*/ 
 
+/* DESKTOP VARIABLES */
+$PAGE_WIDTH_WRAPPER_DESKTOP: 1312px;
 $MAIN_MENU_DESKTOP_HEIGHT: 250px;
+
+/* TABLET VARIABLES */
+
+
+/* MOBILE VARIABLES */

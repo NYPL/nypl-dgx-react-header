@@ -14,6 +14,7 @@
   top: 0;
   width: 100%;
   background-color: white;
+  @extend %clearfix;
 
   /* Global rules for repetitive elements */
   a {
@@ -21,9 +22,13 @@
   }
 
   .Header-TopWrapper {
-  	@include min-screen(1024px) {
+  	@include desktop {
   		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
   	}
+  }
+
+  .SubscribeButton, .DonateButton, .SignInButton {
+  	@include Kievit-Bold;
   }
 
   .signIn-up-arrow {
@@ -91,7 +96,7 @@
 	  	list-style-type: none;
 	  	text-align: right;
 
-	  	@include min-screen(1024px) {
+	  	@include desktop {
 	  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
 	  	}
 
@@ -100,6 +105,7 @@
 	  		padding: 5px 8px;
 
 	  		a {
+	  			@include Kievit-Book;
 	  			color: #000;
 	  		}
 	  	}

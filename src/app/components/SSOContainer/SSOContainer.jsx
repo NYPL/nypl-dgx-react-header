@@ -48,6 +48,7 @@ class SignInContainer extends React.Component {
         {this.state.logged_in}
         <SimpleButton
           id='SignInButton'
+          className={'SignInButton'}
           label={this.state.username || 'Sign In'}
           style={styles.SimpleButton}
           onClick={this._handleClick}
