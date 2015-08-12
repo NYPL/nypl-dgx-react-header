@@ -101,12 +101,40 @@
 	  	}
 
 	  	li {
+	  		position: relative;
 	  		display: inline-block;
 	  		padding: 5px 8px;
 
 	  		a {
 	  			@include Kievit-Book;
 	  			color: #000;
+	  		}
+
+	  		&.active {
+					&:before, &:after {
+						content: ' ';
+						height: 0;
+						position: absolute;
+						width: 0;
+						border-style: solid;
+						border-width: 10px;
+						border-top-color: transparent;
+						border-left-color: transparent;
+						border-right-color: transparent;
+						border-bottom-color: $BG_MENU_BROWSE_RIGHT;
+						bottom: -5px;
+						left: 38%;
+					}
+
+					/* top-stacked, smaller arrow */
+					&:before {
+						z-index: 2;
+					}
+
+					/* arrow which acts as a background shadow */
+					&:after {
+						z-index: 1;
+					}
 	  		}
 	  	}
 	  }
@@ -117,6 +145,8 @@
 	  	background-color: $BG_MENU_BROWSE_RIGHT;
 
 	  	&--active {
+		  	position: relative;
+		  	top: 5px;
 	  		background-color: $BG_MENU_BROWSE_RIGHT;
 	  	}
 
