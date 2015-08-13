@@ -180,6 +180,20 @@
 	  				vertical-align: top;
 	  				position: relative;
 	  				top: 60px;
+
+	  				&-Tag {
+	  					@include Kievit-Medium;
+	  				}
+
+	  				&-Title {
+	  					@include Milo-Regular;
+	  					line-height: 1.25em;
+	  					margin: .75em 0;
+	  				}
+
+	  				&-Desc {
+	  					@include Kievit-Regular;
+	  				}
 	  			}
 	  		}
 	  	}

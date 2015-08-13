@@ -16,6 +16,7 @@ $THIRD_FONT_MILO: 'serif';
 */
 /* KIEVIT */
 @include font-face(Kievit-Regular, '#{$FONT_PATH_PROD}/ff_kievit_web/KievitWeb');
+@include font-face(Kievit-Medium, '#{$FONT_PATH_PROD}/ff_kievit_web/KievitWeb-Medi');
 @include font-face(Kievit-Bold, '#{$FONT_PATH_PROD}/ff_kievit_web/KievitWeb-Bold');
 @include font-face(Kievit-Book, '#{$FONT_PATH_PROD}/ff_kievit_web/KievitWeb-Book');
 @include font-face(Kievit-Light, '#{$FONT_PATH_PROD}/ff_kievit_web/KievitWeb-Light');
@@ -33,6 +34,10 @@ $THIRD_FONT_MILO: 'serif';
 /* KIEVIT INCLUDES */
 @mixin Kievit-Regular {
   font-family: 'Kievit-Regular', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
+}
+
+@mixin Kievit-Medium {
+  font-family: 'Kievit-Medium', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
 }
 
 @mixin Kievit-Bold {
