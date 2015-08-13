@@ -40,9 +40,15 @@ class SubscribeButton extends React.Component {
     //console.log(this.state);
 
     return (
-      <div className='SubscribeButton-Wrapper' ref='SubscribeButton' style={styles.base}>
+      <div className='SubscribeButton-Wrapper'
+      ref='SubscribeButton'
+      style={[
+        styles.base,
+        this.props.style //allows for parent-to-child css styling
+      ]}>
         <SimpleButton
         className={'SubscribeButton'}
+        id={'SubscribeButton'}
         lang={this.props.lang}
         label={this.props.label}
         target={this.props.target}

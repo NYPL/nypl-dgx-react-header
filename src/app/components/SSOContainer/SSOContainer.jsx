@@ -44,7 +44,7 @@ class SignInContainer extends React.Component {
     // styles.SimpleButton.color = this.state.showDialog ? 'white' : 'black';
 
     return (
-      <div style={styles.base}>
+      <div style={[styles.base, this.props.style]}>
         {this.state.logged_in}
         <SimpleButton
           id='SignInButton'
@@ -87,7 +87,6 @@ class SignInContainer extends React.Component {
 
 const styles = {
   base: {
-    position:'relative',
     margin: '0px 5px'
   },
   SimpleButton: {

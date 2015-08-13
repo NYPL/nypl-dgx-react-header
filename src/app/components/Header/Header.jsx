@@ -57,9 +57,9 @@ class Header extends React.Component {
         <div className='Header-TopWrapper' style={styles.wrapper}>
           <Logo className='Header-Logo' style={styles.logo} />
           <div id='Header-Buttons' style={styles.topButtons}>
-            <SSOContainer />
-            <SubscribeButton label='Subscribe' lang={this.props.lang} />
-            <DonateButton lang={this.props.lang} />
+            <SSOContainer style={styles.ssoContainer} />
+            <SubscribeButton label='Subscribe' lang={this.props.lang} style={styles.subscribeButton} />
+            <DonateButton lang={this.props.lang} style={styles.donateButton} />
           </div>
         </div>
         <NavMenu className='Header-NavMenu' items={this.state.headerData} lang={this.props.lang} />
@@ -87,11 +87,17 @@ const styles = {
     position: 'absolute',
     top: '20px',
     right: '2px',
-    fontFamily: 'Helvetica, Arial',
-    fontSize: '10px',
     textTransform: 'uppercase',
-    fontWeight: 'bold',
-    display: 'flex'
+    display: 'block'
+  },
+  ssoContainer: {
+    display: 'inline-block'
+  },
+  subscribeButton: {
+    display: 'inline-block'
+  },
+  donateButton: {
+    display: 'inline-block'
   }
 };
 

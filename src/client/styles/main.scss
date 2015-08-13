@@ -7,7 +7,6 @@
  * -----------------
  * -- Following BEM naming convention
  *
- *
 */
 #Header {
   position: fixed;
@@ -29,61 +28,16 @@
 
   .SubscribeButton, .DonateButton, .SignInButton {
   	@include Kievit-Bold;
+  	font-size: 11px;
   }
 
   .signIn-up-arrow {
-		&:before, &:after {
-			content: ' ';
-			height: 0;
-			position: absolute;
-			width: 0;
-			border-style: solid;
-			border-width: 10px;
-			border-top-color: transparent;
-			border-left-color: transparent;
-			border-right-color: transparent;
-			border-bottom-color: #666666;
-			top: -19px;
-			left: 171px;
-		}
-
-		/* top-stacked, smaller arrow */
-		&:before {
-			z-index: 2;
-		}
-
-		/* arrow which acts as a background shadow */
-		&:after {
-			z-index: 1;
-		} 	
+  	@include up-arrow(#666666, 171px, 'top', -19px);	
   }
 
   .EmailSubscribeForm-Wrapper {
   	&.up-arrow {
-			&:before, &:after {
-				content: ' ';
-				height: 0;
-				position: absolute;
-				width: 0;
-				border-style: solid;
-				border-width: 10px;
-				border-top-color: transparent;
-				border-left-color: transparent;
-				border-right-color: transparent;
-				border-bottom-color: #EEE;
-				top: -19px;
-				left: 212px;
-			}
-
-			/* top-stacked, smaller arrow */
-			&:before {
-				z-index: 2;
-			}
-
-			/* arrow which acts as a background shadow */
-			&:after {
-				z-index: 1;
-			}
+  		@include up-arrow(#EEE, 212px, 'top', -19px);
   	}
   }
 
@@ -111,30 +65,7 @@
 	  		}
 
 	  		&.active {
-					&:before, &:after {
-						content: ' ';
-						height: 0;
-						position: absolute;
-						width: 0;
-						border-style: solid;
-						border-width: 10px;
-						border-top-color: transparent;
-						border-left-color: transparent;
-						border-right-color: transparent;
-						border-bottom-color: $BG_MENU_BROWSE_RIGHT;
-						bottom: -5px;
-						left: 38%;
-					}
-
-					/* top-stacked, smaller arrow */
-					&:before {
-						z-index: 2;
-					}
-
-					/* arrow which acts as a background shadow */
-					&:after {
-						z-index: 1;
-					}
+	  			@include up-arrow($BG_MENU_BROWSE_RIGHT, 38%, 'bottom', -5px);
 	  		}
 	  	}
 	  }
@@ -146,7 +77,7 @@
 
 	  	&--active {
 		  	position: relative;
-		  	top: 5px;
+		  	top: 4px;
 	  		background-color: $BG_MENU_BROWSE_RIGHT;
 	  	}
 
