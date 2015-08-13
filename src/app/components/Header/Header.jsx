@@ -2,6 +2,7 @@
 import React from 'react';
 import Radium from 'radium';
 
+// ALT FLUX
 import Store from '../../stores/Store.js';
 import Actions from '../../actions/Actions.js';
 
@@ -11,22 +12,6 @@ import SSOContainer from '../SSOContainer/SSOContainer.jsx';
 import DonateButton from '../DonateButton/DonateButton.jsx';
 import SubscribeButton from '../SubscribeButton/SubscribeButton.jsx';
 import NavMenu from '../NavMenu/NavMenu.jsx';
-
-// API Mocked Data
-//import API from '../../utils/ApiService';
-
-/* Reads from local storage (i.e. Refinery) */
-// If we follow the FLUX architecture
-// data would not be defined, instead we would
-// load the data via Store Actions and update our
-// App Constants. As of now, we are mocking an API
-// call to fetch the data.
-
-function getHeaderState() {
-  return {
-    headerData: TodoStore.getState().headerData
-  };
-}
 
 class Header extends React.Component {
 
@@ -52,6 +37,7 @@ class Header extends React.Component {
   }
 
   render () {
+    console.log(this.state);
     return (
       <header id='Header' className='Header'>
         <div className='Header-TopWrapper' style={styles.wrapper}>

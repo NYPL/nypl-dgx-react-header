@@ -20,6 +20,9 @@
     "node",
     "express",
     "babel",
+    "alt",
+    "flux",
+    "radium",
     "es6"
   ],
   "repository": {

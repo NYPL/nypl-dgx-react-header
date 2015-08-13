@@ -1,38 +1,40 @@
 import React from 'react';
+import cx from 'classnames';
 
-let NavMenuItem = React.createClass({
-  getDefaultProps: function () {
-    return {
-      target: '#',
-      root: '//nypl.org/',
-      lang: 'en'
-    };
-  },
-  // Pass the index of this item up to the parent so that it can set
-  // the active item
-  activate: function () {
-    this.props.activate(this.props.index);
-  },
-  render: function () {
-    let target = this.props.target,
-      classes = '';
+class NavMenuItem extends React.Component {
+  // Constructor used in ES6
+  constructor(props) {
+    super(props);
 
-    if (target !== '#') {
-      target = this.props.root + target;
-    }
+    // Allows binding methods that reference this
+    this._activate = this._activate.bind(this);
+  }
 
-    if (this.props.isActive) {
-      classes = 'active';
-    }
+  render() {
+    let classes = cx({'active': this.props.isActive}),
+      target = (this.props.target !== '#') 
+        ? `${this.props.root}${this.props.target}` : this.props.target;
 
     return (
       <li className={classes}>
-        <a href={target} onMouseEnter={this.activate} >
+        <a href={target} onMouseEnter={this._activate} >
           {this.props.label[this.props.lang]}
         </a>
       </li>
     );
   }
-});
 
-module.exports = NavMenuItem;
+  // Pass the index of this item up to the parent so that it can set
+  // the active item
+  _activate() {
+    this.props.activate(this.props.index);
+  }
+}
+
+NavMenuItem.defaultProps = {
+  target: '#',
+  root: '//nypl.org/',
+  lang: 'en'
+};
+
+export default NavMenuItem;

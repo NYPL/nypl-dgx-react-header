@@ -28,7 +28,7 @@ let refineryData;
 /*HeaderApiService
   .fetchData('server', API_URL)
   .then(function(result){
-    refineryData = result.data;
+    refineryData = result;
   })
   .catch(function(error){
     console.log('Error on HeaderApiService.fetchData()', error);
@@ -58,6 +58,7 @@ app.disable('x-powered-by');
 
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
+
 // Set the path where to find EJS files
 app.set('views', INDEX_PATH);
 
@@ -100,7 +101,9 @@ app.get('/*', (req, res) => {
   res.render('index', {
   	// Assign the Header String to the
   	// proper EJS variable
-  	headerApp: iso.render()
+  	headerApp: iso.render(),
+    appTitle: appConfig.appName,
+    favicon: appConfig.favIconPath
   });
 });
 
