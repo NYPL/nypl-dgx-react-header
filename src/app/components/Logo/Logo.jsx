@@ -17,7 +17,7 @@ class Logo extends React.Component {
         styles.base,
         this.props.style //allows for parent-to-child css styling
       ]}>
-        <image src={this.props.src} style={styles.image} />
+        <img src={this.props.src} style={styles.image} />
       </a>
     );
   }

@@ -1,13 +1,15 @@
 @import 'mixins';
+@import url('http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700');
 
 $FONT_PATH_QA: 'http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com';
 $FONT_PATH_PROD: 'http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com';
 
-$SECONDARY_FONT_KIEVIT: 'sans-serif';
+$SECONDARY_FONT_KIEVIT: 'Helvetica';
 $THIRD_FONT_KIEVIT: 'arial';
+$FOURTH_FONT_KIEVIT: 'sans-serif';
 
-$SECONDARY_FONT_MILO: 'sans-serif';
-$THIRD_FONT_MILO: 'arial';
+$SECONDARY_FONT_MILO: 'Roboto Slab';
+$THIRD_FONT_MILO: 'serif';
 
 /* FONT DEFINITIONS
  * ---------------------------

@@ -1,7 +1,6 @@
 import path from 'path';
 import compression from 'compression';
 import express from 'express';
-import request from 'request';
 import parser from 'jsonapi-parserinator';
 import React from 'react';
 import Iso from 'iso';

@@ -1,24 +1,23 @@
 import React from 'react';
+import Radium from 'radium';
+import cx from 'classnames';
+
 import MegaMenuSubNav from './MegaMenuSubNav.jsx';
 import MegaMenuFeatures from './MegaMenuFeatures.jsx';
 
-let MegaMenu = React.createClass({
-  getDefaultProps: function () {
-    return {
-      lang: "en"
-    };
-  },
-  render: function () {
-    let divStyle = {display: "none"},
-      classes = "MegaMenu";
+class MegaMenu extends React.Component {
+  // Constructor used in ES6
+  constructor(props) {
+    super(props);
+  }
 
-    if (this.props.isActive) {
-      divStyle = {};
-      classes = "MegaMenu--active";
-    }
-
+  render() {
+    // Dynamic class assignment based on boolean flag
+    let classes = cx({'--active': this.props.isActive});
+    
     return (
-      <div style={divStyle} className={classes}>
+      <div id='MegaMenu' className={'MegaMenu'+classes} 
+      style={this.props.isActive ? styles.show : styles.hide}>
         <div className='MegaMenu-LeftBgWrapper'>
         </div>
         <div className='MegaMenu-Wrapper'>
@@ -35,6 +34,22 @@ let MegaMenu = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = MegaMenu;
+MegaMenu.defaultProps = {
+  lang: 'en'
+};
+
+const styles = {
+  base: {
+
+  },
+  show: {
+    display: 'block'
+  },
+  hide: {
+    display: 'none'
+  }
+};
+
+module.exports = Radium(MegaMenu);

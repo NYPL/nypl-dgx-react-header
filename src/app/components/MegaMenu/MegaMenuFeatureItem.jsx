@@ -1,25 +1,25 @@
 import React from 'react';
+import cx from 'classnames';
 
-let MegaMenuFeatureItem = React.createClass({
-    render: function () {
-	let img = '';
-	if (this.props.feature.image) {
-	    img = <img src={this.props.feature.image} />
-	}
-	
-	return (
+class MegaMenuFeatureItem extends React.Component {
+
+	render() {
+		let img = (this.props.feature.image) ? <img src={this.props.feature.image} /> : '',
+			classes = cx({'with-image': this.props.feature.image, 'without-image': !this.props.feature.image});
+
+		return (
 	    <a href={this.props.feature.link} className='MegaMenu-FeatureItem'>
-		    <div className="FeatureItem-Image">
+		    <div className={'FeatureItem-Image '+classes}>
 		    	{img}
 		    </div>
-		    <div className="FeatureItem-Content">
+		    <div className={'FeatureItem-Content '+classes}>
 	        <div className='FeatureItem-Content-Tag'>{this.props.feature.tag}</div>
 	        <h3 className='FeatureItem-Content-Title'>{this.props.feature.title}</h3>
 	        <div className='FeatureItem-Content-Desc'>{this.props.feature.desc}</div>
 		    </div>
       </a>
-    );
-  }
-});
+	  );
+	}
+}
 
-module.exports = MegaMenuFeatureItem;
+export default MegaMenuFeatureItem;
