@@ -129,7 +129,7 @@ class SSOLoggedInMenu extends React.Component {
         <li style={styles.li}><a style={styles.a} href="http://nypl.bibliocommons.com/user/reminders">Reminders</a></li>
         <li style={styles.li}><a style={styles.a} href="http://nypl.bibliocommons.com/communitycredits">Community Credits</a></li>
         <li style={styles.li}><a style={styles.a} href="http://nypl.bibliocommons.com/carts/order_history">Order History</a></li>
-        <li style={styles.li}><a style={styles.a} href={this._logout} id="sso-logout">Log out</a></li>
+        <li style={styles.li}><a style={styles.a} onClick={this._logout} id="sso-logout">Log out</a></li>
       </ul>
     );
   }
