@@ -84,19 +84,25 @@ class SSOSignIn extends React.Component {
   submitSSO(e) {
     e.preventDefault();
 
-    var data = {
-      username: React.findDOMNode(this.refs.username).value,
-      pin:      React.findDOMNode(this.refs.pin).value,
-      remember: this.state.remember,
-    }
+    let data = {
+        username: React.findDOMNode(this.refs.username).value,
+        pin:      React.findDOMNode(this.refs.pin).value,
+        remember: this.state.remember,
+      },
+      url = 'https://nypl.bibliocommons.com/user/login?destination=';
 
     if (data.remember) {
-      cookie.save('remember_me', {
-        path: '/'
-      });
+      cookie.save('remember_me', { path: '/' });
     } else {
       cookie.remove('remember_me');
     }
+
+
+    url += window.location.href.replace('#', '%23') + '&';
+    url += 'name=' + data.username;
+    url += '&user_pin=' + data.pin;
+
+    window.location.href = url;
   }
 }
 
