@@ -75,54 +75,54 @@ class EmailSubscription extends React.Component {
           <SubscribeMessageBox status={status} msg="There was an error while performing your
           request, please try again later." />
         );     
-      } else {
-        return (
-          <div>
-            <form 
-            ref='EmailSubscribeForm'
-            id={this.props.id}
-            className={this.props.className}
-            action={this.props.target} 
-            method={this.props.form_method}
-            name={this.props.form_name}
-            onSubmit={this._validateForm}
-            style={[
-              styles.base,
-              this.props.style
-            ]}>
-              <div className='EmailSubscribeForm-fields'>
-                <InputField type='hidden' name='thx' value='http://pages.email.nypl.org/confirmation' />
-                <InputField type='hidden' name='err' value='http://pages.email.nypl.org/confirmation' />
-                <InputField type='hidden' name='SubAction' value='sub_add_update' />
-                <InputField type='hidden' name='MID' value='7000413' />
-                <InputField type='hidden' name='Email Type' value='HTML' />
-                <InputField type='hidden' name='lid' value='1061' />
-                
-                <InputField 
-                type='email'
-                name='Email Address'
-                placeholder={this.props.placeholder}
-                style={styles.emailField}
-                ref='emailAddressField'
-                required={true} />
-
-                <InputField 
-                type='submit'
-                name='submit'
-                value='Sign Up'
-                style={styles.submitButton} />
-
-                <InputField type='hidden' name='Source Code' value='Homepage' />
-              </div>
-            </form>
-            <a href={this.props.policyUrl}
-            className='EmailSubscribeForm-pp-link'
-            style={styles.privacyLink}>
-              Privacy Policy
-            </a>
-          </div>
-        );
       }
+
+      return (
+        <div>
+          <form 
+          ref='EmailSubscribeForm'
+          id={this.props.id}
+          className={this.props.className}
+          action={this.props.target} 
+          method={this.props.form_method}
+          name={this.props.form_name}
+          onSubmit={this._validateForm}
+          style={[
+            styles.base,
+            this.props.style
+          ]}>
+            <div className='EmailSubscribeForm-fields'>
+              <InputField type='hidden' name='thx' value='http://pages.email.nypl.org/confirmation' />
+              <InputField type='hidden' name='err' value='http://pages.email.nypl.org/confirmation' />
+              <InputField type='hidden' name='SubAction' value='sub_add_update' />
+              <InputField type='hidden' name='MID' value='7000413' />
+              <InputField type='hidden' name='Email Type' value='HTML' />
+              <InputField type='hidden' name='lid' value='1061' />
+              
+              <InputField 
+              type='email'
+              name='Email Address'
+              placeholder={this.props.placeholder}
+              style={styles.emailField}
+              ref='emailAddressField'
+              required={true} />
+
+              <InputField 
+              type='submit'
+              name='submit'
+              value='Sign Up'
+              style={styles.submitButton} />
+
+              <InputField type='hidden' name='Source Code' value='Homepage' />
+            </div>
+          </form>
+          <a href={this.props.policyUrl}
+          className='EmailSubscribeForm-pp-link'
+          style={styles.privacyLink}>
+            Privacy Policy
+          </a>
+        </div>
+      );
     } else {
       return (
         <div>Loading results...</div>
