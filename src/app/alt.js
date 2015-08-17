@@ -1,3 +1,7 @@
-import Alt from 'alt';
-// This creates the alt variable in a singleton way
-export default new Alt();
+import Alt from 'alt'
+import chromeDebug from 'alt/utils/chromeDebug'
+
+const alt = new Alt();
+chromeDebug(alt);
+
+export default alt

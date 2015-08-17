@@ -1,5 +1,6 @@
 import alt from '../alt.js';
 import Actions from '../actions/Actions.js';
+import HeaderSource from '../utils/HeaderSource.js';
 
 class Store {
   constructor(){
@@ -11,6 +12,8 @@ class Store {
       handleFetchHeaderData: Actions.FETCH_HEADER_DATA,
       handleHeaderDataFailedFetch: Actions.FAILED_HEADER_DATA
     });
+
+    this.registerAsync(HeaderSource);
   }
 
   handleUpdateHeaderData(data) {

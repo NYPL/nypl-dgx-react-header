@@ -5,8 +5,13 @@ import parser from 'jsonapi-parserinator';
 import React from 'react';
 import Iso from 'iso';
 import alt from './src/app/alt.js';
-import HeaderApiService from './src/app/utils/ApiService';
 import appConfig from './appConfig.js';
+
+// Temporary API Service
+import HeaderApiService from './src/app/utils/ApiService';
+
+// Need to improve for server-side and client-side requests
+import HeaderSource from './src/app/utils/HeaderSource.js';
 
 import Header from './src/app/components/Header/Header.jsx';
 
@@ -24,24 +29,16 @@ let refineryData;
 
 // Use the HeaderApiService to fetch our Header Data
 // We would parse the Data at this point and Model it
-/*HeaderApiService
-  .fetchData('server', API_URL)
-  .then(function(result){
-    refineryData = result;
-  })
-  .catch(function(error){
-    console.log('Error on HeaderApiService.fetchData()', error);
-  });*/
-
 // Local Mock
 HeaderApiService
   .fetchData('local')
-  .then(function(result){
+  .then((result) => {
     refineryData = result;
   })
-  .catch(function(error){
-    console.log('Error on HeaderApiService.fetchData()', error);
+  .catch((error) => {
+    console.log('Error on local data fetch', error);
   });
+
 
 /* Express Server Configuration
  * ----------------------------

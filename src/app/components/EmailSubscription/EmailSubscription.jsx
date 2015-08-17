@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import axios from 'axios';
 import InputField from '../InputField/InputField.jsx';
 
 //import HeaderStore from '../../stores/HeaderStore';
@@ -13,7 +14,7 @@ class SubscribeMessageBox extends React.Component {
 
   render () {
     return (
-      <div className='EmailSuccessBox'>
+      <div className={'EmailMessageBox ' + this.props.status }>
         <p>{this.props.msg}</p>
       </div>
     );
@@ -49,65 +50,82 @@ class EmailSubscription extends React.Component {
   }*/
 
   render () {
-    //console.log(this.state);
-    let status = this.state.formStatus;
-    if (status === 'success') {
-      return (
-        <SubscribeMessageBox className={status} msg="Thank you for subscribing to our newsletter. 
-        You'll now receive the best of NYPL in your inbox." />
-      );     
-    }
-    if (status === 'exists') {
-      return (
-        <SubscribeMessageBox className={status} msg="You are already subscribed to our newsletter. 
-        If you're not receiving the best of NYPL in your inbox, please check your spam folder." />
-      );
+    let status = this.state.formStatus,
+      isLoading = this.state.formProcessing;
+
+    //console.log(isLoading, status);
+
+    if (!isLoading) {
+      if (status === 'success') {
+        return (
+          <SubscribeMessageBox status={status} msg="Thank you for subscribing to our newsletter. 
+          You'll now receive the best of NYPL in your inbox." />
+        );     
+      }
+
+      if (status === 'exists') {
+        return (
+          <SubscribeMessageBox status={status} msg="You are already subscribed to our newsletter. 
+          If you're not receiving the best of NYPL in your inbox, please check your spam folder." />
+        );
+      }
+
+      if (status === 'error') {
+        return (
+          <SubscribeMessageBox status={status} msg="There was an error while performing your
+          request, please try again later." />
+        );     
+      } else {
+        return (
+          <div>
+            <form 
+            ref='EmailSubscribeForm'
+            id={this.props.id}
+            className={this.props.className}
+            action={this.props.target} 
+            method={this.props.form_method}
+            name={this.props.form_name}
+            onSubmit={this._validateForm}
+            style={[
+              styles.base,
+              this.props.style
+            ]}>
+              <div className='EmailSubscribeForm-fields'>
+                <InputField type='hidden' name='thx' value='http://pages.email.nypl.org/confirmation' />
+                <InputField type='hidden' name='err' value='http://pages.email.nypl.org/confirmation' />
+                <InputField type='hidden' name='SubAction' value='sub_add_update' />
+                <InputField type='hidden' name='MID' value='7000413' />
+                <InputField type='hidden' name='Email Type' value='HTML' />
+                <InputField type='hidden' name='lid' value='1061' />
+                
+                <InputField 
+                type='email'
+                name='Email Address'
+                placeholder={this.props.placeholder}
+                style={styles.emailField}
+                ref='emailAddressField'
+                required={true} />
+
+                <InputField 
+                type='submit'
+                name='submit'
+                value='Sign Up'
+                style={styles.submitButton} />
+
+                <InputField type='hidden' name='Source Code' value='Homepage' />
+              </div>
+            </form>
+            <a href={this.props.policyUrl}
+            className='EmailSubscribeForm-pp-link'
+            style={styles.privacyLink}>
+              Privacy Policy
+            </a>
+          </div>
+        );
+      }
     } else {
       return (
-        <div>
-        	<form 
-          ref='EmailSubscribeForm'
-        	id={this.props.id}
-          className={this.props.className}
-        	action={this.props.target} 
-        	method={this.props.form_method}
-        	name={this.props.form_name}
-          onSubmit={this._validateForm}
-          style={[
-            styles.base,
-            this.props.style
-          ]}>
-            <div className='EmailSubscribeForm-fields'>
-              <InputField type='hidden' name='thx' value='http://pages.email.nypl.org/confirmation' />
-              <InputField type='hidden' name='err' value='http://pages.email.nypl.org/confirmation' />
-              <InputField type='hidden' name='SubAction' value='sub_add_update' />
-              <InputField type='hidden' name='MID' value='7000413' />
-              <InputField type='hidden' name='Email Type' value='HTML' />
-              <InputField type='hidden' name='lid' value='1061' />
-              
-              <InputField 
-              type='email'
-              name='Email Address'
-              placeholder={this.props.placeholder}
-              style={styles.emailField}
-              ref='emailAddressField'
-              required={true} />
-
-              <InputField 
-              type='submit'
-              name='submit'
-              value='Sign Up'
-              style={styles.submitButton} />
-
-              <InputField type='hidden' name='Source Code' value='Homepage' />
-            </div>
-          </form>
-          <a href={this.props.policyUrl}
-          className='EmailSubscribeForm-pp-link'
-          style={styles.privacyLink}>
-            Privacy Policy
-          </a>
-        </div>
+        <div>Loading results...</div>
       );
     }
   }
@@ -145,35 +163,25 @@ class EmailSubscription extends React.Component {
   }
 
   _addSubscriberToList(email, url, listid) {
-    const postUrl = `${url}/add-subscriber/${listid}`,
-      xhr = new XMLHttpRequest();
+    const postUrl = `${url}/add-subscriber/${listid}`;
 
-    xhr.open('POST', encodeURI(postUrl));
+    // Display loader while processing finalizes.
+    this.setState({formProcessing: true});
 
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-    xhr.onload = () => {
-      let res = JSON.parse(xhr.responseText);
-      // Either sucess or existing entry response
-      if (xhr.status === 200) {
-        
-        console.log(res);
-
-        this.setState({
-          formStatus: res.responseStatus,
-          formProcessing: false
-        });
-        // Store Actions are causing buggy
-        //HeaderActions.updateSubscribeFormStatus(res.responseStatus);
-      }
-    };
-
-    xhr.onerror = (e) => {
-      console.log('onerror triggered');
-      console.log(e.error);
-    };
-
-    xhr.send(encodeURI('email=' + email));
+    axios.post(postUrl, {
+      email: email
+    })
+    .then((response) => {
+      this.setState({
+        formStatus: response.data.responseStatus,
+        formProcessing: false
+      });
+    })
+   .catch((response) => {
+      this.setState({
+        formStatus: response.data.responseStatus
+      });   
+    });
   }
 };
 

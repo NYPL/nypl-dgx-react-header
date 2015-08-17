@@ -1,5 +1,5 @@
-// Server Side Request Module
 import axios from 'axios';
+import Actions from '../actions/Actions.js';
 
 const fakeData = [{
   label: { en: 'Browse' },
@@ -140,7 +140,7 @@ const fakeData = [{
       title: "Digital Collections",
       desc: "Access more than 800,000 images digitized from the New York Public Library's collections including historical maps, vintage posters, photographs, and more.",
       link: "//digitalcollections.nypl.org",
-      image: 'http://fpoimg.com/88x88'	  
+      image: 'http://fpoimg.com/88x88'    
     },
     {
       tag: "Information",
@@ -212,25 +212,25 @@ const fakeData = [{
   ]
 }];
 
-const HeaderApiService = {
-	fetchData(source, url) {
-		if (source === 'server') {
-      return axios.get(url).then(res => res.data);
-		}
-
-		if (source === 'client') {
-
-		}
-
-		if (source === 'local') {
-			return new Promise((resolve, reject) => {
-				resolve(fakeData);
-			});
-		}
-	}
-};
-
-
-export default HeaderApiService;
-
-
+export default {
+  loadHeaderData(url) {
+    return {
+      local(state) {
+        return state.headerData;
+      },
+      remote(state, url) {
+        return axios.get(url).then(res => res);
+      },
+      shouldFetch(state) {
+        const headerData = state.headerData;
+        // sends request if headerData doesn't exist in the store
+        if (!headerData) {
+          return true;
+        }
+        return false;
+      },
+      success: Actions.updateHeaderData,
+      error: Actions.failedHeaderData
+    }
+  }
+}
