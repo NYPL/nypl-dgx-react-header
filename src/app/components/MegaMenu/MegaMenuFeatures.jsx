@@ -2,9 +2,14 @@ import React from 'react';
 import _ from 'underscore';
 import MegaMenuFeatureItem from './MegaMenuFeatureItem.jsx';
 
-let MegaMenuFeatures = React.createClass({
-  render: function () {
-    var items = _.map(this.props.features, function(m, i) {
+class MegaMenuFeatures extends React.Component {
+  // Constructor used in ES6
+  constructor(props) {
+    super(props);
+  }
+  
+  render() {
+    let items = _.map(this.props.features, function(m, i) {
       return (
         <MegaMenuFeatureItem key={i} feature={m} />
       );
@@ -16,6 +21,6 @@ let MegaMenuFeatures = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = MegaMenuFeatures;
+export default MegaMenuFeatures;

@@ -1,13 +1,14 @@
 import React from 'react';
 import _ from 'underscore';
 
-let MegaMenuSubNav = React.createClass({
-  getDefaultProps: function () {
-    return {
-      lang: "en"
-    };
-  },
-  render: function () {
+class MegaMenuSubNav extends React.Component {
+
+  // Constructor used in ES6
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
     let items = _.map(this.props.items, function(m, i) {
         let target = m.target;
 
@@ -18,6 +19,7 @@ let MegaMenuSubNav = React.createClass({
         } else if (!/^http/.exec(target)) {
           target = '//nypl.org/' + target;
         }
+        
         return (
           <li key={i}>
             <a href={target}>{m.label[this.props.lang]}</a>
@@ -32,6 +34,10 @@ let MegaMenuSubNav = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = MegaMenuSubNav;
+MegaMenuSubNav.defaultProps = {
+  lang: 'en'
+};
+
+export default MegaMenuSubNav;
