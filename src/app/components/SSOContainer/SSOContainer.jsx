@@ -18,7 +18,6 @@ class SignInContainer extends React.Component {
       username: this._login(),
       logged_in: !!this._login(),
       remember: this._remember_me(),
-      showDialog: false,
       ssoWindowVisible: HeaderStore.getSSOWindowVisible()
     };
 
@@ -37,11 +36,6 @@ class SignInContainer extends React.Component {
   render() {
     let showDialog = this.state.ssoWindowVisible;
     const classes =  cx({ show: showDialog, hide: !showDialog });
-
-    //console.log(this.state);
-
-    // styles.SimpleButton.backgroundColor = this.state.showDialog ? '#E43534' : 'transparent';
-    // styles.SimpleButton.color = this.state.showDialog ? 'white' : 'black';
 
     return (
       <div style={[styles.base, this.props.style]}>
@@ -67,7 +61,6 @@ class SignInContainer extends React.Component {
   _handleClick(e) {
     e.preventDefault();
     HeaderActions.toggleSSOWindowVisible();
-    //this.setState({showDialog: !this.state.showDialog});
   }
 
   // Updates the state of the form based off the Header Store.
@@ -77,7 +70,7 @@ class SignInContainer extends React.Component {
   }
 
   _login() {
-    return cookie.load('username');
+    return cookie.load('bc_username');
   }
 
   _remember_me() {

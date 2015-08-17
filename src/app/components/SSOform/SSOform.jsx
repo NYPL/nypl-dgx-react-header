@@ -104,10 +104,13 @@ class SSOLoggedInMenu extends React.Component {
   constructor(props) {
     super(props);
 
+    this.current_location = window !== undefined ? window.location.href : '';
     this.state = {
       current_location: 'http://nypl.org',
       logout_url: `https://nypl.bibliocommons.com/user/logout?destination=${this.current_location}`
     };
+
+    this._logout = this._logout.bind(this);
   }
 
   render() {
@@ -120,9 +123,14 @@ class SSOLoggedInMenu extends React.Component {
         <li style={styles.li}><a style={styles.a} href="http://nypl.bibliocommons.com/user/reminders">Reminders</a></li>
         <li style={styles.li}><a style={styles.a} href="http://nypl.bibliocommons.com/communitycredits">Community Credits</a></li>
         <li style={styles.li}><a style={styles.a} href="http://nypl.bibliocommons.com/carts/order_history">Order History</a></li>
-        <li style={styles.li}><a style={styles.a} href={this.state.logout_url} id="sso-logout">Log out</a></li>
+        <li style={styles.li}><a style={styles.a} href={this._logout} id="sso-logout">Log out</a></li>
       </ul>
     );
+  }
+
+  _logout (e) {
+    e.preventDefault();
+    window.location = this.state.logout_url;
   }
 }
 
