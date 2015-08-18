@@ -361,5 +361,117 @@
 	  		}
 	  	}
 	  }
+
+  	/* FIND US WIDGET
+  	 * --------------
+  	 * Specific SASS rules for
+  	 * this widget within the Header.
+  	*/ 
+  	.FindUsWidget {
+  		&-LocationFinder {
+				display: inline-table;
+				width: 46%;
+				margin: 0 2% 0 2%;
+				vertical-align: top;
+
+				&-Wrapper {
+  				color: #FFFFFF;
+  				display: table-cell;
+  				vertical-align: top;
+  				position: relative;
+  				top: 60px;
+				}
+
+				&-Tag {
+					@include Kievit-Medium;
+				}
+
+				&-IntroText {
+					display: block;
+					margin: 1em 0;
+					@include Milo-Regular;
+					line-height: 1.25em;
+					font-size: 18px;
+					max-width: 65%;
+				}
+
+				&-SearchBox {
+					display: block;
+					margin: 10px 0 0 0;
+				}
+
+				#LocationFinder {
+					&-Input {
+						display: table-cell;
+						border: none;
+						height: 40px;
+						width: 65%;
+						padding: 2px 5px;
+						font-size: 15px;
+						color: #000;
+					}
+					&-Submit {
+						display: table-cell;
+						border: none;
+						padding: 0px 15px;
+						margin: 0px;
+						height: 44px;
+						background-color: $BG_MENU_SEARCH;
+						width: auto;
+						vertical-align: top;
+						font-size: 15px;
+					}
+				}
+  		}
+
+  		&-SeparationBar {
+  			display: inline-table;
+  			position: relative;
+  			top: 25px;
+  			height: 200px;
+  			border-right: 1px solid #FFF;
+  		}
+
+  		&-FeaturedLocation {
+				display: inline-table;
+				width: 48%;
+				margin: 0 0 0 2%;
+				vertical-align: top;
+
+  			&-Image {
+  				width: 88px;
+  				height: 88px;
+  				position: relative;
+  				top: 80px;
+  				margin: 0 10px 0 0;
+
+  				img {
+  					border-radius: 50%;
+  				}
+  			}
+
+  			&-Content {
+  				color: #FFFFFF;
+  				display: table-cell;
+  				vertical-align: top;
+  				position: relative;
+  				top: 60px;
+
+  				&-Tag {
+  					@include Kievit-Medium;
+  				}
+
+  				&-Title {
+  					@include Milo-Regular;
+  					line-height: 1.25em;
+  					margin: .75em 0;
+  				}
+
+  				&-Desc {
+  					@include Kievit-Regular;
+  				}
+  			}
+  		}
+  	}
   }
 }
