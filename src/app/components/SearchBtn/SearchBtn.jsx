@@ -6,7 +6,7 @@ import React from 'react';
 import BasicButton from '../Buttons/BasicButton.jsx';
 
 // Create React class
-class SearchBoxBtn extends React.Component {
+class SearchBtn extends React.Component {
 
   // Constructor used in ES6
   constructor(props) {
@@ -21,9 +21,9 @@ class SearchBoxBtn extends React.Component {
   render () {
   	return (
       <li>
-        <BasicButton id='NavMenu-TopLevelLinks__Search-Box-Btn'
-        className='NavMenu-TopLevelLinks__Search-Box-Btn'
-        name='Search Box Button'
+        <BasicButton id='NavMenu-TopLevelLinks__Search-Btn'
+        className='NavMenu-TopLevelLinks__Search-Btn'
+        name='Search Button'
         label='Search Box'
         style={styles.base} />
       </li>
@@ -38,4 +38,4 @@ const styles = {
 };
 
 // Export the class
-export default Radium(SearchBoxBtn);
+export default Radium(SearchBtn);

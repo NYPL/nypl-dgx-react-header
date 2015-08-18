@@ -3,7 +3,8 @@ import React from 'react';
 import _ from 'underscore';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.jsx';
 import MegaMenu from '../MegaMenu/MegaMenu.jsx';
-import SearchBoxBtn from '../SearchBoxBtn/SearchBoxBtn.jsx';
+import SearchBtn from '../SearchBtn/SearchBtn.jsx';
+import SearchBox from '../SearchBox/SearchBox.jsx';
 
 class NavMenu extends React.Component {
 
@@ -50,9 +51,10 @@ class NavMenu extends React.Component {
       <nav className='NavMenu' onMouseLeave={this._deactivate}>
         <ul className='NavMenu-TopLevelLinks'>
           {items}
-          <SearchBoxBtn />
+          <SearchBtn />
         </ul>
         {megas}
+        <SearchBox />
       </nav>
     );
   }
