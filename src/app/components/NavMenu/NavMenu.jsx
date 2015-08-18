@@ -3,6 +3,7 @@ import React from 'react';
 import _ from 'underscore';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.jsx';
 import MegaMenu from '../MegaMenu/MegaMenu.jsx';
+import SearchBoxBtn from '../SearchBoxBtn/SearchBoxBtn.jsx';
 
 class NavMenu extends React.Component {
 
@@ -49,6 +50,7 @@ class NavMenu extends React.Component {
       <nav className='NavMenu' onMouseLeave={this._deactivate}>
         <ul className='NavMenu-TopLevelLinks'>
           {items}
+          <SearchBoxBtn />
         </ul>
         {megas}
       </nav>
