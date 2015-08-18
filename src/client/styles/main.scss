@@ -346,6 +346,7 @@
 
 	  				&-Tag {
 	  					@include Kievit-Medium;
+	  					text-transform: uppercase;
 	  				}
 
 	  				&-Title {
@@ -384,6 +385,7 @@
 
 				&-Tag {
 					@include Kievit-Medium;
+					text-transform: uppercase;
 				}
 
 				&-IntroText {
@@ -459,6 +461,7 @@
 
   				&-Tag {
   					@include Kievit-Medium;
+  					text-transform: uppercase;
   				}
 
   				&-Title {
