@@ -16,7 +16,8 @@ class MegaMenu extends React.Component {
     let classes = cx({'--active': this.props.isActive});
     
     return (
-      <div id='MegaMenu' className={'MegaMenu'+classes} 
+      <div id={(this.props.navId) ? 'MegaMenu-'+this.props.navId : 'MegaMenu'} 
+      className={'MegaMenu'+classes} 
       style={this.props.isActive ? styles.show : styles.hide}>
         <div className='MegaMenu-LeftBgWrapper'>
         </div>

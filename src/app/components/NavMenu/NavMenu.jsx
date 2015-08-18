@@ -27,6 +27,7 @@ class NavMenu extends React.Component {
           label={m.label}
           lang={this.props.lang}
           target={m.target}
+          navId={m.id}
           key={i}
           index={i}
           isActive={i === this.state.activeItem}
@@ -39,6 +40,7 @@ class NavMenu extends React.Component {
             label={m.label}
             lang={this.props.lang}
             items={m.subnav}
+            navId={m.id}
             features={m.features}
             key={i}
             index={i}

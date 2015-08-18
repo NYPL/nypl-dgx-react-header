@@ -11,12 +11,12 @@ class NavMenuItem extends React.Component {
   }
 
   render() {
-    let classes = cx({'active': this.props.isActive}),
+    let classes = cx('NavMenuItem', {'active': this.props.isActive}),
       target = (this.props.target !== '#') 
         ? `${this.props.root}${this.props.target}` : this.props.target;
 
     return (
-      <li className={classes}>
+      <li className={classes} id={(this.props.navId) ? 'NavMenuItem-'+this.props.navId : 'NavMenuItem'}>
         <a href={target} onMouseEnter={this._activate} >
           {this.props.label[this.props.lang]}
         </a>
