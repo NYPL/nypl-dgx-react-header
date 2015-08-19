@@ -18,7 +18,7 @@ class NavMenuItem extends React.Component {
     return (
       <li className={classes}>
         <a href={target} onMouseEnter={this._activate} >
-          {this.props.label[this.props.lang]}
+          {this.props.label[this.props.lang]['text']}
         </a>
       </li>
     );

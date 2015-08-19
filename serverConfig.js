@@ -28,16 +28,16 @@ let serverPort = process.env.PORT || (isProduction ? 3001 : appConfig.port);
 let refineryData;
 
 // Use the HeaderApiService to fetch our Header Data
-// We would parse the Data at this point and Model it
-// Local Mock
-HeaderApiService
-  .fetchData('local')
-  .then((result) => {
-    refineryData = result;
-  })
-  .catch((error) => {
-    console.log('Error on local data fetch', error);
-  });
+// // We would parse the Data at this point and Model it
+// // Local Mock
+// HeaderApiService
+//   .fetchData('local')
+//   .then((result) => {
+//     refineryData = result;
+//   })
+//   .catch((error) => {
+//     console.log('Error on local data fetch', error);
+//   });
 
 
 /* Express Server Configuration
@@ -75,32 +75,70 @@ let headerApp = React.renderToString(<Header />);
 
 // Used to debug refinery response
 app.get('/header-data', (req, res) => {
-	res.json(refineryData);
+  let options = {
+    endpoint: '/api/nypl/ndo/v0.1/site-data/header-items',
+    includes: [
+      'children',
+      'related-mega-menu-panes.current-mega-menu-items.related-content',
+      'related-mega-menu-panes.current-mega-menu-items.images'],
+    filters: {
+      'relationships': {'parent': 'null'}
+    }
+  };
+ 
+  parser
+    .setHost({
+      api_root: 'dev.refinery.aws.nypl.org',
+      api_version: 'v0.1'
+    })
+    .get(options, function (data) {
+      res.json(parser.parse(data));
+    });
 });
 
 // Match all routes to render the index page.
 app.get('/*', (req, res) => {
 
-  res.locals.data = {
-    Store: { headerData: refineryData }
+  let options = {
+    endpoint: '/api/nypl/ndo/v0.1/site-data/header-items',
+    includes: [
+      'children',
+      'related-mega-menu-panes.current-mega-menu-items.related-content',
+      'related-mega-menu-panes.current-mega-menu-items.images'],
+    filters: {
+      'relationships': {'parent': 'null'}
+    }
   };
+ 
 
-  alt.bootstrap(JSON.stringify(res.locals.data || {}));
+  // ASYNC REQUEST!
+  parser
+    .setHost({
+      api_root: 'dev.refinery.aws.nypl.org',
+      api_version: 'v0.1'
+    })
+    .get(options, function (data) {
+      res.locals.data = {
+        Store: { headerData: parser.parse(data) }
+      };
 
-  let headerApp = React.renderToString(React.createElement(Header));
+      alt.bootstrap(JSON.stringify(res.locals.data || {}));
+      let headerApp = React.renderToString(React.createElement(Header));
+      let iso = new Iso();
+      iso.add(headerApp, alt.flush());
 
-  let iso = new Iso();
+      // First parameter references the ejs filename
+      res.render('index', {
+        // Assign the Header String to the
+        // proper EJS variable
+        headerApp: iso.render(),
+        appTitle: appConfig.appName,
+        favicon: appConfig.favIconPath
+      });
+    });
 
-  iso.add(headerApp, alt.flush());
 
-	// First parameter references the ejs filename
-  res.render('index', {
-  	// Assign the Header String to the
-  	// proper EJS variable
-  	headerApp: iso.render(),
-    appTitle: appConfig.appName,
-    favicon: appConfig.favIconPath
-  });
+
 });
 
 // Start the server.

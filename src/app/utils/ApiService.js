@@ -1,5 +1,6 @@
 // Server Side Request Module
 import axios from 'axios';
+import config from '../../../appConfig.js';
 
 const fakeData = [{
   label: { en: 'Browse' },
@@ -215,7 +216,7 @@ const fakeData = [{
 const HeaderApiService = {
 	fetchData(source, url) {
 		if (source === 'server') {
-      return axios.get(url).then(res => res.data);
+      return axios.get('/header-data').then(res => res.data);
 		}
 
 		if (source === 'client') {

@@ -24,9 +24,8 @@ class NavMenu extends React.Component {
     let items = _.map(this.props.items, function(m, i) {
       return (
         <NavMenuItem
-          label={m.label}
+          label={m.attributes.name}
           lang={this.props.lang}
-          target={m.target}
           key={i}
           index={i}
           isActive={i === this.state.activeItem}
@@ -36,10 +35,10 @@ class NavMenu extends React.Component {
       megas = _.map(this.props.items, function(m, i) {
         return (
           <MegaMenu
-            label={m.label}
+            label={m.attributes.name}
             lang={this.props.lang}
-            items={m.subnav}
-            features={m.features}
+            items={m.children}
+            features={m['related-mega-menu-panes']}
             key={i}
             index={i}
             isActive={i === this.state.activeItem} />

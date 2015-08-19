@@ -8,18 +8,32 @@ class MegaMenuFeatureItem extends React.Component {
   }
   
 	render() {
-		let img = (this.props.feature.image) ? <img src={this.props.feature.image} /> : '',
-			classes = cx({'with-image': this.props.feature.image, 'without-image': !this.props.feature.image});
+    let feature = this.props.feature['current-mega-menu-items'] ? this.props.feature['current-mega-menu-items'][0] : undefined;
+		let img = '',
+			classes = cx({'with-image': feature && feature.images, 'without-image': !feature || !feature.images});
+
+    let headline = '',
+      title = '',
+      desc = '',
+      link = '#';
+
+    if (feature) {
+      headline = feature.attributes.headline.en.text;
+      title = feature.attributes.headline.en.text;
+      desc = feature.attributes.description.en.text;
+      link = feature.attributes.link.en.text;
+      img = (feature.images) ? <img src={feature.images[0].attributes.uri['full-uri']} /> : '';
+    }
 
 		return (
-	    <a href={this.props.feature.link} className='MegaMenu-FeatureItem'>
-		    <div className={'FeatureItem-Image '+classes}>
+	    <a href={link} className='MegaMenu-FeatureItem'>
+		    <div className={'FeatureItem-Image ' + classes}>
 		    	{img}
 		    </div>
-		    <div className={'FeatureItem-Content '+classes}>
-	        <div className='FeatureItem-Content-Tag'>{this.props.feature.tag}</div>
-	        <h3 className='FeatureItem-Content-Title'>{this.props.feature.title}</h3>
-	        <div className='FeatureItem-Content-Desc'>{this.props.feature.desc}</div>
+		    <div className={'FeatureItem-Content ' + classes}>
+	        <div className='FeatureItem-Content-Tag'>{headline}</div>
+	        <h3 className='FeatureItem-Content-Title'>{title}</h3>
+	        <div className='FeatureItem-Content-Desc'>{desc}</div>
 		    </div>
       </a>
 	  );
