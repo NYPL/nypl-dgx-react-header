@@ -13,10 +13,11 @@ class SearchBox extends React.Component {
     super(props);
 
     this.state = {
-      searchKeywords: '',
+      searchKeywords: 'What would you like to find?',
       searchField: ''
     };
 
+    this._handleChange = this._handleChange.bind(this);
     this._submitSearchReq = this._submitSearchReq.bind(this);
   }
 
@@ -30,13 +31,18 @@ class SearchBox extends React.Component {
         <InputField type='text' 
         id='NavMenu__Search-Box__Input-Field' 
         ref='keywords' 
-        value='What would you like to find?'/>
+        value={this.state.searchKeywords}
+        onChange={this._handleChange} />
         <InputField type='submit' id='NavMenu__Search-Box__Submit-Btn' onClick={this._submitSearchReq} />
         <InputField type='radio' name='search field' value='catalog' ref='field' checked />Search the Catalog
         <InputField type='radio' name='search field' value='org' ref='field' />Search NYPL.org
         <SimpleButton target='http://catalog.nypl.org/' label='Advenced Search'/>
       </div>
     );
+  }
+
+  _handleChange (event) {
+    this.setState({searchKeywords: event.target.value});
   }
 
   // The function to generate a http request after click the search button
@@ -60,9 +66,9 @@ class SearchBox extends React.Component {
     }
 
     console.log(reqUrl);
-    
+
     // Go to search page
-    window.location.replace(reqUrl);
+    window.location.assign(reqUrl);
   }
 }
 

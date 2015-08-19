@@ -18,6 +18,7 @@ class InputField extends React.Component {
       placeholder={this.props.placeholder}
       required={this.props.required || null}
       onClick={this.props.onClick}
+      onChange={this.props.onChange}
       style={[
         styles.base,
         this.props.style
