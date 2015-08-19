@@ -238,12 +238,14 @@
 	  }
 
 	  .MegaMenu {
+	  	display: none;
 	  	color: #FFFFFF;
+	  	width: 100%;
+  		position: absolute;
+	  	top: 34px;
 
-	  	&--active {
-	  		width: 100%;
-	  		position: absolute;
-		  	top: 34px;
+	  	&.active {
+	  		display: block;
 	  	}
 
 	  	&-LeftBgWrapper {
@@ -323,43 +325,111 @@
 	  		width: 48%;
 	  		margin: 0 0 0 2%;
 	  		vertical-align: top;
-
-	  		.FeatureItem {
-	  			&-Image {
-	  				width: 88px;
-	  				height: 88px;
-	  				position: relative;
-	  				top: 80px;
-	  				margin: 0 10px 0 0;
-
-	  				img {
-	  					border-radius: 50%;
-	  				}
-	  			}
-
-	  			&-Content {
-	  				color: #FFFFFF;
-	  				display: table-cell;
-	  				vertical-align: top;
-	  				position: relative;
-	  				top: 60px;
-
-	  				&-Tag {
-	  					@include Kievit-Medium;
-	  				}
-
-	  				&-Title {
-	  					@include Milo-Regular;
-	  					line-height: 1.25em;
-	  					margin: .75em 0;
-	  				}
-
-	  				&-Desc {
-	  					@include Kievit-Regular;
-	  				}
-	  			}
-	  		}
 	  	}
 	  }
+
+		.FeatureItem {
+			&-Image {
+				width: 88px;
+				height: 88px;
+				position: relative;
+				top: 75px;
+				margin: 0 10px 0 0;
+
+				img {
+					border-radius: 50%;
+				}
+			}
+
+			&-Content {
+				color: #FFFFFF;
+				display: table-cell;
+				vertical-align: top;
+				position: relative;
+				top: 50px;
+
+				&-Tag {
+					@include Kievit-Medium;
+					text-transform: uppercase;
+				}
+
+				&-Title {
+					@include Milo-Regular;
+					line-height: 1.25em;
+					margin: .75em 0;
+				}
+
+				&-Desc {
+					@include Kievit-Regular;
+				}
+			}
+		}
+
+  	/* FIND US WIDGET
+  	 * --------------
+  	 * Specific SASS rules for
+  	 * this widget within the Header.
+  	*/ 
+  	.DonateWidget {
+  		&-DonateBox {
+				display: inline-table;
+				width: 46%;
+				margin: 0 2% 0 2%;
+				vertical-align: top;
+				color: #FFF;
+
+				&-Wrapper {
+					position: relative;
+					top: 50px;
+				}
+
+				&-Tag {
+					@include Kievit-Medium;
+					text-transform: uppercase;
+				}
+
+				&-Title {
+					@include Milo-Regular;
+					line-height: 1.25em;
+					margin: .75em 0;
+				}
+
+				&-Desc {
+					@include Kievit-Regular;
+				}
+
+				&-DonationLinks {
+					list-style-type: none;
+					display: block;
+					margin: 1em 0;
+					padding: 0;
+
+					li {
+						display: inline-block;
+						margin: 0 15px 0 0;
+
+						&:last-child {
+							margin-right: 0px
+						}
+
+						a {
+							color: #FFF;
+							display: block;
+							font-size: 18px;
+							padding: 15px 20px;
+							border: 2px solid #FFF;
+							border-radius: 5px;
+						}
+					}
+				}
+  		}
+
+  		&-FeatureItem {
+				display: inline-table;
+				width: 48%;
+				margin: 0 0 0 2%;
+				vertical-align: top;
+  		}
+  	}
   }
 }

@@ -13,12 +13,11 @@ class MegaMenu extends React.Component {
 
   render() {
     // Dynamic class assignment based on boolean flag
-    let classes = cx({'--active': this.props.isActive});
+    let classes = cx('MegaMenu',{'active': this.props.isActive});
     
     return (
-      <div id={(this.props.navId) ? 'MegaMenu-'+this.props.navId : 'MegaMenu'} 
-      className={'MegaMenu'+classes} 
-      style={this.props.isActive ? styles.show : styles.hide}>
+      <div id={(this.props.navId) ? 'MegaMenu-'+this.props.navId : 'MegaMenu'}
+      className={classes}>
         <div className='MegaMenu-LeftBgWrapper'>
         </div>
         <div className='MegaMenu-Wrapper'>
@@ -29,7 +28,7 @@ class MegaMenu extends React.Component {
             lang={this.props.lang} />
           </div>
           <div className='MegaMenu-FeaturesWrapper'>
-            <MegaMenuFeatures features={this.props.features} />
+            <MegaMenuFeatures navId={this.props.navId} features={this.props.features} />
           </div>
         </div>
       </div>
