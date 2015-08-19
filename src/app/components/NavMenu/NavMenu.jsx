@@ -26,6 +26,8 @@ class NavMenu extends React.Component {
         <NavMenuItem
           label={m.attributes.name}
           lang={this.props.lang}
+          target={m.target}
+          navId={m.id}
           key={i}
           index={i}
           isActive={i === this.state.activeItem}
@@ -39,6 +41,7 @@ class NavMenu extends React.Component {
             lang={this.props.lang}
             items={m.children}
             features={m['related-mega-menu-panes']}
+            navId={m.id}
             key={i}
             index={i}
             isActive={i === this.state.activeItem} />
