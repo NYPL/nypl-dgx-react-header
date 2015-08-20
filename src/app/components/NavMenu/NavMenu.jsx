@@ -35,6 +35,7 @@ class NavMenu extends React.Component {
       );
     }, this),
       megas = _.map(this.props.items, function(m, i) {
+        console.log(m);
         return (
           <MegaMenu
             label={m.attributes.name}
