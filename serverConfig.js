@@ -121,6 +121,8 @@ if (!isProduction) {
   new WebpackDevServer(webpack(webpackConfig), {
     publicPath: webpackConfig.output.publicPath,
     hot: true,
+    stats: false,
+    historyApiFallback: true
   }).listen(3000, 'localhost', function (err, result) {
     if (err) {
       console.log(err);
