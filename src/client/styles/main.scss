@@ -243,6 +243,7 @@
 	  	width: 100%;
   		position: absolute;
 	  	top: 34px;
+	  	left: 0;
 
 	  	&.active {
 	  		display: block;
@@ -268,7 +269,7 @@
 
 	  	&-SubNavWrapper {
 	  		position: relative;
-	  		width: 350px;
+	  		width: 345px;
 	  		float: left;
 	  		display: table-cell;
 	  		margin: 0;
@@ -280,7 +281,8 @@
 	  		height: 100%;
 	  		position: absolute;
 	  		right: 20px;
-	  		width: 225px;
+	  		width: 220px;
+	  		text-align: left;
 
 	  		a {
 	  			color: #FFFFFF;
@@ -303,6 +305,8 @@
 	  					margin-top: 0px;
 	  				}
 	  				margin: 7px 0px;
+	  				display: block;
+	  				padding: 0;
 	  			}
 	  		}
 	  	}
@@ -312,6 +316,7 @@
 	  		margin: 0;
 	  		padding: 0;
 	  		height: $MAIN_MENU_DESKTOP_HEIGHT;
+	  		text-align: left;
 	  	}
 
 	  	&-Features {
