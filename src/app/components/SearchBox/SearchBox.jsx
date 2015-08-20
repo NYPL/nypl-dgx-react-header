@@ -11,13 +11,15 @@ class SearchBox extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-
+    
+    // Set the default values of input fields
     this.state = {
       searchKeywords: 'What would you like to find?',
-      searchField: ''
+      searchField: 'catalog'
     };
 
-    this._handleChange = this._handleChange.bind(this);
+    this._keywordsChange = this._keywordsChange.bind(this);
+    this._fieldChange = this._fieldChange.bind(this);
     this._submitSearchReq = this._submitSearchReq.bind(this);
   }
 
@@ -28,31 +30,52 @@ class SearchBox extends React.Component {
     return (
       <div id='NavMenu__Search-Box' className={'NavMenu__Search-Box'+classes} 
       style={this.props.isActive ? styles.show : styles.hide}>
+        
         <InputField type='text' 
         id='NavMenu__Search-Box__Input-Field' 
         ref='keywords' 
         value={this.state.searchKeywords}
-        onChange={this._handleChange} />
+        onChange={this._keywordsChange} />
+
         <InputField type='submit' id='NavMenu__Search-Box__Submit-Btn' onClick={this._submitSearchReq} />
-        <InputField type='radio' name='search field' value='catalog' ref='field' checked />Search the Catalog
-        <InputField type='radio' name='search field' value='org' ref='field' />Search NYPL.org
+        
+        <InputField type='radio' 
+        name='search field' 
+        value='catalog' 
+        ref='field' 
+        onChange={this._fieldChange}
+        checked={this.state.searchField ==='catalog'} />Search the Catalog
+        
+        <InputField type='radio' 
+        name='search field' 
+        value='org' 
+        ref='field'
+        onChange={this._fieldChange} 
+        checked={this.state.searchField ==='org'} />Search NYPL.org
+        
         <SimpleButton target='http://catalog.nypl.org/' label='Advenced Search'/>
       </div>
     );
   }
 
-  _handleChange (event) {
+  // Listen to any changes to keywords input and change the state
+  _keywordsChange (event) {
     this.setState({searchKeywords: event.target.value});
+  }
+
+  // Listen to any changes to filed radio input and change the state
+  _fieldChange (event) {
+    this.setState({searchField: event.target.value});
   }
 
   // The function to generate a http request after click the search button
   _submitSearchReq (e) {
     e.preventDefault();
     
-    // The parameters the user has entered
+    // Grab the values the user has entered as the parameters for URL
     var reqPara = {
-      keywords: encodeURIComponent(React.findDOMNode(this.refs.keywords).value.trim()),
-      field: React.findDOMNode(this.refs.field).value
+      keywords: encodeURIComponent(this.state.searchKeywords.trim()),
+      field: this.state.searchField
     }
     
     // The vairable for request URL
