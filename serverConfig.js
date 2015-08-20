@@ -15,7 +15,6 @@ import webpackConfig from './webpack.config.js';
 
 // Temporary API Service
 import HeaderApiService from './src/app/utils/ApiService';
-
 // Need to improve for server-side and client-side requests
 import HeaderSource from './src/app/utils/HeaderSource.js';
 
@@ -25,7 +24,7 @@ const ROOT_PATH = __dirname;
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
 const INDEX_PATH = path.resolve(ROOT_PATH, 'src/client');
 const API_URL = process.env.API_URL || appConfig.apiUrl;
-const WP_PORT = appConfig.webpackPort || 3000;
+const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
 
 // Boolean flag that determines if we are running
 // our application in Production Mode.
@@ -108,7 +107,7 @@ app.get('/*', (req, res) => {
     appTitle: appConfig.appTitle,
     favicon: appConfig.favIconPath,
     isProduction: isProduction,
-    webpackPort: WP_PORT
+    webpackPort: WEBPACK_DEV_PORT
   });
 });
 
@@ -132,10 +131,10 @@ if (!isProduction) {
     hot: true,
     stats: false,
     historyApiFallback: true
-  }).listen(WP_PORT, 'localhost', (err, result) => {
+  }).listen(WEBPACK_DEV_PORT, 'localhost', (err, result) => {
     if (err) {
       console.log(colors.red(err));
     }
-    console.log(colors.magenta('Webpack Dev Server listening at'), colors.cyan('localhost' + WP_PORT));
+    console.log(colors.magenta('Webpack Dev Server listening at'), colors.cyan('localhost' + WEBPACK_DEV_PORT));
   });
 }
