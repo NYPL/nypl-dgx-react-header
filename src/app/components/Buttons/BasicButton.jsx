@@ -15,6 +15,7 @@ class BasicButton extends React.Component {
       className={this.props.className}
       name={this.props.name}
       onClick={this.props.onClick}
+      onMouseEnter={this.props.onMouseEnter}
       style={[
         styles.base,
         this.props.style

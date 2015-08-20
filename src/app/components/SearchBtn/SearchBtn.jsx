@@ -14,8 +14,10 @@ class SearchBtn extends React.Component {
 
     // Holds the initial state, replaces getInitialState() method
     this.state = {
-
+      isActivate: faulse;
     };
+
+    this._active = this._active.bind(this);
   }
 
   render () {
@@ -25,9 +27,14 @@ class SearchBtn extends React.Component {
         className='NavMenu-TopLevelLinks__Search-Btn'
         name='Search Button'
         label='Search Box'
-        style={styles.base} />
+        style={styles.base}
+        onMouseEnter={this._activate} />
       </li>
 		);
+  }
+
+  _active() {
+    this.setState.isActivate = true;
   }
 }
 

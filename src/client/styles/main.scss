@@ -199,6 +199,12 @@
 	  	}
 	  }
   }
+  .NavMenu-TopLevelLinks__Search-Btn{
+  	color: #000000;
+  	&:hover {
+  		color: #00AAFF;
+  	}
+  }
   .NavMenu__Search-Box {
 		background-color: #00AAFF; 
 		color: #000000;
