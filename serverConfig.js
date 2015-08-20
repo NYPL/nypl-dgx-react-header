@@ -6,6 +6,9 @@ import React from 'react';
 import Iso from 'iso';
 import alt from './src/app/alt.js';
 import appConfig from './appConfig.js';
+import webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
+import webpackConfig from './webpack.config.js';
 
 // Temporary API Service
 import HeaderApiService from './src/app/utils/ApiService';
@@ -99,7 +102,8 @@ app.get('/*', (req, res) => {
   	// proper EJS variable
   	headerApp: iso.render(),
     appTitle: appConfig.appName,
-    favicon: appConfig.favIconPath
+    favicon: appConfig.favIconPath,
+    isProduction: isProduction
   });
 });
 
@@ -114,5 +118,14 @@ app.listen(serverPort, () => {
  * - Using Webpack Dev Server
 */
 if (!isProduction) {
+  new WebpackDevServer(webpack(webpackConfig), {
+    publicPath: webpackConfig.output.publicPath,
+    hot: true,
+  }).listen(3000, 'localhost', function (err, result) {
+    if (err) {
+      console.log(err);
+    }
 
+    console.log('Listening at localhost:3000');
+  });
 }
