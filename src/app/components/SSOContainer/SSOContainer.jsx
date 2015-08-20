@@ -12,7 +12,7 @@ class SignInContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    // cookie.save('username', 'edwinguzman');
+    // cookie.save('bc_username', 'edwinguzman');
 
     this.state = {
       username: this._login(),
@@ -86,8 +86,7 @@ const styles = {
     padding: '1em',
     display: 'block',
     color: '#000'
-  },
-  SSOform: {}
+  }
 }
 
 export default Radium(SignInContainer);
