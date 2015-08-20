@@ -8,6 +8,7 @@ class MegaMenuFeatureItem extends React.Component {
   }
   
 	render() {
+    console.log(this.props.feature);
     let feature = this.props.feature['current-mega-menu-items'] ? this.props.feature['current-mega-menu-items'][0] : undefined;
 		let img = '',
 			classes = cx({'with-image': feature && feature.images, 'without-image': !feature || !feature.images});
@@ -18,9 +19,9 @@ class MegaMenuFeatureItem extends React.Component {
       link = '#';
 
     if (feature) {
-      headline = feature.attributes.headline.en.text;
       title = feature.attributes.headline.en.text;
-      desc = feature.attributes.description.en.text;
+      headline = feature.attributes.category ? feature.attributes.category.en.text : title;
+      desc = feature.attributes.description.en.text.substring(0, '150');
       link = feature.attributes.link.en.text;
       img = (feature.images) ? <img src={feature.images[0].attributes.uri['full-uri']} /> : '';
     }
