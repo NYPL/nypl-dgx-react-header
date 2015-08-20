@@ -14,12 +14,12 @@ class SSOSignIn extends React.Component {
 
   render() {
     return (
-      <div id='login-form'> 
+      <div id='login-form' className='LoginForm'> 
         <form action='/' method='post' id='bc-sso-login-form--2' acceptCharset='UTF-8' onSubmit={this.submitSSO.bind(this)}>
-          <div className='fieldContainer usernameField'>
+          <div className='LoginForm-fieldContainer LoginForm-usernameField'>
             <input type='text' id='username' name='name'
               ref='username' placeholder='User Name or Barcode' autoComplete='off' />
-            <div className='checkbox'>
+            <div className='LoginForm-checkbox'>
               <input type='checkbox' id='remember_me' name='remember_me'
                 checked={this.state.remember}
                 onChange={this._remember_me.bind(this)}
@@ -28,14 +28,14 @@ class SSOSignIn extends React.Component {
             </div>
           </div>
 
-          <div className='fieldContainer shortField'>
+          <div className='LoginForm-fieldContainer LoginForm-shortField'>
             <input style={{width:'85px'}} type='password' id='pin'
               name='user_pin' size='60' maxLength='128' ref='pin'
               className='form-text' autoComplete='off' placeholder='PIN' />
               <a href='https://nypl.bibliocommons.com/user/forgot' className='forgotpin-button'>Forgot your PIN?</a>
           </div>
 
-          <div className='fieldContainer shortField'>
+          <div className='LoginForm-fieldContainer LoginForm-shortField'>
             <InputField type='hidden' name='destination' value='http://www.nypl.org/' />
             <InputField
               id='login-form-submit' 

@@ -16,15 +16,15 @@ class SSOLoggedInMenu extends React.Component {
 
   render() {
     return (
-      <ul className="logged-in-menu" style={styles.SSOLoggedInMenu}>
-        <li><a style={styles.a} href="http://nypl.bibliocommons.com/user/account">Personal Information</a></li>
-        <li><a style={styles.a} href="http://nypl.bibliocommons.com/user/saved_searches">Saved Searches</a></li>
-        <li><a style={styles.a} href="http://nypl.bibliocommons.com/user/preferences">Preferences</a></li>
-        <li><a style={styles.a} href="http://nypl.bibliocommons.com/user/privacy">Privacy</a></li>
-        <li><a style={styles.a} href="http://nypl.bibliocommons.com/user/reminders">Reminders</a></li>
-        <li><a style={styles.a} href="http://nypl.bibliocommons.com/communitycredits">Community Credits</a></li>
-        <li><a style={styles.a} href="http://nypl.bibliocommons.com/carts/order_history">Order History</a></li>
-        <li><a style={styles.a} onClick={this._logout} id="sso-logout">Log out</a></li>
+      <ul className='logged-in-menu' style={styles.SSOLoggedInMenu}>
+        <li><a style={styles.a} href='http://nypl.bibliocommons.com/user/account'>Personal Information</a></li>
+        <li><a style={styles.a} href='http://nypl.bibliocommons.com/user/saved_searches'>Saved Searches</a></li>
+        <li><a style={styles.a} href='http://nypl.bibliocommons.com/user/preferences'>Preferences</a></li>
+        <li><a style={styles.a} href='http://nypl.bibliocommons.com/user/privacy'>Privacy</a></li>
+        <li><a style={styles.a} href='http://nypl.bibliocommons.com/user/reminders'>Reminders</a></li>
+        <li><a style={styles.a} href='http://nypl.bibliocommons.com/communitycredits'>Community Credits</a></li>
+        <li><a style={styles.a} href='http://nypl.bibliocommons.com/carts/order_history'>Order History</a></li>
+        <li><a style={styles.a} href='#' onClick={this._logout} id='sso-logout'>Log out</a></li>
       </ul>
     );
   }

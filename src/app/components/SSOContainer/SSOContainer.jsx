@@ -38,7 +38,7 @@ class SignInContainer extends React.Component {
     const classes =  cx({ show: showDialog, hide: !showDialog });
 
     return (
-      <div style={[styles.base, this.props.style]}>
+      <div style={[styles.base, this.props.style]} className='SignInButton-Wrapper'>
         {this.state.logged_in}
         <SimpleButton
           id='SignInButton'

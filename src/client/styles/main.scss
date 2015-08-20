@@ -29,49 +29,53 @@
   	font-size: 11px;
   }
 
-  .signIn-up-arrow {
-  	@include up-arrow(#666666, 165px, 'top', -19px);	
-  }
-  #login-form {
-  	font-size: 9px;
-  	a {
-  		display: inline-block;
-      padding: 7px 0;
-      margin-top: 7px;
-      color: #fff;
-  	}
+  .SignInButton-Wrapper {
+  	&.signIn-up-arrow {
+	  	@include up-arrow(#666666, 165px, 'top', -19px);	
+	  }
 
-		input[type=text], input[type=password] {
-			height: 32px;
-		}
+	 	.LoginForm {
+	  	font-size: 9px;
 
-		.fieldContainer {
-			float: left;
-      padding: 7px;
-		}
+	  	a {
+	  		display: inline-block;
+	      padding: 7px 0;
+	      margin-top: 7px;
+	      color: #fff;
+	  	}
 
-		.shortField {
-			width: 90px;
-			padding: 7px 0;
-			margin: 0 5px;
-		}
+			input[type=text], input[type=password] {
+				height: 32px;
+			}
 
-		.checkbox {
-			display: inline-block;
-      padding-top: 12px;
-      color: #fff;
-		}
+			&-fieldContainer {
+				float: left;
+	      padding: 7px;
+			}
 
-  	.usernameField {
-  		width: 145px;
-      float: left;
-      padding: 7px;
-      margin-right: 5px;
+			&-shortField {
+				width: 90px;
+				padding: 7px 0;
+				margin: 0 5px;
+			}
 
-      #username {
-      	width: 145px;
-      }
-  	}
+			&-checkbox {
+				display: inline-block;
+	      padding-top: 12px;
+	      color: #fff;
+			}
+
+	  	&-usernameField {
+	  		width: 145px;
+	      float: left;
+	      padding: 7px;
+	      margin-right: 5px;
+
+	      #username {
+	      	width: 145px;
+	      }
+	  	}
+	  }
   }
 
   .EmailSubscribeForm-Wrapper {
