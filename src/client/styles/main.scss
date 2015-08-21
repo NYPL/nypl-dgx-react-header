@@ -205,12 +205,18 @@
   		color: #00AAFF;
   	}
   }
-  .NavMenu__Search-Box {
+  .NavMenu__Search-Box--active {
 		background-color: #00AAFF; 
 		color: #000000;
+		display: block;
 		height: 200px;
 		margin: 6px 0 0 0;
-		padding: 20px 40%;
+		padding: 20px 0;
+		position: relative;
   	width: 100%;
+  	z-index: 300;
+  }
+  .NavMenu__Search-Box {
+		display: none;
   }
 }

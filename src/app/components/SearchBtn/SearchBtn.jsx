@@ -1,6 +1,7 @@
 // Import React libraries
 import Radium from 'radium';
 import React from 'react';
+import cx from 'classnames';
 
 // Import components
 import BasicButton from '../Buttons/BasicButton.jsx';
@@ -12,29 +13,36 @@ class SearchBtn extends React.Component {
   constructor(props) {
     super(props);
 
-    // Holds the initial state, replaces getInitialState() method
+    // Holds the initial state. The actived status is false
     this.state = {
-      isActivate: false
+      isActive: false
     };
 
-    this._active = this._active.bind(this);
+    this._activate = this._activate.bind(this);
   }
 
   render () {
+    // Give active class if the button is activated
+    let classes = cx({'--active': this.state.isActive});
   	return (
       <li>
         <BasicButton id='NavMenu-TopLevelLinks__Search-Btn'
-        className='NavMenu-TopLevelLinks__Search-Btn'
+        className={`NavMenu-TopLevelLinks__Search-Btn${classes}`}
         name='Search Button'
         label='Search Box'
         style={styles.base}
-        onMouseEnter={this._activate} />
+        onClick={this._activate} />
       </li>
 		);
   }
 
-  _active() {
-    this.setState.isActivate = true;
+  // Set the function to active the box when the button is clicked
+  _activate() {
+    // Set the NaveMenu activeItem to be search if search box is not shown
+    (this.state.isActive === false) ?
+      this.props.activate('search') : this.props.activate(null);
+    // Set the button state to be active
+    this.state.isActive = !this.state.isActive;
   }
 }
 

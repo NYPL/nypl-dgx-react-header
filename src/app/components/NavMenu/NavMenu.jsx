@@ -20,6 +20,7 @@ class NavMenu extends React.Component {
     // Allows binding methods that reference this
     this._activate = this._activate.bind(this);
     this._deactivate = this._deactivate.bind(this);
+    this._searchActivate = this._searchActivate.bind(this);
   }
 
   render () {
@@ -51,18 +52,23 @@ class NavMenu extends React.Component {
       <nav className='NavMenu' onMouseLeave={this._deactivate}>
         <ul className='NavMenu-TopLevelLinks'>
           {items}
-          <SearchBtn />
+          <SearchBtn activate={this._searchActivate} />
         </ul>
         {megas}
-        <SearchBox />
+        <SearchBox isActive={'search' === this.state.activeItem} />
       </nav>
     );
   }
 
+  // Isolate the interaction of search from other NaveMenuItem
   _activate (i) {
-    this.setState({
-      activeItem: i
-    });
+    (this.state.activeItem !== 'search') ?
+      this.setState({activeItem: i}) : this.setState({activeItem: 'search'});
+  }
+
+  // Swith on or off search button
+  _searchActivate (i) {
+    this.setState({activeItem: i});
   }
 
   _deactivate () {

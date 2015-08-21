@@ -24,12 +24,12 @@ class SearchBox extends React.Component {
   }
 
   render() {
-    // Dynamic class assignment based on boolean flag
+    // Give active class if the button is activated
     let classes = cx({'--active': this.props.isActive});
     
     return (
-      <div id='NavMenu__Search-Box' className={'NavMenu__Search-Box'+classes} 
-      style={this.props.isActive ? styles.show : styles.hide}>
+      <div id='NavMenu__Search-Box' 
+      className={`NavMenu__Search-Box${classes}`}>
         
         <InputField type='text' 
         id='NavMenu__Search-Box__Input-Field' 
@@ -103,12 +103,6 @@ SearchBox.defaultProps = {
 const styles = {
   base: {
 
-  },
-  show: {
-    display: 'block'
-  },
-  hide: {
-    display: 'block'
   }
 };
 
