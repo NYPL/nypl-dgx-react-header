@@ -14,7 +14,7 @@ class SearchBtn extends React.Component {
 
     // Holds the initial state, replaces getInitialState() method
     this.state = {
-      isActivate: faulse;
+      isActivate: false
     };
 
     this._active = this._active.bind(this);

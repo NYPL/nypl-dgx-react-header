@@ -14,7 +14,7 @@ class SearchBox extends React.Component {
     
     // Set the default values of input fields
     this.state = {
-      searchKeywords: 'What would you like to find?',
+      searchKeywords: '',
       searchField: 'catalog'
     };
 
@@ -35,6 +35,7 @@ class SearchBox extends React.Component {
         id='NavMenu__Search-Box__Input-Field' 
         ref='keywords' 
         value={this.state.searchKeywords}
+        placeholder='What would you like to find?'
         onChange={this._keywordsChange} />
 
         <InputField type='submit' id='NavMenu__Search-Box__Submit-Btn' onClick={this._submitSearchReq} />
