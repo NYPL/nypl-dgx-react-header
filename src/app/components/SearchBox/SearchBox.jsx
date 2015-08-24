@@ -18,11 +18,14 @@ class SearchBox extends React.Component {
       searchField: 'catalog'
     };
 
+    // The functions listen to the changes of input fields
     this._keywordsChange = this._keywordsChange.bind(this);
     this._fieldChange = this._fieldChange.bind(this);
+    // The function send search requests
     this._submitSearchReq = this._submitSearchReq.bind(this);
   }
 
+  // Dom Render Section
   render() {
     // Give active class if the button is activated
     let classes = cx({'--active': this.props.isActive});
@@ -89,9 +92,7 @@ class SearchBox extends React.Component {
       reqUrl = `http://www.nypl.org/search/apachesolr_search/${reqPara.keywords}`;
     }
 
-    console.log(reqUrl);
-
-    // Go to search page
+    // Go to the search page
     window.location.assign(reqUrl);
   }
 }
@@ -102,8 +103,8 @@ SearchBox.defaultProps = {
 
 const styles = {
   base: {
-
   }
 };
 
+// Export the component
 module.exports = Radium(SearchBox);

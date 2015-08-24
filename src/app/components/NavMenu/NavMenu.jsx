@@ -20,6 +20,7 @@ class NavMenu extends React.Component {
     // Allows binding methods that reference this
     this._activate = this._activate.bind(this);
     this._deactivate = this._deactivate.bind(this);
+    // The fucntion specificlly to active search box
     this._searchActivate = this._searchActivate.bind(this);
   }
 
@@ -60,7 +61,7 @@ class NavMenu extends React.Component {
     );
   }
 
-  // Isolate the interaction of search from other NaveMenuItem
+  // Isolate the interaction of search button from other NaveMenuItem
   _activate (i) {
     (this.state.activeItem !== 'search') ?
       this.setState({activeItem: i}) : this.setState({activeItem: 'search'});

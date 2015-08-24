@@ -17,10 +17,12 @@ class SearchBtn extends React.Component {
     this.state = {
       isActive: false
     };
-
+    
+    // The function activates the saerch box
     this._activate = this._activate.bind(this);
   }
 
+  // Dom Render Section
   render () {
     // Give active class if the button is activated
     let classes = cx({'--active': this.state.isActive});
@@ -36,7 +38,7 @@ class SearchBtn extends React.Component {
 		);
   }
 
-  // Set the function to active the box when the button is clicked
+  // Set the function to active search box when the button is clicked
   _activate() {
     // Set the NaveMenu activeItem to be search if search box is not shown
     (this.state.isActive === false) ?
@@ -48,9 +50,8 @@ class SearchBtn extends React.Component {
 
 const styles = {
   base: {
-
   }
 };
 
-// Export the class
+// Export the component
 export default Radium(SearchBtn);

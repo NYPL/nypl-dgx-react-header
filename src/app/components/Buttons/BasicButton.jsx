@@ -1,3 +1,5 @@
+// The button component that doesn't activate any link, only interaction and submission
+// Import React libraries
 import React from 'react';
 import Radium from 'radium';
 
@@ -41,4 +43,5 @@ const styles = {
   }
 };
 
+// Export the component
 export default Radium(BasicButton);
