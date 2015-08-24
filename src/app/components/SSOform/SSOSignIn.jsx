@@ -10,15 +10,12 @@ class SSOSignIn extends React.Component {
     this.state = {
       remember: (!!this.props.remember) || false
     }
-
-    this._rememberMe.bind(this);
-    this._submitSignIn.bind(this);
   }
 
   render() {
     return (
       <div id='SSOSignIn' className='LoginForm'> 
-        <form action='/' method='post' id='SSOSignIn-LoginForm' onSubmit={this._submitSignIn}>
+        <form action='/' method='post' id='SSOSignIn-LoginForm' onSubmit={this._submitSignIn.bind(this)}>
           <div className='LoginForm-fields'>
             <div className='LoginForm-longField'>
               <input type='text' id='username' name='name'
@@ -40,7 +37,7 @@ class SSOSignIn extends React.Component {
           <div className='LoginForm-text'>
             <div className='LoginForm-longField'>
               <input type='checkbox' id='remember_me' name='remember_me' checked={this.state.remember}
-                onChange={this._rememberMe} className='form-checkbox' ref='remember' />
+                onChange={this._rememberMe.bind(this)} className='form-checkbox' ref='remember' />
               <label className='option' htmlFor='remember_me'>Remember me</label>
             </div>
 
@@ -65,9 +62,16 @@ class SSOSignIn extends React.Component {
   _submitSignIn(e) {
     e.preventDefault();
 
+    let username = React.findDOMNode(this.refs.username).value,
+      pin = React.findDOMNode(this.refs.pin).value;
+
+    if (username === '' || pin === '') {
+      return;
+    } 
+
     let data = {
-        username: React.findDOMNode(this.refs.username).value,
-        pin:      React.findDOMNode(this.refs.pin).value,
+        username: username,
+        pin:      pin,
         remember: this.state.remember,
       },
       url = 'https://nypl.bibliocommons.com/user/login?destination=';
