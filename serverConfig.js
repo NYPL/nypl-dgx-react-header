@@ -1,15 +1,20 @@
 import path from 'path';
 import compression from 'compression';
 import express from 'express';
+import colors from 'colors';
 import parser from 'jsonapi-parserinator';
+// React
 import React from 'react';
 import Iso from 'iso';
 import alt from './src/app/alt.js';
+// Server Configurations
 import appConfig from './appConfig.js';
+import webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
+import webpackConfig from './webpack.config.js';
 
 // Temporary API Service
 import HeaderApiService from './src/app/utils/ApiService';
-
 // Need to improve for server-side and client-side requests
 import HeaderSource from './src/app/utils/HeaderSource.js';
 
@@ -19,6 +24,7 @@ const ROOT_PATH = __dirname;
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
 const INDEX_PATH = path.resolve(ROOT_PATH, 'src/client');
 const API_URL = process.env.API_URL || appConfig.apiUrl;
+const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
 
 // Boolean flag that determines if we are running
 // our application in Production Mode.
@@ -98,14 +104,20 @@ app.get('/*', (req, res) => {
   	// Assign the Header String to the
   	// proper EJS variable
   	headerApp: iso.render(),
-    appTitle: appConfig.appName,
-    favicon: appConfig.favIconPath
+    appTitle: appConfig.appTitle,
+    favicon: appConfig.favIconPath,
+    isProduction: isProduction,
+    webpackPort: WEBPACK_DEV_PORT
   });
 });
 
 // Start the server.
-app.listen(serverPort, () => {
-  console.log('Express server is listening at localhost:%s', serverPort);
+app.listen(serverPort, (err, result) => {
+  if (err) {
+    console.log(colors.red(err));
+  }
+  console.log(colors.yellow.underline(appConfig.appName));
+  console.log(colors.green('Express server is listening at'), colors.cyan('localhost:' + serverPort));
 });
 
 
@@ -114,5 +126,15 @@ app.listen(serverPort, () => {
  * - Using Webpack Dev Server
 */
 if (!isProduction) {
-
+  new WebpackDevServer(webpack(webpackConfig), {
+    publicPath: webpackConfig.output.publicPath,
+    hot: true,
+    stats: false,
+    historyApiFallback: true
+  }).listen(WEBPACK_DEV_PORT, 'localhost', (err, result) => {
+    if (err) {
+      console.log(colors.red(err));
+    }
+    console.log(colors.magenta('Webpack Dev Server listening at'), colors.cyan('localhost' + WEBPACK_DEV_PORT));
+  });
 }
