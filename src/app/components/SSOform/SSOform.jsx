@@ -11,7 +11,7 @@ class SSOform extends React.Component {
 
   render() {
     return (
-      <div className='sso-login signIn-up-arrow'
+      <div className='SSOform signIn-up-arrow'
         style={[
           styles.base,
           this.props.style,

@@ -16,24 +16,28 @@ class SSOLoggedInMenu extends React.Component {
 
   render() {
     return (
-      <ul className='logged-in-menu' style={styles.SSOLoggedInMenu}>
-        <li><a style={styles.a} href='http://nypl.bibliocommons.com/user/account'>Personal Information</a></li>
-        <li><a style={styles.a} href='http://nypl.bibliocommons.com/user/saved_searches'>Saved Searches</a></li>
-        <li><a style={styles.a} href='http://nypl.bibliocommons.com/user/preferences'>Preferences</a></li>
-        <li><a style={styles.a} href='http://nypl.bibliocommons.com/user/privacy'>Privacy</a></li>
-        <li><a style={styles.a} href='http://nypl.bibliocommons.com/user/reminders'>Reminders</a></li>
-        <li><a style={styles.a} href='http://nypl.bibliocommons.com/communitycredits'>Community Credits</a></li>
-        <li><a style={styles.a} href='http://nypl.bibliocommons.com/carts/order_history'>Order History</a></li>
-        <li><a style={styles.a} href='#' onClick={this._logout} id='sso-logout'>Log out</a></li>
+      <ul className={this.props.className} style={styles.SSOLoggedInMenu}>
+        <li><a href='http://nypl.bibliocommons.com/user/account'>Personal Information</a></li>
+        <li><a href='http://nypl.bibliocommons.com/user/saved_searches'>Saved Searches</a></li>
+        <li><a href='http://nypl.bibliocommons.com/user/preferences'>Preferences</a></li>
+        <li><a href='http://nypl.bibliocommons.com/user/privacy'>Privacy</a></li>
+        <li><a href='http://nypl.bibliocommons.com/user/reminders'>Reminders</a></li>
+        <li><a href='http://nypl.bibliocommons.com/communitycredits'>Community Credits</a></li>
+        <li><a href='http://nypl.bibliocommons.com/carts/order_history'>Order History</a></li>
+        <li><a href='#' onClick={this._logout} id='sso-logout'>Log out</a></li>
       </ul>
     );
   }
 
-  _logout (e) {
+  _logout(e) {
     e.preventDefault();
     window.location = this.state.logout_url;
   }
 }
+
+SSOLoggedInMenu.defaultProps = {
+  className: 'SSOLoggedInMenu'
+};
 
 const styles = {
   SSOLoggedInMenu: {
@@ -46,18 +50,6 @@ const styles = {
     top: '-15px',
     zIndex: '4',
     padding: '12px 10px'
-  },
-  li: {
-    margin: '5px 0px'
-  },
-  a: {
-    margin: '0px',
-    padding: '0px',
-    color: '#000000',
-    fontSize: '11px',
-    float: 'none',
-    width: '100px',
-    textDecoration: 'none'
   }
 };
 

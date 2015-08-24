@@ -10,52 +10,59 @@ class SSOSignIn extends React.Component {
     this.state = {
       remember: (!!this.props.remember) || false
     }
+
+    this._rememberMe.bind(this);
+    this._submitSignIn.bind(this);
   }
 
   render() {
     return (
-      <div id='login-form' className='LoginForm'> 
-        <form action='/' method='post' id='bc-sso-login-form--2' acceptCharset='UTF-8' onSubmit={this.submitSSO.bind(this)}>
-          <div className='LoginForm-fieldContainer LoginForm-usernameField'>
-            <input type='text' id='username' name='name'
-              ref='username' placeholder='User Name or Barcode' autoComplete='off' />
-            <div className='LoginForm-checkbox'>
-              <input type='checkbox' id='remember_me' name='remember_me'
-                checked={this.state.remember}
-                onChange={this._remember_me.bind(this)}
-                className='form-checkbox' ref='remember' />
-              <label className='option' htmlFor='remember_me'>Remember me </label>
+      <div id='SSOSignIn' className='LoginForm'> 
+        <form action='/' method='post' id='SSOSignIn-LoginForm' onSubmit={this._submitSignIn}>
+          <div className='LoginForm-fields'>
+            <div className='LoginForm-longField'>
+              <input type='text' id='username' name='name'
+                ref='username' placeholder='User Name or Barcode' autoComplete='off' />
+            </div>
+
+            <div className='LoginForm-shortField'>
+              <input type='password' id='pin' name='user_pin' size='60' maxLength='128' ref='pin'
+                className='form-text' autoComplete='off' placeholder='PIN' />
+            </div>
+
+            <div className='LoginForm-shortField'>
+              <InputField type='hidden' name='destination' value='http://www.nypl.org/' />
+              <InputField id='login-form-submit' type='submit' name='op'
+                value='Log In' className='form-submit' style={styles.submitButton} />
             </div>
           </div>
 
-          <div className='LoginForm-fieldContainer LoginForm-shortField'>
-            <input style={{width:'85px'}} type='password' id='pin'
-              name='user_pin' size='60' maxLength='128' ref='pin'
-              className='form-text' autoComplete='off' placeholder='PIN' />
-              <a href='https://nypl.bibliocommons.com/user/forgot' className='forgotpin-button'>Forgot your PIN?</a>
+          <div className='LoginForm-text'>
+            <div className='LoginForm-longField'>
+              <input type='checkbox' id='remember_me' name='remember_me' checked={this.state.remember}
+                onChange={this._rememberMe} className='form-checkbox' ref='remember' />
+              <label className='option' htmlFor='remember_me'>Remember me</label>
+            </div>
+
+            <div className='LoginForm-shortField'>
+              <a href='https://nypl.bibliocommons.com/user/forgot'>Forgot your PIN?</a>
+            </div>
+
+            <div className='LoginForm-shortField'>
+              <a href='http://www.nypl.org/help/library-card'>Create an Account</a>
+            </div>
           </div>
 
-          <div className='LoginForm-fieldContainer LoginForm-shortField'>
-            <InputField type='hidden' name='destination' value='http://www.nypl.org/' />
-            <InputField
-              id='login-form-submit' 
-              type='submit'
-              name='op'
-              value='Log In'
-              className='form-submit'
-              style={styles.submitButton} />
-              <a href='http://www.nypl.org/help/library-card' className='createacct-button'>Create an Account</a>
-          </div>
         </form>
       </div>
     );
   }
 
-  _remember_me(e) {
+  _rememberMe(e) {
     this.setState({remember: e.target.checked});
   }
 
-  submitSSO(e) {
+  _submitSignIn(e) {
     e.preventDefault();
 
     let data = {
@@ -86,8 +93,7 @@ const styles = {
     border: 'none',
     color: 'white',
     height: '37px',
-    fontSize: '13px',
-    width: '85px'
+    fontSize: '13px'
   }
 };
 

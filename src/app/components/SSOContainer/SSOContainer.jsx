@@ -12,12 +12,10 @@ class SignInContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    // cookie.save('bc_username', 'edwinguzman');
-
     this.state = {
       username: this._login(),
       logged_in: !!this._login(),
-      remember: this._remember_me(),
+      remember: this._rememberMe(),
       ssoWindowVisible: HeaderStore.getSSOWindowVisible()
     };
 
@@ -73,7 +71,7 @@ class SignInContainer extends React.Component {
     return cookie.load('bc_username');
   }
 
-  _remember_me() {
+  _rememberMe() {
     return !!cookie.load('remember_me');
   }
 }
