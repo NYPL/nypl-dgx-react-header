@@ -15,14 +15,14 @@ class SearchBox extends React.Component {
     // Set the default values of input fields
     this.state = {
       searchKeywords: '',
-      searchField: 'catalog'
+      searchOption: 'catalog'
     };
 
     // The functions listen to the changes of input fields
     this._keywordsChange = this._keywordsChange.bind(this);
-    this._fieldChange = this._fieldChange.bind(this);
+    this._searchOptionChange = this._searchOptionChange.bind(this);
     // The function send search requests
-    this._submitSearchReq = this._submitSearchReq.bind(this);
+    this._submitSearchRequest = this._submitSearchRequest.bind(this);
   }
 
   // Dom Render Section
@@ -31,31 +31,31 @@ class SearchBox extends React.Component {
     let classes = cx({'--active': this.props.isActive});
     
     return (
-      <div id='NavMenu__Search-Box' 
-      className={`NavMenu__Search-Box${classes}`}>
+      <div id='NavMenu__SearchBox' 
+      className={`NavMenu__SearchBox${classes}`}>
         
         <InputField type='text' 
-        id='NavMenu__Search-Box__Input-Field' 
+        id='NavMenu__SearchBox__InputField' 
         ref='keywords' 
         value={this.state.searchKeywords}
         placeholder='What would you like to find?'
         onChange={this._keywordsChange} />
 
-        <InputField type='submit' id='NavMenu__Search-Box__Submit-Btn' onClick={this._submitSearchReq} />
+        <InputField type='submit' id='NavMenu__SearchBox__SubmitButton' onClick={this._submitSearchRequest} />
         
         <InputField type='radio' 
-        name='search field' 
+        name='search option' 
         value='catalog' 
-        ref='field' 
-        onChange={this._fieldChange}
-        checked={this.state.searchField ==='catalog'} />Search the Catalog
+        ref='option' 
+        onChange={this._searchOptionChange}
+        checked={this.state.searchOption ==='catalog'} />Search the Catalog
         
         <InputField type='radio' 
-        name='search field' 
-        value='org' 
-        ref='field'
-        onChange={this._fieldChange} 
-        checked={this.state.searchField ==='org'} />Search NYPL.org
+        name='search option' 
+        value='website' 
+        ref='option'
+        onChange={this._searchOptionChange} 
+        checked={this.state.searchOption ==='website'} />Search NYPL.org
         
         <SimpleButton target='http://catalog.nypl.org/' label='Advenced Search'/>
       </div>
@@ -67,33 +67,33 @@ class SearchBox extends React.Component {
     this.setState({searchKeywords: event.target.value});
   }
 
-  // Listen to any changes to filed radio input and change the state
-  _fieldChange (event) {
-    this.setState({searchField: event.target.value});
+  // Listen to the changes of the search options and change the state
+  _searchOptionChange (event) {
+    this.setState({searchOption: event.target.value});
   }
 
   // The function to generate a http request after click the search button
-  _submitSearchReq (e) {
+  _submitSearchRequest (e) {
     e.preventDefault();
     
     // Grab the values the user has entered as the parameters for URL
-    var reqPara = {
+    let requestParameters = {
       keywords: encodeURIComponent(this.state.searchKeywords.trim()),
-      field: this.state.searchField
+      option: this.state.searchOption
     }
     
     // The vairable for request URL
-    let reqUrl;
+    let requestUrl;
 
-    // Decide the search field
-    if (reqPara.field == 'catalog') {
-      reqUrl = `https://nypl.bibliocommons.com/search?t=smart&q=${reqPara.keywords}&commit=Search&searchOpt=catalogue`;
-    }  else if (reqPara.field == 'org') {
-      reqUrl = `http://www.nypl.org/search/apachesolr_search/${reqPara.keywords}`;
+    // Decide the search option
+    if (requestParameters.option == 'catalog') {
+      requestUrl = `https://nypl.bibliocommons.com/search?t=smart&q=${requestParameters.keywords}&commit=Search&searchOpt=catalogue`;
+    }  else if (requestParameters.option == 'website') {
+      requestUrl = `http://www.nypl.org/search/apachesolr_search/${requestParameters.keywords}`;
     }
 
     // Go to the search page
-    window.location.assign(reqUrl);
+    window.location.assign(requestUrl);
   }
 }
 

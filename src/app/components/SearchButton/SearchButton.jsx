@@ -28,8 +28,8 @@ class SearchButton extends React.Component {
     let classes = cx({'--active': this.state.isActive});
   	return (
       <li>
-        <BasicButton id='NavMenu-TopLevelLinks__Search-Btn'
-        className={`NavMenu-TopLevelLinks__Search-Btn${classes}`}
+        <BasicButton id='NavMenu-TopLevelLinks__SearchButton'
+        className={`NavMenu-TopLevelLinks__SearchButton${classes}`}
         name='Search Button'
         label='Search Box'
         style={styles.base}

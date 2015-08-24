@@ -201,7 +201,7 @@
   }
 
   /* CSS for Search button */
-  .NavMenu-TopLevelLinks__Search-Btn{
+  .NavMenu-TopLevelLinks__SearchButton{
   	color: #000000;
   	&:hover {
   		color: #00AAFF;
@@ -209,7 +209,7 @@
   }
 
   /* CSS for Search box. It shows only activated. Default is not displayed. */
-  .NavMenu__Search-Box--active {
+  .NavMenu__SearchBox--active {
 		background-color: #00AAFF; 
 		color: #000000;
 		display: block;
@@ -220,7 +220,7 @@
   	width: 100%;
   	z-index: 300;
   }
-  .NavMenu__Search-Box {
+  .NavMenu__SearchBox {
 		display: none;
   }
 }
