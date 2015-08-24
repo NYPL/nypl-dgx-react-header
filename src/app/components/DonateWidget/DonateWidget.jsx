@@ -10,7 +10,9 @@ class DonateWidget extends React.Component {
   
   render() {
     // Extract the second element since the mocked
-    // data's first element is the Donate Widget
+    // data's first element is the Donate Widget.
+    // This needs to be properly determined by the
+    // back-end team.
     let featureItem = this.props.features[1];
 
     return (
@@ -19,6 +21,7 @@ class DonateWidget extends React.Component {
         className={this.props.className + '-DonateBox'}
         tag={'Donate'}
         title={'Donate Now!'}
+        donationAmounts={[10, 19, 17, 50, 45]}
         desc={"Support NYPL in it's mission to inspire lifelong learning, advance knowledge, and strengthen our communities."} />
         <MegaMenuFeatureItem 
         className={this.props.className + '-FeatureItem'}

@@ -7,7 +7,15 @@ class DonateBox extends React.Component {
   }
   
   render() {
-    let donateLinks;
+    let target = this.props.donateUrl || '#';
+    // Limit to 3 items only, as per design restrictions.
+    let donationLinks = this.props.donationAmounts.map((amount, index) => {
+      while (index < 3) {
+        return (
+          <li key={index}><a href={target}>${amount}</a></li>
+        );
+      }
+    });
 
     return (
       <div className={this.props.className}>
@@ -16,10 +24,8 @@ class DonateBox extends React.Component {
           <h3 className={this.props.className + '-Title'}>{this.props.title}</h3>
           <div className={this.props.className + '-Desc'}>{this.props.desc}</div>
           <ul className={this.props.className + '-DonationLinks'}>
-            <li><a href='#'>$19</a></li>
-            <li><a href='#'>$35</a></li>
-            <li><a href='#'>$70</a></li>
-            <li><a href='#'>Other</a></li>
+            {donationLinks}
+            <li><a href={target}>Other</a></li>
           </ul>
         </div>
       </div>
@@ -29,7 +35,9 @@ class DonateBox extends React.Component {
 
 DonateBox.defaultProps = {
   lang: 'en',
-  className: 'DonateBox'
+  className: 'DonateBox',
+  donateUrl: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form',
+  donationAmounts: [10, 19, 17]
 };
 
 export default DonateBox;
