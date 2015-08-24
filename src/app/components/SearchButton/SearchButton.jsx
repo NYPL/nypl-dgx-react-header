@@ -7,7 +7,7 @@ import cx from 'classnames';
 import BasicButton from '../Buttons/BasicButton.jsx';
 
 // Create React class
-class SearchBtn extends React.Component {
+class SearchButton extends React.Component {
 
   // Constructor used in ES6
   constructor(props) {
@@ -54,4 +54,4 @@ const styles = {
 };
 
 // Export the component
-export default Radium(SearchBtn);
+export default Radium(SearchButton);

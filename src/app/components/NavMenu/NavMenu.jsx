@@ -3,7 +3,7 @@ import React from 'react';
 import _ from 'underscore';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.jsx';
 import MegaMenu from '../MegaMenu/MegaMenu.jsx';
-import SearchBtn from '../SearchBtn/SearchBtn.jsx';
+import SearchButton from '../SearchButton/SearchButton.jsx';
 import SearchBox from '../SearchBox/SearchBox.jsx';
 
 class NavMenu extends React.Component {
@@ -20,8 +20,8 @@ class NavMenu extends React.Component {
     // Allows binding methods that reference this
     this._activate = this._activate.bind(this);
     this._deactivate = this._deactivate.bind(this);
-    // The fucntion specificlly to active search box
-    this._searchActivate = this._searchActivate.bind(this);
+    // The fucntion specifically to active search box
+    this._activateSearchBox = this._activateSearchBox.bind(this);
   }
 
   render () {
@@ -53,7 +53,7 @@ class NavMenu extends React.Component {
       <nav className='NavMenu' onMouseLeave={this._deactivate}>
         <ul className='NavMenu-TopLevelLinks'>
           {items}
-          <SearchBtn activate={this._searchActivate} />
+          <SearchButton activate={this._activateSearchBox} />
         </ul>
         {megas}
         <SearchBox isActive={'search' === this.state.activeItem} />
@@ -68,7 +68,7 @@ class NavMenu extends React.Component {
   }
 
   // Swith on or off search button
-  _searchActivate (i) {
+  _activateSearchBox (i) {
     this.setState({activeItem: i});
   }
 
