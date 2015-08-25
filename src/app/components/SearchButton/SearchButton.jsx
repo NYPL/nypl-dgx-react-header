@@ -41,7 +41,7 @@ class SearchButton extends React.Component {
   // Set the function to active search box when the button is clicked
   _activate() {
     // Set the NaveMenu activeItem to be search if search box is not shown
-    (this.state.isActive === false) ?
+    (this.state.isActive !== 'search') ?
       this.props.activate('search') : this.props.activate(null);
     // Set the button state to be active
     this.state.isActive = !this.state.isActive;

@@ -53,7 +53,7 @@ class NavMenu extends React.Component {
       <nav className='NavMenu' onMouseLeave={this._deactivate}>
         <ul className='NavMenu-TopLevelLinks'>
           {items}
-          <SearchButton activate={this._activateSearchBox} />
+          <SearchButton activate={this._activate} />
         </ul>
         {megas}
         <SearchBox id='NavMenu-SearchBox' className='NavMenu-SearchBox' isActive={'search' === this.state.activeItem} />
@@ -64,6 +64,7 @@ class NavMenu extends React.Component {
   // Isolate the interaction of search button from other NaveMenuItem
   _activate (i) {
       this.setState({activeItem: i});
+      console.log(i);
   }
 
   // Swith on or off search button
