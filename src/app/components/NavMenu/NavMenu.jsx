@@ -27,7 +27,7 @@ class NavMenu extends React.Component {
 
     return (
       <nav className='NavMenu'>
-        <ul className='NavMenu-TopLevelLinks'>
+        <ul className='NavMenu-List'>
           {navMenu}
         </ul>
       </nav>

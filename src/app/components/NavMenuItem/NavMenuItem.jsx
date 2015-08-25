@@ -17,20 +17,22 @@ class NavMenuItem extends React.Component {
   }
 
   render() {
-    let classes = cx('NavMenuItem', {'active': this.state.activeItem === this.props.index});
+    let classes = cx('NavMenuItem-Link', {'active': this.state.activeItem === this.props.index});
     let target = (this.props.target !== '#') 
         ? `${this.props.root}${this.props.target}` : this.props.target;
 
     return (
-      <span
-      onMouseEnter={this._activate} 
-      onMouseLeave={this._deactivate}>
-        <li className={classes}
-        id={(this.props.navId) ? 'NavMenuItem-'+this.props.navId : 'NavMenuItem'}>
+      <li
+        onMouseEnter={this._activate} 
+        onMouseLeave={this._deactivate}
+        className={(this.props.navId) ? 'NavMenuItem-'+this.props.navId : 'NavMenuItem'}>
+        <span 
+          className={classes}
+          id={(this.props.navId) ? 'NavMenuItem-Link-'+this.props.navId : 'NavMenuItem-Link'}>
           <a href={target}>
             {this.props.label[this.props.lang]}
           </a>
-        </li>
+        </span>
         <MegaMenu
           label={this.props.label}
           lang={this.props.lang}
@@ -39,7 +41,7 @@ class NavMenuItem extends React.Component {
           features={this.props.features}
           index={this.props.index}
           currentActiveItem={this.state.activeItem} />
-      </span>
+      </li>
     );
   }
 

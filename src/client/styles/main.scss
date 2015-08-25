@@ -42,8 +42,8 @@
   /* MAIN NAVIGATION */
   .NavMenu {
   	position: relative;
-  	/* Top-level Links Wrapper */
-	  &-TopLevelLinks {
+  	/* <ul> list holding NavItems */
+	  &-List {
 	  	padding: 0;
 	  	margin: 0 auto;
 	  	list-style-type: none;
@@ -53,18 +53,23 @@
 	  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
 	  	}
 
-	  	li {
-	  		position: relative;
-	  		display: inline-block;
-	  		padding: 5px 8px;
+	  	/* Top level Link Rules */
+	  	& > li {
+	  		display: inline;
 
-	  		a {
-	  			@include Kievit-Book;
-	  			color: #000;
-	  		}
+				& > span {
+		  		position: relative;
+		  		display: inline-block;
+		  		padding: 5px 8px;
+
+		  		a {
+		  			@include Kievit-Book;
+		  			color: #000;
+		  		}
+		  	}
 	  	}
 
-	  	#NavMenuItem {
+	  	#NavMenuItem-Link {
 	  		/* BROWSE */
 	  		&-84330695-2ae3-a904-25c6-4149a2e55575 {
 		  		&.active {
@@ -422,6 +427,7 @@
 							display: block;
 							font-size: 18px;
 							padding: 15px 20px;
+							margin: 0;
 							border: 2px solid #FFF;
 							border-radius: 5px;
 						}
