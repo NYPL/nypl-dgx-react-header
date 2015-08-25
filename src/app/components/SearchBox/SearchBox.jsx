@@ -33,31 +33,41 @@ class SearchBox extends React.Component {
     return (
       <div id={this.props.id} 
       className={`${this.props.className}${classes}`}>
-        
-        <InputField type='text' 
-        id={`${this.props.id}__InputField`} 
-        ref='keywords' 
-        value={this.state.searchKeywords}
-        placeholder='What would you like to find?'
-        onChange={this._keywordsChange} />
+        <div className={`${this.props.className}-Elements-Wrapper`}>
+          <div className={`${this.props.className}-Elements-Input-Wrapper`}>
 
-        <InputField type='submit' id={`${this.props.id}__SubmitButton`} onClick={this._submitSearchRequest} />
-        
-        <InputField type='radio' 
-        name='search option' 
-        value='catalog' 
-        ref='option' 
-        onChange={this._searchOptionChange}
-        checked={this.state.searchOption ==='catalog'} />Search the Catalog
-        
-        <InputField type='radio' 
-        name='search option' 
-        value='website' 
-        ref='option'
-        onChange={this._searchOptionChange} 
-        checked={this.state.searchOption ==='website'} />Search NYPL.org
-        
-        <SimpleButton target='http://catalog.nypl.org/' label='Advenced Search'/>
+            <div className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
+              <InputField type='text' 
+              id={`${this.props.id}-Input-Keywords`}
+              className={`${this.props.className}-Input-Keywords`} 
+              ref='keywords' 
+              value={this.state.searchKeywords}
+              placeholder='What would you like to find?'
+              onChange={this._keywordsChange} />
+            </div>
+            <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
+              <div className={`${this.props.className}-Input-Options`}>
+                <InputField type='radio' 
+                name='search option' 
+                value='catalog' 
+                ref='option' 
+                onChange={this._searchOptionChange}
+                checked={this.state.searchOption ==='catalog'} />Search the Catalog
+                
+                <InputField type='radio' 
+                name='search option' 
+                value='website' 
+                ref='option'
+                onChange={this._searchOptionChange} 
+                checked={this.state.searchOption ==='website'} />Search NYPL.org
+              </div>
+              
+              <SimpleButton className={`${this.props.className}-Elements-Input-Advanced-Options`} target='http://catalog.nypl.org/' label='Advenced Search'/>
+            </div>
+              
+          </div>
+          <InputField type='submit' id={`${this.props.id}-Elements-SubmitButton`} classNAme={`${this.props.id}-Elements-SubmitButton`} onClick={this._submitSearchRequest} />
+        </div>
       </div>
     );
   }

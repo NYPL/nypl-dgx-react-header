@@ -260,13 +260,57 @@
   }
 
   /* CSS for Search button */
-  .NavMenu-TopLevelLinks__SearchButton{
+  .NavMenu-TopLevelLinks__SearchButton {
   	color: #000000;
   	&:hover {
   		color: #00AAFF;
   	}
   }
 
+  .NavMenu-SearchBox-Elements-Wrapper {
+		margin: 55px 10% 0 10%;
+    display: inline-block;
+    width: 80%;
+  }
+
+  .NavMenu-SearchBox-Elements-Input-Wrapper { 
+    display: inline-block;
+    position: relative;
+    width: 94%;
+  }
+
+  .NavMenu-SearchBox-Elements-Input-Keywords-Wrapper {
+		display: block;
+		margin: 0 0 20px 0;
+    position: relative;
+  }
+
+	.NavMenu-SearchBox-Input-Keywords {
+		width: 93%;
+    height: 60px;
+    background-color: #1DA1D4;
+    border-width: 1px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid;
+    border-color: #ffffff;
+    font-size: 45px;
+    color: #ffffff;
+	}
+
+	.NavMenu-SearchBox-Elements-Input-Options-Wrapper {
+	}
+
+	.NavMenu-SearchBox-Input-Options {
+		display: inline-block;
+	}
+
+	.NavMenu-SearchBox-Elements-Input-Advanced-Options {
+		display: inline-block;
+    float: right;
+	}
+     
   /* CSS for Search box. It shows only activated. Default is not displayed. */
   .NavMenu-SearchBox--active {
 		background-color: $BG_SEARCHBOX; 
@@ -274,7 +318,6 @@
 		display: block;
 		height: 200px;
 		margin: 6px 0 0 0;
-		padding: 20px 10%;
 		position: relative;
   	width: 100%;
   	z-index: 300;
