@@ -31,17 +31,17 @@ class SearchBox extends React.Component {
     let classes = cx({'--active': this.props.isActive});
     
     return (
-      <div id='NavMenu__SearchBox' 
-      className={`NavMenu__SearchBox${classes}`}>
+      <div id={this.props.id} 
+      className={`${this.props.className}${classes}`}>
         
         <InputField type='text' 
-        id='NavMenu__SearchBox__InputField' 
+        id={`${this.props.id}__InputField`} 
         ref='keywords' 
         value={this.state.searchKeywords}
         placeholder='What would you like to find?'
         onChange={this._keywordsChange} />
 
-        <InputField type='submit' id='NavMenu__SearchBox__SubmitButton' onClick={this._submitSearchRequest} />
+        <InputField type='submit' id={`${this.props.id}__SubmitButton`} onClick={this._submitSearchRequest} />
         
         <InputField type='radio' 
         name='search option' 
@@ -86,9 +86,9 @@ class SearchBox extends React.Component {
     let requestUrl;
 
     // Decide the search option
-    if (requestParameters.option == 'catalog') {
+    if (requestParameters.option === 'catalog') {
       requestUrl = `https://nypl.bibliocommons.com/search?t=smart&q=${requestParameters.keywords}&commit=Search&searchOpt=catalogue`;
-    }  else if (requestParameters.option == 'website') {
+    }  else if (requestParameters.option === 'website') {
       requestUrl = `http://www.nypl.org/search/apachesolr_search/${requestParameters.keywords}`;
     }
 
@@ -98,7 +98,9 @@ class SearchBox extends React.Component {
 }
 
 SearchBox.defaultProps = {
-  lang: 'en'
+  lang: 'en',
+  id: 'SearchBox',
+  className: 'SearchBox'
 };
 
 const styles = {

@@ -209,7 +209,7 @@
   }
 
   /* CSS for Search box. It shows only activated. Default is not displayed. */
-  .NavMenu__SearchBox--active {
+  .NavMenu-SearchBox--active {
 		background-color: #00AAFF; 
 		color: #000000;
 		display: block;
@@ -220,7 +220,7 @@
   	width: 100%;
   	z-index: 300;
   }
-  .NavMenu__SearchBox {
+  .NavMenu-SearchBox {
 		display: none;
   }
 }

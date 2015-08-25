@@ -56,7 +56,7 @@ class NavMenu extends React.Component {
           <SearchButton activate={this._activateSearchBox} />
         </ul>
         {megas}
-        <SearchBox isActive={'search' === this.state.activeItem} />
+        <SearchBox id='NavMenu-SearchBox' className='NavMenu-SearchBox' isActive={'search' === this.state.activeItem} />
       </nav>
     );
   }
