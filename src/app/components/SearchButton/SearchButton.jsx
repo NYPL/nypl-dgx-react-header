@@ -33,7 +33,7 @@ class SearchButton extends React.Component {
         name='Search Button'
         label='Search Box'
         style={styles.base}
-        onClick={this._activate} />
+        onMouseEnter={this._activate} />
       </li>
 		);
   }

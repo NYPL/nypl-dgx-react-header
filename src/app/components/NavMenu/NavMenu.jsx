@@ -63,8 +63,7 @@ class NavMenu extends React.Component {
 
   // Isolate the interaction of search button from other NaveMenuItem
   _activate (i) {
-    (this.state.activeItem !== 'search') ?
-      this.setState({activeItem: i}) : this.setState({activeItem: 'search'});
+      this.setState({activeItem: i});
   }
 
   // Swith on or off search button
