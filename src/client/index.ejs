@@ -13,11 +13,21 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <!-- Minified Styles -->
-    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <% if (isProduction) { %>
+      <!-- Minified Styles -->
+      <link rel="stylesheet" type="text/css" href="/styles.css">
+    <% } else { %>
+      <link rel="stylesheet" type="text/css" href="http://localhost:<%= webpackPort %>/styles.css">
+    <% } %>
   </head>
   <body>
 		<div id="nypl-dgx-header"><%- headerApp %></div>
   </body>
-  <script src="/bundle.js"></script>
+
+<% if (isProduction) { %>
+  <script async src="/bundle.js"></script>
+<% } else { %>
+  <script src="http://localhost:<%= webpackPort %>/bundle.js"></script>
+<% } %>
+
 </html>
