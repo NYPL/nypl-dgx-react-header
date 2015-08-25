@@ -82,8 +82,8 @@ app.get('/header-data', (req, res) => {
     endpoint: '/api/nypl/ndo/v0.1/site-data/header-items',
     includes: [
       'children',
-      'related-mega-menu-panes.current-mega-menu-items.related-content',
-      'related-mega-menu-panes.current-mega-menu-items.images'],
+      'related-mega-menu-panes.current-mega-menu-item.related-content',
+      'related-mega-menu-panes.current-mega-menu-item.images'],
     filters: {
       'relationships': {'parent': 'null'}
     }
@@ -94,6 +94,7 @@ app.get('/header-data', (req, res) => {
       api_root: 'dev.refinery.aws.nypl.org',
       api_version: 'v0.1'
     })
+    .setChildrenObjects(options)
     .get(options, function (data) {
       res.json(parser.parse(data));
     });
@@ -106,20 +107,20 @@ app.get('/*', (req, res) => {
     endpoint: '/api/nypl/ndo/v0.1/site-data/header-items',
     includes: [
       'children',
-      'related-mega-menu-panes.current-mega-menu-items.related-content',
-      'related-mega-menu-panes.current-mega-menu-items.images'],
+      'related-mega-menu-panes.current-mega-menu-item.related-content',
+      'related-mega-menu-panes.current-mega-menu-item.images'],
     filters: {
       'relationships': {'parent': 'null'}
     }
   };
  
-
   // ASYNC REQUEST!
   parser
     .setHost({
       api_root: 'dev.refinery.aws.nypl.org',
       api_version: 'v0.1'
     })
+    .setChildrenObjects(options)
     .get(options, function (data) {
       res.locals.data = {
         Store: { headerData: parser.parse(data) }
