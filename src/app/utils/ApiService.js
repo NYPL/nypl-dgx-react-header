@@ -2,6 +2,7 @@
 import axios from 'axios';
 
 const fakeData = [{
+  id: '84330695-2ae3-a904-25c6-4149a2e55575',
   label: { en: 'Browse' },
   subnav: [
     {
@@ -35,6 +36,7 @@ const fakeData = [{
   ]
 },
 {
+  id: 'b3a0321e-6785-5384-157e-baf0398dacdc',
   label: { en: 'Learn' },
   subnav: [
     {
@@ -65,6 +67,7 @@ const fakeData = [{
   ]
 },
 {
+  id: '662abf31-7789-ce84-b537-1d324a379c95',
   label: { en: 'Attend' },
   subnav: [
     {
@@ -97,6 +100,7 @@ const fakeData = [{
   ]
 },
 {
+  id: 'abb58f55-20e0-0d34-d1ae-45687cc4799d',
   label: { en: 'Find Us' },
   target: 'locations',
   subnav: [
@@ -122,6 +126,7 @@ const fakeData = [{
   ]
 },
 {
+  id: 'aeb16807-40c0-8534-950f-bfdaf546be2e',
   label: { en: 'Research' },
   subnav: [
     {
@@ -152,6 +157,7 @@ const fakeData = [{
   ]
 },
 {
+  id: '7638d892-1846-1484-2961-ad180e4194bf',
   label: { en: 'Give' },
   target: 'support',
   subnav: [
@@ -179,6 +185,7 @@ const fakeData = [{
   ]
 },
 {
+  id: 'cb464e38-b91a-2554-d1d5-64bc1c1d6283',
   label: { en: 'Get Help' },
   target: 'ask-nypl',
   subnav: [

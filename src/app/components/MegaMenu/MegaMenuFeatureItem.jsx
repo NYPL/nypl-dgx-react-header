@@ -12,7 +12,7 @@ class MegaMenuFeatureItem extends React.Component {
 			classes = cx({'with-image': this.props.feature.image, 'without-image': !this.props.feature.image});
 
 		return (
-	    <a href={this.props.feature.link} className='MegaMenu-FeatureItem'>
+	    <a href={this.props.feature.link} className={this.props.className}>
 		    <div className={'FeatureItem-Image '+classes}>
 		    	{img}
 		    </div>
@@ -25,5 +25,10 @@ class MegaMenuFeatureItem extends React.Component {
 	  );
 	}
 }
+
+MegaMenuFeatureItem.defaultProps = {
+	lang: 'en',
+	className: 'MegaMenu-FeatureItem'
+};
 
 export default MegaMenuFeatureItem;
