@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'underscore';
 
+import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
+
 class MegaMenuSubNav extends React.Component {
 
   // Constructor used in ES6
@@ -31,6 +33,9 @@ class MegaMenuSubNav extends React.Component {
       <div className='MegaMenu-SubNav'>
         <h2>{this.props.label[this.props.lang]}</h2>
         <ul>{items}</ul>
+        <SocialMediaLinksWidget 
+          className={'MegaMenu-SubNav-SocialMediaWidget'} 
+          displayOnly={['facebook', 'twitter']} />
       </div>
     );
   }

@@ -198,6 +198,31 @@
 	  				margin: 7px 0px;
 	  			}
 	  		}
+
+	  		&-SocialMediaWidget {
+	  			padding: 2px;
+	  			margin: 15px 0 0 0;
+	  			border: 1px solid #FFF;
+
+	  			ul {
+	  				list-style-type: none;
+	  				margin: 0;
+	  				padding: 0;
+
+	  				li {
+	  					display: inline;
+	  					margin: 0 5px 0 0;
+
+	  					&:last-child {
+	  						margin-right: 0;
+	  					}
+
+	  					a {
+	  						text-decoration: underline;
+	  					}
+	  				}
+	  			}
+	  		}
 	  	}
 
 	  	&-FeaturesWrapper {
