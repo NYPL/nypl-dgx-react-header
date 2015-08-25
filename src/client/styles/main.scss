@@ -260,11 +260,23 @@
   }
 
   /* CSS for Search button */
-  .NavMenu-TopLevelLinks__SearchButton {
+  .NavMenu-TopLevelLinks-SearchButton {
+    -webkit-appearance: none;
+    background-color: transparent;
   	color: #000000;
+    font-size: 1em;
+    border-width: 0;
   	&:hover {
-  		color: #00AAFF;
+  		color: $BG_SEARCHBOX
   	}
+  }
+
+  .NavMenu-TopLevelLinks-SearchButton--active {
+    -webkit-appearance: none;
+    background-color: transparent;
+  	color: $BG_SEARCHBOX;
+    font-size: 1em;
+    border-width: 0;
   }
 
   /* CSS for Search box. It shows only activated. Default is not displayed. */

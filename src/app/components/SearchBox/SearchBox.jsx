@@ -62,7 +62,7 @@ class SearchBox extends React.Component {
                 checked={this.state.searchOption ==='website'} />Search NYPL.org
               </div>
               
-              <SimpleButton className={`${this.props.className}-Elements-Input-Advanced-Options`} target='http://catalog.nypl.org/' label='Advenced Search'/>
+              <SimpleButton className={`${this.props.className}-Elements-Input-Advanced-Options`} target='http://catalog.nypl.org/' label='Advanced Search'/>
             </div>
               
           </div>
