@@ -14,12 +14,12 @@ class NavMenu extends React.Component {
     let navMenu = this.props.items.map((item, index) => {
       return (
         <NavMenuItem 
-        label={item.label}
-        lang={this.props.lang}
-        target={item.target}
+        label={item.attributes.name}
+        lang='en'
+        target={item.attributes.link.en.text}
         navId={item.id}
-        features={item.features}
-        subNav={item.subnav}
+        features={item['related-mega-menu-panes']}
+        subNav={item.children}
         key={index}
         index={index} />
       );

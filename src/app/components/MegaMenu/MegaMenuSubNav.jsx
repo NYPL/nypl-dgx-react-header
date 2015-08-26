@@ -29,7 +29,7 @@ class MegaMenuSubNav extends React.Component {
 
     return (
       <div className='MegaMenu-SubNav'>
-        <h2>{this.props.label[this.props.lang]['text']}</h2>
+        <h2>{this.props.label[this.props.lang].text}</h2>
         <ul>{items}</ul>
       </div>
     );

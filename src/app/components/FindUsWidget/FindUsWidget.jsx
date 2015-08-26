@@ -21,7 +21,7 @@ class FindUsWidget extends React.Component {
     // For now, we will utilize the 2nd item in the response
     // since the first item is the LocationFinder Widget.
     // If that response is empty, use the mocked data.
-    let featLocData = this.props.features[1] || mockedFeaturedLocation;
+    let featLocData = this.props.features || mockedFeaturedLocation;
 
     return (
       <div className={this.props.className}>

@@ -37,7 +37,6 @@ class Header extends React.Component {
   }
 
   render () {
-    // console.log(this.state);
     return (
       <header id='Header' className='Header'>
         <div className='Header-TopWrapper' style={styles.wrapper}>

@@ -14,9 +14,9 @@ class MegaMenuFeatures extends React.Component {
     let currentFeatureItem;
 
     // Donate Widget
-    if (this.props.navId === '7638d892-1846-1484-2961-ad180e4194bf') {
+    if (this.props.navId === '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1') {
       currentFeatureItem = <DonateWidget navId={this.props.navId} features={this.props.features} />;
-    } else if (this.props.navId === 'abb58f55-20e0-0d34-d1ae-45687cc4799d') {
+    } else if (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') {
       currentFeatureItem = <FindUsWidget navId={this.props.navId} features={this.props.features} />;
     } else {
       currentFeatureItem = this.props.features.map((m, i) => {

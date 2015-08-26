@@ -13,7 +13,7 @@ class DonateWidget extends React.Component {
     // data's first element is the Donate Widget.
     // This needs to be properly determined by the
     // back-end team.
-    let featureItem = this.props.features[1];
+    let featureItem = this.props.features;
 
     return (
       <div className={this.props.className}>

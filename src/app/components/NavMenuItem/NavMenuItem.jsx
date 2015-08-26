@@ -25,12 +25,12 @@ class NavMenuItem extends React.Component {
       <li
         onMouseEnter={this._activate} 
         onMouseLeave={this._deactivate}
-        className={(this.props.navId) ? 'NavMenuItem-'+this.props.navId : 'NavMenuItem'}>
+        className={(this.props.navId) ? 'NavMenuItem-' + this.props.navId : 'NavMenuItem'}>
         <span 
           className={classes}
-          id={(this.props.navId) ? 'NavMenuItem-Link-'+this.props.navId : 'NavMenuItem-Link'}>
-          <a href={target}>
-            {this.props.label[this.props.lang]}
+          id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
+          <a href='#'>
+            {this.props.label[this.props.lang].text}
           </a>
         </span>
         <MegaMenu
