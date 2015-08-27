@@ -1,28 +1,37 @@
 import React from 'react';
 import Iso from 'iso';
 import alt from '../app/alt.js';
+import Actions from '../app/actions/Actions.js';
 import Header from '../app/components/Header/Header.jsx';
 
 import './styles/main.scss';
 
 if (typeof window !== 'undefined') {
 
-	let isRenderedByServer = false;
+	let styleTag, isRenderedByServer = false;
 
 	window.onload = () => {
+
+  	styleTag = document.createElement('link');
+  	styleTag.rel = 'stylesheet';
+    styleTag.type = 'text/css';
+    styleTag.href = 'http://dev.header.aws.nypl.org/styles.css';
+    styleTag.media = "all";
+
 		// Render Isomorphically
 	  Iso.bootstrap(function (state, meta, container) {
 	  	console.log('Application rendered Isomorphically.');
 	    alt.bootstrap(state);
 	    React.render(React.createElement(Header), container);
 	    isRenderedByServer = true;
+	    container.appendChild(styleTag);
 	  });
 
 	  // Render Client Side Only, attached to ID
 	  if (!isRenderedByServer) {
 	  	// Wrap in closure
 	  	(function (global, doc) {
-		  	let scriptTags, styleTag, htmlElement, nyplHeaderObject, i;
+		  	let allScriptTags, scriptTag, htmlElement, nyplHeaderObject, i;
 
 	  		// create element to hold the single header instance.
 	  		htmlElement = doc.createElement('div');
@@ -42,13 +51,6 @@ if (typeof window !== 'undefined') {
 		  	// Only create the nyplHeader if the global.nyplHeaderObject is empty
 		  	if (nyplHeaderObject.styleTags.length === 0 && nyplHeaderObject.processedScripts.length === 0) {
 
-		  		// create the single styletag reference.
-			  	styleTag = doc.createElement('link');
-			  	styleTag.rel = 'stylesheet';
-		      styleTag.type = 'text/css';
-		      styleTag.href = 'http://dev.header.aws.nypl.org/styles.css';
-		      styleTag.media = "all";
-
 		      // attach the React component first before adding the style tag
 		      React.render(React.createElement(Header), htmlElement);
 
@@ -56,20 +58,23 @@ if (typeof window !== 'undefined') {
 		      htmlElement.appendChild(styleTag);
 
 		      // insert the markup right before the script tag
-		      scriptTags = doc.getElementsByTagName('script');
-		      for (i=0; i < scriptTags.length; i++) {
-		      	if (scriptTags[i].src.indexOf('bundle.js') !== -1) {
-		      		scriptTags[i].parentNode.insertBefore(htmlElement, scriptTags[i]);
+		      allScriptTags = doc.getElementsByTagName('script');
+		      for (i=0; i < allScriptTags.length; i++) {
+		      	if (allScriptTags[i].src.indexOf('bundle.js') !== -1) {
+		      		scriptTag = allScriptTags[i];
+		      		scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
 		      	}
 		      }
 
 		      // update the global nyplHeaderObject
 		      nyplHeaderObject.styleTags.push(styleTag);
 		      nyplHeaderObject.processedScripts.push(scriptTag);
+
+		      Actions.fetchHeaderData();
 		  	}
 
 		  	console.log('Application rendered via Client');
-		  	//console.log(htmlElement);
+		  	//console.log(Actions.fetchHeaderData());
 	  	})(window, document);
 	  }
 	}

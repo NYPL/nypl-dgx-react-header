@@ -103,7 +103,7 @@ app.get('/*', (req, res) => {
   res.render('index', {
     // Assign the Header String to the
     // proper EJS variable
-    //headerApp: iso.render(),
+    headerApp: iso.render(),
     appTitle: appConfig.appTitle,
     favicon: appConfig.favIconPath,
     isProduction: isProduction,
