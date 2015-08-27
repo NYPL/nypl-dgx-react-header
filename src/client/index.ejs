@@ -3,31 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-
     <title><%- appTitle %></title>
-
-		<!--[if IE]><link rel="shortcut icon" href="<%- favicon %>"><![endif]-->
-		<!-- Possibly include a png version of the favicon -->
-		<link rel="icon" type="image/png" href="<%- favicon %>">
+    <!--[if IE]><link rel="shortcut icon" href="<%- favicon %>"><![endif]-->
+    <!-- Possibly include a png version of the favicon -->
+    <link rel="icon" type="image/png" href="<%- favicon %>">
 
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <% if (isProduction) { %>
-      <!-- Minified Styles -->
-      <link rel="stylesheet" type="text/css" href="/styles.css">
-    <% } else { %>
-      <link rel="stylesheet" type="text/css" href="http://localhost:<%= webpackPort %>/styles.css">
-    <% } %>
   </head>
   <body>
-		<div id="nypl-dgx-header"><%- headerApp %></div>
   </body>
 
-<% if (isProduction) { %>
-  <script async src="/bundle.js"></script>
-<% } else { %>
-  <script src="http://localhost:<%= webpackPort %>/bundle.js"></script>
-<% } %>
-
+  <% if (isProduction) { %>
+    <script async type='text/javascript' src="/bundle.js" id='nypl-dgx-header-embed'></script>
+  <% } else { %>
+    <script async type='text/javascript' src="http://localhost:<%= webpackPort %>/bundle.js" id='nypl-dgx-header-embed'></script>
+  <% } %>
 </html>

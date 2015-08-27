@@ -81,7 +81,7 @@ let headerApp = React.renderToString(<Header />);
 
 // Used to debug refinery response
 app.get('/header-data', (req, res) => {
-	res.json(refineryData);
+  res.json(refineryData);
 });
 
 // Match all routes to render the index page.
@@ -99,11 +99,11 @@ app.get('/*', (req, res) => {
 
   iso.add(headerApp, alt.flush());
 
-	// First parameter references the ejs filename
+  // First parameter references the ejs filename
   res.render('index', {
-  	// Assign the Header String to the
-  	// proper EJS variable
-  	headerApp: iso.render(),
+    // Assign the Header String to the
+    // proper EJS variable
+    //headerApp: iso.render(),
     appTitle: appConfig.appTitle,
     favicon: appConfig.favIconPath,
     isProduction: isProduction,

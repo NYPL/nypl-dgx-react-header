@@ -20,8 +20,55 @@ if (typeof window !== 'undefined') {
 
 	  // Render Client Side Only, attached to ID
 	  if (!isRenderedByServer) {
-	  	console.log('Application rendered via Client');
-	  	React.render(React.createElement(Header), document.getElementById('nypl-dgx-header'));
+	  	// Wrap in closure
+	  	(function (global, doc) {
+		  	let scriptTag, styleTag, htmlElement, nyplHeaderObject;
+
+	  		// create element to hold the single header instance.
+	  		htmlElement = doc.createElement('div');
+	  		htmlElement.id = 'nypl-dgx-header';
+
+		  	// Make a global object to store the instances of nyplHeader
+		  	if(!global.nyplHeader) { global.nyplHeader = {}; };
+		  	// Short-name reference to global.nyplHeader
+		  	nyplHeaderObject = global.nyplHeader;
+
+		  	// Let's keep track of the processed scripts within nyplHeader
+		  	if(!nyplHeaderObject.processedScripts) { nyplHeaderObject.processedScripts = []; };
+
+		  	// Let's keep track of the processed style tags within nyplHeader
+		  	if(!nyplHeaderObject.styleTags) { nyplHeaderObject.styleTags = []; };
+
+		  	// Only create the nyplHeader if the global.nyplHeaderObject is empty
+		  	if (nyplHeaderObject.styleTags.length === 0 && nyplHeaderObject.processedScripts.length === 0) {
+
+		  		// get current initialized script tag by it's unique id
+		  		scriptTag = doc.getElementById('nypl-dgx-header-embed');
+
+		  		// create the single styletag reference.
+			  	styleTag = doc.createElement('link');
+			  	styleTag.rel = 'stylesheet';
+		      styleTag.type = 'text/css';
+		      styleTag.href = 'http://dev.header.aws.nypl.org/styles.css';
+		      styleTag.media = "all";
+
+		      // attach the React component first before adding the style tag
+		      React.render(React.createElement(Header), htmlElement);
+
+		      // append the style-tag to the element holding the nypl-header
+		      htmlElement.appendChild(styleTag);
+
+		      // insert the markup right before the script tag
+		      scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
+
+		      // update the global nyplHeaderObject
+		      nyplHeaderObject.styleTags.push(styleTag);
+		      nyplHeaderObject.processedScripts.push(scriptTag);
+		  	}
+
+		  	console.log('Application rendered via Client');
+		  	console.log(htmlElement);
+	  	})(window, document);
 	  }
 	}
 }
