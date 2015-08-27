@@ -22,7 +22,7 @@ if (typeof window !== 'undefined') {
 	  if (!isRenderedByServer) {
 	  	// Wrap in closure
 	  	(function (global, doc) {
-		  	let scriptTag, styleTag, htmlElement, nyplHeaderObject;
+		  	let scriptTags, styleTag, htmlElement, nyplHeaderObject, i;
 
 	  		// create element to hold the single header instance.
 	  		htmlElement = doc.createElement('div');
@@ -42,9 +42,6 @@ if (typeof window !== 'undefined') {
 		  	// Only create the nyplHeader if the global.nyplHeaderObject is empty
 		  	if (nyplHeaderObject.styleTags.length === 0 && nyplHeaderObject.processedScripts.length === 0) {
 
-		  		// get current initialized script tag by it's unique id
-		  		scriptTag = doc.getElementById('nypl-dgx-header-embed');
-
 		  		// create the single styletag reference.
 			  	styleTag = doc.createElement('link');
 			  	styleTag.rel = 'stylesheet';
@@ -59,7 +56,12 @@ if (typeof window !== 'undefined') {
 		      htmlElement.appendChild(styleTag);
 
 		      // insert the markup right before the script tag
-		      scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
+		      scriptTags = doc.getElementsByTagName('script');
+		      for (i=0; i < scriptTags.length; i++) {
+		      	if (scriptTags[i].src.indexOf('bundle.js') !== -1) {
+		      		scriptTags[i].parentNode.insertBefore(htmlElement, scriptTags[i]);
+		      	}
+		      }
 
 		      // update the global nyplHeaderObject
 		      nyplHeaderObject.styleTags.push(styleTag);
@@ -67,7 +69,7 @@ if (typeof window !== 'undefined') {
 		  	}
 
 		  	console.log('Application rendered via Client');
-		  	console.log(htmlElement);
+		  	//console.log(htmlElement);
 	  	})(window, document);
 	  }
 	}

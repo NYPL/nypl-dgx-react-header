@@ -15,8 +15,8 @@
   </body>
 
   <% if (isProduction) { %>
-    <script async type='text/javascript' src="/bundle.js" id='nypl-dgx-header-embed'></script>
+    <script async type='text/javascript' src="/bundle.js"></script>
   <% } else { %>
-    <script async type='text/javascript' src="http://localhost:<%= webpackPort %>/bundle.js" id='nypl-dgx-header-embed'></script>
+    <script async type='text/javascript' src="http://localhost:<%= webpackPort %>/bundle.js"></script>
   <% } %>
 </html>
