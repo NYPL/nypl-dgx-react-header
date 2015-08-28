@@ -90,7 +90,7 @@ if (typeof window !== 'undefined') {
 		      	React.render(React.createElement(Header), htmlElement);
 
 		      	console.log('Application rendered via Client');
-		  		}, 1000);
+		  		}, 10);
 		  	}
 	  	})(window, document);
 	  }
