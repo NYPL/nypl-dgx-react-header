@@ -61,7 +61,6 @@ if (typeof window !== 'undefined') {
 
 		      /*
 		       * Only create one instance of the style tag for the Header.
-		       * Once created, append the style tag to the NYPL Header.
 		       * Add the newly created tag to thhe nyplHeaderObject
 		       */
 		      if (nyplHeaderObject.styleTags.length === 0) {
@@ -72,20 +71,24 @@ if (typeof window !== 'undefined') {
 				    styleTag.media = "all";
 
 				    nyplHeaderObject.styleTags.push(styleTag);
-		      	htmlElement.appendChild(styleTag);
 		      }
 		  	}
 
 		  	// Now we ensure that only one <script> tag and one <style> tag have been created
 		  	// before allowing React to Render the Header.
 		  	if (nyplHeaderObject.processedScripts.length === 1 && nyplHeaderObject.styleTags.length === 1) {
-		  		setTimeout(() => {
-		  			// Fetch the data first before Render
-		  			Actions.fetchHeaderData();
+		  		
+	  			// Fetch the data first before Render
+	  			Actions.fetchHeaderData();
 
+		  		setTimeout(() => {
 		  			// Once rendered, React should populate the state
 		  			// based off the Store.
 		      	React.render(React.createElement(Header), htmlElement);
+
+		      	// append the style tag
+		  			htmlElement.appendChild(styleTag);
+
 		      	console.log('Application rendered via Client');
 		  		}, 0);
 		  	}
