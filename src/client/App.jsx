@@ -8,15 +8,9 @@ import './styles/main.scss';
 
 if (typeof window !== 'undefined') {
 
-	let styleTag, isRenderedByServer = false;
+	let isRenderedByServer = false;
 
 	window.onload = () => {
-
-  	styleTag = document.createElement('link');
-  	styleTag.rel = 'stylesheet';
-    styleTag.type = 'text/css';
-    styleTag.href = 'http://dev.header.aws.nypl.org/styles.css';
-    styleTag.media = "all";
 
 		// Render Isomorphically
 	  Iso.bootstrap(function (state, meta, container) {
@@ -24,14 +18,13 @@ if (typeof window !== 'undefined') {
 	    alt.bootstrap(state);
 	    React.render(React.createElement(Header), container);
 	    isRenderedByServer = true;
-	    container.appendChild(styleTag);
 	  });
 
-	  // Render Client Side Only, attached to ID
+	  // Render Client Side Only
 	  if (!isRenderedByServer) {
 	  	// Wrap in closure
 	  	(function (global, doc) {
-		  	let allScriptTags, scriptTag, htmlElement, nyplHeaderObject, i;
+		  	let styleTag, allScriptTags, scriptTag, htmlElement, nyplHeaderObject, i;
 
 	  		// create element to hold the single header instance.
 	  		htmlElement = doc.createElement('div');
@@ -48,33 +41,54 @@ if (typeof window !== 'undefined') {
 		  	// Let's keep track of the processed style tags within nyplHeader
 		  	if(!nyplHeaderObject.styleTags) { nyplHeaderObject.styleTags = []; };
 
-		  	// Only create the nyplHeader if the global.nyplHeaderObject is empty
-		  	if (nyplHeaderObject.styleTags.length === 0 && nyplHeaderObject.processedScripts.length === 0) {
+		  	// Only create the nyplHeader if the global.nyplHeaderObject.scripts is empty
+		  	if (nyplHeaderObject.processedScripts.length === 0) {
 
-		      // attach the React component first before adding the style tag
-		      React.render(React.createElement(Header), htmlElement);
-
-		      // append the style-tag to the element holding the nypl-header
-		      htmlElement.appendChild(styleTag);
-
-		      // insert the markup right before the script tag
+		      /*
+		       * Loop through all <script> tags in the DOM.
+		       * Find the match which contains 'bundle.js'.
+		       * Insert the markup holding the NYPL Header
+		       * right before the <script> tag matched.
+		       */
 		      allScriptTags = doc.getElementsByTagName('script');
 		      for (i=0; i < allScriptTags.length; i++) {
 		      	if (allScriptTags[i].src.indexOf('bundle.js') !== -1) {
 		      		scriptTag = allScriptTags[i];
 		      		scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
+		      		nyplHeaderObject.processedScripts.push(scriptTag);
 		      	}
 		      }
 
-		      // update the global nyplHeaderObject
-		      nyplHeaderObject.styleTags.push(styleTag);
-		      nyplHeaderObject.processedScripts.push(scriptTag);
+		      /*
+		       * Only create one instance of the style tag for the Header.
+		       * Once created, append the style tag to the NYPL Header.
+		       * Add the newly created tag to thhe nyplHeaderObject
+		       */
+		      if (nyplHeaderObject.styleTags.length === 0) {
+				  	styleTag = document.createElement('link');
+				  	styleTag.rel = 'stylesheet';
+				    styleTag.type = 'text/css';
+				    styleTag.href = 'http://dev.header.aws.nypl.org/styles.css';
+				    styleTag.media = "all";
 
-		      Actions.fetchHeaderData();
+				    nyplHeaderObject.styleTags.push(styleTag);
+		      	htmlElement.appendChild(styleTag);
+		      }
 		  	}
 
-		  	console.log('Application rendered via Client');
-		  	//console.log(Actions.fetchHeaderData());
+		  	// Now we ensure that only one <script> tag and one <style> tag have been created
+		  	// before allowing React to Render the Header.
+		  	if (nyplHeaderObject.processedScripts.length === 1 && nyplHeaderObject.styleTags.length === 1) {
+		  		setTimeout(() => {
+		  			// Fetch the data first before Render
+		  			Actions.fetchHeaderData();
+
+		  			// Once rendered, React should populate the state
+		  			// based off the Store.
+		      	React.render(React.createElement(Header), htmlElement);
+		      	console.log('Application rendered via Client');
+		  		}, 0);
+		  	}
 	  	})(window, document);
 	  }
 	}
