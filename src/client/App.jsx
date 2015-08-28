@@ -52,6 +52,7 @@ if (typeof window !== 'undefined') {
 		       */
 		      allScriptTags = doc.getElementsByTagName('script');
 		      for (i=0; i < allScriptTags.length; i++) {
+		      	// TODO: Make a better comparison (source host)
 		      	if (allScriptTags[i].src.indexOf('bundle.js') !== -1) {
 		      		scriptTag = allScriptTags[i];
 		      		scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
@@ -60,8 +61,9 @@ if (typeof window !== 'undefined') {
 		      }
 
 		      /*
-		       * Only create one instance of the style tag for the Header.
-		       * Add the newly created tag to thhe nyplHeaderObject
+		       * Only create one instance of the <style> tag for the Header.
+		       * Append the <head> element with the new <style> tag
+		       * Add the newly created tag to the nyplHeaderObject for tracking
 		       */
 		      if (nyplHeaderObject.styleTags.length === 0) {
 				  	styleTag = document.createElement('link');
@@ -70,27 +72,25 @@ if (typeof window !== 'undefined') {
 				    styleTag.href = 'http://dev.header.aws.nypl.org/styles.css';
 				    styleTag.media = "all";
 
+		  			doc.getElementsByTagName('head')[0].appendChild(styleTag);
 				    nyplHeaderObject.styleTags.push(styleTag);
 		      }
 		  	}
 
-		  	// Now we ensure that only one <script> tag and one <style> tag have been created
+		  	// Now we ensure that only ONE <script> tag and ONE <style> tag have been created
 		  	// before allowing React to Render the Header.
 		  	if (nyplHeaderObject.processedScripts.length === 1 && nyplHeaderObject.styleTags.length === 1) {
-		  		
+
 	  			// Fetch the data first before Render
 	  			Actions.fetchHeaderData();
 
-		  		setTimeout(() => {
+		  		//setTimeout(() => {
 		  			// Once rendered, React should populate the state
 		  			// based off the Store.
 		      	React.render(React.createElement(Header), htmlElement);
 
-		      	// append the style tag
-		  			htmlElement.appendChild(styleTag);
-
 		      	console.log('Application rendered via Client');
-		  		}, 0);
+		  		//}, 0);
 		  	}
 	  	})(window, document);
 	  }
