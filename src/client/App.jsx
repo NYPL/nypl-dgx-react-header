@@ -84,13 +84,13 @@ if (typeof window !== 'undefined') {
 	  			// Fetch the data first before Render
 	  			Actions.fetchHeaderData();
 
-		  		//setTimeout(() => {
+		  		setTimeout(() => {
 		  			// Once rendered, React should populate the state
 		  			// based off the Store.
 		      	React.render(React.createElement(Header), htmlElement);
 
 		      	console.log('Application rendered via Client');
-		  		//}, 0);
+		  		}, 1000);
 		  	}
 	  	})(window, document);
 	  }
