@@ -18,22 +18,18 @@ class FindUsWidget extends React.Component {
       desc: 'The original George Bruce Library was located on 42nd Street.'
     };
 
-    // For now, we will utilize the 2nd item in the response
-    // since the first item is the LocationFinder Widget.
-    // If that response is empty, use the mocked data.
-    let featLocData = this.props.features || mockedFeaturedLocation;
+    let featLocData = this.props.featuredItem || mockedFeaturedLocation;
 
     return (
       <div className={this.props.className}>
-        <LocationFinder 
-        className={this.props.className + '-LocationFinder'} />
+        <LocationFinder className={this.props.className + '-LocationFinder'} />
         <div className={this.props.className + '-SeparationBar'}></div>
         <FeaturedLocation 
-        className={this.props.className + '-FeaturedLocation'}
-        tag={featLocData.tag}
-        title={featLocData.title}
-        image={featLocData.image}
-        desc={featLocData.desc} />
+          className={this.props.className + '-FeaturedLocation'}
+          tag={featLocData.tag}
+          title={featLocData.title}
+          image={featLocData.image}
+          desc={featLocData.desc} />
       </div>
     );
   }

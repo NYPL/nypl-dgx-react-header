@@ -29,7 +29,7 @@ class NavMenuItem extends React.Component {
         <span 
           className={classes}
           id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
-          <a href='#'>
+          <a href={target}>
             {this.props.label[this.props.lang].text}
           </a>
         </span>

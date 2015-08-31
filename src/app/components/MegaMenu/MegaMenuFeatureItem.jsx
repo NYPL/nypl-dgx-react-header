@@ -8,32 +8,58 @@ class MegaMenuFeatureItem extends React.Component {
   }
   
 	render() {
-    let feature = this.props.feature['current-mega-menu-item'] ? this.props.feature['current-mega-menu-item'] : undefined;
-		let img = '',
+    let feature = this.props.feature ? this.props.feature : undefined,
+      img = '',
 			classes = cx({'with-image': feature && feature.images, 'without-image': !feature || !feature.images});
 
-    let headline = '',
+    let category = '',
       title = '',
       desc = '',
       link = '#';
 
+    let blogAuthor = null,
+      eventTime = null,
+      date = null,
+      location = null;
+
+    if (feature.content) {
+      switch (feature.content.type) {
+        case 'blog': 
+          // Does not contain title
+          blogAuthor = (<p>{feature.content.authors[0].attributes['full-name']}</p>);
+          break;
+        case 'event-program':
+          location = (<p>{feature.content.location.attributes['full-name']}</p>);
+          break;
+        case 'node':
+          console.log('node');
+          break;
+        default:
+          break;
+      }
+    } else {
+      // all content in the object itself
+    }
+
     if (feature) {
-      title = feature.attributes.headline.en.text;
-      headline = feature.attributes.category ? feature.attributes.category.en.text : title;
-      desc = feature.attributes.description.en.text.substring(0, '150');
-      link = feature.attributes.link.en.text;
-      img = (feature.images) ? <img src={feature.images[0].attributes.uri['full-uri']} /> : '';
+      title = feature.headline.en.text;
+      category = feature.category ? feature.category.en.text : title;
+      desc = feature.description.en.text.substring(0, '150');
+      link = feature.link.en.text;
+      img = (feature.images) ? <img src={feature.images[0].uri['full-uri']} /> : '';
     }
 
 		return (
-	    <a href={this.props.feature.link} className={this.props.className}>
-		    <div className={'FeatureItem-Image '+classes}>
+	    <a href={link} className={this.props.className}>
+		    <div className={'FeatureItem-Image ' + classes}>
 		    	{img}
 		    </div>
 		    <div className={'FeatureItem-Content ' + classes}>
-	        <div className='FeatureItem-Content-Tag'>{headline}</div>
+	        <div className='FeatureItem-Content-Tag'>{category}</div>
 	        <h3 className='FeatureItem-Content-Title'>{title}</h3>
 	        <div className='FeatureItem-Content-Desc'>{desc}</div>
+          {blogAuthor}
+          {location}
 		    </div>
       </a>
 	  );

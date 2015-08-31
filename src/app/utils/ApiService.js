@@ -49,10 +49,9 @@ const HeaderApiService = {
           'related-mega-menu-panes.current-mega-menu-item.related-content.location')
         .then(res => {
           let data = parser.parse(res.data);
+          let modelData = Model.build(data);
 
-          Model.build(data);
-
-          return data;
+          return modelData;
         });
 		}
 

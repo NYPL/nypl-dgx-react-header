@@ -9,23 +9,50 @@ class DonateWidget extends React.Component {
   }
   
   render() {
-    // Extract the second element since the mocked
-    // data's first element is the Donate Widget.
-    // This needs to be properly determined by the
-    // back-end team.
-    let featureItem = this.props.features;
+    // This is pending removal once we establish the Data from API.
+    let mockedFeaturedLocation = {
+      headline: {
+        en: {
+          text: 'George Bruce Library Celebrates 100 Years'
+        }
+      },
+      category: {
+        en: {
+          text: 'Mocked Location Spotlight'
+        }
+      },
+      images: [
+        {
+          uri: {
+            'full-uri': 'http://fpoimg.com/88x88'
+          }
+        }
+      ],
+      description: {
+        en: {
+          text: 'The original George Bruce Library was located on 42nd Street.'
+        }
+      },
+      link: {
+        en: {
+          text: 'nypl.org'
+        }
+      }
+    };
+
+    let featuredItem = this.props.featuredItem || mockedFeaturedLocation;
 
     return (
       <div className={this.props.className}>
         <DonateBox 
-        className={this.props.className + '-DonateBox'}
-        tag={'Donate'}
-        title={'Donate Now!'}
-        donationAmounts={[10, 19, 17, 50, 45]}
-        desc={"Support NYPL in it's mission to inspire lifelong learning, advance knowledge, and strengthen our communities."} />
+          className={this.props.className + '-DonateBox'}
+          tag={'Donate'}
+          title={'Donate Now!'}
+          donationAmounts={[10, 19, 17, 50, 45]}
+          desc={"Support NYPL in it's mission to inspire lifelong learning, advance knowledge, and strengthen our communities."} />
         <MegaMenuFeatureItem 
-        className={this.props.className + '-FeatureItem'}
-        feature={featureItem} />
+          className={this.props.className + '-FeatureItem'}
+          feature={featuredItem} />
       </div>
     );
   }
