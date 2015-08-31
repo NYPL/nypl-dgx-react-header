@@ -2,6 +2,7 @@
 import axios from 'axios';
 import config from '../../../appConfig.js';
 import parser from 'jsonapi-parserinator';
+import Model from './HeaderItemModel.js';
 
 const fakeData = [];
 
@@ -46,7 +47,13 @@ const HeaderApiService = {
           'related-mega-menu-panes.current-mega-menu-item.images,' +
           'related-mega-menu-panes.current-mega-menu-item.related-content.authors,' +
           'related-mega-menu-panes.current-mega-menu-item.related-content.location')
-        .then(res => parser.parse(res.data));
+        .then(res => {
+          let data = parser.parse(res.data);
+
+          Model.build(data);
+
+          return data;
+        });
 		}
 
 		if (source === 'client') {
