@@ -105,28 +105,13 @@ app.get('/header-data', (req, res) => {
 
 // Match all routes to render the index page.
 app.get('/*', (req, res) => {
+  HeaderApiService
+    .fetchData('server')
+    .then((result) => {
+      refineryData = result;
 
-  let options = {
-    endpoint: '/api/nypl/ndo/v0.1/site-data/header-items',
-    includes: [
-      'children',
-      'related-mega-menu-panes.current-mega-menu-item.related-content',
-      'related-mega-menu-panes.current-mega-menu-item.images'],
-    filters: {
-      'relationships': {'parent': 'null'}
-    }
-  };
- 
-  // ASYNC REQUEST!
-  parser
-    .setHost({
-      api_root: 'dev.refinery.aws.nypl.org',
-      api_version: 'v0.1'
-    })
-    .setChildrenObjects(options)
-    .get(options, function (data) {
       res.locals.data = {
-        Store: { headerData: parser.parse(data) }
+        Store: { headerData: refineryData }
       };
 
       alt.bootstrap(JSON.stringify(res.locals.data || {}));
@@ -144,6 +129,9 @@ app.get('/*', (req, res) => {
         isProduction: isProduction,
         webpackPort: WEBPACK_DEV_PORT
       });
+    })
+    .catch((error) => {
+      console.log('Error on local data fetch', error);
     });
 
 });
