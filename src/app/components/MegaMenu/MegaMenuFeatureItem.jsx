@@ -32,7 +32,6 @@ class MegaMenuFeatureItem extends React.Component {
           location = (<p>{feature.content.location.attributes['full-name']}</p>);
           break;
         case 'node':
-          console.log('node');
           break;
         default:
           break;

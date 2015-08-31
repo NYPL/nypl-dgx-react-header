@@ -81,26 +81,12 @@ let headerApp = React.renderToString(<Header />);
 
 // Used to debug refinery response
 app.get('/header-data', (req, res) => {
-  let options = {
-    endpoint: '/api/nypl/ndo/v0.1/site-data/header-items',
-    includes: [
-      'children',
-      'related-mega-menu-panes.current-mega-menu-item.related-content',
-      'related-mega-menu-panes.current-mega-menu-item.images'],
-    filters: {
-      'relationships': {'parent': 'null'}
-    }
-  };
- 
-  parser
-    .setHost({
-      api_root: 'dev.refinery.aws.nypl.org',
-      api_version: 'v0.1'
-    })
-    .setChildrenObjects(options)
-    .get(options, function (data) {
-      res.json(parser.parse(data));
+  HeaderApiService
+    .fetchData('server')
+    .then((result) => {
+      res.json(refineryData);
     });
+
 });
 
 // Match all routes to render the index page.

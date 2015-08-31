@@ -19,7 +19,7 @@ function Model() {
 
   };
 
-  this.headerItemModel = (data) => {
+  this.headerItemModel = data => {
     let headerItem = {};
     
     // Top level header-item attributes
@@ -41,7 +41,7 @@ function Model() {
     return headerItem;
   };
 
-  this.subnav = (children) => {
+  this.subnav = children => {
     if (!children || !_.isArray(children)) {
       return;
     }
@@ -49,7 +49,7 @@ function Model() {
     return _.map(children, this.headerItemModel);
   };
 
-  this.features = (features) => {
+  this.features = features => {
     if (!features || !_.isArray(features)) {
       return;
     }
@@ -57,7 +57,7 @@ function Model() {
     return _.map(features, this.createFeature);
   };
 
-  this.createFeature = (data) => {
+  this.createFeature = data => {
     if (!data) {
       return;
     }
@@ -74,7 +74,7 @@ function Model() {
     return feature;
   };
 
-  this.createFeatureItem = (data) => {
+  this.createFeatureItem = data => {
     if (!data) {
       return;
     }
@@ -104,7 +104,7 @@ function Model() {
   };
 
 
-  this.getImage = (data) => {
+  this.getImage = data => {
     if (!data) {
       return;
     }
@@ -119,7 +119,7 @@ function Model() {
     return image;
   };
 
-  this.getContent = (data) => {
+  this.getContent = data => {
     if (!data) {
       return;
     }
