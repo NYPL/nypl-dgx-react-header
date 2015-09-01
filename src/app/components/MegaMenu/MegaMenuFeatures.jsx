@@ -19,7 +19,7 @@ class MegaMenuFeatures extends React.Component {
     if (this.props.navId === '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1') {
       currentFeatureItem = <DonateWidget navId={this.props.navId} features={widgetFeature} />;
     } else if (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') {
-      currentFeatureItem = <FindUsWidget navId={this.props.navId} features={widgetFeature} />;
+      currentFeatureItem = <FindUsWidget navId={this.props.navId} featuredItem={widgetFeature} />;
     } else {
       currentFeatureItem = this.props.features.map((item, i) => {
         return (
