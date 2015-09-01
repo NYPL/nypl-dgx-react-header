@@ -23,9 +23,7 @@ class DonateWidget extends React.Component {
       },
       images: [
         {
-          uri: {
-            'full-uri': 'http://fpoimg.com/88x88'
-          }
+          uri: 'http://fpoimg.com/88x88'
         }
       ],
       description: {

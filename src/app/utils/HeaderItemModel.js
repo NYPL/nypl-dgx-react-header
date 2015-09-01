@@ -1,10 +1,10 @@
 import _ from 'underscore';
+import ContentModel from './ContentModel.js';
 
 function Model() {
 
+  // Build an array of header item models or a single one
   this.build = (data) => {
-    // console.log(data);
-
     if (!data) {
       return;
     }
@@ -16,9 +16,9 @@ function Model() {
     } else {
       return;
     }
-
   };
 
+  // The main modeling function
   this.headerItemModel = data => {
     let headerItem = {};
     
@@ -29,35 +29,31 @@ function Model() {
     headerItem.name = data.attributes.name;
     headerItem.sort = data.attributes.sort;
 
-    // Sub navigation header items:
+    // Sub navigation header items
     if (data.children) {
-      headerItem.subnav = this.subnav(data.children);
+      // The subnavigation is made up of header items as well
+      headerItem.subnav = this.mapArrayData(data.children, this.headerItemModel);
     }
 
+    // The features if they are available
     if (data['related-mega-menu-panes']) {
-      headerItem.features = this.features(data['related-mega-menu-panes']);
+      headerItem.features = this.mapArrayData(data['related-mega-menu-panes'], this.feature);
     }
 
     return headerItem;
   };
 
-  this.subnav = children => {
-    if (!children || !_.isArray(children)) {
+  // Map a data set to a function.
+  this.mapArrayData = (data, fn) => {
+    if (!data || !_.isArray(data)) {
       return;
     }
 
-    return _.map(children, this.headerItemModel);
+    return _.map(data, fn);
   };
 
-  this.features = features => {
-    if (!features || !_.isArray(features)) {
-      return;
-    }
-
-    return _.map(features, this.createFeature);
-  };
-
-  this.createFeature = data => {
+  // Create the featured slot in the mega menu
+  this.feature = data => {
     if (!data) {
       return;
     }
@@ -67,6 +63,7 @@ function Model() {
     feature.id = data.id;
     feature.type = data.type;
 
+    // A featured slot may not have a featured item, but it should. Just in case:
     if (data['current-mega-menu-item']) {
       feature.featuredItem = this.createFeatureItem(data['current-mega-menu-item']);
     }
@@ -93,60 +90,15 @@ function Model() {
     };
 
     if (data.images) {
-      featuredItem.images = _.map(data.images, this.getImage);
+      featuredItem.images = _.map(data.images, ContentModel.image);
     }
 
     if (data['related-content']) {
-      featuredItem.content = this.getContent(data['related-content']);
+      featuredItem.content = ContentModel.content(data['related-content']);
     }
 
     return featuredItem;
   };
-
-
-  this.getImage = data => {
-    if (!data) {
-      return;
-    }
-
-    let image = {};
-
-    image.id = data.id;
-    image.type = data.type;
-    image.created = data.attributes['date-created'];
-    image.uri = data.attributes.uri;
-
-    return image;
-  };
-
-  this.getContent = data => {
-    if (!data) {
-      return;
-    }
-
-    let content = {};
-    // console.log(data);
-
-    content.id = data.id;
-    content.type = data.type;
-
-    // content.title = data.attributes.title;
-    // content.body = data.attributes.body;
-    content.uri = data.attributes.uri['full-uri'];
-
-    if (data.type === 'blog') {
-      // Clean up authors
-      content.authors = data.authors;
-    }
-
-    if (data.type === 'event-program') {
-      // Need to clean up location
-      content.location = data.location;
-    }
-
-    return content;
-  };
-
 }
 
 

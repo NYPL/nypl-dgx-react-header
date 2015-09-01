@@ -26,7 +26,7 @@ class FindUsWidget extends React.Component {
       category = feature.category ? feature.category.en.text : title;
       desc = feature.description.en.text.substring(0, '150');
       link = feature.link.en.text;
-      img = (feature.images) ? feature.images[0].uri['full-uri'] : '';
+      img = (feature.images) ? feature.images[0].uri : '';
     }
 
     return (

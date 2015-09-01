@@ -9,15 +9,13 @@ class MegaMenuFeatureItem extends React.Component {
   
 	render() {
     let feature = this.props.feature ? this.props.feature : undefined,
+			classes = cx({'with-image': feature && feature.images, 'without-image': !feature || !feature.images}),
+      category = '',
       img = '',
-			classes = cx({'with-image': feature && feature.images, 'without-image': !feature || !feature.images});
-
-    let category = '',
       title = '',
       desc = '',
-      link = '#';
-
-    let blogAuthor = null,
+      link = '#',
+      blogAuthor = null,
       eventTime = null,
       date = null,
       location = null;
@@ -26,28 +24,35 @@ class MegaMenuFeatureItem extends React.Component {
       switch (feature.content.type) {
         case 'blog': 
           // Does not contain title
-          blogAuthor = (<p>{feature.content.authors[0].attributes['full-name']}</p>);
+          blogAuthor = (<p>{feature.content.authors[0].fullName}</p>);
           break;
         case 'event-program':
-          location = (<p>{feature.content.location.attributes['full-name']}</p>);
+          let startDate = new Date(feature.dates.start),
+            endDate = new Date(feature.dates.end);
+
+          date = (<p>{startDate.getHours()} | {startDate.getFullYear()}</p>);
+          location = (<p>{feature.content.location.fullName}</p>);
+          break;
+        case 'exhibition':
+          // This case is needed for "Ongoing" or "Now through ..." messages.
           break;
         case 'node':
+          // No extra attributes/data in a simple node object.
           break;
         default:
           break;
       }
-    } else {
-      // all content in the object itself
     }
 
     if (feature) {
       title = feature.headline.en.text;
       category = feature.category ? feature.category.en.text : title;
+      img = feature.images ? <img src={feature.images[0].uri} /> : '';
       desc = feature.description.en.text.substring(0, '150');
       link = feature.link.en.text;
-      img = (feature.images) ? <img src={feature.images[0].uri['full-uri']} /> : '';
     }
 
+    // Don't believe that there's a description in the mock up.
 		return (
 	    <a href={link} className={this.props.className}>
 		    <div className={'FeatureItem-Image ' + classes}>
@@ -58,6 +63,7 @@ class MegaMenuFeatureItem extends React.Component {
 	        <h3 className='FeatureItem-Content-Title'>{title}</h3>
 	        <div className='FeatureItem-Content-Desc'>{desc}</div>
           {blogAuthor}
+          {date}
           {location}
 		    </div>
       </a>
