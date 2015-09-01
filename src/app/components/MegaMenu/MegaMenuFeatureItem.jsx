@@ -22,9 +22,14 @@ class MegaMenuFeatureItem extends React.Component {
 
     if (feature.content) {
       switch (feature.content.type) {
-        case 'blog': 
+        case 'blog':
           // Does not contain title
-          blogAuthor = (<p>{feature.content.authors[0].fullName}</p>);
+          blogAuthor = (
+            <div>
+              <div>{feature.content.authors[0].fullName}</div>
+              <div>{feature.content.authors[0].title}</div>
+            </div>
+            );
           break;
         case 'event-program':
           let startDate = new Date(feature.dates.start),

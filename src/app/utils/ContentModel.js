@@ -31,7 +31,6 @@ function ContentModel() {
     content.uri = data.attributes.uri['full-uri'];
 
     if (data.type === 'blog') {
-      // Clean up authors
       this.blog(content, data)
     }
 
@@ -54,12 +53,16 @@ function ContentModel() {
 
     authors.id = data.id;
     authors.type = data.type;
-    authors.displayName = data.attributes['display-name'];
     authors.email = data.attributes.email;
+    authors.title = data.attributes.title;
+    authors.unit = data.attributes.unit;
     authors.fullName = data.attributes['full-name'];
     authors.firstName = data.attributes['first-name'];
     authors.lastName = data.attributes['last-name'];
-    authors.location = data.attributes.location;
+
+    if (data['nypl-location']) {
+      authors.location = this.location(data['nypl-location']);
+    }
 
     return authors;
   };

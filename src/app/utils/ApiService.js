@@ -14,7 +14,7 @@ const HeaderApiService = {
         endpoint: '/api/nypl/ndo/v0.1/site-data/header-items',
         includes: [
           'children',
-          'related-mega-menu-panes.current-mega-menu-item.related-content.authors',
+          'related-mega-menu-panes.current-mega-menu-item.related-content.authors.nypl-location',
           'related-mega-menu-panes.current-mega-menu-item.related-content.location',
           'related-mega-menu-panes.current-mega-menu-item.images'],
         filters: {
@@ -45,7 +45,7 @@ const HeaderApiService = {
           'header-items?filter[relationships][parent]=null&include=' +
           'children,' +
           'related-mega-menu-panes.current-mega-menu-item.images,' +
-          'related-mega-menu-panes.current-mega-menu-item.related-content.authors,' +
+          'related-mega-menu-panes.current-mega-menu-item.related-content.authors.nypl-location,' +
           'related-mega-menu-panes.current-mega-menu-item.related-content.location')
         .then(res => {
           let data = parser.parse(res.data);
