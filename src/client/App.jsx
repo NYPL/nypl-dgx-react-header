@@ -82,6 +82,10 @@ if (typeof window !== 'undefined') {
 		  	if (nyplHeaderObject.processedScripts.length === 1 && nyplHeaderObject.styleTags.length === 1) {
 
 	  			// Fetch the data first before Render
+	  			// This allows us to populate the Store so that
+	  			// the <Header /> component renders with data already
+	  			// loaded. There is a fallback method in the <Header />
+	  			// component that checks the Store data then fetches.
 	  			Actions.fetchHeaderData();
 
 		  		setTimeout(() => {
