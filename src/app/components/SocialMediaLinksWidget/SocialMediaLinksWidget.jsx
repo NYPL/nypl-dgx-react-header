@@ -44,7 +44,7 @@ class SocialMediaLinksWidget extends React.Component {
       socialMediaName = item.name.toLowerCase();
 
       // dynamic class assignment based on the link name
-      linkClass = cx(this.props.className + '-Link', item.name.toLowerCase());
+      linkClass = cx(this.props.className + '-Link', 'icon-'+item.name.toLowerCase());
 
       // Only return those links that are matched with the included options
       if (displayOnlyList && displayOnlyList.length) {

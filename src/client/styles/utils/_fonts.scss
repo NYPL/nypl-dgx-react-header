@@ -1,8 +1,7 @@
 @import 'mixins';
-@import url('http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700');
+@import url('//fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700');
 
-$FONT_PATH_QA: 'http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com';
-$FONT_PATH_PROD: 'http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com';
+$FONT_PATH: '//ux-static.nypl.org.s3-website-us-east-1.amazonaws.com';
 
 $SECONDARY_FONT_KIEVIT: 'Helvetica';
 $THIRD_FONT_KIEVIT: 'arial';
@@ -15,21 +14,21 @@ $THIRD_FONT_MILO: 'serif';
  * ---------------------------
 */
 /* KIEVIT */
-@include font-face(Kievit-Regular, '#{$FONT_PATH_PROD}/ff_kievit_web/KievitWeb');
-@include font-face(Kievit-Medium, '#{$FONT_PATH_PROD}/ff_kievit_web/KievitWeb-Medi');
-@include font-face(Kievit-Bold, '#{$FONT_PATH_PROD}/ff_kievit_web/KievitWeb-Bold');
-@include font-face(Kievit-Book, '#{$FONT_PATH_PROD}/ff_kievit_web/KievitWeb-Book');
-@include font-face(Kievit-Light, '#{$FONT_PATH_PROD}/ff_kievit_web/KievitWeb-Light');
-@include font-face(Kievit-Thin, '#{$FONT_PATH_PROD}/ff_kievit_web/KievitWeb-Thin');
+@include font-face(Kievit-Regular, '#{$FONT_PATH}/ff_kievit_web/KievitWeb');
+@include font-face(Kievit-Medium, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Medi');
+@include font-face(Kievit-Bold, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Bold');
+@include font-face(Kievit-Book, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Book');
+@include font-face(Kievit-Light, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Light');
+@include font-face(Kievit-Thin, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Thin');
 /* KIEVIT Small Caps */
-@include font-face(Kievit-SC, '#{$FONT_PATH_PROD}/ff_kievit_web/KievitScWeb');
+@include font-face(Kievit-SC, '#{$FONT_PATH}/ff_kievit_web/KievitScWeb');
 
 /* MILO */
-@include font-face(Milo-Regular, '#{$FONT_PATH_PROD}/milo-web/milo-slab-pro-regular/MiloSlabWebPro');
-@include font-face(Milo-Regular-Italic, '#{$FONT_PATH_PROD}/milo-web/milo-slab-pro-regular-italic/MiloSlabWebPro-Italic');
-@include font-face(Milo-Light, '#{$FONT_PATH_PROD}/milo-web/milo-slab-pro-light/MiloSlabWebPro-Light');
-@include font-face(Milo-Light-Italic, '#{$FONT_PATH_PROD}/milo-web/milo-slab-pro-light-italic/MiloSlabWebPro-LightItalic');
-@include font-face(Milo-Medium, '#{$FONT_PATH_PROD}/milo-web/milo-slab-pro-medium/MiloSlabWebPro-Medium');
+@include font-face(Milo-Regular, '#{$FONT_PATH}/milo-web/milo-slab-pro-regular/MiloSlabWebPro');
+@include font-face(Milo-Regular-Italic, '#{$FONT_PATH}/milo-web/milo-slab-pro-regular-italic/MiloSlabWebPro-Italic');
+@include font-face(Milo-Light, '#{$FONT_PATH}/milo-web/milo-slab-pro-light/MiloSlabWebPro-Light');
+@include font-face(Milo-Light-Italic, '#{$FONT_PATH}/milo-web/milo-slab-pro-light-italic/MiloSlabWebPro-LightItalic');
+@include font-face(Milo-Medium, '#{$FONT_PATH}/milo-web/milo-slab-pro-medium/MiloSlabWebPro-Medium');
 
 /* KIEVIT INCLUDES */
 @mixin Kievit-Regular {

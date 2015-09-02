@@ -29,13 +29,16 @@ class MegaMenuSubNav extends React.Component {
         );
     }, this);
 
+    let socialMediaWidget = (this.props.navId === 'abb58f55-20e0-0d34-d1ae-45687cc4799d') ?
+      <SocialMediaLinksWidget 
+        className={'MegaMenu-SubNav-SocialMediaWidget'} 
+        displayOnly={['facebook', 'twitter']} /> : null;
+
     return (
       <div className='MegaMenu-SubNav'>
         <h2>{this.props.label[this.props.lang]}</h2>
         <ul>{items}</ul>
-        <SocialMediaLinksWidget 
-          className={'MegaMenu-SubNav-SocialMediaWidget'} 
-          displayOnly={['facebook', 'twitter']} />
+        {socialMediaWidget}
       </div>
     );
   }
