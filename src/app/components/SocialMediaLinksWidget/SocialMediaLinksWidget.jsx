@@ -44,21 +44,21 @@ class SocialMediaLinksWidget extends React.Component {
       socialMediaName = item.name.toLowerCase();
 
       // dynamic class assignment based on the link name
-      linkClass = cx(this.props.className + '-Link', 'icon-'+item.name.toLowerCase());
+      linkClass = cx(`${this.props.className}-Link`, `icon-${socialMediaName}`);
 
       // Only return those links that are matched with the included options
       if (displayOnlyList && displayOnlyList.length) {
         if (displayOnlyList.indexOf(socialMediaName) !== -1) {
           return (
-            <li key={index} className={this.props.className + '-ListItem'}>
-              <a href={item.url} className={linkClass}>{item.name}</a>
+            <li key={index} className={`${this.props.className}-ListItem`}>
+              <a href={item.url} className={linkClass}></a>
             </li>
           );
         }
       } else {
         return (
-          <li key={index} className={this.props.className + '-ListItem'}>
-            <a href={item.url} className={linkClass}>{item.name}</a>
+          <li key={index} className={`${this.props.className}-ListItem`}>
+            <a href={item.url} className={linkClass}></a>
           </li>
         );
       }
@@ -66,7 +66,7 @@ class SocialMediaLinksWidget extends React.Component {
 
     return (
       <div className={this.props.className}>
-        <ul className={this.props.className + '-List'}>
+        <ul className={`${this.props.className}-List`}>
           {socialLinks}
         </ul>
       </div>

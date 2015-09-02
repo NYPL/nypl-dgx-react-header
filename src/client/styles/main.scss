@@ -384,7 +384,7 @@
 	  				padding: 0;
 
 	  				li {
-	  					display: inline;
+	  					display: inline-block;
 	  					margin: 0 5px 0 0;
 
 	  					&:last-child {
@@ -392,7 +392,9 @@
 	  					}
 
 	  					a {
-	  						text-decoration: underline;
+	  						text-decoration: none;
+	  						display: block;
+	  						font-size: 21px;
 	  					}
 	  				}
 	  			}
