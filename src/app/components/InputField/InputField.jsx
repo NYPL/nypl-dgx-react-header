@@ -16,7 +16,7 @@ class InputField extends React.Component {
       name={this.props.name} 
       value={this.props.value}
       placeholder={this.props.placeholder}
-      required={this.props.required || null}
+      required={this.props.isRequired || false}
       style={[
         styles.base,
         this.props.style
