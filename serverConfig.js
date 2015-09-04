@@ -107,7 +107,8 @@ app.get('/*', (req, res) => {
     appTitle: appConfig.appTitle,
     favicon: appConfig.favIconPath,
     isProduction: isProduction,
-    webpackPort: WEBPACK_DEV_PORT
+    webpackPort: WEBPACK_DEV_PORT,
+    filename: webpackConfig.output.filename
   });
 });
 

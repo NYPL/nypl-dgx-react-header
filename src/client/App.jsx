@@ -31,34 +31,44 @@ if (typeof window !== 'undefined') {
 	  		htmlElement.id = 'nypl-dgx-header';
 
 		  	// Make a global object to store the instances of nyplHeader
-		  	if(!global.nyplHeader) { global.nyplHeader = {}; };
+		  	if (!global.nyplHeader) { 
+		  		global.nyplHeader = {}; 
+		  	};
+
 		  	// Short-name reference to global.nyplHeader
 		  	nyplHeaderObject = global.nyplHeader;
 
 		  	// Let's keep track of the processed scripts within nyplHeader
-		  	if(!nyplHeaderObject.processedScripts) { nyplHeaderObject.processedScripts = []; };
+		  	if (!nyplHeaderObject.processedScripts) {
+		  		nyplHeaderObject.processedScripts = []; 
+		  	};
 
 		  	// Let's keep track of the processed style tags within nyplHeader
-		  	if(!nyplHeaderObject.styleTags) { nyplHeaderObject.styleTags = []; };
+		  	if (!nyplHeaderObject.styleTags) {
+		  		nyplHeaderObject.styleTags = [];
+		  	};
 
 		  	// Only create the nyplHeader if the global.nyplHeaderObject.scripts is empty
 		  	if (nyplHeaderObject.processedScripts.length === 0) {
 
 		      /*
 		       * Loop through all <script> tags in the DOM.
-		       * Find the match which contains 'bundle.js'.
+		       * Find the match which contains 'dgx-header.min.js'.
 		       * Insert the markup holding the NYPL Header
 		       * right before the <script> tag matched.
 		       */
 		      allScriptTags = doc.getElementsByTagName('script');
-		      for (i=0; i < allScriptTags.length; i++) {
-		      	// TODO: Make a better comparison (source host)
-		      	if (allScriptTags[i].src.indexOf('bundle.js') !== -1) {
-		      		scriptTag = allScriptTags[i];
+
+		      /* Since getElementsBy is an array-like structure,
+		     	 * we need to use call to iterate with forEach.
+		     	 */
+		      [].forEach.call(allScriptTags, function(value, index) {
+		      	if (value.src.indexOf('dgx-header.min.js') !== -1) {
+		      		scriptTag = value;
 		      		scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
 		      		nyplHeaderObject.processedScripts.push(scriptTag);
 		      	}
-		      }
+		      });
 
 		      /*
 		       * Only create one instance of the <style> tag for the Header.
