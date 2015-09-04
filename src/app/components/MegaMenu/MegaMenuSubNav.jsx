@@ -1,5 +1,8 @@
 import React from 'react';
 import _ from 'underscore';
+import config from '../../../../appConfig.js';
+
+import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
 
 class MegaMenuSubNav extends React.Component {
 
@@ -27,10 +30,18 @@ class MegaMenuSubNav extends React.Component {
         );
     }, this);
 
+    // Assign widget to the FindUs Menu Item by ID match
+    let socialMediaWidget = (this.props.navId === 'abb58f55-20e0-0d34-d1ae-45687cc4799d') ?
+      <SocialMediaLinksWidget 
+        className={'MegaMenu-SubNav-SocialMediaWidget'}
+        links={config.socialMediaLinks} 
+        displayOnly={['facebook', 'twitter']} /> : null;
+
     return (
       <div className='MegaMenu-SubNav'>
         <h2>{this.props.label[this.props.lang]}</h2>
         <ul>{items}</ul>
+        {socialMediaWidget}
       </div>
     );
   }
