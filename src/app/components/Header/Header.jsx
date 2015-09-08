@@ -27,7 +27,7 @@ class Header extends React.Component {
 
     // If the Store is not populated with
     // the proper Data, then fetch.
-    // this._fetchDataIfNeeded();
+    this._fetchDataIfNeeded();
   }
 
   componentWillUnmount() {
