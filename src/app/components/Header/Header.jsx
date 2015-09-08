@@ -24,8 +24,10 @@ class Header extends React.Component {
 
   componentDidMount() {
     Store.listen(this._onChange.bind(this));
-    // Here we would fetch our data async
-    //Actions.fetchHeaderData();
+
+    // If the Store is not populated with
+    // the proper Data, then fetch.
+    this._fetchDataIfNeeded();
   }
 
   componentWillUnmount() {
@@ -50,6 +52,13 @@ class Header extends React.Component {
         <NavMenu className='Header-NavMenu' items={this.state.headerData} lang={this.props.lang} />
       </header>
     );
+  }
+
+  _fetchDataIfNeeded() {
+    if (Store.getState().headerData.length < 1) {
+      console.log('_fetchDataIfNeeded() performed Actions.fetchHeaderData()');
+      Actions.fetchHeaderData();
+    }
   }
 };
 
