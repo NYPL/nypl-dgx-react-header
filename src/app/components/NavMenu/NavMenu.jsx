@@ -16,7 +16,7 @@ class NavMenu extends React.Component {
   }
 
   render () {
-    let classes = cx('NavMenu', {'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'}),
+    let classes = cx('NavMenu-List', {'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'}),
       navMenu = this.props.items.map((item, index) => {
         return (
           <NavMenuItem 
@@ -32,9 +32,9 @@ class NavMenu extends React.Component {
       });
 
     return (
-      <nav className={classes}>
+      <nav className='NavMenu'>
         <span className='MobileLogoText icon-nypl-logo-type'></span>
-        <ul className='NavMenu-List'>
+        <ul className={classes}>
           {navMenu}
         </ul>
       </nav>

@@ -18,6 +18,75 @@
     text-decoration: none;
   }
 
+  .Header-Logo {
+  	display: none;
+
+  	@include desktop {
+  		display: block;
+  	}
+  }
+
+  #Header-Buttons {
+  	width: 100%;
+  	top: 305px;
+  	border-top: 1px solid #CCC;
+  	z-index: 1;
+  	padding: 0;
+  	background-color: #2B2B2B;
+  	display: none;
+
+  	@include desktop {
+  		display: block;
+  		border: none;
+  		background-color: transparent;
+  		margin: 0;
+  		padding: 0;
+  		width: auto;
+	    top: 20px;
+	    right: 2px;
+	  }
+
+	  .SignInButton-Wrapper {
+	  	display: inline-table;
+	  	width: 48%;
+	  	@include desktop {
+	  		display: inline-block;
+	  		width: auto;
+	  	}
+	  }
+
+	  .SubscribeButton-Wrapper {
+	  	display: inline-table;
+	  	width: 48%;
+	  	@include desktop {
+	  		display: inline-block;
+	  		width: auto;
+	  	}
+	  	.SubscribeButton {
+	  		margin: 0;
+	  		color: #FFF;
+	  		text-align: center;
+
+	  		@include desktop {
+	  			margin: 0px 5px;
+	  			color: #000;
+	  		}
+	  	}
+	  }
+
+	  .DonateButton {
+	  	@extend %clearfix;
+	  	width: 100%;
+	  	display: block;
+	  	text-align: center;
+
+	  	@include desktop {
+	  		display: inline-block;
+	  		width: auto;
+	  	}
+	  }
+  }
+
   .Header-Mobile {
   	position: relative;
   	display: block;
@@ -63,7 +132,7 @@
   }
 
   .Header-TopWrapper {
-  	display: none;
+  	//display: none;
 
   	@include desktop {
   		display: block;
@@ -148,17 +217,7 @@
   /* MAIN NAVIGATION */
   .NavMenu {
   	position: relative;
-  	background-color: #2B2B2B;
-  	display: none;
-
-  	&.mobileActive {
-  		display: block;
-  	}
-
-  	@include desktop {
-  		display: block;
-  		background-color: #FFF;
-  	}
+  	display: block;
 
   	.MobileLogoText {
   		position: absolute;
@@ -174,12 +233,20 @@
 
   	/* <ul> list holding NavItems */
 	  &-List {
+	  	background-color: #2B2B2B;
 	  	padding: 10px 0;
-	  	margin: 0 10px 0 0;
+	  	margin: 0;
 	  	list-style-type: none;
 	  	text-align: right;
+	  	display: none;
+
+	  	&.mobileActive {
+  			display: block;
+  		}
 
 	  	@include desktop {
+	  		background-color: transparent;
+	  		display: block;
 	  		padding: 0;
 		  	margin: 0 auto;
 		  }
@@ -191,7 +258,7 @@
 	  	/* Top level Link Rules */
 	  	& > li {
 	  		padding: 5px 0;
-	  		margin: 2.5px 0;
+	  		margin: 2.5px 12px 2.5px 0;
 
 	  		@include desktop {
 	  			padding: 0;
