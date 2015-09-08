@@ -12,6 +12,7 @@ import SSOContainer from '../SSOContainer/SSOContainer.jsx';
 import DonateButton from '../DonateButton/DonateButton.jsx';
 import SubscribeButton from '../SubscribeButton/SubscribeButton.jsx';
 import NavMenu from '../NavMenu/NavMenu.jsx';
+import MobileHeader from './MobileHeader.jsx';
 
 class Header extends React.Component {
 
@@ -37,9 +38,9 @@ class Header extends React.Component {
   }
 
   render () {
-    console.log(this.state);
     return (
       <header id='Header' className='Header'>
+        <MobileHeader className='Header-Mobile' />
         <div className='Header-TopWrapper' style={styles.wrapper}>
           <Logo className='Header-Logo' style={styles.logo} />
           <div id='Header-Buttons' style={styles.topButtons}>

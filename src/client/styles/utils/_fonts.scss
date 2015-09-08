@@ -87,7 +87,7 @@ $THIRD_FONT_MILO: 'serif';
   src:url('#{$FONT_PATH}/nypl-moon/nypl-moon.eot?#iefix') format('embedded-opentype'),
     url('#{$FONT_PATH}/nypl-moon/nypl-moon.ttf') format('truetype'),
     url('#{$FONT_PATH}/nypl-moon/nypl-moon.woff') format('woff'),
-    url('#{$FONT_PATH}/nypl-moon/nypl-moon.svg?vglwt4#nypl-icon-pak-8-2015') format('svg');
+    url('#{$FONT_PATH}/nypl-moon/nypl-moon.svg?zguob8#nypl-icon-pak-8-2015') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -106,14 +106,38 @@ $THIRD_FONT_MILO: 'serif';
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-solo-x:before {
+  content: "\e611";
+}
+.icon-mail:before {
+  content: "\e61c";
+}
+.icon-login:before {
+  content: "\e61d";
+}
+.icon-nypl-logo-mark:before {
+  content: "\e61e";
+}
+.icon-nypl-logo-type:before {
+  content: "\e61f";
+}
+.icon-locator-nodot:before {
+  content: "\e620";
+}
 .icon-locatorsmall:before {
   content: "\e616";
 }
-.icon-locator:before {
+.icon-locator-large:before {
   content: "\e615";
 }
 .icon-burgernav:before {
   content: "\e614";
+}
+.icon-wedge-right:before {
+  content: "\e621";
+}
+.icon-wedge-left:before {
+  content: "\e622";
 }
 .icon-down-wedge:before {
   content: "\e600";
@@ -181,10 +205,7 @@ $THIRD_FONT_MILO: 'serif';
 .icon-more-dots:before {
   content: "\e610";
 }
-.icon-solo-X:before {
-  content: "\e611";
-}
-.icon-circle-X:before {
+.icon-circle-x:before {
   content: "\e612";
 }
 .icon-circle-check-2:before {

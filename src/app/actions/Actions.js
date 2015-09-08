@@ -1,12 +1,9 @@
 import alt from '../alt.js';
 
 class Actions {
-
+  // TODO: Clean this method with new API methods
   fetchHeaderData() {
     let self = this;
-
-    // Here we will use the client side AJAX request
-    // to fetch data
   }
 
   updateHeaderData(data) {
@@ -15,6 +12,10 @@ class Actions {
 
   failedHeaderData(errorMessage) {
     this.dispatch(errorMessage);
+  }
+
+  setMobileMenuButtonValue(currentActiveMobileButton) {
+    this.dispatch(currentActiveMobileButton);
   }
 }
 
