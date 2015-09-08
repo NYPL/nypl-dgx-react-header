@@ -45,7 +45,6 @@ class MegaMenuFeatureItem extends React.Component {
           featuredItem = <BlogItem feature={contentObj} classes={classes} className={this.props.className} />;
           break;
         case 'event-program':
-          console.log(feature);
           contentObj.dates = {
             start: feature.content.dates.start,
             end: feature.content.dates.end

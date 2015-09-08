@@ -6,16 +6,16 @@ class Actions {
   fetchHeaderData() {
     let self = this;
 
-    // Here we will use the client side AJAX request
-    // to fetch data
-    ApiService
-      .fetchData('local')
-      .then((result) => {
-        self.actions.updateHeaderData(result);
-      })
-      .catch((error) => {
-        console.log('Error on local data fetch', error);
-      });
+    // // Here we will use the client side AJAX request
+    // // to fetch data
+    // ApiService
+    //   .fetchData('local')
+    //   .then((result) => {
+    //     self.actions.updateHeaderData(result);
+    //   })
+    //   .catch((error) => {
+    //     console.log('Error on local data fetch', error);
+    //   });
 
   }
 
