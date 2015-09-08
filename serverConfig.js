@@ -60,8 +60,11 @@ app.use(express.static(DIST_PATH));
  *    to our component.
 */
 
-require('./ApiRoutes/ClientApiRoutes.js')(app);
-require('./ApiRoutes/ServerApiRoutes.js')(app);
+// require('./ApiRoutes/ClientApiRoutes.js')(app);
+// require('./ApiRoutes/ServerApiRoutes.js')(app);
+let apiRoutes = require('./ApiRoutes/ApiRoutes.js');
+
+app.use('/', apiRoutes);
 
 // Match all routes to render the index page.
 app.use((req, res) => {
