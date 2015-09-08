@@ -801,6 +801,7 @@
 
   /* CSS for Search button */
   .NavMenu-TopLevelLinks-SearchButton {
+  	  	display: none;
     -webkit-appearance: none;
     background-color: transparent;
   	color: #000000;
@@ -812,6 +813,7 @@
   }
 
   .NavMenu-TopLevelLinks-SearchButton--active {
+  	display: none;
     -webkit-appearance: none;
     background-color: transparent;
   	color: $BG_MENU_SEARCH;

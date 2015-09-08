@@ -21,7 +21,6 @@ class SearchButton extends React.Component {
     // The function activates and deactivates the search box
     this._activate = this._activate.bind(this);
     this._deactivate = this._deactivate.bind(this);
-    // this._click = this._click.bind(this);
   }
 
   // Dom Render Section
@@ -29,15 +28,15 @@ class SearchButton extends React.Component {
     // Give active class if the button is activated
     let classes = cx({'--active': this.state.isActive});
   	return (
-      <li onMouseEnter={this._activate} 
+      <div onMouseEnter={this._activate} 
       onMouseLeave={this._deactivate}>
         <BasicButton id='NavMenu-TopLevelLinks__SearchButton'
-        className={`NavMenu-TopLevelLinks__SearchButton${classes}`}
+        className={`icon-magnifier2 NavMenu-TopLevelLinks__SearchButton${classes}`}
         name='Search Button'
         label='Search Box'
         style={styles.base} />
         <SearchBox id='NavMenu-SearchBox' className='NavMenu-SearchBox' isActive={this.state.isActive} />
-      </li>
+      </div>
 		);
   }
 

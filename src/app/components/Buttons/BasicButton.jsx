@@ -40,7 +40,6 @@ BasicButton.defaultProps = {
 
 const styles = {
   base: {
-
   }
 };
 

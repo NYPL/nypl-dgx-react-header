@@ -67,9 +67,11 @@ class SearchBox extends React.Component {
             </div>
               
           </div>
-          <InputField type='submit' 
-          className={`${this.props.className}-Elements-SubmitButton`} 
-          onClick={this._submitSearchRequest} />
+          <div className='icon-circle-magnifier'>
+            <InputField type='submit' 
+            className={`${this.props.className}-Elements-SubmitButton`} 
+            onClick={this._submitSearchRequest} />
+          </div>
         </div>
       </div>
     );
