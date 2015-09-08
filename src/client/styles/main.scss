@@ -373,6 +373,32 @@
 	  				padding: 0;
 	  			}
 	  		}
+
+	  		&-SocialMediaWidget {
+	  			padding: 2px;
+	  			margin: 15px 0 0 0;
+
+	  			ul {
+	  				list-style-type: none;
+	  				margin: 0;
+	  				padding: 0;
+
+	  				li {
+	  					display: inline-block;
+	  					margin: 0 5px 0 0;
+
+	  					&:last-child {
+	  						margin-right: 0;
+	  					}
+
+	  					a {
+	  						text-decoration: none;
+	  						display: block;
+	  						font-size: 28px;
+	  					}
+	  				}
+	  			}
+	  		}
 	  	}
 
 	  	&-FeaturesWrapper {

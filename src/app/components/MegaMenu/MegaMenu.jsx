@@ -20,10 +20,11 @@ class MegaMenu extends React.Component {
         <div className='MegaMenu-LeftBgWrapper'></div>
         <div className='MegaMenu-Wrapper'>
           <div className='MegaMenu-SubNavWrapper'>
-            <MegaMenuSubNav 
+            <MegaMenuSubNav
               label={this.props.label} 
               items={this.props.items} 
-              lang={this.props.lang} />
+              lang={this.props.lang}
+              navId={this.props.navId} />
           </div>
           <div className='MegaMenu-FeaturesWrapper'>
             <MegaMenuFeatures navId={this.props.navId} features={this.props.features} />
