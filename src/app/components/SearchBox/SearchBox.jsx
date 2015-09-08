@@ -1,6 +1,5 @@
 // Import React libraries
 import React from 'react';
-import Radium from 'radium';
 import cx from 'classnames';
 
 // Import components
@@ -56,8 +55,6 @@ class SearchBox extends React.Component {
         ref='option'
         onChange={this._searchOptionChange} 
         checked={this.state.searchOption ==='website'} />Search NYPL.org
-        
-        <SimpleButton target='http://catalog.nypl.org/' label='Advenced Search'/>
       </div>
     );
   }
@@ -109,4 +106,4 @@ const styles = {
 };
 
 // Export the component
-module.exports = Radium(SearchBox);
+module.exports = SearchBox;
