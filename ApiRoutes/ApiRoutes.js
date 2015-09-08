@@ -48,7 +48,12 @@ router
       }); /* end Axios call */
   });
 
-router.route('/header-data').get((req, res) => {
+router
+  .route('/header-data')
+  .get((req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
     let options = {
       endpoint: 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/site-data/' +
         'header-items?filter[relationships][parent]=null&include=' +
