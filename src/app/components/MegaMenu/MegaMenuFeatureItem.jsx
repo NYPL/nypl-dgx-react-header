@@ -1,5 +1,8 @@
 import React from 'react';
 import cx from 'classnames';
+import BlogItem from '../ContentBox/BlogItem.jsx';
+import EventProgramItem from '../ContentBox/EventProgramItem.jsx';
+import ExhibitionItem from '../ContentBox/ExhibitionItem.jsx';
 
 class MegaMenuFeatureItem extends React.Component {
   // Constructor used in ES6
@@ -10,69 +13,54 @@ class MegaMenuFeatureItem extends React.Component {
 	render() {
     let feature = this.props.feature ? this.props.feature : undefined,
 			classes = cx({'with-image': feature && feature.images, 'without-image': !feature || !feature.images}),
-      category = '',
-      img = '',
-      title = '',
-      desc = '',
-      link = '#',
-      blogAuthor = null,
-      eventTime = null,
-      date = null,
-      location = null;
+      // should have a fallback
+      contentObj = {
+        title: feature.headline.en.text,
+        category: feature.category ? feature.category.en.text : title,
+        img: feature.images ? <img src={feature.images[0].uri} /> : '',
+        desc: feature.description.en.text.substring(0, '150'),
+        link: feature.link.en.text
+      },
+      featuredItem = (<a href={contentObj.link} className={this.props.className}>
+          <div className={'FeatureItem-Image ' + classes}>
+            {contentObj.img}
+          </div>
+          <div className={'FeatureItem-Content ' + classes}>
+            <div className='FeatureItem-Content-Tag'>{contentObj.category}</div>
+            <h3 className='FeatureItem-Content-Title'>{contentObj.title}</h3>
+            <div className='FeatureItem-Content-Desc'>{contentObj.desc}</div>
+          </div>
+        </a>
+      );
 
     if (feature.content) {
       switch (feature.content.type) {
         case 'blog':
-          // Does not contain title
-          blogAuthor = (
-            <div>
-              <div>{feature.content.authors[0].fullName}</div>
-              <div>{feature.content.authors[0].title}</div>
-            </div>
-            );
+          contentObj.fullName = feature.content.authors[0].fullName;
+          contentObj.authorTitle = feature.content.authors[0].title;
+          featuredItem = <BlogItem feature={contentObj} classes={classes} className={this.props.className} />;
           break;
         case 'event-program':
-          let startDate = new Date(feature.dates.start),
-            endDate = new Date(feature.dates.end);
-
-          date = (<p>{startDate.getHours()} | {startDate.getFullYear()}</p>);
-          location = (<p>{feature.content.location.fullName}</p>);
+          console.log(feature);
+          contentObj.dates = {
+            start: feature.content.dates.start,
+            end: feature.content.dates.end
+          };
+          contentObj.location = {
+            fullName: feature.content.location.fullName
+          };
+          featuredItem = <EventProgramItem feature={contentObj} className={this.props.className} classes={classes} />;
           break;
         case 'exhibition':
           // This case is needed for "Ongoing" or "Now through ..." messages.
-          break;
         case 'node':
           // No extra attributes/data in a simple node object.
-          break;
         default:
           break;
       }
     }
 
-    if (feature) {
-      title = feature.headline.en.text;
-      category = feature.category ? feature.category.en.text : title;
-      img = feature.images ? <img src={feature.images[0].uri} /> : '';
-      desc = feature.description.en.text.substring(0, '150');
-      link = feature.link.en.text;
-    }
-
-    // Don't believe that there's a description in the mock up.
-		return (
-	    <a href={link} className={this.props.className}>
-		    <div className={'FeatureItem-Image ' + classes}>
-		    	{img}
-		    </div>
-		    <div className={'FeatureItem-Content ' + classes}>
-	        <div className='FeatureItem-Content-Tag'>{category}</div>
-	        <h3 className='FeatureItem-Content-Title'>{title}</h3>
-	        <div className='FeatureItem-Content-Desc'>{desc}</div>
-          {blogAuthor}
-          {date}
-          {location}
-		    </div>
-      </a>
-	  );
+		return featuredItem;
 	}
 }
 
