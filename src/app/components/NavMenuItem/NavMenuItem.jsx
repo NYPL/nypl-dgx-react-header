@@ -11,6 +11,10 @@ class NavMenuItem extends React.Component {
       activeItem: null
     };
 
+    this.state = {
+      activeItem: null
+    };
+
     // Allows binding methods that reference this
     this._activate = this._activate.bind(this);
     this._deactivate = this._deactivate.bind(this);

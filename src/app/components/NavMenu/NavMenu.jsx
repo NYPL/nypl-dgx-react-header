@@ -1,17 +1,16 @@
 import Radium from 'radium';
 import React from 'react';
-// import _ from 'underscore';
 // Dependent Components
-import NavMenuItem from '../NavMenuItem/NavMenuItem.jsx';
-// import MegaMenu from '../MegaMenu/MegaMenu.jsx';
 import SearchButton from '../SearchButton/SearchButton.jsx';
 import SearchBox from '../SearchBox/SearchBox.jsx';
+import NavMenuItem from '../NavMenuItem/NavMenuItem.jsx';
 
 class NavMenu extends React.Component {
 
   // Constructor used in ES6
   constructor(props) {
     super(props);
+
 
     // Holds the initial state, replaces getInitialState() method
     // this.state = {
@@ -23,11 +22,11 @@ class NavMenu extends React.Component {
     // this._deactivate = this._deactivate.bind(this);
     // The fucntion specifically to active search box
     // this._activateSearchBox = this._activateSearchBox.bind(this);
+
   }
 
   render () {
     let navMenu = this.props.items.map((item, index) => {
-    // let items = _.map(this.props.items, function(m, i) {
       return (
         <NavMenuItem 
         label={item.label}
@@ -40,6 +39,7 @@ class NavMenu extends React.Component {
         index={index} />
       );
     });
+
     //   megas = _.map(this.props.items, function(m, i) {
     //     return (
     //       <MegaMenu
@@ -52,6 +52,7 @@ class NavMenu extends React.Component {
     //         isActive={i === this.state.activeItem} />
     //     );
     // }, this);
+
     return (
       <nav className='NavMenu'>
         <ul className='NavMenu-List'>

@@ -12,13 +12,10 @@ class SignInContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    // cookie.save('username', 'edwinguzman');
-
     this.state = {
       username: this._login(),
       logged_in: !!this._login(),
-      remember: this._remember_me(),
-      showDialog: false,
+      remember: this._rememberMe(),
       ssoWindowVisible: HeaderStore.getSSOWindowVisible()
     };
 
@@ -38,13 +35,8 @@ class SignInContainer extends React.Component {
     let showDialog = this.state.ssoWindowVisible;
     const classes =  cx({ show: showDialog, hide: !showDialog });
 
-    //console.log(this.state);
-
-    // styles.SimpleButton.backgroundColor = this.state.showDialog ? '#E43534' : 'transparent';
-    // styles.SimpleButton.color = this.state.showDialog ? 'white' : 'black';
-
     return (
-      <div style={[styles.base, this.props.style]}>
+      <div style={[styles.base, this.props.style]} className='SignInButton-Wrapper'>
         {this.state.logged_in}
         <SimpleButton
           id='SignInButton'
@@ -67,7 +59,6 @@ class SignInContainer extends React.Component {
   _handleClick(e) {
     e.preventDefault();
     HeaderActions.toggleSSOWindowVisible();
-    //this.setState({showDialog: !this.state.showDialog});
   }
 
   // Updates the state of the form based off the Header Store.
@@ -77,10 +68,10 @@ class SignInContainer extends React.Component {
   }
 
   _login() {
-    return cookie.load('username');
+    return cookie.load('bc_username');
   }
 
-  _remember_me() {
+  _rememberMe() {
     return !!cookie.load('remember_me');
   }
 }
@@ -93,8 +84,7 @@ const styles = {
     padding: '1em',
     display: 'block',
     color: '#000'
-  },
-  SSOform: {}
+  }
 }
 
 export default Radium(SignInContainer);
