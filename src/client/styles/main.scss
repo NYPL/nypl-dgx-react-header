@@ -752,6 +752,18 @@
     border-width: 0;
   }
 
+	/* CSS for mobile Search box. It shows only activated. Default is not displayed. */
+  .NavMenu-SearchBox--mobileActive {
+		background-color: $BG_MENU_SEARCH; 
+		color: #000000;
+		display: block;
+		height: 200px;
+		margin: 6px 0 0 0;
+		position: relative;
+  	width: 100%;
+  	z-index: 300;
+  }
+
   /* CSS for Search box. It shows only activated. Default is not displayed. */
   .NavMenu-SearchBox--active {
 		background-color: $BG_MENU_SEARCH; 
@@ -763,6 +775,7 @@
   	width: 100%;
   	z-index: 300;
   }
+
   .NavMenu-SearchBox {
 		display: none;
   }

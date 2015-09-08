@@ -6,6 +6,9 @@ import cx from 'classnames';
 import InputField from '../InputField/InputField.jsx';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 
+// Import HeaderStore
+import HeaderStore from '../../stores/Store.js';
+
 class SearchBox extends React.Component {
   // Constructor used in ES6
   constructor(props) {
@@ -27,11 +30,12 @@ class SearchBox extends React.Component {
   // Dom Render Section
   render() {
     // Give active class if the button is activated
-    let classes = cx({'--active': this.props.isActive});
+    let classes = cx({'--active': this.props.isActive}),
+        mobileClasses = cx({'--mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileSearch'});
     
     return (
       <div id={this.props.id} 
-      className={`${this.props.className}${classes}`}>
+      className={`${this.props.className}${classes}${mobileClasses}`}>
         <div className={`${this.props.className}-Elements-Wrapper`}>
           <div className={`${this.props.className}-Elements-Input-Wrapper`}>
 

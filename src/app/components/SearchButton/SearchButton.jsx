@@ -49,12 +49,9 @@ class SearchButton extends React.Component {
 
   _deactivate() {
     // Set the isActive state to be false
-    // this.setState({isActive: false});
+    this.setState({isActive: false});
   }
 
-  // _click() {
-  //   this.setState({isActive: !isActive});
-  // }
 }
 
 const styles = {
