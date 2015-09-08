@@ -1,8 +1,13 @@
 import express from 'express';
+import axios from 'axios';
+import parser from 'jsonapi-parserinator';
+import Model from '../src/app/utils/HeaderItemModel.js';
 
 let router = express.Router();
 
-router.route('/').get((req, res, next) => {
+router
+  .route('/')
+  .get((req, res, next) => {
     let options = {
       endpoint: 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/site-data/' +
         'header-items?filter[relationships][parent]=null&include=' +
@@ -27,6 +32,7 @@ router.route('/').get((req, res, next) => {
     axios
       .get(options.endpoint)
       .then(data => {
+        console.log(data);
         let parsed = parser.parse(data.data),
           modelData = Model.build(parsed);
 
@@ -35,6 +41,10 @@ router.route('/').get((req, res, next) => {
             headerData: modelData
           }
         };
+        next();
+      })
+      .catch(error => {
+        console.log('error calling API');
         next();
       }); /* end Axios call */
   });
@@ -68,7 +78,11 @@ router.route('/header-data').get((req, res) => {
           modelData = Model.build(parsed);
 
         res.json(modelData);
-      });
+      })
+      .catch(error => {
+        console.log('error calling API');
+        res.json({'error': 'error calling API'});
+      }); /* end Axios call */
   });
 
 export default router;
