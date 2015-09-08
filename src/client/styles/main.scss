@@ -18,8 +18,55 @@
     text-decoration: none;
   }
 
-  .Header-TopWrapper {
+  .Header-Mobile {
+  	position: relative;
+  	display: block;
+  	height: 58px;
+  	text-align: right;
+
+  	&-Logo {
+  		position: absolute;
+  		left: 0;
+  		top: 0;
+  		font-size: 58px;
+  	}
+
+  	&-SearchButton {
+  		font-size: 30px;
+  		margin: 0;
+  		padding: 14px;
+  		display: inline-block;
+  		color: #000;
+
+  		&.icon-solo-x {
+  			background-color: #29A1D2;
+  			color: #FFF;
+  		}
+  	}
+
+  	&-MenuButton {
+  		font-size: 30px;
+  		margin: 0;
+  		padding: 14px;
+  		display: inline-block;
+
+  		&.icon-solo-x {
+  			background-color: #2B2B2B;
+  			color: #FFF;		
+  		}
+  	}
+
+  	/* Hide MobileHeader on Desktop and up */
   	@include desktop {
+  		display: none;
+  	}
+  }
+
+  .Header-TopWrapper {
+  	display: none;
+
+  	@include desktop {
+  		display: block;
   		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
   	}
   }
@@ -101,12 +148,41 @@
   /* MAIN NAVIGATION */
   .NavMenu {
   	position: relative;
+  	background-color: #2B2B2B;
+  	display: none;
+
+  	&.mobileActive {
+  		display: block;
+  	}
+
+  	@include desktop {
+  		display: block;
+  		background-color: #FFF;
+  	}
+
+  	.MobileLogoText {
+  		position: absolute;
+  		top: 20px;
+  		left: 15px;
+  		color: #FFF;
+  		font-size: 75px;
+
+  		@include desktop {
+  			display: none;
+  		}
+  	}
+
   	/* <ul> list holding NavItems */
 	  &-List {
-	  	padding: 0;
-	  	margin: 0 auto;
+	  	padding: 10px 0;
+	  	margin: 0 10px 0 0;
 	  	list-style-type: none;
 	  	text-align: right;
+
+	  	@include desktop {
+	  		padding: 0;
+		  	margin: 0 auto;
+		  }
 
 	  	@include desktop {
 	  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
@@ -114,7 +190,14 @@
 
 	  	/* Top level Link Rules */
 	  	& > li {
-	  		display: inline;
+	  		padding: 5px 0;
+	  		margin: 2.5px 0;
+
+	  		@include desktop {
+	  			padding: 0;
+	  			margin: 0;
+	  			display: inline;
+	  		}
 
 				& > span {
 		  		position: relative;
@@ -122,61 +205,69 @@
 		  		padding: 5px 8px;
 
 		  		a {
+		  			color: #FFF;
 		  			@include Kievit-Book;
-		  			color: #000;
+		  			font-size: 18px;
+
+		  			@include desktop {
+		  				color: #000;
+		  				font-size: 16px;
+		  			}
 		  		}
 		  	}
 	  	}
 
 	  	#NavMenuItem-Link {
-	  		/* BROWSE */
-	  		&-84330695-2ae3-a904-25c6-4149a2e55575 {
-		  		&.active {
-		  			@include up-arrow($BG_MENU_BROWSE_RIGHT, 33%, 'bottom', -10px, 12px);
+	  		@include desktop {
+		  		/* BROWSE */
+		  		&-84330695-2ae3-a904-25c6-4149a2e55575 {
+			  		&.active {
+			  			@include up-arrow($BG_MENU_BROWSE_RIGHT, 33%, 'bottom', -10px, 12px);
+			  		}
 		  		}
-	  		}
 
-	  		/* LEARN */
-	  		&-b3a0321e-6785-5384-157e-baf0398dacdc {
-		  		&.active {
-		  			@include up-arrow($BG_MENU_LEARN_RIGHT, 33%, 'bottom', -10px, 12px);
+		  		/* LEARN */
+		  		&-b3a0321e-6785-5384-157e-baf0398dacdc {
+			  		&.active {
+			  			@include up-arrow($BG_MENU_LEARN_RIGHT, 33%, 'bottom', -10px, 12px);
+			  		}
 		  		}
-	  		}
 
-	  		/* ATTEND */
-	  		&-662abf31-7789-ce84-b537-1d324a379c95 {
-		  		&.active {
-		  			@include up-arrow($BG_MENU_ATTEND_RIGHT, 33%, 'bottom', -10px, 12px);
+		  		/* ATTEND */
+		  		&-662abf31-7789-ce84-b537-1d324a379c95 {
+			  		&.active {
+			  			@include up-arrow($BG_MENU_ATTEND_RIGHT, 33%, 'bottom', -10px, 12px);
+			  		}
 		  		}
-	  		}
 
-	  		/* FIND US */
-	  		&-abb58f55-20e0-0d34-d1ae-45687cc4799d {
-		  		&.active {
-		  			@include up-arrow($BG_MENU_FINDUS_RIGHT, 33%, 'bottom', -10px, 12px);
+		  		/* FIND US */
+		  		&-abb58f55-20e0-0d34-d1ae-45687cc4799d {
+			  		&.active {
+			  			@include up-arrow($BG_MENU_FINDUS_RIGHT, 33%, 'bottom', -10px, 12px);
+			  		}
 		  		}
-	  		}
 
-	  		/* RESEARCH */
-	  		&-aeb16807-40c0-8534-950f-bfdaf546be2e {
-		  		&.active {
-		  			@include up-arrow($BG_MENU_RESEARCH_RIGHT, 33%, 'bottom', -10px, 12px);
+		  		/* RESEARCH */
+		  		&-aeb16807-40c0-8534-950f-bfdaf546be2e {
+			  		&.active {
+			  			@include up-arrow($BG_MENU_RESEARCH_RIGHT, 33%, 'bottom', -10px, 12px);
+			  		}
 		  		}
-	  		}
 
-	  		/* GIVE */
-	  		&-7638d892-1846-1484-2961-ad180e4194bf {
-		  		&.active {
-		  			@include up-arrow($BG_MENU_GIVE_RIGHT, 33%, 'bottom', -10px, 12px);
+		  		/* GIVE */
+		  		&-7638d892-1846-1484-2961-ad180e4194bf {
+			  		&.active {
+			  			@include up-arrow($BG_MENU_GIVE_RIGHT, 33%, 'bottom', -10px, 12px);
+			  		}
 		  		}
-	  		}
 
-		  	/* GET HELP */
-		  	&-cb464e38-b91a-2554-d1d5-64bc1c1d6283 {
-		  		&.active {
-		  			@include up-arrow($BG_MENU_HELP_RIGHT, 33%, 'bottom', -10px, 12px);
-		  		}  		
-		  	}
+			  	/* GET HELP */
+			  	&-cb464e38-b91a-2554-d1d5-64bc1c1d6283 {
+			  		&.active {
+			  			@include up-arrow($BG_MENU_HELP_RIGHT, 33%, 'bottom', -10px, 12px);
+			  		}  		
+			  	}
+			  }
 	  	}
 	  }
 
@@ -309,8 +400,11 @@
 	  	top: 34px;
 	  	left: 0;
 
+	  	/* Only display MegaMenu's on Desktop */
 	  	&.active {
-	  		display: block;
+	  		@include desktop {
+	  			display: block;
+	  		}
 	  	}
 
 	  	&-LeftBgWrapper {
@@ -371,6 +465,32 @@
 	  				margin: 7px 0px;
 	  				display: block;
 	  				padding: 0;
+	  			}
+	  		}
+
+	  		&-SocialMediaWidget {
+	  			padding: 2px;
+	  			margin: 15px 0 0 0;
+
+	  			ul {
+	  				list-style-type: none;
+	  				margin: 0;
+	  				padding: 0;
+
+	  				li {
+	  					display: inline-block;
+	  					margin: 0 5px 0 0;
+
+	  					&:last-child {
+	  						margin-right: 0;
+	  					}
+
+	  					a {
+	  						text-decoration: none;
+	  						display: block;
+	  						font-size: 28px;
+	  					}
+	  				}
 	  			}
 	  		}
 	  	}
