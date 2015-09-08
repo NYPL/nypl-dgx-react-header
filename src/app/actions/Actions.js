@@ -9,7 +9,7 @@ class Actions {
     // // Here we will use the client side AJAX request
     // // to fetch data
     axios
-      .get('/header-data')
+      .get('https://dev-header.nypl.org/')
       .then(result => {
         self.actions.updateHeaderData(result.data);
       })
