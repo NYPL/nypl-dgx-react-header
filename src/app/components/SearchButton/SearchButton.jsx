@@ -1,10 +1,10 @@
 // Import React libraries
-import Radium from 'radium';
 import React from 'react';
 import cx from 'classnames';
 
 // Import components
 import BasicButton from '../Buttons/BasicButton.jsx';
+import SearchBox from '../SearchBox/SearchBox.jsx';
 
 // Create React class
 class SearchButton extends React.Component {
@@ -18,8 +18,9 @@ class SearchButton extends React.Component {
       isActive: false
     };
     
-    // The function activates the saerch box
+    // The function activates and deactivates the search box
     this._activate = this._activate.bind(this);
+    this._deactivate = this._deactivate.bind(this);
   }
 
   // Dom Render Section
@@ -33,7 +34,8 @@ class SearchButton extends React.Component {
         name='Search Button'
         label='Search Box'
         style={styles.base}
-        onMouseEnter={this._activate} />
+        onMouseEnter={this._activate}
+        onMouseLeave={this._deactivate} />
       </li>
 		);
   }
@@ -41,10 +43,16 @@ class SearchButton extends React.Component {
   // Set the function to active search box when the button is clicked
   _activate() {
     // Set the NaveMenu activeItem to be search if search box is not shown
-    (this.state.isActive !== 'search') ?
-      this.props.activate('search') : this.props.activate(null);
+    // (this.state.isActive !== true) ?
+    //   this.props.activate(true) : this.props.activate(null);
     // Set the button state to be active
-    this.state.isActive = !this.state.isActive;
+    this.state.isActive = true;
+    console.log(this.state.isActive);
+  }
+
+  _deactivate() {
+    this.state.isActive = false;
+    console.log(this.state.isActive);
   }
 }
 
@@ -54,4 +62,4 @@ const styles = {
 };
 
 // Export the component
-export default Radium(SearchButton);
+export default SearchButton;
