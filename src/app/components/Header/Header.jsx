@@ -74,23 +74,19 @@ const styles = {
     margin: '0 auto'
   },
   logo: {
-    display: 'block',
     width: '230px',
     position: 'relative',
     left: '-8px'
   },
   topButtons: {
     position: 'absolute',
-    top: '20px',
-    right: '2px',
-    textTransform: 'uppercase',
-    display: 'block'
+    textTransform: 'uppercase'
   },
   ssoContainer: {
-    display: 'inline-block'
+
   },
   subscribeButton: {
-    display: 'inline-block'
+
   },
   donateButton: {
     display: 'inline-block'
