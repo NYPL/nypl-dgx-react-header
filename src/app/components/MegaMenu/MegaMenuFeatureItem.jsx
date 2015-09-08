@@ -11,6 +11,10 @@ class MegaMenuFeatureItem extends React.Component {
   }
   
 	render() {
+    if (!this.props.feature) {
+      return <div className={this.props.className}>Featured Item not Found</div>;
+    }
+
     let feature = this.props.feature ? this.props.feature : undefined,
 			classes = cx({'with-image': feature && feature.images, 'without-image': !feature || !feature.images}),
       // should have a fallback

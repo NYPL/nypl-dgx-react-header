@@ -32,7 +32,6 @@ router
     axios
       .get(options.endpoint)
       .then(data => {
-        console.log(data);
         let parsed = parser.parse(data.data),
           modelData = Model.build(parsed);
 
