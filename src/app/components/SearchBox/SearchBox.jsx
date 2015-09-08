@@ -34,7 +34,7 @@ class SearchBox extends React.Component {
       className={`${this.props.className}${classes}`}>
         <div className={`${this.props.className}-Elements-Wrapper`}>
           <div className={`${this.props.className}-Elements-Input-Wrapper`}>
-          
+
             <div className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
               <InputField type='text' 
               id={`${this.props.id}-Input-Keywords`}
@@ -60,8 +60,6 @@ class SearchBox extends React.Component {
                 onChange={this._searchOptionChange} 
                 checked={this.state.searchOption ==='website'} />Search NYPL.org
               </div>
-              
-              <SimpleButton className={`${this.props.className}-Elements-Input-Advanced-Options`} target='http://catalog.nypl.org/' label='Advanced Search'/>
             </div>
               
           </div>
