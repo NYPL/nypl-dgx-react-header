@@ -1,6 +1,5 @@
 // Import React libraries
 import React from 'react';
-import Radium from 'radium';
 import cx from 'classnames';
 
 // Import components
@@ -35,7 +34,7 @@ class SearchBox extends React.Component {
       className={`${this.props.className}${classes}`}>
         <div className={`${this.props.className}-Elements-Wrapper`}>
           <div className={`${this.props.className}-Elements-Input-Wrapper`}>
-
+          
             <div className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
               <InputField type='text' 
               id={`${this.props.id}-Input-Keywords`}
@@ -121,4 +120,4 @@ const styles = {
 };
 
 // Export the component
-module.exports = Radium(SearchBox);
+module.exports = SearchBox;

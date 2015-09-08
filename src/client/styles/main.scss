@@ -101,8 +101,8 @@
   /* MAIN NAVIGATION */
   .NavMenu {
   	position: relative;
-  	/* Top-level Links Wrapper */
-	  &-TopLevelLinks {
+  	/* <ul> list holding NavItems */
+	  &-List {
 	  	padding: 0;
 	  	margin: 0 auto;
 	  	list-style-type: none;
@@ -112,31 +112,205 @@
 	  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
 	  	}
 
-	  	li {
-	  		position: relative;
-	  		display: inline-block;
-	  		padding: 5px 8px;
+	  	/* Top level Link Rules */
+	  	& > li {
+	  		display: inline;
 
-	  		a {
-	  			@include Kievit-Book;
-	  			color: #000;
+				& > span {
+		  		position: relative;
+		  		display: inline-block;
+		  		padding: 5px 8px;
+
+		  		a {
+		  			@include Kievit-Book;
+		  			color: #000;
+		  		}
+		  	}
+	  	}
+
+	  	#NavMenuItem-Link {
+	  		/* BROWSE */
+	  		&-84330695-2ae3-a904-25c6-4149a2e55575 {
+		  		&.active {
+		  			@include up-arrow($BG_MENU_BROWSE_RIGHT, 33%, 'bottom', -10px, 12px);
+		  		}
 	  		}
 
-	  		&.active {
-	  			@include up-arrow($BG_MENU_BROWSE_RIGHT, 33%, 'bottom', -10px, 12px);
+	  		/* LEARN */
+	  		&-b3a0321e-6785-5384-157e-baf0398dacdc {
+		  		&.active {
+		  			@include up-arrow($BG_MENU_LEARN_RIGHT, 33%, 'bottom', -10px, 12px);
+		  		}
+	  		}
+
+	  		/* ATTEND */
+	  		&-662abf31-7789-ce84-b537-1d324a379c95 {
+		  		&.active {
+		  			@include up-arrow($BG_MENU_ATTEND_RIGHT, 33%, 'bottom', -10px, 12px);
+		  		}
+	  		}
+
+	  		/* FIND US */
+	  		&-abb58f55-20e0-0d34-d1ae-45687cc4799d {
+		  		&.active {
+		  			@include up-arrow($BG_MENU_FINDUS_RIGHT, 33%, 'bottom', -10px, 12px);
+		  		}
+	  		}
+
+	  		/* RESEARCH */
+	  		&-aeb16807-40c0-8534-950f-bfdaf546be2e {
+		  		&.active {
+		  			@include up-arrow($BG_MENU_RESEARCH_RIGHT, 33%, 'bottom', -10px, 12px);
+		  		}
+	  		}
+
+	  		/* GIVE */
+	  		&-7638d892-1846-1484-2961-ad180e4194bf {
+		  		&.active {
+		  			@include up-arrow($BG_MENU_GIVE_RIGHT, 33%, 'bottom', -10px, 12px);
+		  		}
+	  		}
+
+		  	/* GET HELP */
+		  	&-cb464e38-b91a-2554-d1d5-64bc1c1d6283 {
+		  		&.active {
+		  			@include up-arrow($BG_MENU_HELP_RIGHT, 33%, 'bottom', -10px, 12px);
+		  		}  		
+		  	}
+	  	}
+	  }
+
+	  /* Dynamic Background Color Assignments */
+	  #MegaMenu {
+	  	/* BROWSE */
+	  	&-84330695-2ae3-a904-25c6-4149a2e55575 {
+	  		background-color: $BG_MENU_BROWSE_RIGHT;
+
+	  		.MegaMenu {
+					&-LeftBgWrapper {
+						background-color: $BG_MENU_BROWSE_LEFT;
+					}
+					&-SubNavWrapper {
+	  				background-color: $BG_MENU_BROWSE_LEFT;
+					}
+					&-FeaturesWrapper {
+						background-color: $BG_MENU_BROWSE_RIGHT;
+					}
+	  		}
+	  	}
+
+	  	/* LEARN */
+	  	&-b3a0321e-6785-5384-157e-baf0398dacdc {
+	  		background-color: $BG_MENU_LEARN_RIGHT;
+
+	  		.MegaMenu {
+					&-LeftBgWrapper {
+						background-color: $BG_MENU_LEARN_LEFT;
+					}
+					&-SubNavWrapper {
+	  				background-color: $BG_MENU_LEARN_LEFT;
+					}
+					&-FeaturesWrapper {
+						background-color: $BG_MENU_LEARN_RIGHT;
+					}
+	  		}
+	  	}
+
+	  	/* ATTEND */
+	  	&-662abf31-7789-ce84-b537-1d324a379c95 {
+	  		background-color: $BG_MENU_ATTEND_RIGHT;
+
+	  		.MegaMenu {
+					&-LeftBgWrapper {
+						background-color: $BG_MENU_ATTEND_LEFT;
+					}
+					&-SubNavWrapper {
+	  				background-color: $BG_MENU_ATTEND_LEFT;
+					}
+					&-FeaturesWrapper {
+						background-color: $BG_MENU_ATTEND_RIGHT;
+					}
+	  		}	
+	  	}
+
+	  	/* FIND US */
+	  	&-abb58f55-20e0-0d34-d1ae-45687cc4799d {
+	  		background-color: $BG_MENU_FINDUS_RIGHT;
+
+	  		.MegaMenu {
+					&-LeftBgWrapper {
+						background-color: $BG_MENU_FINDUS_LEFT;
+					}
+					&-SubNavWrapper {
+	  				background-color: $BG_MENU_FINDUS_LEFT;
+					}
+					&-FeaturesWrapper {
+						background-color: $BG_MENU_FINDUS_RIGHT;
+					}
+	  		}
+	  	}
+
+	  	/* RESEARCH */
+	  	&-aeb16807-40c0-8534-950f-bfdaf546be2e {
+	  		background-color: $BG_MENU_RESEARCH_RIGHT;
+
+	  		.MegaMenu {
+					&-LeftBgWrapper {
+						background-color: $BG_MENU_RESEARCH_LEFT;
+					}
+					&-SubNavWrapper {
+	  				background-color: $BG_MENU_RESEARCH_LEFT;
+					}
+					&-FeaturesWrapper {
+						background-color: $BG_MENU_RESEARCH_RIGHT;
+					}
+	  		}
+	  	}
+
+	  	/* GIVE */
+	  	&-7638d892-1846-1484-2961-ad180e4194bf {
+	  		background-color: $BG_MENU_GIVE_RIGHT;
+
+	  		.MegaMenu {
+					&-LeftBgWrapper {
+						background-color: $BG_MENU_GIVE_LEFT;
+					}
+					&-SubNavWrapper {
+	  				background-color: $BG_MENU_GIVE_LEFT;
+					}
+					&-FeaturesWrapper {
+						background-color: $BG_MENU_GIVE_RIGHT;
+					}
+	  		}
+	  	}
+	  	/* GET HELP */
+	  	&-cb464e38-b91a-2554-d1d5-64bc1c1d6283 {
+	  		background-color: $BG_MENU_HELP_RIGHT;
+
+	  		.MegaMenu {
+					&-LeftBgWrapper {
+						background-color: $BG_MENU_HELP_LEFT;
+					}
+					&-SubNavWrapper {
+	  				background-color: $BG_MENU_HELP_LEFT;
+					}
+					&-FeaturesWrapper {
+						background-color: $BG_MENU_HELP_RIGHT;
+					}
 	  		}
 	  	}
 	  }
 
 	  .MegaMenu {
+	  	display: none;
 	  	color: #FFFFFF;
-	  	background-color: $BG_MENU_BROWSE_RIGHT;
+	  	width: 100%;
+  		position: absolute;
+	  	top: 34px;
+	  	left: 0;
 
-	  	&--active {
-	  		width: 100%;
-	  		position: absolute;
-		  	top: 34px;
-	  		background-color: $BG_MENU_BROWSE_RIGHT;
+	  	&.active {
+	  		display: block;
 	  	}
 
 	  	&-LeftBgWrapper {
@@ -144,7 +318,6 @@
 				width: 50%;
 				position: absolute;
 				left: 0;
-				background-color: $BG_MENU_BROWSE_LEFT;
 				z-index: 0;
 	  	}
 
@@ -160,12 +333,11 @@
 
 	  	&-SubNavWrapper {
 	  		position: relative;
-	  		width: 350px;
+	  		width: 345px;
 	  		float: left;
 	  		display: table-cell;
 	  		margin: 0;
 	  		padding: 0;
-	  		background-color: $BG_MENU_BROWSE_LEFT;
 	  		height: $MAIN_MENU_DESKTOP_HEIGHT;
 	  	}
 
@@ -173,7 +345,8 @@
 	  		height: 100%;
 	  		position: absolute;
 	  		right: 20px;
-	  		width: 225px;
+	  		width: 220px;
+	  		text-align: left;
 
 	  		a {
 	  			color: #FFFFFF;
@@ -196,6 +369,8 @@
 	  					margin-top: 0px;
 	  				}
 	  				margin: 7px 0px;
+	  				display: block;
+	  				padding: 0;
 	  			}
 	  		}
 	  	}
@@ -205,7 +380,7 @@
 	  		margin: 0;
 	  		padding: 0;
 	  		height: $MAIN_MENU_DESKTOP_HEIGHT;
-	  		background-color: $BG_MENU_BROWSE_RIGHT;
+	  		text-align: left;
 	  	}
 
 	  	&-Features {
@@ -219,44 +394,222 @@
 	  		width: 48%;
 	  		margin: 0 0 0 2%;
 	  		vertical-align: top;
-
-	  		.FeatureItem {
-	  			&-Image {
-	  				width: 88px;
-	  				height: 88px;
-	  				position: relative;
-	  				top: 80px;
-	  				margin: 0 10px 0 0;
-
-	  				img {
-	  					border-radius: 50%;
-	  				}
-	  			}
-
-	  			&-Content {
-	  				color: #FFFFFF;
-	  				display: table-cell;
-	  				vertical-align: top;
-	  				position: relative;
-	  				top: 60px;
-
-	  				&-Tag {
-	  					@include Kievit-Medium;
-	  				}
-
-	  				&-Title {
-	  					@include Milo-Regular;
-	  					line-height: 1.25em;
-	  					margin: .75em 0;
-	  				}
-
-	  				&-Desc {
-	  					@include Kievit-Regular;
-	  				}
-	  			}
-	  		}
 	  	}
 	  }
+
+		.FeatureItem {
+			&-Image {
+				width: 88px;
+				height: 88px;
+				position: relative;
+				top: 75px;
+				margin: 0 10px 0 0;
+
+				img {
+					border-radius: 50%;
+				}
+			}
+
+			&-Content {
+				color: #FFFFFF;
+				display: table-cell;
+				vertical-align: top;
+				position: relative;
+				top: 50px;
+
+				&-Tag {
+					@include Kievit-Medium;
+					text-transform: uppercase;
+				}
+				&-Title {
+					@include Milo-Regular;
+					line-height: 1.25em;
+					margin: .75em 0;
+				}
+
+				&-Desc {
+					@include Kievit-Regular;
+				}
+			}
+		}
+
+  	/* FIND US WIDGET
+  	 * --------------
+  	 * Specific SASS rules for
+  	 * this widget within the Header.
+  	*/ 
+  	.FindUsWidget {
+  		&-LocationFinder {
+  			display: inline-table;
+				width: 46%;
+				margin: 0 2% 0 2%;
+				vertical-align: top;
+
+  			&-Wrapper {
+  				color: #FFFFFF;
+  				display: table-cell;
+  				vertical-align: top;
+  				position: relative;
+  				top: 60px;
+  			}
+
+  			&-Tag {
+					@include Kievit-Medium;
+					text-transform: uppercase;
+				}
+
+  			&-IntroText {
+					display: block;
+					margin: 1em 0;
+					@include Milo-Regular;
+					line-height: 1.25em;
+					font-size: 18px;
+					max-width: 65%;
+				}
+
+				&-SearchBox {
+					display: block;
+					margin: 10px 0 0 0;
+				}
+
+				#LocationFinder {
+					&-Input {
+						display: table-cell;
+						border: none;
+						height: 40px;
+						width: 65%;
+						padding: 2px 5px;
+						font-size: 15px;
+						color: #000;
+					}
+					&-Submit {
+						display: table-cell;
+						border: none;
+						padding: 0px 15px;
+						margin: 0px;
+						height: 44px;
+						background-color: $BG_MENU_SEARCH;
+						width: auto;
+						vertical-align: top;
+						font-size: 15px;
+					}
+				}
+			}
+
+			&-SeparationBar {
+  			display: inline-table;
+  			position: relative;
+  			top: 25px;
+  			height: 200px;
+  			border-right: 1px solid #FFF;
+  		}
+
+  		&-FeaturedLocation {
+  			display: inline-table;
+				width: 47%;
+				margin: 0 0 0 2%;
+				vertical-align: top;
+
+  			&-Image {
+  				width: 88px;
+  				height: 88px;
+  				position: relative;
+  				top: 80px;
+  				margin: 0 10px 0 0;
+
+  				img {
+  					border-radius: 50%;
+  				}
+  			}
+
+  			&-Content {
+  				color: #FFFFFF;
+  				display: table-cell;
+  				vertical-align: top;
+  				position: relative;
+  				top: 60px;
+
+  				&-Tag {
+  					@include Kievit-Medium;
+  					text-transform: uppercase;
+  				}
+
+  				&-Title {
+  					@include Milo-Regular;
+  					line-height: 1.25em;
+  					margin: .75em 0;
+  				}
+
+  				&-Desc {
+  					@include Kievit-Regular;
+  				}
+  			}
+  		}
+  	}
+
+  	.DonateWidget {
+  		&-DonateBox {
+				display: inline-table;
+				width: 46%;
+				margin: 0 2% 0 2%;
+				vertical-align: top;
+				color: #FFF;
+
+				&-Wrapper {
+					position: relative;
+					top: 50px;
+				}
+
+				&-Tag {
+					@include Kievit-Medium;
+					text-transform: uppercase;
+				}
+
+				&-Title {
+					@include Milo-Regular;
+					line-height: 1.25em;
+					margin: .75em 0;
+				}
+
+				&-Desc {
+					@include Kievit-Regular;
+				}
+
+				&-DonationLinks {
+					list-style-type: none;
+					display: block;
+					margin: 1em 0;
+					padding: 0;
+
+					li {
+						display: inline-block;
+						margin: 0 15px 0 0;
+
+						&:last-child {
+							margin-right: 0px
+						}
+
+						a {
+							color: #FFF;
+							display: block;
+							font-size: 18px;
+							padding: 15px 20px;
+							margin: 0;
+							border: 2px solid #FFF;
+							border-radius: 5px;
+						}
+					}
+				}
+  		}
+
+  		&-FeatureItem {
+				display: inline-table;
+				width: 48%;
+				margin: 0 0 0 2%;
+				vertical-align: top;
+			}
+		}
+
   }
 
   /* CSS for Search button */
@@ -267,21 +620,21 @@
     font-size: 1em;
     border-width: 0;
   	&:hover {
-  		color: $BG_SEARCHBOX
+  		color: $BG_MENU_SEARCH;
   	}
   }
 
   .NavMenu-TopLevelLinks-SearchButton--active {
     -webkit-appearance: none;
     background-color: transparent;
-  	color: $BG_SEARCHBOX;
+  	color: $BG_MENU_SEARCH;
     font-size: 1em;
     border-width: 0;
   }
 
   /* CSS for Search box. It shows only activated. Default is not displayed. */
   .NavMenu-SearchBox--active {
-		background-color: $BG_SEARCHBOX; 
+		background-color: $BG_MENU_SEARCH; 
 		color: #000000;
 		display: block;
 		height: 200px;

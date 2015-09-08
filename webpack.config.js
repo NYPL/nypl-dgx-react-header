@@ -28,7 +28,7 @@ var commonSettings = {
 		path: path.resolve(ROOT_PATH, 'dist'),
 		// Sets the name of the bundled application files
 		// Additionally we can isolate vendor files as well
-		filename: 'bundle.js'
+		filename: 'dgx-header.min.js'
 	},
 	module: {
 		loaders: [
