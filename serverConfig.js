@@ -3,20 +3,17 @@ import compression from 'compression';
 import express from 'express';
 import colors from 'colors';
 import parser from 'jsonapi-parserinator';
+
 // React
 import React from 'react';
 import Iso from 'iso';
 import alt from './src/app/alt.js';
+
 // Server Configurations
 import appConfig from './appConfig.js';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import webpackConfig from './webpack.config.js';
-
-// Temporary API Service
-import HeaderApiService from './src/app/utils/ApiService';
-// Need to improve for server-side and client-side requests
-import HeaderSource from './src/app/utils/HeaderSource.js';
 
 import Header from './src/app/components/Header/Header.jsx';
 
@@ -31,20 +28,6 @@ const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
 // Assigning as let variables, since they are mutable
 let isProduction = process.env.NODE_ENV === 'production';
 let serverPort = process.env.PORT || (isProduction ? 3001 : appConfig.port);
-let refineryData;
-
-// Use the HeaderApiService to fetch our Header Data
-// // We would parse the Data at this point and Model it
-// // Local Mock
-// HeaderApiService
-//   .fetchData('local')
-//   .then((result) => {
-//     refineryData = result;
-//   })
-//   .catch((error) => {
-//     console.log('Error on local data fetch', error);
-//   });
-
 
 /* Express Server Configuration
  * ----------------------------
@@ -76,49 +59,30 @@ app.use(express.static(DIST_PATH));
  * 2. Ideally we would pass in the API Data here
  *    to our component.
 */
-// Assign the string containing the markup from the component
-let headerApp = React.renderToString(<Header />);
 
-// Used to debug refinery response
-app.get('/header-data', (req, res) => {
-  HeaderApiService
-    .fetchData('server')
-    .then((result) => {
-      res.json(refineryData);
-    });
-
-});
+require('./ApiRoutes/ClientApiRoutes.js')(app);
+require('./ApiRoutes/ServerApiRoutes.js')(app);
 
 // Match all routes to render the index page.
-app.get('/*', (req, res) => {
-  HeaderApiService
-    .fetchData('server')
-    .then((result) => {
-      refineryData = result;
+app.use((req, res) => {
+  let headerApp, iso;
 
-      res.locals.data = {
-        Store: { headerData: refineryData }
-      };
+  alt.bootstrap(JSON.stringify(res.locals.data || {}));
+  iso = new Iso();
+  
+  headerApp = React.renderToString(React.createElement(Header));
+  iso.add(headerApp, alt.flush());
 
-      alt.bootstrap(JSON.stringify(res.locals.data || {}));
-      let headerApp = React.renderToString(React.createElement(Header));
-      let iso = new Iso();
-      iso.add(headerApp, alt.flush());
-
-      // First parameter references the ejs filename
-      res.render('index', {
-        // Assign the Header String to the
-        // proper EJS variable
-        headerApp: iso.render(),
-        appTitle: appConfig.appTitle,
-        favicon: appConfig.favIconPath,
-        isProduction: isProduction,
-        webpackPort: WEBPACK_DEV_PORT
-      });
-    })
-    .catch((error) => {
-      console.log('Error on local data fetch', error);
-    });
+  // First parameter references the ejs filename
+  res.render('index', {
+    // Assign the Header String to the
+    // proper EJS variable
+    headerApp: iso.render(),
+    appTitle: appConfig.appTitle,
+    favicon: appConfig.favIconPath,
+    isProduction: isProduction,
+    webpackPort: WEBPACK_DEV_PORT
+  });
 
 });
 
