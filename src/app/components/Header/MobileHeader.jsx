@@ -32,7 +32,7 @@ class MobileHeader extends React.Component {
 
   render () {
     let activeButton = this.state.activeMobileButton,
-      mobileSearchClass = cx({'icon-solo-x': activeButton === 'mobileSearch', 'icon-magnifier2': activeButton !== 'mobileSearch'}),
+      mobileSearchClass = cx({'icon-solo-x': activeButton === 'mobileSearch' || activeButton === 'search', 'icon-magnifier2': activeButton !== 'mobileSearch' && activeButton !== 'search'}),
       mobileMenuClass = cx({'icon-solo-x': activeButton === 'mobileMenu', 'icon-burgernav': activeButton !== 'mobileMenu'});
 
     console.log(activeButton);

@@ -264,7 +264,7 @@
 	  	/* Top level Link Rules */
 	  	& > li {
 	  		padding: 5px 0;
-	  		margin: 2.5px 12px 2.5px 0;
+	  		margin: 0 12px 2.5px 0;
 
 	  		@include desktop {
 	  			padding: 0;
@@ -470,7 +470,7 @@
 	  	color: #FFFFFF;
 	  	width: 100%;
   		position: absolute;
-	  	top: 34px;
+	  	top: 40px;
 	  	left: 0;
 
 	  	/* Only display MegaMenu's on Desktop */
@@ -810,28 +810,33 @@
   	.icon-magnifier2 {
 	    -webkit-appearance: none;
   		background-color: transparent;
+	  	color: $BG_MENU_SEARCH;
   		border-width: 0px;
 	  	display: none;
 	  	font-size: 24px;
+	    padding: 0 0 12px 12px;
 	  	@include desktop {
 	  		display: block;
 	  	}
 	  	&:before {
-		  	vertical-align: sub;
+	  		vertical-align: none;
+	  		border-bottom-style: none;
+	  		@include desktop {
+			  	vertical-align: sub;
+			  	border-bottom-color: $BG_MENU_SEARCH;
+			  	border-bottom-style: solid;
+			  	border-bottom-width: 1px;
+			  }
 	  	}
 		}
   }
 
   /* CSS for Search button */
   .NavMenu-TopLevelLinks-SearchButton {
-  	color: #000000;
   	display: none;
     font-size: 30px;
   	@include desktop {
 	  	display: block;
-	  	&:hover {
-	  		color: $BG_MENU_SEARCH;
-	  	}
   	}
   }
 
@@ -860,12 +865,15 @@
 		color: #000000;
 		display: block;
 		height: 200px;
+    left: 0px;
 		margin: 0;
-		position: relative;
+		position: absolute;
+    top: 0;
   	width: 100%;
   	z-index: 300;
   	@include desktop {
 			margin: 6px 0 0 0;
+			top: 34px;
   	}
   }
 
@@ -905,8 +913,10 @@
 			color: $BG_MENU_SEARCH;
 			display: inline-block;
 			font-size: 20px;
-			padding: 20px 6px;
+			left: 2px;
+			padding: 10px 5px;
 			position: absolute;
+			top: 10px;
 			@include desktop {
 				display:none;
 			}
@@ -935,6 +945,7 @@
 			color: #FFFFFF;
 			font-size: 45px;
 			padding: 0;
+			width: 100%;
 		}
 	}
 
