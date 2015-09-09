@@ -25,17 +25,18 @@ class SearchBox extends React.Component {
     this._searchOptionChange = this._searchOptionChange.bind(this);
     // The function send search requests
     this._submitSearchRequest = this._submitSearchRequest.bind(this);
+    this._submitMobileSearchRequest = this._submitMobileSearchRequest.bind(this);
   }
 
   // Dom Render Section
   render() {
     // Give active class if the button is activated
-    let classes = cx({'--active': this.props.isActive}),
-        mobileClasses = cx({'--mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileSearch'});
+    // let classes = cx({'--active': this.props.isActive}),
+    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'mobileSearch' || 'search'});
     
     return (
       <div id={this.props.id} 
-      className={`${this.props.className}${classes}${mobileClasses}`}>
+      className={`${this.props.className}${classes}`}>
         <div className={`${this.props.className}-Elements-Wrapper`}>
           <div className={`${this.props.className}-Elements-Input-Wrapper`}>
 
@@ -66,13 +67,22 @@ class SearchBox extends React.Component {
                 checked={this.state.searchOption ==='website'} />Search NYPL.org
               </div>
             </div>
-              
           </div>
-          <div className='icon-circle-magnifier'>
-            <InputField type='submit' 
-            className={`${this.props.className}-Elements-SubmitButton`} 
+          <div className={`${this.props.className}-mobile-submit`}>
+            <div className={`${this.props.className}-mobile-submit-option`}
+            onClick={this._submitMobileSearchRequest}>
+              catalog
+              <span className='icon-circle-right-wedge'></span>
+            </div>
+            <div className={`${this.props.className}-mobile-submit-option`}
+            onClick={this._submitMobileSearchRequest}>
+              nypl.org
+              <span className='icon-circle-right-wedge'></span>
+            </div>
+          </div>
+            <div  
+            className={`icon-circle-magnifier ${this.props.className}-Elements-SubmitButton`} 
             onClick={this._submitSearchRequest} />
-          </div>
         </div>
       </div>
     );
@@ -110,6 +120,30 @@ class SearchBox extends React.Component {
 
     // Go to the search page
     window.location.assign(requestUrl);
+  }
+
+  _submitMobileSearchRequest (parameter) {
+    // e.preventDefault();
+    
+    // Grab the values the user has entered as the parameters for URL
+    let requestParameters = {
+      keywords: encodeURIComponent(this.state.searchKeywords.trim()),
+      option: parameter
+    }
+    
+    // The vairable for request URL
+    let requestUrl;
+
+    // Decide the search option
+    if (requestParameters.option === 'catalog') {
+      requestUrl = `https://nypl.bibliocommons.com/search?t=smart&q=${requestParameters.keywords}&commit=Search&searchOpt=catalogue`;
+    }  else if (requestParameters.option === 'website') {
+      requestUrl = `http://www.nypl.org/search/apachesolr_search/${requestParameters.keywords}`;
+    }
+
+    // Go to the search page
+    window.location.assign(requestUrl);
+   // console.log(requestUrl);
   }
 }
 

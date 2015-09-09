@@ -7,6 +7,9 @@ import Radium from 'radium';
 import BasicButton from '../Buttons/BasicButton.jsx';
 import SearchBox from '../SearchBox/SearchBox.jsx';
 
+import HeaderStore from '../../stores/Store.js';
+import Actions from '../../actions/Actions.js';
+
 // Create React class
 class SearchButton extends React.Component {
 
@@ -16,12 +19,12 @@ class SearchButton extends React.Component {
 
     // Holds the initial state. The actived status is false
     this.state = {
-      isActive: false
+      activeMobileButton: HeaderStore.getState().activeMobileButton
     };
     
     // The function activates and deactivates the search box
     this._activate = this._activate.bind(this);
-    this._deactivate = this._deactivate.bind(this);
+    this._deaactivate = this._deactivate.bind(this);
   }
 
   // Dom Render Section
@@ -29,28 +32,31 @@ class SearchButton extends React.Component {
     // Give active class if the button is activated
     let classes = cx({'--active': this.state.isActive});
   	return (
-      <div>
+      <div className='NavMenu-TopLevelLinks__SearchButton-Wrapper'
+      onMouseEnter={this._activate}
+      onMouseLeave={this._deactivate}>
         <BasicButton id='NavMenu-TopLevelLinks__SearchButton'
         className={`icon-magnifier2 NavMenu-TopLevelLinks__SearchButton${classes}`}
         name='Search Button'
         label=''
         style={styles.base} />
-        <SearchBox id='NavMenu-SearchBox' className='NavMenu-SearchBox' isActive={this.state.isActive} />
+        <SearchBox id='NavMenu-SearchBox' className='NavMenu-SearchBox' isActive={this.state.activeMobileButton==='search'} />
       </div>
 		);
   }
 
   // Set the function to active search box when the button is clicked
   _activate() {
-    // Set the isActive state to be true
-    this.setState({isActive: true});
+    Actions.setMobileMenuButtonValue('search');
   }
 
   _deactivate() {
-    // Set the isActive state to be false
-    this.setState({isActive: false});
+    if (HeaderStore._getMobileMenuBtnValue() === 'mobileSearch'){
+    Actions.setMobileMenuButtonValue('mobileSearch');
+    } else {
+      Actions.setMobileMenuButtonValue('');
+    }
   }
-
 }
 
 const styles = {
