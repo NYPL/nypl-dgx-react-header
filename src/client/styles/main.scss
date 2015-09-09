@@ -946,7 +946,7 @@
 		}
 	}
 
-	.NavMenu-SearchBox-mobile-submit {
+	.NavMenu-SearchBox-Mobile-Submit {
 		color: #FFFFFF;
 		font-size: 16px;
 		text-align: center;
@@ -957,11 +957,16 @@
 		}
 	}
 
-	.NavMenu-SearchBox-mobile-submit-option {
+	.NavMenu-SearchBox-Mobile-Submit-Option {
 		cursor: pointer;
 		display: inline-block;
 		padding: 20px 0;
 		width: 50%;
+		.icon-wedge-right {
+			font-size: 30px;
+			position: absolute;
+			top: 94px;
+		}
 	}
 
 	.icon-circle-magnifier {

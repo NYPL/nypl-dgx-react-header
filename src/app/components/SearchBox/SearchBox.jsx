@@ -68,18 +68,18 @@ class SearchBox extends React.Component {
             </div>
           </div>
 
-          <div className={`${this.props.className}-mobile-submit`}>
-            <div className={`${this.props.className}-mobile-submit-option`}
+          <div className={`${this.props.className}-Mobile-Submit`}>
+            <div className={`${this.props.className}-Mobile-Submit-Option`}
             value='catalog'
             onClick={this._submitMobileSearchRequest.bind(this, 'catalog')}>
               catalog
-              <span className='icon-circle-right-wedge'></span>
+              <span className='icon-wedge-right'></span>
             </div>
-            <div className={`${this.props.className}-mobile-submit-option`}
+            <div className={`${this.props.className}-Mobile-Submit-Option`}
             value='website'
             onClick={this._submitMobileSearchRequest.bind(this, 'website')}>
               nypl.org
-              <span className='icon-circle-right-wedge'></span>
+              <span className='icon-wedge-right'></span>
             </div>
           </div>
           <div className={`icon-circle-magnifier ${this.props.className}-Elements-SubmitButton`} 
