@@ -43,7 +43,8 @@ router
         next();
       })
       .catch(error => {
-        console.log('error calling API');
+        console.log('error calling API : ' + error);
+        console.log('Attempted to call : ' + options.endpoint);
         next();
       }); /* end Axios call */
   });
