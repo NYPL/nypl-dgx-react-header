@@ -10,7 +10,7 @@ router
   .get((req, res, next) => {
     let options = {
       endpoint: 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/site-data/' +
-        'header-items?filter[relationships][parent]=null&include=' +
+        'header-items?filter%5Brelationships%5D%5Bparent%5D=null&include=' +
         'children,' +
         'related-mega-menu-panes.current-mega-menu-item.images,' +
         'related-mega-menu-panes.current-mega-menu-item.related-content.authors.nypl-location,' +
