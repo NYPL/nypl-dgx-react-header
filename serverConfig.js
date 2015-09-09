@@ -15,8 +15,10 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import webpackConfig from './webpack.config.js';
 
+// Header Component
 import Header from './src/app/components/Header/Header.jsx';
 
+// Global Config Variables
 const ROOT_PATH = __dirname;
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
 const INDEX_PATH = path.resolve(ROOT_PATH, 'src/client');
@@ -54,10 +56,10 @@ app.use(express.static(DIST_PATH));
 
 /* Isomporphic Rendering of React App
  * ----------------------------------
- * 1. Render the App as a String to be passed
- *    to the server.
- * 2. Ideally we would pass in the API Data here
- *    to our component.
+ * 1. Bootstrap the FLUX Store with API Data
+ * 2. Use ISO to add the <Header> component with
+ *    proper data
+ * 3. Render the <Header> as a string in the EJS template
 */
 
 // require('./ApiRoutes/ClientApiRoutes.js')(app);
@@ -67,7 +69,7 @@ let apiRoutes = require('./ApiRoutes/ApiRoutes.js');
 app.use('/', apiRoutes);
 
 // Match all routes to render the index page.
-app.use((req, res) => {
+app.get('/', (req, res) => {
   let headerApp, iso;
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
