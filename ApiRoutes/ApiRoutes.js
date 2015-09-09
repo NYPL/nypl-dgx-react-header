@@ -1,38 +1,44 @@
 import express from 'express';
 import axios from 'axios';
+import request from 'superagent';
 import parser from 'jsonapi-parserinator';
 import Model from '../src/app/utils/HeaderItemModel.js';
 
 let router = express.Router();
 
+let options = {
+  endpoint: 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/site-data/' +
+    'header-items?filter\[relationships\]\[parent\]=null&include=' +
+    'children,' +
+    'related-mega-menu-panes.current-mega-menu-item.images,' +
+    'related-mega-menu-panes.current-mega-menu-item.related-content.authors.nypl-location,' +
+    'related-mega-menu-panes.current-mega-menu-item.related-content.location',
+  includes: [
+    'children',
+    'related-mega-menu-panes.current-mega-menu-item.images',
+    'related-mega-menu-panes.current-mega-menu-item.related-content.authors.nypl-location',
+    'related-mega-menu-panes.current-mega-menu-item.related-content.location'],
+  filters: {
+    'relationships': {'parent': 'null'}
+  }
+};
+
+// Set the actual children relationships you want to create
+// for the embedded properties.
+parser.setChildrenObjects(options)
+
 router
   .route('/')
   .get((req, res, next) => {
-    let options = {
-      endpoint: 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/site-data/' +
-        'header-items?filter%5Brelationships%5D%5Bparent%5D=null&include=' +
-        'children,' +
-        'related-mega-menu-panes.current-mega-menu-item.images,' +
-        'related-mega-menu-panes.current-mega-menu-item.related-content.authors.nypl-location,' +
-        'related-mega-menu-panes.current-mega-menu-item.related-content.location',
-      includes: [
-        'children',
-        'related-mega-menu-panes.current-mega-menu-item.images',
-        'related-mega-menu-panes.current-mega-menu-item.related-content.authors.nypl-location',
-        'related-mega-menu-panes.current-mega-menu-item.related-content.location'],
-      filters: {
-        'relationships': {'parent': 'null'}
-      }
-    };
-
-    // Set the actual children relationships you want to create
-    // for the embedded properties.
-    parser.setChildrenObjects(options)
-
-    axios
+    request
       .get(options.endpoint)
-      .then(data => {
-        let parsed = parser.parse(data.data),
+      .end((error, data) => {
+        if (error) {
+          console.log('error calling API : ' + error);
+          console.log('Attempted to call : ' + options.endpoint);
+        }
+
+        let parsed = parser.parse(data.body),
           modelData = Model.build(parsed);
 
         res.locals.data = {
@@ -41,12 +47,7 @@ router
           }
         };
         next();
-      })
-      .catch(error => {
-        console.log('error calling API : ' + error);
-        console.log('Attempted to call : ' + options.endpoint);
-        next();
-      }); /* end Axios call */
+      }); /* end request call */
   });
 
 router
@@ -55,39 +56,19 @@ router
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 
-    let options = {
-      endpoint: 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/site-data/' +
-        'header-items?filter[relationships][parent]=null&include=' +
-        'children,' +
-        'related-mega-menu-panes.current-mega-menu-item.images,' +
-        'related-mega-menu-panes.current-mega-menu-item.related-content.authors.nypl-location,' +
-        'related-mega-menu-panes.current-mega-menu-item.related-content.location',
-      includes: [
-        'children',
-        'related-mega-menu-panes.current-mega-menu-item.images',
-        'related-mega-menu-panes.current-mega-menu-item.related-content.authors.nypl-location',
-        'related-mega-menu-panes.current-mega-menu-item.related-content.location'],
-      filters: {
-        'relationships': {'parent': 'null'}
-      }
-    };
-
-    // Set the actual children relationships you want to create
-    // for the embedded properties.
-    parser.setChildrenObjects(options)
-
-    axios
+    request
       .get(options.endpoint)
-      .then(data => {
-        let parsed = parser.parse(data.data),
+      .end((error, data) => {
+        if (error) {
+          console.log('error calling API');
+          res.json({'error': 'error calling API'});
+        }
+
+        let parsed = parser.parse(data.body),
           modelData = Model.build(parsed);
 
         res.json(modelData);
-      })
-      .catch(error => {
-        console.log('error calling API');
-        res.json({'error': 'error calling API'});
-      }); /* end Axios call */
+      }); /* end request call */
   });
 
 export default router;
