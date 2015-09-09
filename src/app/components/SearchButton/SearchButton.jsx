@@ -1,6 +1,7 @@
 // Import React libraries
 import React from 'react';
 import cx from 'classnames';
+import Radium from 'radium';
 
 // Import components
 import BasicButton from '../Buttons/BasicButton.jsx';
@@ -28,12 +29,11 @@ class SearchButton extends React.Component {
     // Give active class if the button is activated
     let classes = cx({'--active': this.state.isActive});
   	return (
-      <div onMouseEnter={this._activate} 
-      onMouseLeave={this._deactivate}>
+      <div>
         <BasicButton id='NavMenu-TopLevelLinks__SearchButton'
         className={`icon-magnifier2 NavMenu-TopLevelLinks__SearchButton${classes}`}
         name='Search Button'
-        label='Search Box'
+        label=''
         style={styles.base} />
         <SearchBox id='NavMenu-SearchBox' className='NavMenu-SearchBox' isActive={this.state.isActive} />
       </div>
@@ -59,4 +59,4 @@ const styles = {
 };
 
 // Export the component
-export default SearchButton;
+export default Radium(SearchButton);

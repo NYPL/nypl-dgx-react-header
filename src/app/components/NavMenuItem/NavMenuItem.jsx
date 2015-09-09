@@ -1,13 +1,14 @@
 import React from 'react';
 import cx from 'classnames';
+
 import MegaMenu from '../MegaMenu/MegaMenu.jsx';
 
 class NavMenuItem extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
- 
-    this.state = {
+
+     this.state = {
       activeItem: null
     };
 
@@ -23,24 +24,24 @@ class NavMenuItem extends React.Component {
 
     return (
       <li
-        onMouseEnter={this._activate} 
-        onMouseLeave={this._deactivate}
-        className={(this.props.navId) ? 'NavMenuItem-'+this.props.navId : 'NavMenuItem'}>
-        <span 
-          className={classes}
-          id={(this.props.navId) ? 'NavMenuItem-Link-'+this.props.navId : 'NavMenuItem-Link'}>
-          <a href={target}>
-            {this.props.label[this.props.lang]}
-          </a>
-        </span>
-        <MegaMenu
-          label={this.props.label}
-          lang={this.props.lang}
-          items={this.props.subNav}
-          navId={this.props.navId}
-          features={this.props.features}
-          index={this.props.index}
-          currentActiveItem={this.state.activeItem} />
+      onMouseEnter={this._activate} 
+      onMouseLeave={this._deactivate}
+      className={(this.props.navId) ? 'NavMenuItem-'+this.props.navId : 'NavMenuItem'}>
+      <span 
+        className={classes}
+        id={(this.props.navId) ? 'NavMenuItem-Link-'+this.props.navId : 'NavMenuItem-Link'}>
+        <a href={target}>
+          {this.props.label[this.props.lang]}
+        </a>
+      </span>
+      <MegaMenu
+        label={this.props.label}
+        lang={this.props.lang}
+        items={this.props.subNav}
+        navId={this.props.navId}
+        features={this.props.features}
+        index={this.props.index}
+        currentActiveItem={this.state.activeItem} />
       </li>
     );
   }
