@@ -32,7 +32,7 @@ class NavMenu extends React.Component {
       });
 
     return (
-      <nav className='NavMenu'>
+      <nav className={this.props.className}>
         <span className='MobileLogoText icon-nypl-logo-type'></span>
         <ul className={classes}>
           {navMenu}
@@ -43,7 +43,8 @@ class NavMenu extends React.Component {
 }
 
 NavMenu.defaultProps = {
-  lang: 'en'
+  lang: 'en',
+  className: 'NavMenu'
 };
 
 export default Radium(NavMenu);

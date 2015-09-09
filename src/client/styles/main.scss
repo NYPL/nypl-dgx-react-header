@@ -3,799 +3,754 @@
 @import 'utils/globals';
 @import 'utils/viewports';
 
-/* NYPL HEADER RULES
- * -----------------
+/* NYPL HEADER
+ * -----------
  * -- Following BEM naming convention
- *
+ * -- Mobile First approach
 */
 #Header {
   width: 100%;
   background-color: white;
   @extend %clearfix;
 
-  /* Global rules for repetitive elements */
+  /* Global rules for repetitive link elements */
   a {
     text-decoration: none;
   }
 
-  .Header-Logo {
-  	display: none;
+  .Header {
 
-  	@include desktop {
-  		display: block;
-  	}
-  }
-
-  #Header-Buttons {
-  	width: 100%;
-  	top: 305px;
-  	border-top: 1px solid #CCC;
-  	z-index: 1;
-  	padding: 0;
-  	background-color: #2B2B2B;
-  	display: none;
-
-  	@include desktop {
-  		display: block;
-  		border: none;
-  		background-color: transparent;
-  		margin: 0;
-  		padding: 0;
-  		width: auto;
-	    top: 20px;
-	    right: 2px;
-	  }
-
-	  .SignInButton-Wrapper {
-	  	display: inline-table;
-	  	width: 48%;
-	  	@include desktop {
-	  		display: inline-block;
-	  		width: auto;
-	  	}
-	  }
-
-	  .SubscribeButton-Wrapper {
-	  	display: inline-table;
-	  	width: 48%;
-	  	@include desktop {
-	  		display: inline-block;
-	  		width: auto;
-	  	}
-	  	.SubscribeButton {
-	  		margin: 0;
-	  		color: #FFF;
-	  		text-align: center;
-
-	  		@include desktop {
-	  			margin: 0px 5px;
-	  			color: #000;
-	  		}
-	  	}
-	  }
-
-	  .DonateButton {
-	  	@extend %clearfix;
-	  	width: 100%;
-	  	display: block;
-	  	text-align: center;
-
-	  	@include desktop {
-	  		display: inline-block;
-	  		width: auto;
-	  	}
-	  }
-  }
-
-  .Header-Mobile {
-  	position: relative;
-  	display: block;
-  	height: 58px;
-  	text-align: right;
-
-  	&-Logo {
-  		position: absolute;
-  		left: 0;
-  		top: 0;
-  		font-size: 58px;
-  	}
-
-  	&-SearchButton {
-  		font-size: 30px;
-  		margin: 0;
-  		padding: 14px;
-  		display: inline-block;
-  		color: #000;
-
-  		&.icon-solo-x {
-  			background-color: #29A1D2;
-  			color: #FFF;
-  		}
-  	}
-
-  	&-MenuButton {
-  		font-size: 30px;
-  		margin: 0;
-  		padding: 14px;
-  		display: inline-block;
-
-  		&.icon-solo-x {
-  			background-color: #2B2B2B;
-  			color: #FFF;		
-  		}
-  	}
-
-  	/* Hide MobileHeader on Desktop and up */
-  	@include desktop {
-  		display: none;
-  	}
-  }
-
-  .Header-TopWrapper {
-  	//display: none;
-
-  	@include desktop {
-  		display: block;
-  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-  	}
-  }
-
-  .SubscribeButton, .DonateButton, .SignInButton {
-  	@include Kievit-Bold;
-  	font-size: 11px;
-  }
-
-  .SignInButton-Wrapper {
-  	.signIn-up-arrow {
-	  	@include up-arrow(#666666, 165px, 'top', -19px);	
-	  }
-
-	 	.LoginForm {
-	  	font-size: 9px;
-
-	  	a {
-	  		display: inline-block;
-	      padding: 7px 0;
-	      margin-top: 7px;
-	      color: #fff;
-	  	}
-
-			input[type=text], input[type=password] {
-				height: 32px;
-			}
-
-			input[type=text] {
-				width: 100%;
-			}
-
-			&-fields {
-				padding: 7px;
-				padding-bottom: 0;
-			}
-
-			&-text {
-				color: #fff;
-				padding: 0 7px;
-			}
-
-			&-longField {
-				width: 145px;
-				margin-right: 5px;
-				display: inline-block;
-			}
-
-			&-shortField {
-				width: 90px;
-				display: inline-block;
-				margin: 0 5px;
-
-				input {
-					width: 100%;
-				}
-			}
-	  }
-  }
-
-  .SSOLoggedInMenu {
-  	a {
-  		margin: 0px;
-	    padding: 0px;
-	    color: #000000;
-	    fontSize: 11px;
-	    float: none;
-	    width: 100px;
-	    textDecoration: none;
-  	}
-  }
-
-  .EmailSubscribeForm-Wrapper {
-  	&.up-arrow {
-  		@include up-arrow(#EEE, 212px, 'top', -19px);
-  	}
-  }
-
-  /* MAIN NAVIGATION */
-  .NavMenu {
-  	position: relative;
-  	display: block;
-
-  	.MobileLogoText {
-  		position: absolute;
-  		top: 20px;
-  		left: 15px;
-  		color: #FFF;
-  		font-size: 75px;
-
-  		@include desktop {
-  			display: none;
-  		}
-  	}
-
-  	/* <ul> list holding NavItems */
-	  &-List {
-	  	background-color: #2B2B2B;
-	  	padding: 10px 0;
-	  	margin: 0;
-	  	list-style-type: none;
-	  	text-align: right;
+  	/* DESKTOP HEADER WRAPPER
+  	 * ----------------------
+  	 * Sets the max-width on a desktop and up device.
+  	*/
+  	&-TopWrapper {
 	  	display: none;
 
-	  	&.mobileActive {
-  			display: block;
-  		}
-
 	  	@include desktop {
-	  		background-color: transparent;
 	  		display: block;
-	  		padding: 0;
-		  	margin: 0 auto;
-		  }
-
-	  	@include desktop {
 	  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
 	  	}
+  	}
 
-	  	/* Top level Link Rules */
-	  	& > li {
-	  		padding: 5px 0;
-	  		margin: 2.5px 12px 2.5px 0;
+  	/* TOP HEADER BUTTONS
+  	 * ------------------
+  	 * - Sign In
+  	 * - E-mail Subscription
+  	 * - Donate
+  	*/ 
+  	&-Buttons {
+
+			.SubscribeButton, .DonateButton, .SignInButton {
+				@include Kievit-Bold;
+				font-size: 11px;
+			}
+
+		  .SignInButton-Wrapper {
+
+		  	.signIn-up-arrow {
+			  	@include up-arrow(#666666, 165px, 'top', -19px);	
+			  }
+
+			 	.LoginForm {
+			  	font-size: 9px;
+
+			  	a {
+			  		display: inline-block;
+			      padding: 7px 0;
+			      margin-top: 7px;
+			      color: #fff;
+			  	}
+
+					input[type=text], input[type=password] {
+						height: 32px;
+					}
+
+					input[type=text] {
+						width: 100%;
+					}
+
+					&-fields {
+						padding: 7px;
+						padding-bottom: 0;
+					}
+
+					&-text {
+						color: #fff;
+						padding: 0 7px;
+					}
+
+					&-longField {
+						width: 145px;
+						margin-right: 5px;
+						display: inline-block;
+					}
+
+					&-shortField {
+						width: 90px;
+						display: inline-block;
+						margin: 0 5px;
+
+						input {
+							width: 100%;
+						}
+					}
+			  }
+
+			  .SSOLoggedInMenu {
+			  	a {
+			  		margin: 0px;
+				    padding: 0px;
+				    color: #000000;
+				    fontSize: 11px;
+				    float: none;
+				    width: 100px;
+				    textDecoration: none;
+			  	}
+			  }
+		  }
+
+		  .EmailSubscribeForm-Wrapper {
+		  	&.up-arrow {
+		  		@include up-arrow(#EEE, 212px, 'top', -19px);
+		  	}
+		  }
+  	}
+
+  	/* MOBILE HEADER
+  	 * -------------
+  	*/
+  	&-Mobile {
+	  	position: relative;
+	  	display: block;
+	  	height: 58px;
+	  	text-align: right;
+
+	  	&-Logo {
+	  		position: absolute;
+	  		left: 0;
+	  		top: 0;
+	  		font-size: 58px;
+	  	}
+
+	  	&-SearchButton {
+	  		font-size: 30px;
+	  		margin: 0;
+	  		padding: 14px;
+	  		display: inline-block;
+	  		color: #000;
+
+	  		&.icon-solo-x {
+	  			background-color: #29A1D2;
+	  			color: #FFF;
+	  		}
+	  	}
+
+	  	&-MenuButton {
+	  		font-size: 30px;
+	  		margin: 0;
+	  		padding: 14px;
+	  		display: inline-block;
+
+	  		&.icon-solo-x {
+	  			background-color: #2B2B2B;
+	  			color: #FFF;		
+	  		}
+	  	}
+
+	  	/* Hide MobileHeader on Desktop and up */
+	  	@include desktop {
+	  		display: none;
+	  	}
+  	}
+
+  	/* MAIN NAVIGATION
+  	 * ---------------
+  	 * - Includes MegaMenu's
+  	 * - Includes Logo text for mobile
+  	*/
+  	&-NavMenu {
+	  	position: relative;
+	  	display: block;
+
+	  	.MobileLogoText {
+	  		position: absolute;
+	  		top: 20px;
+	  		left: 15px;
+	  		color: #FFF;
+	  		font-size: 75px;
 
 	  		@include desktop {
-	  			padding: 0;
-	  			margin: 0;
-	  			display: inline;
+	  			display: none;
+	  		}
+	  	}
+
+	  	/* Main <ul> list holding all NavItems */
+		  .NavMenu-List {
+		  	background-color: #2B2B2B;
+		  	padding: 10px 0;
+		  	margin: 0;
+		  	list-style-type: none;
+		  	text-align: right;
+		  	display: none;
+
+		  	/* Dynamic class assignment for mobile */
+		  	&.mobileActive {
+	  			display: block;
 	  		}
 
-				& > span {
+		  	@include desktop {
+		  		background-color: transparent;
+		  		display: block;
+		  		padding: 0;
+			  	margin: 0 auto;
+			  	max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+			  }
+
+		  	/* Top level Link Rules */
+		  	& > li {
+		  		padding: 5px 0;
+		  		margin: 2.5px 15px 2.5px 0;
+
+		  		@include desktop {
+		  			padding: 0;
+		  			margin: 0;
+		  			display: inline;
+		  		}
+
+					& > span {
+			  		position: relative;
+			  		display: inline-block;
+			  		padding: 5px 8px;
+
+			  		a {
+			  			color: #FFF;
+			  			@include Kievit-Book;
+			  			font-size: 18px;
+
+			  			@include desktop {
+			  				color: #000;
+			  				font-size: 16px;
+			  			}
+			  		}
+			  	}
+		  	}
+
+		  	#NavMenuItem-Link {
+
+		  		/* Arrow Assignment for Desktop and up */
+		  		@include desktop {
+			  		/* BROWSE */
+			  		&-84330695-2ae3-a904-25c6-4149a2e55575 {
+				  		&.active {
+				  			@include up-arrow($BG_MENU_BROWSE_RIGHT, 33%, 'bottom', -10px, 12px);
+				  		}
+			  		}
+
+			  		/* LEARN */
+			  		&-b3a0321e-6785-5384-157e-baf0398dacdc {
+				  		&.active {
+				  			@include up-arrow($BG_MENU_LEARN_RIGHT, 33%, 'bottom', -10px, 12px);
+				  		}
+			  		}
+
+			  		/* ATTEND */
+			  		&-662abf31-7789-ce84-b537-1d324a379c95 {
+				  		&.active {
+				  			@include up-arrow($BG_MENU_ATTEND_RIGHT, 33%, 'bottom', -10px, 12px);
+				  		}
+			  		}
+
+			  		/* FIND US */
+			  		&-abb58f55-20e0-0d34-d1ae-45687cc4799d {
+				  		&.active {
+				  			@include up-arrow($BG_MENU_FINDUS_RIGHT, 33%, 'bottom', -10px, 12px);
+				  		}
+			  		}
+
+			  		/* RESEARCH */
+			  		&-aeb16807-40c0-8534-950f-bfdaf546be2e {
+				  		&.active {
+				  			@include up-arrow($BG_MENU_RESEARCH_RIGHT, 33%, 'bottom', -10px, 12px);
+				  		}
+			  		}
+
+			  		/* GIVE */
+			  		&-7638d892-1846-1484-2961-ad180e4194bf {
+				  		&.active {
+				  			@include up-arrow($BG_MENU_GIVE_RIGHT, 33%, 'bottom', -10px, 12px);
+				  		}
+			  		}
+
+				  	/* GET HELP */
+				  	&-cb464e38-b91a-2554-d1d5-64bc1c1d6283 {
+				  		&.active {
+				  			@include up-arrow($BG_MENU_HELP_RIGHT, 33%, 'bottom', -10px, 12px);
+				  		}  		
+				  	}
+				  }
+		  	}
+		  }
+
+		  /* Dynamic Background Color Assignments */
+		  #MegaMenu {
+
+		  	/* BROWSE */
+		  	&-84330695-2ae3-a904-25c6-4149a2e55575 {
+		  		background-color: $BG_MENU_BROWSE_RIGHT;
+
+		  		.MegaMenu {
+						&-LeftBgWrapper {
+							background-color: $BG_MENU_BROWSE_LEFT;
+						}
+						&-SubNavWrapper {
+		  				background-color: $BG_MENU_BROWSE_LEFT;
+						}
+						&-FeaturesWrapper {
+							background-color: $BG_MENU_BROWSE_RIGHT;
+						}
+		  		}
+		  	}
+
+		  	/* LEARN */
+		  	&-b3a0321e-6785-5384-157e-baf0398dacdc {
+		  		background-color: $BG_MENU_LEARN_RIGHT;
+
+		  		.MegaMenu {
+						&-LeftBgWrapper {
+							background-color: $BG_MENU_LEARN_LEFT;
+						}
+						&-SubNavWrapper {
+		  				background-color: $BG_MENU_LEARN_LEFT;
+						}
+						&-FeaturesWrapper {
+							background-color: $BG_MENU_LEARN_RIGHT;
+						}
+		  		}
+		  	}
+
+		  	/* ATTEND */
+		  	&-662abf31-7789-ce84-b537-1d324a379c95 {
+		  		background-color: $BG_MENU_ATTEND_RIGHT;
+
+		  		.MegaMenu {
+						&-LeftBgWrapper {
+							background-color: $BG_MENU_ATTEND_LEFT;
+						}
+						&-SubNavWrapper {
+		  				background-color: $BG_MENU_ATTEND_LEFT;
+						}
+						&-FeaturesWrapper {
+							background-color: $BG_MENU_ATTEND_RIGHT;
+						}
+		  		}	
+		  	}
+
+		  	/* FIND US */
+		  	&-abb58f55-20e0-0d34-d1ae-45687cc4799d {
+		  		background-color: $BG_MENU_FINDUS_RIGHT;
+
+		  		.MegaMenu {
+						&-LeftBgWrapper {
+							background-color: $BG_MENU_FINDUS_LEFT;
+						}
+						&-SubNavWrapper {
+		  				background-color: $BG_MENU_FINDUS_LEFT;
+						}
+						&-FeaturesWrapper {
+							background-color: $BG_MENU_FINDUS_RIGHT;
+						}
+		  		}
+		  	}
+
+		  	/* RESEARCH */
+		  	&-aeb16807-40c0-8534-950f-bfdaf546be2e {
+		  		background-color: $BG_MENU_RESEARCH_RIGHT;
+
+		  		.MegaMenu {
+						&-LeftBgWrapper {
+							background-color: $BG_MENU_RESEARCH_LEFT;
+						}
+						&-SubNavWrapper {
+		  				background-color: $BG_MENU_RESEARCH_LEFT;
+						}
+						&-FeaturesWrapper {
+							background-color: $BG_MENU_RESEARCH_RIGHT;
+						}
+		  		}
+		  	}
+
+		  	/* GIVE */
+		  	&-7638d892-1846-1484-2961-ad180e4194bf {
+		  		background-color: $BG_MENU_GIVE_RIGHT;
+
+		  		.MegaMenu {
+						&-LeftBgWrapper {
+							background-color: $BG_MENU_GIVE_LEFT;
+						}
+						&-SubNavWrapper {
+		  				background-color: $BG_MENU_GIVE_LEFT;
+						}
+						&-FeaturesWrapper {
+							background-color: $BG_MENU_GIVE_RIGHT;
+						}
+		  		}
+		  	}
+		  	/* GET HELP */
+		  	&-cb464e38-b91a-2554-d1d5-64bc1c1d6283 {
+		  		background-color: $BG_MENU_HELP_RIGHT;
+
+		  		.MegaMenu {
+						&-LeftBgWrapper {
+							background-color: $BG_MENU_HELP_LEFT;
+						}
+						&-SubNavWrapper {
+		  				background-color: $BG_MENU_HELP_LEFT;
+						}
+						&-FeaturesWrapper {
+							background-color: $BG_MENU_HELP_RIGHT;
+						}
+		  		}
+		  	}
+		  }
+
+		  .MegaMenu {
+		  	display: none;
+		  	color: #FFFFFF;
+		  	width: 100%;
+	  		position: absolute;
+		  	top: 34px;
+		  	left: 0;
+
+		  	/* Only display MegaMenu's on Desktop */
+		  	&.active {
+		  		@include desktop {
+		  			display: block;
+		  		}
+		  	}
+
+		  	&-LeftBgWrapper {
+					height: $MAIN_MENU_DESKTOP_HEIGHT;
+					width: 50%;
+					position: absolute;
+					left: 0;
+					z-index: 0;
+		  	}
+
+		  	&-Wrapper {
+		  		width: 100%;
+			  	display: block;
+			  	min-height: $MAIN_MENU_DESKTOP_HEIGHT;
+			  	margin: 0 auto;
+			  	max-width: 1312px;
+			  	z-index: 1;
+			  	position: relative;
+		  	}
+
+		  	&-SubNavWrapper {
 		  		position: relative;
-		  		display: inline-block;
-		  		padding: 5px 8px;
+		  		width: 345px;
+		  		float: left;
+		  		display: table-cell;
+		  		margin: 0;
+		  		padding: 0;
+		  		height: $MAIN_MENU_DESKTOP_HEIGHT;
+		  	}
+
+		  	&-SubNav {
+		  		height: 100%;
+		  		position: absolute;
+		  		right: 20px;
+		  		width: 220px;
+		  		text-align: left;
 
 		  		a {
-		  			color: #FFF;
-		  			@include Kievit-Book;
-		  			font-size: 18px;
+		  			color: #FFFFFF;
+		  		}
 
-		  			@include desktop {
-		  				color: #000;
-		  				font-size: 16px;
+		  		h2 {
+		  			color: #FFFFFF;
+		  			border-top: 2px solid #FFFFFF;
+		  			margin: 20px 0px;
+		  			padding: 10px 0 0 0;
+		  		}
+
+		  		ul {
+		  			margin: 0;
+		  			padding: 0;
+		  			list-style-type: none;
+
+		  			li {
+		  				&:first-child {
+		  					margin-top: 0px;
+		  				}
+		  				margin: 7px 0px;
+		  				display: block;
+		  				padding: 0;
+		  			}
+		  		}
+
+		  		&-SocialMediaWidget {
+		  			padding: 2px;
+		  			margin: 15px 0 0 0;
+
+		  			ul {
+		  				list-style-type: none;
+		  				margin: 0;
+		  				padding: 0;
+
+		  				li {
+		  					display: inline-block;
+		  					margin: 0 5px 0 0;
+
+		  					&:last-child {
+		  						margin-right: 0;
+		  					}
+
+		  					a {
+		  						text-decoration: none;
+		  						display: block;
+		  						font-size: 28px;
+		  					}
+		  				}
 		  			}
 		  		}
 		  	}
-	  	}
 
-	  	#NavMenuItem-Link {
-	  		@include desktop {
-		  		/* BROWSE */
-		  		&-84330695-2ae3-a904-25c6-4149a2e55575 {
-			  		&.active {
-			  			@include up-arrow($BG_MENU_BROWSE_RIGHT, 33%, 'bottom', -10px, 12px);
-			  		}
-		  		}
+		  	&-FeaturesWrapper {
+		  		display: table-cell;
+		  		margin: 0;
+		  		padding: 0;
+		  		height: $MAIN_MENU_DESKTOP_HEIGHT;
+		  		text-align: left;
+		  	}
 
-		  		/* LEARN */
-		  		&-b3a0321e-6785-5384-157e-baf0398dacdc {
-			  		&.active {
-			  			@include up-arrow($BG_MENU_LEARN_RIGHT, 33%, 'bottom', -10px, 12px);
-			  		}
-		  		}
+		  	&-Features {
+		  		display: block;
+		  		margin: 0;
+		  		width: 100%;
+		  	}
 
-		  		/* ATTEND */
-		  		&-662abf31-7789-ce84-b537-1d324a379c95 {
-			  		&.active {
-			  			@include up-arrow($BG_MENU_ATTEND_RIGHT, 33%, 'bottom', -10px, 12px);
-			  		}
-		  		}
+		  	&-FeatureItem {
+		  		display: inline-table;
+		  		width: 48%;
+		  		margin: 0 0 0 2%;
+		  		vertical-align: top;
+		  	}
+		  }
 
-		  		/* FIND US */
-		  		&-abb58f55-20e0-0d34-d1ae-45687cc4799d {
-			  		&.active {
-			  			@include up-arrow($BG_MENU_FINDUS_RIGHT, 33%, 'bottom', -10px, 12px);
-			  		}
-		  		}
+			.FeatureItem {
+				&-Image {
+					width: 88px;
+					height: 88px;
+					position: relative;
+					top: 75px;
+					margin: 0 10px 0 0;
 
-		  		/* RESEARCH */
-		  		&-aeb16807-40c0-8534-950f-bfdaf546be2e {
-			  		&.active {
-			  			@include up-arrow($BG_MENU_RESEARCH_RIGHT, 33%, 'bottom', -10px, 12px);
-			  		}
-		  		}
-
-		  		/* GIVE */
-		  		&-7638d892-1846-1484-2961-ad180e4194bf {
-			  		&.active {
-			  			@include up-arrow($BG_MENU_GIVE_RIGHT, 33%, 'bottom', -10px, 12px);
-			  		}
-		  		}
-
-			  	/* GET HELP */
-			  	&-cb464e38-b91a-2554-d1d5-64bc1c1d6283 {
-			  		&.active {
-			  			@include up-arrow($BG_MENU_HELP_RIGHT, 33%, 'bottom', -10px, 12px);
-			  		}  		
-			  	}
-			  }
-	  	}
-	  }
-
-	  /* Dynamic Background Color Assignments */
-	  #MegaMenu {
-	  	/* BROWSE */
-	  	&-84330695-2ae3-a904-25c6-4149a2e55575 {
-	  		background-color: $BG_MENU_BROWSE_RIGHT;
-
-	  		.MegaMenu {
-					&-LeftBgWrapper {
-						background-color: $BG_MENU_BROWSE_LEFT;
-					}
-					&-SubNavWrapper {
-	  				background-color: $BG_MENU_BROWSE_LEFT;
-					}
-					&-FeaturesWrapper {
-						background-color: $BG_MENU_BROWSE_RIGHT;
-					}
-	  		}
-	  	}
-
-	  	/* LEARN */
-	  	&-b3a0321e-6785-5384-157e-baf0398dacdc {
-	  		background-color: $BG_MENU_LEARN_RIGHT;
-
-	  		.MegaMenu {
-					&-LeftBgWrapper {
-						background-color: $BG_MENU_LEARN_LEFT;
-					}
-					&-SubNavWrapper {
-	  				background-color: $BG_MENU_LEARN_LEFT;
-					}
-					&-FeaturesWrapper {
-						background-color: $BG_MENU_LEARN_RIGHT;
-					}
-	  		}
-	  	}
-
-	  	/* ATTEND */
-	  	&-662abf31-7789-ce84-b537-1d324a379c95 {
-	  		background-color: $BG_MENU_ATTEND_RIGHT;
-
-	  		.MegaMenu {
-					&-LeftBgWrapper {
-						background-color: $BG_MENU_ATTEND_LEFT;
-					}
-					&-SubNavWrapper {
-	  				background-color: $BG_MENU_ATTEND_LEFT;
-					}
-					&-FeaturesWrapper {
-						background-color: $BG_MENU_ATTEND_RIGHT;
-					}
-	  		}	
-	  	}
-
-	  	/* FIND US */
-	  	&-abb58f55-20e0-0d34-d1ae-45687cc4799d {
-	  		background-color: $BG_MENU_FINDUS_RIGHT;
-
-	  		.MegaMenu {
-					&-LeftBgWrapper {
-						background-color: $BG_MENU_FINDUS_LEFT;
-					}
-					&-SubNavWrapper {
-	  				background-color: $BG_MENU_FINDUS_LEFT;
-					}
-					&-FeaturesWrapper {
-						background-color: $BG_MENU_FINDUS_RIGHT;
-					}
-	  		}
-	  	}
-
-	  	/* RESEARCH */
-	  	&-aeb16807-40c0-8534-950f-bfdaf546be2e {
-	  		background-color: $BG_MENU_RESEARCH_RIGHT;
-
-	  		.MegaMenu {
-					&-LeftBgWrapper {
-						background-color: $BG_MENU_RESEARCH_LEFT;
-					}
-					&-SubNavWrapper {
-	  				background-color: $BG_MENU_RESEARCH_LEFT;
-					}
-					&-FeaturesWrapper {
-						background-color: $BG_MENU_RESEARCH_RIGHT;
-					}
-	  		}
-	  	}
-
-	  	/* GIVE */
-	  	&-7638d892-1846-1484-2961-ad180e4194bf {
-	  		background-color: $BG_MENU_GIVE_RIGHT;
-
-	  		.MegaMenu {
-					&-LeftBgWrapper {
-						background-color: $BG_MENU_GIVE_LEFT;
-					}
-					&-SubNavWrapper {
-	  				background-color: $BG_MENU_GIVE_LEFT;
-					}
-					&-FeaturesWrapper {
-						background-color: $BG_MENU_GIVE_RIGHT;
-					}
-	  		}
-	  	}
-	  	/* GET HELP */
-	  	&-cb464e38-b91a-2554-d1d5-64bc1c1d6283 {
-	  		background-color: $BG_MENU_HELP_RIGHT;
-
-	  		.MegaMenu {
-					&-LeftBgWrapper {
-						background-color: $BG_MENU_HELP_LEFT;
-					}
-					&-SubNavWrapper {
-	  				background-color: $BG_MENU_HELP_LEFT;
-					}
-					&-FeaturesWrapper {
-						background-color: $BG_MENU_HELP_RIGHT;
-					}
-	  		}
-	  	}
-	  }
-
-	  .MegaMenu {
-	  	display: none;
-	  	color: #FFFFFF;
-	  	width: 100%;
-  		position: absolute;
-	  	top: 34px;
-	  	left: 0;
-
-	  	/* Only display MegaMenu's on Desktop */
-	  	&.active {
-	  		@include desktop {
-	  			display: block;
-	  		}
-	  	}
-
-	  	&-LeftBgWrapper {
-				height: $MAIN_MENU_DESKTOP_HEIGHT;
-				width: 50%;
-				position: absolute;
-				left: 0;
-				z-index: 0;
-	  	}
-
-	  	&-Wrapper {
-	  		width: 100%;
-		  	display: block;
-		  	min-height: $MAIN_MENU_DESKTOP_HEIGHT;
-		  	margin: 0 auto;
-		  	max-width: 1312px;
-		  	z-index: 1;
-		  	position: relative;
-	  	}
-
-	  	&-SubNavWrapper {
-	  		position: relative;
-	  		width: 345px;
-	  		float: left;
-	  		display: table-cell;
-	  		margin: 0;
-	  		padding: 0;
-	  		height: $MAIN_MENU_DESKTOP_HEIGHT;
-	  	}
-
-	  	&-SubNav {
-	  		height: 100%;
-	  		position: absolute;
-	  		right: 20px;
-	  		width: 220px;
-	  		text-align: left;
-
-	  		a {
-	  			color: #FFFFFF;
-	  		}
-
-	  		h2 {
-	  			color: #FFFFFF;
-	  			border-top: 2px solid #FFFFFF;
-	  			margin: 20px 0px;
-	  			padding: 10px 0 0 0;
-	  		}
-
-	  		ul {
-	  			margin: 0;
-	  			padding: 0;
-	  			list-style-type: none;
-
-	  			li {
-	  				&:first-child {
-	  					margin-top: 0px;
-	  				}
-	  				margin: 7px 0px;
-	  				display: block;
-	  				padding: 0;
-	  			}
-	  		}
-
-	  		&-SocialMediaWidget {
-	  			padding: 2px;
-	  			margin: 15px 0 0 0;
-
-	  			ul {
-	  				list-style-type: none;
-	  				margin: 0;
-	  				padding: 0;
-
-	  				li {
-	  					display: inline-block;
-	  					margin: 0 5px 0 0;
-
-	  					&:last-child {
-	  						margin-right: 0;
-	  					}
-
-	  					a {
-	  						text-decoration: none;
-	  						display: block;
-	  						font-size: 28px;
-	  					}
-	  				}
-	  			}
-	  		}
-	  	}
-
-	  	&-FeaturesWrapper {
-	  		display: table-cell;
-	  		margin: 0;
-	  		padding: 0;
-	  		height: $MAIN_MENU_DESKTOP_HEIGHT;
-	  		text-align: left;
-	  	}
-
-	  	&-Features {
-	  		display: block;
-	  		margin: 0;
-	  		width: 100%;
-	  	}
-
-	  	&-FeatureItem {
-	  		display: inline-table;
-	  		width: 48%;
-	  		margin: 0 0 0 2%;
-	  		vertical-align: top;
-	  	}
-	  }
-
-		.FeatureItem {
-			&-Image {
-				width: 88px;
-				height: 88px;
-				position: relative;
-				top: 75px;
-				margin: 0 10px 0 0;
-
-				img {
-					border-radius: 50%;
-				}
-			}
-
-			&-Content {
-				color: #FFFFFF;
-				display: table-cell;
-				vertical-align: top;
-				position: relative;
-				top: 50px;
-
-				&-Tag {
-					@include Kievit-Medium;
-					text-transform: uppercase;
-				}
-				&-Title {
-					@include Milo-Regular;
-					line-height: 1.25em;
-					margin: .75em 0;
-				}
-
-				&-Desc {
-					@include Kievit-Regular;
-				}
-			}
-		}
-
-  	/* FIND US WIDGET
-  	 * --------------
-  	 * Specific SASS rules for
-  	 * this widget within the Header.
-  	*/ 
-  	.FindUsWidget {
-  		&-LocationFinder {
-  			display: inline-table;
-				width: 46%;
-				margin: 0 2% 0 2%;
-				vertical-align: top;
-
-  			&-Wrapper {
-  				color: #FFFFFF;
-  				display: table-cell;
-  				vertical-align: top;
-  				position: relative;
-  				top: 60px;
-  			}
-
-  			&-Tag {
-					@include Kievit-Medium;
-					text-transform: uppercase;
-				}
-
-  			&-IntroText {
-					display: block;
-					margin: 1em 0;
-					@include Milo-Regular;
-					line-height: 1.25em;
-					font-size: 18px;
-					max-width: 65%;
-				}
-
-				&-SearchBox {
-					display: block;
-					margin: 10px 0 0 0;
-				}
-
-				#LocationFinder {
-					&-Input {
-						display: table-cell;
-						border: none;
-						height: 40px;
-						width: 65%;
-						padding: 2px 5px;
-						font-size: 15px;
-						color: #000;
-					}
-					&-Submit {
-						display: table-cell;
-						border: none;
-						padding: 0px 15px;
-						margin: 0px;
-						height: 44px;
-						background-color: $BG_MENU_SEARCH;
-						width: auto;
-						vertical-align: top;
-						font-size: 15px;
+					img {
+						border-radius: 50%;
 					}
 				}
-			}
 
-			&-SeparationBar {
-  			display: inline-table;
-  			position: relative;
-  			top: 25px;
-  			height: 200px;
-  			border-right: 1px solid #FFF;
-  		}
-
-  		&-FeaturedLocation {
-  			display: inline-table;
-				width: 47%;
-				margin: 0 0 0 2%;
-				vertical-align: top;
-
-  			&-Image {
-  				width: 88px;
-  				height: 88px;
-  				position: relative;
-  				top: 80px;
-  				margin: 0 10px 0 0;
-
-  				img {
-  					border-radius: 50%;
-  				}
-  			}
-
-  			&-Content {
-  				color: #FFFFFF;
-  				display: table-cell;
-  				vertical-align: top;
-  				position: relative;
-  				top: 60px;
-
-  				&-Tag {
-  					@include Kievit-Medium;
-  					text-transform: uppercase;
-  				}
-
-  				&-Title {
-  					@include Milo-Regular;
-  					line-height: 1.25em;
-  					margin: .75em 0;
-  				}
-
-  				&-Desc {
-  					@include Kievit-Regular;
-  				}
-  			}
-  		}
-  	}
-
-  	.DonateWidget {
-  		&-DonateBox {
-				display: inline-table;
-				width: 46%;
-				margin: 0 2% 0 2%;
-				vertical-align: top;
-				color: #FFF;
-
-				&-Wrapper {
+				&-Content {
+					color: #FFFFFF;
+					display: table-cell;
+					vertical-align: top;
 					position: relative;
 					top: 50px;
+
+					&-Tag {
+						@include Kievit-Medium;
+						text-transform: uppercase;
+					}
+					&-Title {
+						@include Milo-Regular;
+						line-height: 1.25em;
+						margin: .75em 0;
+					}
+
+					&-Desc {
+						@include Kievit-Regular;
+					}
 				}
+			}
 
-				&-Tag {
-					@include Kievit-Medium;
-					text-transform: uppercase;
-				}
+	  	/* FIND US WIDGET
+	  	 * --------------
+	  	 * Specific SASS rules for
+	  	 * this widget within the Header.
+	  	*/ 
+	  	.FindUsWidget {
+	  		&-LocationFinder {
+	  			display: inline-table;
+					width: 46%;
+					margin: 0 2% 0 2%;
+					vertical-align: top;
 
-				&-Title {
-					@include Milo-Regular;
-					line-height: 1.25em;
-					margin: .75em 0;
-				}
+	  			&-Wrapper {
+	  				color: #FFFFFF;
+	  				display: table-cell;
+	  				vertical-align: top;
+	  				position: relative;
+	  				top: 60px;
+	  			}
 
-				&-Desc {
-					@include Kievit-Regular;
-				}
+	  			&-Tag {
+						@include Kievit-Medium;
+						text-transform: uppercase;
+					}
 
-				&-DonationLinks {
-					list-style-type: none;
-					display: block;
-					margin: 1em 0;
-					padding: 0;
+	  			&-IntroText {
+						display: block;
+						margin: 1em 0;
+						@include Milo-Regular;
+						line-height: 1.25em;
+						font-size: 18px;
+						max-width: 65%;
+					}
 
-					li {
-						display: inline-block;
-						margin: 0 15px 0 0;
+					&-SearchBox {
+						display: block;
+						margin: 10px 0 0 0;
+					}
 
-						&:last-child {
-							margin-right: 0px
+					#LocationFinder {
+						&-Input {
+							display: table-cell;
+							border: none;
+							height: 40px;
+							width: 65%;
+							padding: 2px 5px;
+							font-size: 15px;
+							color: #000;
 						}
-
-						a {
-							color: #FFF;
-							display: block;
-							font-size: 18px;
-							padding: 15px 20px;
-							margin: 0;
-							border: 2px solid #FFF;
-							border-radius: 5px;
+						&-Submit {
+							display: table-cell;
+							border: none;
+							padding: 0px 15px;
+							margin: 0px;
+							height: 44px;
+							background-color: $BG_MENU_SEARCH;
+							width: auto;
+							vertical-align: top;
+							font-size: 15px;
 						}
 					}
 				}
-  		}
 
-  		&-FeatureItem {
-				display: inline-table;
-				width: 48%;
-				margin: 0 0 0 2%;
-				vertical-align: top;
+				&-SeparationBar {
+	  			display: inline-table;
+	  			position: relative;
+	  			top: 25px;
+	  			height: 200px;
+	  			border-right: 1px solid #FFF;
+	  		}
+
+	  		&-FeaturedLocation {
+	  			display: inline-table;
+					width: 47%;
+					margin: 0 0 0 2%;
+					vertical-align: top;
+
+	  			&-Image {
+	  				width: 88px;
+	  				height: 88px;
+	  				position: relative;
+	  				top: 80px;
+	  				margin: 0 10px 0 0;
+
+	  				img {
+	  					border-radius: 50%;
+	  				}
+	  			}
+
+	  			&-Content {
+	  				color: #FFFFFF;
+	  				display: table-cell;
+	  				vertical-align: top;
+	  				position: relative;
+	  				top: 60px;
+
+	  				&-Tag {
+	  					@include Kievit-Medium;
+	  					text-transform: uppercase;
+	  				}
+
+	  				&-Title {
+	  					@include Milo-Regular;
+	  					line-height: 1.25em;
+	  					margin: .75em 0;
+	  				}
+
+	  				&-Desc {
+	  					@include Kievit-Regular;
+	  				}
+	  			}
+	  		}
+	  	}
+
+	  	.DonateWidget {
+	  		&-DonateBox {
+					display: inline-table;
+					width: 46%;
+					margin: 0 2% 0 2%;
+					vertical-align: top;
+					color: #FFF;
+
+					&-Wrapper {
+						position: relative;
+						top: 50px;
+					}
+
+					&-Tag {
+						@include Kievit-Medium;
+						text-transform: uppercase;
+					}
+
+					&-Title {
+						@include Milo-Regular;
+						line-height: 1.25em;
+						margin: .75em 0;
+					}
+
+					&-Desc {
+						@include Kievit-Regular;
+					}
+
+					&-DonationLinks {
+						list-style-type: none;
+						display: block;
+						margin: 1em 0;
+						padding: 0;
+
+						li {
+							display: inline-block;
+							margin: 0 15px 0 0;
+
+							&:last-child {
+								margin-right: 0px
+							}
+
+							a {
+								color: #FFF;
+								display: block;
+								font-size: 18px;
+								padding: 15px 20px;
+								margin: 0;
+								border: 2px solid #FFF;
+								border-radius: 5px;
+							}
+						}
+					}
+	  		}
+
+	  		&-FeatureItem {
+					display: inline-table;
+					width: 48%;
+					margin: 0 0 0 2%;
+					vertical-align: top;
+				}
 			}
-		}
-
+  	}
   }
 }
