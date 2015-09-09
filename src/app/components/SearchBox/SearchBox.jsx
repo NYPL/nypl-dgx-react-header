@@ -32,7 +32,7 @@ class SearchBox extends React.Component {
   render() {
     // Give active class if the button is activated
     // let classes = cx({'--active': this.props.isActive}),
-    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'mobileSearch' || 'search'});
+    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'mobileSearch' || HeaderStore._getMobileMenuBtnValue() ==='search'});
     
     return (
       <div id={this.props.id} 
