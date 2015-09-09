@@ -45,16 +45,20 @@ class SearchButton extends React.Component {
 		);
   }
 
-  // Set the function to active search box when the button is clicked
+  // Set the function to active searchbox when the button is hovered
   _activate() {
-    Actions.setMobileMenuButtonValue('search');
+    // If in mobile version the onMouseEnter and onMouseLeave don't work
+    if (HeaderStore._getMobileMenuBtnValue() !== 'mobileSearch') {
+      Actions.setMobileMenuButtonValue('search');
+    }
   }
 
   _deactivate() {
-    if (HeaderStore._getMobileMenuBtnValue() === 'mobileSearch'){
-    Actions.setMobileMenuButtonValue('mobileSearch');
-    } else {
+    // _deactive function only works when it is on desktop version
+    if (window.innerWidth > '1024') {
       Actions.setMobileMenuButtonValue('');
+    } else {
+      Actions.setMobileMenuButtonValue('mobileSearch');
     }
   }
 }
