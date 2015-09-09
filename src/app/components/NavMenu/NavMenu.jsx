@@ -35,11 +35,13 @@ class NavMenu extends React.Component {
 
     return (
       <nav className='NavMenu'>
-        <span className='MobileLogoText icon-nypl-logo-type'></span>
-        <ul className={classes}>
-          {navMenu}
-        </ul>
-        <SearchButton />
+        <div className='NavMenu-Wrapper'>
+          <span className='MobileLogoText icon-nypl-logo-type'></span>
+          <ul className={classes}>
+            {navMenu}
+          </ul>
+          <SearchButton />
+        </div>
       </nav>
     );
   }

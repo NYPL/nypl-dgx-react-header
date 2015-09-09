@@ -225,16 +225,26 @@
   		left: 15px;
   		color: #FFF;
   		font-size: 75px;
-
-  		@include desktop {
-  			display: none;
-  		}
+			@include desktop {
+				display: none;
+			}
   	}
 
   	/* <ul> list holding NavItems */
+  	&-Wrapper {
+  		@include desktop {
+	  		background-color: transparent;
+	  		display: block;
+	  		padding: 0;
+		  	margin: 0 auto;
+	  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+	  		text-align: right;
+	  	}
+  	}
+
 	  &-List {
 	  	background-color: #2B2B2B;
-	  	padding: 10px 0;
+	  	padding: 0;
 	  	margin: 0;
 	  	list-style-type: none;
 	  	text-align: right;
@@ -244,16 +254,12 @@
   			display: block;
   		}
 
-	  	@include desktop {
-	  		background-color: transparent;
-	  		display: block;
-	  		padding: 0;
-		  	margin: 0 auto;
-		  }
+  		@include desktop {
+  			display: inline-block;
+  			background-color: transparent;
+  		}
 
-	  	@include desktop {
-	  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-	  	}
+	  	
 
 	  	/* Top level Link Rules */
 	  	& > li {
@@ -796,37 +802,41 @@
 				vertical-align: top;
 			}
 		}
+  }
 
+	/* The Wrapper for putting in the icon for search button and search box */
+  .NavMenu-TopLevelLinks__SearchBox-Wrapper {
+  	display: inline-block;
+  	.icon-magnifier2 {
+	    -webkit-appearance: none;
+  		background-color: transparent;
+  		border-width: 0px;
+	  	display: none;
+	  	font-size: 24px;
+	  	@include desktop {
+	  		display: block;
+	  	}
+	  	&:before {
+		  	vertical-align: sub;
+	  	}
+		}
   }
 
   /* CSS for Search button */
-   .NavMenu-TopLevelLinks-SearchButton {
+  .NavMenu-TopLevelLinks-SearchButton {
+  	color: #000000;
   	display: none;
+    font-size: 30px;
   	@include desktop {
-	    -webkit-appearance: none;
-	    background-color: transparent;
-	  	color: #000000;
 	  	display: block;
-	    font-size: 30px;
-	    border-width: 0;
 	  	&:hover {
 	  		color: $BG_MENU_SEARCH;
 	  	}
   	}
   }
 
-    .NavMenu-TopLevelLinks__SearchButton-Wrapper {
-    	.icon-magnifier2 {
-		  	display: none;
-		  	font-size: 30px;
-		  	@include desktop {
-		  		display: block;
-		  	}
-		}
-  }
-
   .NavMenu-TopLevelLinks-SearchButton--active {
-	display: none;
+		display: none;
   	@include desktop {
 	    -webkit-appearance: none;
 	    background-color: transparent;
@@ -841,35 +851,45 @@
   }
 
   /* CSS for Search box. It shows only activated. Default is not displayed. */
-  .NavMenu-SearchBox--active {
-	background-color: $BG_MENU_SEARCH; 
-	color: #000000;
-	display: block;
-	height: 200px;
-	margin: 0;
-	position: relative;
-  	width: 100%;
-  	z-index: 300;
-  	@include desktop {
-		margin: 6px 0 0 0;
-  	}
-  }
-
   .NavMenu-SearchBox {
 		display: none;
   }
 
+  .NavMenu-SearchBox--active {
+		background-color: $BG_MENU_SEARCH; 
+		color: #000000;
+		display: block;
+		height: 200px;
+		margin: 0;
+		position: relative;
+  	width: 100%;
+  	z-index: 300;
+  	@include desktop {
+			margin: 6px 0 0 0;
+  	}
+  }
+
+	/* The wrapper for all elements in SearchBox */
   .NavMenu-SearchBox-Elements-Wrapper {
   	margin: 20px 5% 0 5%;
     display: inline-block;
     width: 100%;
   	@include desktop {
-		margin: 55px 10% 0 10%;
+			margin: 55px 10% 0 10%;
 	    display: inline-block;
 	    width: 80%;
-	}
+		}
+		.icon-circle-magnifier {
+			color: #FFFFFF;
+			display: none;
+			font-size: 60px;
+			@include desktop {
+				display: block;	  
+			}
+		}
   }
 
+	/* The wrapper for input fields */
   .NavMenu-SearchBox-Elements-Input-Wrapper { 
     display: inline-block;
     position: relative;
@@ -879,8 +899,8 @@
   .NavMenu-SearchBox-Elements-Input-Keywords-Wrapper {
 		display: block;
 		margin: 0;
-	    position: relative;
-    	.icon-magnifier2 {
+    position: relative;
+  	.icon-magnifier2 {
 			background-color: #FFFFFF;
 			color: $BG_MENU_SEARCH;
 			display: inline-block;
@@ -899,16 +919,16 @@
 	.NavMenu-SearchBox-Input-Keywords {
 		background-color: #FFFFFF;
 		border-width: 1px;
-	    border-top: none;
-	    border-left: none;
-	    border-right: none;
-	    border-bottom: solid;
-	    border-color: #FFFFFF;
-	    color: #000000;
-	    display: inline-block;
-	    font-size: 16px;
-	    padding: 0 0 0 32px;
-	    width: 88%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid;
+    border-color: #FFFFFF;
+    color: #000000;
+    display: inline-block;
+    font-size: 16px;
+    padding: 0 0 0 32px;
+    width: 88%;
 		height: 60px;
 		@include desktop {
 			background-color: #1DA1D4;
@@ -940,12 +960,13 @@
 		display: none;
 		@include desktop {
 			display: block;
-		    float: right;
-		    height: 60px;
-		    margin: 0 0 10% 0;
+	    float: right;
+	    height: 60px;
+	    margin: 0 0 10% 0;
 		}
 	}
 
+	/* Submit buttons with search options on mobile version */
 	.NavMenu-SearchBox-Mobile-Submit {
 		color: #FFFFFF;
 		font-size: 16px;
@@ -966,15 +987,6 @@
 			font-size: 30px;
 			position: absolute;
 			top: 94px;
-		}
-	}
-
-	.icon-circle-magnifier {
-		color: #FFFFFF;
-		display: none;
-		font-size: 60px;
-		@include desktop {
-			display: block;	  
 		}
 	}
 }
