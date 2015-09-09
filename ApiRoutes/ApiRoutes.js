@@ -1,6 +1,5 @@
 import express from 'express';
 import axios from 'axios';
-import request from 'superagent';
 import parser from 'jsonapi-parserinator';
 import Model from '../src/app/utils/HeaderItemModel.js';
 
@@ -30,15 +29,10 @@ parser.setChildrenObjects(options)
 router
   .route('/')
   .get((req, res, next) => {
-    request
+    axios
       .get(options.endpoint)
-      .end((error, data) => {
-        if (error) {
-          console.log('error calling API : ' + error);
-          console.log('Attempted to call : ' + options.endpoint);
-        }
-
-        let parsed = parser.parse(data.body),
+      .then(data => {
+        let parsed = parser.parse(data.data),
           modelData = Model.build(parsed);
 
         res.locals.data = {
@@ -47,7 +41,12 @@ router
           }
         };
         next();
-      }); /* end request call */
+      })
+      .catch(error => {
+        console.log('error calling API : ' + error);
+        console.log('Attempted to call : ' + options.endpoint);
+        next();
+      }); /* end Axios call */
   });
 
 router
@@ -56,19 +55,18 @@ router
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 
-    request
+    axios
       .get(options.endpoint)
-      .end((error, data) => {
-        if (error) {
-          console.log('error calling API');
-          res.json({'error': 'error calling API'});
-        }
-
-        let parsed = parser.parse(data.body),
+      .then(data => {
+        let parsed = parser.parse(data.data),
           modelData = Model.build(parsed);
 
         res.json(modelData);
-      }); /* end request call */
+      })
+      .catch(error => {
+        console.log('error calling API');
+        res.json({'error': 'error calling API'});
+      }); /* end Axios call */
   });
 
 export default router;
