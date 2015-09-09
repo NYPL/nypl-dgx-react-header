@@ -10,7 +10,7 @@ class BasicButton extends React.Component {
 
   render () {
     return (
-      <div
+      <button
       ref='BasicButton'
       id={this.props.id}
       className={this.props.className}
@@ -23,7 +23,7 @@ class BasicButton extends React.Component {
         this.props.style
       ]}>
         {this.props.label}
-      </div>
+      </button>
     );
   }
 };

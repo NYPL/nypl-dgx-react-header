@@ -25,13 +25,12 @@ class SearchBox extends React.Component {
     this._searchOptionChange = this._searchOptionChange.bind(this);
     // The function send search requests
     this._submitSearchRequest = this._submitSearchRequest.bind(this);
-    this._submitMobileSearchRequest = this._submitMobileSearchRequest.bind(this);
+    // this._submitMobileSearchRequest = this._submitMobileSearchRequest.bind(this);
   }
 
   // Dom Render Section
   render() {
-    // Give active class if the button is activated
-    // let classes = cx({'--active': this.props.isActive}),
+    // Set active class if search button is hovered on desktop version or clicked on mobile version
     let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'mobileSearch' || HeaderStore._getMobileMenuBtnValue() ==='search'});
     
     return (
@@ -68,21 +67,24 @@ class SearchBox extends React.Component {
               </div>
             </div>
           </div>
+
           <div className={`${this.props.className}-mobile-submit`}>
             <div className={`${this.props.className}-mobile-submit-option`}
-            onClick={this._submitMobileSearchRequest}>
+            value='catalog'
+            onClick={this._submitMobileSearchRequest.bind(this, 'catalog')}>
               catalog
               <span className='icon-circle-right-wedge'></span>
             </div>
             <div className={`${this.props.className}-mobile-submit-option`}
-            onClick={this._submitMobileSearchRequest}>
+            value='website'
+            onClick={this._submitMobileSearchRequest.bind(this, 'website')}>
               nypl.org
               <span className='icon-circle-right-wedge'></span>
             </div>
           </div>
-            <div  
-            className={`icon-circle-magnifier ${this.props.className}-Elements-SubmitButton`} 
-            onClick={this._submitSearchRequest} />
+          <div className={`icon-circle-magnifier ${this.props.className}-Elements-SubmitButton`} 
+          onClick={this._submitSearchRequest}>
+          </div>
         </div>
       </div>
     );
@@ -101,49 +103,40 @@ class SearchBox extends React.Component {
   // The function to generate a http request after click the search button
   _submitSearchRequest (e) {
     e.preventDefault();
-    
     // Grab the values the user has entered as the parameters for URL
     let requestParameters = {
       keywords: encodeURIComponent(this.state.searchKeywords.trim()),
       option: this.state.searchOption
     }
-    
     // The vairable for request URL
     let requestUrl;
-
     // Decide the search option
     if (requestParameters.option === 'catalog') {
       requestUrl = `https://nypl.bibliocommons.com/search?t=smart&q=${requestParameters.keywords}&commit=Search&searchOpt=catalogue`;
     }  else if (requestParameters.option === 'website') {
       requestUrl = `http://www.nypl.org/search/apachesolr_search/${requestParameters.keywords}`;
     }
-
     // Go to the search page
     window.location.assign(requestUrl);
   }
 
-  _submitMobileSearchRequest (parameter) {
-    // e.preventDefault();
-    
+  _submitMobileSearchRequest (value) {    
     // Grab the values the user has entered as the parameters for URL
+    // Go to different options as clicking different buttons
     let requestParameters = {
       keywords: encodeURIComponent(this.state.searchKeywords.trim()),
-      option: parameter
+      option: value
     }
-    
     // The vairable for request URL
     let requestUrl;
-
     // Decide the search option
     if (requestParameters.option === 'catalog') {
       requestUrl = `https://nypl.bibliocommons.com/search?t=smart&q=${requestParameters.keywords}&commit=Search&searchOpt=catalogue`;
     }  else if (requestParameters.option === 'website') {
       requestUrl = `http://www.nypl.org/search/apachesolr_search/${requestParameters.keywords}`;
     }
-
     // Go to the search page
     window.location.assign(requestUrl);
-   // console.log(requestUrl);
   }
 }
 
