@@ -11,17 +11,19 @@ class MegaMenuFeatures extends React.Component {
   }
 
   render() {
-    let currentFeatureItem;
+    let currentFeatureItem,
+      // The specific header items for Find Us and Give only have one feature.
+      widgetFeature = this.props.features[0].featuredItem;
 
     // Donate Widget
-    if (this.props.navId === '7638d892-1846-1484-2961-ad180e4194bf') {
-      currentFeatureItem = <DonateWidget navId={this.props.navId} features={this.props.features} />;
-    } else if (this.props.navId === 'abb58f55-20e0-0d34-d1ae-45687cc4799d') {
-      currentFeatureItem = <FindUsWidget navId={this.props.navId} features={this.props.features} />;
+    if (this.props.navId === '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1') {
+      currentFeatureItem = <DonateWidget navId={this.props.navId} featuredItem={widgetFeature} />;
+    } else if (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') {
+      currentFeatureItem = <FindUsWidget navId={this.props.navId} featuredItem={widgetFeature} />;
     } else {
-      currentFeatureItem = this.props.features.map((m, i) => {
+      currentFeatureItem = this.props.features.map((item, i) => {
         return (
-          <MegaMenuFeatureItem key={i} feature={m} />
+          <MegaMenuFeatureItem key={i} feature={item.featuredItem} />
         );
       });
     }

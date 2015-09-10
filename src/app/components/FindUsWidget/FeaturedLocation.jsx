@@ -14,11 +14,11 @@ class FeaturedLocation extends React.Component {
 
     return (
       <div className={this.props.className}>
-        <div className={this.props.className +'-Image ' + classes}>
+        <div className={this.props.className +'-Image FeatureItem-Image ' + classes}>
           {img}
         </div>
         <div className={this.props.className +'-Content ' + classes}>
-          <div className={this.props.className +'-Content-Tag'}>{this.props.tag}</div>
+          <div className={this.props.className +'-Content-Tag'}>{this.props.category}</div>
           <h3 className={this.props.className +'-Content-Title'}>{this.props.title}</h3>
           <div className={this.props.className +'-Content-Desc'}>{this.props.desc}</div>
         </div>

@@ -1,6 +1,5 @@
 import alt from '../alt.js';
 import Actions from '../actions/Actions.js';
-//import HeaderSource from '../utils/HeaderSource.js';
 
 class Store {
   constructor(){

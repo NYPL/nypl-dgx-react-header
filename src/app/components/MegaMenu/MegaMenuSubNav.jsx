@@ -13,7 +13,7 @@ class MegaMenuSubNav extends React.Component {
 
   render() {
     let items = _.map(this.props.items, function(m, i) {
-        let target = m.target;
+        let target = m.link.en.text;
 
         if (typeof target === 'undefined') {
           // In reality target should never be undefined, but
@@ -25,7 +25,7 @@ class MegaMenuSubNav extends React.Component {
         
         return (
           <li key={i}>
-            <a href={target}>{m.label[this.props.lang]}</a>
+            <a href={target}>{m.name[this.props.lang]['text']}</a>
           </li>
         );
     }, this);
@@ -39,7 +39,7 @@ class MegaMenuSubNav extends React.Component {
 
     return (
       <div className='MegaMenu-SubNav'>
-        <h2>{this.props.label[this.props.lang]}</h2>
+        <h2>{this.props.label[this.props.lang].text}</h2>
         <ul>{items}</ul>
         {socialMediaWidget}
       </div>
