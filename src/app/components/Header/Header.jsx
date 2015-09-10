@@ -40,7 +40,7 @@ class Header extends React.Component {
   render () {
     return (
       <header id='Header' className='Header'>
-        <MobileHeader className='Header-Mobile' />
+        <MobileHeader className='Header-Mobile' locatorUrl={'//www.nypl.org/locations'} />
         <div className='Header-TopWrapper' style={styles.wrapper}>
           <Logo className='Header-Logo' style={styles.logo} />
           <div className='Header-Buttons' style={styles.topButtons}>

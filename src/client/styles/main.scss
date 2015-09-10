@@ -1,6 +1,7 @@
-@import 'utils/colors';
+@import 'utils/fonts';
 @import 'utils/normalize';
 @import 'utils/globals';
+@import 'utils/colors';
 @import 'utils/viewports';
 
 /* NYPL HEADER
@@ -9,6 +10,7 @@
  * -- Mobile First approach
 */
 #Header {
+	@include Kievit-Regular;
   width: 100%;
   background-color: white;
   @extend %clearfix;
@@ -121,44 +123,7 @@
   	 * -------------
   	*/
   	&-Mobile {
-	  	position: relative;
-	  	display: block;
-	  	height: 58px;
-	  	text-align: right;
-
-	  	&-Logo {
-	  		position: absolute;
-	  		left: 0;
-	  		top: 0;
-	  		font-size: 58px;
-	  	}
-
-	  	&-SearchButton {
-	  		font-size: 30px;
-	  		margin: 0;
-	  		padding: 14px;
-	  		display: inline-block;
-	  		color: #000;
-
-	  		&.icon-solo-x {
-	  			background-color: #29A1D2;
-	  			color: #FFF;
-	  		}
-	  	}
-
-	  	&-MenuButton {
-	  		font-size: 30px;
-	  		margin: 0;
-	  		padding: 14px;
-	  		display: inline-block;
-
-	  		&.icon-solo-x {
-	  			background-color: #2B2B2B;
-	  			color: #FFF;		
-	  		}
-	  	}
-
-	  	/* Hide MobileHeader on Desktop and up */
+	  	/* Hide MobileHeader on Desktop and larger viewports */
 	  	@include desktop {
 	  		display: none;
 	  	}
