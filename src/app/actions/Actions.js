@@ -1,19 +1,19 @@
 import alt from '../alt.js';
-import ApiService from '../utils/ApiService.js';
+import axios from 'axios';
 
 class Actions {
 
   fetchHeaderData() {
     let self = this;
 
-    // Here we will use the client side AJAX request
-    // to fetch data
-    ApiService
-      .fetchData('local')
-      .then((result) => {
-        self.actions.updateHeaderData(result);
+    // // Here we will use the client side AJAX request
+    // // to fetch data
+    axios
+      .get('https://dev-header.nypl.org/header-data')
+      .then(result => {
+        self.actions.updateHeaderData(result.data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log('Error on local data fetch', error);
       });
 
