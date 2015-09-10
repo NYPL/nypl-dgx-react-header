@@ -83,7 +83,6 @@ class MobileHeader extends React.Component {
    *
    * @param {String} activeButton
    */
-   */
   _toggleMobileMenu(activeButton) {
     if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
       Actions.setMobileMenuButtonValue(activeButton);
@@ -119,7 +118,6 @@ MobileHeader.defaultProps = {
 const styles = {
   base: {
     position: 'relative',
-    display: 'block',
     height: '58px',
     textAlign: 'right'
   },

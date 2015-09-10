@@ -123,6 +123,8 @@
   	 * -------------
   	*/
   	&-Mobile {
+  		display: block;
+  		
 	  	/* Hide MobileHeader on Desktop and larger viewports */
 	  	@include desktop {
 	  		display: none;
