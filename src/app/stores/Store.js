@@ -18,12 +18,12 @@ class Store {
     };
   }
 
-  // Public GET Method
+  // Public Methods
   static _getMobileMenuBtnValue() {
     return this.state.activeMobileButton;
   }
 
-  // Private Store Methods
+  // Private Methods
   handleUpdateHeaderData(data) {
     this.setState({headerData: data});
   }

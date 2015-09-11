@@ -30,6 +30,8 @@ const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
 // Assigning as let variables, since they are mutable
 let isProduction = process.env.NODE_ENV === 'production';
 let serverPort = process.env.PORT || (isProduction ? 3001 : appConfig.port);
+// Assign API Routes
+let apiRoutes = require('./ApiRoutes/ApiRoutes.js');
 
 /* Express Server Configuration
  * ----------------------------
@@ -61,11 +63,6 @@ app.use(express.static(DIST_PATH));
  *    proper data
  * 3. Render the <Header> as a string in the EJS template
 */
-
-// require('./ApiRoutes/ClientApiRoutes.js')(app);
-// require('./ApiRoutes/ServerApiRoutes.js')(app);
-let apiRoutes = require('./ApiRoutes/ApiRoutes.js');
-
 app.use('/', apiRoutes);
 
 // Match all routes to render the index page.
