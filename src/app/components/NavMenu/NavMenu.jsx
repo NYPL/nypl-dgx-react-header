@@ -1,5 +1,10 @@
 import Radium from 'radium';
 import React from 'react';
+import cx from 'classnames';
+
+// Header Store
+import HeaderStore from '../../stores/Store.js';
+
 // Dependent Components
 import NavMenuItem from '../NavMenuItem/NavMenuItem.jsx';
 
@@ -11,23 +16,25 @@ class NavMenu extends React.Component {
   }
 
   render () {
-    let navMenu = this.props.items.map((item, index) => {
-      return (
-        <NavMenuItem 
-          label={item.name}
-          lang='en'
-          target={item.link.en.text}
-          navId={item.id}
-          features={item.features}
-          subNav={item.subnav}
-          key={index}
-          index={index} />
-      );
-    });
+    let classes = cx('NavMenu-List', {'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'}),
+      navMenu = this.props.items.map((item, index) => {
+        return (
+          <NavMenuItem 
+            label={item.name}
+            lang={this.props.lang}
+            target={item.link.en.text}
+            navId={item.id}
+            features={item.features}
+            subNav={item.subnav}
+            key={index}
+            index={index} />
+        );
+      });
 
     return (
-      <nav className='NavMenu'>
-        <ul className='NavMenu-List'>
+      <nav className={this.props.className}>
+        <span className='MobileLogoText icon-nypl-logo-type'></span>
+        <ul className={classes}>
           {navMenu}
         </ul>
       </nav>
@@ -36,7 +43,8 @@ class NavMenu extends React.Component {
 }
 
 NavMenu.defaultProps = {
-  lang: 'en'
+  lang: 'en',
+  className: 'NavMenu'
 };
 
 export default Radium(NavMenu);
