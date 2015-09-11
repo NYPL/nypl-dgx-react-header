@@ -1,14 +1,13 @@
-// Non-NYPL module imports
+// NPM Modules
 import React from 'react';
 import Radium from 'radium';
 
-// ALT FLUX
+// ALT Flux
 import Store from '../../stores/Store.js';
 import Actions from '../../actions/Actions.js';
 
-// NYPL module imports
+// NYPL Components
 import Logo from '../Logo/Logo.jsx';
-import SSOContainer from '../SSOContainer/SSOContainer.jsx';
 import DonateButton from '../DonateButton/DonateButton.jsx';
 import SubscribeButton from '../SubscribeButton/SubscribeButton.jsx';
 import NavMenu from '../NavMenu/NavMenu.jsx';
@@ -46,7 +45,6 @@ class Header extends React.Component {
         <div className='Header-TopWrapper' style={styles.wrapper}>
           <Logo className='Header-Logo' style={styles.logo} />
           <div className='Header-Buttons' style={styles.topButtons}>
-            <SSOContainer style={styles.ssoContainer} />
             <SubscribeButton label='Subscribe' lang={this.props.lang} style={styles.subscribeButton} />
             <DonateButton lang={this.props.lang} style={styles.donateButton} />
           </div>
