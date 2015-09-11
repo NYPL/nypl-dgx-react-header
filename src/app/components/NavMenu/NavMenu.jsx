@@ -40,7 +40,7 @@ class NavMenu extends React.Component {
           <ul className={classes}>
             {navMenu}
           </ul>
-          <SearchButton />
+          <SearchButton className={`${this.props.className}`} />
         </div>
       </nav>
     );

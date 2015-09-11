@@ -32,15 +32,17 @@ class SearchButton extends React.Component {
     // Give active class if the button is activated
     let classes = cx({'--active': this.state.isActive});
   	return (
-      <div className={`${this.props.className}-TopLevelLinks__SearchBox-Wrapper`}
+      <div className={`${this.props.className}-SearchBox-Wrapper`}
       onMouseEnter={this._activate}
       onMouseLeave={this._deactivate}>
-        <BasicButton id='NavMenu-TopLevelLinks__SearchButton'
-        className={`icon-magnifier2 NavMenu-TopLevelLinks__SearchButton${classes}`}
+        <BasicButton id={`${this.props.className}-SearchButton`}
+        className={`icon-magnifier2 ${this.props.className}-SearchButton${classes}`}
         name='Search Button'
         label=''
         style={styles.base} />
-        <SearchBox id='NavMenu-SearchBox' className='NavMenu-SearchBox' isActive={this.state.activeMobileButton==='search'} />
+        <SearchBox id={`${this.props.className}-SearchBox`} 
+        className={`${this.props.className}-SearchBox`} 
+        isActive={this.state.activeMobileButton==='search'} />
       </div>
 		);
   }
