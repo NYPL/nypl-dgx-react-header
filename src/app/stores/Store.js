@@ -1,6 +1,5 @@
 import alt from '../alt.js';
 import Actions from '../actions/Actions.js';
-//import HeaderSource from '../utils/HeaderSource.js';
 
 class Store {
   constructor(){
@@ -19,12 +18,12 @@ class Store {
     };
   }
 
-  // Public GET Method
+  // Public Methods
   static _getMobileMenuBtnValue() {
     return this.state.activeMobileButton;
   }
 
-  // Private Store Methods
+  // Private Methods
   handleUpdateHeaderData(data) {
     this.setState({headerData: data});
   }

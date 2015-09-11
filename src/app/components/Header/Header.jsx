@@ -42,10 +42,10 @@ class Header extends React.Component {
   render () {
     return (
       <header id='Header' className='Header'>
-        <MobileHeader className='Header-Mobile' />
+        <MobileHeader className='Header-Mobile' locatorUrl={'//www.nypl.org/locations'} />
         <div className='Header-TopWrapper' style={styles.wrapper}>
           <Logo className='Header-Logo' style={styles.logo} />
-          <div id='Header-Buttons' style={styles.topButtons}>
+          <div className='Header-Buttons' style={styles.topButtons}>
             <SSOContainer style={styles.ssoContainer} />
             <SubscribeButton label='Subscribe' lang={this.props.lang} style={styles.subscribeButton} />
             <DonateButton lang={this.props.lang} style={styles.donateButton} />
@@ -74,19 +74,23 @@ const styles = {
     margin: '0 auto'
   },
   logo: {
+    display: 'block',
     width: '230px',
     position: 'relative',
     left: '-8px'
   },
   topButtons: {
     position: 'absolute',
-    textTransform: 'uppercase'
+    top: '20px',
+    right: '2px',
+    textTransform: 'uppercase',
+    display: 'block'
   },
   ssoContainer: {
-
+    display: 'inline-block'
   },
   subscribeButton: {
-
+    display: 'inline-block'
   },
   donateButton: {
     display: 'inline-block'

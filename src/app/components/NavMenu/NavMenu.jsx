@@ -22,20 +22,20 @@ class NavMenu extends React.Component {
       navMenu = this.props.items.map((item, index) => {
         return (
           <NavMenuItem 
-          label={item.label}
-          lang={this.props.lang}
-          target={item.target}
-          navId={item.id}
-          features={item.features}
-          subNav={item.subnav}
-          key={index}
-          index={index} />
+            label={item.name}
+            lang={this.props.lang}
+            target={item.link.en.text}
+            navId={item.id}
+            features={item.features}
+            subNav={item.subnav}
+            key={index}
+            index={index} />
         );
       });
 
     return (
-      <nav className='NavMenu'>
-        <div className='NavMenu-Wrapper'>
+      <nav className={this.props.className}>
+        <div className={`${this.props.className}-Wrapper`}>
           <span className='MobileLogoText icon-nypl-logo-type'></span>
           <ul className={classes}>
             {navMenu}
@@ -48,7 +48,8 @@ class NavMenu extends React.Component {
 }
 
 NavMenu.defaultProps = {
-  lang: 'en'
+  lang: 'en',
+  className: 'NavMenu'
 };
 
 export default Radium(NavMenu);

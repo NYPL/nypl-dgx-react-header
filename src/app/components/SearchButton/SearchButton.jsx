@@ -32,7 +32,7 @@ class SearchButton extends React.Component {
     // Give active class if the button is activated
     let classes = cx({'--active': this.state.isActive});
   	return (
-      <div className='NavMenu-TopLevelLinks__SearchBox-Wrapper'
+      <div className={`${this.props.className}-TopLevelLinks__SearchBox-Wrapper`}
       onMouseEnter={this._activate}
       onMouseLeave={this._deactivate}>
         <BasicButton id='NavMenu-TopLevelLinks__SearchButton'
@@ -62,6 +62,11 @@ class SearchButton extends React.Component {
     }
   }
 }
+
+SearchButton.defaultProps = {
+  lang: 'en',
+  className: 'NavMenu'
+};
 
 const styles = {
   base: {
