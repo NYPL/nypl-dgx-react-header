@@ -38,7 +38,6 @@
 	background-color: $BG_MENU_SEARCH; 
 	color: #000000;
 	display: block;
-	height: 200px;
   left: 0px;
 	margin: 0;
 	position: absolute;
@@ -46,6 +45,7 @@
 	width: 100%;
 	z-index: 300;
 	@include desktop {
+		height: 200px;
 		margin: 6px 0 0 0;
 		top: 34px;
 	}
@@ -53,7 +53,7 @@
 
 /* The wrapper for all elements in SearchBox */
 &-SearchBox-Elements-Wrapper {
-	margin: 20px 5% 0 5%;
+	margin: 20px 0 0 0;
   display: inline-block;
   width: 100%;
 	@include desktop {
@@ -72,15 +72,23 @@
 }
 
 /* The wrapper for input fields */
-&-SearchBox-Elements-Input-Wrapper { 
-  display: inline-block;
+&-SearchBox-Elements-Input-Wrapper {
+	border-bottom-style: solid;
+  border-color: rgba(121,102,102,0.21);
+  border-width: 1px; 
+  display: inline-block;  
+  padding: 0 0 18px 0;
   position: relative;
-  width: 90%;
+  width: 100%;
+	@include desktop {
+		margin: 0;
+		padding: 0;
+	}
 }
 
 &-SearchBox-Elements-Input-Keywords-Wrapper {
 	display: block;
-	margin: 0;
+	margin: 0 5%;
   position: relative;
 	.icon {
 		background-color: #FFFFFF;
@@ -90,7 +98,7 @@
 		left: 2px;
 		padding: 10px 5px;
 		position: absolute;
-		top: 10px;
+		top: 9px;
 		@include desktop {
 			display:none;
 		}
@@ -110,10 +118,12 @@
   border-color: #FFFFFF;
   color: #000000;
   display: inline-block;
-  font-size: 16px;
-  padding: 0 0 0 32px;
-  width: 88%;
+  font-family: Kievit-Light;
+  font-size: 18px;
+  font-style: italic;
 	height: 60px;
+  padding: 0 0 0 12%;
+  width: 88%;
 	@include desktop {
 		background-color: #1DA1D4;
 		color: #FFFFFF;
@@ -154,7 +164,7 @@
 /* Submit buttons with search options on mobile version */
 &-SearchBox-Mobile-Submit {
 	color: #FFFFFF;
-	font-size: 16px;
+	font-size: 14px;
 	text-align: center;
 	text-transform: uppercase;
 	display: block;
@@ -164,13 +174,22 @@
 }
 
 &-SearchBox-Mobile-Submit-Option {
+  &.left-column {
+  	border-color: rgba(102, 102, 102, 0.21);
+		border-right-style: solid;
+		border-width: 1px;
+  }
 	cursor: pointer;
 	display: inline-block;
 	padding: 20px 0;
-	width: 50%;
+	width: 49%;
+	span {
+		margin: 0 20px 0 0;
+	}
 	.icon {
+		color: #78CCED;
 		font-size: 30px;
 		position: absolute;
-		top: 94px;
+		top: 113px;
 	}
 }

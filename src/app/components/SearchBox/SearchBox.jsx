@@ -70,7 +70,7 @@ class SearchBox extends React.Component {
           </div>
 
           <div className={`${this.props.className}-Mobile-Submit`}>
-            <div className={`${this.props.className}-Mobile-Submit-Option`}
+            <div className={`${this.props.className}-Mobile-Submit-Option left-column`}
             value='catalog'
             onClick={this._submitMobileSearchRequest.bind(this, 'catalog')}>
               catalog
