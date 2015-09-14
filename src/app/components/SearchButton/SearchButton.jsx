@@ -19,12 +19,8 @@ class SearchButton extends React.Component {
 
     // Holds the initial state. The actived status is false
     this.state = {
-      activeMobileButton: HeaderStore.getState().activeMobileButton
+      isActive: false
     };
-    
-    // The function activates and deactivates the search box
-    this._activate = this._activate.bind(this);
-    this._deaactivate = this._deactivate.bind(this);
   }
 
   // Dom Render Section
@@ -33,35 +29,51 @@ class SearchButton extends React.Component {
     let classes = cx({'--active': this.state.isActive});
   	return (
       <div className={`${this.props.className}-SearchBox-Wrapper`}
-      onMouseEnter={this._activate}
-      onMouseLeave={this._deactivate}>
+      onMouseEnter={this._activate.bind(this, 'hover')}
+      onMouseLeave={this._deactivate.bind(this)}>
         <BasicButton id={`${this.props.className}-SearchButton`}
         className={`icon-magnifier2 ${this.props.className}-SearchButton${classes}`}
         name='Search Button'
         label=''
-        style={styles.base} />
+        style={styles.base}
+        onClick={this._activate.bind(this, 'click')} />
         <SearchBox id={`${this.props.className}-SearchBox`} 
-        className={`${this.props.className}-SearchBox`} 
-        isActive={this.state.activeMobileButton==='search'} />
+        className={`${this.props.className}-SearchBox${classes}`} />
       </div>
 		);
   }
 
   // Set the function to active searchbox when the button is hovered
-  _activate() {
-    // If in mobile version the onMouseEnter and onMouseLeave don't work
-    if (HeaderStore._getMobileMenuBtnValue() !== 'mobileSearch') {
-      Actions.setMobileMenuButtonValue('search');
+  _activate(option) {
+    if (option === 'hover') {
+      Actions.setMobileMenuButtonValue('hoverSearch');
+      this.setState({isActive: true});
+      console.log('mouse in');
+    } else if (option === 'click') {
+      if (HeaderStore._getMobileMenuBtnValue() === 'clickSearch'){
+        this._toggle();
+      }
     }
   }
 
   _deactivate() {
     // _deactive function only works when it is on desktop version
-    if (window.innerWidth > '1024') {
+    if (HeaderStore._getMobileMenuBtnValue() === 'hoverSearch') {
       Actions.setMobileMenuButtonValue('');
-    } else {
-      Actions.setMobileMenuButtonValue('mobileSearch');
+      this.setState({isActive: false});
+      console.log('close');
     }
+  }
+
+  _toggle() {
+    if (HeaderStore._getMobileMenuBtnValue() === '') {
+      Actions.setMobileMenuButtonValue('clickSearch');
+      this.setState({isActive: true});
+    } else {
+      Actions.setMobileMenuButtonValue('');
+      this.setState({isActive: false});
+    }
+    console.log('click');
   }
 }
 
