@@ -38,7 +38,7 @@ class SearchButton extends React.Component {
         style={styles.base}
         onClick={this._activate.bind(this, 'click')} />
         <SearchBox id={`${this.props.className}-SearchBox`} 
-        className={`${this.props.className}-SearchBox${classes}`} />
+        className={`${this.props.className}-SearchBox`} />
       </div>
 		);
   }
@@ -46,11 +46,13 @@ class SearchButton extends React.Component {
   // Set the function to active searchbox when the button is hovered
   _activate(option) {
     if (option === 'hover') {
-      Actions.setMobileMenuButtonValue('hoverSearch');
-      this.setState({isActive: true});
-      console.log('mouse in');
+      if (HeaderStore._getMobileMenuBtnValue() === '') {
+        Actions.setMobileMenuButtonValue('hoverSearch');
+        this.setState({isActive: true});
+        console.log('mouse in');
+      } 
     } else if (option === 'click') {
-      if (HeaderStore._getMobileMenuBtnValue() === 'clickSearch'){
+      if (HeaderStore._getMobileMenuBtnValue() !== 'hoverSearch'){
         this._toggle();
       }
     }
@@ -66,14 +68,16 @@ class SearchButton extends React.Component {
   }
 
   _toggle() {
-    if (HeaderStore._getMobileMenuBtnValue() === '') {
+    if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
       Actions.setMobileMenuButtonValue('clickSearch');
       this.setState({isActive: true});
+      console.log(HeaderStore._getMobileMenuBtnValue());
     } else {
       Actions.setMobileMenuButtonValue('');
       this.setState({isActive: false});
+      console.log(HeaderStore._getMobileMenuBtnValue());
     }
-    console.log('click');
+    
   }
 }
 

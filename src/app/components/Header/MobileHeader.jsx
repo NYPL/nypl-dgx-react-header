@@ -36,8 +36,8 @@ class MobileHeader extends React.Component {
 
       locatorUrl = this.props.locatorUrl || '#',
       mobileSearchClass = cx({
-        'active icon-solo-x': activeButton === 'mobileSearch' || activeButton === 'search',
-        'icon-magnifier2': activeButton !== 'mobileSearch' && activeButton !== 'search'
+        'active icon-solo-x': activeButton === 'clickSearch',
+        'icon-magnifier2': activeButton !== 'clickSearch'
       }),
       mobileMenuClass = cx({
         'active icon-solo-x': activeButton === 'mobileMenu', 
@@ -60,7 +60,7 @@ class MobileHeader extends React.Component {
         <span
           style={[
             styles.searchIcon,
-            activeButton === 'mobileSearch' ? styles.activeSearchIcon : ''
+            activeButton === 'clickSearch' ? styles.activeSearchIcon : ''
           ]}
           className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
           ref='MobileSearchButton'
@@ -104,7 +104,8 @@ class MobileHeader extends React.Component {
    * with the 'mobileSearch' as a param
    */
   _handleSearchBtnClick() {
-    this._toggleMobileMenu('mobileSearch');
+    this._toggleMobileMenu('clickSearch');
+    console.log('click');
   }
 
   /**

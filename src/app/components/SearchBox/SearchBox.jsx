@@ -31,7 +31,8 @@ class SearchBox extends React.Component {
   // Dom Render Section
   render() {
     // Set active class if search button is hovered on desktop version or clicked on mobile version
-    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'mobileSearch' || HeaderStore._getMobileMenuBtnValue() ==='search'});
+    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' || 
+      HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
     
     return (
       <div id={this.props.id} 

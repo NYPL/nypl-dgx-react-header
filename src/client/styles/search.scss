@@ -129,7 +129,7 @@
 	float: left;
 	font-size: 14px;
 	@include desktop {
-		display: block;
+		display: inline-block;
 	}
 }
 
@@ -144,7 +144,7 @@
 	cursor: pointer;
 	display: none;
 	@include desktop {
-		display: block;
+		display: inline-block;
     float: right;
     height: 60px;
     margin: 0 0 10% 0;
