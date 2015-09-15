@@ -30,24 +30,25 @@ input:-ms-input-placeholder {
 
 input[type=radio] {
   /* Hide original inputs */
-  visibility: hidden;
+  display: none;
 }
-input[type=radio] + label:before {
-  height:12px;
-  width:12px;
+label:before {
+	background-color: #FFFFFF;
+	border-radius: 50%;
+  content: '';
+  display: inline-block;
+  height: 11px;
+  left: 0;
   margin-right: 2px;
-  content: " ";
-  display:inline-block;
-  vertical-align: baseline;
-  border:1px solid #777;
+	position: relative;
+  width: 11px;
 }
 input[type=radio]:checked + label:before {
-  background:gold;
-}
-
-/* CUSTOM RADIO AND CHECKBOX STYLES */
-input[type=radio] + label:before{
-  border-radius:50%;
+	content: "\E602";
+  color: #000000;
+  font-size: 30px;
+  text-align: center;
+  line-height: 18px;
 }
 
 /* The Wrapper for putting in the icon for search button and search box */
