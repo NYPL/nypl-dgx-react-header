@@ -1,6 +1,7 @@
 // NPM Modules
 import React from 'react';
 import Radium from 'radium';
+import cx from 'classnames';
 
 // ALT Flux
 import Store from '../../stores/Store.js';
@@ -28,6 +29,16 @@ class Header extends React.Component {
     // If the Store is not populated with
     // the proper Data, then fetch.
     this._fetchDataIfNeeded();
+
+    // Assign method for proper scope handle
+    let handleHeaderScroll = this._activateStickyHeader.bind(this);
+
+    // Allows us to use window only after component has mounted
+    window.addEventListener('scroll',
+      function() {
+        handleHeaderScroll();
+      }
+    );
   }
 
   componentWillUnmount() {
@@ -39,43 +50,63 @@ class Header extends React.Component {
   }
 
   render () {
+    let isHeaderSticky = this.state.isSticky,
+      headerClasses = cx(this.props.className, {'sticky': isHeaderSticky});
+
     return (
-      <header id='Header' className='Header'>
-        <MobileHeader className='Header-Mobile' locatorUrl={'//www.nypl.org/locations'} />
-        <div className='Header-TopWrapper' style={styles.wrapper}>
-          <Logo className='Header-Logo' style={styles.logo} />
-          <div className='Header-Buttons' style={styles.topButtons}>
-            <SubscribeButton label='Subscribe' lang={this.props.lang} style={styles.subscribeButton} />
-            <DonateButton lang={this.props.lang} style={styles.donateButton} />
+      <header id={this.props.id} className={headerClasses}>
+        <div className={`${this.props.className}-Wrapper`}>
+          <MobileHeader className={`${this.props.className}-Mobile`} locatorUrl={'//www.nypl.org/locations'} />
+          <div className={`${this.props.className}-TopWrapper`} style={styles.wrapper}>
+            <Logo className={`${this.props.className}-Logo`} />
+            <div className={`${this.props.className}-Buttons`} style={styles.topButtons}>
+              <SubscribeButton 
+                label='Subscribe'
+                lang={this.props.lang}
+                style={styles.subscribeButton} />
+              <DonateButton 
+                lang={this.props.lang}
+                style={styles.donateButton} />
+            </div>
           </div>
+          <NavMenu 
+            className={`${this.props.className}-NavMenu`}
+            lang={this.props.lang}
+            items={this.state.headerData}  />
         </div>
-        <NavMenu className='Header-NavMenu' items={this.state.headerData} lang={this.props.lang} />
       </header>
     );
   }
 
   _fetchDataIfNeeded() {
     if (Store.getState().headerData.length < 1) {
-      console.log('_fetchDataIfNeeded() performed Actions.fetchHeaderData()');
       Actions.fetchHeaderData();
     }
+  }
+
+  _activateStickyHeader() {
+    let headerHeight = this._getHeaderHeight(),
+      windowHeight = window.scrollY;
+    return (windowHeight > headerHeight)
+      ? Actions.updateIsHeaderSticky(true) : Actions.updateIsHeaderSticky(false);
+  }
+
+  _getHeaderHeight() {
+    let headerContainer = document.getElementById(this.props.id);
+    return headerContainer.clientHeight;
   }
 };
 
 Header.defaultProps = {
-  lang: 'en'
+  lang: 'en',
+  className: 'Header',
+  id: 'Header'
 };
 
 const styles = {
   wrapper: {
     position: 'relative',
     margin: '0 auto'
-  },
-  logo: {
-    display: 'block',
-    width: '230px',
-    position: 'relative',
-    left: '-8px'
   },
   topButtons: {
     position: 'absolute',

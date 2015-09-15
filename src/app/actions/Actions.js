@@ -29,6 +29,10 @@ class Actions {
   setMobileMenuButtonValue(currentActiveMobileButton) {
     this.dispatch(currentActiveMobileButton);
   }
+
+  updateIsHeaderSticky(value) {
+    this.dispatch(value);
+  }
 }
 
 export default alt.createActions(Actions);
