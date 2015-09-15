@@ -17,7 +17,7 @@ class BlogItem extends React.Component {
         </div>
         <div className={'FeatureItem-Content ' + classes}>
           <div className='FeatureItem-Content-Tag'>{feature.category}</div>
-          <h3 className='FeatureItem-Content-Title'>{feature.title}</h3>
+          <h3 className='FeatureItem-Content-Title'>{feature.headline}</h3>
           <div className='FeatureItem-Content-Desc'>{feature.desc}</div>
           <p>{feature.fullName}</p>
           <div>{feature.authorTitle}</div>

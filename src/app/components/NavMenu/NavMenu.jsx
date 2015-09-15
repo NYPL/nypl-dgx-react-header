@@ -19,7 +19,7 @@ class NavMenu extends React.Component {
 
   render () {
     let mobileActiveClass = cx({'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'}),
-      navMenu = items.map((item, index) => {
+      navMenu = this.props.items.map((item, index) => {
         return (
           <NavMenuItem 
             label={item.name}

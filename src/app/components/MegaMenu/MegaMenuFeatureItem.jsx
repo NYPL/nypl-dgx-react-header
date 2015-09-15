@@ -12,21 +12,22 @@ class MegaMenuFeatureItem extends React.Component {
   }
   
 	render() {
+    // There should always be a featured item, but just in case:
     if (!this.props.feature) {
       return <DefaultItem className={this.props.className} />;
     }
 
-    let feature = this.props.feature ? this.props.feature : undefined,
+    let feature = this.props.feature,
 			classes = cx({'with-image': feature && feature.images, 'without-image': !feature || !feature.images}),
       // should have a fallback
       contentObj = {
-        title: feature.headline[this.props.lang].text,
-        category: feature.category ? feature.category[this.props.lang].text : title,
+        category: feature.category ? feature.category[this.props.lang].text : headline,
+        headline: feature.headline[this.props.lang].text,
         img: feature.images ? <img src={feature.images[0].uri} /> : '',
         desc: feature.description ? feature.description.en.text.substring(0, '150') : '',
         link: feature.link.en.text
       },
-      featuredItem = <DefaultItem feature={contentObj} className={this.props.className} />;
+      featuredItem = <DefaultItem feature={contentObj} className={this.props.className} classes={classes} />;
 
     if (feature.content) {
       switch (feature.content.type) {
