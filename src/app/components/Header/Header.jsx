@@ -46,7 +46,8 @@ class Header extends React.Component {
         <div className='Header-TopWrapper' style={styles.wrapper}>
           <Logo className='Header-Logo' style={styles.logo} />
           <div className='Header-Buttons' style={styles.topButtons}>
-            <SimpleButton label='Get a Library Card' 
+            <SimpleButton 
+              label='Get a Library Card' 
               target='//catalog.nypl.org/screens/selfregpick.html' 
               className='LibraryCardButton'
               style={styles.libraryCardButton} />
