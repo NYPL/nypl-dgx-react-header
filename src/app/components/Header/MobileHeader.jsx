@@ -34,20 +34,26 @@ class MobileHeader extends React.Component {
   render () {
     let activeButton = this.state.activeMobileButton,
       locatorUrl = this.props.locatorUrl || '#',
-      mobileSearchClass = cx({'active icon-solo-x': activeButton === 'mobileSearch', 'icon-magnifier2': activeButton !== 'mobileSearch'}),
-      mobileMenuClass = cx({'active icon-solo-x': activeButton === 'mobileMenu', 'icon-burgernav': activeButton !== 'mobileMenu'});
+      mobileSearchClass = cx({
+        'active nypl-icon-solo-x': activeButton === 'mobileSearch',
+        'nypl-icon-magnifier-thin': activeButton !== 'mobileSearch'
+      }),
+      mobileMenuClass = cx({
+        'active nypl-icon-solo-x': activeButton === 'mobileMenu',
+        'nypl-icon-burger-nav': activeButton !== 'mobileMenu'
+      });
 
     return (
       <div className={this.props.className} style={styles.base}>
         <span 
           style={styles.logoIcon}
-          className={`${this.props.className}-Logo icon-nypl-logo-mark`}>
+          className={`${this.props.className}-Logo nypl-icon-logo-mark`}>
         </span>
 
         <a 
           style={styles.locatorIcon} 
           href={locatorUrl} 
-          className={`${this.props.className}-Locator icon-locatorsmall`}>
+          className={`${this.props.className}-Locator nypl-icon-locator-large`}>
         </a>
 
         <span
@@ -119,7 +125,8 @@ const styles = {
   base: {
     position: 'relative',
     height: '58px',
-    textAlign: 'right'
+    textAlign: 'right',
+    borderBottom: '1px solid #979797'
   },
   logoIcon: {
     position: 'absolute',

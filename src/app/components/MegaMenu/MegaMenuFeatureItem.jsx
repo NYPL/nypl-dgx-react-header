@@ -23,8 +23,8 @@ class MegaMenuFeatureItem extends React.Component {
         title: feature.headline[this.props.lang].text,
         category: feature.category ? feature.category[this.props.lang].text : title,
         img: feature.images ? <img src={feature.images[0].uri} /> : '',
-        desc: feature.description[this.props.lang].text.substring(0, '150'),
-        link: feature.link[this.props.lang].text
+        desc: feature.description ? feature.description.en.text.substring(0, '150') : '',
+        link: feature.link.en.text
       },
       featuredItem = <DefaultItem feature={contentObj} className={this.props.className} />;
 

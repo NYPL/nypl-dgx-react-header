@@ -46,7 +46,7 @@ class DonateWidget extends React.Component {
           className={this.props.className + '-DonateBox'}
           tag={'Donate'}
           title={'Donate Now!'}
-          donationAmounts={[10, 19, 17, 50, 45]}
+          donationLinks={this.props.donationLinks}
           desc={"Support NYPL in it's mission to inspire lifelong learning, advance knowledge, and strengthen our communities."} />
         <MegaMenuFeatureItem 
           className={this.props.className + '-FeatureItem'}

@@ -31,7 +31,7 @@ class MegaMenuSubNav extends React.Component {
     }, this);
 
     // Assign widget to the FindUs Menu Item by ID match
-    let socialMediaWidget = (this.props.navId === 'abb58f55-20e0-0d34-d1ae-45687cc4799d') ?
+    let socialMediaWidget = (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') ?
       <SocialMediaLinksWidget 
         className={'MegaMenu-SubNav-SocialMediaWidget'}
         links={config.socialMediaLinks} 
