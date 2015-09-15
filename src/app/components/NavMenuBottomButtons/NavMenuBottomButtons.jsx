@@ -1,30 +1,33 @@
 import React from 'react';
 import Radium from 'radium';
 
+// Dependent NYPL React Component
 import DonateButton from '../DonateButton/DonateButton.jsx';
 
 class NavMenuBottomButtons extends React.Component{
-
+  
   constructor(props) {
     super(props);
   }
 
   render() {
+    let libraryCardClass = 'LibraryCardLink',
+      subscribeLinkClass = 'SubscribeLink';
 
     return (
       <div className={this.props.className} style={styles.base}>
-        <a href={this.props.libraryCardLink} className='LibraryCardLink' style={styles.libraryCardLink}>
-          <span className='LibraryCardLink-Wrapper' style={styles.libraryCardLinkWrapper}>
-            <span className='LibraryCardLink-Icon nypl-icon-card' style={styles.icon}></span>
-            <span className='LibraryCardLink-Label' style={styles.libraryCardLinkLabel}>
+        <a href={this.props.libraryCardLink} className={libraryCardClass} style={styles.links}>
+          <span className={`${libraryCardClass}-Wrapper`} style={[styles.wrapper, styles.libraryCardLinkWrapper]}>
+            <span className={`${libraryCardClass}-Icon nypl-icon-card`} style={styles.icon}></span>
+            <span className={`${libraryCardClass}-Label`} style={[styles.label, styles.libraryCardLinkLabel]}>
               Get a Library Card
             </span>
           </span>
         </a>
-        <a href={this.props.subscribeLink} className='SubscribeLink' style={styles.subscribeLink}>
-          <span className='SubscribeLink-Wrapper' style={styles.subscribeLinkWrapper}>
-            <span className='SubscribeLink-Icon nypl-icon-mail' style={styles.icon}></span>
-            <span className='SubscribeLink-Label' style={styles.subscribeLinkLabel}>
+        <a href={this.props.subscribeLink} className={subscribeLinkClass} style={styles.links}>
+          <span className={`${subscribeLinkClass}-Wrapper`} style={[styles.wrapper, styles.subscribeLinkWrapper]}>
+            <span className={`${subscribeLinkClass}-Icon nypl-icon-mail`} style={styles.icon}></span>
+            <span className={`${subscribeLinkClass}-Label`} style={[styles.label, styles.subscribeLinkLabel]}>
               Get Email Updates
             </span>
           </span>
@@ -49,7 +52,7 @@ const styles = {
     margin: 0,
     padding: 0
   },
-  subscribeLink: {
+  links: {
     display: 'inline-table',
     color: '#FFF',
     padding: 0,
@@ -58,42 +61,29 @@ const styles = {
     textAlign: 'center',
     textDecoration: 'none'
   },
-  subscribeLinkWrapper: {
+  label: {
+    fontSize: '16px',
+    margin: '0 0 0 10px',
+    textTransform: 'uppercase',
+    display: 'inline-block'
+  },
+  wrapper: {
     width: '100%',
-    borderLeft: '1.25px solid #252525',
     display: 'block',
     margin: '0',
     padding: '1.75em 0'
+  },
+  subscribeLinkWrapper: {
+    borderLeft: '1.25px solid #252525'
   },
   subscribeLinkLabel: {
-    textTransform: 'uppercase',
-    display: 'inline-block',
-    width: '85px',
-    fontSize: '16px',
-    margin: '0 0 0 10px'
-  },
-  libraryCardLink: {
-    display: 'inline-table',
-    color: '#FFF',
-    padding: '0',
-    margin: '0',
-    width: '50%',
-    textDecoration: 'none',
-    textAlign: 'center'
+    width: '85px'
   },
   libraryCardLinkWrapper: {
-    width: '100%',
-    borderRight: '1.25px solid #252525',
-    display: 'block',
-    margin: '0',
-    padding: '1.75em 0'
+    borderRight: '1.25px solid #252525'
   },
   libraryCardLinkLabel: {
-    textTransform: 'uppercase',
-    display: 'inline-block',
-    width: '110px',
-    fontSize: '16px',
-    margin: '0 0 0 10px'
+    width: '110px'
   },
   icon: {
     fontSize: '32px',
