@@ -52,19 +52,25 @@ class SearchBox extends React.Component {
             </div>
             <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
               <div className={`${this.props.className}-Input-Options`}>
-                <InputField type='radio' 
-                name='search option' 
-                value='catalog' 
-                ref='option' 
-                onChange={this._searchOptionChange}
-                checked={this.state.searchOption ==='catalog'} />Search the Catalog
+                <label for='catalog'>
+                  <InputField type='radio' 
+                  name='search option' 
+                  value='catalog'
+                  ref='option' 
+                  onChange={this._searchOptionChange}
+                  checked={this.state.searchOption ==='catalog'} />
+                  Search the Catalog
+                </label>
                 
-                <InputField type='radio' 
-                name='search option' 
-                value='website' 
-                ref='option'
-                onChange={this._searchOptionChange} 
-                checked={this.state.searchOption ==='website'} />Search NYPL.org
+                <label for='website'>
+                  <InputField type='radio' 
+                  name='search option' 
+                  value='website' 
+                  ref='option'
+                  onChange={this._searchOptionChange} 
+                  checked={this.state.searchOption ==='website'} />
+                  Search NYPL.org
+                </label>
               </div>
             </div>
           </div>

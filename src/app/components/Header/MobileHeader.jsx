@@ -6,6 +6,7 @@ import cx from 'classnames';
 import HeaderStore from '../../stores/Store.js';
 import Actions from '../../actions/Actions.js';
 
+
 class MobileHeader extends React.Component {
 
   constructor(props) {
@@ -93,8 +94,10 @@ class MobileHeader extends React.Component {
   _toggleMobileMenu(activeButton) {
     if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
       Actions.setMobileMenuButtonValue(activeButton);
+      console.log(HeaderStore._getMobileMenuBtnValue());
     } else {
       Actions.setMobileMenuButtonValue('');
+      console.log('no search');
     }
   }
 
@@ -105,7 +108,6 @@ class MobileHeader extends React.Component {
    */
   _handleSearchBtnClick() {
     this._toggleMobileMenu('clickSearch');
-    console.log('click');
   }
 
   /**

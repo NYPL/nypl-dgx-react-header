@@ -19,14 +19,14 @@ class SearchButton extends React.Component {
 
     // Holds the initial state. The actived status is false
     this.state = {
-      isActive: false
     };
   }
 
   // Dom Render Section
   render () {
     // Give active class if the button is activated
-    let classes = cx({'--active': this.state.isActive});
+    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' || 
+      HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
   	return (
       <div className={`${this.props.className}-SearchBox-Wrapper`}
       onMouseEnter={this._activate.bind(this, 'hover')}
@@ -47,11 +47,13 @@ class SearchButton extends React.Component {
   _activate(option) {
     if (option === 'hover') {
       // And the only when the button has not been activated yet
-      if (HeaderStore._getMobileMenuBtnValue() === '') {
+      if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
         Actions.setMobileMenuButtonValue('hoverSearch');
-        this.setState({isActive: true});
-      } 
-    } else if (option === 'click') {
+        console.log('hover search');
+      } else {
+        // Actions.setMobileMenuButtonValue(HeaderStore._getMobileMenuBtnValue());
+      }
+    } else {
       // And only when the button has not activated by hovering
       if (HeaderStore._getMobileMenuBtnValue() !== 'hoverSearch'){
         this._toggle();
@@ -64,7 +66,6 @@ class SearchButton extends React.Component {
     // _deactive function only works when it is on desktop version
     if (HeaderStore._getMobileMenuBtnValue() === 'hoverSearch') {
       Actions.setMobileMenuButtonValue('');
-      this.setState({isActive: false});
     }
   }
 
@@ -73,10 +74,10 @@ class SearchButton extends React.Component {
     // Only activated when the button has not been activated yet
     if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
       Actions.setMobileMenuButtonValue('clickSearch');
-      this.setState({isActive: true});
+      console.log('click search');
     } else {
       Actions.setMobileMenuButtonValue('');
-      this.setState({isActive: false});
+      console.log('no search');
     }
   }
 }

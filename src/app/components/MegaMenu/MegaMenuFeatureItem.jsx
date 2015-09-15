@@ -22,7 +22,7 @@ class MegaMenuFeatureItem extends React.Component {
         title: feature.headline.en.text,
         category: feature.category ? feature.category.en.text : title,
         img: feature.images ? <img src={feature.images[0].uri} /> : '',
-        desc: feature.description.en.text.substring(0, '150'),
+        desc: feature.description ? feature.description.en.text.substring(0, '150') : '',
         link: feature.link.en.text
       },
       featuredItem = (<a href={contentObj.link} className={this.props.className}>
