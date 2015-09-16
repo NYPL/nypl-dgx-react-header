@@ -1,5 +1,8 @@
 import React from 'react';
 import _ from 'underscore';
+import config from '../../../../appConfig.js';
+
+import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
 
 class MegaMenuSubNav extends React.Component {
 
@@ -10,7 +13,7 @@ class MegaMenuSubNav extends React.Component {
 
   render() {
     let items = _.map(this.props.items, function(m, i) {
-        let target = m.target;
+        let target = m.link.en.text;
 
         if (typeof target === 'undefined') {
           // In reality target should never be undefined, but
@@ -22,15 +25,23 @@ class MegaMenuSubNav extends React.Component {
         
         return (
           <li key={i}>
-            <a href={target}>{m.label[this.props.lang]}</a>
+            <a href={target}>{m.name[this.props.lang]['text']}</a>
           </li>
         );
     }, this);
 
+    // Assign widget to the FindUs Menu Item by ID match
+    let socialMediaWidget = (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') ?
+      <SocialMediaLinksWidget 
+        className={'MegaMenu-SubNav-SocialMediaWidget'}
+        links={config.socialMediaLinks} 
+        displayOnly={['facebook', 'twitter']} /> : null;
+
     return (
       <div className='MegaMenu-SubNav'>
-        <h2>{this.props.label[this.props.lang]}</h2>
+        <h2>{this.props.label[this.props.lang].text}</h2>
         <ul>{items}</ul>
+        {socialMediaWidget}
       </div>
     );
   }

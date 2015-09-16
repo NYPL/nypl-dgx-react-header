@@ -3,23 +3,22 @@ import compression from 'compression';
 import express from 'express';
 import colors from 'colors';
 import parser from 'jsonapi-parserinator';
+
 // React
 import React from 'react';
 import Iso from 'iso';
 import alt from './src/app/alt.js';
+
 // Server Configurations
 import appConfig from './appConfig.js';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import webpackConfig from './webpack.config.js';
 
-// Temporary API Service
-import HeaderApiService from './src/app/utils/ApiService';
-// Need to improve for server-side and client-side requests
-import HeaderSource from './src/app/utils/HeaderSource.js';
-
+// Header Component
 import Header from './src/app/components/Header/Header.jsx';
 
+// Global Config Variables
 const ROOT_PATH = __dirname;
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
 const INDEX_PATH = path.resolve(ROOT_PATH, 'src/client');
@@ -31,20 +30,8 @@ const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
 // Assigning as let variables, since they are mutable
 let isProduction = process.env.NODE_ENV === 'production';
 let serverPort = process.env.PORT || (isProduction ? 3001 : appConfig.port);
-let refineryData;
-
-// Use the HeaderApiService to fetch our Header Data
-// We would parse the Data at this point and Model it
-// Local Mock
-HeaderApiService
-  .fetchData('local')
-  .then((result) => {
-    refineryData = result;
-  })
-  .catch((error) => {
-    console.log('Error on local data fetch', error);
-  });
-
+// Assign API Routes
+let apiRoutes = require('./ApiRoutes/ApiRoutes.js');
 
 /* Express Server Configuration
  * ----------------------------
@@ -71,44 +58,35 @@ app.use(express.static(DIST_PATH));
 
 /* Isomporphic Rendering of React App
  * ----------------------------------
- * 1. Render the App as a String to be passed
- *    to the server.
- * 2. Ideally we would pass in the API Data here
- *    to our component.
+ * 1. Bootstrap the FLUX Store with API Data
+ * 2. Use ISO to add the <Header> component with
+ *    proper data
+ * 3. Render the <Header> as a string in the EJS template
 */
-// Assign the string containing the markup from the component
-let headerApp = React.renderToString(<Header />);
-
-// Used to debug refinery response
-app.get('/header-data', (req, res) => {
-	res.json(refineryData);
-});
+app.use('/', apiRoutes);
 
 // Match all routes to render the index page.
-app.get('/*', (req, res) => {
-
-  res.locals.data = {
-    Store: { headerData: refineryData }
-  };
+app.get('/', (req, res) => {
+  let headerApp, iso;
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
-
-  let headerApp = React.renderToString(React.createElement(Header));
-
-  let iso = new Iso();
-
+  iso = new Iso();
+  
+  headerApp = React.renderToString(React.createElement(Header));
   iso.add(headerApp, alt.flush());
 
-	// First parameter references the ejs filename
+  // First parameter references the ejs filename
   res.render('index', {
-  	// Assign the Header String to the
-  	// proper EJS variable
-  	headerApp: iso.render(),
+    // Assign the Header String to the
+    // proper EJS variable
+    headerApp: iso.render(),
     appTitle: appConfig.appTitle,
     favicon: appConfig.favIconPath,
     isProduction: isProduction,
-    webpackPort: WEBPACK_DEV_PORT
+    webpackPort: WEBPACK_DEV_PORT,
+    filename: webpackConfig.output.filename
   });
+
 });
 
 // Start the server.

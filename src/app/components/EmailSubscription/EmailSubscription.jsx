@@ -53,7 +53,7 @@ class EmailSubscription extends React.Component {
     let status = this.state.formStatus,
       isLoading = this.state.formProcessing;
 
-    console.log(this.state);
+    // console.log(this.state);
 
     if (!isLoading) {
       if (status === 'success') {
