@@ -55,7 +55,11 @@ input[type=radio]:checked + label:before {
 
 /* The Wrapper for putting in the icon for search button and search box */
 &-SearchBox-Wrapper {
-  display: inline-block;
+  display: block;
+
+  @include desktop {
+    display: inline-block;
+  }
 }
 
 /* CSS for Search button */
