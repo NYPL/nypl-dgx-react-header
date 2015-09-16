@@ -2,29 +2,29 @@
 input::-webkit-input-placeholder {
   color: #999999;
   @include desktop {
-	  color: #FFFFFF;
-	}
+    color: #FFFFFF;
+  }
 }
 
 input:-moz-placeholder { /* Firefox 18- */
   color: #999999;
   @include desktop {
-	  color: #FFFFFF;
-	} 
+    color: #FFFFFF;
+  } 
 }
 
 input:-moz-placeholder {  /* Firefox 19+ */
   color: #999999;
   @include desktop {
-	  color: #FFFFFF;
-	}
+    color: #FFFFFF;
+  }
 }
 
 input:-ms-input-placeholder {  
   color: #999999;
   @include desktop {
-	  color: #FFFFFF;
-	}
+    color: #FFFFFF;
+  }
 }
 
 /* Customized radio button */
@@ -34,19 +34,19 @@ input[type=radio] {
 }
 
 label:before {
-	background-color: #FFFFFF;
-	border-radius: 50%;
+  background-color: #FFFFFF;
+  border-radius: 50%;
   content: '';
   display: none;
   height: 10px;
   left: 0;
   margin-right: 2px;
-	position: relative;
+  position: relative;
   width: 10px;
 }
 
 input[type=radio]:checked + label:before {
-	content: '\2022';
+  content: '\2022';
   color: #000000;
   display: none;
   font-size: 20px;
@@ -55,45 +55,45 @@ input[type=radio]:checked + label:before {
 
 /* The Wrapper for putting in the icon for search button and search box */
 &-SearchBox-Wrapper {
-	display: inline-block;
+  display: inline-block;
 }
 
 /* CSS for Search button */
 
 &-SearchButton {
   -webkit-appearance: none;
-	background-color: transparent;
-	color: $BG_MENU_SEARCH;
-	border-width: 0px;
-	display: none;
-	font-size: 22px;
+  background-color: transparent;
+  color: $BG_MENU_SEARCH;
+  border-width: 0px;
+  display: none;
+  font-size: 22px;
   padding: 8px 12px 12px 12px;
-	@include desktop {
-		display: block;
-	}
-	&:before {
-		vertical-align: none;
-		border-bottom-style: none;
-		@include desktop {
-	  	vertical-align: sub;
-	  	border-bottom-color: $BG_MENU_SEARCH;
-	  	border-bottom-style: solid;
-	  	border-bottom-width: 1px;
-	  }
-	}
+  @include desktop {
+    display: block;
+  }
+  &:before {
+    vertical-align: none;
+    border-bottom-style: none;
+    @include desktop {
+      vertical-align: sub;
+      border-bottom-color: $BG_MENU_SEARCH;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+    }
+  }
 }
 
 &-SearchButton--active {
   -webkit-appearance: none;
-	background-color: $BG_MENU_SEARCH;
-	color: #78CCED;
-	border-width: 0px;
-	display: none;
-	font-size: 22px;
+  background-color: $BG_MENU_SEARCH;
+  color: #78CCED;
+  border-width: 0px;
+  display: none;
+  font-size: 22px;
   padding: 8px 12px 14px 12px;
-	@include desktop {
-		display: block;
-	}
+  @include desktop {
+    display: block;
+  }
 	&:before {
 		vertical-align: none;
 		border-bottom-style: none;

@@ -109,22 +109,18 @@ class SearchBox extends React.Component {
 
   // The function to generate a http request after click the search button
   _submitSearchRequest (value) {
-
     let requestParameters;
     // Grab the values the user has entered as the parameters for URL
-    if (value !=='none') {
+    (value !=='none') ?
       // If the user choose the radio buttons on desktop version
       requestParameters = {
-        keywords: encodeURIComponent(this.state.searchKeywords.trim()),
-        option: value
-      } 
-    } else {
-      // If the user click the buttons on mobile version
-      requestParameters = {
-        keywords: encodeURIComponent(this.state.searchKeywords.trim()),
+        keywords: encodeURIComponent(this.state.searchKeywords.trim()), 
+        option: value 
+        // If the user click the buttons on mobile version
+      } : requestParameters = {
+        keywords: encodeURIComponent(this.state.searchKeywords.trim()), 
         option: this.state.searchOption
-      } 
-    }
+      }
     // The variable for request URL
     let requestUrl;
     // Decide the search option
