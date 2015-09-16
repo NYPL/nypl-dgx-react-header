@@ -41,7 +41,7 @@ class NavMenuBottomButtons extends React.Component{
 NavMenuBottomButtons.defaultProps = {
   lang: 'en',
   className: 'NavMenuBottomButtons',
-  libraryCardLink: '//www.nypl.org',
+  libraryCardLink: '//catalog.nypl.org/screens/selfregpick.html',
   subscribeLink: '//www.nypl.org'
 };
 

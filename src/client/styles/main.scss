@@ -43,7 +43,7 @@
   	*/ 
   	&-Buttons {
 
-			.SubscribeButton, .DonateButton, .SignInButton {
+			.SubscribeButton, .DonateButton, .SignInButton, .LibraryCardButton {
 				@include Kievit-Bold;
 				font-size: 11px;
 			}
