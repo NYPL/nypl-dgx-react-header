@@ -94,62 +94,62 @@ input[type=radio]:checked + label:before {
   @include desktop {
     display: block;
   }
-	&:before {
-		vertical-align: none;
-		border-bottom-style: none;
-		@include desktop {
-	  	vertical-align: sub;
-	  	border-bottom-color: $BG_MENU_SEARCH;
-	  	border-bottom-style: none;
-	  	border-bottom-width: 1px;
-	  }
-	}
+  &:before {
+    vertical-align: none;
+    border-bottom-style: none;
+    @include desktop {
+      vertical-align: sub;
+      border-bottom-color: $BG_MENU_SEARCH;
+      border-bottom-style: none;
+      border-bottom-width: 1px;
+    }
+  }
 }
 
 /* CSS for Search box. It shows only activated. Default is not displayed. */
 &-SearchBox {
-	display: none;
+  display: none;
 }
 
 &-SearchBox--active {
-	background-color: $BG_MENU_SEARCH; 
-	color: #000000;
-	display: block;
+  background-color: $BG_MENU_SEARCH; 
+  color: #000000;
+  display: block;
   left: 0px;
-	margin: -1px 0 0 0;
-	position: absolute;
+  margin: -1px 0 0 0;
+  position: absolute;
   top: 0;
-	width: 100%;
-	z-index: 300;
-	@include desktop {
-		height: 236px;
-		margin: 0;
-		top: 48px;
-	}
+  width: 100%;
+  z-index: 300;
+  @include desktop {
+    height: 236px;
+    margin: 0;
+    top: 48px;
+  }
 }
 
 /* The wrapper for all elements in SearchBox */
 &-SearchBox-Elements-Wrapper {
   display: inline-block;
-	margin: 20px 0 0 0;
-	max-width: 1312px;
-	position: relative;
+  margin: 20px 0 0 0;
+  max-width: 1312px;
+  position: relative;
   width: 100%;
-	@include desktop {
-		margin: 66px auto 0 auto;
+  @include desktop {
+    margin: 66px auto 0 auto;
     display: block;
     text-align: left;
-	}
-	.submit-icon {
-		color: #FFFFFF;
-		display: none;
-		font-size: 80px;
-		@include desktop {
-			display: inline-block;
-			position: relative;
-			right: 10px;	  
-		}
-	}
+  }
+  .submit-icon {
+    color: #FFFFFF;
+    display: none;
+    font-size: 80px;
+    @include desktop {
+      display: inline-block;
+      position: relative;
+      right: 10px;
+    }
+  }
 }
 
 /* The wrapper for input fields */
@@ -159,43 +159,43 @@ input[type=radio]:checked + label:before {
   position: relative;
   width: 100%;
   text-align: center;
-	@include desktop {
-		border-bottom-style: none;
-		display: inline-block;
-		left: 0px;
-		padding: 0 0 0 110px;
-		width: 80%;
-	}
+  @include desktop {
+    border-bottom-style: none;
+    display: inline-block;
+    left: 0px;
+    padding: 0 0 0 110px;
+    width: 80%;
+  }
 }
 
 &-SearchBox-Elements-Input-Keywords-Wrapper {
-	display: inline-block;
-	margin: 0 auto;
+  display: inline-block;
+  margin: 0 auto;
   position: relative;
   text-align: left;
   width: 88%;
-	.icon {
-		background-color: #FFFFFF;
-		color: $BG_MENU_SEARCH;
-		display: inline-block;
-		font-size: 20px;
-		left: 2px;
-		padding: 10px 5px;
-		position: absolute;
-		top: 9px;
-		@include desktop {
-			display:none;
-		}
-	}
-	@include desktop {
-		margin: 0 0 20px 0;
-		width: 100%;
-	}
+  .icon {
+    background-color: #FFFFFF;
+    color: $BG_MENU_SEARCH;
+    display: inline-block;
+    font-size: 20px;
+    left: 2px;
+    padding: 10px 5px;
+    position: absolute;
+    top: 9px;
+    @include desktop {
+      display:none;
+    }
+  }
+  @include desktop {
+    margin: 0 0 20px 0;
+    width: 100%;
+  }
 }
 
 &-SearchBox-Input-Keywords {
-	background-color: #FFFFFF;
-	border-width: 1px;
+  background-color: #FFFFFF;
+  border-width: 1px;
   border-top: none;
   border-left: none;
   border-right: none;
@@ -206,86 +206,86 @@ input[type=radio]:checked + label:before {
   font-family: Kievit-Book;
   font-size: 18px;
   font-style: italic;
-	height: 60px;
+  height: 60px;
   padding: 0 0 0 35px;
   width: -webkit-calc(100% - 35px);
   width: -moz-calc(100% - 35px);
   width: calc(100% - 35px);
-	@include desktop {
-		background-color: #1DA1D4;
-		color: #FFFFFF;
-		font-family: Kievit-Light;
-		font-size: 66px;
-		font-style: normal;
-		padding: 0 0 16px 0;
-		width: 100%;
-	}
+  @include desktop {
+    background-color: #1DA1D4;
+    color: #FFFFFF;
+    font-family: Kievit-Light;
+    font-size: 66px;
+    font-style: normal;
+    padding: 0 0 16px 0;
+    width: 100%;
+  }
 }
 
 &-SearchBox-Elements-Input-Options-Wrapper {
-	color: #FFFFFF;
-	display: none;
-	float: left;
-	font-size: 14px;
-	@include desktop {
-		display: inline-block;
-	}
+  color: #FFFFFF;
+  display: none;
+  float: left;
+  font-size: 14px;
+  @include desktop {
+    display: inline-block;
+  }
 }
 
 &-SearchBox-Input-Options {
-	display: inline-block;
-	span {
-		margin: 0 50px 0 6px;
-	}
+  display: inline-block;
+  span {
+    margin: 0 50px 0 6px;
+  }
 }
 
 &-SearchBox-Input-Options-label {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 &-SearchBox-Elements-SubmitButton {
-	cursor: pointer;
-	display: none;
-	@include desktop {
-		display: inline-block;
+  cursor: pointer;
+  display: none;
+  @include desktop {
+    display: inline-block;
     float: right;
     height: 60px;
     margin: 0 0 10% 0;
-	}
+  }
 }
 
 /* Submit buttons with search options on mobile version */
 &-SearchBox-Mobile-Submit {
-	border-top-style: solid;
+  border-top-style: solid;
   border-color: rgba(102,102,102,0.21);
   border-width: 1px; 
-	color: #FFFFFF;
-	font-size: 14px;
-	text-align: center;
-	text-transform: uppercase;
-	display: block;
-	@include desktop {
-		display: none;
-	}
+  color: #FFFFFF;
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  display: block;
+  @include desktop {
+    display: none;
+  }
 }
 
 &-SearchBox-Mobile-Submit-Option {
   &.left-column {
-  	border-color: rgba(102, 102, 102, 0.21);
-		border-right-style: solid;
-		border-width: 1px;
+    border-color: rgba(102, 102, 102, 0.21);
+    border-right-style: solid;
+    border-width: 1px;
   }
-	cursor: pointer;
-	display: inline-block;
-	padding: 20px 0;
-	width: 49%;
-	span {
-		margin: 0 20px 0 0;
-	}
-	.icon {
-		color: #78CCED;
-		font-size: 30px;
-		position: absolute;
-		top: 93px;
-	}
+  cursor: pointer;
+  display: inline-block;
+  padding: 20px 0;
+  width: 49%;
+  span {
+    margin: 0 20px 0 0;
+  }
+  .icon {
+    color: #78CCED;
+    font-size: 30px;
+    position: absolute;
+    top: 93px;
+  }
 }
