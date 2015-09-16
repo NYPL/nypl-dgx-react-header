@@ -12,7 +12,25 @@ let config = {
 		tumblr: 'http://nypl.tumblr.com/',
 		youtube: 'https://www.youtube.com/user/NewYorkPublicLibrary',
 		soundcloud: 'https://soundcloud.com/nypl'
-	}
+	},
+	donationLinks: [
+		{
+			url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form',
+			amount: '$55'
+		},
+		{
+			url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form',
+			amount: '$115'
+		},
+		{
+			url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form',
+			amount: '$250'
+		},
+		{
+			url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form',
+			amount: 'Other'
+		}
+	]
 };
 
 export default config;
