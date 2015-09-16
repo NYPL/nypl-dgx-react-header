@@ -30,8 +30,8 @@ class Header extends React.Component {
     // the proper Data, then fetch.
     this._fetchDataIfNeeded();
 
-    // Assign method for proper scope handle
-    let handleHeaderScroll = this._activateStickyHeader.bind(this);
+    // Assign method for proper scope
+    let handleHeaderScroll = this._handleStickyHeader.bind(this);
 
     // Allows us to use window only after component has mounted
     window.addEventListener('scroll',
@@ -78,22 +78,52 @@ class Header extends React.Component {
     );
   }
 
+  /**
+   * _fetchDataIfNeeded() 
+   * checks the existence of headerData items,
+   * triggers the Actions.fetchHeaderData()
+   * method to dispatch a client-side event
+   * to obtain data.
+   */
   _fetchDataIfNeeded() {
     if (Store.getState().headerData.length < 1) {
       Actions.fetchHeaderData();
     }
   }
 
-  _activateStickyHeader() {
+  /**
+   * _handleStickyHeader() 
+   * returns the Actions.updateIsHeaderSticky()
+   * with the proper boolean value to update the 
+   * Store.isSticky value based on the window 
+   * vertical scroll position surpassing the height
+   * of the Header DOM element.
+   */
+  _handleStickyHeader() {
     let headerHeight = this._getHeaderHeight(),
-      windowHeight = window.scrollY;
-    return (windowHeight > headerHeight)
+      windowVerticalDistance = this._getWindowVerticalScroll();
+
+    return (windowVerticalDistance > headerHeight)
       ? Actions.updateIsHeaderSticky(true) : Actions.updateIsHeaderSticky(false);
   }
 
+  /**
+   * _getHeaderHeight() 
+   * returns the Height of the Header DOM
+   * element in pixels.
+   */
   _getHeaderHeight() {
     let headerContainer = document.getElementById(this.props.id);
     return headerContainer.clientHeight;
+  }
+
+  /**
+   * _getWindowVerticallScroll() 
+   * returns the current window vertical
+   * scroll position in pixels.
+   */
+  _getWindowVerticalScroll() {
+    return window.scrollY;
   }
 };
 

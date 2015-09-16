@@ -20,12 +20,28 @@ class Store {
     };
   }
 
-  // Public Methods
+  /*** PUBLIC METHODS ***/
+  /**
+   * _getMobileMenuBtnValue() 
+   * returns the current state.activeMobileButton
+   * value.
+   * @return {String}
+   */
   static _getMobileMenuBtnValue() {
     return this.state.activeMobileButton;
   }
 
-  // Private Methods
+  /**
+   * _getIsStickyValue() 
+   * returns the current state.isSticky value.
+   *
+   * @return {Boolean} true/false
+   */
+  static _getIsStickyValue() {
+    return this.state.isSticky;
+  }
+
+  /*** PRIVATE METHODS ***/
   handleUpdateHeaderData(data) {
     this.setState({headerData: data});
   }
