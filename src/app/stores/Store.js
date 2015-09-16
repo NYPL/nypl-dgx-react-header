@@ -12,6 +12,11 @@ class Store {
       handleUpdateIsHeaderSticky: Actions.UPDATE_IS_HEADER_STICKY
     });
 
+    this.exportPublicMethods({
+      _getMobileMenuBtnValue: this._getMobileMenuBtnValue,
+      _getIsStickyValue: this._getIsStickyValue
+    });
+
     this.state = {
       headerData: [],
       errorMessage: null,
@@ -27,7 +32,7 @@ class Store {
    * value.
    * @return {String}
    */
-  static _getMobileMenuBtnValue() {
+  _getMobileMenuBtnValue() {
     return this.state.activeMobileButton;
   }
 
@@ -37,7 +42,7 @@ class Store {
    *
    * @return {Boolean} true/false
    */
-  static _getIsStickyValue() {
+  _getIsStickyValue() {
     return this.state.isSticky;
   }
 
