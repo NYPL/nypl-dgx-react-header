@@ -63,7 +63,8 @@ class MobileHeader extends React.Component {
           ]}
           className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
           ref='MobileSearchButton'
-          onClick={this._handleSearchBtnClick}>
+          onClick={this._handleSearchBtnClick}
+          onTouchStart={this._handleSearchBtnClick}>
         </span>
 
         <span 
@@ -73,7 +74,8 @@ class MobileHeader extends React.Component {
           ]}
           className={`${this.props.className}-MenuButton ${mobileMenuClass}`}
           ref='MobileMenuButton'
-          onClick={this._handleMenuBtnClick}>
+          onClick={this._handleMenuBtnClick}
+          onTouchStart={this._handleMenuBtnClick}>
         </span>
       </div>
     );
