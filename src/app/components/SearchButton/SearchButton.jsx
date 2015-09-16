@@ -1,10 +1,14 @@
 // Import React libraries
-import Radium from 'radium';
 import React from 'react';
 import cx from 'classnames';
+import Radium from 'radium';
 
 // Import components
 import BasicButton from '../Buttons/BasicButton.jsx';
+import SearchBox from '../SearchBox/SearchBox.jsx';
+
+import HeaderStore from '../../stores/Store.js';
+import Actions from '../../actions/Actions.js';
 
 // Create React class
 class SearchButton extends React.Component {
@@ -15,38 +19,70 @@ class SearchButton extends React.Component {
 
     // Holds the initial state. The actived status is false
     this.state = {
-      isActive: false
     };
-    
-    // The function activates the saerch box
-    this._activate = this._activate.bind(this);
   }
 
   // Dom Render Section
   render () {
     // Give active class if the button is activated
-    let classes = cx({'--active': this.state.isActive});
-  	return (
-      <li>
-        <BasicButton id='NavMenu-TopLevelLinks__SearchButton'
-        className={`NavMenu-TopLevelLinks__SearchButton${classes}`}
+    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' || 
+      HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
+    return (
+      <div className={`${this.props.className}-SearchBox-Wrapper`}
+      onMouseEnter={this._activate.bind(this, 'hover')}
+      onMouseLeave={this._deactivate.bind(this)}>
+        <BasicButton id={`${this.props.className}-SearchButton`}
+        className={`nypl-icon-magnifier-thin ${this.props.className}-SearchButton${classes}`}
         name='Search Button'
-        label='Search Box'
+        label=''
         style={styles.base}
-        onClick={this._activate} />
-      </li>
-		);
+        onClick={this._activate.bind(this, 'click')} />
+        <SearchBox id={`${this.props.className}-SearchBox`} 
+        className={`${this.props.className}-SearchBox`} />
+      </div>
+    );
   }
 
-  // Set the function to active search box when the button is clicked
-  _activate() {
-    // Set the NaveMenu activeItem to be search if search box is not shown
-    (this.state.isActive === false) ?
-      this.props.activate('search') : this.props.activate(null);
-    // Set the button state to be active
-    this.state.isActive = !this.state.isActive;
+  // Set the function to active searchbox when the button is hovered or clicked
+  _activate(option) {
+    if (option === 'hover') {
+      // And the only when the button has not been activated yet
+      if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
+        Actions.setMobileMenuButtonValue('hoverSearch');
+      } 
+    } else {
+      // And only when the button has not activated by hovering
+      if (HeaderStore._getMobileMenuBtnValue() !== 'hoverSearch'){
+        this._toggle();
+      }
+    }
+  }
+
+  // Deactivated the button only when it was activated by hovering
+  _deactivate() {
+    // _deactive function only works when it is on desktop version
+    if (HeaderStore._getMobileMenuBtnValue() === 'hoverSearch') {
+      Actions.setMobileMenuButtonValue('');
+    }
+  }
+
+  // The toggle for the interaction of clicking on the button
+  _toggle() {
+    // Only activated when the button has not been activated yet
+    if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
+      Actions.setMobileMenuButtonValue('clickSearch');
+      console.log('click search');
+    } else {
+      Actions.setMobileMenuButtonValue('');
+      console.log('no search');
+    }
   }
 }
+
+SearchButton.defaultProps = {
+  lang: 'en',
+  className: 'NavMenu'
+};
 
 const styles = {
   base: {

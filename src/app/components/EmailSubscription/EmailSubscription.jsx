@@ -53,7 +53,7 @@ class EmailSubscription extends React.Component {
     let status = this.state.formStatus,
       isLoading = this.state.formProcessing;
 
-    //console.log(isLoading, status);
+    // console.log(this.state);
 
     if (!isLoading) {
       if (status === 'success') {
@@ -105,7 +105,7 @@ class EmailSubscription extends React.Component {
               placeholder={this.props.placeholder}
               style={styles.emailField}
               ref='emailAddressField'
-              required={true} />
+              isRequired={true} />
 
               <InputField 
               type='submit'
@@ -179,7 +179,8 @@ class EmailSubscription extends React.Component {
     })
    .catch((response) => {
       this.setState({
-        formStatus: response.data.responseStatus
+        formStatus: response.data.responseStatus,
+        formProcessing: false
       });   
     });
   }

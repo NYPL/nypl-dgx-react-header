@@ -1,7 +1,6 @@
 // The button component that doesn't activate any link, only interaction and submission
 // Import React libraries
 import React from 'react';
-import Radium from 'radium';
 
 class BasicButton extends React.Component {
   // Constructor used in ES6
@@ -18,6 +17,7 @@ class BasicButton extends React.Component {
       name={this.props.name}
       onClick={this.props.onClick}
       onMouseEnter={this.props.onMouseEnter}
+      onMouseLeave={this.props.onMouseLeave}
       style={[
         styles.base,
         this.props.style
@@ -39,9 +39,8 @@ BasicButton.defaultProps = {
 
 const styles = {
   base: {
-
   }
 };
 
 // Export the component
-export default Radium(BasicButton);
+export default BasicButton;

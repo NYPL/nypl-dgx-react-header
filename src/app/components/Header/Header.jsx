@@ -1,17 +1,19 @@
-// Non-NYPL module imports
+// NPM Modules
 import React from 'react';
 import Radium from 'radium';
+import cx from 'classnames';
 
-// ALT FLUX
+// ALT Flux
 import Store from '../../stores/Store.js';
 import Actions from '../../actions/Actions.js';
 
-// NYPL module imports
+// NYPL Components
 import Logo from '../Logo/Logo.jsx';
-import SSOContainer from '../SSOContainer/SSOContainer.jsx';
 import DonateButton from '../DonateButton/DonateButton.jsx';
+import SimpleButton from '../Buttons/SimpleButton.jsx';
 import SubscribeButton from '../SubscribeButton/SubscribeButton.jsx';
 import NavMenu from '../NavMenu/NavMenu.jsx';
+import MobileHeader from './MobileHeader.jsx';
 
 class Header extends React.Component {
 
@@ -24,8 +26,20 @@ class Header extends React.Component {
 
   componentDidMount() {
     Store.listen(this._onChange.bind(this));
-    // Here we would fetch our data async
-    //Actions.fetchHeaderData();
+
+    // If the Store is not populated with
+    // the proper Data, then fetch.
+    this._fetchDataIfNeeded();
+
+    // Assign method for proper scope
+    let handleHeaderScroll = this._handleStickyHeader.bind(this);
+
+    // Allows us to use window only after component has mounted
+    window.addEventListener('scroll',
+      function() {
+        handleHeaderScroll();
+      }
+    );
   }
 
   componentWillUnmount() {
@@ -37,37 +51,98 @@ class Header extends React.Component {
   }
 
   render () {
-    console.log(this.state);
+    let isHeaderSticky = this.state.isSticky,
+      headerClasses = cx(this.props.className, {'sticky': isHeaderSticky});
+
     return (
-      <header id='Header' className='Header'>
-        <div className='Header-TopWrapper' style={styles.wrapper}>
-          <Logo className='Header-Logo' style={styles.logo} />
-          <div id='Header-Buttons' style={styles.topButtons}>
-            <SSOContainer style={styles.ssoContainer} />
-            <SubscribeButton label='Subscribe' lang={this.props.lang} style={styles.subscribeButton} />
-            <DonateButton lang={this.props.lang} style={styles.donateButton} />
+      <header id={this.props.id} className={headerClasses}>
+        <div className={`${this.props.className}-Wrapper`}>
+          <MobileHeader className={`${this.props.className}-Mobile`} locatorUrl={'//www.nypl.org/locations'} />
+          <div className={`${this.props.className}-TopWrapper`} style={styles.wrapper}>
+            <Logo className={`${this.props.className}-Logo`} />
+            <div className={`${this.props.className}-Buttons`} style={styles.topButtons}>
+              <SimpleButton 
+                label='Get a Library Card' 
+                target='//catalog.nypl.org/screens/selfregpick.html' 
+                className='LibraryCardButton'
+                style={styles.libraryCardButton} />
+              <SubscribeButton 
+                label='Subscribe'
+                lang={this.props.lang}
+                style={styles.subscribeButton} />
+              <DonateButton 
+                lang={this.props.lang}
+                style={styles.donateButton} />
+            </div>
           </div>
+          <NavMenu 
+            className={`${this.props.className}-NavMenu`}
+            lang={this.props.lang}
+            items={this.state.headerData}  />
         </div>
-        <NavMenu className='Header-NavMenu' items={this.state.headerData} lang={this.props.lang} />
       </header>
     );
+  }
+
+  /**
+   * _fetchDataIfNeeded() 
+   * checks the existence of headerData items,
+   * triggers the Actions.fetchHeaderData()
+   * method to dispatch a client-side event
+   * to obtain data.
+   */
+  _fetchDataIfNeeded() {
+    if (Store.getState().headerData.length < 1) {
+      Actions.fetchHeaderData();
+    }
+  }
+
+  /**
+   * _handleStickyHeader() 
+   * returns the Actions.updateIsHeaderSticky()
+   * with the proper boolean value to update the 
+   * Store.isSticky value based on the window 
+   * vertical scroll position surpassing the height
+   * of the Header DOM element.
+   */
+  _handleStickyHeader() {
+    let headerHeight = this._getHeaderHeight(),
+      windowVerticalDistance = this._getWindowVerticalScroll();
+
+    return (windowVerticalDistance > headerHeight)
+      ? Actions.updateIsHeaderSticky(true) : Actions.updateIsHeaderSticky(false);
+  }
+
+  /**
+   * _getHeaderHeight() 
+   * returns the Height of the Header DOM
+   * element in pixels.
+   */
+  _getHeaderHeight() {
+    let headerContainer = document.getElementById(this.props.id);
+    return headerContainer.clientHeight;
+  }
+
+  /**
+   * _getWindowVerticallScroll() 
+   * returns the current window vertical
+   * scroll position in pixels.
+   */
+  _getWindowVerticalScroll() {
+    return window.scrollY;
   }
 };
 
 Header.defaultProps = {
-  lang: 'en'
+  lang: 'en',
+  className: 'Header',
+  id: 'Header'
 };
 
 const styles = {
   wrapper: {
     position: 'relative',
     margin: '0 auto'
-  },
-  logo: {
-    display: 'block',
-    width: '230px',
-    position: 'relative',
-    left: '-8px'
   },
   topButtons: {
     position: 'absolute',
@@ -78,6 +153,12 @@ const styles = {
   },
   ssoContainer: {
     display: 'inline-block'
+  },
+  libraryCardButton: {
+    display: 'inline-block',
+    color: '#000',
+    margin: 0,
+    padding: 0
   },
   subscribeButton: {
     display: 'inline-block'

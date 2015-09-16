@@ -1,31 +1,70 @@
 import alt from '../alt.js';
 import Actions from '../actions/Actions.js';
-import HeaderSource from '../utils/HeaderSource.js';
 
 class Store {
   constructor(){
-    this.headerData = [];
-    this.errorMessage = null;
 
     this.bindListeners({
       handleUpdateHeaderData: Actions.UPDATE_HEADER_DATA,
       handleFetchHeaderData: Actions.FETCH_HEADER_DATA,
-      handleHeaderDataFailedFetch: Actions.FAILED_HEADER_DATA
+      handleHeaderDataFailedFetch: Actions.FAILED_HEADER_DATA,
+      handleSetMobileMenuButtonValue: Actions.SET_MOBILE_MENU_BUTTON_VALUE,
+      handleUpdateIsHeaderSticky: Actions.UPDATE_IS_HEADER_STICKY
     });
 
-    this.registerAsync(HeaderSource);
+    this.exportPublicMethods({
+      _getMobileMenuBtnValue: this._getMobileMenuBtnValue,
+      _getIsStickyValue: this._getIsStickyValue
+    });
+
+    this.state = {
+      headerData: [],
+      errorMessage: null,
+      isSticky: false,
+      activeMobileButton: ''
+    };
   }
 
+  /*** PUBLIC METHODS ***/
+  /**
+   * _getMobileMenuBtnValue() 
+   * returns the current state.activeMobileButton
+   * value.
+   * @return {String}
+   */
+  _getMobileMenuBtnValue() {
+    return this.state.activeMobileButton;
+  }
+
+  /**
+   * _getIsStickyValue() 
+   * returns the current state.isSticky value.
+   *
+   * @return {Boolean} true/false
+   */
+  _getIsStickyValue() {
+    return this.state.isSticky;
+  }
+
+  /*** PRIVATE METHODS ***/
   handleUpdateHeaderData(data) {
-    this.headerData = data;
+    this.setState({headerData: data});
   }
 
   handleFetchHeaderData() {
-    this.headerData = [];
+    this.setState({headerData: []});
   }
 
   handleHeaderDataFailedFetch(errorMessage) {
-    this.errorMessage =  errorMessage;
+    this.setState({errorMessage: errorMessage});
+  }
+
+  handleSetMobileMenuButtonValue(currentActiveMobileButton) {
+    this.setState({activeMobileButton: currentActiveMobileButton});
+  }
+
+  handleUpdateIsHeaderSticky(value) {
+    this.setState({isSticky: value});
   }
 }
 
