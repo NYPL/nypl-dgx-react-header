@@ -23,10 +23,6 @@ class MobileHeader extends React.Component {
     HeaderStore.listen(this._onChange.bind(this));
   }
 
-  componentWillMount() {
-    React.initializeTouchEvents(true);
-  }
-
   componentWillUnmount() {
     HeaderStore.unlisten(this._onChange.bind(this));
   }
@@ -67,8 +63,7 @@ class MobileHeader extends React.Component {
           ]}
           className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
           ref='MobileSearchButton'
-          onClick={this._handleSearchBtnClick}
-          onTouchStart={this._handleSearchBtnClick}>
+          onClick={this._handleSearchBtnClick}>
         </span>
 
         <span 
@@ -78,8 +73,7 @@ class MobileHeader extends React.Component {
           ]}
           className={`${this.props.className}-MenuButton ${mobileMenuClass}`}
           ref='MobileMenuButton'
-          onClick={this._handleMenuBtnClick}
-          onTouchStart={this._handleMenuBtnClick}>
+          onClick={this._handleMenuBtnClick}>
         </span>
       </div>
     );
