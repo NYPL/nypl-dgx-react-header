@@ -20,7 +20,7 @@ input:-moz-placeholder {  /* Firefox 19+ */
   }
 }
 
-input:-ms-input-placeholder {  
+input:-ms-input-placeholder {
   color: #999999;
   @include desktop {
     color: #FFFFFF;
@@ -195,10 +195,8 @@ input[type=radio]:checked + label:before {
 
 &-SearchBox-Input-Keywords {
   background-color: #FFFFFF;
+  border: none;
   border-width: 1px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
   border-bottom: solid;
   border-color: #FFFFFF;
   color: #000000;
@@ -257,7 +255,7 @@ input[type=radio]:checked + label:before {
 /* Submit buttons with search options on mobile version */
 &-SearchBox-Mobile-Submit {
   border-top-style: solid;
-  border-color: rgba(102,102,102,0.21);
+  border-color: rgba(102, 102, 102, 0.21);
   border-width: 1px; 
   color: #FFFFFF;
   font-size: 14px;

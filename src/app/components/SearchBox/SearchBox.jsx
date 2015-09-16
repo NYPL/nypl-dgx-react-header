@@ -90,7 +90,7 @@ class SearchBox extends React.Component {
             </div>
           </div>
           <div className={`nypl-icon-magnifier-circle ${this.props.className}-Elements-SubmitButton submit-icon`} 
-          onClick={this._submitSearchRequest.bind(this, 'none')}>
+          onClick={this._submitSearchRequest.bind(this, null)}>
           </div>
         </div>
       </div>
@@ -110,17 +110,12 @@ class SearchBox extends React.Component {
   // The function to generate a http request after click the search button
   _submitSearchRequest (value) {
     let requestParameters;
-    // Grab the values the user has entered as the parameters for URL
-    (value !=='none') ?
-      // If the user choose the radio buttons on desktop version
-      requestParameters = {
-        keywords: encodeURIComponent(this.state.searchKeywords.trim()), 
-        option: value 
-        // If the user click the buttons on mobile version
-      } : requestParameters = {
-        keywords: encodeURIComponent(this.state.searchKeywords.trim()), 
-        option: this.state.searchOption
-      }
+    // Grab the values the user has entered as the parameters for URL,
+    // depends on desktop or mobile
+    requestParameters = {
+      keywords: encodeURIComponent(this.state.searchKeywords.trim()), 
+      option: value || this.state.searchOption
+    }
     // The variable for request URL
     let requestUrl;
     // Decide the search option
