@@ -78,19 +78,19 @@ class SearchBox extends React.Component {
           <div className={`${this.props.className}-Mobile-Submit`}>
             <div className={`${this.props.className}-Mobile-Submit-Option left-column`}
             value='catalog'
-            onClick={this._submitMobileSearchRequest.bind(this, 'catalog')}>
+            onClick={this._submitSearchRequest.bind(this, 'catalog')}>
               catalog
               <span className='icon-wedge-right icon'></span>
             </div>
             <div className={`${this.props.className}-Mobile-Submit-Option`}
             value='website'
-            onClick={this._submitMobileSearchRequest.bind(this, 'website')}>
+            onClick={this._submitSearchRequest.bind(this, 'website')}>
               nypl.org
               <span className='icon-wedge-right icon'></span>
             </div>
           </div>
           <div className={`icon-circle-magnifier ${this.props.className}-Elements-SubmitButton submit-icon`} 
-          onClick={this._submitSearchRequest}>
+          onClick={this._submitSearchRequest.bind(this, 'none')}>
           </div>
         </div>
       </div>
@@ -108,31 +108,22 @@ class SearchBox extends React.Component {
   }
 
   // The function to generate a http request after click the search button
-  _submitSearchRequest (e) {
-    e.preventDefault();
-    // Grab the values the user has entered as the parameters for URL
-    let requestParameters = {
-      keywords: encodeURIComponent(this.state.searchKeywords.trim()),
-      option: this.state.searchOption
-    }
-    // The variable for request URL
-    let requestUrl;
-    // Decide the search option
-    if (requestParameters.option === 'catalog') {
-      requestUrl = `https://nypl.bibliocommons.com/search?t=smart&q=${requestParameters.keywords}&commit=Search&searchOpt=catalogue`;
-    }  else if (requestParameters.option === 'website') {
-      requestUrl = `http://www.nypl.org/search/apachesolr_search/${requestParameters.keywords}`;
-    }
-    // Go to the search page
-    window.location.assign(requestUrl);
-  }
+  _submitSearchRequest (value) {
 
-  _submitMobileSearchRequest (value) {    
+    let requestParameters;
     // Grab the values the user has entered as the parameters for URL
-    // Go to different options as clicking different buttons
-    let requestParameters = {
-      keywords: encodeURIComponent(this.state.searchKeywords.trim()),
-      option: value
+    if (value !=='none') {
+      // If the user choose the radio buttons on desktop version
+      requestParameters = {
+        keywords: encodeURIComponent(this.state.searchKeywords.trim()),
+        option: value
+      } 
+    } else {
+      // If the user click the buttons on mobile version
+      requestParameters = {
+        keywords: encodeURIComponent(this.state.searchKeywords.trim()),
+        option: this.state.searchOption
+      } 
     }
     // The variable for request URL
     let requestUrl;
