@@ -6,6 +6,7 @@ import cx from 'classnames';
 import HeaderStore from '../../stores/Store.js';
 
 // Dependent Components
+import SearchButton from '../SearchButton/SearchButton.jsx';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.jsx';
 import NavMenuBottomButtons from '../NavMenuBottomButtons/NavMenuBottomButtons.jsx';
 import DonateButton from '../DonateButton/DonateButton.jsx';
@@ -43,6 +44,7 @@ class NavMenu extends React.Component {
             {navMenu}
             {donateButton}
           </ul>
+          <SearchButton className={`${this.props.className}`} />
           <NavMenuBottomButtons className='MobileBottomButtons' />
         </div>
       </nav>

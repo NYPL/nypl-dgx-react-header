@@ -184,11 +184,19 @@
 	 * - Includes Logo text for mobile
 	*/
 	&-NavMenu {
+
+		@import 'components/_search';
   	position: relative;
   	display: block;
 
   	/* Wrapper for the NavMenu */
   	&-Wrapper {
+  		@include desktop {
+  			margin: 0 auto;
+  			max-width: 1312px;
+				text-align: right;
+  		}
+
   		&.mobileActive {
   			margin-top: -1px;
   			
@@ -239,7 +247,7 @@
 		  	display: none;
 
 		  	@include desktop {
-		  		display: block;
+		  		display: inline-block;
 		  		background-color: transparent;
 		  		padding: 0;
 			  	margin: 0 auto;
@@ -249,7 +257,7 @@
 		  	/* Top level Link Rules */
 		  	& > li {
 		  		padding: 5px 0;
-		  		margin: 2.5px 15px 0px 0px;
+		  		margin: 2.5px 15px 0px 0;
 
 		  		@include desktop {
 		  			padding: 0;
@@ -452,13 +460,12 @@
 		  	}
 		  }
 
-
 		  .MegaMenu {
 		  	display: none;
 		  	color: #FFFFFF;
 		  	width: 100%;
 	  		position: absolute;
-		  	top: 32px;
+		  	top: 45px;
 		  	left: 0;
 
 		  	/* Only display MegaMenu's on Desktop */
@@ -794,5 +801,6 @@
 				vertical-align: top;
 			}
 		}
-	}
+  }
 }
+
