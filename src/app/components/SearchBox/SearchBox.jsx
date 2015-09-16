@@ -115,7 +115,7 @@ class SearchBox extends React.Component {
       keywords: encodeURIComponent(this.state.searchKeywords.trim()),
       option: this.state.searchOption
     }
-    // The vairable for request URL
+    // The variable for request URL
     let requestUrl;
     // Decide the search option
     if (requestParameters.option === 'catalog') {
@@ -134,7 +134,7 @@ class SearchBox extends React.Component {
       keywords: encodeURIComponent(this.state.searchKeywords.trim()),
       option: value
     }
-    // The vairable for request URL
+    // The variable for request URL
     let requestUrl;
     // Decide the search option
     if (requestParameters.option === 'catalog') {
