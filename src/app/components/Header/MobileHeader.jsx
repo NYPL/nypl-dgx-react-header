@@ -37,11 +37,11 @@ class MobileHeader extends React.Component {
 
       locatorUrl = this.props.locatorUrl || '#',
       mobileSearchClass = cx({
-        'active icon-solo-x': activeButton === 'clickSearch',
+        'active nypl-icon-solo-x': activeButton === 'clickSearch',
         'nypl-icon-magnifier-thin': activeButton !== 'clickSearch'
       }),
       mobileMenuClass = cx({
-        'active icon-solo-x': activeButton === 'mobileMenu', 
+        'active nypl-icon-solo-x': activeButton === 'mobileMenu', 
         'nypl-icon-burger-nav': activeButton !== 'mobileMenu'
       });
 

@@ -41,7 +41,7 @@ class SearchBox extends React.Component {
           <div className={`${this.props.className}-Elements-Input-Wrapper`}>
 
             <div className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
-              <span className='icon-magnifier2 icon'></span>
+              <span className='nypl-icon-magnifier-thin icon'></span>
               <InputField type='text' 
               id={`${this.props.id}-Input-Keywords`}
               className={`${this.props.className}-Input-Keywords`} 
@@ -80,16 +80,16 @@ class SearchBox extends React.Component {
             value='catalog'
             onClick={this._submitSearchRequest.bind(this, 'catalog')}>
               catalog
-              <span className='icon-wedge-right icon'></span>
+              <span className='nypl-icon-wedge-right icon'></span>
             </div>
             <div className={`${this.props.className}-Mobile-Submit-Option`}
             value='website'
             onClick={this._submitSearchRequest.bind(this, 'website')}>
               nypl.org
-              <span className='icon-wedge-right icon'></span>
+              <span className='nypl-icon-wedge-right icon'></span>
             </div>
           </div>
-          <div className={`icon-circle-magnifier ${this.props.className}-Elements-SubmitButton submit-icon`} 
+          <div className={`nypl-icon-magnifier-circle ${this.props.className}-Elements-SubmitButton submit-icon`} 
           onClick={this._submitSearchRequest.bind(this, 'none')}>
           </div>
         </div>

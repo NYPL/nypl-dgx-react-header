@@ -32,7 +32,7 @@ class SearchButton extends React.Component {
       onMouseEnter={this._activate.bind(this, 'hover')}
       onMouseLeave={this._deactivate.bind(this)}>
         <BasicButton id={`${this.props.className}-SearchButton`}
-        className={`icon-magnifier2 ${this.props.className}-SearchButton${classes}`}
+        className={`nypl-icon-magnifier-thin ${this.props.className}-SearchButton${classes}`}
         name='Search Button'
         label=''
         style={styles.base}

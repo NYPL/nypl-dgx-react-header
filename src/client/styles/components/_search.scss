@@ -116,7 +116,7 @@ input[type=radio]:checked + label:before {
 	color: #000000;
 	display: block;
   left: 0px;
-	margin: 0;
+	margin: -1px 0 0 0;
 	position: absolute;
   top: 0;
 	width: 100%;
