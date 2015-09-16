@@ -27,28 +27,30 @@ input:-ms-input-placeholder {
 	}
 }
 
-
+/* Customed radio button */
 input[type=radio] {
   /* Hide original inputs */
-  display: none;
+  display: inline-block;
 }
+
 label:before {
 	background-color: #FFFFFF;
 	border-radius: 50%;
   content: '';
-  display: inline-block;
-  height: 11px;
+  display: none;
+  height: 10px;
   left: 0;
   margin-right: 2px;
 	position: relative;
-  width: 11px;
+  width: 10px;
 }
+
 input[type=radio]:checked + label:before {
-	content: "\E602";
+	content: '\2022';
   color: #000000;
-  font-size: 30px;
-  text-align: center;
-  line-height: 18px;
+  display: none;
+  font-size: 20px;
+  line-height: 13px;
 }
 
 /* The Wrapper for putting in the icon for search button and search box */
@@ -235,6 +237,10 @@ input[type=radio]:checked + label:before {
 	span {
 		margin: 0 50px 0 6px;
 	}
+}
+
+&-SearchBox-Input-Options-label {
+	cursor: pointer;
 }
 
 &-SearchBox-Elements-SubmitButton {
