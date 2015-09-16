@@ -5,6 +5,8 @@ import DefaultItem from '../ContentBox/DefaultItem.jsx';
 import EventProgramItem from '../ContentBox/EventProgramItem.jsx';
 import ExhibitionItem from '../ContentBox/ExhibitionItem.jsx';
 
+import ContentModel from '../../utils/ContentModel.js';
+
 class MegaMenuFeatureItem extends React.Component {
   // Constructor used in ES6
   constructor(props) {
@@ -18,38 +20,23 @@ class MegaMenuFeatureItem extends React.Component {
     }
 
     let feature = this.props.feature,
-			classes = cx({'with-image': feature && feature.images, 'without-image': !feature || !feature.images}),
-      // should have a fallback
-      contentObj = {
-        category: feature.category ? feature.category[this.props.lang].text : headline,
-        headline: feature.headline[this.props.lang].text,
-        img: feature.images ? <img src={feature.images[0].uri} /> : '',
-        desc: feature.description ? feature.description.en.text.substring(0, '150') : '',
-        link: feature.link.en.text
-      },
+			classes = cx({
+        'with-image': feature && feature.images,
+        'without-image': !feature || !feature.images
+      }),
+      contentObj = ContentModel.featureItem(feature, this.props.lang),
       featuredItem = <DefaultItem feature={contentObj} className={this.props.className} classes={classes} />;
 
-    if (feature.content) {
-      switch (feature.content.type) {
+    if (contentObj.content && contentObj.content.type) {
+      switch (contentObj.content.type) {
         case 'blog':
-          contentObj.fullName = feature.content.authors[0].fullName;
-          contentObj.authorTitle = feature.content.authors[0].title;
+        // console.log(contentObj);
           featuredItem = <BlogItem feature={contentObj} className={this.props.className} classes={classes} />;
           break;
         case 'event-program':
-          contentObj.dates = {
-            start: feature.content.dates.start,
-            end: feature.content.dates.end
-          };
-          contentObj.location = {
-            fullName: feature.content.location.fullName
-          };
+        case 'exhibition':
           featuredItem = <EventProgramItem feature={contentObj} className={this.props.className} classes={classes} />;
           break;
-        case 'exhibition':
-          // This case is needed for "Ongoing" or "Now through ..." messages.
-        case 'node':
-          // No extra attributes/data in a simple node object.
         default:
           break;
       }

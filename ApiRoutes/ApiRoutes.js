@@ -34,7 +34,7 @@ parser.setChildrenObjects(options)
 
 router
   .route('/')
-  .get((req, res, next) => {console.log(options.endpoint);
+  .get((req, res, next) => {
     axios
       .get(options.endpoint)
       .then(data => {

@@ -514,7 +514,6 @@
 			  		padding: 0;
 			  		height: $MAIN_MENU_DESKTOP_HEIGHT;
 			  		text-align: left;
-			  		min-width: 933px;
 			  	}
 
 			  	&-Features {
@@ -557,17 +556,20 @@
 					width: 335px;
 
 					&-Tag {
+						@include font-size(12px);
 						@include Kievit-Medium;
 						text-transform: uppercase;
 					}
 					&-Title {
+						@include font-size(22px);
 						@include Milo-Regular;
 						line-height: 1.25em;
-						margin: .75em 0;
+						margin: 1em 0;
 					}
 
 					&-Desc {
 						@include Kievit-Regular;
+						@include font-size(14px);
 					}
 				}
 			}
@@ -580,7 +582,7 @@
 	  	.FindUsWidget {
 	  		&-LocationFinder {
 	  			display: inline-table;
-					width: 46%;
+					width: 45%;
 					margin: 0 2% 0 2%;
 					vertical-align: top;
 
@@ -689,7 +691,7 @@
 	  	.DonateWidget {
 	  		&-DonateBox {
 					display: inline-table;
-					width: 46%;
+					width: 45%;
 					margin: 0 2% 0 2%;
 					vertical-align: top;
 					color: #FFF;
