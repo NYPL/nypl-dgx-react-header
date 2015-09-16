@@ -62,7 +62,6 @@
   	}
   }
 
-
 	/* DESKTOP HEADER WRAPPER
 	 * ----------------------
 	 * Sets the max-width on a desktop and up device.
@@ -91,7 +90,7 @@
 	*/ 
 	&-Buttons {
 
-		.SubscribeButton, .DonateButton, .SignInButton {
+		.SubscribeButton, .DonateButton, .SignInButton, .LibraryCardButton {
 			@include Kievit-Bold;
 			font-size: 11px;
 		}

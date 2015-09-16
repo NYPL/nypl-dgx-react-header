@@ -10,6 +10,7 @@ import Actions from '../../actions/Actions.js';
 // NYPL Components
 import Logo from '../Logo/Logo.jsx';
 import DonateButton from '../DonateButton/DonateButton.jsx';
+import SimpleButton from '../Buttons/SimpleButton.jsx';
 import SubscribeButton from '../SubscribeButton/SubscribeButton.jsx';
 import NavMenu from '../NavMenu/NavMenu.jsx';
 import MobileHeader from './MobileHeader.jsx';
@@ -60,6 +61,11 @@ class Header extends React.Component {
           <div className={`${this.props.className}-TopWrapper`} style={styles.wrapper}>
             <Logo className={`${this.props.className}-Logo`} />
             <div className={`${this.props.className}-Buttons`} style={styles.topButtons}>
+              <SimpleButton 
+                label='Get a Library Card' 
+                target='//catalog.nypl.org/screens/selfregpick.html' 
+                className='LibraryCardButton'
+                style={styles.libraryCardButton} />
               <SubscribeButton 
                 label='Subscribe'
                 lang={this.props.lang}
@@ -147,6 +153,12 @@ const styles = {
   },
   ssoContainer: {
     display: 'inline-block'
+  },
+  libraryCardButton: {
+    display: 'inline-block',
+    color: '#000',
+    margin: 0,
+    padding: 0
   },
   subscribeButton: {
     display: 'inline-block'
