@@ -23,6 +23,10 @@ class MobileHeader extends React.Component {
     HeaderStore.listen(this._onChange.bind(this));
   }
 
+  componentWillMount() {
+    React.initializeTouchEvents(true);
+  }
+
   componentWillUnmount() {
     HeaderStore.unlisten(this._onChange.bind(this));
   }
