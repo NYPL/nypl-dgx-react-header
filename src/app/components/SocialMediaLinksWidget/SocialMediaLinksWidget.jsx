@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import _ from 'underscore';
 
-class SocialMediaLinksWidget extends React.Component {
+class SocialMediaLinksWidget extends React.Component{
 
   constructor(props) {
     super(props);
@@ -21,9 +21,9 @@ class SocialMediaLinksWidget extends React.Component {
 
     // Iterate over each object key->value pair and display as a list item
     socialLinksToDisplay = _.map(socialLinksList, (item, key) => {
-      linkClass = cx(`${this.props.className}-Link`, `icon-${key}`);
+      linkClass = cx(`${this.props.className}-Link`, `nypl-icon-${key}`);
       return (
-        <li className={`${this.props.className}-ListItem`}>
+        <li key={key} className={`${this.props.className}-ListItem`}>
           <a href={item} className={linkClass}></a>
         </li>
       );

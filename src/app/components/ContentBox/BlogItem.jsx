@@ -8,19 +8,20 @@ class BlogItem extends React.Component {
 
   render() {
     let feature = this.props.feature,
-      classes = this.props.classes;
+      classes = this.props.classes,
+      img = feature.imgSrc ? <img src={feature.imgSrc} /> : null;
 
     return (
       <a href={feature.link} className={this.props.className}>
         <div className={'FeatureItem-Image ' + classes}>
-          {feature.img}
+          {img}
         </div>
         <div className={'FeatureItem-Content ' + classes}>
           <div className='FeatureItem-Content-Tag'>{feature.category}</div>
-          <h3 className='FeatureItem-Content-Title'>{feature.title}</h3>
-          <div className='FeatureItem-Content-Desc'>{feature.desc}</div>
-          <p>{feature.fullName}</p>
-          <div>{feature.authorTitle}</div>
+          <h3 className='FeatureItem-Content-Title'>{feature.headline}</h3>
+          <div className='FeatureItem-Content-Desc'>{feature.description}</div>
+          <p>{feature.author.fullName}</p>
+          <div>{feature.author.title}</div>
         </div>
       </a>
     );

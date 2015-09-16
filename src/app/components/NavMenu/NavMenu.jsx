@@ -7,6 +7,8 @@ import HeaderStore from '../../stores/Store.js';
 
 // Dependent Components
 import NavMenuItem from '../NavMenuItem/NavMenuItem.jsx';
+import NavMenuBottomButtons from '../NavMenuBottomButtons/NavMenuBottomButtons.jsx';
+
 
 class NavMenu extends React.Component {
 
@@ -16,7 +18,7 @@ class NavMenu extends React.Component {
   }
 
   render () {
-    let classes = cx('NavMenu-List', {'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'}),
+    let mobileActiveClass = cx({'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'}),
       navMenu = this.props.items.map((item, index) => {
         return (
           <NavMenuItem 
@@ -33,10 +35,13 @@ class NavMenu extends React.Component {
 
     return (
       <nav className={this.props.className}>
-        <span className='MobileLogoText icon-nypl-logo-type'></span>
-        <ul className={classes}>
-          {navMenu}
-        </ul>
+        <div className={`${this.props.className}-Wrapper ${mobileActiveClass}`}>
+          <span className='MobileLogoText nypl-icon-logo-type'></span>
+          <ul className='NavMenu-List'>
+            {navMenu}
+          </ul>
+          <NavMenuBottomButtons className='MobileBottomButtons' />
+        </div>
       </nav>
     );
   }
