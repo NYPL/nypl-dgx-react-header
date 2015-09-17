@@ -6,6 +6,7 @@ import cx from 'classnames';
 import HeaderStore from '../../stores/Store.js';
 import Actions from '../../actions/Actions.js';
 
+
 class MobileHeader extends React.Component {
 
   constructor(props) {
@@ -33,13 +34,14 @@ class MobileHeader extends React.Component {
 
   render () {
     let activeButton = this.state.activeMobileButton,
+
       locatorUrl = this.props.locatorUrl || '#',
       mobileSearchClass = cx({
-        'active nypl-icon-solo-x': activeButton === 'mobileSearch',
-        'nypl-icon-magnifier-thin': activeButton !== 'mobileSearch'
+        'active nypl-icon-solo-x': activeButton === 'clickSearch',
+        'nypl-icon-magnifier-thin': activeButton !== 'clickSearch'
       }),
       mobileMenuClass = cx({
-        'active nypl-icon-solo-x': activeButton === 'mobileMenu',
+        'active nypl-icon-solo-x': activeButton === 'mobileMenu', 
         'nypl-icon-burger-nav': activeButton !== 'mobileMenu'
       });
 
@@ -59,7 +61,7 @@ class MobileHeader extends React.Component {
         <span
           style={[
             styles.searchIcon,
-            activeButton === 'mobileSearch' ? styles.activeSearchIcon : ''
+            activeButton === 'clickSearch' ? styles.activeSearchIcon : ''
           ]}
           className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
           ref='MobileSearchButton'
@@ -92,8 +94,10 @@ class MobileHeader extends React.Component {
   _toggleMobileMenu(activeButton) {
     if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
       Actions.setMobileMenuButtonValue(activeButton);
+      console.log(HeaderStore._getMobileMenuBtnValue());
     } else {
       Actions.setMobileMenuButtonValue('');
+      console.log('no search');
     }
   }
 
@@ -103,7 +107,7 @@ class MobileHeader extends React.Component {
    * with the 'mobileSearch' as a param
    */
   _handleSearchBtnClick() {
-    this._toggleMobileMenu('mobileSearch');
+    this._toggleMobileMenu('clickSearch');
   }
 
   /**

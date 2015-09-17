@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+
 import MegaMenu from '../MegaMenu/MegaMenu.jsx';
 
 class NavMenuItem extends React.Component {

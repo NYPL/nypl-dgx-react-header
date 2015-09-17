@@ -6,9 +6,10 @@ import cx from 'classnames';
 import HeaderStore from '../../stores/Store.js';
 
 // Dependent Components
+import SearchButton from '../SearchButton/SearchButton.jsx';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.jsx';
 import NavMenuBottomButtons from '../NavMenuBottomButtons/NavMenuBottomButtons.jsx';
-
+import DonateButton from '../DonateButton/DonateButton.jsx';
 
 class NavMenu extends React.Component {
 
@@ -19,6 +20,8 @@ class NavMenu extends React.Component {
 
   render () {
     let mobileActiveClass = cx({'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'}),
+      donateButton = HeaderStore._getIsStickyValue() ?
+        <li><DonateButton style={styles.donateButton} /></li> : null,
       navMenu = this.props.items.map((item, index) => {
         return (
           <NavMenuItem 
@@ -39,7 +42,9 @@ class NavMenu extends React.Component {
           <span className='MobileLogoText nypl-icon-logo-type'></span>
           <ul className='NavMenu-List'>
             {navMenu}
+            {donateButton}
           </ul>
+          <SearchButton className={`${this.props.className}`} />
           <NavMenuBottomButtons className='MobileBottomButtons' />
         </div>
       </nav>
@@ -50,6 +55,17 @@ class NavMenu extends React.Component {
 NavMenu.defaultProps = {
   lang: 'en',
   className: 'NavMenu'
+};
+
+const styles = {
+  donateButton: {
+    padding: '8px 15px',
+    margin: '0 5px 0 10px',
+    textTransform: 'uppercase',
+    borderRadius: '3px',
+    fontSize: '12.5px',
+    letterSpacing: '.04em'
+  }
 };
 
 export default Radium(NavMenu);

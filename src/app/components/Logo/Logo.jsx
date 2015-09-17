@@ -18,6 +18,7 @@ class Logo extends React.Component {
         this.props.style //allows for parent-to-child css styling
       ]}>
         <img src={this.props.src} style={styles.image} />
+        <span className='nypl-icon-logo-mark' style={styles.icon}></span>
       </a>
     );
   }
@@ -36,6 +37,9 @@ const styles = {
   },
   image: {
     maxWidth: '100%'
+  },
+  icon: {
+    display: 'none'
   }
 };
 
