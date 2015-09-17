@@ -10,7 +10,7 @@
  * -- Mobile First approach
 */
 .Header {
-	@include Kievit-Regular;
+	@include Kievit-Book;
   width: 100%;
   background-color: #FFF;
   @extend %clearfix;
@@ -93,6 +93,11 @@
 		.SubscribeButton, .DonateButton, .SignInButton, .LibraryCardButton {
 			@include Kievit-Bold;
 			font-size: 11px;
+		}
+
+		.DonateButton {
+			padding: 0.8rem 1.55rem;
+			border-radius: 4px;
 		}
 
 	  .SignInButton-Wrapper {
@@ -495,7 +500,7 @@
 
 		  	&-SubNavWrapper {
 		  		position: relative;
-		  		width: 345px;
+		  		width: 280px;
 		  		float: left;
 		  		display: table-cell;
 		  		margin: 0;
@@ -504,10 +509,9 @@
 		  	}
 
 		  	&-SubNav {
-		  		height: 100%;
 		  		position: absolute;
-		  		right: 20px;
-		  		width: 220px;
+		  		right: 32px;
+		  		width: 140px;
 		  		text-align: left;
 
 		  		a {
@@ -517,8 +521,9 @@
 		  		h2 {
 		  			color: #FFFFFF;
 		  			border-top: 2px solid #FFFFFF;
-		  			margin: 20px 0px;
-		  			padding: 10px 0 0 0;
+		  			margin: 35px 0 30px 0;
+		  			padding: 12px 0 0 0;
+		  			font-weight: normal;
 		  		}
 
 		  		ul {
@@ -530,9 +535,10 @@
 		  				&:first-child {
 		  					margin-top: 0px;
 		  				}
-		  				margin: 7px 0px;
+		  				margin: 7px 0px 14px 0;
 		  				display: block;
 		  				padding: 0;
+		  				@include font-size(17px);
 		  			}
 		  		}
 
@@ -575,14 +581,15 @@
 		  		display: block;
 		  		margin: 0;
 		  		width: 100%;
+		  		padding: 0 0 0 5.625rem;
 		  	}
 
 		  	&-FeatureItem {
 		  		display: inline-table;
-		  		width: 48%;
-		  		// min-width: 420px;
-		  		margin: 0 0 0 2%;
+		  		width: 41%;
+		  		margin: 0;
 		  		vertical-align: top;
+		  		margin-right: 82px;
 		  	}
 		  }
 		}
@@ -593,7 +600,7 @@
 				height: 88px;
 				position: relative;
 				top: 75px;
-				margin: 0 10px 0 0;
+				margin: 0 20px 0 0;
 
 				img {
 					border-radius: 50%;
@@ -611,20 +618,36 @@
 				width: 335px;
 
 				&-Tag {
-					@include font-size(12px);
+					font-size: 0.76rem;
 					@include Kievit-Medium;
 					text-transform: uppercase;
+					letter-spacing: 0.05rem;
 				}
 				&-Title {
-					@include font-size(22px);
-					@include Milo-Regular;
-					line-height: 1.25em;
-					margin: 1em 0;
+					@include font-size(30px);
+					@include Milo-Light;
+					line-height: 1em;
+					margin: 0.8em 0 0.6em;
+					font-weight: normal;
+					letter-spacing: 0.05rem;
 				}
 
 				&-Desc {
 					@include Kievit-Regular;
-					@include font-size(14px);
+					font-size: 15px;
+					font-size: 0.875rem;
+					line-height: 1.3rem;
+				}
+
+				&-Author {
+					&-Name {
+						font-size: 19px;
+						font-weight: normal;
+						margin-bottom: 0.3rem;
+					}
+					&-Title {
+						font-size: 15px;
+					}
 				}
 			}
 		}
@@ -637,7 +660,7 @@
   	.FindUsWidget {
   		&-LocationFinder {
   			display: inline-table;
-				width: 45%;
+				width: 41%;
 				margin: 0 2% 0 2%;
 				vertical-align: top;
 
@@ -650,8 +673,10 @@
   			}
 
   			&-Tag {
+					font-size: 0.76rem;
 					@include Kievit-Medium;
 					text-transform: uppercase;
+					letter-spacing: 0.05rem;
 				}
 
   			&-IntroText {
@@ -697,78 +722,22 @@
   			position: relative;
   			top: 25px;
   			height: 200px;
+  			margin-right: 40px;
   			border-right: 1px solid #FFF;
   		}
-
-  		&-FeaturedLocation {
-  			display: inline-table;
-				width: 47%;
-				margin: 0 0 0 2%;
-				vertical-align: top;
-
-  			&-Image {
-  				width: 88px;
-  				height: 88px;
-  				position: relative;
-  				top: 80px;
-  				margin: 0 10px 0 0;
-
-  				img {
-  					border-radius: 50%;
-  				}
-  			}
-
-  			&-Content {
-  				color: #FFFFFF;
-  				display: table-cell;
-  				vertical-align: top;
-  				position: relative;
-  				top: 60px;
-
-  				&-Tag {
-  					@include Kievit-Medium;
-  					text-transform: uppercase;
-  				}
-
-  				&-Title {
-  					@include Milo-Regular;
-  					line-height: 1.25em;
-  					margin: .75em 0;
-  				}
-
-  				&-Desc {
-  					@include Kievit-Regular;
-  				}
-  			}
-  		}
-  	}
+  	} /* End .FindUsWidget */
 
   	.DonateWidget {
   		&-DonateBox {
 				display: inline-table;
-				width: 46%;
-				margin: 0 2% 0 2%;
+				width: 42%;
+				margin: 0 5% 0 2%;
 				vertical-align: top;
 				color: #FFF;
 
 				&-Wrapper {
 					position: relative;
 					top: 50px;
-				}
-
-				&-Tag {
-					@include Kievit-Medium;
-					text-transform: uppercase;
-				}
-
-				&-Title {
-					@include Milo-Regular;
-					line-height: 1.25em;
-					margin: .75em 0;
-				}
-
-				&-Desc {
-					@include Kievit-Regular;
 				}
 
 				&-DonationLinks {
@@ -797,14 +766,7 @@
 					}
 				}
   		}
-
-  		&-FeatureItem {
-				display: inline-table;
-				width: 48%;
-				margin: 0 0 0 2%;
-				vertical-align: top;
-			}
-		}
+		} /* End .DonateWidget */
   }
 }
 
