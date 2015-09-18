@@ -243,6 +243,7 @@ input[type=radio]:checked + label:before {
 
 &-SearchBox-Input-Options-label {
   cursor: pointer;
+  margin: 0 40px 0 15px;
 }
 
 &-SearchBox-Elements-SubmitButton {

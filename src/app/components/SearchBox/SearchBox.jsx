@@ -31,7 +31,7 @@ class SearchBox extends React.Component {
   // Dom Render Section
   render() {
     // Set active class if search button is hovered or clicked
-    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' || 
+    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
     
     return (
@@ -52,23 +52,25 @@ class SearchBox extends React.Component {
             </div>
             <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
               <div className={`${this.props.className}-Input-Options`}>
-                <label for='catalog' className={`${this.props.className}-Input-Options-label`}>
-                  <InputField type='radio' 
-                  name='catalog' 
-                  value='catalog'
-                  ref='option' 
-                  onChange={this._searchOptionChange}
-                  checked={this.state.searchOption ==='catalog'} />
+                <InputField type='radio'
+                    name='catalog'
+                    value='catalog'
+                    ref='option'
+                    onChange={this._searchOptionChange}
+                    checked={this.state.searchOption ==='catalog'} />
+
+                <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
                   Search the Catalog
                 </label>
                 
-                <label for='website' className={`${this.props.className}-Input-Options-label`}>
-                  <InputField type='radio' 
-                  name='website' 
-                  value='website' 
+                <InputField type='radio'
+                  name='website'
+                  value='website'
                   ref='option'
                   onChange={this._searchOptionChange} 
                   checked={this.state.searchOption ==='website'} />
+
+                  <label htmlfFor='website' className={`${this.props.className}-Input-Options-label`}>
                   Search NYPL.org
                 </label>
               </div>
@@ -89,7 +91,7 @@ class SearchBox extends React.Component {
               <span className='nypl-icon-wedge-right icon'></span>
             </div>
           </div>
-          <div className={`nypl-icon-magnifier-circle ${this.props.className}-Elements-SubmitButton submit-icon`} 
+          <div className={`nypl-icon-magnifier-circle ${this.props.className}-Elements-SubmitButton submit-icon`}
           onClick={this._submitSearchRequest.bind(this, null)}>
           </div>
         </div>
