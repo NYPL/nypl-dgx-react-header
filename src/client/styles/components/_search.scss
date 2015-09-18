@@ -210,9 +210,7 @@ input[type=radio]:checked + label:before {
   font-style: italic;
   height: 60px;
   padding: 0 0 0 35px;
-  width: -webkit-calc(100% - 35px);
-  width: -moz-calc(100% - 35px);
-  width: calc(100% - 35px);
+  @include calculation(width, '100% - 35px');
   @include desktop {
     background-color: #1DA1D4;
     color: #FFFFFF;
@@ -243,7 +241,7 @@ input[type=radio]:checked + label:before {
 
 &-SearchBox-Input-Options-label {
   cursor: pointer;
-  margin: 0 40px 0 15px;
+  margin: 0 40px 0 10px;
 }
 
 &-SearchBox-Elements-SubmitButton {
