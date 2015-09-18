@@ -52,29 +52,27 @@ class SearchBox extends React.Component {
             </div>
             <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
               <div className={`${this.props.className}-Input-Options`}>
-          
-                  <InputField type='radio'
-                      id='catalog'
-                      name='input option'
-                      value='catalog'
-                      ref='option'
-                      onChange={this._searchOptionChange}
-                      checked={this.state.searchOption ==='catalog'} />
-
-                  <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
-                    Search the Catalog
-                  </label>
-             
-                
                 <InputField type='radio'
-                  id='website'
-                  name='input option'
-                  value='website'
-                  ref='option'
-                  onChange={this._searchOptionChange}
-                  checked={this.state.searchOption ==='website'} />
+                id='catalog'
+                name='input option'
+                value='catalog'
+                ref='option'
+                onChange={this._searchOptionChange}
+                checked={this.state.searchOption ==='catalog'} />
 
-                  <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
+                <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
+                  Search the Catalog
+                </label>
+
+                <InputField type='radio'
+                id='website'
+                name='input option'
+                value='website'
+                ref='option'
+                onChange={this._searchOptionChange}
+                checked={this.state.searchOption ==='website'} />
+
+                <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
                   Search NYPL.org
                 </label>
               </div>
