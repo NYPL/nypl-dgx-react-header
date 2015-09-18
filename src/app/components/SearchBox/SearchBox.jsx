@@ -70,7 +70,7 @@ class SearchBox extends React.Component {
                   onChange={this._searchOptionChange} 
                   checked={this.state.searchOption ==='website'} />
 
-                  <label htmlfFor='website' className={`${this.props.className}-Input-Options-label`}>
+                  <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
                   Search NYPL.org
                 </label>
               </div>
