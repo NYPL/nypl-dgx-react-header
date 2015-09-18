@@ -745,6 +745,28 @@
 					top: 50px;
 				}
 
+				&-Tag {
+					font-size: 0.76rem;
+					@include Kievit-Medium;
+					text-transform: uppercase;
+					letter-spacing: 0.05rem;
+				}
+				&-Title {
+					@include font-size(30px);
+					@include Milo-Light;
+					line-height: 1em;
+					margin: 0.8em 0 0.6em;
+					font-weight: normal;
+					letter-spacing: 0.05rem;
+				}
+
+				&-Desc {
+					@include Kievit-Regular;
+					font-size: 15px;
+					font-size: 0.875rem;
+					line-height: 1.3rem;
+				}
+
 				&-DonationLinks {
 					list-style-type: none;
 					display: block;
