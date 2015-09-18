@@ -35,14 +35,14 @@ class SearchBox extends React.Component {
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
     
     return (
-      <div id={this.props.id} 
+      <div id={this.props.id}
       className={`${this.props.className}${classes}`}>
         <div className={`${this.props.className}-Elements-Wrapper`}>
           <div className={`${this.props.className}-Elements-Input-Wrapper`}>
 
             <div className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
               <span className='nypl-icon-magnifier-thin icon'></span>
-              <InputField type='text' 
+              <InputField type='text'
               id={`${this.props.id}-Input-Keywords`}
               className={`${this.props.className}-Input-Keywords`} 
               ref='keywords' 
