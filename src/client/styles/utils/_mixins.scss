@@ -104,3 +104,16 @@
     clear: both;
   }
 }
+
+/* MIXIN FOR SEARCH BOX
+ * ---------------------
+ * Usage: For mobile version
+ * make keywords input fields always
+ * in the middle
+*/
+
+@mixin mobileKeywordsWidth($leftPadding) {
+  width: -webkit-calc(100% - $leftPadding);
+  width: -moz-calc(100% - $leftPadding);
+  width: calc(100% - $leftPadding);
+}
