@@ -23,14 +23,10 @@ class LocationFinder extends React.Component {
     return (
       <div className={this.props.className}>
         <div className={this.props.className + '-Wrapper'}>
-          <div className={this.props.className + '-Tag'}>Find a Library</div>
-          <label htmlFor='LocationFinder-Input' className={this.props.className + '-IntroText'}>
-            Type a zip code where you would like to find a NYPL Location.
-          </label>
-          <div className={this.props.className + '-SearchBox'}>
-            <input type='text' placeholder='Zip Code' id='LocationFinder-Input' ref='zipCodeInput' onChange={this._handleChange} />
-            <button type='button' id='LocationFinder-Submit' disabled={this.state.disableSubmit} onClick={this._handleSubmit}>FIND</button>
-          </div>
+          <div className={this.props.className + '-Tag'}>Information</div>
+          <h2 className={this.props.className + '-Title'}>
+            Explore NYPLs 92 locations in the Bronx, Manhattan, and Staten Island.
+          </h2>
         </div>
       </div>
     );
