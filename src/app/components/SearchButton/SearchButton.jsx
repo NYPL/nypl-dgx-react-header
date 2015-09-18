@@ -25,19 +25,24 @@ class SearchButton extends React.Component {
   // Dom Render Section
   render () {
     // Give active class if the button is activated
-    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' || 
+    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
+    // Change the icon based on the behavior either click or hover
+    let icon = cx({
+      'nypl-icon-solo-x': HeaderStore._getMobileMenuBtnValue() === 'clickSearch',
+      'nypl-icon-magnifier-fat': HeaderStore._getMobileMenuBtnValue() !== 'clickSearch'});
+
     return (
       <div className={`${this.props.className}-SearchBox-Wrapper`}
       onMouseEnter={this._activate.bind(this, 'hover')}
       onMouseLeave={this._deactivate.bind(this)}>
         <BasicButton id={`${this.props.className}-SearchButton`}
-        className={`nypl-icon-magnifier-thin ${this.props.className}-SearchButton${classes}`}
+        className={`${icon} ${this.props.className}-SearchButton${classes}`}
         name='Search Button'
         label=''
         style={styles.base}
         onClick={this._activate.bind(this, 'click')} />
-        <SearchBox id={`${this.props.className}-SearchBox`} 
+        <SearchBox id={`${this.props.className}-SearchBox`}
         className={`${this.props.className}-SearchBox`} />
       </div>
     );
@@ -46,15 +51,13 @@ class SearchButton extends React.Component {
   // Set the function to active searchbox when the button is hovered or clicked
   _activate(option) {
     if (option === 'hover') {
-      // And the only when the button has not been activated yet
+      // And actived by hover only when the button has not been activated yet
       if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
         Actions.setMobileMenuButtonValue('hoverSearch');
       } 
     } else {
-      // And only when the button has not activated by hovering
-      if (HeaderStore._getMobileMenuBtnValue() !== 'hoverSearch'){
-        this._toggle();
-      }
+      // Click ignores hover
+      this._toggle();
     }
   }
 
