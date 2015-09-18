@@ -42,7 +42,7 @@ NavMenuBottomButtons.defaultProps = {
   lang: 'en',
   className: 'NavMenuBottomButtons',
   libraryCardLink: '//catalog.nypl.org/screens/selfregpick.html',
-  subscribeLink: '//www.nypl.org'
+  subscribeLink: '//pages.email.nypl.org/page.aspx?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7'
 };
 
 const styles = {
