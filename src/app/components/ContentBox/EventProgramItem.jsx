@@ -23,7 +23,7 @@ class EventProgramItem extends React.Component {
           <div className='FeatureItem-Content-Tag'>{feature.category}</div>
           <h3 className='FeatureItem-Content-Title'>{feature.headline}</h3>
           <div>
-            <p>{startDate.format('hA | ddd, MMMM Do')}</p>
+            <p className='FeatureItem-Content-Date'>{startDate.format('hA | ddd, MMMM Do')}</p>
             <span>{feature.location.fullName}</span>
           </div>
         </div>

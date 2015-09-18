@@ -25,7 +25,7 @@ class ExhibitionItem extends React.Component {
           <div className='FeatureItem-Content-Tag'>{feature.category}</div>
           <h3 className='FeatureItem-Content-Title'>{feature.headline}</h3>
           <div>
-            <p>{exhibitionDate}</p>
+            <p className='FeatureItem-Content-Date'>{exhibitionDate}</p>
             <span>{feature.location.fullName}</span>
           </div>
         </div>
