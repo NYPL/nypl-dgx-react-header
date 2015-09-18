@@ -25,19 +25,19 @@ class SearchButton extends React.Component {
   // Dom Render Section
   render () {
     // Give active class if the button is activated
-    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' || 
+    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
     return (
       <div className={`${this.props.className}-SearchBox-Wrapper`}
       onMouseEnter={this._activate.bind(this, 'hover')}
       onMouseLeave={this._deactivate.bind(this)}>
         <BasicButton id={`${this.props.className}-SearchButton`}
-        className={`nypl-icon-magnifier-thin ${this.props.className}-SearchButton${classes}`}
+        className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton${classes}`}
         name='Search Button'
         label=''
         style={styles.base}
         onClick={this._activate.bind(this, 'click')} />
-        <SearchBox id={`${this.props.className}-SearchBox`} 
+        <SearchBox id={`${this.props.className}-SearchBox`}
         className={`${this.props.className}-SearchBox`} />
       </div>
     );
