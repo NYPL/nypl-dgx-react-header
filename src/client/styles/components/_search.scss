@@ -128,7 +128,7 @@ input[type=radio]:checked + label:before {
   @include desktop {
     height: 236px;
     margin: 0;
-    top: 48px;
+    top: 45px;
   }
 }
 
@@ -241,6 +241,7 @@ input[type=radio]:checked + label:before {
 
 &-SearchBox-Input-Options-label {
   cursor: pointer;
+  margin: 0 40px 0 15px;
 }
 
 &-SearchBox-Elements-SubmitButton {
