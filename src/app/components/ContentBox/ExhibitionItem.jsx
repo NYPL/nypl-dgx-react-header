@@ -1,5 +1,6 @@
 import React from 'react';
-import cx from 'classnames';
+import moment from 'moment';
+import utils from '../../utils/utils.js';
 
 class ExhibitionItem extends React.Component {
   constructor(props) {
@@ -9,17 +10,24 @@ class ExhibitionItem extends React.Component {
   render() {
     let feature = this.props.feature,
       classes = this.props.classes,
-      img = feature.imgSrc ? <img src={feature.imgSrc} /> : null;
+      img = feature.imgSrc ?
+        <div className={'FeatureItem-Image ' + classes}>
+          <img src={feature.imgSrc} />
+        </div> : null,
+      startDate = moment(feature.eventDates.start),
+      endDate = moment(feature.eventDates.end),
+      exhibitionDate = utils.formatDate(startDate, endDate);
 
     return (
       <a href={feature.link} className={this.props.className}>
-        <div className={'FeatureItem-Image ' + classes}>
-          {img}
-        </div>
+        {img}
         <div className={'FeatureItem-Content ' + classes}>
           <div className='FeatureItem-Content-Tag'>{feature.category}</div>
           <h3 className='FeatureItem-Content-Title'>{feature.headline}</h3>
-          <div className='FeatureItem-Content-Desc'>{feature.description}</div>
+          <div>
+            <p>{exhibitionDate}</p>
+            <span>{feature.location.fullName}</span>
+          </div>
         </div>
       </a>
     );

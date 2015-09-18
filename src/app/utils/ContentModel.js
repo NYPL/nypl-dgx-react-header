@@ -34,8 +34,8 @@ function ContentModel() {
       this.blog(content, data)
     }
 
-    if (data.type === 'event-program') {
-      this.events(content, data);
+    if (data.type === 'event-program' || data.type === 'event-exhibition') {
+      this.eventExhibition(content, data);
     }
 
     return content;
@@ -67,10 +67,10 @@ function ContentModel() {
     return authors;
   };
 
-  this.events = (content, data) => {
+  this.eventExhibition = (content, data) => {
     content.dates = {
       start: data.attributes['start-date'],
-      end: data.attributes['start-end'],
+      end: data.attributes['end-date'],
     };
     content.name = data.attributes.name;
     content.description = data.attributes.description;
@@ -106,7 +106,6 @@ function ContentModel() {
         type: data.content.type
       };
 
-
       switch (data.content.type) {
         case 'blog':
           item.author = {
@@ -115,7 +114,7 @@ function ContentModel() {
           };
           break;
         case 'event-program':
-        case 'exhibition':
+        case 'event-exhibition':
           item.eventDates = {
             start: data.content.dates.start,
             end: data.content.dates.end

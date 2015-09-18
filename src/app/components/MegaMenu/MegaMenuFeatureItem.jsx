@@ -30,12 +30,13 @@ class MegaMenuFeatureItem extends React.Component {
     if (contentObj.content && contentObj.content.type) {
       switch (contentObj.content.type) {
         case 'blog':
-        // console.log(contentObj);
           featuredItem = <BlogItem feature={contentObj} className={this.props.className} classes={classes} />;
           break;
         case 'event-program':
-        case 'exhibition':
           featuredItem = <EventProgramItem feature={contentObj} className={this.props.className} classes={classes} />;
+          break;
+        case 'event-exhibition':
+          featuredItem = <ExhibitionItem feature={contentObj} className={this.props.className} classes={classes} />;
           break;
         default:
           break;
