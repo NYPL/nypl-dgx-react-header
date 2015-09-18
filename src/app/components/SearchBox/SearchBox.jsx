@@ -52,25 +52,29 @@ class SearchBox extends React.Component {
             </div>
             <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
               <div className={`${this.props.className}-Input-Options`}>
-                <InputField type='radio'
-                    name='catalog'
-                    value='catalog'
-                    ref='option'
-                    onChange={this._searchOptionChange}
-                    checked={this.state.searchOption ==='catalog'} />
+          
+                  <InputField type='radio'
+                      id='catalog'
+                      name='input option'
+                      value='catalog'
+                      ref='option'
+                      onChange={this._searchOptionChange}
+                      checked={this.state.searchOption ==='catalog'} />
 
-                <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
-                  Search the Catalog
-                </label>
+                  <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
+                    Search the Catalog
+                  </label>
+             
                 
                 <InputField type='radio'
-                  name='website'
+                  id='website'
+                  name='input option'
                   value='website'
                   ref='option'
-                  onChange={this._searchOptionChange} 
+                  onChange={this._searchOptionChange}
                   checked={this.state.searchOption ==='website'} />
 
-                  <label htmlfFor='website' className={`${this.props.className}-Input-Options-label`}>
+                  <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
                   Search NYPL.org
                 </label>
               </div>
@@ -107,6 +111,7 @@ class SearchBox extends React.Component {
   // Listen to the changes of the search options and change the state
   _searchOptionChange (event) {
     this.setState({searchOption: event.target.value});
+    console.log(this.state.searchOption);
   }
 
   // The function to generate a http request after click the search button
