@@ -15,19 +15,19 @@ let config = {
 	},
 	donationLinks: [
 		{
-			url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form',
+			url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=55&s_src=FRQ16ZZ_TNN',
 			amount: '$55'
 		},
 		{
-			url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form',
+			url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=115&s_src=FRQ16ZZ_TNN',
 			amount: '$115'
 		},
 		{
-			url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form',
+			url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=250&s_src=FRQ16ZZ_TNN',
 			amount: '$250'
 		},
 		{
-			url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form',
+			url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=0&s_src=FRQ16ZZ_TNN',
 			amount: 'Other'
 		}
 	]
