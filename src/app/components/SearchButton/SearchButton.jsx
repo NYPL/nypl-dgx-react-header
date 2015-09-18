@@ -51,12 +51,12 @@ class SearchButton extends React.Component {
   // Set the function to active searchbox when the button is hovered or clicked
   _activate(option) {
     if (option === 'hover') {
-      // And actived by hover only when the button has not been activated yet
+      // And activated by hover only when the button has not been activated yet
       if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
         Actions.setMobileMenuButtonValue('hoverSearch');
       } 
     } else {
-      // Click ignores hover
+      // Click ignores the status of hover
       this._toggle();
     }
   }
