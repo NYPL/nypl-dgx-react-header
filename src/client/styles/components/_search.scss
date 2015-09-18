@@ -200,8 +200,8 @@ input[type=radio]:checked + label:before {
 &-SearchBox-Input-Keywords {
   background-color: #FFFFFF;
   border: none;
-  border-width: 1px;
   border-bottom: solid;
+  border-bottom-width: 2px;
   border-color: #FFFFFF;
   color: #000000;
   display: inline-block;
@@ -217,6 +217,7 @@ input[type=radio]:checked + label:before {
     font-family: Kievit-Light;
     font-size: 66px;
     font-style: normal;
+    letter-spacing: -0.8px;
     padding: 0 0 16px 0;
     width: 100%;
   }
@@ -226,7 +227,7 @@ input[type=radio]:checked + label:before {
   color: #FFFFFF;
   display: none;
   float: left;
-  font-size: 14px;
+  font-size: 15px;
   @include desktop {
     display: inline-block;
   }

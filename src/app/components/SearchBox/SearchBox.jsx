@@ -109,7 +109,7 @@ class SearchBox extends React.Component {
   // Listen to the changes of the search options and change the state
   _searchOptionChange (event) {
     this.setState({searchOption: event.target.value});
-    console.log(this.state.searchOption);
+    // console.log(this.state.searchOption);
   }
 
   // The function to generate a http request after click the search button
