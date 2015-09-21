@@ -147,28 +147,11 @@ input[type=radio]:checked + label:before {
     display: block;
     text-align: left;
   }
-  .submit-icon {
-    display: none;
-    &:before {
-      font-size: 22px;
-      padding: 22px;
-      border-style: solid;
-      border-radius: 50%;
-      border-width: 2px;
-    }
-    @include desktop {
-      color: #FFFFFF;
-      display: inline-block;
-      position: relative;
-      right: 10px;
-      top: 23px;
-    }
-  }
 }
 
 /* The wrapper for input fields */
 &-SearchBox-Elements-Input-Wrapper {
-  display: inline-block;  
+  display: inline-block;
   padding: 0 0 18px 0;
   position: relative;
   width: 100%;
@@ -256,10 +239,22 @@ input[type=radio]:checked + label:before {
 }
 
 &-SearchBox-Elements-SubmitButton {
-  cursor: pointer;
   display: none;
+  &:before {
+    font-size: 22px;
+    padding: 22px;
+    border-style: solid;
+    border-radius: 50%;
+    border-width: 2px;
+  }
   @include desktop {
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
     float: right;
+    position: relative;
+    right: 10px;
+    top: 23px;
   }
 }
 
