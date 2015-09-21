@@ -666,11 +666,12 @@
   	 * this widget within the Header.
   	*/ 
   	.FindUsWidget {
-  		&-LocationFinder {
-  			display: inline-table;
-				width: 41%;
-				margin: 0 2% 0 2%;
-				vertical-align: top;
+  		&-FindUsFeature {
+				display: inline-table;
+	  		width: 41%;
+	  		margin: 0;
+	  		vertical-align: top;
+	  		margin-right: 82px;
 
   			&-Wrapper {
   				color: #FFFFFF;
@@ -687,6 +688,15 @@
 					letter-spacing: 0.05rem;
 				}
 
+				&-Title {
+					@include font-size(22px);
+					@include Milo-Light;
+					line-height: 1em;
+					margin: 0.8em 0 0.6em;
+					font-weight: normal;
+					letter-spacing: 0.05rem;
+				}
+
   			&-IntroText {
 					display: block;
 					margin: 1em 0;
@@ -694,6 +704,17 @@
 					line-height: 1.25em;
 					font-size: 18px;
 					max-width: 65%;
+				}
+
+				&-Link {
+					margin-top: 10px;
+					position: absolute;
+					@include font-size(15px);
+					@include Kievit-Regular;
+					background-color: $libraryBlue;
+					color: #fff;
+					padding: 10px 10px 12px 20px;
+					margin: 10px 0;
 				}
 
 				&-SearchBox {
