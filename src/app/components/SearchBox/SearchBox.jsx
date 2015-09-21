@@ -93,7 +93,7 @@ class SearchBox extends React.Component {
               <span className='nypl-icon-wedge-right icon'></span>
             </div>
           </div>
-          <div className={`nypl-icon-magnifier-circle ${this.props.className}-Elements-SubmitButton submit-icon`}
+          <div className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
           onClick={this._submitSearchRequest.bind(this, null)}>
           </div>
         </div>
@@ -109,7 +109,7 @@ class SearchBox extends React.Component {
   // Listen to the changes of the search options and change the state
   _searchOptionChange (event) {
     this.setState({searchOption: event.target.value});
-    console.log(this.state.searchOption);
+    // console.log(this.state.searchOption);
   }
 
   // The function to generate a http request after click the search button

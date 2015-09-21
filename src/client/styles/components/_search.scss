@@ -82,7 +82,7 @@ input[type=radio]:checked + label:before {
       vertical-align: sub;
       border-bottom-color: $BG_MENU_SEARCH;
       border-bottom-style: solid;
-      border-bottom-width: 1px;
+      border-bottom-width: 2px;
       padding: 0 3px 2px 3px;
     }
   }
@@ -107,7 +107,7 @@ input[type=radio]:checked + label:before {
       vertical-align: sub;
       border-bottom-color: $BG_MENU_SEARCH;
       border-bottom-style: none;
-      border-bottom-width: 1px;
+      border-bottom-width: 2px;
       padding: 0 3px 2px 3px;
     }
   }
@@ -147,21 +147,11 @@ input[type=radio]:checked + label:before {
     display: block;
     text-align: left;
   }
-  .submit-icon {
-    color: #FFFFFF;
-    display: none;
-    font-size: 80px;
-    @include desktop {
-      display: inline-block;
-      position: relative;
-      right: 10px;
-    }
-  }
 }
 
 /* The wrapper for input fields */
 &-SearchBox-Elements-Input-Wrapper {
-  display: inline-block;  
+  display: inline-block;
   padding: 0 0 18px 0;
   position: relative;
   width: 100%;
@@ -171,7 +161,7 @@ input[type=radio]:checked + label:before {
     display: inline-block;
     left: 0px;
     padding: 0 0 0 110px;
-    width: 80%;
+    width: 82%;
   }
 }
 
@@ -180,7 +170,7 @@ input[type=radio]:checked + label:before {
   margin: 0 auto;
   position: relative;
   text-align: left;
-  width: 88%;
+  width: 93%;
   .icon {
     background-color: #FFFFFF;
     color: $BG_MENU_SEARCH;
@@ -249,13 +239,22 @@ input[type=radio]:checked + label:before {
 }
 
 &-SearchBox-Elements-SubmitButton {
-  cursor: pointer;
   display: none;
+  &:before {
+    font-size: 22px;
+    padding: 22px;
+    border-style: solid;
+    border-radius: 50%;
+    border-width: 2px;
+  }
   @include desktop {
+    color: #FFFFFF;
+    cursor: pointer;
     display: inline-block;
     float: right;
-    height: 60px;
-    margin: 0 0 10% 0;
+    position: relative;
+    right: 10px;
+    top: 23px;
   }
 }
 
