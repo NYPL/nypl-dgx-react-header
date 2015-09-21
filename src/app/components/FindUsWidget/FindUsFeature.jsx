@@ -16,7 +16,7 @@ class FindUsFeature extends React.Component {
         <div className={this.props.className + '-Wrapper'}>
           <div className={this.props.className + '-Tag'}>Information</div>
           <h2 className={this.props.className + '-Title'}>
-            Explore NYPLs 92 locations in the Bronx, Manhattan, and Staten Island.
+            Explore NYPL&apos;s 92 locations in the Bronx, Manhattan, and Staten Island.
           </h2>
           <a style={styles.base} href={locinator} className={this.props.className + '-Link'}>
             FIND A LOCATION
@@ -37,7 +37,7 @@ const styles = {
   base: {},
   icon: {
     fontSize: '25px',
-    verticalAlign: 'sub'
+    verticalAlign: 'middle'
   }
 };
 

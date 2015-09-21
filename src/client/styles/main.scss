@@ -709,11 +709,12 @@
 				&-Link {
 					margin-top: 10px;
 					position: absolute;
-					@include font-size(15px);
-					@include Kievit-Regular;
+					@include font-size(13px);
+					@include Kievit-Book;
+					letter-spacing: 0.07em;
 					background-color: $libraryBlue;
 					color: #fff;
-					padding: 10px 10px 12px 20px;
+					padding: 10px 10px 15px 20px;
 					margin: 10px 0;
 				}
 
