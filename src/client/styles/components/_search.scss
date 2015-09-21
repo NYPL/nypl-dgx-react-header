@@ -61,7 +61,11 @@ input[type=radio]:checked + label:before {
   input[type=text] {
     padding: 0;
     border: none;
-  };
+  }
+
+  input:not([type="image" i]), textarea {
+    box-sizing: content-box;
+  }
 
   @include desktop {
     display: inline-block;
