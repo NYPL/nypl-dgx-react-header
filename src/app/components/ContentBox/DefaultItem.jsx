@@ -1,20 +1,24 @@
 import React from 'react';
-import moment from 'moment';
 
-class EventProgramItem extends React.Component {
+class DefaultItem extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    let feature = this.props.feature,
-      classes = this.props.classes,
+    let defaultFeature = {
+        category: 'NYPL',
+        headline: 'Find more about NYPL',
+        desc: 'NYPL Rocks!',
+        link: 'http://nypl.org',
+        img: null
+      },
+      feature = this.props.feature || defaultFeature,
+      classes = this.props.classes || 'without-image',
       img = feature.imgSrc ?
         <div className={'FeatureItem-Image ' + classes}>
           <img src={feature.imgSrc} />
-        </div> : null,
-      startDate = moment(feature.eventDates.start),
-      endDate = moment(feature.eventDates.end);
+        </div> : null;
 
     return (
       <a href={feature.link} className={this.props.className}>
@@ -22,19 +26,16 @@ class EventProgramItem extends React.Component {
         <div className={'FeatureItem-Content ' + classes}>
           <div className='FeatureItem-Content-Tag'>{feature.category}</div>
           <h3 className='FeatureItem-Content-Title'>{feature.headline}</h3>
-          <div>
-            <p className='FeatureItem-Content-Date'>{startDate.format('hA | ddd, MMMM Do')}</p>
-            <span>{feature.location.fullName}</span>
-          </div>
+          <div className='FeatureItem-Content-Desc'>{feature.description}</div>
         </div>
       </a>
     );
   }
 }
 
-EventProgramItem.defaultProps = {
+DefaultItem.defaultProps = {
   lang: 'en',
-  className: 'EventProgramItem'
+  className: 'FeatureItem'
 };
 
-export default EventProgramItem;
+export default DefaultItem;

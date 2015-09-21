@@ -58,15 +58,15 @@ function Model() {
       return;
     }
 
-    let feature = {};
+    let feature = {},
+      featuredItem = data['current-mega-menu-item'] ?
+        data['current-mega-menu-item'] :
+        data['default-mega-menu-item'];
 
     feature.id = data.id;
     feature.type = data.type;
 
-    // A featured slot may not have a featured item, but it should. Just in case:
-    if (data['current-mega-menu-item']) {
-      feature.featuredItem = this.createFeatureItem(data['current-mega-menu-item']);
-    }
+    feature.featuredItem = this.createFeatureItem(featuredItem);
 
     return feature;
   };
