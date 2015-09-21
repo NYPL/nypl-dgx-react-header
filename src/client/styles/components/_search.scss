@@ -57,6 +57,12 @@ input[type=radio]:checked + label:before {
 &-SearchBox-Wrapper {
   display: block;
 
+  /* Customized input field only for searchbox */
+  input[type=text] {
+    padding: 0;
+    border: none;
+  };
+
   @include desktop {
     display: inline-block;
   }
