@@ -1,27 +1,27 @@
 /* The style of placehold text */
 input::-webkit-input-placeholder {
-  color: #999999;
+  color: #A3A19E;
   @include desktop {
     color: #FFFFFF;
   }
 }
 
 input:-moz-placeholder { /* Firefox 18- */
-  color: #999999;
+  color: #A3A19E;
   @include desktop {
     color: #FFFFFF;
   } 
 }
 
 input:-moz-placeholder {  /* Firefox 19+ */
-  color: #999999;
+  color: #A3A19E;
   @include desktop {
     color: #FFFFFF;
   }
 }
 
 input:-ms-input-placeholder {
-  color: #999999;
+  color: #A3A19E;
   @include desktop {
     color: #FFFFFF;
   }
@@ -71,18 +71,19 @@ input[type=radio]:checked + label:before {
   border-width: 0px;
   display: none;
   font-size: 22px;
-  padding: 8px 12px 12px 12px;
   @include desktop {
     display: block;
   }
   &:before {
-    vertical-align: none;
+    border-bottom-color: $BG_MENU_SEARCH;
     border-bottom-style: none;
+    vertical-align: none;
     @include desktop {
       vertical-align: sub;
       border-bottom-color: $BG_MENU_SEARCH;
       border-bottom-style: solid;
       border-bottom-width: 1px;
+      padding: 0 3px 2px 3px;
     }
   }
 }
@@ -94,18 +95,20 @@ input[type=radio]:checked + label:before {
   border-width: 0px;
   display: none;
   font-size: 22px;
-  padding: 8px 12px 14px 12px;
+  padding-bottom: 10px;
   @include desktop {
     display: block;
   }
   &:before {
-    vertical-align: none;
+    border-bottom-color: $BG_MENU_SEARCH;
     border-bottom-style: none;
+    vertical-align: none;
     @include desktop {
       vertical-align: sub;
       border-bottom-color: $BG_MENU_SEARCH;
       border-bottom-style: none;
       border-bottom-width: 1px;
+      padding: 0 3px 2px 3px;
     }
   }
 }
@@ -128,7 +131,7 @@ input[type=radio]:checked + label:before {
   @include desktop {
     height: 236px;
     margin: 0;
-    top: 45px;
+    top: 39px;
   }
 }
 
