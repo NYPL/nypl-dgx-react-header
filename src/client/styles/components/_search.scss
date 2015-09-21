@@ -75,13 +75,14 @@ input[type=radio]:checked + label:before {
     display: block;
   }
   &:before {
+    border-bottom-color: $BG_MENU_SEARCH;
     border-bottom-style: none;
     vertical-align: none;
     @include desktop {
       vertical-align: sub;
       border-bottom-color: $BG_MENU_SEARCH;
       border-bottom-style: solid;
-      border-bottom-width: 2px;
+      border-bottom-width: 1px;
       padding: 0 3px 2px 3px;
     }
   }
@@ -99,6 +100,7 @@ input[type=radio]:checked + label:before {
     display: block;
   }
   &:before {
+    border-bottom-color: $BG_MENU_SEARCH;
     border-bottom-style: none;
     vertical-align: none;
     @include desktop {
@@ -201,8 +203,8 @@ input[type=radio]:checked + label:before {
 &-SearchBox-Input-Keywords {
   background-color: #FFFFFF;
   border: none;
-  border-width: 1px;
   border-bottom: solid;
+  border-bottom-width: 2px;
   border-color: #FFFFFF;
   color: #000000;
   display: inline-block;
@@ -218,6 +220,7 @@ input[type=radio]:checked + label:before {
     font-family: Kievit-Light;
     font-size: 66px;
     font-style: normal;
+    letter-spacing: -0.8px;
     padding: 0 0 16px 0;
     width: 100%;
   }
@@ -227,7 +230,7 @@ input[type=radio]:checked + label:before {
   color: #FFFFFF;
   display: none;
   float: left;
-  font-size: 14px;
+  font-size: 15px;
   @include desktop {
     display: inline-block;
   }
