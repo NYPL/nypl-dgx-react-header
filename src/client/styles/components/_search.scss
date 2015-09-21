@@ -244,6 +244,7 @@ input[type=radio]:checked + label:before {
 
 &-SearchBox-Input-Options-label {
   cursor: pointer;
+  display: inline-block;
   margin: 0 40px 0 10px;
 }
 
