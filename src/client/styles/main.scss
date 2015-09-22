@@ -795,13 +795,16 @@
   	.DonateWidget {
   		&-DonateBox {
 				display: inline-table;
-				width: 42%;
-				margin: 0 5% 0 2%;
-				vertical-align: top;
-				color: #FFF;
+				width: 50%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
 
 				&-Wrapper {
+  				color: #FFFFFF;
+					display: block;
 					position: relative;
+					margin: 0 0 0 25px;
 					top: 50px;
 				}
 
@@ -853,7 +856,7 @@
 					}
 				}
   		}
-		} /* End .DonateWidget */
+		}
   }
 }
 
