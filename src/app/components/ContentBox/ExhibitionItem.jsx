@@ -20,13 +20,15 @@ class ExhibitionItem extends React.Component {
 
     return (
       <a href={feature.link} className={this.props.className}>
-        {img}
-        <div className={'FeatureItem-Content ' + classes}>
-          <div className='FeatureItem-Content-Tag'>{feature.category}</div>
-          <h3 className='FeatureItem-Content-Title'>{feature.headline}</h3>
-          <div>
-            <p className='FeatureItem-Content-Date'>{exhibitionDate}</p>
-            <span>{feature.location.fullName}</span>
+        <div className={`${this.props.className}-Wrapper`}>
+          {img}
+          <div className={'FeatureItem-Content ' + classes}>
+            <div className='FeatureItem-Content-Tag'>{feature.category}</div>
+            <h3 className='FeatureItem-Content-Title'>{feature.headline}</h3>
+            <div>
+              <p className='FeatureItem-Content-Date'>{exhibitionDate}</p>
+              <span>{feature.location.fullName}</span>
+            </div>
           </div>
         </div>
       </a>

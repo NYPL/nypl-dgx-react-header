@@ -71,6 +71,7 @@ input[type=radio]:checked + label:before {
   border-width: 0px;
   display: none;
   font-size: 22px;
+  padding-bottom: 10px;
   @include desktop {
     display: block;
   }
@@ -79,11 +80,12 @@ input[type=radio]:checked + label:before {
     border-bottom-style: none;
     vertical-align: none;
     @include desktop {
-      vertical-align: sub;
       border-bottom-color: $BG_MENU_SEARCH;
       border-bottom-style: solid;
       border-bottom-width: 2px;
+      line-height: 1.5;
       padding: 0 3px 2px 3px;
+      vertical-align: sub;
     }
   }
 }
@@ -104,11 +106,12 @@ input[type=radio]:checked + label:before {
     border-bottom-style: none;
     vertical-align: none;
     @include desktop {
-      vertical-align: sub;
       border-bottom-color: $BG_MENU_SEARCH;
       border-bottom-style: none;
       border-bottom-width: 2px;
+      line-height: 1.5;
       padding: 0 3px 2px 3px;
+      vertical-align: sub;
     }
   }
 }

@@ -15,13 +15,15 @@ class BlogItem extends React.Component {
 
     return (
       <a href={feature.link} className={this.props.className}>
-        {img}
-        <div className={'FeatureItem-Content ' + classes}>
-          <div className='FeatureItem-Content-Tag'>{feature.category}</div>
-          <h3 className='FeatureItem-Content-Title'>{feature.headline}</h3>
-          <div className='FeatureItem-Content-Desc'>{feature.description}</div>
-          <p className='FeatureItem-Content-Author-Name'>{feature.author.fullName}</p>
-          <span className='FeatureItem-Content-Author-Title'>{feature.author.title}</span>
+        <div className={`${this.props.className}-Wrapper`}>
+          {img}
+          <div className={'FeatureItem-Content ' + classes}>
+            <div className='FeatureItem-Content-Tag'>{feature.category}</div>
+            <h3 className='FeatureItem-Content-Title'>{feature.headline}</h3>
+            <div className='FeatureItem-Content-Desc'>{feature.description}</div>
+            <p className='FeatureItem-Content-Author-Name'>{feature.author.fullName}</p>
+            <span className='FeatureItem-Content-Author-Title'>{feature.author.title}</span>
+          </div>
         </div>
       </a>
     );
