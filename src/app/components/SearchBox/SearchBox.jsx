@@ -44,7 +44,7 @@ class SearchBox extends React.Component {
               <span className='nypl-icon-magnifier-thin icon'></span>
               <InputField type='text'
               id={`${this.props.id}-Input-Keywords`}
-              className={`${this.props.className}-Input-Keywords`} 
+              className={`${this.props.className}-Input-Keywords input-text`} 
               ref='keywords' 
               value={this.state.searchKeywords}
               placeholder='What would you like to find?'
