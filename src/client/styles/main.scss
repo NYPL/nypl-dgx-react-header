@@ -684,19 +684,20 @@
   	 * this widget within the Header.
   	*/ 
   	.FindUsWidget {
+
   		&-FindUsFeature {
 				display: inline-table;
-	  		width: 41%;
-	  		margin: 0;
-	  		vertical-align: top;
-	  		margin-right: 82px;
+				width: 50%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
 
   			&-Wrapper {
   				color: #FFFFFF;
-  				display: table-cell;
-  				vertical-align: top;
-  				position: relative;
-  				top: 60px;
+					display: block;
+					position: relative;
+					margin: 0 0 0 25px;
+					top: 50px;
   			}
 
   			&-Tag {
@@ -764,15 +765,6 @@
 					}
 				}
 			}
-
-			&-SeparationBar {
-  			display: inline-table;
-  			position: relative;
-  			top: 25px;
-  			height: 200px;
-  			margin-right: 40px;
-  			border-right: 1px solid #FFF;
-  		}
   	} /* End .FindUsWidget */
 
   	.DonateWidget {
