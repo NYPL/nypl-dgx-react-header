@@ -37,7 +37,8 @@ const styles = {
   base: {},
   icon: {
     fontSize: '25px',
-    verticalAlign: 'middle'
+    verticalAlign: 'middle',
+    marginLeft: '5px'
   }
 };
 
