@@ -37,66 +37,68 @@ class SearchBox extends React.Component {
     return (
       <div id={this.props.id}
       className={`${this.props.className}${classes}`}>
-        <div className={`${this.props.className}-Elements-Wrapper`}>
-          <div className={`${this.props.className}-Elements-Input-Wrapper`}>
+        <form>
+          <div className={`${this.props.className}-Elements-Wrapper`}>
+            <div className={`${this.props.className}-Elements-Input-Wrapper`}>
 
-            <div className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
-              <span className='nypl-icon-magnifier-thin icon'></span>
-              <InputField type='text'
-              id={`${this.props.id}-Input-Keywords`}
-              className={`${this.props.className}-Input-Keywords`} 
-              ref='keywords' 
-              value={this.state.searchKeywords}
-              placeholder='What would you like to find?'
-              onChange={this._keywordsChange} />
-            </div>
-            <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
-              <div className={`${this.props.className}-Input-Options`}>
-                <InputField type='radio'
-                id='catalog'
-                name='input option'
-                value='catalog'
-                ref='option'
-                onChange={this._searchOptionChange}
-                checked={this.state.searchOption ==='catalog'} />
+              <div className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
+                <span className='nypl-icon-magnifier-thin icon'></span>
+                <InputField type='text'
+                id={`${this.props.id}-Input-Keywords`}
+                className={`${this.props.className}-Input-Keywords`} 
+                ref='keywords' 
+                value={this.state.searchKeywords}
+                placeholder='What would you like to find?'
+                onChange={this._keywordsChange} />
+              </div>
+              <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
+                <div className={`${this.props.className}-Input-Options`}>
+                  <InputField type='radio'
+                  id='catalog'
+                  name='input option'
+                  value='catalog'
+                  ref='option'
+                  onChange={this._searchOptionChange}
+                  checked={this.state.searchOption ==='catalog'} />
 
-                <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
-                  Search the Catalog
-                </label>
+                  <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
+                    Search the Catalog
+                  </label>
 
-                <InputField type='radio'
-                id='website'
-                name='input option'
-                value='website'
-                ref='option'
-                onChange={this._searchOptionChange}
-                checked={this.state.searchOption ==='website'} />
+                  <InputField type='radio'
+                  id='website'
+                  name='input option'
+                  value='website'
+                  ref='option'
+                  onChange={this._searchOptionChange}
+                  checked={this.state.searchOption ==='website'} />
 
-                <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
-                  Search NYPL.org
-                </label>
+                  <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
+                    Search NYPL.org
+                  </label>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className={`${this.props.className}-Mobile-Submit`}>
-            <div className={`${this.props.className}-Mobile-Submit-Option left-column`}
-            value='catalog'
-            onClick={this._submitSearchRequest.bind(this, 'catalog')}>
-              catalog
-              <span className='nypl-icon-wedge-right icon'></span>
+            <div className={`${this.props.className}-Mobile-Submit`}>
+              <div className={`${this.props.className}-Mobile-Submit-Option left-column`}
+              value='catalog'
+              onClick={this._submitSearchRequest.bind(this, 'catalog')}>
+                catalog
+                <span className='nypl-icon-wedge-right icon'></span>
+              </div>
+              <div className={`${this.props.className}-Mobile-Submit-Option`}
+              value='website'
+              onClick={this._submitSearchRequest.bind(this, 'website')}>
+                nypl.org
+                <span className='nypl-icon-wedge-right icon'></span>
+              </div>
             </div>
-            <div className={`${this.props.className}-Mobile-Submit-Option`}
-            value='website'
-            onClick={this._submitSearchRequest.bind(this, 'website')}>
-              nypl.org
-              <span className='nypl-icon-wedge-right icon'></span>
+            <div className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
+            onClick={this._submitSearchRequest.bind(this, null)}>
             </div>
           </div>
-          <div className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
-          onClick={this._submitSearchRequest.bind(this, null)}>
-          </div>
-        </div>
+        </form>
       </div>
     );
   }
