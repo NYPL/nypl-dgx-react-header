@@ -54,7 +54,7 @@ class SubscribeButton extends React.Component {
         target={this.props.target}
         onClick={this._handleClick}
         style={styles.SimpleButton} />
-        <div className={'EmailSubscribeForm-Wrapper up-arrow '}
+        <div className={'EmailSubscribeForm-Wrapper'}
         style={[
           styles.EmailSubscribeForm,
           showDialog ? styles.show : styles.hide
@@ -114,11 +114,10 @@ const styles = {
   EmailSubscribeForm: {
     position: 'absolute',
     zIndex: 1000,
-    right: '0px',
-    width: '310px',
+    right: '98px',
+    width: '300px',
     backgroundColor: '#EDEDED',
-    padding: '10px',
-    margin: '5px 0 0 0'
+    padding: '15px'
   },
   hide: {
     display: 'none'

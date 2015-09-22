@@ -169,6 +169,12 @@
 	  	&.up-arrow {
 	  		@include up-arrow(#EEE, 212px, 'top', -19px);
 	  	}
+
+	  	.EmailSubscribeForm {
+	  		&-Title {
+	  			border-top: 2px solid #FFF;
+	  		}
+	  	}
 	  }
 	}
 
