@@ -35,7 +35,7 @@ class SubscribeButton extends React.Component {
     //let showDialog = this.state.showDialog;
     let showDialog = this.state.subscribeFormVisible;
     // Dynamic class assignment based on boolean flag
-    const classes =  cx({ show: showDialog, hide: !showDialog });
+    const classes =  cx({ 'active': showDialog, '': !showDialog });
 
     //console.log(this.state);
 
@@ -47,14 +47,14 @@ class SubscribeButton extends React.Component {
         this.props.style //allows for parent-to-child css styling
       ]}>
         <SimpleButton
-        className={'SubscribeButton'}
+        className={'SubscribeButton ' + classes}
         id={'SubscribeButton'}
         lang={this.props.lang}
         label={this.props.label}
         target={this.props.target}
         onClick={this._handleClick}
         style={styles.SimpleButton} />
-        <div className={'EmailSubscribeForm-Wrapper up-arrow '}
+        <div className={'EmailSubscribeForm-Wrapper'}
         style={[
           styles.EmailSubscribeForm,
           showDialog ? styles.show : styles.hide
@@ -104,21 +104,20 @@ SubscribeButton.defaultProps = {
 
 const styles = {
   base: {
-    margin: '0px 5px'
+    margin: '0px 5px',
+    position: 'relative'
   },
   SimpleButton: {
     padding: '1em',
-    display: 'block',
-    color: '#000'
+    display: 'block'
   },
   EmailSubscribeForm: {
     position: 'absolute',
     zIndex: 1000,
-    right: '0px',
-    width: '310px',
-    backgroundColor: '#EDEDED',
-    padding: '10px',
-    margin: '5px 0 0 0'
+    right: '0',
+    width: '250px',
+    backgroundColor: '#1DA1D4',
+    padding: '20px 25px'
   },
   hide: {
     display: 'none'

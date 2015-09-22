@@ -26,6 +26,7 @@
 	  	.Header {
 	  		&-Wrapper{
 	  			border-top: 2px solid #EA212E;
+	  			z-index: 3;
 					width: 100%;
 					position: fixed;
 					top: 0;
@@ -57,7 +58,7 @@
 	  		&-NavMenu {
 	  			position: absolute;
 	  			width: 100%;
-	  			bottom: 20px;
+	  			bottom: 5px;
 	  		}
 	  	}
   	}
@@ -94,10 +95,18 @@
 		.SubscribeButton, .DonateButton, .SignInButton, .LibraryCardButton {
 			@include Kievit-Bold;
 			font-size: 11px;
+
+			&:visited {
+				color: #000;
+			}
+		}
+
+		.SubscribeButton.active {
+			background-color: #1980a9;
+			color: #FFF;
 		}
 
 		.DonateButton {
-			padding: 0.8rem 1.55rem;
 			border-radius: 4px;
 		}
 
@@ -168,6 +177,15 @@
 	  .EmailSubscribeForm-Wrapper {
 	  	&.up-arrow {
 	  		@include up-arrow(#EEE, 212px, 'top', -19px);
+	  	}
+
+	  	.EmailSubscribeForm {
+	  		&-Title {
+	  			border-top: 2px solid #FFF;
+	  			padding-top: 10px;
+	  			color: #fff;
+	  			margin-bottom: 15px;
+	  		}
 	  	}
 	  }
 	}
@@ -293,6 +311,7 @@
 		  	#NavMenuItem-Link {
 					/* Arrow Assignment for Desktop and up */
 					@include desktop {
+
 			  		/* BROWSE */
 			  		&-29a4b824-e084-4771-aafc-52b3586c5e49 {
 				  		&.active {
@@ -471,7 +490,7 @@
 		  	color: #FFFFFF;
 		  	width: 100%;
 	  		position: absolute;
-		  	top: 39px;
+		  	top: 38px;
 		  	left: 0;
 
 		  	/* Only display MegaMenu's on Desktop */
@@ -500,10 +519,9 @@
 		  	}
 
 		  	&-SubNavWrapper {
-		  		position: relative;
+		  		position: absolute;
 		  		width: 280px;
-		  		float: left;
-		  		display: table-cell;
+		  		display: block;
 		  		margin: 0;
 		  		padding: 0;
 		  		height: $MAIN_MENU_DESKTOP_HEIGHT;
@@ -539,7 +557,13 @@
 		  				margin: 7px 0px 14px 0;
 		  				display: block;
 		  				padding: 0;
-		  				@include font-size(17px);
+		  				
+		  				a {
+		  					font-size: 17px;
+		  					margin: 0;
+		  					padding: 0;
+		  					display: block;
+		  				}
 		  			}
 		  		}
 
@@ -580,8 +604,9 @@
 		  	}
 
 		  	&-FeaturesWrapper {
-		  		display: table-cell;
-		  		margin: 0;
+		  		display: block;
+		  		width: auto;
+		  		margin: 0 0 0 280px;
 		  		padding: 0;
 		  		height: $MAIN_MENU_DESKTOP_HEIGHT;
 		  		text-align: left;
@@ -590,27 +615,39 @@
 		  	&-Features {
 		  		display: block;
 		  		margin: 0;
+		  		padding: 0;
 		  		width: 100%;
-		  		padding: 0 0 0 5.625rem;
+		  		height: 100%;
 		  	}
 
 		  	&-FeatureItem {
 		  		display: inline-table;
-		  		width: 41%;
+		  		width: 50%;
+		  		height: 100%;
 		  		margin: 0;
-		  		vertical-align: top;
-		  		margin-right: 82px;
+		  		padding: 0;
+
+					&-Wrapper {
+						display: block;
+						position: relative;
+						margin: 0 0 0 25px;
+						top: 50px;
+					}
 		  	}
 		  }
 		}
 
 		.FeatureItem {
+
 			&-Image {
-				width: 88px;
-				height: 88px;
-				position: relative;
-				top: 75px;
-				margin: 0 20px 0 0;
+
+				&.with-image {
+					width: 88px;
+					height: 88px;
+					display: block;
+					position: absolute;
+					top: 40px;
+				}
 
 				img {
 					border-radius: 50%;
@@ -621,36 +658,43 @@
 
 			&-Content {
 				color: #FFFFFF;
-				display: table-cell;
-				vertical-align: top;
-				position: relative;
-				top: 50px;
-				width: 335px;
+				
+				&.with-image {
+					display: block;
+					padding: 0;
+					margin: 0 10px 0 110px;
+					width: auto;
+					max-width: 100%;
+				}
+
+				&.without-image {
+					margin: 0;
+				}
 
 				&-Tag {
-					font-size: 0.76rem;
+					font-size: 13px;
 					@include Kievit-Medium;
 					text-transform: uppercase;
-					letter-spacing: 0.05rem;
+					letter-spacing: 0.05em;
 				}
 				&-Title {
-					@include font-size(30px);
 					@include Milo-Light;
+					font-size: 30px;
 					line-height: 1em;
-					margin: 0.8em 0 0.6em;
+					margin: .75em 0;
 					font-weight: normal;
-					letter-spacing: 0.05rem;
+					letter-spacing: 0.05em;
 				}
 
 				&-Desc {
 					@include Kievit-Regular;
-					font-size: 15px;
-					font-size: 0.875rem;
-					line-height: 1.3rem;
+					font-size: 15.5px;
+					line-height: 1.5em;
+					letter-spacing: .01em;
 				}
 
 				&-Date {
-					@include font-size(13px);
+					font-size: 15px;
 					text-transform: uppercase;
 					letter-spacing: 0.05em;
 					margin-bottom: 0.5em;
@@ -658,12 +702,12 @@
 
 				&-Author {
 					&-Name {
-						font-size: 19px;
+						font-size: 17px;
 						font-weight: normal;
-						margin-bottom: 0.3rem;
+						margin-bottom: 0.3em;
 					}
 					&-Title {
-						font-size: 15px;
+						font-size: 14px;
 					}
 				}
 			}
@@ -675,24 +719,36 @@
   	 * this widget within the Header.
   	*/ 
   	.FindUsWidget {
-  		&-LocationFinder {
-  			display: inline-table;
-				width: 41%;
-				margin: 0 2% 0 2%;
-				vertical-align: top;
+
+  		&-FindUsFeature {
+				display: inline-table;
+				width: 50%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
 
   			&-Wrapper {
   				color: #FFFFFF;
-  				display: table-cell;
-  				vertical-align: top;
-  				position: relative;
-  				top: 60px;
+					display: block;
+					position: relative;
+					margin: 0 0 0 25px;
+					top: 50px;
   			}
 
   			&-Tag {
-					font-size: 0.76rem;
+					font-size: 13px;
 					@include Kievit-Medium;
 					text-transform: uppercase;
+					letter-spacing: 0.05em;
+				}
+
+				&-Title {
+					font-size: 22px;
+					@include Milo-Light;
+					color: #FFF;
+					line-height: 1em;
+					margin: 0.8em 0 0.6em;
+					font-weight: normal;
 					letter-spacing: 0.05rem;
 				}
 
@@ -703,6 +759,18 @@
 					line-height: 1.25em;
 					font-size: 18px;
 					max-width: 65%;
+				}
+
+				&-Link {
+					margin-top: 10px;
+					position: absolute;
+					font-size: 13px;
+					@include Kievit-Book;
+					letter-spacing: 0.07em;
+					background-color: $libraryBlue;
+					color: #fff;
+					padding: 10px 10px 10px 20px;
+					margin: 10px 0;
 				}
 
 				&-SearchBox {
@@ -733,49 +801,44 @@
 					}
 				}
 			}
-
-			&-SeparationBar {
-  			display: inline-table;
-  			position: relative;
-  			top: 25px;
-  			height: 200px;
-  			margin-right: 40px;
-  			border-right: 1px solid #FFF;
-  		}
   	} /* End .FindUsWidget */
 
   	.DonateWidget {
   		&-DonateBox {
 				display: inline-table;
-				width: 42%;
-				margin: 0 5% 0 2%;
-				vertical-align: top;
-				color: #FFF;
+				width: 50%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
 
 				&-Wrapper {
+  				color: #FFFFFF;
+					display: block;
 					position: relative;
+					margin: 0 0 0 25px;
 					top: 50px;
 				}
 
 				&-Tag {
-					font-size: 0.76rem;
+					font-size: 13px;
 					@include Kievit-Medium;
 					text-transform: uppercase;
-					letter-spacing: 0.05rem;
+					letter-spacing: 0.05em;
 				}
 				&-Title {
-					@include font-size(30px);
+					font-size: 30px;
 					@include Kievit-Book;
 					line-height: 1em;
-					margin: 0.8em 0 0.6em;
+					margin: .75em 0;
 					font-weight: normal;
-					letter-spacing: 0.05rem;
+					letter-spacing: 0.02em;
 				}
 
 				&-Desc {
 					@include Kievit-Regular;
-					@include font-size(15px);
-					line-height: 1.3rem;
+					font-size: 15.5px;
+					line-height: 1.5em;
+					letter-spacing: .01em;
 				}
 
 				&-DonationLinks {
@@ -804,7 +867,7 @@
 					}
 				}
   		}
-		} /* End .DonateWidget */
+		}
   }
 }
 
