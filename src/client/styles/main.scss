@@ -94,11 +94,15 @@
 		.SubscribeButton, .DonateButton, .SignInButton, .LibraryCardButton {
 			@include Kievit-Bold;
 			font-size: 11px;
+
+			&:visited {
+				color: #000;
+			}
 		}
 
 		.SubscribeButton.active {
 			background-color: #1980a9;
-			color: #fff;
+			color: #FFF;
 		}
 
 		.DonateButton {
@@ -551,7 +555,13 @@
 		  				margin: 7px 0px 14px 0;
 		  				display: block;
 		  				padding: 0;
-		  				font-size: 17px;
+		  				
+		  				a {
+		  					font-size: 17px;
+		  					margin: 0;
+		  					padding: 0;
+		  					display: block;
+		  				}
 		  			}
 		  		}
 
@@ -722,8 +732,9 @@
 				}
 
 				&-Title {
-					@include font-size(22px);
+					font-size: 22px;
 					@include Milo-Light;
+					color: #FFF;
 					line-height: 1em;
 					margin: 0.8em 0 0.6em;
 					font-weight: normal;
@@ -742,7 +753,7 @@
 				&-Link {
 					margin-top: 10px;
 					position: absolute;
-					@include font-size(13px);
+					font-size: 13px;
 					@include Kievit-Book;
 					letter-spacing: 0.07em;
 					background-color: $libraryBlue;
