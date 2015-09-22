@@ -96,6 +96,11 @@
 			font-size: 11px;
 		}
 
+		.SubscribeButton.active {
+			background-color: #1980a9;
+			color: #fff;
+		}
+
 		.DonateButton {
 			border-radius: 4px;
 		}
@@ -167,6 +172,15 @@
 	  .EmailSubscribeForm-Wrapper {
 	  	&.up-arrow {
 	  		@include up-arrow(#EEE, 212px, 'top', -19px);
+	  	}
+
+	  	.EmailSubscribeForm {
+	  		&-Title {
+	  			border-top: 2px solid #FFF;
+	  			padding-top: 10px;
+	  			color: #fff;
+	  			margin-bottom: 15px;
+	  		}
 	  	}
 	  }
 	}
