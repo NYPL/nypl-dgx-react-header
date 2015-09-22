@@ -25,7 +25,7 @@ class SearchBox extends React.Component {
     this._searchOptionChange = this._searchOptionChange.bind(this);
     // The function send search requests
     this._submitSearchRequest = this._submitSearchRequest.bind(this);
-    // this._submitMobileSearchRequest = this._submitMobileSearchRequest.bind(this);
+    this._triggerSubmit = this._triggerSubmit.bind(this);
   }
 
   // Dom Render Section
@@ -36,86 +36,85 @@ class SearchBox extends React.Component {
     
     return (
       <div id={this.props.id}
-      className={`${this.props.className}${classes}`}>
-        <form>
-          <div className={`${this.props.className}-Elements-Wrapper`}>
-            <div className={`${this.props.className}-Elements-Input-Wrapper`}>
+      className={`${this.props.className}${classes}`}
+      onKeyPress={this._triggerSubmit.bind(this)}>
+        <div className={`${this.props.className}-Elements-Wrapper`}>
+          <div className={`${this.props.className}-Elements-Input-Wrapper`}>
 
-              <div className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
-                <span className='nypl-icon-magnifier-thin icon'></span>
-                <InputField type='text'
-                id={`${this.props.id}-Input-Keywords`}
-                className={`${this.props.className}-Input-Keywords`} 
-                ref='keywords' 
-                value={this.state.searchKeywords}
-                placeholder='What would you like to find?'
-                onChange={this._keywordsChange} />
-              </div>
-              <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
-                <div className={`${this.props.className}-Input-Options`}>
-                  <InputField type='radio'
-                  id='catalog'
-                  name='input option'
-                  value='catalog'
-                  ref='option'
-                  onChange={this._searchOptionChange}
-                  checked={this.state.searchOption ==='catalog'} />
-
-                  <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
-                    Search the Catalog
-                  </label>
-
-                  <InputField type='radio'
-                  id='website'
-                  name='input option'
-                  value='website'
-                  ref='option'
-                  onChange={this._searchOptionChange}
-                  checked={this.state.searchOption ==='website'} />
-
-                  <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
-                    Search NYPL.org
-                  </label>
-                </div>
-              </div>
+            <div className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
+              <span className='nypl-icon-magnifier-thin icon'></span>
+              <InputField type='text'
+              id={`${this.props.id}-Input-Keywords`}
+              className={`${this.props.className}-Input-Keywords`} 
+              ref='keywords' 
+              value={this.state.searchKeywords}
+              placeholder='What would you like to find?'
+              onChange={this._keywordsChange} />
             </div>
+            <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
+              <div className={`${this.props.className}-Input-Options`}>
+                <InputField type='radio'
+                id='catalog'
+                name='inputOption'
+                value='catalog'
+                ref='option'
+                onChange={this._searchOptionChange}
+                checked={this.state.searchOption ==='catalog'} />
 
-            <div className={`${this.props.className}-Mobile-Submit`}>
-              <div className={`${this.props.className}-Mobile-Submit-Option left-column`}
-              value='catalog'
-              onClick={this._submitSearchRequest.bind(this, 'catalog')}>
-                catalog
-                <span className='nypl-icon-wedge-right icon'></span>
+                <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
+                  Search the Catalog
+                </label>
+
+                <InputField type='radio'
+                id='website'
+                name='inputOption'
+                value='website'
+                ref='option'
+                onChange={this._searchOptionChange}
+                checked={this.state.searchOption ==='website'} />
+
+                <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
+                  Search NYPL.org
+                </label>
               </div>
-              <div className={`${this.props.className}-Mobile-Submit-Option`}
-              value='website'
-              onClick={this._submitSearchRequest.bind(this, 'website')}>
-                nypl.org
-                <span className='nypl-icon-wedge-right icon'></span>
-              </div>
-            </div>
-            <div className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
-            onClick={this._submitSearchRequest.bind(this, null)}>
             </div>
           </div>
-        </form>
+
+          <div className={`${this.props.className}-Mobile-Submit`}>
+            <div className={`${this.props.className}-Mobile-Submit-Option left-column`}
+            value='catalog'
+            onClick={this._submitSearchRequest.bind(this, 'catalog')}>
+              catalog
+              <span className='nypl-icon-wedge-right icon'></span>
+            </div>
+            <div className={`${this.props.className}-Mobile-Submit-Option`}
+            value='website'
+            onClick={this._submitSearchRequest.bind(this, 'website')}>
+              nypl.org
+              <span className='nypl-icon-wedge-right icon'></span>
+            </div>
+          </div>
+          <button className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
+          onClick={this._submitSearchRequest.bind(this, null)}>
+          </button>
+        </div>
       </div>
     );
   }
 
   // Listen to any changes to keywords input and change the state
-  _keywordsChange (event) {
+  _keywordsChange(event) {
     this.setState({searchKeywords: event.target.value});
   }
 
   // Listen to the changes of the search options and change the state
-  _searchOptionChange (event) {
+  _searchOptionChange(event) {
     this.setState({searchOption: event.target.value});
     // console.log(this.state.searchOption);
   }
 
   // The function to generate a http request after click the search button
-  _submitSearchRequest (value) {
+  _submitSearchRequest(value) {
     let requestParameters;
     // Grab the values the user has entered as the parameters for URL,
     // depends on desktop or mobile
@@ -133,6 +132,12 @@ class SearchBox extends React.Component {
     }
     // Go to the search page
     window.location.assign(requestUrl);
+  }
+
+  _triggerSubmit(event) {
+    if (event.charCode === 13) {
+      this._submitSearchRequest(null);
+    }
   }
 }
 

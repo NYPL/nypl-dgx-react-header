@@ -38,7 +38,6 @@ InputField.defaultProps = {
 
 const styles = {
   base: {
-
   }
 };
 

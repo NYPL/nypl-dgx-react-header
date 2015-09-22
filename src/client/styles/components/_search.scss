@@ -248,6 +248,9 @@
     border-width: 2px;
   }
   @include desktop {
+    -webkit-appearance: none;
+    background-color: transparent;
+    border-width: 0px;
     color: #FFFFFF;
     cursor: pointer;
     display: inline-block;
