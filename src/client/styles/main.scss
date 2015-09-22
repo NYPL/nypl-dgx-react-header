@@ -554,7 +554,7 @@
 
 		  				li {
 		  					display: inline-block;
-		  					margin: 0 5px 0 0;
+		  					margin: 0 10px 0 0;
 
 		  					&:last-child {
 		  						margin-right: 0;
@@ -563,7 +563,16 @@
 		  					a {
 		  						text-decoration: none;
 		  						display: block;
-		  						font-size: 28px;
+		  						font-size: 25px;
+		  						border: 1.8px solid #FFF;
+		  						padding: 8px;
+		  						@include border-radius(50%);
+		  						transition: all 0.5s ease;
+
+		  						&:hover {
+		  							color: #726958;
+		  							background-color: #FFF;
+		  						}
 		  					}
 		  				}
 		  			}
