@@ -1,64 +1,10 @@
-/* The style of placehold text */
-input::-webkit-input-placeholder {
-  color: #A3A19E;
-  @include desktop {
-    color: #FFFFFF;
-  }
-}
-
-input:-moz-placeholder { /* Firefox 18- */
-  color: #A3A19E;
-  @include desktop {
-    color: #FFFFFF;
-  } 
-}
-
-input:-moz-placeholder {  /* Firefox 19+ */
-  color: #A3A19E;
-  @include desktop {
-    color: #FFFFFF;
-  }
-}
-
-input:-ms-input-placeholder {
-  color: #A3A19E;
-  @include desktop {
-    color: #FFFFFF;
-  }
-}
-
-/* Customized radio button */
-input[type=radio] {
-  /* Hide original inputs */
-  display: inline-block;
-}
-
-label:before {
-  background-color: #FFFFFF;
-  border-radius: 50%;
-  content: '';
-  display: none;
-  height: 10px;
-  left: 0;
-  margin-right: 2px;
-  position: relative;
-  width: 10px;
-}
-
-input[type=radio]:checked + label:before {
-  content: '\2022';
-  color: #000000;
-  display: none;
-  font-size: 20px;
-  line-height: 13px;
-}
-
 /* The Wrapper for putting in the icon for search button and search box */
 &-SearchBox-Wrapper {
   display: block;
 
   @include desktop {
     display: inline-block;
+    vertical-align: middle;
   }
 }
 
@@ -78,14 +24,12 @@ input[type=radio]:checked + label:before {
   &:before {
     border-bottom-color: $BG_MENU_SEARCH;
     border-bottom-style: none;
-    vertical-align: none;
     @include desktop {
       border-bottom-color: $BG_MENU_SEARCH;
       border-bottom-style: solid;
       border-bottom-width: 2px;
       line-height: 1.5;
       padding: 0 3px 2px 3px;
-      vertical-align: middle;
     }
   }
 }
@@ -104,14 +48,12 @@ input[type=radio]:checked + label:before {
   &:before {
     border-bottom-color: $BG_MENU_SEARCH;
     border-bottom-style: none;
-    vertical-align: none;
     @include desktop {
       border-bottom-color: $BG_MENU_SEARCH;
       border-bottom-style: none;
       border-bottom-width: 2px;
       line-height: 1.5;
       padding: 0 3px 2px 3px;
-      vertical-align: middle;
     }
   }
 }
@@ -149,6 +91,61 @@ input[type=radio]:checked + label:before {
     margin: 66px auto 0 auto;
     display: block;
     text-align: left;
+  }
+
+  /* The style of placehold text */
+  input::-webkit-input-placeholder {
+    color: #A3A19E;
+    @include desktop {
+      color: #FFFFFF;
+    }
+  }
+
+  input:-moz-placeholder { /* Firefox 18- */
+    color: #A3A19E;
+    @include desktop {
+      color: #FFFFFF;
+    } 
+  }
+
+  input:-moz-placeholder {  /* Firefox 19+ */
+    color: #A3A19E;
+    @include desktop {
+      color: #FFFFFF;
+    }
+  }
+
+  input:-ms-input-placeholder {
+    color: #A3A19E;
+    @include desktop {
+      color: #FFFFFF;
+    }
+  }
+
+  /* Customized radio button */
+  input[type=radio] {
+    /* Hide original inputs */
+    display: inline-block;
+  }
+
+  label:before {
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    content: '';
+    display: none;
+    height: 10px;
+    left: 0;
+    margin-right: 2px;
+    position: relative;
+    width: 10px;
+  }
+
+  input[type=radio]:checked + label:before {
+    content: '\2022';
+    color: #000000;
+    display: none;
+    font-size: 20px;
+    line-height: 13px;
   }
 }
 
