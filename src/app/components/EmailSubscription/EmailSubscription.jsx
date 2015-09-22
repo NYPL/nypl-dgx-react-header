@@ -14,7 +14,7 @@ class SubscribeMessageBox extends React.Component {
 
   render () {
     return (
-      <div className={'EmailMessageBox ' + this.props.status }>
+      <div className={'EmailMessageBox ' + this.props.status + ' ' + this.props.className + '-Title'}>
         <p>{this.props.msg}</p>
       </div>
     );
@@ -58,13 +58,18 @@ class EmailSubscription extends React.Component {
     if (!isLoading) {
       if (status === 'success') {
         return (
-          <SubscribeMessageBox status={status} msg="Thank you for subscribing to our email updates." />
+          <SubscribeMessageBox status={status} msg="Thank you for subscribing to our email updates." 
+            className={'EmailSubscribeForm'} />
         );     
       }
 
       if (status === 'exists') {
         return (
-          <SubscribeMessageBox status={status} msg="Looks like you're already signed up!" />
+          <div>
+            <SubscribeMessageBox status={status} msg="Looks like you're already signed up!"
+              className={'EmailSubscribeForm'}/>
+            <p><a href='' onClick={this._initForm.bind(this)}>Enter a different email address</a></p>
+          </div>
         );
       }
 
@@ -111,7 +116,7 @@ class EmailSubscription extends React.Component {
               <InputField 
               type='submit'
               name='submit'
-              value='Sign Up'
+              value='SIGN UP'
               style={styles.submitButton} />
 
               <InputField type='hidden' name='Source Code' value='Homepage' />
@@ -129,6 +134,14 @@ class EmailSubscription extends React.Component {
         <div>Loading results...</div>
       );
     }
+  }
+
+  _initForm(e) {
+    e.preventDefault();
+    this.setState({
+      formProcessing: false,
+      formStatus: ''
+    });
   }
 
   // Store changes are funky, need to look into it
@@ -201,13 +214,13 @@ EmailSubscription.defaultProps = {
   form_name: 'subscribeForm',
   list_id: '1061',
   form_method: 'POST',
-  placeholder: 'Your email addres',
+  placeholder: 'Your email address',
   policyUrl: 'http://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'
 };
 
 const styles = {
   base: {
-    backgroundColor: '#EEE',
+    backgroundColor: '#1DA1D4',
     padding: '0px',
     width: 'auto'
   },
@@ -219,31 +232,33 @@ const styles = {
   },
   emailField: {
     display: 'table-cell',
+    borderRadius: '3px',
     padding: '2px 5px',
     height: '35px',
     margin: '0',
-    width: '220px',
+    width: '100%',
     fontSize: '12.5px',
     border: 'none'
   },
   submitButton: {
     display: 'table-cell',
-    backgroundColor: '#666',
-    border: 'none',
+    marginTop: '40px',
+    border: '2px solid #fff',
     color: 'white',
-    height: '38.5px',
+    height: '33px',
     verticalAlign: 'top',
     width: '70px',
-    margin: '0 0 0 5px',
-    fontSize: '13px' 
+    borderRadius: '20px',
+    fontSize: '12px',
+    backgroundColor: '#1DA1D4'
   },
   privacyLink: {
     textDecoration: 'underline',
     fontSize: '10px',
-    color: '#a5a5a5',
+    color: '#BBB',
     fontWeight: '200',
-    position: 'absoute',
-    bottom: '15px',
+    position: 'absolute',
+    bottom: '30px',
     right: '15px'
   }
 };
