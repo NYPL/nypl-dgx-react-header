@@ -22,11 +22,13 @@ class DefaultItem extends React.Component {
 
     return (
       <a href={feature.link} className={this.props.className}>
-        {img}
-        <div className={'FeatureItem-Content ' + classes}>
-          <div className='FeatureItem-Content-Tag'>{feature.category}</div>
-          <h3 className='FeatureItem-Content-Title'>{feature.headline}</h3>
-          <div className='FeatureItem-Content-Desc'>{feature.description}</div>
+        <div className={`${this.props.className}-Wrapper`}>
+          {img}
+          <div className={'FeatureItem-Content ' + classes}>
+            <div className='FeatureItem-Content-Tag'>{feature.category}</div>
+            <h3 className='FeatureItem-Content-Title'>{feature.headline}</h3>
+            <div className='FeatureItem-Content-Desc'>{feature.description}</div>
+          </div>
         </div>
       </a>
     );

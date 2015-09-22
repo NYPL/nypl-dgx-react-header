@@ -67,7 +67,7 @@ class Header extends React.Component {
                 className='LibraryCardButton'
                 style={styles.libraryCardButton} />
               <SubscribeButton 
-                label='Subscribe'
+                label='Get Email Updates'
                 lang={this.props.lang}
                 style={styles.subscribeButton} />
               <DonateButton 
