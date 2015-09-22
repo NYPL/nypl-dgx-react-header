@@ -104,7 +104,7 @@ SubscribeButton.defaultProps = {
 
 const styles = {
   base: {
-    margin: '0px 5px'
+    margin: '0px 5px',
     position: 'relative'
   },
   SimpleButton: {
