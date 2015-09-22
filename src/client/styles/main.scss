@@ -513,10 +513,9 @@
 		  	}
 
 		  	&-SubNavWrapper {
-		  		position: relative;
+		  		position: absolute;
 		  		width: 280px;
-		  		float: left;
-		  		display: table-cell;
+		  		display: block;
 		  		margin: 0;
 		  		padding: 0;
 		  		height: $MAIN_MENU_DESKTOP_HEIGHT;
@@ -584,8 +583,9 @@
 		  	}
 
 		  	&-FeaturesWrapper {
-		  		display: table-cell;
-		  		margin: 0;
+		  		display: block;
+		  		width: auto;
+		  		margin: 0 0 0 280px;
 		  		padding: 0;
 		  		height: $MAIN_MENU_DESKTOP_HEIGHT;
 		  		text-align: left;
@@ -594,27 +594,39 @@
 		  	&-Features {
 		  		display: block;
 		  		margin: 0;
+		  		padding: 0;
 		  		width: 100%;
-		  		padding: 0 0 0 5.625em;
+		  		height: 100%;
 		  	}
 
 		  	&-FeatureItem {
 		  		display: inline-table;
-		  		width: 41%;
+		  		width: 50%;
+		  		height: 100%;
 		  		margin: 0;
-		  		vertical-align: top;
-		  		margin-right: 82px;
+		  		padding: 0;
+
+					&-Wrapper {
+						display: block;
+						position: relative;
+						margin: 0 0 0 25px;
+						top: 50px;
+					}
 		  	}
 		  }
 		}
 
 		.FeatureItem {
+
 			&-Image {
-				width: 88px;
-				height: 88px;
-				position: relative;
-				top: 75px;
-				margin: 0 20px 0 0;
+
+				&.with-image {
+					width: 88px;
+					height: 88px;
+					display: block;
+					position: absolute;
+					top: 40px;
+				}
 
 				img {
 					border-radius: 50%;
@@ -625,11 +637,18 @@
 
 			&-Content {
 				color: #FFFFFF;
-				display: table-cell;
-				vertical-align: top;
-				position: relative;
-				top: 50px;
-				width: 335px;
+				
+				&.with-image {
+					display: block;
+					padding: 0;
+					margin: 0 10px 0 110px;
+					width: auto;
+					max-width: 100%;
+				}
+
+				&.without-image {
+					margin: 0;
+				}
 
 				&-Tag {
 					font-size: 13px;
@@ -679,19 +698,20 @@
   	 * this widget within the Header.
   	*/ 
   	.FindUsWidget {
+
   		&-FindUsFeature {
 				display: inline-table;
-	  		width: 41%;
-	  		margin: 0;
-	  		vertical-align: top;
-	  		margin-right: 82px;
+				width: 50%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
 
   			&-Wrapper {
   				color: #FFFFFF;
-  				display: table-cell;
-  				vertical-align: top;
-  				position: relative;
-  				top: 60px;
+					display: block;
+					position: relative;
+					margin: 0 0 0 25px;
+					top: 50px;
   			}
 
   			&-Tag {
@@ -759,15 +779,6 @@
 					}
 				}
 			}
-
-			&-SeparationBar {
-  			display: inline-table;
-  			position: relative;
-  			top: 25px;
-  			height: 200px;
-  			margin-right: 40px;
-  			border-right: 1px solid #FFF;
-  		}
   	} /* End .FindUsWidget */
 
   	.DonateWidget {
