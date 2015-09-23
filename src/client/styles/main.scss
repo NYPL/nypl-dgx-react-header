@@ -102,7 +102,7 @@
 		}
 
 		.SubscribeButton.active {
-			background-color: #1980a9;
+			background-color: #1980A9;
 			color: #FFF;
 		}
 
@@ -180,11 +180,27 @@
 	  	}
 
 	  	.EmailSubscribeForm {
-	  		&-Title {
+	  		&-Eyebrow {
 	  			border-top: 2px solid #FFF;
-	  			padding-top: 10px;
 	  			color: #fff;
-	  			margin-bottom: 15px;
+	  			width: 25px;
+	  		}
+	  		&-Title {
+	  			color: #fff;
+	  		}
+	  		&-Input {
+	  			display: table-cell;
+			    border-radius: 4px;
+			    padding: 2px 5px;
+			    height: 35px;
+			    margin: 0;
+			    width: 95%;
+			    font-size: 12.5px;
+			    border: 3px solid #1DA1D4;
+
+	  			&:focus {
+      			border: 3px solid #1980A9;
+	  			}
 	  		}
 	  	}
 	  }
