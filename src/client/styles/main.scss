@@ -185,7 +185,7 @@
 
 	.EmailSubscribeForm-Wrapper {
 		.EmailMessageBox {
-			width: 65%;
+			width: 75%;
 		}
 		.EmailSubscribeForm {
 			margin-top: 20px;
@@ -201,7 +201,6 @@
 				font-size: 20px;
 				@include Kievit-Book;
 				font-weight: normal;
-				line-height: 
 
 				&-BestNYPL {
 					@include Kievit-Bold;
@@ -213,6 +212,13 @@
 				a {
 					text-decoration: underline;
 					color: #fff;
+				}
+			}
+			&-Error {
+				display: none;
+
+				&.active {
+					display: block;
 				}
 			}
 			&-Input {

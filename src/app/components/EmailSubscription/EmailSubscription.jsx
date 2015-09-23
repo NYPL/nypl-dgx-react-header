@@ -2,6 +2,7 @@ import React from 'react';
 import Radium from 'radium';
 import axios from 'axios';
 import InputField from '../InputField/InputField.jsx';
+import cx from 'classnames';
 
 //import HeaderStore from '../../stores/HeaderStore';
 //import HeaderActions from '../../actions/HeaderActions';
@@ -10,6 +11,10 @@ class SubscribeMessageBox extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
+
+    this.state = {
+      notValidEmail: false
+    };
   }
 
   render () {
@@ -53,8 +58,10 @@ class EmailSubscription extends React.Component {
   render () {
     let status = this.state.formStatus,
       isLoading = this.state.formProcessing,
+      notValidEmail = this.state.notValidEmail,
       contentBox;
 
+    const errorClass =  cx({ 'active': notValidEmail, '': !notValidEmail });
     // console.log(this.state);
 
     if (!isLoading) {
@@ -93,6 +100,10 @@ class EmailSubscription extends React.Component {
             style={styles.emailField}
             ref='emailAddressField'
             isRequired={true} />
+
+            <div className={'EmailSubscribeForm-Error ' + errorClass}>
+              <span>Please enter a valid email address</span>
+            </div>
 
             <InputField
             type='submit'
@@ -181,10 +192,16 @@ class EmailSubscription extends React.Component {
 
     if (!this._isValidEmail(userInput.value)) {
       userInput.value = '';
-      userInput.placeholder = 'Please enter a valid email address';
+      // userInput.placeholder = 'Please enter a valid email address';
       userInput.focus();
-
+      this.setState({
+        notValidEmail: true
+      });
     } else {
+      this.setState({
+        notValidEmail: false
+      });
+
       // Send as a POST request
       this._addSubscriberToList(
         userInput.value,
@@ -273,7 +290,7 @@ const styles = {
     color: '#BBB',
     fontWeight: '200',
     position: 'absolute',
-    bottom: '21px',
+    bottom: '19px',
     right: '25px'
   }
 };

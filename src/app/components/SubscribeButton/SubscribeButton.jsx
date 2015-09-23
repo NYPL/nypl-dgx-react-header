@@ -116,10 +116,10 @@ const styles = {
     position: 'absolute',
     zIndex: 1000,
     right: '0',
-    width: '300px',
+    width: '250px',
     height: '200px',
     backgroundColor: '#1DA1D4',
-    padding: '30px 30px 20px 30px'
+    padding: '25px 30px 20px 30px'
   },
   hide: {
     display: 'none'
