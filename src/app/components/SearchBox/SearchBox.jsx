@@ -26,7 +26,6 @@ class SearchBox extends React.Component {
     this._searchOptionChange = this._searchOptionChange.bind(this);
     // The function send search requests
     this._submitSearchRequest = this._submitSearchRequest.bind(this);
-    // this._submitMobileSearchRequest = this._submitMobileSearchRequest.bind(this);
   }
 
   // Dom Render Section
@@ -34,6 +33,8 @@ class SearchBox extends React.Component {
     // Set active class if search button is hovered or clicked
     let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
+
+    let pulseAnimation = cx({'': this.state.placeholder !== 'What would you like to find?'});
     
     return (
       <div id={this.props.id}
@@ -46,7 +47,7 @@ class SearchBox extends React.Component {
               <div className={`${this.props.className}-Input-Keywords-Border`}>
                 <InputField type='text'
                 id={`${this.props.id}-Input-Keywords`}
-                className={`${this.props.className}-Input-Keywords`}
+                className={`${this.props.className}-Input-Keywords pulse`}
                 ref='keywords'
                 value={this.state.searchKeywords}
                 placeholder={this.state.placeholder}
@@ -136,6 +137,25 @@ class SearchBox extends React.Component {
     if (!requestParameters.keywords) {
       // Notice if there's no keywords input
       this.setState({placeholder: 'Please enter a search term.'});
+      let keywords = document.getElementsByClassName('pulse')[0];
+
+      function pulse(element) {
+        let opacity = 0;
+        function frame() {
+          opacity += 0.01;
+          element.style.opacity = opacity;
+          if (opacity == 1) {
+            clearInterval(animation);
+          }
+          
+
+          
+        }
+        var animation = setInterval(frame, 200);
+        console.log('>>>>>>works');
+      }
+
+      pulse(keywords);
     } else {
       // Go to the search page
       window.location.assign(requestUrl);
