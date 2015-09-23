@@ -2,7 +2,7 @@
 &-SearchBox-Wrapper {
   display: block;
   @include desktop {
-    display: inline-block;
+    display: inline-table;
     vertical-align: middle;
   }
 }
@@ -75,7 +75,7 @@
   @include desktop {
     height: 236px;
     margin: 0;
-    top: 38px;
+    top: 41.5px;
   }
 }
 

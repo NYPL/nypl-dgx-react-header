@@ -165,7 +165,7 @@ const styles = {
   },
   donateButton: {
     display: 'inline-block',
-    padding: '0.8rem 1.55rem',
+    padding: '12px 18px 10px 18px',
     borderRadius: '4px'
   }
 };
