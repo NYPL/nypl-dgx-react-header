@@ -43,13 +43,15 @@ class SearchBox extends React.Component {
 
             <div className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
               <span className='nypl-icon-magnifier-thin icon'></span>
-              <InputField type='text'
-              id={`${this.props.id}-Input-Keywords`}
-              className={`${this.props.className}-Input-Keywords input-text`} 
-              ref='keywords' 
-              value={this.state.searchKeywords}
-              placeholder={this.state.placeholder}
-              onChange={this._keywordsChange} />
+              <div className={`${this.props.className}-Input-Keywords-Border`}>
+                <InputField type='text'
+                id={`${this.props.id}-Input-Keywords`}
+                className={`${this.props.className}-Input-Keywords`}
+                ref='keywords'
+                value={this.state.searchKeywords}
+                placeholder={this.state.placeholder}
+                onChange={this._keywordsChange} />
+              </div>
             </div>
             <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
               <div className={`${this.props.className}-Input-Options`}>
