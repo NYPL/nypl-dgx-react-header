@@ -1,5 +1,4 @@
 import React from 'react';
-import cx from 'classnames';
 import moment from 'moment';
 
 class EventProgramItem extends React.Component {
@@ -9,23 +8,26 @@ class EventProgramItem extends React.Component {
 
   render() {
     let feature = this.props.feature,
-      classes = this.props.classes;
+      classes = this.props.classes,
+      img = feature.imgSrc ?
+        <div className={'FeatureItem-Image ' + classes}>
+          <img src={feature.imgSrc} />
+        </div> : null,
+      startDate = moment(feature.eventDates.start),
+      endDate = moment(feature.eventDates.end);
 
-    let startDate = moment(feature.dates.start),
-      endDate = moment(feature.dates.end);
-
-    // Not including end date yet...
     return (
       <a href={feature.link} className={this.props.className}>
-        <div className={'FeatureItem-Image ' + classes}>
-          {feature.img}
-        </div>
-        <div className={'FeatureItem-Content ' + classes}>
-          <div className='FeatureItem-Content-Tag'>{feature.category}</div>
-          <h3 className='FeatureItem-Content-Title'>{feature.title}</h3>
-          <div className='FeatureItem-Content-Desc'>{feature.desc}</div>
-          <p>{startDate.format('hA | YYYY')}</p>
-          <p>{feature.location.fullName}</p>
+        <div className={`${this.props.className}-Wrapper`}>
+          {img}
+          <div className={'FeatureItem-Content ' + classes}>
+            <div className='FeatureItem-Content-Tag'>{feature.category}</div>
+            <h3 className='FeatureItem-Content-Title'>{feature.headline}</h3>
+            <div>
+              <p className='FeatureItem-Content-Date'>{startDate.format('hA | ddd, MMMM Do')}</p>
+              <span>{feature.location.fullName}</span>
+            </div>
+          </div>
         </div>
       </a>
     );

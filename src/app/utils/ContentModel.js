@@ -34,8 +34,8 @@ function ContentModel() {
       this.blog(content, data)
     }
 
-    if (data.type === 'event-program') {
-      this.events(content, data);
+    if (data.type === 'event-program' || data.type === 'event-exhibition') {
+      this.eventExhibition(content, data);
     }
 
     return content;
@@ -67,10 +67,10 @@ function ContentModel() {
     return authors;
   };
 
-  this.events = (content, data) => {
+  this.eventExhibition = (content, data) => {
     content.dates = {
       start: data.attributes['start-date'],
-      end: data.attributes['start-end'],
+      end: data.attributes['end-date'],
     };
     content.name = data.attributes.name;
     content.description = data.attributes.description;
@@ -89,6 +89,46 @@ function ContentModel() {
     location.slug = data.attributes.slug;
 
     return location;
+  };
+
+  this.featureItem = (data, lang) => {
+    let item = {};
+
+    item.headline = data.headline[lang].text || '';
+    item.category = data.category ? data.category[lang].text : item.headline;
+    item.imgSrc = data.images ? data.images[0].uri : '';
+    // Assuming that the text is already trimmed we should redo this:
+    item.description = data.description ? data.description[lang].text.substring(0, '100') : '';
+    item.link = data.link ? data.link[lang].text : '';
+
+    if (data.content) {
+      item.content = {
+        type: data.content.type
+      };
+
+      switch (data.content.type) {
+        case 'blog':
+          item.author = {
+            fullName: data.content.authors[0].fullName,
+            title: data.content.authors[0].title
+          };
+          break;
+        case 'event-program':
+        case 'event-exhibition':
+          item.eventDates = {
+            start: data.content.dates.start,
+            end: data.content.dates.end
+          };
+          item.location = {
+            fullName: data.content.location.fullName
+          };
+          break;
+        default:
+          break;
+      }
+    }
+
+    return item;
   };
 }
 

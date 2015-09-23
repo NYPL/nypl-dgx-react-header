@@ -11,6 +11,7 @@ class InputField extends React.Component {
   render () {
     return (
       <input
+      id={this.props.id}
       lang={this.props.lang}
       type={this.props.type} 
       name={this.props.name} 

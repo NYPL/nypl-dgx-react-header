@@ -1,14 +1,21 @@
 import React from 'react';
 
-class BlogItem extends React.Component {
+class DefaultItem extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    let feature = this.props.feature,
-      classes = this.props.classes,
-      img = feature.imgSrc ? 
+    let defaultFeature = {
+        category: 'NYPL',
+        headline: 'Find more about NYPL',
+        desc: 'NYPL Rocks!',
+        link: 'http://nypl.org',
+        img: null
+      },
+      feature = this.props.feature || defaultFeature,
+      classes = this.props.classes || 'without-image',
+      img = feature.imgSrc ?
         <div className={'FeatureItem-Image ' + classes}>
           <img src={feature.imgSrc} />
         </div> : null;
@@ -21,8 +28,6 @@ class BlogItem extends React.Component {
             <div className='FeatureItem-Content-Tag'>{feature.category}</div>
             <h3 className='FeatureItem-Content-Title'>{feature.headline}</h3>
             <div className='FeatureItem-Content-Desc'>{feature.description}</div>
-            <p className='FeatureItem-Content-Author-Name'>{feature.author.fullName}</p>
-            <span className='FeatureItem-Content-Author-Title'>{feature.author.title}</span>
           </div>
         </div>
       </a>
@@ -30,9 +35,9 @@ class BlogItem extends React.Component {
   }
 }
 
-BlogItem.defaultProps = {
+DefaultItem.defaultProps = {
   lang: 'en',
-  className: 'BlogItem'
+  className: 'FeatureItem'
 };
 
-export default BlogItem;
+export default DefaultItem;
