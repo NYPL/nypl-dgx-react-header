@@ -119,8 +119,7 @@ const styles = {
     width: '300px',
     height: '200px',
     backgroundColor: '#1DA1D4',
-    padding: '30px',
-    paddingBottom: '20px'
+    padding: '30px 30px 20px 30px'
   },
   hide: {
     display: 'none'
