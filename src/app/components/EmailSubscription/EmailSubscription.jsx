@@ -58,7 +58,13 @@ class EmailSubscription extends React.Component {
     // console.log(this.state);
 
     if (!isLoading) {
-      contentBox = (<div><SubscribeMessageBox status={status} msg="Get the Best of NYPL in your inbox" className={'EmailSubscribeForm'}/>
+      contentBox = (<div>
+        <div className={'EmailMessageBox ' + status}>
+          <div className={'EmailSubscribeForm-Eyebrow'}></div>
+          <div className={'EmailSubscribeForm-Title'}>
+            Get the <span className={'EmailSubscribeForm-Title-BestNYPL'}>best of NYPL</span> in your inbox
+          </div>
+        </div>
         <form 
         ref='EmailSubscribeForm'
         id={this.props.id}
@@ -104,7 +110,9 @@ class EmailSubscription extends React.Component {
           <div>
             <SubscribeMessageBox status={status} msg="Thank you for subscribing to our email updates." 
               className={'EmailSubscribeForm'} />
-            <p>Follow us:</p>
+            <div>
+              <p>Follow us:</p>
+            </div>
           </div>
         );     
       }
@@ -114,16 +122,23 @@ class EmailSubscription extends React.Component {
           <div>
             <SubscribeMessageBox status={status} msg="Looks like you're already signed up!"
               className={'EmailSubscribeForm'}/>
-            <p><a href='' onClick={this._initForm.bind(this)}>Enter a different email address</a></p>
+            <div className='EmailSubscribeForm-NewEmail'>
+              <a href='' onClick={this._initForm.bind(this)}>Enter a different email address</a>
+            </div>
           </div>
         );
       }
 
       if (status === 'error') {
         contentBox = (
-          <div>
-            <SubscribeMessageBox status={status} msg="Hmm... Something isn't quite right.
-            Please try again." />
+          <div className='error'>
+            <p>Hmm...</p>
+            <p>Something isn&apos;t quite right.</p>
+            <p>Please try again.</p>
+            <InputField
+              type='button'
+              value='TRY AGAIN'
+              style={styles.submitButton} />
           </div>
         );     
       }
@@ -242,7 +257,7 @@ const styles = {
   emailField: {},
   submitButton: {
     display: 'table-cell',
-    marginTop: '40px',
+    marginTop: '45px',
     border: '2px solid #fff',
     color: 'white',
     height: '38px',
@@ -254,7 +269,7 @@ const styles = {
   },
   privacyLink: {
     textDecoration: 'underline',
-    fontSize: '10px',
+    fontSize: '12px',
     color: '#BBB',
     fontWeight: '200',
     position: 'absolute',

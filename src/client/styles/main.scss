@@ -166,45 +166,75 @@
 		  		margin: 0px;
 			    padding: 0px;
 			    color: #000000;
-			    fontSize: 11px;
+			    font-size: 11px;
 			    float: none;
 			    width: 100px;
-			    textDecoration: none;
+			    text-decoration: none;
 		  	}
 		  }
 	  }
 
 	  .EmailSubscribeForm-Wrapper {
+	  	text-transform: none;
+
 	  	&.up-arrow {
 	  		@include up-arrow(#EEE, 212px, 'top', -19px);
 	  	}
-
-	  	.EmailSubscribeForm {
-	  		&-Eyebrow {
-	  			border-top: 2px solid #FFF;
-	  			color: #fff;
-	  			width: 25px;
-	  		}
-	  		&-Title {
-	  			color: #fff;
-	  		}
-	  		&-Input {
-	  			display: table-cell;
-			    border-radius: 4px;
-			    padding: 2px 5px;
-			    height: 35px;
-			    margin: 0;
-			    width: 95%;
-			    font-size: 12.5px;
-			    border: 3px solid #1DA1D4;
-
-	  			&:focus {
-      			border: 3px solid #1980A9;
-	  			}
-	  		}
-	  	}
 	  }
 	}
+
+	.EmailSubscribeForm-Wrapper {
+		.EmailMessageBox {
+			width: 65%;
+		}
+		.EmailSubscribeForm {
+			margin-top: 20px;
+
+			&-Eyebrow {
+				border-top: 2px solid #FFF;
+				color: #fff;
+				margin-bottom: 10px;
+				width: 25px;
+			}
+			&-Title {
+				color: #fff;
+				font-size: 20px;
+				@include Kievit-Book;
+				font-weight: normal;
+				line-height: 
+
+				&-BestNYPL {
+					@include Kievit-Bold;
+		    }
+			}
+			&-NewEmail {
+				margin-top: 10px;
+
+				a {
+					text-decoration: underline;
+					color: #fff;
+				}
+			}
+			&-Input {
+				display: table-cell;
+		    border-radius: 4px;
+		    padding: 2px 5px;
+		    height: 35px;
+		    margin: 0;
+		    width: 95%;
+		    font-size: 12.5px;
+		    border: 3px solid #1DA1D4;
+
+				&:focus {
+	  			border: 3px solid #1980A9;
+				}
+			}
+		}
+		.error {
+			color: #fff;
+		}
+	}
+
 
 	/* MOBILE HEADER
 	 * -------------

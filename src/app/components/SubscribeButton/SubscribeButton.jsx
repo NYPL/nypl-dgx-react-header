@@ -55,13 +55,13 @@ class SubscribeButton extends React.Component {
         onClick={this._handleClick}
         style={styles.SimpleButton} />
         <div className={'EmailSubscribeForm-Wrapper'}
-        style={[
-          styles.EmailSubscribeForm,
-          showDialog ? styles.show : styles.hide
-        ]}>
+          style={[
+            styles.EmailSubscribeForm,
+            showDialog ? styles.show : styles.hide
+          ]}>
           <EmailSubscription
-          list_id='1061'
-          target='https://dev-mailinglistapi.nypl.org' />
+            list_id='1061'
+            target='https://dev-mailinglistapi.nypl.org' />
         </div>
       </div>
     );
@@ -116,9 +116,11 @@ const styles = {
     position: 'absolute',
     zIndex: 1000,
     right: '0',
-    width: '250px',
+    width: '300px',
+    height: '200px',
     backgroundColor: '#1DA1D4',
-    padding: '20px 25px'
+    padding: '30px',
+    paddingBottom: '20px'
   },
   hide: {
     display: 'none'
