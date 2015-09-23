@@ -35,7 +35,7 @@ class MobileHeader extends React.Component {
   render () {
     let activeButton = this.state.activeMobileButton,
 
-      locatorUrl = this.props.locatorUrl || '#',
+      locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true',
       mobileSearchClass = cx({
         'active nypl-icon-solo-x': activeButton === 'clickSearch',
         'nypl-icon-magnifier-thin': activeButton !== 'clickSearch'
