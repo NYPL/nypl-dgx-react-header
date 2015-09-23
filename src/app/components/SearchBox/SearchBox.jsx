@@ -17,7 +17,8 @@ class SearchBox extends React.Component {
     // Set the default values of input fields
     this.state = {
       searchKeywords: '',
-      searchOption: 'catalog'
+      searchOption: 'catalog',
+      placeholder: 'What would you like to find?'
     };
 
     // The functions listen to the changes of input fields
@@ -47,7 +48,7 @@ class SearchBox extends React.Component {
               className={`${this.props.className}-Input-Keywords input-text`} 
               ref='keywords' 
               value={this.state.searchKeywords}
-              placeholder='What would you like to find?'
+              placeholder={this.state.placeholder}
               onChange={this._keywordsChange} />
             </div>
             <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
@@ -129,8 +130,14 @@ class SearchBox extends React.Component {
     }  else if (requestParameters.option === 'website') {
       requestUrl = `http://www.nypl.org/search/apachesolr_search/${requestParameters.keywords}`;
     }
-    // Go to the search page
-    window.location.assign(requestUrl);
+
+    if (!requestParameters.keywords) {
+      // Notice if there's no keywords input
+      this.setState({placeholder: 'Please enter a search term.'});
+    } else {
+      // Go to the search page
+      window.location.assign(requestUrl);
+    }
   }
 }
 
