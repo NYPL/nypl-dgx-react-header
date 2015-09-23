@@ -25,6 +25,7 @@ class SearchBox extends React.Component {
     this._searchOptionChange = this._searchOptionChange.bind(this);
     // The function send search requests
     this._submitSearchRequest = this._submitSearchRequest.bind(this);
+    // Listen to the event if enter is pressed
     this._triggerSubmit = this._triggerSubmit.bind(this);
   }
 
@@ -33,7 +34,7 @@ class SearchBox extends React.Component {
     // Set active class if search button is hovered or clicked
     let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
-    
+
     return (
       <div id={this.props.id}
       className={`${this.props.className}${classes}`}
@@ -48,6 +49,7 @@ class SearchBox extends React.Component {
               className={`${this.props.className}-Input-Keywords`} 
               ref='keywords' 
               value={this.state.searchKeywords}
+              maxlength='128'
               placeholder='What would you like to find?'
               onChange={this._keywordsChange} />
             </div>

@@ -16,6 +16,7 @@ class InputField extends React.Component {
       type={this.props.type} 
       name={this.props.name} 
       value={this.props.value}
+      maxlength={this.props.maxlength}
       checked={this.props.checked}
       placeholder={this.props.placeholder}
       className={this.props.className}
