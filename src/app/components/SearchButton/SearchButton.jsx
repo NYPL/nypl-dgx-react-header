@@ -40,7 +40,6 @@ class SearchButton extends React.Component {
         className={`${icon} ${this.props.className}-SearchButton${classes}`}
         name='Search Button'
         label=''
-        style={styles.base}
         onClick={this._activate.bind(this, 'click')} />
         <SearchBox id={`${this.props.className}-SearchBox`}
         className={`${this.props.className}-SearchBox`} />
