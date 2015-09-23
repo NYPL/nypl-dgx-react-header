@@ -287,11 +287,10 @@
 		  	display: none;
 
 		  	@include desktop {
-		  		display: inline-block;
+		  		display: inline-table;
 		  		background-color: transparent;
 		  		padding: 0;
-			  	margin: 0 auto;
-			  	max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+		  		margin: 0;
 			  }
 
 		  	/* Top level Link Rules */
@@ -506,7 +505,7 @@
 		  	color: #FFFFFF;
 		  	width: 100%;
 	  		position: absolute;
-		  	top: 38px;
+		  	top: 41.5px;
 		  	left: 0;
 
 		  	/* Only display MegaMenu's on Desktop */
@@ -556,9 +555,10 @@
 		  		h2 {
 		  			color: #FFFFFF;
 		  			border-top: 2px solid #FFFFFF;
-		  			margin: 35px 0 30px 0;
-		  			padding: 12px 0 0 0;
+		  			margin: 35px 0 20px 0;
+		  			padding: 10px 0 0 0;
 		  			font-weight: normal;
+		  			font-size: 18px;
 		  		}
 
 		  		ul {
@@ -570,12 +570,12 @@
 		  				&:first-child {
 		  					margin-top: 0px;
 		  				}
-		  				margin: 7px 0px 14px 0;
+		  				margin: 5px 0px 12px 0;
 		  				display: block;
 		  				padding: 0;
 		  				
 		  				a {
-		  					font-size: 17px;
+		  					font-size: 16.5px;
 		  					margin: 0;
 		  					padding: 0;
 		  					display: block;
