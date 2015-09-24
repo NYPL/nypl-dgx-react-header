@@ -49,7 +49,7 @@ class SearchBox extends React.Component {
               className={`${this.props.className}-Input-Keywords`} 
               ref='keywords' 
               value={this.state.searchKeywords}
-              maxlength='128'
+              maxLength='128'
               placeholder='What would you like to find?'
               onChange={this._keywordsChange} />
             </div>
