@@ -36,24 +36,25 @@ class SearchBox extends React.Component {
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
 
     return (
-      <div id={this.props.id}
-      className={`${this.props.className}${classes}`}
-      onKeyPress={this._triggerSubmit}>
-        <div className={`${this.props.className}-Elements-Wrapper`}>
-          <div className={`${this.props.className}-Elements-Input-Wrapper`}>
+      <div id={this.props.id} className={`${this.props.className}${classes}`} onKeyPress={this._triggerSubmit}>
+        <div id={`${this.props.className}-Elements-Wrapper`} className={`${this.props.className}-Elements-Wrapper`}>
+          <div id={`${this.props.className}-Elements-Input-Wrapper`}
+          className={`${this.props.className}-Elements-Input-Wrapper`}>
 
-            <div className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
+            <div id={`${this.props.className}-Elements-Input-Keywords-Wrapper`}
+            className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
               <span className='nypl-icon-magnifier-thin icon'></span>
               <InputField type='text'
               id={`${this.props.id}-Input-Keywords`}
-              className={`${this.props.className}-Input-Keywords input-text`} 
-              ref='keywords' 
+              className={`${this.props.className}-Input-Keywords input-text`}
+              ref='keywords'
               value={this.state.searchKeywords}
               maxLength='128'
               placeholder='What would you like to find?'
               onChange={this._keywordsChange} />
             </div>
-            <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
+            <div id={`${this.props.className}-Elements-Input-Options-Wrapper`}
+            className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
               <div className={`${this.props.className}-Input-Options`}>
                 <InputField type='radio'
                 id='catalog'
@@ -82,7 +83,8 @@ class SearchBox extends React.Component {
             </div>
           </div>
 
-          <div className={`${this.props.className}-Mobile-Submit`}>
+          <div id={`${this.props.className}-Mobile-Submit`}
+           className={`${this.props.className}-Mobile-Submit`}>
             <div className={`${this.props.className}-Mobile-Submit-Option left-column`}
             value='catalog'
             onClick={this._submitSearchRequest.bind(this, 'catalog')}>
@@ -96,7 +98,8 @@ class SearchBox extends React.Component {
               <span className='nypl-icon-wedge-right icon'></span>
             </div>
           </div>
-          <button className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
+          <button id={`${this.props.className}-Elements-SubmitButton`}
+          className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
           onClick={this._submitSearchRequest.bind(this, null)}>
           </button>
         </div>
