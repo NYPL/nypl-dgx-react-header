@@ -18,7 +18,6 @@ class SearchBox extends React.Component {
     this.state = {
       searchKeywords: '',
       searchOption: 'catalog',
-      placeholder: 'What would you like to find?'
     };
 
     // The functions listen to the changes of input fields
@@ -34,8 +33,8 @@ class SearchBox extends React.Component {
     let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
 
-    let pulseAnimation = cx({'': this.state.placeholder !== 'What would you like to find?'});
-    
+   // let pulseAnimation = cx({'pulseAnimation': this.state.placeholder !== 'What would you like to find?'});
+
     return (
       <div id={this.props.id}
       className={`${this.props.className}${classes}`}>
@@ -47,10 +46,10 @@ class SearchBox extends React.Component {
               <div className={`${this.props.className}-Input-Keywords-Border`}>
                 <InputField type='text'
                 id={`${this.props.id}-Input-Keywords`}
-                className={`${this.props.className}-Input-Keywords pulse`}
+                className={`${this.props.className}-Input-Keywords`}
                 ref='keywords'
                 value={this.state.searchKeywords}
-                placeholder={this.state.placeholder}
+                placeholder='What would you like to find?'
                 onChange={this._keywordsChange} />
               </div>
             </div>
@@ -136,26 +135,22 @@ class SearchBox extends React.Component {
 
     if (!requestParameters.keywords) {
       // Notice if there's no keywords input
-      this.setState({placeholder: 'Please enter a search term.'});
-      let keywords = document.getElementsByClassName('pulse')[0];
-
+      let inputKeywords = document.getElementsByClassName(`${this.props.className}-Input-Keywords`)[0];
+      inputKeywords.style.opacity = 0;
+      inputKeywords.placeholder = 'Please enter a search term.';
+      // The animation for opacity changing
       function pulse(element) {
         let opacity = 0;
         function frame() {
-          opacity += 0.01;
+          opacity += 0.1;
           element.style.opacity = opacity;
-          if (opacity == 1) {
+          if (opacity > 1) {
             clearInterval(animation);
           }
-          
-
-          
         }
-        var animation = setInterval(frame, 200);
-        console.log('>>>>>>works');
+        var animation = setInterval(frame, 400);
       }
-
-      pulse(keywords);
+      pulse(inputKeywords);
     } else {
       // Go to the search page
       window.location.assign(requestUrl);
