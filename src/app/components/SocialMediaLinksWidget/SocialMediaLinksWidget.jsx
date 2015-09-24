@@ -6,6 +6,10 @@ class SocialMediaLinksWidget extends React.Component{
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      linkClass: ''
+    };
   }
   
   render() {
@@ -21,10 +25,17 @@ class SocialMediaLinksWidget extends React.Component{
 
     // Iterate over each object key->value pair and display as a list item
     socialLinksToDisplay = _.map(socialLinksList, (item, key) => {
-      linkClass = cx(`${this.props.className}-Link`, `nypl-icon-${key}`);
+      let hoverClass = this.state.linkClass === key ? 
+        `nypl-icon-${key}-circle-hover animateHover fadeInSlow` : `nypl-icon-${key}-circle`;
+      
       return (
         <li key={key} className={`${this.props.className}-ListItem`}>
-          <a href={item} className={linkClass}></a>
+          <a 
+            href={item} 
+            className={`${this.props.className}-Link ${hoverClass}`} 
+            onMouseEnter={this._handleOnMouseEnter.bind(this, key)}
+            onMouseLeave={this._handleOnMouseLeave.bind(this)}
+            ></a>
         </li>
       );
     });
@@ -36,6 +47,14 @@ class SocialMediaLinksWidget extends React.Component{
         </ul>
       </div>
     );
+  }
+
+  _handleOnMouseEnter(key) { 
+    this.setState({linkClass: key});
+  }
+
+  _handleOnMouseLeave() {
+    this.setState({linkClass: ''});
   }
 }
 
