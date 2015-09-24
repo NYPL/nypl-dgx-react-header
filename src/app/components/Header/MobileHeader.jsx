@@ -1,6 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 import cx from 'classnames';
+import ReactTappable from 'react-tappable';
 
 // ALT FLUX
 import HeaderStore from '../../stores/Store.js';
@@ -58,25 +59,29 @@ class MobileHeader extends React.Component {
           className={`${this.props.className}-Locator nypl-icon-locator-large`}>
         </a>
 
-        <span
-          style={[
-            styles.searchIcon,
-            activeButton === 'clickSearch' ? styles.activeSearchIcon : ''
-          ]}
-          className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
-          ref='MobileSearchButton'
-          onClick={this._handleSearchBtnClick}>
-        </span>
+        <ReactTappable onTap={this._handleSearchBtnClick}>
+          <span
+            style={[
+              styles.searchIcon,
+              activeButton === 'clickSearch' ? styles.activeSearchIcon : ''
+            ]}
+            className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
+            ref='MobileSearchButton'
+            onClick={this._handleSearchBtnClick}>
+          </span>
+        </ReactTappable>
 
-        <span 
-          style={[
-            styles.menuIcon,
-            activeButton === 'mobileMenu' ? styles.activeMenuIcon : ''
-          ]}
-          className={`${this.props.className}-MenuButton ${mobileMenuClass}`}
-          ref='MobileMenuButton'
-          onClick={this._handleMenuBtnClick}>
-        </span>
+        <ReactTappable onTap={this._handleMenuBtnClick}>
+          <span
+            style={[
+              styles.menuIcon,
+              activeButton === 'mobileMenu' ? styles.activeMenuIcon : ''
+            ]}
+            className={`${this.props.className}-MenuButton ${mobileMenuClass}`}
+            ref='MobileMenuButton'
+            onClick={this._handleMenuBtnClick}>
+          </span>
+        </ReactTappable>
       </div>
     );
   }
@@ -94,10 +99,8 @@ class MobileHeader extends React.Component {
   _toggleMobileMenu(activeButton) {
     if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
       Actions.setMobileMenuButtonValue(activeButton);
-      console.log(HeaderStore._getMobileMenuBtnValue());
     } else {
       Actions.setMobileMenuButtonValue('');
-      console.log('no search');
     }
   }
 
