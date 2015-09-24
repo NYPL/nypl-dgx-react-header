@@ -1,11 +1,11 @@
 import React from 'react';
 import Radium from 'radium';
 import axios from 'axios';
-import InputField from '../InputField/InputField.jsx';
 import cx from 'classnames';
 
-//import HeaderStore from '../../stores/HeaderStore';
-//import HeaderActions from '../../actions/HeaderActions';
+import config from '../../../../appConfig.js';
+import InputField from '../InputField/InputField.jsx';
+import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
 
 class SubscribeMessageBox extends React.Component {
   // Constructor used in ES6
@@ -128,6 +128,10 @@ class EmailSubscription extends React.Component {
             </div>
             <div className={'EmailSubscribeForm-FollowUs'}>
               <p>Follow us:</p>
+              <SocialMediaLinksWidget
+                className={'EmailSubscribeForm-SocialMediaWidget'}
+                links={config.socialMediaLinks} 
+                displayOnly={['facebook', 'twitter']} />
             </div>
           </div>
         );     

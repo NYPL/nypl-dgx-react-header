@@ -223,6 +223,30 @@
 					color: #fff;
 				}
 			}
+			&-SocialMediaWidget {
+  			ul {
+  				list-style-type: none;
+  				margin: 0;
+  				padding: 0;
+
+  				li {
+  					display: inline-block;
+  					margin: 0 15px 0 0;
+  					line-height: 0;
+
+  					&:last-child {
+  						margin-right: 0;
+  					}
+
+  					a {
+  						color: #fff;
+  						text-decoration: none;
+  						display: block;
+  						font-size: 55px;
+  					}
+  				}
+  			}
+  		}
 			&-FollowUs {
 				color: #fff;
 				text-transform: uppercase;
