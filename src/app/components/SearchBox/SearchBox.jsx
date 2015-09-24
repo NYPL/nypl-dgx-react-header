@@ -34,9 +34,9 @@ class SearchBox extends React.Component {
     // Set active class if search button is hovered or clicked
     let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
-
-   let pulseAnimation = cx({'pulseFadeIn': this.state.placeholderAnimation === 'initial',
-   'pulse': this.state.placeholderAnimation === 'sequential'});
+    // Classes for keywords input fields to activate pulse animation
+   let pulseAnimation = cx({'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
+   'keywords-pulse': this.state.placeholderAnimation === 'sequential'});
 
     return (
       <div id={this.props.id}
@@ -136,25 +136,14 @@ class SearchBox extends React.Component {
       requestUrl = `http://www.nypl.org/search/apachesolr_search/${requestParameters.keywords}`;
     }
 
+    // The portion for interaction if the uses doesn't enter any search keywords
     if (!requestParameters.keywords) {
-      // Notice if there's no keywords input
+      // Select keywords input DOM element
       let inputKeywords = document.getElementsByClassName(`${this.props.className}-Input-Keywords`)[0];
-      // inputKeywords.style.opacity = 1;
+      // The placeholder to tell the user there's no keywords input
       inputKeywords.placeholder = 'Please enter a search term.';
-      // The animation for opacity changing
-      // function pulse(element) {
-      //   let opacity = 0;
-      //   function frame() {
-      //     opacity += 0.1;
-      //     element.style.opacity = opacity;
-      //     if (opacity > 1) {
-      //       clearInterval(animation);
-      //     }
-      //   }
-      //   var animation = setInterval(frame, 400);
-      // }
-      // pulse(inputKeywords);
       let self = this;
+      // Decide which animation is going to perform
       function pulse(element) {
         clearInterval(animation);
         let frame = 0;
@@ -163,21 +152,19 @@ class SearchBox extends React.Component {
         } else {
           self.setState({placeholderAnimation: 'sequential'});
         }
-        
+        // Remove the class to stop the animation after 0.1s
         function timer() {
           frame ++;
           if (frame > 1) {
             clearInterval(animation);
             self.setState({placeholderAnimation: null});
+            // Set animation to be sequential
             self.setState({noAnimationBefore: false});
           }
-                  // console.log(self.state.placeholderAnimation);
-                  console.log(self.state.noAnimationBefore);
         }
-        var animation = setInterval(timer, 100);
+        let animation = setInterval(timer, 100);
       }
       pulse(inputKeywords);
-      // console.log(noAnimationBefore);
     } else {
       // Go to the search page
       window.location.assign(requestUrl);
