@@ -18,6 +18,8 @@ class SearchBox extends React.Component {
     this.state = {
       searchKeywords: '',
       searchOption: 'catalog',
+      placeholderAnimation: null,
+      noAnimationBefore: true
     };
 
     // The functions listen to the changes of input fields
@@ -33,7 +35,8 @@ class SearchBox extends React.Component {
     let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
 
-   // let pulseAnimation = cx({'pulseAnimation': this.state.placeholder !== 'What would you like to find?'});
+   let pulseAnimation = cx({'pulseFadeIn': this.state.placeholderAnimation === 'initial',
+   'pulse': this.state.placeholderAnimation === 'sequential'});
 
     return (
       <div id={this.props.id}
@@ -46,7 +49,7 @@ class SearchBox extends React.Component {
               <div className={`${this.props.className}-Input-Keywords-Border`}>
                 <InputField type='text'
                 id={`${this.props.id}-Input-Keywords`}
-                className={`${this.props.className}-Input-Keywords`}
+                className={`${this.props.className}-Input-Keywords ${pulseAnimation}`}
                 ref='keywords'
                 value={this.state.searchKeywords}
                 placeholder='What would you like to find?'
@@ -136,21 +139,45 @@ class SearchBox extends React.Component {
     if (!requestParameters.keywords) {
       // Notice if there's no keywords input
       let inputKeywords = document.getElementsByClassName(`${this.props.className}-Input-Keywords`)[0];
-      inputKeywords.style.opacity = 0;
+      // inputKeywords.style.opacity = 1;
       inputKeywords.placeholder = 'Please enter a search term.';
       // The animation for opacity changing
+      // function pulse(element) {
+      //   let opacity = 0;
+      //   function frame() {
+      //     opacity += 0.1;
+      //     element.style.opacity = opacity;
+      //     if (opacity > 1) {
+      //       clearInterval(animation);
+      //     }
+      //   }
+      //   var animation = setInterval(frame, 400);
+      // }
+      // pulse(inputKeywords);
+      let self = this;
       function pulse(element) {
-        let opacity = 0;
-        function frame() {
-          opacity += 0.1;
-          element.style.opacity = opacity;
-          if (opacity > 1) {
-            clearInterval(animation);
-          }
+        clearInterval(animation);
+        let frame = 0;
+        if (self.state.noAnimationBefore === true) {
+          self.setState({placeholderAnimation: 'initial'});
+        } else {
+          self.setState({placeholderAnimation: 'sequential'});
         }
-        var animation = setInterval(frame, 400);
+        
+        function timer() {
+          frame ++;
+          if (frame > 1) {
+            clearInterval(animation);
+            self.setState({placeholderAnimation: null});
+            self.setState({noAnimationBefore: false});
+          }
+                  // console.log(self.state.placeholderAnimation);
+                  console.log(self.state.noAnimationBefore);
+        }
+        var animation = setInterval(timer, 100);
       }
       pulse(inputKeywords);
+      // console.log(noAnimationBefore);
     } else {
       // Go to the search page
       window.location.assign(requestUrl);

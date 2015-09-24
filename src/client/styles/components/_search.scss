@@ -213,8 +213,59 @@
   }
 }
 
-/*
-.pulseAnimation {
+.pulseFadeIn {
+  @include desktop {
+    -webkit-animation-name: pulseFadeIn;
+    animation-duration: 0.2s;
+    animation-name: pulseFadeIn;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+  }
+}
+
+@-webkit-keyframes pulseFadeIn {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+    opacity: 0;
+  }
+  30% {
+    -webkit-transform: scale3d(1.01, 1.01, 1.01);
+    transform: scale3d(1.01, 1.01, 1.01);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseFadeIn {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+    opacity: 0;
+  }
+  30% {
+    -webkit-transform: scale3d(1.01, 1.01, 1.01);
+    transform: scale3d(1.01, 1.01, 1.01);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+    opacity: 1;
+  }
+}
+
+.pulse {
   @include desktop {
     -webkit-animation-name: pulse;
     animation-duration: 0.2s;
@@ -226,40 +277,35 @@
 
 @-webkit-keyframes pulse {
   from {
-    opacity: 0;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
-  50% {
-    opacity: 0.3
-  }
-  75% {
-    opacity: 0.9
-  }
-  90%{
-    opacity: 0.75
+  30% {
+    -webkit-transform: scale3d(1.01, 1.01, 1.01);
+    transform: scale3d(1.01, 1.01, 1.01);
   }
   to {
-    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
 }
 
 @keyframes pulse {
   from {
-    opacity: 0;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.01, 1.01, 1.01);
+    transform: scale3d(1.01, 1.01, 1.01);
   }
   50% {
-    opacity: 0.3
-  }
-  75% {
-    opacity: 0.9
-  }
-  90%{
-    opacity: 0.75
   }
   to {
-    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
 }
-*/
 
 &-SearchBox-Input-Keywords-Border {
   border: none;
