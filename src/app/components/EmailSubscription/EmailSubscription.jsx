@@ -21,7 +21,7 @@ class SubscribeMessageBox extends React.Component {
     return (
       <div className={'EmailMessageBox ' + this.props.status + ' '}>
         <div className={this.props.className + '-Eyebrow'}></div>
-        <p className={this.props.className + '-Title'}>{this.props.msg}</p>
+        <div className={this.props.className + '-Title'}>{this.props.msg}</div>
       </div>
     );
   }
@@ -101,27 +101,32 @@ class EmailSubscription extends React.Component {
             ref='emailAddressField'
             isRequired={true} />
 
-            <div className={'EmailSubscribeForm-Error ' + errorClass}>
-              <span>Please enter a valid email address</span>
+            <div className={'EmailSubscribeForm-Error error ' + errorClass}>
+              <span className='nypl-icon-solo-x icon'></span><span>Please enter a valid email address</span>
             </div>
 
-            <InputField
-            type='submit'
-            name='submit'
-            value='SIGN UP'
-            style={styles.submitButton} />
+            <div className={'EmailSubscribeForm-Submit'}>
+              <span className='nypl-icon-check-solo icon'></span>
+              <InputField
+              type='submit'
+              name='submit'
+              value='SIGN UP'
+              style={styles.submitButton} />
+            </div>
 
             <InputField type='hidden' name='Source Code' value='Homepage' />
           </div>
         </form></div>);
 
       if (status === 'success') {
-        console.log(status);
         contentBox = (
           <div>
             <SubscribeMessageBox status={status} msg="Thank you for subscribing to our email updates." 
               className={'EmailSubscribeForm'} />
-            <div>
+            <div className='EmailSubscribeForm-NewEmail'>
+              <a href='' onClick={this._initForm.bind(this)}>Enter another email address</a>
+            </div>
+            <div className={'EmailSubscribeForm-FollowUs'}>
               <p>Follow us:</p>
             </div>
           </div>
@@ -140,16 +145,16 @@ class EmailSubscription extends React.Component {
         );
       }
 
-      if (status === 'error') {
+      if (status === 'error' || status === 'Internal Server Error') {
         contentBox = (
-          <div className='error'>
-            <p>Hmm...</p>
-            <p>Something isn&apos;t quite right.</p>
-            <p>Please try again.</p>
-            <InputField
-              type='button'
-              value='TRY AGAIN'
-              style={styles.submitButton} />
+          <div className='EmailSubscribeForm-Misc-Error'>
+            <div>Hmm...</div>
+            <div>Something isn&apos;t quite right.</div>
+            <div>Please try again.</div>
+            <a href='' onClick={this._initForm.bind(this)} style={styles.tryAgainButton}>
+              <span className='nypl-icon-arrow-left icon'></span>
+              TRY AGAIN
+            </a>
           </div>
         );     
       }
@@ -166,7 +171,10 @@ class EmailSubscription extends React.Component {
       );
     } else {
       return (
-        <div>Loading results...</div>
+        <div>
+          <SubscribeMessageBox status={status} msg="Loading..." 
+            className={'EmailSubscribeForm'} />
+        </div>
       );
     }
   }
@@ -192,7 +200,7 @@ class EmailSubscription extends React.Component {
 
     if (!this._isValidEmail(userInput.value)) {
       userInput.value = '';
-      // userInput.placeholder = 'Please enter a valid email address';
+      userInput.placeholder = 'Please enter a valid email address';
       userInput.focus();
       this.setState({
         notValidEmail: true
@@ -237,9 +245,9 @@ class EmailSubscription extends React.Component {
         formProcessing: false
       });
     })
-   .catch((response) => {
+    .catch((response) => {
       this.setState({
-        formStatus: response.data.responseStatus,
+        formStatus: response.data.responseStatus || response.statusText,
         formProcessing: false
       });   
     });
@@ -273,24 +281,36 @@ const styles = {
   },
   emailField: {},
   submitButton: {
-    display: 'table-cell',
-    marginTop: '45px',
+    marginTop: '50px',
     border: '2px solid #fff',
     color: 'white',
     height: '38px',
-    paddingLeft: '10px',
+    paddingLeft: '15px',
     width: '100px',
     borderRadius: '20px',
     fontSize: '12px',
-    backgroundColor: '#1DA1D4'
+    backgroundColor: '#1DA1D4',
+    fontFamily: 'Kievit-Book'
+  },
+  tryAgainButton: {
+    display: 'inline-block',
+    border: '2px solid #fff',
+    color: 'white',
+    padding: '5px 15px 5px 5px',
+    width: '90px',
+    borderRadius: '20px',
+    fontSize: '12px',
+    backgroundColor: '#1DA1D4',
+    fontFamily: 'Kievit-Book',
+    marginTop: '25px'
   },
   privacyLink: {
     textDecoration: 'underline',
     fontSize: '12px',
-    color: '#BBB',
+    color: 'rgba(255, 255, 255, 0.5)',
     fontWeight: '200',
     position: 'absolute',
-    bottom: '19px',
+    bottom: '26px',
     right: '25px'
   }
 };

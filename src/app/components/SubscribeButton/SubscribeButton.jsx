@@ -35,10 +35,16 @@ class SubscribeButton extends React.Component {
     //let showDialog = this.state.showDialog;
     let showDialog = this.state.subscribeFormVisible;
     // Dynamic class assignment based on boolean flag
-    const classes =  cx({ 'active': showDialog, '': !showDialog });
+    const classes = cx({
+        'active': showDialog,
+        '': !showDialog
+      }),
+      iconClass = cx({
+        'nypl-icon-solo-x': showDialog,
+        'nypl-icon-arrow-down': !showDialog
+      });
 
     //console.log(this.state);
-
     return (
       <div className='SubscribeButton-Wrapper'
       ref='SubscribeButton'
@@ -46,14 +52,20 @@ class SubscribeButton extends React.Component {
         styles.base,
         this.props.style //allows for parent-to-child css styling
       ]}>
-        <SimpleButton
-        className={'SubscribeButton ' + classes}
-        id={'SubscribeButton'}
-        lang={this.props.lang}
-        label={this.props.label}
-        target={this.props.target}
-        onClick={this._handleClick}
-        style={styles.SimpleButton} />
+
+        <a
+          id={'SubscribeButton'}
+          className={'SubscribeButton ' + classes}
+          href={this.props.target}
+          onClick={this._handleClick}
+          style={[
+            styles.SimpleButton,
+            this.props.style
+          ]}>
+          <span className={iconClass + ' icon'} style={styles.SubscribeIcon}></span>
+          {this.props.label}
+        </a>
+
         <div className={'EmailSubscribeForm-Wrapper'}
           style={[
             styles.EmailSubscribeForm,
@@ -110,16 +122,22 @@ const styles = {
   },
   SimpleButton: {
     display: 'block',
-    padding: '1em 25px'
+    padding: '1em 30px 1em 25px'
+  },
+  SubscribeIcon: {
+    position: 'absolute',
+    top: '7px',
+    right: '7px',
+    fontSize: '15px'
   },
   EmailSubscribeForm: {
     position: 'absolute',
     zIndex: 1000,
     right: '0',
     width: '250px',
-    height: '200px',
+    height: '210px',
     backgroundColor: '#1DA1D4',
-    padding: '25px 30px 20px 30px'
+    padding: '25px 30px'
   },
   hide: {
     display: 'none'
