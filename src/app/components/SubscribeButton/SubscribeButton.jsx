@@ -41,7 +41,7 @@ class SubscribeButton extends React.Component {
       }),
       iconClass = cx({
         'nypl-icon-solo-x': showDialog,
-        'nypl-icon-arrow-down': !showDialog
+        'nypl-icon-wedge-down': !showDialog
       });
 
     //console.log(this.state);
@@ -126,9 +126,9 @@ const styles = {
   },
   SubscribeIcon: {
     position: 'absolute',
-    top: '7px',
-    right: '7px',
-    fontSize: '15px'
+    top: '10px',
+    right: '8px',
+    fontSize: '13px'
   },
   EmailSubscribeForm: {
     position: 'absolute',
