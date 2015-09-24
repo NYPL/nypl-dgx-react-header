@@ -6,13 +6,16 @@ class SocialMediaLinksWidget extends React.Component{
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      linkClass: ''
+    };
   }
   
   render() {
     let displayOnlyList = this.props.displayOnly,
       socialLinksList = this.props.links,
-      socialLinksToDisplay,
-      linkClass;
+      socialLinksToDisplay;
 
     // Pick the selected links to display (optional)
     if (displayOnlyList && displayOnlyList.length) {
@@ -21,10 +24,17 @@ class SocialMediaLinksWidget extends React.Component{
 
     // Iterate over each object key->value pair and display as a list item
     socialLinksToDisplay = _.map(socialLinksList, (item, key) => {
-      linkClass = cx(`${this.props.className}-Link`, `nypl-icon-${key}`);
+      let hoverClass = this.state.linkClass === key ? 
+        `nypl-icon-${key}-circle-hover animateHover fadeInSlow` : `nypl-icon-${key}-circle`;
+      
       return (
         <li key={key} className={`${this.props.className}-ListItem`}>
-          <a href={item} className={linkClass}></a>
+          <a 
+            href={item} 
+            className={`${this.props.className}-Link ${hoverClass}`} 
+            onMouseEnter={this._handleOnMouseEnter.bind(this, key)}
+            onMouseLeave={this._handleOnMouseLeave.bind(this)}>
+          </a>
         </li>
       );
     });
@@ -36,6 +46,27 @@ class SocialMediaLinksWidget extends React.Component{
         </ul>
       </div>
     );
+  }
+
+  /**
+   * _handleOnMouseEnter(key) 
+   * Updates the linkClass state
+   * object property with the param key
+   *
+   * @param {String} key
+   */
+  _handleOnMouseEnter(key) { 
+    this.setState({linkClass: key});
+  }
+
+  /**
+   * _handleOnMouseLeave() 
+   * updates the linkClass state
+   * object property to an empty string.
+   *
+   */
+  _handleOnMouseLeave() {
+    this.setState({linkClass: ''});
   }
 }
 
