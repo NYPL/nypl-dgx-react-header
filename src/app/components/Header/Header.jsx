@@ -57,7 +57,7 @@ class Header extends React.Component {
     return (
       <header id={this.props.id} className={headerClasses}>
         <div className={`${this.props.className}-Wrapper`}>
-          <MobileHeader className={`${this.props.className}-Mobile`} locatorUrl={'//www.nypl.org/locations'} />
+          <MobileHeader className={`${this.props.className}-Mobile`} locatorUrl={'//www.nypl.org/locations/map?nearme=true'} />
           <div className={`${this.props.className}-TopWrapper`} style={styles.wrapper}>
             <Logo className={`${this.props.className}-Logo`} />
             <div className={`${this.props.className}-Buttons`} style={styles.topButtons}>
@@ -165,7 +165,7 @@ const styles = {
   },
   donateButton: {
     display: 'inline-block',
-    padding: '0.8rem 1.55rem',
+    padding: '12px 18px 10px 18px',
     borderRadius: '4px'
   }
 };

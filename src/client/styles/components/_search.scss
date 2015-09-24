@@ -1,9 +1,8 @@
 /* The Wrapper for putting in the icon for search button and search box */
 &-SearchBox-Wrapper {
   display: block;
-
   @include desktop {
-    display: inline-block;
+    display: inline-table;
     vertical-align: middle;
   }
 }
@@ -82,7 +81,7 @@
   @include desktop {
     height: 236px;
     margin: 0;
-    top: 39px;
+    top: 41.5px;
   }
 }
 
@@ -197,28 +196,32 @@
 }
 
 &-SearchBox-Input-Keywords {
-  background-color: #FFFFFF;
-  border: none;
-  border-bottom: solid;
-  border-bottom-width: 2px;
-  border-color: #FFFFFF;
-  color: #000000;
-  display: inline-block;
-  font-family: Kievit-Book;
-  font-size: 18px;
-  font-style: italic;
-  height: 60px;
-  padding: 0 0 0 35px;
-  @include calculation(width, '100% - 35px');
-  @include desktop {
-    background-color: #1DA1D4;
-    color: #FFFFFF;
-    font-family: Kievit-Light;
-    font-size: 66px;
-    font-style: normal;
-    letter-spacing: -0.8px;
-    padding: 0 0 16px 0;
-    width: 100%;
+  &.input-text {
+    background-color: #FFFFFF;
+    border: none;
+    box-sizing: content-box;
+    color: #000000;
+    display: inline-block;
+    font-family: Kievit-Book;
+    font-size: 18px;
+    font-style: italic;
+    height: 60px;
+    padding: 0 0 0 35px;
+    @include calculation(width, '100% - 35px');
+    @include desktop {
+      background-color: #1DA1D4;
+      border: none;
+      border-bottom: solid;
+      border-bottom-width: 2px;
+      border-color: #FFFFFF;
+      color: #FFFFFF;
+      font-family: Kievit-Light;
+      font-size: 66px;
+      font-style: normal;
+      letter-spacing: -0.8px;
+      padding: 0 0 16px 0;
+      width: 100%;
+    }
   }
 }
 
@@ -241,6 +244,7 @@
 
 &-SearchBox-Input-Options-label {
   cursor: pointer;
+  display: inline-block;
   margin: 0 40px 0 10px;
 }
 

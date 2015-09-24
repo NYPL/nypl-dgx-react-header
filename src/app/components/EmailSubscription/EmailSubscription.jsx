@@ -14,8 +14,9 @@ class SubscribeMessageBox extends React.Component {
 
   render () {
     return (
-      <div className={'EmailMessageBox ' + this.props.status + ' ' + this.props.className + '-Title'}>
-        <p>{this.props.msg}</p>
+      <div className={'EmailMessageBox ' + this.props.status + ' '}>
+        <div className={this.props.className + '-Eyebrow'}></div>
+        <p className={this.props.className + '-Title'}>{this.props.msg}</p>
       </div>
     );
   }
@@ -51,20 +52,65 @@ class EmailSubscription extends React.Component {
 
   render () {
     let status = this.state.formStatus,
-      isLoading = this.state.formProcessing;
+      isLoading = this.state.formProcessing,
+      contentBox;
 
     // console.log(this.state);
 
     if (!isLoading) {
+      contentBox = (<div><SubscribeMessageBox status={status} msg="Get the Best of NYPL in your inbox" className={'EmailSubscribeForm'}/>
+        <form 
+        ref='EmailSubscribeForm'
+        id={this.props.id}
+        className={this.props.className}
+        action={this.props.target} 
+        method={this.props.form_method}
+        name={this.props.form_name}
+        onSubmit={this._validateForm}
+        style={[
+          styles.base,
+          this.props.style
+        ]}>
+          <div className='EmailSubscribeForm-fields'>
+            <InputField type='hidden' name='thx' value='http://pages.email.nypl.org/confirmation' />
+            <InputField type='hidden' name='err' value='http://pages.email.nypl.org/confirmation' />
+            <InputField type='hidden' name='SubAction' value='sub_add_update' />
+            <InputField type='hidden' name='MID' value='7000413' />
+            <InputField type='hidden' name='Email Type' value='HTML' />
+            <InputField type='hidden' name='lid' value='1061' />
+            
+            <InputField
+            className={this.props.className + '-Input'} 
+            type='email'
+            name='Email Address'
+            placeholder={this.props.placeholder}
+            style={styles.emailField}
+            ref='emailAddressField'
+            isRequired={true} />
+
+            <InputField
+            type='submit'
+            name='submit'
+            value='SIGN UP'
+            style={styles.submitButton} />
+
+            <InputField type='hidden' name='Source Code' value='Homepage' />
+          </div>
+        </form></div>);
+
       if (status === 'success') {
-        return (
-          <SubscribeMessageBox status={status} msg="Thank you for subscribing to our email updates." 
-            className={'EmailSubscribeForm'} />
+        console.log(status);
+        contentBox = (
+          <div>
+            <SubscribeMessageBox status={status} msg="Thank you for subscribing to our email updates." 
+              className={'EmailSubscribeForm'} />
+            <p>Follow us:</p>
+          </div>
         );     
       }
 
       if (status === 'exists') {
-        return (
+        contentBox = (
           <div>
             <SubscribeMessageBox status={status} msg="Looks like you're already signed up!"
               className={'EmailSubscribeForm'}/>
@@ -74,54 +120,17 @@ class EmailSubscription extends React.Component {
       }
 
       if (status === 'error') {
-        return (
-          <SubscribeMessageBox status={status} msg="Hmm... Something isn't quite right.
-          Please try again." />
+        contentBox = (
+          <div>
+            <SubscribeMessageBox status={status} msg="Hmm... Something isn't quite right.
+            Please try again." />
+          </div>
         );     
       }
 
       return (
         <div>
-          <div className={this.props.className + '-Title'}>
-            Get the Best of NYPL in your inbox
-          </div>
-          <form 
-          ref='EmailSubscribeForm'
-          id={this.props.id}
-          className={this.props.className}
-          action={this.props.target} 
-          method={this.props.form_method}
-          name={this.props.form_name}
-          onSubmit={this._validateForm}
-          style={[
-            styles.base,
-            this.props.style
-          ]}>
-            <div className='EmailSubscribeForm-fields'>
-              <InputField type='hidden' name='thx' value='http://pages.email.nypl.org/confirmation' />
-              <InputField type='hidden' name='err' value='http://pages.email.nypl.org/confirmation' />
-              <InputField type='hidden' name='SubAction' value='sub_add_update' />
-              <InputField type='hidden' name='MID' value='7000413' />
-              <InputField type='hidden' name='Email Type' value='HTML' />
-              <InputField type='hidden' name='lid' value='1061' />
-              
-              <InputField 
-              type='email'
-              name='Email Address'
-              placeholder={this.props.placeholder}
-              style={styles.emailField}
-              ref='emailAddressField'
-              isRequired={true} />
-
-              <InputField 
-              type='submit'
-              name='submit'
-              value='SIGN UP'
-              style={styles.submitButton} />
-
-              <InputField type='hidden' name='Source Code' value='Homepage' />
-            </div>
-          </form>
+          {contentBox}
           <a href={this.props.policyUrl}
             className='EmailSubscribeForm-pp-link'
             style={styles.privacyLink}>
@@ -230,24 +239,15 @@ const styles = {
   hide: {
     display: 'none'
   },
-  emailField: {
-    display: 'table-cell',
-    borderRadius: '3px',
-    padding: '2px 5px',
-    height: '35px',
-    margin: '0',
-    width: '100%',
-    fontSize: '12.5px',
-    border: 'none'
-  },
+  emailField: {},
   submitButton: {
     display: 'table-cell',
     marginTop: '40px',
     border: '2px solid #fff',
     color: 'white',
-    height: '33px',
-    verticalAlign: 'top',
-    width: '70px',
+    height: '38px',
+    paddingLeft: '10px',
+    width: '100px',
     borderRadius: '20px',
     fontSize: '12px',
     backgroundColor: '#1DA1D4'
@@ -258,8 +258,8 @@ const styles = {
     color: '#BBB',
     fontWeight: '200',
     position: 'absolute',
-    bottom: '30px',
-    right: '15px'
+    bottom: '21px',
+    right: '25px'
   }
 };
 

@@ -104,12 +104,13 @@ SubscribeButton.defaultProps = {
 
 const styles = {
   base: {
-    margin: '0px 5px',
-    position: 'relative'
+    margin: '0px 15px',
+    position: 'relative',
+    display: 'inline-block'
   },
   SimpleButton: {
-    padding: '1em',
-    display: 'block'
+    display: 'block',
+    padding: '1em 25px'
   },
   EmailSubscribeForm: {
     position: 'absolute',
