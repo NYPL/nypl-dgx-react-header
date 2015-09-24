@@ -15,8 +15,7 @@ class SocialMediaLinksWidget extends React.Component{
   render() {
     let displayOnlyList = this.props.displayOnly,
       socialLinksList = this.props.links,
-      socialLinksToDisplay,
-      linkClass;
+      socialLinksToDisplay;
 
     // Pick the selected links to display (optional)
     if (displayOnlyList && displayOnlyList.length) {
@@ -34,8 +33,8 @@ class SocialMediaLinksWidget extends React.Component{
             href={item} 
             className={`${this.props.className}-Link ${hoverClass}`} 
             onMouseEnter={this._handleOnMouseEnter.bind(this, key)}
-            onMouseLeave={this._handleOnMouseLeave.bind(this)}
-            ></a>
+            onMouseLeave={this._handleOnMouseLeave.bind(this)}>
+          </a>
         </li>
       );
     });
@@ -49,10 +48,23 @@ class SocialMediaLinksWidget extends React.Component{
     );
   }
 
+  /**
+   * _handleOnMouseEnter(key) 
+   * Updates the linkClass state
+   * object property with the param key
+   *
+   * @param {String} key
+   */
   _handleOnMouseEnter(key) { 
     this.setState({linkClass: key});
   }
 
+  /**
+   * _handleOnMouseLeave() 
+   * updates the linkClass state
+   * object property to an empty string.
+   *
+   */
   _handleOnMouseLeave() {
     this.setState({linkClass: ''});
   }
