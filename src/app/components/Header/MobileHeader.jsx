@@ -94,10 +94,8 @@ class MobileHeader extends React.Component {
   _toggleMobileMenu(activeButton) {
     if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
       Actions.setMobileMenuButtonValue(activeButton);
-      console.log(HeaderStore._getMobileMenuBtnValue());
     } else {
       Actions.setMobileMenuButtonValue('');
-      console.log('no search');
     }
   }
 
