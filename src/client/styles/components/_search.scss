@@ -11,7 +11,10 @@
 /* CSS for Search button */
 
 &-SearchButton {
+  -moz-appearance: none;
   -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
   background-color: transparent;
   color: $BG_MENU_SEARCH;
   border-width: 0px;
@@ -35,7 +38,10 @@
 }
 
 &-SearchButton--active {
+  -moz-appearance: none;
   -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
   background-color: $BG_MENU_SEARCH;
   color: #78CCED;
   border-width: 0px;
@@ -248,7 +254,9 @@
     border-width: 2px;
   }
   @include desktop {
+    -moz-appearance: none;
     -webkit-appearance: none;
+    appearance: none;
     background-color: transparent;
     border-width: 0px;
     color: #FFFFFF;
