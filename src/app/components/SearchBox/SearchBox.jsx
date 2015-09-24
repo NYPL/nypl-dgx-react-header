@@ -38,7 +38,7 @@ class SearchBox extends React.Component {
     return (
       <div id={this.props.id}
       className={`${this.props.className}${classes}`}
-      onKeyPress={this._triggerSubmit.bind(this)}>
+      onKeyPress={this._triggerSubmit}>
         <div className={`${this.props.className}-Elements-Wrapper`}>
           <div className={`${this.props.className}-Elements-Input-Wrapper`}>
 
