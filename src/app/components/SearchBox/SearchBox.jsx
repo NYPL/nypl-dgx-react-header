@@ -14,7 +14,7 @@ class SearchBox extends React.Component {
   constructor(props) {
     super(props);
     
-    // Set the default values of input fields
+    // The default values of the input fields
     this.state = {
       searchKeywords: '',
       searchOption: 'catalog',
@@ -22,9 +22,8 @@ class SearchBox extends React.Component {
       noAnimationBefore: true
     };
 
-    // The functions listen to the changes of input fields
-    this._keywordsChange = this._keywordsChange.bind(this);
-    this._searchOptionChange = this._searchOptionChange.bind(this);
+    // The function listens to the changes of input fields
+    this._inputChange = this._inputChange.bind(this);
     // The function send search requests
     this._submitSearchRequest = this._submitSearchRequest.bind(this);
   }
@@ -53,18 +52,18 @@ class SearchBox extends React.Component {
                 ref='keywords'
                 value={this.state.searchKeywords}
                 placeholder='What would you like to find?'
-                onChange={this._keywordsChange} />
+                onChange={this._inputChange.bind(this, 'keywords')} />
               </div>
             </div>
             <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
               <div className={`${this.props.className}-Input-Options`}>
                 <InputField type='radio'
                 id='catalog'
-                name='input option'
+                name='inputOption'
                 value='catalog'
                 ref='option'
-                onChange={this._searchOptionChange}
-                checked={this.state.searchOption ==='catalog'} />
+                onChange={this._inputChange.bind(this, 'options')}
+                checked={this.state.searchOption === 'catalog'} />
 
                 <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
                   Search the Catalog
@@ -72,10 +71,10 @@ class SearchBox extends React.Component {
 
                 <InputField type='radio'
                 id='website'
-                name='input option'
+                name='inputOption'
                 value='website'
                 ref='option'
-                onChange={this._searchOptionChange}
+                onChange={this._inputChange.bind(this, 'options')}
                 checked={this.state.searchOption ==='website'} />
 
                 <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
@@ -107,19 +106,29 @@ class SearchBox extends React.Component {
     );
   }
 
-  // Listen to any changes to keywords input and change the state
-  _keywordsChange (event) {
-    this.setState({searchKeywords: event.target.value});
+  /**
+   *  _inputChange(field)
+   * Listen to the changes on keywords input field and option input fields.
+   * Grab the event value, and change the state.
+   * The parameter indicates which input field has been changed.
+   *
+   * @param {String} field
+   */
+  _inputChange(field) {
+    if (field === 'keywords') {
+      this.setState({searchKeywords: event.target.value});
+    } else if (field === 'options') {
+      this.setState({searchOption: event.target.value});
+    }
   }
 
-  // Listen to the changes of the search options and change the state
-  _searchOptionChange (event) {
-    this.setState({searchOption: event.target.value});
-    // console.log(this.state.searchOption);
-  }
-
-  // The function to generate a http request after click the search button
-  _submitSearchRequest (value) {
+  /**
+   * _submitSearchRequest(value)
+   * Submit the search request based on the values of the input fields.
+   *
+   * @param {String} value
+   */
+  _submitSearchRequest(value) {
     let requestParameters;
     // Grab the values the user has entered as the parameters for URL,
     // depends on desktop or mobile
@@ -136,13 +145,21 @@ class SearchBox extends React.Component {
       requestUrl = `http://www.nypl.org/search/apachesolr_search/${requestParameters.keywords}`;
     }
 
-    // The portion for interaction if the uses doesn't enter any search keywords
+    // This portion is for the interactions if the user doesn't enter any input
     if (!requestParameters.keywords) {
-      // Select keywords input DOM element
+      // The selector for inputKeywords DOM element
       let inputKeywords = document.getElementsByClassName(`${this.props.className}-Input-Keywords`)[0];
-      // The placeholder to tell the user there's no keywords input
+      // The placeholder tells users there's no keywords input
       inputKeywords.placeholder = 'Please enter a search term.';
-      // Decide which animation is going to perform
+
+      /**
+       * pulse(element)
+       * Add the CSS animation to the placeholder of the keywords Input.
+       * It adds the proper class to the html element to trigger the animation,
+       * and then removes the class to stop it.
+       *
+       * @param {DOM Element} element
+       */
       let pulse = element => {
         let frame = 0,
           animation = setInterval(() => {
@@ -155,6 +172,9 @@ class SearchBox extends React.Component {
               this.setState({noAnimationBefore: false});
             }
           }, 100);
+        // Decide which CSS animation is going to perform 
+        // by adding different classes to the element.
+        // It is based on if it is the first time the validation to be triggered.
         if (this.state.noAnimationBefore) {
           this.setState({placeholderAnimation: 'initial'});
         } else {
