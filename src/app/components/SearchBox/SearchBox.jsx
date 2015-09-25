@@ -142,28 +142,25 @@ class SearchBox extends React.Component {
       let inputKeywords = document.getElementsByClassName(`${this.props.className}-Input-Keywords`)[0];
       // The placeholder to tell the user there's no keywords input
       inputKeywords.placeholder = 'Please enter a search term.';
-      let self = this;
       // Decide which animation is going to perform
-      function pulse(element) {
-        clearInterval(animation);
-        let frame = 0;
-        if (self.state.noAnimationBefore === true) {
-          self.setState({placeholderAnimation: 'initial'});
+      let pulse = element => {
+        let frame = 0,
+          animation = setInterval(() => {
+            frame ++;
+            // Remove the class to stop the animation after 0.1s
+            if (frame > 1) {
+              clearInterval(animation);
+              this.setState({placeholderAnimation: null});
+              // Set animation to be sequential
+              this.setState({noAnimationBefore: false});
+            }
+          }, 100);
+        if (this.state.noAnimationBefore) {
+          this.setState({placeholderAnimation: 'initial'});
         } else {
-          self.setState({placeholderAnimation: 'sequential'});
+          this.setState({placeholderAnimation: 'sequential'});
         }
-        // Remove the class to stop the animation after 0.1s
-        function timer() {
-          frame ++;
-          if (frame > 1) {
-            clearInterval(animation);
-            self.setState({placeholderAnimation: null});
-            // Set animation to be sequential
-            self.setState({noAnimationBefore: false});
-          }
-        }
-        let animation = setInterval(timer, 100);
-      }
+      };
       pulse(inputKeywords);
     } else {
       // Go to the search page
