@@ -14,7 +14,7 @@ class SearchBox extends React.Component {
   constructor(props) {
     super(props);
     
-    // The default values of the input fields
+    // The default values of input fields
     this.state = {
       searchKeywords: '',
       searchOption: 'catalog',
@@ -24,8 +24,10 @@ class SearchBox extends React.Component {
 
     // The function listens to the changes of input fields
     this._inputChange = this._inputChange.bind(this);
-    // The function send search requests
+    // The function sends search requests
     this._submitSearchRequest = this._submitSearchRequest.bind(this);
+    // Listen to the event if enter is pressed
+     this._triggerSubmit = this._triggerSubmit.bind(this);
   }
 
   // Dom Render Section
@@ -75,7 +77,7 @@ class SearchBox extends React.Component {
                 value='website'
                 ref='option'
                 onChange={this._inputChange.bind(this, 'options')}
-                checked={this.state.searchOption ==='website'} />
+                checked={this.state.searchOption === 'website'} />
 
                 <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
                   Search NYPL.org
