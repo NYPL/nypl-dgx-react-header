@@ -10,6 +10,8 @@ class SocialMediaLinksWidget extends React.Component{
     this.state = {
       linkClass: ''
     };
+
+    this._trackEvent.bind(this);
   }
   
   render() {
@@ -30,7 +32,8 @@ class SocialMediaLinksWidget extends React.Component{
       return (
         <li key={key} className={`${this.props.className}-ListItem`}>
           <a 
-            href={item} 
+            href={item}
+            onClick={this._trackEvent(key)}
             className={`${this.props.className}-Link ${hoverClass}`} 
             onMouseEnter={this._handleOnMouseEnter.bind(this, key)}
             onMouseLeave={this._handleOnMouseLeave.bind(this)}>
@@ -46,6 +49,20 @@ class SocialMediaLinksWidget extends React.Component{
         </ul>
       </div>
     );
+  }
+
+  /**
+   * _trackEvent(gaLabel)
+   * Track a GA click event.
+   *
+   * @param {gaLabel} String Label for GA event.
+   */
+  _trackEvent(gaLabel) {
+    ga.event({
+      category: 'NYPL Header',
+      action: 'Click',
+      label: `Social Media - ${gaLabel}`
+    });
   }
 
   /**

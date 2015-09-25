@@ -4,6 +4,8 @@ import alt from '../app/alt.js';
 import Actions from '../app/actions/Actions.js';
 import Header from '../app/components/Header/Header.jsx';
 
+import ga from 'react-ga';
+
 import './styles/main.scss';
 
 if (typeof window !== 'undefined') {
@@ -11,7 +13,6 @@ if (typeof window !== 'undefined') {
 	let isRenderedByServer = false;
 
 	window.onload = () => {
-
 		// Render Isomorphically
 	  Iso.bootstrap(function (state, meta, container) {
 	  	console.log('Application rendered Isomorphically.');
@@ -108,5 +109,11 @@ if (typeof window !== 'undefined') {
 		  	}
 	  	})(window, document);
 	  }
+
+	  if (!window.ga) {
+			console.log('Analytics not available - loading through React.');
+			let gaOpts = { debug: true };
+			ga.initialize('UA-1420324-122', gaOpts);
+		}
 	}
 }

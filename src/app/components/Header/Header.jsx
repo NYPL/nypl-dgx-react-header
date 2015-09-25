@@ -15,6 +15,8 @@ import SubscribeButton from '../SubscribeButton/SubscribeButton.jsx';
 import NavMenu from '../NavMenu/NavMenu.jsx';
 import MobileHeader from './MobileHeader.jsx';
 
+import ga from 'react-ga';
+
 class Header extends React.Component {
 
   // Constructor used in ES6
@@ -70,9 +72,10 @@ class Header extends React.Component {
                 label='Get Email Updates'
                 lang={this.props.lang}
                 style={styles.subscribeButton} />
-              <DonateButton 
+              <DonateButton
                 lang={this.props.lang}
-                style={styles.donateButton} />
+                style={styles.donateButton}
+                gaLabel={'Desktop Donate'} />
             </div>
           </div>
           <NavMenu 
@@ -108,6 +111,14 @@ class Header extends React.Component {
   _handleStickyHeader() {
     let headerHeight = this._getHeaderHeight(),
       windowVerticalDistance = this._getWindowVerticalScroll();
+
+    if (windowVerticalDistance > headerHeight) {
+      ga.event({
+        category: 'NYPL Header',
+        action: 'scroll',
+        label: 'Sticky Header'
+      });
+    }
 
     return (windowVerticalDistance > headerHeight)
       ? Actions.updateIsHeaderSticky(true) : Actions.updateIsHeaderSticky(false);

@@ -30,7 +30,7 @@ class NavMenuItem extends React.Component {
         <span 
           className={classes}
           id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
-          <a href={target}>
+          <a href={target} onClick={this._trackEvent(this.props.label['en'].text)}>
             {this.props.label[this.props.lang].text}
           </a>
         </span>

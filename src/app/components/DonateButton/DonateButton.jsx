@@ -1,10 +1,14 @@
 import React from 'react';
 import Radium from 'radium';
 
+import ga from 'react-ga';
+
 class DonateButton extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
+
+    this._trackEvent.bind(this);
   }
 
   render () {
@@ -13,6 +17,7 @@ class DonateButton extends React.Component {
       className={this.props.className}
       href={this.props.target}
       lang={this.props.lang}
+      onClick={this._trackEvent(this.props.gaLabel)}
       style={[
         styles.base,
         this.props.style //allows for parent-to-child css styling
@@ -20,6 +25,20 @@ class DonateButton extends React.Component {
         {this.props.label}
       </a>
     );
+  }
+
+  /**
+   * _trackEvent(gaLabel)
+   * Track a GA click event.
+   *
+   * @param {gaLabel} String Label for GA event.
+   */
+  _trackEvent(gaLabel) {
+    // ga.event({
+    //   category: 'NYPL Header',
+    //   action: 'Click',
+    //   label: gaLabel
+    // });
   }
 };
 
