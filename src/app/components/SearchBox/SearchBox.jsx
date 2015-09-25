@@ -61,7 +61,7 @@ class SearchBox extends React.Component {
                 value='catalog'
                 ref='option'
                 onChange={this._inputChange.bind(this, 'options')}
-                checked={this.state.searchOption === 'catalog'} />
+                defaultChecked={this.state.searchOption === 'catalog'} />
 
                 <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
                   Search the Catalog
@@ -73,7 +73,7 @@ class SearchBox extends React.Component {
                 value='website'
                 ref='option'
                 onChange={this._inputChange.bind(this, 'options')}
-                checked={this.state.searchOption === 'website'} />
+                defaultChecked={this.state.searchOption === 'website'} />
 
                 <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
                   Search NYPL.org
