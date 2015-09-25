@@ -107,7 +107,7 @@ class SearchBox extends React.Component {
   }
 
   /**
-   *  _inputChange(field) 
+   *  _inputChange(field)
    * Listen to the changes on keywords input field and option input fields.
    * Grab the event value, and change the state.
    * The parameter indicates which input field has been changed.
@@ -123,7 +123,7 @@ class SearchBox extends React.Component {
   }
 
   /**
-   * _submitSearchRequest(value) 
+   * _submitSearchRequest(value)
    * Submit the search request based on the values of the input fields.
    *
    * @param {String} value
@@ -150,7 +150,7 @@ class SearchBox extends React.Component {
   }
 
   /**
-   * _triggerSubmit(event) 
+   * _triggerSubmit(event)
    * The fuction listens to the event of enter key.
    * Submit search request if enter is pressed.
    *
