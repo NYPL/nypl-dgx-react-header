@@ -2,6 +2,8 @@ import React from 'react';
 import cx from 'classnames';
 import _ from 'underscore';
 
+import ga from 'react-ga';
+
 class SocialMediaLinksWidget extends React.Component{
 
   constructor(props) {
@@ -10,8 +12,6 @@ class SocialMediaLinksWidget extends React.Component{
     this.state = {
       linkClass: ''
     };
-
-    this._trackEvent.bind(this);
   }
   
   render() {
@@ -33,7 +33,7 @@ class SocialMediaLinksWidget extends React.Component{
         <li key={key} className={`${this.props.className}-ListItem`}>
           <a 
             href={item}
-            onClick={this._trackEvent(key)}
+            onClick={this._trackEvent.bind(this, key)}
             className={`${this.props.className}-Link ${hoverClass}`} 
             onMouseEnter={this._handleOnMouseEnter.bind(this, key)}
             onMouseLeave={this._handleOnMouseLeave.bind(this)}>

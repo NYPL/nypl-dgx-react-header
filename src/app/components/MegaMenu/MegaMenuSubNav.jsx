@@ -1,7 +1,8 @@
 import React from 'react';
 import _ from 'underscore';
-import config from '../../../../appConfig.js';
+import ga from 'react-ga';
 
+import config from '../../../../appConfig.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
 
 class MegaMenuSubNav extends React.Component {
@@ -12,7 +13,7 @@ class MegaMenuSubNav extends React.Component {
   }
 
   render() {
-    let items = _.map(this.props.items, function(m, i) {
+    let items = _.map(this.props.items, (m, i) => {
         let target = m.link.en.text;
 
         if (typeof target === 'undefined') {
@@ -25,10 +26,12 @@ class MegaMenuSubNav extends React.Component {
         
         return (
           <li key={i}>
-            <a href={target}>{m.name[this.props.lang]['text']}</a>
+            <a href={target} onClick={this._trackEvent.bind(this, m.name[this.props.lang]['text'])}>
+              {m.name[this.props.lang]['text']}
+            </a>
           </li>
         );
-    }, this);
+      });
 
     // Assign widget to the FindUs Menu Item by ID match
     let socialMediaWidget = (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') ?
@@ -44,6 +47,20 @@ class MegaMenuSubNav extends React.Component {
         {socialMediaWidget}
       </div>
     );
+  }
+
+  /**
+   * _trackEvent(gaLabel)
+   * Track a GA click event.
+   *
+   * @param {gaLabel} String Label for GA event.
+   */
+  _trackEvent(gaLabel) {
+    ga.event({
+      category: 'NYPL Header',
+      action: 'Click',
+      label: `MegaMenu SubNav - ${gaLabel}`
+    });
   }
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import ga from 'react-ga';
 
 import MegaMenu from '../MegaMenu/MegaMenu.jsx';
 
@@ -30,7 +31,7 @@ class NavMenuItem extends React.Component {
         <span 
           className={classes}
           id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
-          <a href={target} onClick={this._trackEvent(this.props.label['en'].text)}>
+          <a href={target} onClick={this._trackEvent.bind(this, this.props.label['en'].text)}>
             {this.props.label[this.props.lang].text}
           </a>
         </span>
@@ -54,6 +55,20 @@ class NavMenuItem extends React.Component {
   // Reset the state to null
   _deactivate() {
     this.setState({activeItem: null});
+  }
+
+  /**
+   * _trackEvent(gaLabel)
+   * Track a GA click event.
+   *
+   * @param {gaLabel} String Label for GA event.
+   */
+  _trackEvent(gaLabel) {
+    ga.event({
+      category: 'NYPL Header',
+      action: 'Click',
+      label: `Nav Item: ${gaLabel}`
+    });
   }
 }
 
