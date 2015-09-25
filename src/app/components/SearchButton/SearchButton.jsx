@@ -73,10 +73,8 @@ class SearchButton extends React.Component {
     // Only activated when the button has not been activated yet
     if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
       Actions.setMobileMenuButtonValue('clickSearch');
-      console.log('click search');
     } else {
       Actions.setMobileMenuButtonValue('');
-      console.log('no search');
     }
   }
 }
