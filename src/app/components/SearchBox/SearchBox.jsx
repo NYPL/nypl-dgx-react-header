@@ -34,18 +34,19 @@ class SearchBox extends React.Component {
   render() {
     // Set active class if search button is hovered or clicked
     let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
-      HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
-    // Classes for keywords input fields to activate pulse animation
-    let pulseAnimation = cx({'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
-   'keywords-pulse': this.state.placeholderAnimation === 'sequential'});
+      HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'}),
+      // Classes for keywords input fields to activate pulse animation
+      pulseAnimation = cx({'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
+       'keywords-pulse': this.state.placeholderAnimation === 'sequential'});
 
     return (
-      <div id={this.props.id}
-      className={`${this.props.className}${classes}`}>
-        <div className={`${this.props.className}-Elements-Wrapper`}>
-          <div className={`${this.props.className}-Elements-Input-Wrapper`}>
+      <div id={this.props.id} className={`${this.props.className}${classes}`} onKeyPress={this._triggerSubmit}>
+        <div id={`${this.props.className}-Elements-Wrapper`} className={`${this.props.className}-Elements-Wrapper`}>
+          <div id={`${this.props.className}-Elements-Input-Wrapper`}
+          className={`${this.props.className}-Elements-Input-Wrapper`}>
 
-            <div className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
+            <div id={`${this.props.className}-Elements-Input-Keywords-Wrapper`}
+            className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
               <span className='nypl-icon-magnifier-thin icon'></span>
               <div className={`${this.props.className}-Input-Keywords-Border`}>
                 <InputField type='text'
@@ -58,7 +59,8 @@ class SearchBox extends React.Component {
                 onChange={this._inputChange.bind(this, 'keywords')} />
               </div>
             </div>
-            <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
+            <div id={`${this.props.className}-Elements-Input-Options-Wrapper`}
+            className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
               <div className={`${this.props.className}-Input-Options`}>
                 <InputField type='radio'
                 id='catalog'
@@ -87,7 +89,8 @@ class SearchBox extends React.Component {
             </div>
           </div>
 
-          <div className={`${this.props.className}-Mobile-Submit`}>
+          <div id={`${this.props.className}-Mobile-Submit`}
+           className={`${this.props.className}-Mobile-Submit`}>
             <div className={`${this.props.className}-Mobile-Submit-Option left-column`}
             value='catalog'
             onClick={this._submitSearchRequest.bind(this, 'catalog')}>
@@ -101,9 +104,10 @@ class SearchBox extends React.Component {
               <span className='nypl-icon-wedge-right icon'></span>
             </div>
           </div>
-          <div className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
+          <button id={`${this.props.className}-Elements-SubmitButton`}
+          className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
           onClick={this._submitSearchRequest.bind(this, null)}>
-          </div>
+          </button>
         </div>
       </div>
     );
@@ -131,17 +135,20 @@ class SearchBox extends React.Component {
    *
    * @param {String} value
    */
-  _submitSearchRequest(value) {
-    let requestParameters;
-    // Grab the values the user has entered as the parameters for URL,
-    // depends on desktop or mobile
-    requestParameters = {
-      keywords: encodeURIComponent(this.state.searchKeywords.trim()), 
-      option: value || this.state.searchOption
-    }
-    // The variable for request URL
-    let requestUrl;
-    // Decide the search option
+  _submitSearchRequest(value) {    
+    // Store the data that the user entered
+    let requestParameters = {
+        keywords: encodeURIComponent(this.state.searchKeywords.trim()), 
+        // If the value is null, it indicates the function is triggered on desktop version.
+        // Then it should get the value for option from state.
+        option: value || this.state.searchOption
+      },
+      // The variable for request URL
+      requestUrl,
+      inputKeywords,
+      pulse;
+
+    // Decide the search option based on which button the user clicked on mobile version search box
     if (requestParameters.option === 'catalog') {
       requestUrl = `https://nypl.bibliocommons.com/search?t=smart&q=${requestParameters.keywords}&commit=Search&searchOpt=catalogue`;
     }  else if (requestParameters.option === 'website') {
@@ -151,7 +158,7 @@ class SearchBox extends React.Component {
     // This portion is for the interactions if the user doesn't enter any input
     if (!requestParameters.keywords) {
       // The selector for inputKeywords DOM element
-      let inputKeywords = document.getElementsByClassName(`${this.props.className}-Input-Keywords`)[0];
+      inputKeywords = document.getElementsByClassName(`${this.props.className}-Input-Keywords`)[0];
       // The placeholder tells users there's no keywords input
       inputKeywords.placeholder = 'Please enter a search term.';
 
@@ -163,7 +170,7 @@ class SearchBox extends React.Component {
        *
        * @param {DOM Element} element
        */
-      let pulse = element => {
+      pulse = element => {
         let frame = 0,
           animation = setInterval(() => {
             frame ++;
@@ -188,6 +195,19 @@ class SearchBox extends React.Component {
     } else {
       // Go to the search page
       window.location.assign(requestUrl);
+    }
+  }
+
+  /**
+   * _triggerSubmit(event)
+   * The fuction listens to the event of enter key.
+   * Submit search request if enter is pressed.
+   *
+   * @param {Event} event
+   */
+  _triggerSubmit(event) {
+    if (event && event.charCode === 13) {
+      this._submitSearchRequest(null);
     }
   }
 }

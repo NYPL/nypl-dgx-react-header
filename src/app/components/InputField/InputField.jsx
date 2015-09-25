@@ -16,6 +16,7 @@ class InputField extends React.Component {
       type={this.props.type} 
       name={this.props.name} 
       value={this.props.value}
+      maxLength={this.props.maxLength}
       checked={this.props.checked}
       maxLength='128'
       placeholder={this.props.placeholder}
@@ -39,7 +40,6 @@ InputField.defaultProps = {
 
 const styles = {
   base: {
-
   }
 };
 

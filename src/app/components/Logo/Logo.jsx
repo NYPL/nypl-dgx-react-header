@@ -25,8 +25,8 @@ class Logo extends React.Component {
 };
 
 Logo.defaultProps = {
-  src: 'http://staging.ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/images/NYPL-logo-black-pos.svg',
-  target: 'http://nypl.org',
+  src: '//ux-static.nypl.org/images/NYPL-logo-black-pos.svg',
+  target: '//www.nypl.org',
   id: 'Logo',
   className: 'Logo'
 };
