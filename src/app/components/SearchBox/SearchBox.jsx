@@ -27,7 +27,7 @@ class SearchBox extends React.Component {
     // The function sends search requests
     this._submitSearchRequest = this._submitSearchRequest.bind(this);
     // Listen to the event if enter is pressed
-     this._triggerSubmit = this._triggerSubmit.bind(this);
+    this._triggerSubmit = this._triggerSubmit.bind(this);
   }
 
   // Dom Render Section
@@ -36,7 +36,7 @@ class SearchBox extends React.Component {
     let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
     // Classes for keywords input fields to activate pulse animation
-   let pulseAnimation = cx({'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
+    let pulseAnimation = cx({'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
    'keywords-pulse': this.state.placeholderAnimation === 'sequential'});
 
     return (
@@ -53,6 +53,7 @@ class SearchBox extends React.Component {
                 className={`${this.props.className}-Input-Keywords ${pulseAnimation}`}
                 ref='keywords'
                 value={this.state.searchKeywords}
+                maxLength='128'
                 placeholder='What would you like to find?'
                 onChange={this._inputChange.bind(this, 'keywords')} />
               </div>
