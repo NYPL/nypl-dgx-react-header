@@ -1,6 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 import cx from 'classnames';
+import ReactTappable from 'react-tappable';
 
 // ALT FLUX
 import HeaderStore from '../../stores/Store.js';
@@ -16,8 +17,8 @@ class MobileHeader extends React.Component {
       activeMobileButton: HeaderStore.getState().activeMobileButton
     };
 
-    this._handleMenuBtnClick = this._handleMenuBtnClick.bind(this);
-    this._handleSearchBtnClick = this._handleSearchBtnClick.bind(this);
+    this._handleMenuBtnPress = this._handleMenuBtnPress.bind(this);
+    this._handleSearchBtnPress = this._handleSearchBtnPress.bind(this);
   }
 
   componentDidMount() {
@@ -58,25 +59,27 @@ class MobileHeader extends React.Component {
           className={`${this.props.className}-Locator nypl-icon-locator-large`}>
         </a>
 
-        <span
-          style={[
-            styles.searchIcon,
-            activeButton === 'clickSearch' ? styles.activeSearchIcon : ''
-          ]}
-          className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
-          ref='MobileSearchButton'
-          onClick={this._handleSearchBtnClick}>
-        </span>
+        <ReactTappable onTap={this._handleSearchBtnPress}>
+          <span
+            style={[
+              styles.searchIcon,
+              activeButton === 'clickSearch' ? styles.activeSearchIcon : ''
+            ]}
+            className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
+            ref='MobileSearchButton'>
+          </span>
+        </ReactTappable>
 
-        <span 
-          style={[
-            styles.menuIcon,
-            activeButton === 'mobileMenu' ? styles.activeMenuIcon : ''
-          ]}
-          className={`${this.props.className}-MenuButton ${mobileMenuClass}`}
-          ref='MobileMenuButton'
-          onClick={this._handleMenuBtnClick}>
-        </span>
+        <ReactTappable onTap={this._handleMenuBtnPress}>
+          <span
+            style={[
+              styles.menuIcon,
+              activeButton === 'mobileMenu' ? styles.activeMenuIcon : ''
+            ]}
+            className={`${this.props.className}-MenuButton ${mobileMenuClass}`}
+            ref='MobileMenuButton'>
+          </span>
+        </ReactTappable>
       </div>
     );
   }
@@ -100,20 +103,20 @@ class MobileHeader extends React.Component {
   }
 
   /**
-   * _handleSearchBtnClick() 
+   * _handleSearchBtnPress() 
    * Calls _toggleMobileMenu()
    * with the 'mobileSearch' as a param
    */
-  _handleSearchBtnClick() {
+  _handleSearchBtnPress() {
     this._toggleMobileMenu('clickSearch');
   }
 
   /**
-   * _handleMenuBtnClick() 
+   * _handleMenuBtnPress() 
    * Calls _toggleMobileMenu()
    * with the 'mobileMenu' as a param
    */
-  _handleMenuBtnClick() {
+  _handleMenuBtnPress() {
     this._toggleMobileMenu('mobileMenu');
   }
 }
