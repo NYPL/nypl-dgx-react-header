@@ -57,7 +57,7 @@
     "extract-text-webpack-plugin": "^0.8.2",
     "flux": "^2.0.3",
     "iso": "^4.1.0",
-    "jsonapi-parserinator": "0.4.1",
+    "jsonapi-parserinator": "0.4.2",
     "moment": "^2.10.6",
     "radium": "^0.13.5",
     "react": "^0.13.3",

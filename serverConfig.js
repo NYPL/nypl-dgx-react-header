@@ -28,16 +28,15 @@ const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
 // Boolean flag that determines if we are running
 // our application in Production Mode.
 // Assigning as let variables, since they are mutable
-let isProduction = process.env.NODE_ENV === 'production';
-let serverPort = process.env.PORT || (isProduction ? 3001 : appConfig.port);
-// Assign API Routes
-let apiRoutes = require('./ApiRoutes/ApiRoutes.js');
-
-/* Express Server Configuration
- * ----------------------------
- * - Using .EJS as the view engine
-*/
-let app = express();
+let isProduction = process.env.NODE_ENV === 'production',
+  serverPort = process.env.PORT || (isProduction ? 3001 : appConfig.port),
+  // Assign API Routes
+  apiRoutes = require('./ApiRoutes/ApiRoutes.js'),
+  /* Express Server Configuration
+   * ----------------------------
+   * - Using .EJS as the view engine
+  */
+  app = express();
 
 app.use(compression());
 
@@ -84,7 +83,8 @@ app.get('/', (req, res) => {
     favicon: appConfig.favIconPath,
     isProduction: isProduction,
     webpackPort: WEBPACK_DEV_PORT,
-    filename: webpackConfig.output.filename
+    filename: webpackConfig.output.filename,
+    apiUrl: res.locals.data.completeApiUrl
   });
 
 });
