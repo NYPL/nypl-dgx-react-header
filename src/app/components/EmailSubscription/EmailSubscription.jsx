@@ -40,88 +40,84 @@ class EmailSubscription extends React.Component {
     // Holds the initial state, replaces getInitialState() method
     this.state = {
       formProcessing: false,
-      formStatus: ''
-      //formStatus: HeaderStore.getSubscribeFormStatus()
+      formStatus: '',
+      notValidEmail: false
     };
 
     this._validateForm = this._validateForm.bind(this);
   }
 
-  /*componentDidMount () {
-    HeaderStore.addChangeListener(this._onChange.bind(this));
-  }
-
-  componentWillUnmount () {
-    HeaderStore.removeChangeListener(this._onChange.bind(this));
-  }*/
-
   render () {
     let status = this.state.formStatus,
       isLoading = this.state.formProcessing,
       notValidEmail = this.state.notValidEmail,
-      contentBox;
+      subscribeContent;
 
     const errorClass =  cx({ 'active': notValidEmail, '': !notValidEmail });
-    // console.log(this.state);
 
     if (!isLoading) {
-      contentBox = (<div>
-        <div className={'EmailMessageBox ' + status}>
-          <div className={'EmailSubscribeForm-Eyebrow'}></div>
-          <div className={'EmailSubscribeForm-Title'}>
-            Get the <span className={'EmailSubscribeForm-Title-BestNYPL'}>best of NYPL</span> in your inbox
-          </div>
-        </div>
-        <form 
-        ref='EmailSubscribeForm'
-        id={this.props.id}
-        className={this.props.className}
-        action={this.props.target} 
-        method={this.props.form_method}
-        name={this.props.form_name}
-        onSubmit={this._validateForm}
-        style={[
-          styles.base,
-          this.props.style
-        ]}>
-          <div className='EmailSubscribeForm-fields'>
-            <InputField type='hidden' name='thx' value='http://pages.email.nypl.org/confirmation' />
-            <InputField type='hidden' name='err' value='http://pages.email.nypl.org/confirmation' />
-            <InputField type='hidden' name='SubAction' value='sub_add_update' />
-            <InputField type='hidden' name='MID' value='7000413' />
-            <InputField type='hidden' name='Email Type' value='HTML' />
-            <InputField type='hidden' name='lid' value='1061' />
-            
-            <InputField
-            className={this.props.className + '-Input'} 
-            type='email'
-            name='Email Address'
-            placeholder={this.props.placeholder}
-            style={styles.emailField}
-            ref='emailAddressField'
-            isRequired={true} />
-
-            <div className={'EmailSubscribeForm-Error error ' + errorClass}>
-              <span className='nypl-icon-solo-x icon'></span><span>Please enter a valid email address</span>
+      // The default view
+      subscribeContent = (
+        <div>
+          <div className={'EmailMessageBox ' + status}>
+            <div className={'EmailSubscribeForm-Eyebrow'}></div>
+            <div className={'EmailSubscribeForm-Title'}>
+              Get the <span className={'EmailSubscribeForm-Title-BestNYPL'}>best of NYPL</span> in your inbox
             </div>
+          </div>
 
-            <div className={'EmailSubscribeForm-Submit'}>
-              <span className='nypl-icon-check-solo icon'></span>
+          <form 
+            ref='EmailSubscribeForm'
+            id={this.props.id}
+            className={this.props.className}
+            action={this.props.target} 
+            method={this.props.form_method}
+            name={this.props.form_name}
+            onSubmit={this._validateForm}
+            style={[
+              styles.base,
+              this.props.style
+            ]}>
+            <div className='EmailSubscribeForm-fields'>
+              <InputField type='hidden' name='thx' value='http://pages.email.nypl.org/confirmation' />
+              <InputField type='hidden' name='err' value='http://pages.email.nypl.org/confirmation' />
+              <InputField type='hidden' name='SubAction' value='sub_add_update' />
+              <InputField type='hidden' name='MID' value='7000413' />
+              <InputField type='hidden' name='Email Type' value='HTML' />
+              <InputField type='hidden' name='lid' value='1061' />
+              
               <InputField
-              type='submit'
-              name='submit'
-              value='SIGN UP'
-              style={styles.submitButton} />
-            </div>
+                className={this.props.className + '-Input'} 
+                type='email'
+                name='Email Address'
+                placeholder={this.props.placeholder}
+                style={styles.emailField}
+                ref='emailAddressField'
+                isRequired={true} />
 
-            <InputField type='hidden' name='Source Code' value='Homepage' />
-          </div>
-        </form></div>);
+              <div className={'EmailSubscribeForm-Error error ' + errorClass}>
+                <span className='nypl-icon-solo-x icon'></span><span>Please enter a valid email address</span>
+              </div>
+
+              <div className={'EmailSubscribeForm-Submit'}>
+                <span className='nypl-icon-check-solo icon'></span>
+                <InputField
+                  type='submit'
+                  name='submit'
+                  value='SIGN UP'
+                  style={styles.submitButton} />
+              </div>
+
+              <InputField type='hidden' name='Source Code' value='Homepage' />
+            </div>
+          </form>
+        </div>);
 
       if (status === 'success') {
-        contentBox = (
+        subscribeContent = (
           <div>
-            <SubscribeMessageBox status={status} msg="Thank you for subscribing to our email updates." 
+            <SubscribeMessageBox status={status}
+              msg="Thank you for subscribing to our email updates." 
               className={'EmailSubscribeForm'} />
             <div className='EmailSubscribeForm-NewEmail'>
               <a href='' onClick={this._initForm.bind(this)}>Enter another email address</a>
@@ -133,24 +129,22 @@ class EmailSubscription extends React.Component {
                 links={config.socialMediaLinks} 
                 displayOnly={['facebook', 'twitter']} />
             </div>
-          </div>
-        );     
+          </div>);     
       }
 
       if (status === 'exists') {
-        contentBox = (
+        subscribeContent = (
           <div>
             <SubscribeMessageBox status={status} msg="Looks like you're already signed up!"
               className={'EmailSubscribeForm'}/>
             <div className='EmailSubscribeForm-NewEmail'>
               <a href='' onClick={this._initForm.bind(this)}>Enter a different email address</a>
             </div>
-          </div>
-        );
+          </div>);
       }
 
       if (status === 'error' || status === 'Internal Server Error') {
-        contentBox = (
+        subscribeContent = (
           <div className='EmailSubscribeForm-Misc-Error'>
             <div>Hmm...</div>
             <div>Something isn&apos;t quite right.</div>
@@ -159,20 +153,19 @@ class EmailSubscription extends React.Component {
               <span className='nypl-icon-arrow-left icon'></span>
               TRY AGAIN
             </a>
-          </div>
-        );     
+          </div>);     
       }
 
+      // Always show the privacy link except in the loading phase.
       return (
         <div>
-          {contentBox}
+          {subscribeContent}
           <a href={this.props.policyUrl}
             className='EmailSubscribeForm-pp-link'
             style={styles.privacyLink}>
             Privacy Policy
           </a>
-        </div>
-      );
+        </div>);
     } else {
       return (
         <div>
@@ -197,14 +190,13 @@ class EmailSubscription extends React.Component {
   }*/
 
   _validateForm (e) {
-    let userInput = React.findDOMNode(this.refs.emailAddressField);
-
     // Prevent re-direct, handle validation
     e.preventDefault();
 
+    let userInput = React.findDOMNode(this.refs.emailAddressField);
+
     if (!this._isValidEmail(userInput.value)) {
       userInput.value = '';
-      userInput.placeholder = 'Please enter a valid email address';
       userInput.focus();
       this.setState({
         notValidEmail: true
@@ -240,21 +232,22 @@ class EmailSubscription extends React.Component {
       formProcessing: true
     });
 
-    axios.post(postUrl, {
-      email: email
-    })
-    .then((response) => {
-      this.setState({
-        formStatus: response.data.responseStatus,
-        formProcessing: false
+    axios
+      .post(postUrl, {
+        email: email
+      })
+      .then(response => {
+        this.setState({
+          formStatus: response.data.responseStatus,
+          formProcessing: false
+        });
+      })
+      .catch(response => {
+        this.setState({
+          formStatus: response.data.responseStatus || response.statusText,
+          formProcessing: false
+        });   
       });
-    })
-    .catch((response) => {
-      this.setState({
-        formStatus: response.data.responseStatus || response.statusText,
-        formProcessing: false
-      });   
-    });
   }
 };
 

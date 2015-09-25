@@ -47,11 +47,11 @@ class SubscribeButton extends React.Component {
     //console.log(this.state);
     return (
       <div className='SubscribeButton-Wrapper'
-      ref='SubscribeButton'
-      style={[
-        styles.base,
-        this.props.style //allows for parent-to-child css styling
-      ]}>
+        ref='SubscribeButton'
+        style={[
+          styles.base,
+          this.props.style //allows for parent-to-child css styling
+        ]}>
 
         <a
           id={'SubscribeButton'}
@@ -89,12 +89,6 @@ class SubscribeButton extends React.Component {
       event.preventDefault();
 
       HeaderActions.toggleSubscribeFormVisible();
-      // Toggle the Constant to show/hide the Subscribe Form
-      /*if (HeaderStore.getSubscribeFormVisible() === false) {
-        HeaderActions.updateSubscribeFormVisible(true);
-      } else {
-        HeaderActions.updateSubscribeFormVisible(false);
-      }*/
     }
   }
 

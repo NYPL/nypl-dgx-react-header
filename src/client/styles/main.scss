@@ -178,20 +178,15 @@
 		  	}
 		  }
 	  }
-
-	  .EmailSubscribeForm-Wrapper {
-	  	text-transform: none;
-
-	  	&.up-arrow {
-	  		@include up-arrow(#EEE, 212px, 'top', -19px);
-	  	}
-	  }
 	}
 
 	.EmailSubscribeForm-Wrapper {
+		text-transform: none;
+
 		.EmailMessageBox {
 			width: 85%;
 		}
+
 		.EmailSubscribeForm {
 			margin-top: 15px;
 
