@@ -180,32 +180,30 @@
 	  }
 	}
 
-	.EmailSubscribeForm-Wrapper {
+	.EmailSubscription-Wrapper {
 		text-transform: none;
 
-		.EmailMessageBox {
-			width: 85%;
-		}
+		.EmailSubscription {
+			.SubscribeMessageBox {
+				width: 85%;
 
-		.EmailSubscribeForm {
-			margin-top: 15px;
+				&-Eyebrow {
+					border-top: 2px solid #FFF;
+					color: #fff;
+					margin-bottom: 10px;
+					width: 25px;
+				}
+				&-Title {
+					color: #fff;
+					font-size: 20px;
+					@include Kievit-Light;
+					font-weight: normal;
+					line-height: 1.2em;
 
-			&-Eyebrow {
-				border-top: 2px solid #FFF;
-				color: #fff;
-				margin-bottom: 10px;
-				width: 25px;
-			}
-			&-Title {
-				color: #fff;
-				font-size: 20px;
-				@include Kievit-Light;
-				font-weight: normal;
-				line-height: 1.2em;
-
-				&-BestNYPL {
-					@include Kievit-Book;
-		    }
+					&-BestNYPL {
+						@include Kievit-Book;
+			    }
+				}
 			}
 			&-NewEmail {
 				margin-top: 20px;
@@ -248,6 +246,21 @@
 				margin-top: 40px;
 				font-size: 12px;
 			}
+			&-Misc-Error {
+				color: #fff;
+				font-size: 20px;
+				line-height: 1.2em;
+				padding-top: 40px;
+
+				.icon {
+					vertical-align: middle;
+					font-size: 25px;
+					margin-right: 5px;
+				}
+			}
+		}
+
+		.EmailSubscribeForm {
 			&-Error {
 				@include Kievit-Light;
 				display: none;
@@ -255,6 +268,7 @@
 				margin-top: 15px;
 				margin-left: 5px;
 				font-size: 13px;
+				color: #fff;
 
 				&.active {
 					display: block;
@@ -272,7 +286,7 @@
 		    border-radius: 5px;
 		    padding: 2px 5px;
 		    height: 35px;
-		    margin: 0;
+		    margin: 15px 0 0 0;
 		    width: 95%;
 		    font-size: 12.5px;
 		    border: 3px solid #1DA1D4;
@@ -290,21 +304,6 @@
 					margin-left: 5px;
 				}
 			}
-			&-Misc-Error {
-				color: #fff;
-				font-size: 20px;
-				line-height: 1.2em;
-				padding-top: 40px;
-
-				.icon {
-					vertical-align: middle;
-					font-size: 25px;
-					margin-right: 5px;
-				}
-			}
-		}
-		.error {
-			color: #fff;
 		}
 	}
 

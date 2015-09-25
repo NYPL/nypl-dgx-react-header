@@ -66,7 +66,7 @@ class SubscribeButton extends React.Component {
           {this.props.label}
         </a>
 
-        <div className={'EmailSubscribeForm-Wrapper'}
+        <div className={'EmailSubscription-Wrapper'}
           style={[
             styles.EmailSubscribeForm,
             showDialog ? styles.show : styles.hide
