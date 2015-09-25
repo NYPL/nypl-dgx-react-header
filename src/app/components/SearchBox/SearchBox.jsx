@@ -14,18 +14,18 @@ class SearchBox extends React.Component {
   constructor(props) {
     super(props);
     
-    // Set the default values of input fields
+    // The default values of input fields
     this.state = {
       searchKeywords: '',
       searchOption: 'catalog'
     };
 
-    // The functions listen to the changes of input fields
-    this._keywordsChange = this._keywordsChange.bind(this);
-    this._searchOptionChange = this._searchOptionChange.bind(this);
-    // The function send search requests
+    // The function listens to the changes of input fields
+    this._inputChange = this._inputChange.bind(this);
+    // The function sends search requests
     this._submitSearchRequest = this._submitSearchRequest.bind(this);
-    // this._submitMobileSearchRequest = this._submitMobileSearchRequest.bind(this);
+    // Listen to the event if enter is pressed
+    this._triggerSubmit = this._triggerSubmit.bind(this);
   }
 
   // Dom Render Section
@@ -33,32 +33,35 @@ class SearchBox extends React.Component {
     // Set active class if search button is hovered or clicked
     let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
-    
-    return (
-      <div id={this.props.id}
-      className={`${this.props.className}${classes}`}>
-        <div className={`${this.props.className}-Elements-Wrapper`}>
-          <div className={`${this.props.className}-Elements-Input-Wrapper`}>
 
-            <div className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
+    return (
+      <div id={this.props.id} className={`${this.props.className}${classes}`} onKeyPress={this._triggerSubmit}>
+        <div id={`${this.props.className}-Elements-Wrapper`} className={`${this.props.className}-Elements-Wrapper`}>
+          <div id={`${this.props.className}-Elements-Input-Wrapper`}
+          className={`${this.props.className}-Elements-Input-Wrapper`}>
+
+            <div id={`${this.props.className}-Elements-Input-Keywords-Wrapper`}
+            className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
               <span className='nypl-icon-magnifier-thin icon'></span>
               <InputField type='text'
               id={`${this.props.id}-Input-Keywords`}
-              className={`${this.props.className}-Input-Keywords input-text`} 
-              ref='keywords' 
+              className={`${this.props.className}-Input-Keywords input-text`}
+              ref='keywords'
               value={this.state.searchKeywords}
+              maxLength='128'
               placeholder='What would you like to find?'
-              onChange={this._keywordsChange} />
+              onChange={this._inputChange.bind(this, 'keywords')} />
             </div>
-            <div className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
+            <div id={`${this.props.className}-Elements-Input-Options-Wrapper`}
+            className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
               <div className={`${this.props.className}-Input-Options`}>
                 <InputField type='radio'
                 id='catalog'
-                name='input option'
+                name='inputOption'
                 value='catalog'
                 ref='option'
-                onChange={this._searchOptionChange}
-                checked={this.state.searchOption ==='catalog'} />
+                onChange={this._inputChange.bind(this, 'options')}
+                checked={this.state.searchOption === 'catalog'} />
 
                 <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
                   Search the Catalog
@@ -66,11 +69,11 @@ class SearchBox extends React.Component {
 
                 <InputField type='radio'
                 id='website'
-                name='input option'
+                name='inputOption'
                 value='website'
                 ref='option'
-                onChange={this._searchOptionChange}
-                checked={this.state.searchOption ==='website'} />
+                onChange={this._inputChange.bind(this, 'options')}
+                checked={this.state.searchOption === 'website'} />
 
                 <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
                   Search NYPL.org
@@ -79,7 +82,8 @@ class SearchBox extends React.Component {
             </div>
           </div>
 
-          <div className={`${this.props.className}-Mobile-Submit`}>
+          <div id={`${this.props.className}-Mobile-Submit`}
+           className={`${this.props.className}-Mobile-Submit`}>
             <div className={`${this.props.className}-Mobile-Submit-Option left-column`}
             value='catalog'
             onClick={this._submitSearchRequest.bind(this, 'catalog')}>
@@ -93,37 +97,49 @@ class SearchBox extends React.Component {
               <span className='nypl-icon-wedge-right icon'></span>
             </div>
           </div>
-          <div className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
+          <button id={`${this.props.className}-Elements-SubmitButton`}
+          className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
           onClick={this._submitSearchRequest.bind(this, null)}>
-          </div>
+          </button>
         </div>
       </div>
     );
   }
 
-  // Listen to any changes to keywords input and change the state
-  _keywordsChange (event) {
-    this.setState({searchKeywords: event.target.value});
+  /**
+   *  _inputChange(field)
+   * Listen to the changes on keywords input field and option input fields.
+   * Grab the event value, and change the state.
+   * The parameter indicates which input field has been changed.
+   *
+   * @param {String} field
+   */
+  _inputChange(field) {
+    if (field === 'keywords') {
+      this.setState({searchKeywords: event.target.value});
+    } else if (field === 'options') {
+      this.setState({searchOption: event.target.value});
+    }
   }
 
-  // Listen to the changes of the search options and change the state
-  _searchOptionChange (event) {
-    this.setState({searchOption: event.target.value});
-    // console.log(this.state.searchOption);
-  }
-
-  // The function to generate a http request after click the search button
-  _submitSearchRequest (value) {
+  /**
+   * _submitSearchRequest(value)
+   * Submit the search request based on the values of the input fields.
+   *
+   * @param {String} value
+   */
+  _submitSearchRequest(value) {
     let requestParameters;
-    // Grab the values the user has entered as the parameters for URL,
-    // depends on desktop or mobile
+    // Store the data that the user entered
     requestParameters = {
       keywords: encodeURIComponent(this.state.searchKeywords.trim()), 
+      // If the value is null, it indicates the function is triggered on desktop version.
+      // Then it should get the value for option from state.
       option: value || this.state.searchOption
     }
     // The variable for request URL
     let requestUrl;
-    // Decide the search option
+    // Decide the search option based on which button the user clicked on mobile version search box
     if (requestParameters.option === 'catalog') {
       requestUrl = `https://nypl.bibliocommons.com/search?t=smart&q=${requestParameters.keywords}&commit=Search&searchOpt=catalogue`;
     }  else if (requestParameters.option === 'website') {
@@ -131,6 +147,19 @@ class SearchBox extends React.Component {
     }
     // Go to the search page
     window.location.assign(requestUrl);
+  }
+
+  /**
+   * _triggerSubmit(event)
+   * The fuction listens to the event of enter key.
+   * Submit search request if enter is pressed.
+   *
+   * @param {Event} event
+   */
+  _triggerSubmit(event) {
+    if (event && event.charCode === 13) {
+      this._submitSearchRequest(null);
+    }
   }
 }
 
