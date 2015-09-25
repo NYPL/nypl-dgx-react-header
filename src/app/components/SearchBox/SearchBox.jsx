@@ -18,6 +18,7 @@ class SearchBox extends React.Component {
     this.state = {
       searchKeywords: '',
       searchOption: 'catalog',
+      placeholder: 'What would you like to find?',
       placeholderAnimation: null,
       noAnimationBefore: true
     };
@@ -55,7 +56,7 @@ class SearchBox extends React.Component {
                 ref='keywords'
                 value={this.state.searchKeywords}
                 maxLength='128'
-                placeholder='What would you like to find?'
+                placeholder={this.state.placeholder}
                 onChange={this._inputChange.bind(this, 'keywords')} />
               </div>
             </div>
@@ -158,9 +159,9 @@ class SearchBox extends React.Component {
     // This portion is for the interactions if the user doesn't enter any input
     if (!requestParameters.keywords) {
       // The selector for inputKeywords DOM element
-      inputKeywords = document.getElementsByClassName(`${this.props.className}-Input-Keywords`)[0];
-      // The placeholder tells users there's no keywords input
-      inputKeywords.placeholder = 'Please enter a search term.';
+      inputKeywords = this.refs.keywords;
+      // The new placeholder that tells users there's no keywords input
+      this.setState({placeholder: 'Please enter a search term.'});
 
       /**
        * pulse(element)
