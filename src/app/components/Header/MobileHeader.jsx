@@ -39,8 +39,8 @@ class MobileHeader extends React.Component {
 
       locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true',
       mobileSearchClass = cx({
-        'active nypl-icon-solo-x': activeButton === 'clickSearch',
-        'nypl-icon-magnifier-thin': activeButton !== 'clickSearch'
+        'active nypl-icon-solo-x': activeButton === 'clickSearch' || activeButton === 'hoverSearch',
+        'nypl-icon-magnifier-thin': activeButton !== 'clickSearch' && activeButton !== 'hoverSearch'
       }),
       mobileMenuClass = cx({
         'active nypl-icon-solo-x': activeButton === 'mobileMenu', 
@@ -64,7 +64,7 @@ class MobileHeader extends React.Component {
           <span
             style={[
               styles.searchIcon,
-              activeButton === 'clickSearch' ? styles.activeSearchIcon : ''
+              activeButton === 'clickSearch' || activeButton === 'hoverSearch' ? styles.activeSearchIcon : ''
             ]}
             className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
             ref='MobileSearchButton'>

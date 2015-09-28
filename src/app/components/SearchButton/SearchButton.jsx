@@ -53,10 +53,14 @@ class SearchButton extends React.Component {
       // And activated by hover only when the button has not been activated yet
       if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
         Actions.setMobileMenuButtonValue('hoverSearch');
-      } 
+      }
+      console.log(HeaderStore._getMobileMenuBtnValue());
     } else {
       // Click ignores the status of hover
-      this._toggle();
+      if (HeaderStore._getMobileMenuBtnValue() !== 'hoverSearch') {
+        this._toggle();
+      }
+      console.log(HeaderStore._getMobileMenuBtnValue());
     }
   }
 
