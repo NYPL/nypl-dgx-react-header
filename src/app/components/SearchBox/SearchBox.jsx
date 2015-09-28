@@ -40,7 +40,7 @@ class SearchBox extends React.Component {
       '--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'
     }),
-    
+
       // Classes for keywords input fields to activate pulse animation
       pulseAnimation = cx({
         'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
