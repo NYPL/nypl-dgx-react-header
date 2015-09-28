@@ -59,7 +59,8 @@ class SearchBox extends React.Component {
             checked={this.state.searchOption === element.value}
             onChange={this._inputChange.bind(this, 'option')} />
 
-            <label htmlFor={element.value} className={`${this.props.className}-Input-Options-label`}>
+            <label htmlFor={element.value} className={`${this.props.className}-Input-Options-label`}
+            onKeyPress={this._triggerSubmit}>
               {element.labelText}
             </label>
           </div>
@@ -182,6 +183,7 @@ class SearchBox extends React.Component {
    * @param {Event} event
    */
   _triggerSubmit(event) {
+    console.log('>>>>> works');
     if (event && event.charCode === 13) {
       this._submitSearchRequest(null);
     }
