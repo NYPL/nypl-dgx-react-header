@@ -7,6 +7,7 @@ import ReactTappable from 'react-tappable';
 import HeaderStore from '../../stores/Store.js';
 import Actions from '../../actions/Actions.js';
 
+import gaUtils from '../../utils/gaUtils.js';
 
 class MobileHeader extends React.Component {
 
@@ -97,6 +98,7 @@ class MobileHeader extends React.Component {
   _toggleMobileMenu(activeButton) {
     if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
       Actions.setMobileMenuButtonValue(activeButton);
+      gaUtils._trackEvent('Click', `Mobile ${activeButton}`);
     } else {
       Actions.setMobileMenuButtonValue('');
     }
