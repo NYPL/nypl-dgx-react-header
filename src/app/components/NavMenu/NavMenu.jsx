@@ -21,7 +21,7 @@ class NavMenu extends React.Component {
   render () {
     let mobileActiveClass = cx({'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'}),
       donateButton = HeaderStore._getIsStickyValue() ?
-        <li><DonateButton style={styles.donateButton} /></li> : null,
+        <li><DonateButton style={styles.donateButton} gaLabel={'Mobile Donate'}/></li> : null,
       navMenu = this.props.items.map((item, index) => {
         return (
           <NavMenuItem 
