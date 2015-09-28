@@ -1,6 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 
+import gaUtils from '../../utils/gaUtils.js';
 import MegaMenu from '../MegaMenu/MegaMenu.jsx';
 
 class NavMenuItem extends React.Component {
@@ -30,7 +31,7 @@ class NavMenuItem extends React.Component {
         <span 
           className={classes}
           id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
-          <a href={target}>
+          <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Click', `Nav Item: ${this.props.label['en'].text}`)}>
             {this.props.label[this.props.lang].text}
           </a>
         </span>
