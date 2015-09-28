@@ -17,7 +17,10 @@ class SearchBox extends React.Component {
     // The default values of input fields
     this.state = {
       searchKeywords: '',
-      searchOption: 'catalog'
+      searchOption: 'catalog',
+      placeholder: 'What would you like to find?',
+      placeholderAnimation: null,
+      noAnimationBefore: true
     };
 
     // The function listens to the changes of input fields
@@ -26,13 +29,20 @@ class SearchBox extends React.Component {
     this._submitSearchRequest = this._submitSearchRequest.bind(this);
     // Listen to the event if enter is pressed
     this._triggerSubmit = this._triggerSubmit.bind(this);
+    // The fucntion to trigger validation animation for keywords input
+    this._pulseAnimation = this._pulseAnimation.bind(this);
   }
 
   // Dom Render Section
   render() {
     // Set active class if search button is hovered or clicked
     let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
-      HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
+      HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'}),
+      // Classes for keywords input fields to activate pulse animation
+      pulseAnimation = cx({
+        'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
+        'keywords-pulse': this.state.placeholderAnimation === 'sequential'
+      });
 
     return (
       <div id={this.props.id} className={`${this.props.className}${classes}`} onKeyPress={this._triggerSubmit}>
@@ -43,14 +53,16 @@ class SearchBox extends React.Component {
             <div id={`${this.props.className}-Elements-Input-Keywords-Wrapper`}
             className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
               <span className='nypl-icon-magnifier-thin icon'></span>
-              <InputField type='text'
-              id={`${this.props.id}-Input-Keywords`}
-              className={`${this.props.className}-Input-Keywords input-text`}
-              ref='keywords'
-              value={this.state.searchKeywords}
-              maxLength='128'
-              placeholder='What would you like to find?'
-              onChange={this._inputChange.bind(this, 'keywords')} />
+              <div className={`${this.props.className}-Input-Keywords-Border`}>
+                <InputField type='text'
+                id={`${this.props.id}-Input-Keywords`}
+                className={`${this.props.className}-Input-Keywords ${pulseAnimation}`}
+                ref='keywords'
+                value={this.state.searchKeywords}
+                maxLength='128'
+                placeholder={this.state.placeholder}
+                onChange={this._inputChange.bind(this, 'keywords')} />
+              </div>
             </div>
             <div id={`${this.props.className}-Elements-Input-Options-Wrapper`}
             className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
@@ -129,24 +141,37 @@ class SearchBox extends React.Component {
    * @param {String} value
    */
   _submitSearchRequest(value) {
-    let requestParameters;
     // Store the data that the user entered
-    requestParameters = {
-      keywords: encodeURIComponent(this.state.searchKeywords.trim()), 
-      // If the value is null, it indicates the function is triggered on desktop version.
-      // Then it should get the value for option from state.
-      option: value || this.state.searchOption
-    }
-    // The variable for request URL
-    let requestUrl;
+    let requestParameters = {
+        keywords: encodeURIComponent(this.state.searchKeywords.trim()), 
+        // If the value is null, it indicates the function is triggered on desktop version.
+        // Then it should get the value for option from state.
+        option: value || this.state.searchOption
+      },
+      // The variable for request URL
+      requestUrl,
+      inputKeywords,
+      pulse;
+
     // Decide the search option based on which button the user clicked on mobile version search box
     if (requestParameters.option === 'catalog') {
       requestUrl = `https://nypl.bibliocommons.com/search?t=smart&q=${requestParameters.keywords}&commit=Search&searchOpt=catalogue`;
     }  else if (requestParameters.option === 'website') {
       requestUrl = `http://www.nypl.org/search/apachesolr_search/${requestParameters.keywords}`;
     }
-    // Go to the search page
-    window.location.assign(requestUrl);
+
+    // This portion is for the interactions if the user doesn't enter any input
+    if (!requestParameters.keywords) {
+      // The selector for inputKeywords DOM element
+      inputKeywords = this.refs.keywords;
+      // The new placeholder that tells users there's no keywords input
+      this.setState({placeholder: 'Please enter a search term.'});
+      // Trigger the validation animation
+      this._pulseAnimation(inputKeywords);
+    } else {
+      // Go to the search page
+      window.location.assign(requestUrl);
+    }
   }
 
   /**
@@ -159,6 +184,36 @@ class SearchBox extends React.Component {
   _triggerSubmit(event) {
     if (event && event.charCode === 13) {
       this._submitSearchRequest(null);
+    }
+  }
+
+  /**
+   * _pulseAnimation(element)
+   * Add the CSS animation to the placeholder of the keywords Input.
+   * It adds the proper class to the html element to trigger the animation,
+   * and then removes the class to stop it.
+   *
+   * @param {DOM Element} element
+   */
+  _pulseAnimation(element) {
+    let frame = 0,
+      animation = setInterval(() => {
+        frame ++;
+        // Remove the class to stop the animation after 0.1s
+        if (frame > 1) {
+          clearInterval(animation);
+          this.setState({placeholderAnimation: null});
+          // Set animation to be sequential
+          this.setState({noAnimationBefore: false});
+        }
+      }, 100);
+    // Decide which CSS animation is going to perform
+    // by adding different classes to the element.
+    // It is based on if it is the first time the validation to be triggered.
+    if (this.state.noAnimationBefore) {
+      this.setState({placeholderAnimation: 'initial'});
+    } else {
+      this.setState({placeholderAnimation: 'sequential'});
     }
   }
 }
