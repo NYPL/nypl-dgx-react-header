@@ -62,8 +62,8 @@ class SubscribeButton extends React.Component {
             styles.SimpleButton,
             this.props.style
           ]}>
-          <span className={iconClass + ' icon'} style={styles.SubscribeIcon}></span>
           {this.props.label}
+          <span className={iconClass + ' icon'} style={styles.SubscribeIcon}></span>
         </a>
 
         <div className={'EmailSubscription-Wrapper'}
@@ -116,13 +116,14 @@ const styles = {
   },
   SimpleButton: {
     display: 'block',
-    padding: '1em 30px 1em 25px'
+    padding: '9px 15px 11px 20px'
   },
   SubscribeIcon: {
-    position: 'absolute',
-    top: '10px',
-    right: '8px',
-    fontSize: '13px'
+    fontSize: '15px',
+    verticalAlign: 'text-bottom',
+    marginLeft: '5px',
+    display: 'inline',
+    opacity: '0.8'
   },
   EmailSubscribeForm: {
     position: 'absolute',
