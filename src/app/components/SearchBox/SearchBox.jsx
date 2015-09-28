@@ -58,9 +58,9 @@ class SearchBox extends React.Component {
                 <InputField type='radio'
                 id='catalog'
                 name='inputOption'
-                
+                value = 'catalog'
                 ref='option'
-                defaultChecked={this.state.searchOption === 'catalog'}
+                checked={this.state.searchOption === 'catalog'}
                 onChange={this._inputChange.bind(this, 'catalog')} />
 
                 <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
@@ -70,9 +70,9 @@ class SearchBox extends React.Component {
                 <InputField type='radio'
                 id='website'
                 name='inputOption'
-                
+                value='website'
                 ref='option'
-                defaultChecked={this.state.searchOption === 'website'}
+                checked={this.state.searchOption === 'website'}
                 onChange={this._inputChange.bind(this, 'website')} />
 
                 <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
@@ -118,9 +118,9 @@ class SearchBox extends React.Component {
     if (field === 'keywords') {
       this.setState({searchKeywords: event.target.value});
     } else if (field === 'catalog') {
-      this.setState({searchOption: 'catalog'});
+      this.setState({searchOption: event.target.value});
     } else if (field === 'website') {
-      this.setState({searchOption: 'website'});
+      this.setState({searchOption: event.target.value});
     }
   }
 
