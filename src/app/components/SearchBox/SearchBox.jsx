@@ -34,7 +34,7 @@ class SearchBox extends React.Component {
     let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'}),
       
-      // Render every radio button with its own properties 
+      // Render radio buttons with their own properties
       inputOptions = inputOptionData.map((element, i) => {
         return (
           <div className={`${this.props.className}-Input-Option`} key = {i}>
@@ -51,6 +51,18 @@ class SearchBox extends React.Component {
             </label>
           </div>
         );
+      }),
+      // Render submit buttons for the mobile version
+      mobileSubmitButtons = mobileSubmitButtonData.map((element, i) => {
+        return (
+          <div key={i}
+          className={`${this.props.className}-Mobile-Submit-Option ${element.leftColumn}`}
+          value={element.value}
+          onClick={this._submitSearchRequest.bind(this, element.value)}>
+            {element.text}
+            <span className='nypl-icon-wedge-right icon'></span>
+          </div>
+        );
       });
 
     return (
@@ -58,7 +70,6 @@ class SearchBox extends React.Component {
         <div id={`${this.props.className}-Elements-Wrapper`} className={`${this.props.className}-Elements-Wrapper`}>
           <div id={`${this.props.className}-Elements-Input-Wrapper`}
           className={`${this.props.className}-Elements-Input-Wrapper`}>
-
             <div id={`${this.props.className}-Elements-Input-Keywords-Wrapper`}
             className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
               <span className='nypl-icon-magnifier-thin icon'></span>
@@ -79,19 +90,9 @@ class SearchBox extends React.Component {
 
           <div id={`${this.props.className}-Mobile-Submit`}
            className={`${this.props.className}-Mobile-Submit`}>
-            <div className={`${this.props.className}-Mobile-Submit-Option left-column`}
-            value='catalog'
-            onClick={this._submitSearchRequest.bind(this, 'catalog')}>
-              catalog
-              <span className='nypl-icon-wedge-right icon'></span>
-            </div>
-            <div className={`${this.props.className}-Mobile-Submit-Option`}
-            value='website'
-            onClick={this._submitSearchRequest.bind(this, 'website')}>
-              nypl.org
-              <span className='nypl-icon-wedge-right icon'></span>
-            </div>
+            {mobileSubmitButtons}
           </div>
+
           <button id={`${this.props.className}-Elements-SubmitButton`}
           className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
           onClick={this._submitSearchRequest.bind(this, null)}>
@@ -179,6 +180,20 @@ const inputOptionData = [
     value: 'website',
     ref: 'optionWebsite',
     labelText: 'Search NYPL.org'
+  }
+];
+
+// mobile submit button properties
+const mobileSubmitButtonData = [
+  {
+    leftColumn: 'left-column',
+    value: 'catalog',
+    text: 'catalog'
+  },
+  {
+    leftColumn: 'right-column',
+    value: 'website',
+    text: 'nypl.org'
   }
 ];
 
