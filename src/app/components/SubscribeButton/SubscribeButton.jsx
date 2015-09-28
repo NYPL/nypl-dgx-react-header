@@ -35,33 +35,45 @@ class SubscribeButton extends React.Component {
     //let showDialog = this.state.showDialog;
     let showDialog = this.state.subscribeFormVisible;
     // Dynamic class assignment based on boolean flag
-    const classes =  cx({ 'active': showDialog, '': !showDialog });
+    const classes = cx({
+        'active': showDialog,
+        '': !showDialog
+      }),
+      iconClass = cx({
+        'nypl-icon-solo-x': showDialog,
+        'nypl-icon-wedge-down': !showDialog
+      });
 
     //console.log(this.state);
-
     return (
       <div className='SubscribeButton-Wrapper'
-      ref='SubscribeButton'
-      style={[
-        styles.base,
-        this.props.style //allows for parent-to-child css styling
-      ]}>
-        <SimpleButton
-        className={'SubscribeButton ' + classes}
-        id={'SubscribeButton'}
-        lang={this.props.lang}
-        label={this.props.label}
-        target={this.props.target}
-        onClick={this._handleClick}
-        style={styles.SimpleButton} />
-        <div className={'EmailSubscribeForm-Wrapper'}
+        ref='SubscribeButton'
         style={[
-          styles.EmailSubscribeForm,
-          showDialog ? styles.show : styles.hide
+          styles.base,
+          this.props.style //allows for parent-to-child css styling
         ]}>
+
+        <a
+          id={'SubscribeButton'}
+          className={'SubscribeButton ' + classes}
+          href={this.props.target}
+          onClick={this._handleClick}
+          style={[
+            styles.SimpleButton,
+            this.props.style
+          ]}>
+          {this.props.label}
+          <span className={iconClass + ' icon'} style={styles.SubscribeIcon}></span>
+        </a>
+
+        <div className={'EmailSubscription-Wrapper'}
+          style={[
+            styles.EmailSubscribeForm,
+            showDialog ? styles.show : styles.hide
+          ]}>
           <EmailSubscription
-          list_id='1061'
-          target='https://dev-mailinglistapi.nypl.org' />
+            list_id='1061'
+            target='https://dev-mailinglistapi.nypl.org' />
         </div>
       </div>
     );
@@ -77,12 +89,6 @@ class SubscribeButton extends React.Component {
       event.preventDefault();
 
       HeaderActions.toggleSubscribeFormVisible();
-      // Toggle the Constant to show/hide the Subscribe Form
-      /*if (HeaderStore.getSubscribeFormVisible() === false) {
-        HeaderActions.updateSubscribeFormVisible(true);
-      } else {
-        HeaderActions.updateSubscribeFormVisible(false);
-      }*/
     }
   }
 
@@ -110,15 +116,23 @@ const styles = {
   },
   SimpleButton: {
     display: 'block',
-    padding: '1em 25px'
+    padding: '9px 15px 11px 20px'
+  },
+  SubscribeIcon: {
+    fontSize: '15px',
+    verticalAlign: 'text-bottom',
+    marginLeft: '5px',
+    display: 'inline',
+    opacity: '0.8'
   },
   EmailSubscribeForm: {
     position: 'absolute',
     zIndex: 1000,
     right: '0',
     width: '250px',
+    height: '210px',
     backgroundColor: '#1DA1D4',
-    padding: '20px 25px'
+    padding: '25px 30px'
   },
   hide: {
     display: 'none'
