@@ -68,13 +68,11 @@ class GlobalAlerts extends React.Component{
    * and assign to state globalAlerts property.
    */
   _fetchGlobalAlerts() {
-    let self = this;
-
     axios
       .get(config.alertsApiUrl)
       .then(result => {
         if (result.data && result.data.data) {
-          self.setState({
+          this.setState({
             globalAlerts: result.data.data
           });
         }
