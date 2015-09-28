@@ -139,17 +139,18 @@
     display: inline-block;
     height: 10px;
     left: 0;
-    margin-right: 2px;
+    margin-right: 10px;
     position: relative;
     width: 10px;
+    top: 1px;
+    text-align: center;
   }
 
   input[type=radio]:checked + label:before {
     content: '\2022';
     color: #000000;
-    display: inline-block;
-    font-size: 20px;
-    line-height: 13px;
+    font-size: 18px;
+    line-height: 11px;
   }
 }
 
@@ -244,7 +245,7 @@
 &-SearchBox-Input-Options-label {
   cursor: pointer;
   display: inline-block;
-  margin: 0 40px 0 10px;
+  margin: 0 40px 0 0;
 }
 
 &-SearchBox-Elements-SubmitButton {
