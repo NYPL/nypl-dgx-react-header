@@ -29,6 +29,8 @@ class SearchBox extends React.Component {
     this._submitSearchRequest = this._submitSearchRequest.bind(this);
     // Listen to the event if enter is pressed
     this._triggerSubmit = this._triggerSubmit.bind(this);
+    // The fucntion to trigger validation animation for keywords input
+    this._pulseAnimation = this._pulseAnimation.bind(this);
   }
 
   // Dom Render Section
@@ -138,7 +140,7 @@ class SearchBox extends React.Component {
    *
    * @param {String} value
    */
-  _submitSearchRequest(value) {    
+  _submitSearchRequest(value) {
     // Store the data that the user entered
     let requestParameters = {
         keywords: encodeURIComponent(this.state.searchKeywords.trim()), 
@@ -164,44 +166,13 @@ class SearchBox extends React.Component {
       inputKeywords = this.refs.keywords;
       // The new placeholder that tells users there's no keywords input
       this.setState({placeholder: 'Please enter a search term.'});
-
-      /**
-       * pulse(element)
-       * Add the CSS animation to the placeholder of the keywords Input.
-       * It adds the proper class to the html element to trigger the animation,
-       * and then removes the class to stop it.
-       *
-       * @param {DOM Element} element
-       */
-      pulse = element => {
-        let frame = 0,
-          animation = setInterval(() => {
-            frame ++;
-            // Remove the class to stop the animation after 0.1s
-            if (frame > 1) {
-              clearInterval(animation);
-              this.setState({placeholderAnimation: null});
-              // Set animation to be sequential
-              this.setState({noAnimationBefore: false});
-            }
-          }, 100);
-        // Decide which CSS animation is going to perform 
-        // by adding different classes to the element.
-        // It is based on if it is the first time the validation to be triggered.
-        if (this.state.noAnimationBefore) {
-          this.setState({placeholderAnimation: 'initial'});
-        } else {
-          this.setState({placeholderAnimation: 'sequential'});
-        }
-      };
-      pulse(inputKeywords);
+      // Trigger the validation animation
+      this._pulseAnimation(inputKeywords);
     } else {
       // Go to the search page
       window.location.assign(requestUrl);
     }
   }
-
-
 
   /**
    * _triggerSubmit(event)
@@ -213,6 +184,36 @@ class SearchBox extends React.Component {
   _triggerSubmit(event) {
     if (event && event.charCode === 13) {
       this._submitSearchRequest(null);
+    }
+  }
+
+  /**
+   * _pulseAnimation(element)
+   * Add the CSS animation to the placeholder of the keywords Input.
+   * It adds the proper class to the html element to trigger the animation,
+   * and then removes the class to stop it.
+   *
+   * @param {DOM Element} element
+   */
+  _pulseAnimation(element) {
+    let frame = 0,
+      animation = setInterval(() => {
+        frame ++;
+        // Remove the class to stop the animation after 0.1s
+        if (frame > 1) {
+          clearInterval(animation);
+          this.setState({placeholderAnimation: null});
+          // Set animation to be sequential
+          this.setState({noAnimationBefore: false});
+        }
+      }, 100);
+    // Decide which CSS animation is going to perform
+    // by adding different classes to the element.
+    // It is based on if it is the first time the validation to be triggered.
+    if (this.state.noAnimationBefore) {
+      this.setState({placeholderAnimation: 'initial'});
+    } else {
+      this.setState({placeholderAnimation: 'sequential'});
     }
   }
 }
