@@ -15,7 +15,9 @@ class GlobalAlerts extends React.Component{
     super(props);
 
     this.state = {
-      globalAlerts: []
+      globalAlerts: [],
+      hideAlertsBox: false,
+      animateAlertsBox: false
     };
   }
 
@@ -25,16 +27,33 @@ class GlobalAlerts extends React.Component{
   }
 
   render () {
-    let currentGlobalAlerts = this._filterCurrentClosingAlerts(this.state.globalAlerts);
+    let currentGlobalAlerts = this.state.globalAlerts,
+      classes = cx({
+        'animated fadeOutUp': this.state.animateAlertsBox,
+        'hide': this.state.hideAlertsBox
+      });
 
     return currentGlobalAlerts && currentGlobalAlerts.length ? (
-      <div className={this.props.className} id={this.props.id} style={styles.base}>
-        <AlertsBox 
-          alerts={currentGlobalAlerts} 
-          id={`${this.props.className}-Box`}
-          className={`${this.props.className}-Box`} />
+      <div className={`${this.props.className} ${classes}`} id={this.props.id} style={styles.base}>
+        <div className={`${this.props.className}-Wrapper`}>
+          <ReactTappable 
+            className={`${this.props.className}-CloseButton nypl-icon-circle-x`} 
+            onTap={this._closeAlertsBox.bind(this)} />
+          <AlertsBox 
+            alerts={currentGlobalAlerts} 
+            id={`${this.props.className}-Box`}
+            className={`${this.props.className}-Box`} />
+        </div>
       </div>
     ) : null;
+  }
+
+  _closeAlertsBox() {
+    this.setState({animateAlertsBox: true});
+
+    setTimeout(() => {
+      this.setState({hideAlertsBox: true});
+    }, 500);
   }
 
   _fetchGlobalAlerts() {
@@ -91,10 +110,10 @@ GlobalAlerts.defaultProps = {
 const styles = {
   base: {
     backgroundColor: '#fee24a',
-    textAlign: 'center',
     width: '100%',
     margin: 0,
-    padding: '10px 0'
+    padding: '15px 0',
+    color: '#333333'
   }
 }
 
