@@ -37,7 +37,7 @@ class SearchBox extends React.Component {
       // Render radio buttons with their own properties
       inputOptions = inputOptionData.map((element, i) => {
         return (
-          <div className={`${this.props.className}-Input-Option`} key = {i}>
+          <div className={`${this.props.className}-Input-Option`} key={i}>
             <InputField type='radio'
             id={element.id}
             name={element.name}
@@ -56,7 +56,7 @@ class SearchBox extends React.Component {
       mobileSubmitButtons = mobileSubmitButtonData.map((element, i) => {
         return (
           <div key={i}
-          className={`${this.props.className}-Mobile-Submit-Option ${element.leftColumn}`}
+          className={`${this.props.className}-Mobile-Submit-Option ${element.columnClass}`}
           value={element.value}
           onClick={this._submitSearchRequest.bind(this, element.value)}>
             {element.text}
@@ -186,12 +186,12 @@ const inputOptionData = [
 // mobile submit button properties
 const mobileSubmitButtonData = [
   {
-    leftColumn: 'left-column',
+    columnClass: 'left-column',
     value: 'catalog',
     text: 'catalog'
   },
   {
-    leftColumn: 'right-column',
+    columnClass: 'right-column',
     value: 'website',
     text: 'nypl.org'
   }
