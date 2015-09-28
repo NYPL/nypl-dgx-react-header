@@ -32,7 +32,26 @@ class SearchBox extends React.Component {
   render() {
     // Set active class if search button is hovered or clicked
     let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
-      HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
+      HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'}),
+      
+      // Render every radio button with its own properties 
+      inputOptions = inputOptionData.map((element, i) => {
+        return (
+          <div className={`${this.props.className}-Input-Option`} key = {i}>
+            <InputField type='radio'
+            id={element.id}
+            name={element.name}
+            value = {element.value}
+            ref={element.ref}
+            checked={this.state.searchOption === element.value}
+            onChange={this._inputChange.bind(this, 'option')} />
+
+            <label htmlFor={element.value} className={`${this.props.className}-Input-Options-label`}>
+              {element.labelText}
+            </label>
+          </div>
+        );
+      });
 
     return (
       <div id={this.props.id} className={`${this.props.className}${classes}`} onKeyPress={this._triggerSubmit}>
@@ -54,31 +73,7 @@ class SearchBox extends React.Component {
             </div>
             <div id={`${this.props.className}-Elements-Input-Options-Wrapper`}
             className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
-              <div className={`${this.props.className}-Input-Options`}>
-                <InputField type='radio'
-                id='catalog'
-                name='inputOption'
-                value = 'catalog'
-                ref='option'
-                checked={this.state.searchOption === 'catalog'}
-                onChange={this._inputChange.bind(this, 'catalog')} />
-
-                <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
-                  Search the Catalog
-                </label>
-
-                <InputField type='radio'
-                id='website'
-                name='inputOption'
-                value='website'
-                ref='option'
-                checked={this.state.searchOption === 'website'}
-                onChange={this._inputChange.bind(this, 'website')} />
-
-                <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
-                  Search NYPL.org
-                </label>
-              </div>
+              {inputOptions}
             </div>
           </div>
 
@@ -117,9 +112,7 @@ class SearchBox extends React.Component {
   _inputChange(field) {
     if (field === 'keywords') {
       this.setState({searchKeywords: event.target.value});
-    } else if (field === 'catalog') {
-      this.setState({searchOption: event.target.value});
-    } else if (field === 'website') {
+    } else if (field === 'option') {
       this.setState({searchOption: event.target.value});
     }
   }
@@ -170,6 +163,24 @@ SearchBox.defaultProps = {
   id: 'SearchBox',
   className: 'SearchBox'
 };
+
+// Radio button properties
+const inputOptionData = [
+  {
+    id: 'catalog',
+    name: 'inputOption',
+    value: 'catalog',
+    ref: 'optionCatalog',
+    labelText: 'Search the Catalog'
+  },
+  {
+    id: 'website',
+    name: 'inputOption',
+    value: 'website',
+    ref: 'optionWebsite',
+    labelText: 'Search NYPL.org'
+  }
+];
 
 const styles = {
   base: {
