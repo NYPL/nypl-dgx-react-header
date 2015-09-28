@@ -15,7 +15,7 @@ import SubscribeButton from '../SubscribeButton/SubscribeButton.jsx';
 import NavMenu from '../NavMenu/NavMenu.jsx';
 import MobileHeader from './MobileHeader.jsx';
 
-import ga from 'react-ga';
+import gaUtils from '../../utils/gaUtils.js';
 
 class Header extends React.Component {
 
@@ -113,11 +113,7 @@ class Header extends React.Component {
       windowVerticalDistance = this._getWindowVerticalScroll();
 
     if (windowVerticalDistance > headerHeight) {
-      ga.event({
-        category: 'NYPL Header',
-        action: 'scroll',
-        label: 'Sticky Header'
-      });
+      gaUtils._trackEvent.bind(this, 'scroll', 'Sticky Header');
     }
 
     return (windowVerticalDistance > headerHeight)

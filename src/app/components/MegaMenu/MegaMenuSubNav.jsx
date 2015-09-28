@@ -1,9 +1,9 @@
 import React from 'react';
 import _ from 'underscore';
-import ga from 'react-ga';
 
 import config from '../../../../appConfig.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
+import gaUtils from '../../utils/gaUtils.js';
 
 class MegaMenuSubNav extends React.Component {
 
@@ -26,7 +26,7 @@ class MegaMenuSubNav extends React.Component {
         
         return (
           <li key={i}>
-            <a href={target} onClick={this._trackEvent.bind(this, m.name[this.props.lang]['text'])}>
+            <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Click', `Megamenu Subnav - ${m.name[this.props.lang]['text']}`)}>
               {m.name[this.props.lang]['text']}
             </a>
           </li>
@@ -47,20 +47,6 @@ class MegaMenuSubNav extends React.Component {
         {socialMediaWidget}
       </div>
     );
-  }
-
-  /**
-   * _trackEvent(gaLabel)
-   * Track a GA click event.
-   *
-   * @param {gaLabel} String Label for GA event.
-   */
-  _trackEvent(gaLabel) {
-    ga.event({
-      category: 'NYPL Header',
-      action: 'Click',
-      label: `MegaMenu SubNav - ${gaLabel}`
-    });
   }
 }
 
