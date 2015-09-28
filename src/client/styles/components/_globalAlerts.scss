@@ -27,6 +27,7 @@
 		font-size: 22px;
 		right: 17px;
 		top: 15px;
+		color: #908034;
 
 		@include desktop {
 			top: -15px;
@@ -52,6 +53,10 @@
 
 			a {
 				text-decoration: underline;
+			}
+
+			strong {
+				@include Kievit-Bold;
 			}
 
 			* {

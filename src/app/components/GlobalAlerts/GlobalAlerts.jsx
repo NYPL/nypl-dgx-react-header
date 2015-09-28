@@ -27,9 +27,9 @@ class GlobalAlerts extends React.Component{
   }
 
   render () {
-    let currentGlobalAlerts = this.state.globalAlerts,
+    let currentGlobalAlerts = this._filterCurrentClosingAlerts(this.state.globalAlerts),
       classes = cx({
-        'animated fadeOutUp': this.state.animateAlertsBox,
+        'animatedFast fadeOutUp': this.state.animateAlertsBox,
         'hide': this.state.hideAlertsBox
       });
 
@@ -48,14 +48,25 @@ class GlobalAlerts extends React.Component{
     ) : null;
   }
 
+  /**
+   * _closeAlertsBox() 
+   * updates both state properties
+   * (animateAlertsBox & hideAlertsBox)
+   * with a setTimeout to allow css transition.
+   */
   _closeAlertsBox() {
     this.setState({animateAlertsBox: true});
 
     setTimeout(() => {
       this.setState({hideAlertsBox: true});
-    }, 500);
+    }, 400);
   }
 
+  /**
+   * _fetchGlobalAlerts()
+   * using axios, fetch the alerts data
+   * and assign to state globalAlerts property.
+   */
   _fetchGlobalAlerts() {
     let self = this;
 
@@ -74,9 +85,17 @@ class GlobalAlerts extends React.Component{
       });
   }
 
-
-  _filterCurrentClosingAlerts(obj) {
-    if (!obj) {
+  /**
+   * _filterCurrentClosingAlerts(data)
+   * Returns a filtered array with current
+   * closing alerts. If no data is passed,
+   * an empty array will be returned.
+   *
+   * @param {Array} data
+   * @return {Array} Alerts
+   */
+  _filterCurrentClosingAlerts(data) {
+    if (!data) {
       return [];
     }
 
@@ -84,7 +103,7 @@ class GlobalAlerts extends React.Component{
       sDate,
       eDate;
 
-    return _.filter(obj, (elem) => {
+    return _.filter(data, (elem) => {
       if (elem.attributes) {
         if (elem.attributes['display-date-start'] && elem.attributes['display-date-end']) {
           sDate = moment(elem.attributes['display-date-start']);
