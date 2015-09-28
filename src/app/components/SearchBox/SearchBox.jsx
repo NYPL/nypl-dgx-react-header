@@ -37,8 +37,10 @@ class SearchBox extends React.Component {
     let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
       HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'}),
       // Classes for keywords input fields to activate pulse animation
-      pulseAnimation = cx({'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
-       'keywords-pulse': this.state.placeholderAnimation === 'sequential'});
+      pulseAnimation = cx({
+        'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
+        'keywords-pulse': this.state.placeholderAnimation === 'sequential'
+      });
 
     return (
       <div id={this.props.id} className={`${this.props.className}${classes}`} onKeyPress={this._triggerSubmit}>
@@ -198,6 +200,8 @@ class SearchBox extends React.Component {
       window.location.assign(requestUrl);
     }
   }
+
+
 
   /**
    * _triggerSubmit(event)

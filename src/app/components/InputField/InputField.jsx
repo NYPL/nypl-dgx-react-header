@@ -18,7 +18,6 @@ class InputField extends React.Component {
       value={this.props.value}
       maxLength={this.props.maxLength}
       checked={this.props.checked}
-      maxLength='128'
       placeholder={this.props.placeholder}
       className={this.props.className}
       onClick={this.props.onClick}
