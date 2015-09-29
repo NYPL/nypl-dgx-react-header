@@ -5,6 +5,7 @@ let config = {
 	webpackDevServerPort: 3000,
 	favIconPath: 'http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/images/favicon.ico',
 	apiUrl: 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/site-data/header-items?filter%5Brelationships%5D%5Bparent%5D=null&include=children,related-mega-menu-panes.current-mega-menu-items.images',
+	alertsApiUrl: 'https://refinery.nypl.org/api/nypl/ndo/v0.1/content/alerts?filter%5Bscope%5D=all',
 	socialMediaLinks: {
 		facebook: 'https://www.facebook.com/nypl',
 		twitter: 'https://twitter.com/nypl',
