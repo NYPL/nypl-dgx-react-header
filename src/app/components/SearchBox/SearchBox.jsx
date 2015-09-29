@@ -182,7 +182,6 @@ class SearchBox extends React.Component {
    * @param {Event} event
    */
   _triggerSubmit(event) {
-    console.log('>>>>> works');
     if (event && event.charCode === 13) {
       this._submitSearchRequest(null);
     }
