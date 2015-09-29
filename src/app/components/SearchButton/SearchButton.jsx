@@ -39,37 +39,53 @@ class SearchButton extends React.Component {
         <BasicButton id={`${this.props.className}-SearchButton`}
         className={`${icon} ${this.props.className}-SearchButton${classes}`}
         name='Search Button'
-        label='' />
+        label=''
+        onClick={this._toggle.bind(this)} />
         <SearchBox id={`${this.props.className}-SearchBox`}
         className={`${this.props.className}-SearchBox`} />
       </div>
     );
   }
 
-  // Set the function to active searchbox when the button is hovered
+  /**
+   * _activate()
+   * Make search button is able to be triggered by hovering in, but only when it hasn't been
+   * triggered by click method yet.
+   *
+   * @param no param
+   */
   _activate() {
-    // And activated by hover only when the button has not been activated yet
     if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
       Actions.setMobileMenuButtonValue('hoverSearch');
     }
   }
 
-  // Deactivated the button
+  /**
+   * _deactivate()
+   * This function will close search box when the user hovers out
+   * from search button and search box.
+   * 
+   * @param no param
+   */
   _deactivate() {
-    // _deactive function only works when it is on desktop version
-    if (HeaderStore._getMobileMenuBtnValue() === 'hoverSearch' ||
-      HeaderStore._getMobileMenuBtnValue() === 'clickSearch') {
+    if (HeaderStore._getMobileMenuBtnValue() === 'hoverSearch') {
       Actions.setMobileMenuButtonValue('');
     }
   }
 
-  // The toggle for the interaction of clicking on the button
+  /**
+   * _toggle()
+   * If search button is triggered by clicking, the only way to close its
+   * is to click it again no matter on mobile or desktop version.
+   *
+   * @param no param
+   */
   _toggle() {
-    // Only activated when the button has not been activated yet
-    if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
-      Actions.setMobileMenuButtonValue('clickSearch');
-    } else {
+    // Only activated when the button was triggered by clicking
+    if (HeaderStore._getMobileMenuBtnValue() === 'clickSearch') {
       Actions.setMobileMenuButtonValue('');
+    } else if (HeaderStore._getMobileMenuBtnValue() === '') {
+      Actions.setMobileMenuButtonValue('clickSearch');
     }
   }
 }
