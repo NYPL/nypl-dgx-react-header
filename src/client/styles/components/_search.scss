@@ -195,32 +195,40 @@
 }
 
 &-SearchBox-Input-Keywords {
-  &.input-text {
-    background-color: #FFFFFF;
+  background-color: #FFFFFF;
+  border: none;
+  box-sizing: content-box;
+  color: #000000;
+  display: inline-block;
+  font-family: Kievit-Book;
+  font-size: 18px;
+  font-style: italic;
+  height: 60px;
+  padding: 0 0 0 35px;
+  width: 100%;
+  @include desktop {
+    background-color: #1DA1D4;
+    color: #FFFFFF;
+    font-family: Kievit-Light;
+    font-size: 66px;
+    font-style: normal;
+    letter-spacing: -0.8px;
+    padding: 0 0 16px 0;
+    width: 100%;
+  }
+}
+
+&-SearchBox-Input-Keywords-Border {
+  border: none;
+  box-sizing: content-box;
+  display: inline-block;
+  @include calculation(width, '100% - 35px');
+  @include desktop {
     border: none;
-    box-sizing: content-box;
-    color: #000000;
-    display: inline-block;
-    font-family: Kievit-Book;
-    font-size: 18px;
-    font-style: italic;
-    height: 60px;
-    padding: 0 0 0 35px;
-    @include calculation(width, '100% - 35px');
-    @include desktop {
-      background-color: #1DA1D4;
-      border: none;
-      border-bottom: solid;
-      border-bottom-width: 2px;
-      border-color: #FFFFFF;
-      color: #FFFFFF;
-      font-family: Kievit-Light;
-      font-size: 66px;
-      font-style: normal;
-      letter-spacing: -0.8px;
-      padding: 0 0 16px 0;
-      width: 100%;
-    }
+    border-bottom: solid;
+    border-bottom-width: 2px;
+    border-color: #FFFFFF;
+    width: 100%;
   }
 }
 
