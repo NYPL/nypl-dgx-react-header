@@ -243,17 +243,20 @@
   }
 }
 
+
+
 &-SearchBox-Input-Option {
   display: inline-block;
-  span {
-    margin: 0 50px 0 6px;
+  margin: 0 40px 0 0;
+  &:last-child {
+    margin: 0;
   }
 }
 
 &-SearchBox-Input-Options-label {
   cursor: pointer;
   display: inline-block;
-  margin: 0 40px 0 -10px;
+  margin: 0 0 0 -10px;
 }
 
 &-SearchBox-Elements-SubmitButton {
