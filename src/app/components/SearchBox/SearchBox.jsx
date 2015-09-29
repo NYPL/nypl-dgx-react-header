@@ -37,9 +37,9 @@ class SearchBox extends React.Component {
   render() {
     // Set active class if search button is hovered or clicked
     let classes = cx({
-      '--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
-      HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'
-    }),
+        '--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
+        HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'
+      }),
 
       // Classes for keywords input fields to activate pulse animation
       pulseAnimation = cx({
@@ -226,21 +226,21 @@ SearchBox.defaultProps = {
 
 // Radio button properties
 const inputOptionData = [
-  {
-    id: 'catalog',
-    name: 'inputOption',
-    value: 'catalog',
-    ref: 'optionCatalog',
-    labelText: 'Search the Catalog'
-  },
-  {
-    id: 'website',
-    name: 'inputOption',
-    value: 'website',
-    ref: 'optionWebsite',
-    labelText: 'Search NYPL.org'
-  }
-],
+    {
+      id: 'catalog',
+      name: 'inputOption',
+      value: 'catalog',
+      ref: 'optionCatalog',
+      labelText: 'Search the Catalog'
+    },
+    {
+      id: 'website',
+      name: 'inputOption',
+      value: 'website',
+      ref: 'optionWebsite',
+      labelText: 'Search NYPL.org'
+    }
+  ],
 
   // mobile submit button properties
   mobileSubmitButtonData = [
