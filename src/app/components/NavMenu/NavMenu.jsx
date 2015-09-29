@@ -21,7 +21,8 @@ class NavMenu extends React.Component {
 
   render () {
 
-    let navItems = this.props.items || appConfig.navTopLinks,
+    let navItems = (this.props.items && this.props.items.length) ? 
+        this.props.items : appConfig.navTopLinks,
       mobileActiveClass = cx({
         'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'
       }),
