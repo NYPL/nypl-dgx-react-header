@@ -21,19 +21,17 @@ class NavMenuItem extends React.Component {
   render() {
 
     let target = (this.props.target.indexOf('nypl.org') !== -1 || this.props.target === '#') ?
-      this.props.target : `${this.props.root}${this.props.target}`,
+        this.props.target : `${this.props.root}${this.props.target}`,
       megaMenu = (this.props.subNav && this.props.features) ?
-      <MegaMenu
-        label={this.props.label}
-        lang={this.props.lang}
-        items={this.props.subNav}
-        navId={this.props.navId}
-        features={this.props.features}
-        index={this.props.index}
-        currentActiveItem={this.state.activeItem} /> : null,
-      classes = cx({
-        'active': this.state.activeItem === this.props.index
-      });
+        <MegaMenu
+          label={this.props.label}
+          lang={this.props.lang}
+          items={this.props.subNav}
+          navId={this.props.navId}
+          features={this.props.features}
+          index={this.props.index}
+          currentActiveItem={this.state.activeItem} /> : null,
+      classes = cx({'active': this.state.activeItem === this.props.index});
 
     return (
       <li
