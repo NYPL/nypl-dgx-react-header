@@ -37,8 +37,8 @@ class SearchBox extends React.Component {
   render() {
     // Set active class if search button is hovered or clicked
     let classes = cx({
-      '--active': HeaderStore._getMobileMenuBtnValue() === 'hoverSearch' ||
-      HeaderStore._getMobileMenuBtnValue() === 'clickSearch'
+      '--active': HeaderStore._getMobileMenuBtnValue() === 'hoverSearch',
+      '--mobileActive': HeaderStore._getMobileMenuBtnValue() === 'clickSearch'
     }),
       // Classes for keywords input fields to activate pulse animation
       pulseAnimation = cx({
@@ -209,6 +209,7 @@ class SearchBox extends React.Component {
           this.setState({noAnimationBefore: false});
         }
       }, 100);
+
     // Decide which CSS animation is going to perform
     // by adding different classes to the element.
     // It is based on if it is the first time the validation to be triggered.

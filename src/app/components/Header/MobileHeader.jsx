@@ -64,8 +64,7 @@ class MobileHeader extends React.Component {
           <span
             style={[
               styles.searchIcon,
-              activeButton === 'clickSearch' || activeButton === 'hoverSearch'?
-              styles.activeSearchIcon : ''
+              activeButton === 'clickSearch' ? styles.activeSearchIcon : ''
             ]}
             className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
             ref='MobileSearchButton'>

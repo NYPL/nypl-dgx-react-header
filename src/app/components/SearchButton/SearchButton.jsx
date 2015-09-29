@@ -25,19 +25,16 @@ class SearchButton extends React.Component {
   // Dom Render Section
   render () {
     // Give active class if the button is activated
-    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
-      HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
-    // Change the icon based on the behavior either click or hover
-    let icon = cx({
-      'nypl-icon-solo-x': HeaderStore._getMobileMenuBtnValue() === 'clickSearch',
-      'nypl-icon-magnifier-fat': HeaderStore._getMobileMenuBtnValue() !== 'clickSearch'});
+    let classes = cx({
+          '--active': HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'
+      });
 
     return (
       <div className={`${this.props.className}-SearchBox-Wrapper`}
-      onMouseEnter={this._activate.bind(this)}
-      onMouseLeave={this._deactivate.bind(this)}>
+      onMouseEnter={this._hoverOpen.bind(this)}
+      onMouseLeave={this._hoverClose.bind(this)}>
         <BasicButton id={`${this.props.className}-SearchButton`}
-        className={`${icon} ${this.props.className}-SearchButton${classes}`}
+        className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton${classes}`}
         name='Search Button'
         label=''
         onClick={this._toggle.bind(this)} />
@@ -48,37 +45,33 @@ class SearchButton extends React.Component {
   }
 
   /**
-   * _activate()
+   * _hoverOpen()
    * Make search button is able to be triggered by hovering in, but only when it hasn't been
    * triggered by click method yet.
-   *
-   * @param no param
    */
-  _activate() {
-    if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
-      Actions.setMobileMenuButtonValue('hoverSearch');
+  _hoverOpen() {
+    if (HeaderStore._getMobileMenuBtnValue() !== 'hoverSearch') {
+      if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
+        Actions.setMobileMenuButtonValue('hoverSearch');
+        console.log('hoverSearch');
+      }
     }
   }
 
   /**
-   * _deactivate()
+   * _hoverClose()
    * This function will close search box when the user hovers out
    * from search button and search box.
-   * 
-   * @param no param
    */
-  _deactivate() {
-    if (HeaderStore._getMobileMenuBtnValue() === 'hoverSearch') {
-      Actions.setMobileMenuButtonValue('');
-    }
+  _hoverClose() {
+    Actions.setMobileMenuButtonValue('');
+    console.log('no search');
   }
 
   /**
    * _toggle()
    * If search button is triggered by clicking, the only way to close its
    * is to click it again no matter on mobile or desktop version.
-   *
-   * @param no param
    */
   _toggle() {
     // Only activated when the button was triggered by clicking
