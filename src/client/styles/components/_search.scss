@@ -128,8 +128,8 @@
 
   /* Customized radio button */
   input[type=radio] {
-    /* Hide original inputs */
-    display: none;
+    /* Hide original inputs, but still accessible for input related functions */
+    opacity: 0;
   }
 
   label:before {
@@ -253,7 +253,7 @@
 &-SearchBox-Input-Options-label {
   cursor: pointer;
   display: inline-block;
-  margin: 0 40px 0 0;
+  margin: 0 40px 0 -10px;
 }
 
 &-SearchBox-Elements-SubmitButton {

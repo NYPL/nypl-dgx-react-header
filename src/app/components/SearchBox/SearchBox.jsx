@@ -59,8 +59,7 @@ class SearchBox extends React.Component {
             checked={this.state.searchOption === element.value}
             onChange={this._inputChange.bind(this, 'option')} />
 
-            <label htmlFor={element.value} className={`${this.props.className}-Input-Options-label`}
-            onKeyPress={this._triggerSubmit}>
+            <label htmlFor={element.id} className={`${this.props.className}-Input-Options-label`}>
               {element.labelText}
             </label>
           </div>
@@ -242,26 +241,26 @@ const inputOptionData = [
     ref: 'optionWebsite',
     labelText: 'Search NYPL.org'
   }
-];
+],
 
-// mobile submit button properties
-const mobileSubmitButtonData = [
-  {
-    columnClass: 'left-column',
-    value: 'catalog',
-    text: 'catalog'
-  },
-  {
-    columnClass: 'right-column',
-    value: 'website',
-    text: 'nypl.org'
-  }
-];
+  // mobile submit button properties
+  mobileSubmitButtonData = [
+    {
+      columnClass: 'left-column',
+      value: 'catalog',
+      text: 'catalog'
+    },
+    {
+      columnClass: 'right-column',
+      value: 'website',
+      text: 'nypl.org'
+    }
+  ],
 
-const styles = {
-  base: {
-  }
-};
+  styles = {
+    base: {
+    }
+  };
 
 // Export the component
 module.exports = SearchBox;
