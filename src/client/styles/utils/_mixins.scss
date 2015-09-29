@@ -24,29 +24,6 @@
   border-radius: $radius;
 }
 
-/* Calculate REM FUNCTION
- * ----------------------
- * Usage: calculate-rem(12px);
- * Desc: Calculates REM size for RWD
- * Rem is similar to the em value, but instead 
- * of being relative to the parent element it’s
- * relative to the font-size set in the <html>.
-*/ 
-@function calculate-rem($size) {
-  $remSize: $size / 16px;
-  @return $remSize * 1rem;
-}
-
-/* FONT SIZE MIXIN
- * ---------------
- * Usage: @include font-size(16px);
- * Desc: Calculates REM size and PX size for RWD
-*/
-@mixin font-size($size) {
-  font-size: $size;
-  font-size: calculate-rem($size);
-}
-
 /* OPACITY MIXIN
  * ---------------
  * Usage: @include opacity(0.8);

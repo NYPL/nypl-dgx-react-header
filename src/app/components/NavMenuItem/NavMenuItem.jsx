@@ -19,30 +19,38 @@ class NavMenuItem extends React.Component {
   }
 
   render() {
-    let classes = cx('NavMenuItem-Link', {'active': this.state.activeItem === this.props.index});
-    let target = (this.props.target !== '#') 
-        ? `${this.props.root}${this.props.target}` : this.props.target;
+
+    let target = (this.props.target.indexOf('nypl.org') !== -1 || this.props.target === '#') ?
+      this.props.target : `${this.props.root}${this.props.target}`,
+      megaMenu = (this.props.subNav && this.props.features) ?
+      <MegaMenu
+        label={this.props.label}
+        lang={this.props.lang}
+        items={this.props.subNav}
+        navId={this.props.navId}
+        features={this.props.features}
+        index={this.props.index}
+        currentActiveItem={this.state.activeItem} /> : null,
+      classes = cx({
+        'active': this.state.activeItem === this.props.index
+      });
 
     return (
       <li
         onMouseEnter={this._activate} 
         onMouseLeave={this._deactivate}
-        className={(this.props.navId) ? 'NavMenuItem-' + this.props.navId : 'NavMenuItem'}>
+        id={(this.props.navId) ? `${this.props.className}-${this.props.navId}` : this.props.className}
+        className={this.props.className}>
         <span 
-          className={classes}
+          className={`NavMenuItem-Link ${classes}`}
           id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
           <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Click', `Nav Item: ${this.props.label['en'].text}`)}>
             {this.props.label[this.props.lang].text}
           </a>
+          {(this.props.subNav && this.props.features) ? 
+            <span className={`NavMenuItem-Arrow-${this.props.navId} ${classes}`}></span> : null}
         </span>
-        <MegaMenu
-          label={this.props.label}
-          lang={this.props.lang}
-          items={this.props.subNav}
-          navId={this.props.navId}
-          features={this.props.features}
-          index={this.props.index}
-          currentActiveItem={this.state.activeItem} />
+        {megaMenu}
       </li>
     );
   }
@@ -61,7 +69,8 @@ class NavMenuItem extends React.Component {
 NavMenuItem.defaultProps = {
   target: '#',
   root: '//nypl.org/',
-  lang: 'en'
+  lang: 'en',
+  className: 'NavMenuItem'
 };
 
 export default NavMenuItem;
