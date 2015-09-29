@@ -34,40 +34,31 @@ class SearchButton extends React.Component {
 
     return (
       <div className={`${this.props.className}-SearchBox-Wrapper`}
-      onMouseEnter={this._activate.bind(this, 'hover')}
+      onMouseEnter={this._activate.bind(this)}
       onMouseLeave={this._deactivate.bind(this)}>
         <BasicButton id={`${this.props.className}-SearchButton`}
         className={`${icon} ${this.props.className}-SearchButton${classes}`}
         name='Search Button'
-        label=''
-        onClick={this._activate.bind(this, 'click')} />
+        label='' />
         <SearchBox id={`${this.props.className}-SearchBox`}
         className={`${this.props.className}-SearchBox`} />
       </div>
     );
   }
 
-  // Set the function to active searchbox when the button is hovered or clicked
-  _activate(option) {
-    if (option === 'hover') {
-      // And activated by hover only when the button has not been activated yet
-      if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
-        Actions.setMobileMenuButtonValue('hoverSearch');
-      }
-      console.log(HeaderStore._getMobileMenuBtnValue());
-    } else {
-      // Click ignores the status of hover
-      if (HeaderStore._getMobileMenuBtnValue() !== 'hoverSearch') {
-        this._toggle();
-      }
-      console.log(HeaderStore._getMobileMenuBtnValue());
+  // Set the function to active searchbox when the button is hovered
+  _activate() {
+    // And activated by hover only when the button has not been activated yet
+    if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
+      Actions.setMobileMenuButtonValue('hoverSearch');
     }
   }
 
-  // Deactivated the button only when it was activated by hovering
+  // Deactivated the button
   _deactivate() {
     // _deactive function only works when it is on desktop version
-    if (HeaderStore._getMobileMenuBtnValue() === 'hoverSearch') {
+    if (HeaderStore._getMobileMenuBtnValue() === 'hoverSearch' ||
+      HeaderStore._getMobileMenuBtnValue() === 'clickSearch') {
       Actions.setMobileMenuButtonValue('');
     }
   }
