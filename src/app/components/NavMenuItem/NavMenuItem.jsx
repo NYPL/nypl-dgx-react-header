@@ -11,12 +11,13 @@ class NavMenuItem extends React.Component {
 
     this.state = {
       activeItem: null,
-      animateHover: false
+      animateHoverEnter: false,
+      animateHoverLeave: false
     };
 
     // Allows binding methods that reference this
-    this._activate = this._activate.bind(this);
-    this._deactivate = this._deactivate.bind(this);
+    this._activateHover = this._activateHover.bind(this);
+    this._deactivateHover = this._deactivateHover.bind(this);
   }
 
   render() {
@@ -31,18 +32,19 @@ class NavMenuItem extends React.Component {
           navId={this.props.navId}
           features={this.props.features}
           index={this.props.index}
-          animateHover={this.state.animateHover}
+          animateHoverEnter={this.state.animateHoverEnter}
+          animateHoverLeave={this.state.animateHoverLeave}
           currentActiveItem={this.state.activeItem} /> : null,
       arrowClasses = cx({
-        'active animateMenuHover fadeIn': this.state.activeItem === this.props.index,
-        'active animateMenuHover fadeOut': this.state.animateHover
+        'active animateMenuHover fadeIn': this.state.animateHoverEnter && this.state.activeItem === this.props.index,
+        'active animateMenuHover fadeOut': this.state.animateHoverLeave
       }),
       menuItemClasses = cx('NavMenuItem-Link', {'active': this.state.activeItem === this.props.index});
 
     return (
       <li
-        onMouseEnter={this._activate} 
-        onMouseLeave={this._deactivate}
+        onMouseEnter={this._activateHover} 
+        onMouseLeave={this._deactivateHover}
         id={(this.props.navId) ? `${this.props.className}-${this.props.navId}` : this.props.className}
         className={this.props.className}>
         <span 
@@ -60,18 +62,23 @@ class NavMenuItem extends React.Component {
   }
 
   // Set the current index as the state's active item
-  _activate() {
+  _activateHover() {
     this.setState({activeItem: this.props.index});
-  }
-
-  // Reset the state to null
-  _deactivate() {
-    this.setState({activeItem: null});
-    this.setState({animateHover: true});
 
     setTimeout(() => {
-      this.setState({animateHover: false});
+      this.setState({animateHoverEnter: true});
     }, 500);
+  }
+
+  // 
+  _deactivateHover() {
+    this.setState({activeItem: null});
+    this.setState({animateHoverEnter: false});
+    this.setState({animateHoverLeave: true});
+
+    setTimeout(() => {
+      this.setState({animateHoverLeave: false});
+    }, 250);
   }
 }
 
