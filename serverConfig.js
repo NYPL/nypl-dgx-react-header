@@ -84,6 +84,7 @@ app.get('/', (req, res) => {
     isProduction: isProduction,
     webpackPort: WEBPACK_DEV_PORT,
     filename: webpackConfig.output.filename,
+    appEnv: process.env.APP_ENV,
     apiUrl: res.locals.data.completeApiUrl
   });
 
