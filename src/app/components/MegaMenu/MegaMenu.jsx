@@ -12,7 +12,10 @@ class MegaMenu extends React.Component {
 
   render() {
     // Dynamic class assignment based on activeItem property matching current index.
-    let classes = cx('MegaMenu', {'active': this.props.index === this.props.currentActiveItem});
+    let classes = cx('MegaMenu', {
+      'active animateMenuHover fadeIn': this.props.index === this.props.currentActiveItem,
+      'active animateMenuHover fadeOut': this.props.animateHover
+    });
 
     return (
       <div id={(this.props.navId) ? 'MegaMenu-' + this.props.navId : 'MegaMenu'}

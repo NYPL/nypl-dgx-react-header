@@ -10,7 +10,8 @@ class NavMenuItem extends React.Component {
     super(props);
 
     this.state = {
-      activeItem: null
+      activeItem: null,
+      animateHover: false
     };
 
     // Allows binding methods that reference this
@@ -30,8 +31,13 @@ class NavMenuItem extends React.Component {
           navId={this.props.navId}
           features={this.props.features}
           index={this.props.index}
+          animateHover={this.state.animateHover}
           currentActiveItem={this.state.activeItem} /> : null,
-      classes = cx({'active': this.state.activeItem === this.props.index});
+      arrowClasses = cx({
+        'active animateMenuHover fadeIn': this.state.activeItem === this.props.index,
+        'active animateMenuHover fadeOut': this.state.animateHover
+      }),
+      menuItemClasses = cx('NavMenuItem-Link', {'active': this.state.activeItem === this.props.index});
 
     return (
       <li
@@ -40,13 +46,13 @@ class NavMenuItem extends React.Component {
         id={(this.props.navId) ? `${this.props.className}-${this.props.navId}` : this.props.className}
         className={this.props.className}>
         <span 
-          className={`NavMenuItem-Link ${classes}`}
+          className={menuItemClasses}
           id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
           <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Click', `Nav Item: ${this.props.label['en'].text}`)}>
             {this.props.label[this.props.lang].text}
           </a>
           {(this.props.subNav && this.props.features) ? 
-            <span className={`NavMenuItem-Arrow-${this.props.navId} ${classes}`}></span> : null}
+            <span className={`NavMenuItem-Arrow-${this.props.navId} ${arrowClasses}`}></span> : null}
         </span>
         {megaMenu}
       </li>
@@ -61,12 +67,17 @@ class NavMenuItem extends React.Component {
   // Reset the state to null
   _deactivate() {
     this.setState({activeItem: null});
+    this.setState({animateHover: true});
+
+    setTimeout(() => {
+      this.setState({animateHover: false});
+    }, 500);
   }
 }
 
 NavMenuItem.defaultProps = {
   target: '#',
-  root: '//nypl.org/',
+  root: '//www.nypl.org/',
   lang: 'en',
   className: 'NavMenuItem'
 };

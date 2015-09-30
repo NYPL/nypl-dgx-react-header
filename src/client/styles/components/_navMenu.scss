@@ -15,6 +15,9 @@
 		/* Controls the display of Mobile View */
 		&.mobileActive {
 			margin-top: -1px;
+			position: absolute;
+			width: 100%;
+			z-index: 3;
 
 			/* Displays NavMenu on Mobile with proper class on parent */
 			#NavMenu-List {
@@ -67,6 +70,14 @@
   		background-color: transparent;
   		padding: 0;
   		margin: 0;
+	  }
+
+	  .DonateButtonItem {
+	  	display: none;
+
+  		@include desktop {
+  			display: inline;
+  		}
 	  }
 
   	/* Top level Link Rules */
