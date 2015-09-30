@@ -1,30 +1,12 @@
 import React from 'react';
 import Radium from 'radium';
 import axios from 'axios';
+import cx from 'classnames';
+
+import config from '../../../../appConfig.js';
 import InputField from '../InputField/InputField.jsx';
-
-//import HeaderStore from '../../stores/HeaderStore';
-//import HeaderActions from '../../actions/HeaderActions';
-
-class SubscribeMessageBox extends React.Component {
-  // Constructor used in ES6
-  constructor(props) {
-    super(props);
-  }
-
-  render () {
-    return (
-      <div className={'EmailMessageBox ' + this.props.status + ' '}>
-        <div className={this.props.className + '-Eyebrow'}></div>
-        <p className={this.props.className + '-Title'}>{this.props.msg}</p>
-      </div>
-    );
-  }
-}
-
-SubscribeMessageBox.defaultProps = {
-  msg: 'Thank you for subscribing to our email updates.'
-};
+import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
+import SubscribeMessageBox from './SubscribeMessageBox.jsx';
 
 class EmailSubscription extends React.Component {
 
@@ -35,112 +17,135 @@ class EmailSubscription extends React.Component {
     // Holds the initial state, replaces getInitialState() method
     this.state = {
       formProcessing: false,
-      formStatus: ''
-      //formStatus: HeaderStore.getSubscribeFormStatus()
+      formStatus: '',
+      notValidEmail: false
     };
 
     this._validateForm = this._validateForm.bind(this);
   }
 
-  /*componentDidMount () {
-    HeaderStore.addChangeListener(this._onChange.bind(this));
-  }
-
-  componentWillUnmount () {
-    HeaderStore.removeChangeListener(this._onChange.bind(this));
-  }*/
-
   render () {
     let status = this.state.formStatus,
       isLoading = this.state.formProcessing,
-      contentBox;
+      notValidEmail = this.state.notValidEmail,
+      formClass = 'EmailSubscribeForm',
+      subscribeContent;
 
-    // console.log(this.state);
+    const errorClass =  cx({ 'active': notValidEmail, '': !notValidEmail });
 
     if (!isLoading) {
-      contentBox = (<div><SubscribeMessageBox status={status} msg="Get the Best of NYPL in your inbox" className={'EmailSubscribeForm'}/>
-        <form 
-        ref='EmailSubscribeForm'
-        id={this.props.id}
-        className={this.props.className}
-        action={this.props.target} 
-        method={this.props.form_method}
-        name={this.props.form_name}
-        onSubmit={this._validateForm}
-        style={[
-          styles.base,
-          this.props.style
-        ]}>
-          <div className='EmailSubscribeForm-fields'>
-            <InputField type='hidden' name='thx' value='http://pages.email.nypl.org/confirmation' />
-            <InputField type='hidden' name='err' value='http://pages.email.nypl.org/confirmation' />
-            <InputField type='hidden' name='SubAction' value='sub_add_update' />
-            <InputField type='hidden' name='MID' value='7000413' />
-            <InputField type='hidden' name='Email Type' value='HTML' />
-            <InputField type='hidden' name='lid' value='1061' />
-            
-            <InputField
-            className={this.props.className + '-Input'} 
-            type='email'
-            name='Email Address'
-            placeholder={this.props.placeholder}
-            style={styles.emailField}
-            ref='emailAddressField'
-            isRequired={true} />
-
-            <InputField
-            type='submit'
-            name='submit'
-            value='SIGN UP'
-            style={styles.submitButton} />
-
-            <InputField type='hidden' name='Source Code' value='Homepage' />
+      // The default view
+      subscribeContent = (
+        <div>
+          <div className={'SubscribeMessageBox ' + status}>
+            <div className={'SubscribeMessageBox-Eyebrow'}></div>
+            <div className={'SubscribeMessageBox-Title'}>
+              Get the <span className={'SubscribeMessageBox-Title-BestNYPL'}>best of NYPL</span> in your inbox
+            </div>
           </div>
-        </form></div>);
+
+          <form 
+            ref='EmailSubscribeForm'
+            id='EmailSubscribeForm'
+            className={formClass}
+            action={this.props.target} 
+            method={this.props.form_method}
+            name={this.props.form_name}
+            onSubmit={this._validateForm}
+            style={[
+              styles.base,
+              this.props.style
+            ]}>
+            <div className={`${formClass}-fields`}>
+              <InputField type='hidden' name='thx' value='http://pages.email.nypl.org/confirmation' />
+              <InputField type='hidden' name='err' value='http://pages.email.nypl.org/confirmation' />
+              <InputField type='hidden' name='SubAction' value='sub_add_update' />
+              <InputField type='hidden' name='MID' value='7000413' />
+              <InputField type='hidden' name='Email Type' value='HTML' />
+              <InputField type='hidden' name='lid' value='1061' />
+              
+              <InputField
+                className={`${formClass}-Input`} 
+                type='email'
+                name='Email Address'
+                placeholder={this.props.placeholder}
+                style={styles.emailField}
+                ref='emailAddressField'
+                isRequired={true} />
+
+              <div className={`${formClass}-Error error ` + errorClass}>
+                <span className='nypl-icon-solo-x icon'></span><span>Please enter a valid email address</span>
+              </div>
+
+              <div className={`${formClass}-Submit`}>
+                <span className='nypl-icon-check-solo icon'></span>
+                <InputField
+                  type='submit'
+                  name='submit'
+                  value='SIGN UP'
+                  style={styles.submitButton} />
+              </div>
+
+              <InputField type='hidden' name='Source Code' value='Homepage' />
+            </div>
+          </form>
+        </div>);
 
       if (status === 'success') {
-        console.log(status);
-        contentBox = (
+        subscribeContent = (
           <div>
-            <SubscribeMessageBox status={status} msg="Thank you for subscribing to our email updates." 
-              className={'EmailSubscribeForm'} />
-            <p>Follow us:</p>
-          </div>
-        );     
+            <SubscribeMessageBox status={status} msg="Thank you for subscribing to our email updates." />
+            <div className={`${this.props.className}-NewEmail`}>
+              <a href='' onClick={this._initForm.bind(this)}>Enter another email address</a>
+            </div>
+            <div className={`${this.props.className}-FollowUs`}>
+              <p>Follow us:</p>
+              <SocialMediaLinksWidget
+                className={`${this.props.className}-SocialMediaWidget`}
+                links={config.socialMediaLinks} 
+                displayOnly={['facebook', 'twitter']} />
+            </div>
+          </div>);
       }
 
       if (status === 'exists') {
-        contentBox = (
+        subscribeContent = (
           <div>
-            <SubscribeMessageBox status={status} msg="Looks like you're already signed up!"
-              className={'EmailSubscribeForm'}/>
-            <p><a href='' onClick={this._initForm.bind(this)}>Enter a different email address</a></p>
-          </div>
-        );
+            <SubscribeMessageBox status={status} msg="Looks like you're already signed up!" />
+            <div className={`${this.props.className}-NewEmail`}>
+              <a href='' onClick={this._initForm.bind(this)}>Enter a different email address</a>
+            </div>
+          </div>);
       }
 
-      if (status === 'error') {
-        contentBox = (
-          <div>
-            <SubscribeMessageBox status={status} msg="Hmm... Something isn't quite right.
-            Please try again." />
-          </div>
-        );     
+      if (status === 'error' || status === 'Internal Server Error') {
+        subscribeContent = (
+          <div className={`${this.props.className}-Misc-Error`}>
+            <div>Hmm...</div>
+            <div>Something isn&apos;t quite right.</div>
+            <div>Please try again.</div>
+            <a href='' onClick={this._initForm.bind(this)} style={styles.tryAgainButton}>
+              <span className='nypl-icon-arrow-left icon'></span>
+              TRY AGAIN
+            </a>
+          </div>);     
       }
 
+      // Always show the privacy link except in the loading phase.
       return (
-        <div>
-          {contentBox}
+        <div className={this.props.className}>
+          {subscribeContent}
           <a href={this.props.policyUrl}
-            className='EmailSubscribeForm-pp-link'
+            className={`${this.props.className}-pp-link`}
             style={styles.privacyLink}>
             Privacy Policy
           </a>
-        </div>
-      );
+        </div>);
     } else {
       return (
-        <div>Loading results...</div>
+        <div className={this.props.className}>
+          <SubscribeMessageBox status={status} msg="Loading..." />
+        </div>
       );
     }
   }
@@ -159,17 +164,22 @@ class EmailSubscription extends React.Component {
   }*/
 
   _validateForm (e) {
-    let userInput = React.findDOMNode(this.refs.emailAddressField);
-
     // Prevent re-direct, handle validation
     e.preventDefault();
 
+    let userInput = React.findDOMNode(this.refs.emailAddressField);
+
     if (!this._isValidEmail(userInput.value)) {
       userInput.value = '';
-      userInput.placeholder = 'Please enter a valid email address';
       userInput.focus();
-
+      this.setState({
+        notValidEmail: true
+      });
     } else {
+      this.setState({
+        notValidEmail: false
+      });
+
       // Send as a POST request
       this._addSubscriberToList(
         userInput.value,
@@ -196,28 +206,29 @@ class EmailSubscription extends React.Component {
       formProcessing: true
     });
 
-    axios.post(postUrl, {
-      email: email
-    })
-    .then((response) => {
-      this.setState({
-        formStatus: response.data.responseStatus,
-        formProcessing: false
+    axios
+      .post(postUrl, {
+        email: email
+      })
+      .then(response => {
+        this.setState({
+          formStatus: response.data.responseStatus,
+          formProcessing: false
+        });
+      })
+      .catch(response => {
+        this.setState({
+          formStatus: response.data.responseStatus || response.statusText,
+          formProcessing: false
+        });   
       });
-    })
-   .catch((response) => {
-      this.setState({
-        formStatus: response.data.responseStatus,
-        formProcessing: false
-      });   
-    });
   }
 };
 
 /* Default Component Properties */
 EmailSubscription.defaultProps = {
-  id: 'EmailSubscribeForm',
-  className: 'EmailSubscribeForm',
+  id: 'EmailSubscription',
+  className: 'EmailSubscription',
   lang: 'en',
   target: 'http://cl.exct.net/subscribe.aspx',
   form_name: 'subscribeForm',
@@ -241,24 +252,36 @@ const styles = {
   },
   emailField: {},
   submitButton: {
-    display: 'table-cell',
-    marginTop: '40px',
+    marginTop: '50px',
     border: '2px solid #fff',
     color: 'white',
     height: '38px',
-    paddingLeft: '10px',
+    paddingLeft: '15px',
     width: '100px',
     borderRadius: '20px',
     fontSize: '12px',
-    backgroundColor: '#1DA1D4'
+    backgroundColor: '#1DA1D4',
+    fontFamily: 'Kievit-Book'
+  },
+  tryAgainButton: {
+    display: 'inline-block',
+    border: '2px solid #fff',
+    color: 'white',
+    padding: '5px 15px 5px 5px',
+    width: '90px',
+    borderRadius: '20px',
+    fontSize: '12px',
+    backgroundColor: '#1DA1D4',
+    fontFamily: 'Kievit-Book',
+    marginTop: '25px'
   },
   privacyLink: {
     textDecoration: 'underline',
-    fontSize: '10px',
-    color: '#BBB',
+    fontSize: '12px',
+    color: 'rgba(255, 255, 255, 0.5)',
     fontWeight: '200',
     position: 'absolute',
-    bottom: '21px',
+    bottom: '26px',
     right: '25px'
   }
 };

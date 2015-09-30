@@ -19,7 +19,6 @@
   </head>
   <body>
     <div><%- headerApp %></div>
-  </body>
 
   <script type="text/javascript">
     var apiUrl = "<%- apiUrl %>";
@@ -30,4 +29,5 @@
   <% } else { %>
     <script async type="text/javascript" src="http://localhost:<%= webpackPort %>/<%= filename %>"></script>
   <% } %>
+  </body>
 </html>

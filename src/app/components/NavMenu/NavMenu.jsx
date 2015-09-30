@@ -1,6 +1,7 @@
 import Radium from 'radium';
 import React from 'react';
 import cx from 'classnames';
+import appConfig from '../../../../appConfig.js';
 
 // Header Store
 import HeaderStore from '../../stores/Store.js';
@@ -19,12 +20,17 @@ class NavMenu extends React.Component {
   }
 
   render () {
-    let mobileActiveClass = cx({'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'}),
+
+    let navItems = (this.props.items && this.props.items.length) ? 
+        this.props.items : appConfig.navTopLinks,
+      mobileActiveClass = cx({
+        'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'
+      }),
       donateButton = HeaderStore._getIsStickyValue() ?
-        <li><DonateButton style={styles.donateButton} /></li> : null,
-      navMenu = this.props.items.map((item, index) => {
+        <li><DonateButton style={styles.donateButton} gaLabel={'Mobile Donate'}/></li> : null,
+      navMenu = navItems.map((item, index) => {
         return (
-          <NavMenuItem 
+          <NavMenuItem
             label={item.name}
             lang={this.props.lang}
             target={item.link.en.text}
@@ -40,7 +46,7 @@ class NavMenu extends React.Component {
       <nav className={this.props.className}>
         <div className={`${this.props.className}-Wrapper ${mobileActiveClass}`}>
           <span className='MobileLogoText nypl-icon-logo-type'></span>
-          <ul className='NavMenu-List'>
+          <ul className={`${this.props.className}-List`} id='NavMenu-List'>
             {navMenu}
             {donateButton}
           </ul>

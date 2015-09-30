@@ -7,6 +7,7 @@ import ReactTappable from 'react-tappable';
 import HeaderStore from '../../stores/Store.js';
 import Actions from '../../actions/Actions.js';
 
+import gaUtils from '../../utils/gaUtils.js';
 
 class MobileHeader extends React.Component {
 
@@ -97,6 +98,7 @@ class MobileHeader extends React.Component {
   _toggleMobileMenu(activeButton) {
     if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
       Actions.setMobileMenuButtonValue(activeButton);
+      gaUtils._trackEvent('Click', `Mobile ${activeButton}`);
     } else {
       Actions.setMobileMenuButtonValue('');
     }
@@ -129,7 +131,7 @@ MobileHeader.defaultProps = {
 const styles = {
   base: {
     position: 'relative',
-    height: '58px',
+    height: '59px',
     textAlign: 'right',
     borderBottom: '1px solid #979797'
   },
@@ -137,24 +139,24 @@ const styles = {
     position: 'absolute',
     left: 0,
     top: 0,
-    fontSize: '58px'
+    fontSize: '59px'
   },
   locatorIcon: {
-    fontSize: '30px',
+    fontSize: '31px',
     margin: 0,
     padding: '14px',
     display: 'inline-block',
     color: '#000'
   },
   searchIcon: {
-    fontSize: '30px',
+    fontSize: '31px',
     margin: 0,
     padding: '14px',
     display: 'inline-block',
     color: '#000'
   },
   menuIcon: {
-    fontSize: '30px',
+    fontSize: '31px',
     margin: 0,
     padding: '14px',
     display: 'inline-block',
