@@ -43,7 +43,8 @@ router
 
         res.locals.data = {
           Store: {
-            headerData: modelData
+            headerData: modelData,
+            subscribeFormVisible: false
           }
         };
         next();

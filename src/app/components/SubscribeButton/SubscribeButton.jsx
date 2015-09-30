@@ -4,8 +4,11 @@ import cx from 'classnames';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 import EmailSubscription from '../EmailSubscription/EmailSubscription.jsx';
 
-import HeaderStore from '../../stores/HeaderStore';
-import HeaderActions from '../../actions/HeaderActions';
+// import HeaderStore from '../../stores/HeaderStore';
+// import HeaderActions from '../../actions/HeaderActions';
+
+import Store from '../../stores/Store.js';
+import Actions from '../../actions/Actions.js';
 
 class SubscribeButton extends React.Component {
 
@@ -15,7 +18,7 @@ class SubscribeButton extends React.Component {
 
     // Holds the initial state, replaces getInitialState() method
     this.state = {
-      subscribeFormVisible: HeaderStore.getSubscribeFormVisible()
+      subscribeFormVisible: Store._getSubscribeFormVisible()
     };
 
     // Allows binding methods that reference this
@@ -23,11 +26,11 @@ class SubscribeButton extends React.Component {
   }
 
   componentDidMount () {
-    HeaderStore.addChangeListener(this._onChange.bind(this));
+    Store.listen(this._onChange.bind(this));
   }
 
   componentWillUnmount () {
-    HeaderStore.removeChangeListener(this._onChange.bind(this));
+    Store.unListen(this._onChange.bind(this));
   }
 
   render () {
@@ -88,14 +91,14 @@ class SubscribeButton extends React.Component {
     if(this.props.target === '') {
       event.preventDefault();
 
-      HeaderActions.toggleSubscribeFormVisible();
+      Actions.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
     }
   }
 
   // Updates the state of the form based off the Header Store.
   // The central point of access to the value is in the Store.
   _onChange () {
-    this.setState({subscribeFormVisible: HeaderStore.getSubscribeFormVisible()});
+    this.setState({subscribeFormVisible: Store._getSubscribeFormVisible()});
   }
 }
 
