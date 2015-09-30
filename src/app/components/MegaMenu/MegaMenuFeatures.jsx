@@ -20,13 +20,13 @@ class MegaMenuFeatures extends React.Component {
       currentFeatureItem = <DonateWidget 
         navId={this.props.navId} 
         featuredItem={widgetFeature} 
-        donationLinks={config.donationLinks} />;
+        donationLinks={config.donationLinks} navLabel={this.props.navLabel} />;
     } else if (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') {
-      currentFeatureItem = <FindUsWidget navId={this.props.navId} featuredItem={widgetFeature} />;
+      currentFeatureItem = <FindUsWidget navId={this.props.navId} featuredItem={widgetFeature} navLabel={this.props.navLabel} />;
     } else {
       currentFeatureItem = this.props.features.map((item, i) => {
         return (
-          <MegaMenuFeatureItem key={i} feature={item.featuredItem} />
+          <MegaMenuFeatureItem key={i} feature={item.featuredItem} navLabel={this.props.navLabel} />
         );
       });
     }

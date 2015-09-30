@@ -25,18 +25,24 @@ class MegaMenuFeatureItem extends React.Component {
         'without-image': !feature || !feature.images
       }),
       contentObj = ContentModel.featureItem(feature, this.props.lang),
-      featuredItem = <DefaultItem feature={contentObj} className={this.props.className} classes={classes} />;
+      featuredItem = <DefaultItem feature={contentObj}
+        className={this.props.className}
+        classes={classes}
+        navLabel={this.props.navLabel} />;
 
     if (contentObj.content && contentObj.content.type) {
       switch (contentObj.content.type) {
         case 'blog':
-          featuredItem = <BlogItem feature={contentObj} className={this.props.className} classes={classes} />;
+          featuredItem = <BlogItem feature={contentObj}
+            className={this.props.className} classes={classes} navLabel={this.props.navLabel} />;
           break;
         case 'event-program':
-          featuredItem = <EventProgramItem feature={contentObj} className={this.props.className} classes={classes} />;
+          featuredItem = <EventProgramItem feature={contentObj}
+            className={this.props.className} classes={classes} navLabel={this.props.navLabel} />;
           break;
         case 'event-exhibition':
-          featuredItem = <ExhibitionItem feature={contentObj} className={this.props.className} classes={classes} />;
+          featuredItem = <ExhibitionItem feature={contentObj}
+            className={this.props.className} classes={classes} navLabel={this.props.navLabel} />;
           break;
         default:
           break;

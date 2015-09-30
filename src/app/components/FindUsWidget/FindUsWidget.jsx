@@ -15,7 +15,7 @@ class FindUsWidget extends React.Component {
     return (
       <div className={this.props.className}>
         <FindUsFeature className={this.props.className + '-FindUsFeature'} />
-        <MegaMenuFeatureItem feature={feature} />
+        <MegaMenuFeatureItem feature={feature} navLabel={this.props.navLabel} />
       </div>
     );
   }

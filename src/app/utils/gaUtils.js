@@ -10,7 +10,7 @@ function gaUtils() {
    */
   this._trackEvent = function _trackEvent(action, label) {
     ga.event({
-      category: 'NYPL Header',
+      category: 'Global Header',
       action: action,
       label: label
     });

@@ -7,6 +7,8 @@ import EmailSubscription from '../EmailSubscription/EmailSubscription.jsx';
 import HeaderStore from '../../stores/HeaderStore';
 import HeaderActions from '../../actions/HeaderActions';
 
+import gaUtils from '../../utils/gaUtils.js';
+
 class SubscribeButton extends React.Component {
 
   // Constructor used in ES6
@@ -87,6 +89,9 @@ class SubscribeButton extends React.Component {
   _handleClick (event) {
     if(this.props.target === '') {
       event.preventDefault();
+
+      let visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
+      gaUtils._trackEvent('Click', `Subscribe - ${visibleState}`);
 
       HeaderActions.toggleSubscribeFormVisible();
     }
