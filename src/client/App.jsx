@@ -25,7 +25,8 @@ if (typeof window !== 'undefined') {
 	  if (!isRenderedByServer) {
 	  	// Wrap in closure
 	  	(function (global, doc) {
-		  	let styleTag, allScriptTags, scriptTag, htmlElement, nyplHeaderObject, i;
+		  	let refineryServer = window.appEnv != 'production' ? `${window.appEnv}-` : '',
+		  		styleTag, allScriptTags, scriptTag, htmlElement, nyplHeaderObject, i;
 
 	  		// create element to hold the single header instance.
 	  		htmlElement = doc.createElement('div');
@@ -80,7 +81,7 @@ if (typeof window !== 'undefined') {
 				  	styleTag = document.createElement('link');
 				  	styleTag.rel = 'stylesheet';
 				    styleTag.type = 'text/css';
-				    styleTag.href = '//qa-header.nypl.org/styles.css';
+				    styleTag.href = `//${refineryServer}header.nypl.org/styles.css`;
 				    styleTag.media = "all";
 
 		  			doc.getElementsByTagName('head')[0].appendChild(styleTag);
