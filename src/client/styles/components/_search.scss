@@ -10,7 +10,9 @@
 /* CSS for Search button */
 
 &-SearchButton {
+  -moz-appearance: none;
   -webkit-appearance: none;
+  appearance: none;
   background-color: transparent;
   color: $BG_MENU_SEARCH;
   border-width: 0px;
@@ -34,7 +36,10 @@
 }
 
 &-SearchButton--active {
+  -moz-appearance: none;
   -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
   background-color: $BG_MENU_SEARCH;
   color: #78CCED;
   border-width: 0px;
@@ -123,28 +128,29 @@
 
   /* Customized radio button */
   input[type=radio] {
-    /* Hide original inputs */
-    display: inline-block;
+    /* Hide original inputs, but still accessible for input related functions */
+    opacity: 0;
   }
 
   label:before {
     background-color: #FFFFFF;
     border-radius: 50%;
     content: '';
-    display: none;
+    display: inline-block;
     height: 10px;
     left: 0;
-    margin-right: 2px;
+    margin-right: 10px;
     position: relative;
     width: 10px;
+    top: 1px;
+    text-align: center;
   }
 
   input[type=radio]:checked + label:before {
     content: '\2022';
     color: #000000;
-    display: none;
-    font-size: 20px;
-    line-height: 13px;
+    font-size: 18px;
+    line-height: 11px;
   }
 }
 
@@ -190,32 +196,40 @@
 }
 
 &-SearchBox-Input-Keywords {
-  &.input-text {
-    background-color: #FFFFFF;
+  background-color: #FFFFFF;
+  border: none;
+  box-sizing: content-box;
+  color: #000000;
+  display: inline-block;
+  font-family: Kievit-Book;
+  font-size: 18px;
+  font-style: italic;
+  height: 60px;
+  padding: 0 0 0 35px;
+  width: 100%;
+  @include desktop {
+    background-color: #1DA1D4;
+    color: #FFFFFF;
+    font-family: Kievit-Light;
+    font-size: 66px;
+    font-style: normal;
+    letter-spacing: -0.8px;
+    padding: 0 0 16px 0;
+    width: 100%;
+  }
+}
+
+&-SearchBox-Input-Keywords-Border {
+  border: none;
+  box-sizing: content-box;
+  display: inline-block;
+  @include calculation(width, '100% - 35px');
+  @include desktop {
     border: none;
-    box-sizing: content-box;
-    color: #000000;
-    display: inline-block;
-    font-family: Kievit-Book;
-    font-size: 18px;
-    font-style: italic;
-    height: 60px;
-    padding: 0 0 0 35px;
-    @include calculation(width, '100% - 35px');
-    @include desktop {
-      background-color: #1DA1D4;
-      border: none;
-      border-bottom: solid;
-      border-bottom-width: 2px;
-      border-color: #FFFFFF;
-      color: #FFFFFF;
-      font-family: Kievit-Light;
-      font-size: 66px;
-      font-style: normal;
-      letter-spacing: -0.8px;
-      padding: 0 0 16px 0;
-      width: 100%;
-    }
+    border-bottom: solid;
+    border-bottom-width: 2px;
+    border-color: #FFFFFF;
+    width: 100%;
   }
 }
 
@@ -229,17 +243,20 @@
   }
 }
 
-&-SearchBox-Input-Options {
+
+
+&-SearchBox-Input-Option {
   display: inline-block;
-  span {
-    margin: 0 50px 0 6px;
+  margin: 0 40px 0 0;
+  &:last-child {
+    margin: 0;
   }
 }
 
 &-SearchBox-Input-Options-label {
   cursor: pointer;
   display: inline-block;
-  margin: 0 40px 0 10px;
+  margin: 0 0 0 -10px;
 }
 
 &-SearchBox-Elements-SubmitButton {
@@ -252,13 +269,18 @@
     border-width: 2px;
   }
   @include desktop {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border-width: 0px;
     color: #FFFFFF;
     cursor: pointer;
     display: inline-block;
     float: right;
+    height: 72px;
+    padding: 0;
     position: relative;
-    right: 10px;
-    top: 23px;
   }
 }
 
@@ -294,6 +316,6 @@
     color: #78CCED;
     font-size: 30px;
     position: absolute;
-    top: 93px;
+    top: 90px;
   }
 }
