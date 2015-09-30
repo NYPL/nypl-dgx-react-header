@@ -2,7 +2,7 @@ import alt from '../alt.js';
 import axios from 'axios';
 
 let env = process.env.APP_ENV,
-  refineryServer = env != 'production' ? `${env}-` : '',
+  refineryServer = env != 'production' ? `${env}-` : '';
 
 class Actions {
   // TODO: Clean this method with new API methods
