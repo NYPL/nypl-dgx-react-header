@@ -10,9 +10,7 @@ class NavMenuItem extends React.Component {
     super(props);
 
     this.state = {
-      activeItem: null,
-      animateHoverEnter: false,
-      animateHoverLeave: false
+      activeItem: null
     };
 
     // Allows binding methods that reference this
@@ -32,22 +30,19 @@ class NavMenuItem extends React.Component {
           navId={this.props.navId}
           features={this.props.features}
           index={this.props.index}
-          animateHoverEnter={this.state.animateHoverEnter}
-          animateHoverLeave={this.state.animateHoverLeave}
           currentActiveItem={this.state.activeItem} /> : null,
       arrowClasses = cx({
-        'active animateMenuHover fadeIn': this.state.animateHoverEnter && this.state.activeItem === this.props.index,
-        'active animateMenuHover fadeOut': this.state.animateHoverLeave
+        'active animateMenuHoverEnter fadeIn': this.state.activeItem === this.props.index
       }),
       menuItemClasses = cx('NavMenuItem-Link', {'active': this.state.activeItem === this.props.index});
 
     return (
       <li
-        onMouseEnter={this._activateHover} 
-        onMouseLeave={this._deactivateHover}
         id={(this.props.navId) ? `${this.props.className}-${this.props.navId}` : this.props.className}
         className={this.props.className}>
-        <span 
+        <span
+          onMouseEnter={this._activateHover} 
+          onMouseLeave={this._deactivateHover}
           className={menuItemClasses}
           id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
           <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Click', `Nav Item: ${this.props.label['en'].text}`)}>
@@ -64,21 +59,11 @@ class NavMenuItem extends React.Component {
   // Set the current index as the state's active item
   _activateHover() {
     this.setState({activeItem: this.props.index});
-
-    setTimeout(() => {
-      this.setState({animateHoverEnter: true});
-    }, 500);
   }
 
   // 
   _deactivateHover() {
     this.setState({activeItem: null});
-    this.setState({animateHoverEnter: false});
-    this.setState({animateHoverLeave: true});
-
-    setTimeout(() => {
-      this.setState({animateHoverLeave: false});
-    }, 250);
   }
 }
 

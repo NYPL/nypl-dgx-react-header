@@ -82,20 +82,29 @@
 
   	/* Top level Link Rules */
   	.NavMenuItem {
-  		padding: 5px 0;
+  		padding: 8px 0;
   		margin: 3.5px 15px 0px 0;
+  		display: block;
 
   		@include desktop {
-  			padding: 0;
-  			margin: 0;
   			display: inline;
+  			padding: 0;
+  			margin: 0 6px 0 0;
+
+  			&:last-child {
+  				margin-right: 0px;
+  			}
   		}
 
 			&-Link {
 	  		position: relative;
 	  		display: inline-block;
-	  		padding: 5px 8px 0;
+	  		padding: 0;
 	  		margin: 0;
+
+	  		&:hover {
+	  			cursor: pointer;
+	  		}
 
 	  		& > a {
 	  			display: block;
@@ -106,6 +115,7 @@
 	  			@include desktop {
 	  				color: #000;
 	  				font-size: 16px;
+	  				padding: 0px 7px;
 	  			}
 	  		}
 	  	}
@@ -180,6 +190,7 @@
 	  	&.active {
 	  		@include desktop {
 	  			display: block;
+	  			z-index: 3;
 	  		}
 	  	}
 
