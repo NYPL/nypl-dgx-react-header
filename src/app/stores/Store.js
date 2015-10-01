@@ -9,6 +9,7 @@ class Store {
       handleFetchHeaderData: Actions.FETCH_HEADER_DATA,
       handleHeaderDataFailedFetch: Actions.FAILED_HEADER_DATA,
       handleSetMobileMenuButtonValue: Actions.SET_MOBILE_MENU_BUTTON_VALUE,
+      handleSearchButtonActionValue: Actions.SEARCH_BUTTON_ACTION_VALUE,
       handleUpdateIsHeaderSticky: Actions.UPDATE_IS_HEADER_STICKY
     });
 
@@ -21,7 +22,8 @@ class Store {
       headerData: [],
       errorMessage: null,
       isSticky: false,
-      activeMobileButton: ''
+      activeMobileButton: '',
+      searchButtonAction:''
     };
   }
 
@@ -61,6 +63,10 @@ class Store {
 
   handleSetMobileMenuButtonValue(currentActiveMobileButton) {
     this.setState({activeMobileButton: currentActiveMobileButton});
+  }
+
+  handleSearchButtonActionValue(actionValue) {
+    this.setState({searchButtonAction: actionValue});
   }
 
   handleUpdateIsHeaderSticky(value) {
