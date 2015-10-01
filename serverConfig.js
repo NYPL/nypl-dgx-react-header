@@ -70,7 +70,7 @@ app.get('/', (req, res) => {
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   iso = new Iso();
-  
+
   headerApp = React.renderToString(React.createElement(Header));
   iso.add(headerApp, alt.flush());
 

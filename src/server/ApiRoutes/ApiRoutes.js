@@ -5,8 +5,6 @@ import parser from 'jsonapi-parserinator';
 import Model from '../../app/utils/HeaderItemModel.js';
 import {refineryApi} from '../../../appConfig.js';
 
-
-
 let router = express.Router(),
   appEnvironment = process.env.APP_ENV || 'development',
   apiRoot = refineryApi.root[appEnvironment],
@@ -33,23 +31,22 @@ router
 
         res.locals.data = {
           Store: {
-<<<<<<< HEAD:ApiRoutes/ApiRoutes.js
-            headerData: modelData
+            headerData: modelData,
+            subscribeFormVisible: false
           },
           // Set the API URL here so we can access it when we
           // render in the EJS file.
           completeApiUrl
-=======
-            headerData: modelData,
-            subscribeFormVisible: false
-          }
->>>>>>> development:src/server/ApiRoutes/ApiRoutes.js
         };
         next();
       })
       .catch(error => {
         console.log('error calling API : ' + error);
         console.log('Attempted to call : ' + completeApiUrl);
+
+        res.locals.data = {
+          completeApiUrl
+        };
         next();
       }); /* end Axios call */
   });
