@@ -38,11 +38,11 @@ class NavMenuItem extends React.Component {
 
     return (
       <li
+        onMouseEnter={this._activateHover} 
+        onMouseLeave={this._deactivateHover}
         id={(this.props.navId) ? `${this.props.className}-${this.props.navId}` : this.props.className}
         className={this.props.className}>
         <span
-          onMouseEnter={this._activateHover} 
-          onMouseLeave={this._deactivateHover}
           className={menuItemClasses}
           id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
           <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Click', `Nav Item: ${this.props.label['en'].text}`)}>

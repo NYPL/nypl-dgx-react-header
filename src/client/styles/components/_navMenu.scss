@@ -106,6 +106,12 @@
 	  			cursor: pointer;
 	  		}
 
+	  		&.active {
+	  			& > a {
+	  				z-index: 3;
+	  			}
+	  		}
+
 	  		& > a {
 	  			display: block;
 	  			color: #FFF;
@@ -128,49 +134,49 @@
 		  		/* BROWSE */
 		  		&-29a4b824-e084-4771-aafc-52b3586c5e49 {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_BROWSE_RIGHT, 33%, 'bottom', -12px, 12px);
+			  			@include up-arrow($BG_MENU_BROWSE_RIGHT, 30%, 'bottom', -13px, 13px);
 			  		}
 		  		}
 
 		  		/* LEARN */
-		  		&-925d1fa9-1138-403c-9990-38861902b02d{
+		  		&-925d1fa9-1138-403c-9990-38861902b02d {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_LEARN_RIGHT, 33%, 'bottom', -12px, 12px);
+			  			@include up-arrow($BG_MENU_LEARN_RIGHT, 30%, 'bottom', -13px, 13px);
 			  		}
 		  		}
 
 		  		/* ATTEND */
 		  		&-851ed351-08f5-43f0-9011-9c317f85f0ca {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_ATTEND_RIGHT, 33%, 'bottom', -12px, 12px);
+			  			@include up-arrow($BG_MENU_ATTEND_RIGHT, 30%, 'bottom', -13px, 13px);
 			  		}
 		  		}
 
 		  		/* FIND US */
 		  		&-df621833-4dd1-4223-83e5-6ad7f98ad26a {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_FINDUS_RIGHT, 33%, 'bottom', -12px, 12px);
+			  			@include up-arrow($BG_MENU_FINDUS_RIGHT, 30%, 'bottom', -13px, 13px);
 			  		}
 		  		}
 
 		  		/* RESEARCH */
 		  		&-4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9 {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_RESEARCH_RIGHT, 33%, 'bottom', -12px, 12px);
+			  			@include up-arrow($BG_MENU_RESEARCH_RIGHT, 30%, 'bottom', -13px, 13px);
 			  		}
 		  		}
 
 		  		/* GIVE */
 		  		&-1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1 {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_GIVE_RIGHT, 33%, 'bottom', -12px, 12px);
+			  			@include up-arrow($BG_MENU_GIVE_RIGHT, 30%, 'bottom', -13px, 13px);
 			  		}
 		  		}
 
 			  	/* GET HELP */
 			  	&-13d95ad5-f117-4415-ba2c-5c0b9618984d {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_HELP_RIGHT, 33%, 'bottom', -12px, 12px);
+			  			@include up-arrow($BG_MENU_HELP_RIGHT, 30%, 'bottom', -13px, 13px);
 			  		}  		
 			  	}
 			  }
