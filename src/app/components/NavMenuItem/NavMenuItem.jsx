@@ -10,7 +10,8 @@ class NavMenuItem extends React.Component {
     super(props);
 
     this.state = {
-      activeItem: null
+      activeItem: null,
+      animateHover: false
     };
 
     // Allows binding methods that reference this
@@ -30,19 +31,20 @@ class NavMenuItem extends React.Component {
           navId={this.props.navId}
           features={this.props.features}
           index={this.props.index}
+          animateHover={this.state.animateHover}
           currentActiveItem={this.state.activeItem} /> : null,
       arrowClasses = cx({
-        'active animateMenuHoverEnter fadeIn': this.state.activeItem === this.props.index
+        'active animateMenuHoverEnter fadeIn': this.state.animateHover || this.state.activeItem === this.props.index
       }),
       menuItemClasses = cx('NavMenuItem-Link', {'active': this.state.activeItem === this.props.index});
 
     return (
       <li
-        onMouseEnter={this._activateHover} 
-        onMouseLeave={this._deactivateHover}
         id={(this.props.navId) ? `${this.props.className}-${this.props.navId}` : this.props.className}
         className={this.props.className}>
         <span
+          onMouseEnter={this._activateHover} 
+          onMouseLeave={this._deactivateHover}
           className={menuItemClasses}
           id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
           <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Click', `Nav Item: ${this.props.label['en'].text}`)}>
@@ -59,11 +61,19 @@ class NavMenuItem extends React.Component {
   // Set the current index as the state's active item
   _activateHover() {
     this.setState({activeItem: this.props.index});
+
+    this.setState({animateHover: true});
   }
 
   // 
   _deactivateHover() {
     this.setState({activeItem: null});
+
+    if (this.state.animateHover) {
+      setTimeout(() => {
+        this.setState({animateHover: false});
+      }, 700);
+    }
   }
 }
 
