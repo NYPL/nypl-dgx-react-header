@@ -4,11 +4,10 @@ import cx from 'classnames';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 import EmailSubscription from '../EmailSubscription/EmailSubscription.jsx';
 
-// import HeaderStore from '../../stores/HeaderStore';
-// import HeaderActions from '../../actions/HeaderActions';
-
 import Store from '../../stores/Store.js';
 import Actions from '../../actions/Actions.js';
+
+import gaUtils from '../../utils/gaUtils.js';
 
 class SubscribeButton extends React.Component {
 
@@ -92,6 +91,9 @@ class SubscribeButton extends React.Component {
       event.preventDefault();
 
       Actions.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
+
+      let visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
+      gaUtils._trackEvent('Click', `Subscribe - ${visibleState}`);
     }
   }
 
