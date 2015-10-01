@@ -1,7 +1,7 @@
 import alt from '../alt.js';
 import axios from 'axios';
 
-let env = process.env.APP_ENV,
+let env = process.env.APP_ENV ? process.env.APP_ENV : '',
   refineryServer = env != 'production' ? `${env}-` : '';
 
 class Actions {

@@ -25,7 +25,7 @@ if (typeof window !== 'undefined') {
 	  if (!isRenderedByServer) {
 	  	// Wrap in closure
 	  	(function (global, doc) {
-		  	let refineryServer = window.appEnv != 'production' ? `${window.appEnv}-` : '',
+		  	let refineryServer = (window.appEnv && window.appEnv != 'production') ? `${window.appEnv}-` : '',
 		  		styleTag, allScriptTags, scriptTag, htmlElement, nyplHeaderObject, i;
 
 	  		// create element to hold the single header instance.
