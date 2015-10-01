@@ -162,9 +162,6 @@ const styles = {
     textTransform: 'uppercase',
     display: 'block'
   },
-  ssoContainer: {
-    display: 'inline-block'
-  },
   libraryCardButton: {
     display: 'inline-block',
     color: '#000',

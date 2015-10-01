@@ -1,7 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
-import Model from '../src/app/utils/HeaderItemModel.js';
+import Model from '../../app/utils/HeaderItemModel.js';
 
 let router = express.Router();
 
@@ -43,7 +43,8 @@ router
 
         res.locals.data = {
           Store: {
-            headerData: modelData
+            headerData: modelData,
+            subscribeFormVisible: false
           }
         };
         next();
