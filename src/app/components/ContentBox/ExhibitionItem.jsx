@@ -1,6 +1,9 @@
 import React from 'react';
+
 import moment from 'moment';
+
 import utils from '../../utils/utils.js';
+import gaUtils from '../../utils/gaUtils.js';
 
 class ExhibitionItem extends React.Component {
   constructor(props) {
@@ -19,7 +22,8 @@ class ExhibitionItem extends React.Component {
       exhibitionDate = utils.formatDate(startDate, endDate);
 
     return (
-      <a href={feature.link} className={this.props.className}>
+      <a href={feature.link} className={this.props.className}
+        onClick={gaUtils._trackEvent.bind(this, 'FeatureItem', `${this.props.navLabel} - ${feature.headline}`)}>
         <div className={`${this.props.className}-Wrapper`}>
           {img}
           <div className={'FeatureItem-Content ' + classes}>

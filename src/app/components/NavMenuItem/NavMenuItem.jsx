@@ -42,7 +42,7 @@ class NavMenuItem extends React.Component {
         <span 
           className={`NavMenuItem-Link ${classes}`}
           id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
-          <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Click', `Nav Item: ${this.props.label['en'].text}`)}>
+          <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Go to...', `${this.props.label['en'].text}`)}>
             {this.props.label[this.props.lang].text}
           </a>
           {(this.props.subNav && this.props.features) ? 

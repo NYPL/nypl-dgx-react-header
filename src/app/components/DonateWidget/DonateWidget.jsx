@@ -49,7 +49,7 @@ class DonateWidget extends React.Component {
           donationLinks={this.props.donationLinks}
           desc={'We rely on your generosity to provide books, literacy classes, children\'s story hours, and much more FREE for all New Yorkers.'} />
         <MegaMenuFeatureItem
-          feature={featuredItem} />
+          feature={featuredItem} navLabel={this.props.navLabel} />
       </div>
     );
   }

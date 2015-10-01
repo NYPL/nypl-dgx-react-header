@@ -69,6 +69,8 @@ class Header extends React.Component {
                 label='Get a Library Card' 
                 target='//catalog.nypl.org/screens/selfregpick.html' 
                 className='LibraryCardButton'
+                gaAction='Get a Library Card'
+                gaLabel=''
                 style={styles.libraryCardButton} />
               <SubscribeButton 
                 label='Get Email Updates'
@@ -77,7 +79,7 @@ class Header extends React.Component {
               <DonateButton
                 lang={this.props.lang}
                 style={styles.donateButton}
-                gaLabel={'Desktop Donate'} />
+                gaLabel={'Header Button'} />
             </div>
           </div>
           <NavMenu 
