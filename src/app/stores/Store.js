@@ -65,6 +65,7 @@ class Store {
     this.setState({activeMobileButton: currentActiveMobileButton});
   }
 
+  // The set search button action value to Store
   handleSearchButtonActionValue(actionValue) {
     this.setState({searchButtonAction: actionValue});
   }

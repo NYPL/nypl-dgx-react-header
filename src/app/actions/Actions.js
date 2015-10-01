@@ -30,6 +30,10 @@ class Actions {
     this.dispatch(currentActiveMobileButton);
   }
 
+  SearchButtonActionValue(actionValue) {
+    this.dispatch(actionValue);
+  }
+
   updateIsHeaderSticky(value) {
     this.dispatch(value);
   }
