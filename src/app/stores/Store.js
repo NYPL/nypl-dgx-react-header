@@ -15,6 +15,7 @@ class Store {
 
     this.exportPublicMethods({
       _getMobileMenuBtnValue: this._getMobileMenuBtnValue,
+      _getSearchButtonActionValue: this._getSearchButtonActionValue,
       _getIsStickyValue: this._getIsStickyValue
     });
 
@@ -29,13 +30,23 @@ class Store {
 
   /*** PUBLIC METHODS ***/
   /**
-   * _getMobileMenuBtnValue() 
+   * _getMobileMenuBtnValue()
    * returns the current state.activeMobileButton
    * value.
    * @return {String}
    */
   _getMobileMenuBtnValue() {
     return this.state.activeMobileButton;
+  }
+
+  /**
+   * _getSearchButtonActionValue()
+   * returns the current state.getSearchButtonActionValue
+   * value.
+   * @return {String}
+   */
+  _getSearchButtonActionValue() {
+    return this.state.searchButtonAction;
   }
 
   /**

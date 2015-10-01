@@ -37,8 +37,8 @@ class SearchBox extends React.Component {
   render() {
     // Set active class if search button is hovered or clicked
     let classes = cx({
-      '--active': HeaderStore._getMobileMenuBtnValue() === 'hoverSearch',
-      '--mobileActive': HeaderStore._getMobileMenuBtnValue() === 'clickSearch'
+      '--active': HeaderStore._getSearchButtonActionValue() === 'hoverSearch',
+      '--mobileActive': HeaderStore._getSearchButtonActionValue() === 'clickSearch'
     }),
       // Classes for keywords input fields to activate pulse animation
       pulseAnimation = cx({

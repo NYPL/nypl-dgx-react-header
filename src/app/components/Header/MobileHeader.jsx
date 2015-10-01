@@ -15,7 +15,8 @@ class MobileHeader extends React.Component {
     super(props);
 
     this.state = {
-      activeMobileButton: HeaderStore.getState().activeMobileButton
+      activeMobileButton: HeaderStore.getState().activeMobileButton,
+      searchButtonAction: HeaderStore.getState().searchButtonAction
     };
 
     this._handleMenuBtnPress = this._handleMenuBtnPress.bind(this);
@@ -32,20 +33,25 @@ class MobileHeader extends React.Component {
 
   _onChange() {
     this.setState({activeMobileButton: HeaderStore.getState().activeMobileButton});
+    this.setState({searchButtonAction: HeaderStore.getState().searchButtonAction});
   }
 
   render () {
     let activeButton = this.state.activeMobileButton,
+      searchButtonAction = this.state.searchButtonAction,
 
       locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true',
       mobileSearchClass = cx({
-        'active nypl-icon-solo-x': activeButton === 'clickSearch',
-        'nypl-icon-magnifier-thin': activeButton !== 'clickSearch'
+        'active nypl-icon-solo-x': searchButtonAction === 'clickSearch',
+        'nypl-icon-magnifier-thin': searchButtonAction !== 'clickSearch'
       }),
       mobileMenuClass = cx({
         'active nypl-icon-solo-x': activeButton === 'mobileMenu', 
         'nypl-icon-burger-nav': activeButton !== 'mobileMenu'
       });
+
+      // console.log(HeaderStore.getState().searchButtonAction);
+      console.log(this.state.activeMobileButton);
 
     return (
       <div className={this.props.className} style={styles.base}>
@@ -64,7 +70,7 @@ class MobileHeader extends React.Component {
           <span
             style={[
               styles.searchIcon,
-              activeButton === 'clickSearch' ? styles.activeSearchIcon : ''
+              searchButtonAction === 'clickSearch' ? styles.activeSearchIcon : ''
             ]}
             className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
             ref='MobileSearchButton'>
@@ -98,8 +104,31 @@ class MobileHeader extends React.Component {
   _toggleMobileMenu(activeButton) {
     if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
       Actions.setMobileMenuButtonValue(activeButton);
+      Actions.searchButtonActionValue('');
       gaUtils._trackEvent('Click', `Mobile ${activeButton}`);
     } else {
+      Actions.setMobileMenuButtonValue('');
+      Actions.searchButtonActionValue('');
+    }
+  }
+
+  /**
+   * _toggleSearchMenu(actionValue)
+   * Verifies that the actionValue does not
+   * match the HeaderStore's current search action value
+   * and set's it as the param activeButton.
+   * If it matches, it clears the HeaderStore's
+   * current value.
+   *
+   * @param {String} actionValue
+   */
+  _toggleSearchMenu(actionValue) {
+    if (HeaderStore._getSearchButtonActionValue() !== actionValue) {
+      Actions.searchButtonActionValue(actionValue);
+      Actions.setMobileMenuButtonValue('');
+      gaUtils._trackEvent('Click', `Mobile ${actionValue}`);
+    } else {
+      Actions.searchButtonActionValue('');
       Actions.setMobileMenuButtonValue('');
     }
   }
@@ -110,7 +139,7 @@ class MobileHeader extends React.Component {
    * with the 'mobileSearch' as a param
    */
   _handleSearchBtnPress() {
-    this._toggleMobileMenu('clickSearch');
+    this._toggleSearchMenu('clickSearch');
   }
 
   /**

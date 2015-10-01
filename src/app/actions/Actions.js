@@ -30,7 +30,7 @@ class Actions {
     this.dispatch(currentActiveMobileButton);
   }
 
-  SearchButtonActionValue(actionValue) {
+  searchButtonActionValue(actionValue) {
     this.dispatch(actionValue);
   }
 

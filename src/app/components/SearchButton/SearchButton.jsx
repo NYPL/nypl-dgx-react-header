@@ -1,7 +1,7 @@
 // Import React libraries
 import React from 'react';
 import cx from 'classnames';
-import Radium from 'radium';
+// import Radium from 'radium';
 
 // Import components
 import BasicButton from '../Buttons/BasicButton.jsx';
@@ -26,7 +26,7 @@ class SearchButton extends React.Component {
   render () {
     // Give active class if the button is activated
     let classes = cx({
-          '--active': HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'
+          '--active': HeaderStore._getSearchButtonActionValue() === 'hoverSearch'
       });
 
     return (
@@ -50,10 +50,9 @@ class SearchButton extends React.Component {
    * triggered by click method yet.
    */
   _hoverOpen() {
-    if (HeaderStore._getMobileMenuBtnValue() !== 'hoverSearch') {
-      if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
-        Actions.setMobileMenuButtonValue('hoverSearch');
-        console.log('hoverSearch');
+    if (HeaderStore._getSearchButtonActionValue() !== 'hoverSearch') {
+      if (HeaderStore._getSearchButtonActionValue() !== 'clickSearch') {
+        Actions.searchButtonActionValue('hoverSearch');
       }
     }
   }
@@ -64,7 +63,7 @@ class SearchButton extends React.Component {
    * from search button and search box.
    */
   _hoverClose() {
-    Actions.setMobileMenuButtonValue('');
+    Actions.searchButtonActionValue('');
     console.log('no search');
   }
 
@@ -75,10 +74,10 @@ class SearchButton extends React.Component {
    */
   _toggle() {
     // Only activated when the button was triggered by clicking
-    if (HeaderStore._getMobileMenuBtnValue() === 'clickSearch') {
-      Actions.setMobileMenuButtonValue('');
-    } else if (HeaderStore._getMobileMenuBtnValue() === '') {
-      Actions.setMobileMenuButtonValue('clickSearch');
+    if (HeaderStore._getSearchButtonActionValue() === 'clickSearch') {
+      Actions.searchButtonActionValue('');
+    } else if (HeaderStore._getSearchButtonActionValue() === '') {
+      Actions.searchButtonActionValue('clickSearch');
     }
   }
 }
@@ -94,4 +93,4 @@ const styles = {
 };
 
 // Export the component
-export default Radium(SearchButton);
+export default SearchButton;
