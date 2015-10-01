@@ -39,7 +39,6 @@ class MobileHeader extends React.Component {
   render () {
     let activeButton = this.state.activeMobileButton,
       searchButtonAction = this.state.searchButtonAction,
-
       locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true',
       mobileSearchClass = cx({
         'active nypl-icon-solo-x': searchButtonAction === 'clickSearch',
@@ -49,9 +48,6 @@ class MobileHeader extends React.Component {
         'active nypl-icon-solo-x': activeButton === 'mobileMenu', 
         'nypl-icon-burger-nav': activeButton !== 'mobileMenu'
       });
-
-      // console.log(HeaderStore.getState().searchButtonAction);
-      console.log(this.state.activeMobileButton);
 
     return (
       <div className={this.props.className} style={styles.base}>
