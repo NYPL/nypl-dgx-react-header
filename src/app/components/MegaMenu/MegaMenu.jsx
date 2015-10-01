@@ -27,7 +27,7 @@ class MegaMenu extends React.Component {
               navId={this.props.navId} />
           </div>
           <div className='MegaMenu-FeaturesWrapper'>
-            <MegaMenuFeatures navId={this.props.navId} features={this.props.features} />
+            <MegaMenuFeatures navId={this.props.navId} features={this.props.features} navLabel={this.props.label['en'].text} />
           </div>
         </div>
       </div>

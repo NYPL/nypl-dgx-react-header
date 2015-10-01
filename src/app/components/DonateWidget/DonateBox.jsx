@@ -1,5 +1,7 @@
 import React from 'react';
 
+import gaUtils from '../../utils/gaUtils.js';
+
 class DonateBox extends React.Component {
 
   constructor(props) {
@@ -12,7 +14,11 @@ class DonateBox extends React.Component {
       donationLinkItems = (donationLinks && donationLinks.length) ?
         donationLinks.map((item, index) => {
           return (
-            <li key={index}><a href={item.url}>{item.amount}</a></li>
+            <li key={index}>
+              <a href={item.url} onClick={gaUtils._trackEvent.bind(this, 'Donate', `Menu--${item.amount}`)}>
+                {item.amount}
+              </a>
+            </li>
           );
         }) : null;
 

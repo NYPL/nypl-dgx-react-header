@@ -9,19 +9,22 @@ class Store {
       handleFetchHeaderData: Actions.FETCH_HEADER_DATA,
       handleHeaderDataFailedFetch: Actions.FAILED_HEADER_DATA,
       handleSetMobileMenuButtonValue: Actions.SET_MOBILE_MENU_BUTTON_VALUE,
-      handleUpdateIsHeaderSticky: Actions.UPDATE_IS_HEADER_STICKY
+      handleUpdateIsHeaderSticky: Actions.UPDATE_IS_HEADER_STICKY,
+      handleToggleSubscribeFormVisible: Actions.TOGGLE_SUBSCRIBE_FORM_VISIBLE
     });
 
     this.exportPublicMethods({
       _getMobileMenuBtnValue: this._getMobileMenuBtnValue,
-      _getIsStickyValue: this._getIsStickyValue
+      _getIsStickyValue: this._getIsStickyValue,
+      _getSubscribeFormVisible: this._getSubscribeFormVisible
     });
 
     this.state = {
       headerData: [],
       errorMessage: null,
       isSticky: false,
-      activeMobileButton: ''
+      activeMobileButton: '',
+      subscribeFormVisible: false
     };
   }
 
@@ -34,6 +37,10 @@ class Store {
    */
   _getMobileMenuBtnValue() {
     return this.state.activeMobileButton;
+  }
+
+  _getSubscribeFormVisible() {
+    return this.state.subscribeFormVisible;
   }
 
   /**
@@ -65,6 +72,10 @@ class Store {
 
   handleUpdateIsHeaderSticky(value) {
     this.setState({isSticky: value});
+  }
+
+  handleToggleSubscribeFormVisible(value) {
+    this.setState({subscribeFormVisible: value});
   }
 }
 

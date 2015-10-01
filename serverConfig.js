@@ -31,7 +31,7 @@ const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
 let isProduction = process.env.NODE_ENV === 'production',
   serverPort = process.env.PORT || (isProduction ? 3001 : appConfig.port),
   // Assign API Routes
-  apiRoutes = require('./ApiRoutes/ApiRoutes.js'),
+  apiRoutes = require('./src/server/ApiRoutes/ApiRoutes.js'),
   /* Express Server Configuration
    * ----------------------------
    * - Using .EJS as the view engine

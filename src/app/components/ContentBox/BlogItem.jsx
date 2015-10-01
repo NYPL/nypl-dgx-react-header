@@ -1,5 +1,7 @@
 import React from 'react';
 
+import gaUtils from '../../utils/gaUtils.js';
+
 class BlogItem extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,8 @@ class BlogItem extends React.Component {
         </div> : null;
 
     return (
-      <a href={feature.link} className={this.props.className}>
+      <a href={feature.link} className={this.props.className}
+        onClick={gaUtils._trackEvent.bind(this, 'FeatureItem', `${this.props.navLabel} - ${feature.headline}`)}>
         <div className={`${this.props.className}-Wrapper`}>
           {img}
           <div className={'FeatureItem-Content ' + classes}>
