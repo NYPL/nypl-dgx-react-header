@@ -143,7 +143,7 @@ class SearchBox extends React.Component {
   _submitSearchRequest(value) {
     // Store the data that the user entered
     let requestParameters = {
-        keywords: encodeURIComponent(this.state.searchKeywords.trim()), 
+        keywords: encodeURIComponent(this.state.searchKeywords.trim()),
         // If the value is null, it indicates the function is triggered on desktop version.
         // Then it should get the value for option from state.
         option: value || this.state.searchOption
