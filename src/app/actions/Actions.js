@@ -1,9 +1,6 @@
 import alt from '../alt.js';
 import axios from 'axios';
 
-let env = process.env.APP_ENV ? process.env.APP_ENV : '',
-  refineryServer = env != 'production' ? `${env}-` : '';
-
 class Actions {
   // TODO: Clean this method with new API methods
   fetchHeaderData() {
@@ -12,7 +9,7 @@ class Actions {
     // Here we will use the client side AJAX request
     // to fetch data
     axios
-      .get(`https://${refineryServer}header.nypl.org/header-data`)
+      .get('https://qa-header.nypl.org/header-data')
       .then(result => {
         self.actions.updateHeaderData(result.data);
       })
