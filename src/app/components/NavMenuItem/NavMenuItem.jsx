@@ -34,7 +34,7 @@ class NavMenuItem extends React.Component {
           animateHover={this.state.animateHover}
           currentActiveItem={this.state.activeItem} /> : null,
       arrowClasses = cx({
-        'active animateMenuHoverEnter fadeIn': this.state.activeItem === this.props.index
+        'active animateMenuHoverEnter fadeIn': this.state.animateHover || this.state.activeItem === this.props.index
       }),
       menuItemClasses = cx('NavMenuItem-Link', {'active': this.state.activeItem === this.props.index});
 
@@ -61,11 +61,19 @@ class NavMenuItem extends React.Component {
   // Set the current index as the state's active item
   _activateHover() {
     this.setState({activeItem: this.props.index});
+
+    setTimeout(() => {
+      this.setState({animateHover: true});
+    }, 800);
   }
 
   // 
   _deactivateHover() {
     this.setState({activeItem: null});
+
+    setTimeout(() => {
+      this.setState({animateHover: false});
+    }, 1000);
   }
 }
 
