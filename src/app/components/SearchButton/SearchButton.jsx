@@ -1,7 +1,6 @@
 // Import React libraries
 import React from 'react';
 import cx from 'classnames';
-// import Radium from 'radium';
 
 // Import components
 import BasicButton from '../Buttons/BasicButton.jsx';
@@ -36,8 +35,7 @@ class SearchButton extends React.Component {
         <BasicButton id={`${this.props.className}-SearchButton`}
         className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton${classes}`}
         name='Search Button'
-        label=''
-        onClick={this._toggle.bind(this)} />
+        label='' />
         <SearchBox id={`${this.props.className}-SearchBox`}
         className={`${this.props.className}-SearchBox`} />
       </div>
@@ -65,20 +63,6 @@ class SearchButton extends React.Component {
   _hoverClose() {
     Actions.searchButtonActionValue('');
     console.log('no search');
-  }
-
-  /**
-   * _toggle()
-   * If search button is triggered by clicking, the only way to close its
-   * is to click it again no matter on mobile or desktop version.
-   */
-  _toggle() {
-    // Only activated when the button was triggered by clicking
-    if (HeaderStore._getSearchButtonActionValue() === 'clickSearch') {
-      Actions.searchButtonActionValue('');
-    } else if (HeaderStore._getSearchButtonActionValue() === '') {
-      Actions.searchButtonActionValue('clickSearch');
-    }
   }
 }
 
