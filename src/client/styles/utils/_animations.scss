@@ -20,8 +20,8 @@ Copyright (c) 2015 Daniel Eden
 .animateMenuHoverEnter {
    -webkit-animation-duration: .4s;
   animation-duration: .4s;
-  -webkit-animation-delay: .4s;
-  animation-delay: .4s;
+  -webkit-animation-delay: .5s;
+  animation-delay: .5s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
@@ -29,8 +29,8 @@ Copyright (c) 2015 Daniel Eden
 .animateMenuHoverLeave {
    -webkit-animation-duration: .4s;
   animation-duration: .4s;
-  -webkit-animation-delay: .35s;
-  animation-delay: .35s;
+  -webkit-animation-delay: .45s;
+  animation-delay: .45s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
