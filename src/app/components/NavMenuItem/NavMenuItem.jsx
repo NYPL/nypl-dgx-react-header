@@ -3,6 +3,7 @@ import cx from 'classnames';
 
 import gaUtils from '../../utils/gaUtils.js';
 import MegaMenu from '../MegaMenu/MegaMenu.jsx';
+import MegaMenuArrow from '../MegaMenu/MegaMenuArrow';
 
 class NavMenuItem extends React.Component {
   // Constructor used in ES6
@@ -11,7 +12,7 @@ class NavMenuItem extends React.Component {
 
     this.state = {
       activeItem: null,
-      animateHover: false
+      lastActiveMenuItem: ''
     };
 
     // Allows binding methods that reference this
@@ -23,6 +24,11 @@ class NavMenuItem extends React.Component {
 
     let target = (this.props.target.indexOf('nypl.org') !== -1 || this.props.target === '#') ?
         this.props.target : `${this.props.root}${this.props.target}`,
+      megaMenuArrow = (this.props.subNav && this.props.features) ?
+        <MegaMenuArrow
+          navId={this.props.navId}
+          index={this.props.index}
+          currentActiveItem={this.state.activeItem} /> : null,
       megaMenu = (this.props.subNav && this.props.features) ?
         <MegaMenu
           label={this.props.label}
@@ -31,51 +37,48 @@ class NavMenuItem extends React.Component {
           navId={this.props.navId}
           features={this.props.features}
           index={this.props.index}
-          animateHover={this.state.animateHover}
-          currentActiveItem={this.state.activeItem} /> : null,
-      arrowClasses = cx({
-        'active animateMenuHoverEnter fadeIn': this.state.animateHover || this.state.activeItem === this.props.index
-      }),
-      menuItemClasses = cx('NavMenuItem-Link', {'active': this.state.activeItem === this.props.index});
-
+          lastActiveMenuItem={this.state.lastActiveMenuItem}
+          currentActiveItem={this.state.activeItem} /> : null;
     return (
       <li
-        onMouseEnter={this._activateHover} 
-        onMouseLeave={this._deactivateHover}
         id={(this.props.navId) ? `${this.props.className}-${this.props.navId}` : this.props.className}
         className={this.props.className}>
         <span
-          className={menuItemClasses}
+          onMouseEnter={this._activateHover} 
+          onMouseLeave={this._deactivateHover}
+          className={'NavMenuItem-Link'}
           id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
           <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Click', `Nav Item: ${this.props.label['en'].text}`)}>
             {this.props.label[this.props.lang].text}
           </a>
-          {(this.props.subNav && this.props.features) ? 
-            <span className={`NavMenuItem-Arrow-${this.props.navId} ${arrowClasses}`}></span> : null}
+          {megaMenuArrow}
         </span>
         {megaMenu}
       </li>
     );
   }
 
-  // Set the current index as the state's active item
-  _activateHover() {
-    //this.setState({activeItem: this.props.index});
 
-    setTimeout(() => {
+  _activateHover() {
+    timer = setTimeout(() => {
+      this.setState({lastActiveMenuItem: this.props.navId});
       this.setState({activeItem: this.props.index});
-      this.setState({animateHover: true});
-    }, 750);
+    }, 400);
   }
 
   _deactivateHover() {
-    this.setState({activeItem: null});
+    // Will clear the set timer that activates the menu
+    // from executing
+    clearTimeout(timer);
 
     setTimeout(() => {
-      this.setState({animateHover: false});
-    }, 950);
+      this.setState({activeItem: null});
+    }, 250);
   }
 }
+
+// Global variable to hold the reference to the timed events.
+let timer;
 
 NavMenuItem.defaultProps = {
   target: '#',
