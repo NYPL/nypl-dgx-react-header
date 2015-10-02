@@ -20,7 +20,6 @@ class MobileHeader extends React.Component {
     };
 
     this._handleMenuBtnPress = this._handleMenuBtnPress.bind(this);
-    this._handleSearchBtnPress = this._handleSearchBtnPress.bind(this);
   }
 
   componentDidMount() {
@@ -62,7 +61,7 @@ class MobileHeader extends React.Component {
           className={`${this.props.className}-Locator nypl-icon-locator-large`}>
         </a>
 
-        <ReactTappable onTap={this._handleSearchBtnPress}>
+        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'clickSearch')}>
           <span
             style={[
               styles.searchIcon,
@@ -73,7 +72,7 @@ class MobileHeader extends React.Component {
           </span>
         </ReactTappable>
 
-        <ReactTappable onTap={this._handleMenuBtnPress}>
+        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'mobileMenu')}>
           <span
             style={[
               styles.menuIcon,
@@ -98,44 +97,23 @@ class MobileHeader extends React.Component {
    * @param {String} activeButton
    */
   _toggleMobileMenu(activeButton) {
-    if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
-      Actions.setMobileMenuButtonValue(activeButton);
-      Actions.searchButtonActionValue('');
-      gaUtils._trackEvent('Click', `Mobile ${activeButton}`);
-    } else {
-      Actions.setMobileMenuButtonValue('');
-      Actions.searchButtonActionValue('');
+    if (activeButton === 'clickSearch') {
+      if (HeaderStore._getSearchButtonActionValue() !== activeButton) {
+        Actions.searchButtonActionValue(activeButton);
+        Actions.setMobileMenuButtonValue('');
+        gaUtils._trackEvent('Click', `Mobile ${activeButton}`);
+      } else {
+        Actions.searchButtonActionValue('');
+      }
+    } else if (activeButton === 'mobileMenu') {
+      if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
+        Actions.setMobileMenuButtonValue(activeButton);
+        Actions.searchButtonActionValue('');
+        gaUtils._trackEvent('Click', `Mobile ${activeButton}`);
+      } else {
+        Actions.setMobileMenuButtonValue('');
+      }
     }
-  }
-
-  /**
-   * _toggleSearchMenu(actionValue)
-   * Verifies that the actionValue does not
-   * match the HeaderStore's current search action value
-   * and set's it as the param activeButton.
-   * If it matches, it clears the HeaderStore's
-   * current value.
-   *
-   * @param {String} actionValue
-   */
-  _toggleSearchMenu(actionValue) {
-    if (HeaderStore._getSearchButtonActionValue() !== actionValue) {
-      Actions.searchButtonActionValue(actionValue);
-      Actions.setMobileMenuButtonValue('');
-      gaUtils._trackEvent('Click', `Mobile ${actionValue}`);
-    } else {
-      Actions.searchButtonActionValue('');
-      Actions.setMobileMenuButtonValue('');
-    }
-  }
-
-  /**
-   * _handleSearchBtnPress() 
-   * Calls _toggleMobileMenu()
-   * with the 'mobileSearch' as a param
-   */
-  _handleSearchBtnPress() {
-    this._toggleSearchMenu('clickSearch');
   }
 
   /**
@@ -143,8 +121,8 @@ class MobileHeader extends React.Component {
    * Calls _toggleMobileMenu()
    * with the 'mobileMenu' as a param
    */
-  _handleMenuBtnPress() {
-    this._toggleMobileMenu('mobileMenu');
+  _handleMenuBtnPress(activeButton) {
+    this._toggleMobileMenu(activeButton);
   }
 }
 
