@@ -65,7 +65,7 @@ class NavMenuItem extends React.Component {
     setTimeout(() => {
       this.setState({activeItem: this.props.index});
       this.setState({animateHover: true});
-    }, 700);
+    }, 750);
   }
 
   _deactivateHover() {
@@ -73,7 +73,7 @@ class NavMenuItem extends React.Component {
 
     setTimeout(() => {
       this.setState({animateHover: false});
-    }, 900);
+    }, 950);
   }
 }
 
