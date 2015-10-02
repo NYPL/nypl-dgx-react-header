@@ -60,20 +60,20 @@ class NavMenuItem extends React.Component {
 
   // Set the current index as the state's active item
   _activateHover() {
-    this.setState({activeItem: this.props.index});
+    //this.setState({activeItem: this.props.index});
 
     setTimeout(() => {
+      this.setState({activeItem: this.props.index});
       this.setState({animateHover: true});
-    }, 800);
+    }, 700);
   }
 
-  // 
   _deactivateHover() {
     this.setState({activeItem: null});
 
     setTimeout(() => {
       this.setState({animateHover: false});
-    }, 1000);
+    }, 900);
   }
 }
 
