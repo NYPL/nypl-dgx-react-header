@@ -62,7 +62,7 @@ class MobileHeader extends React.Component {
           className={`${this.props.className}-Locator nypl-icon-locator-large`}>
         </a>
 
-        <ReactTappable onTap={this._handleSearchBtnPress}>
+        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'clickSearch')}>
           <span
             style={[
               styles.searchIcon,
@@ -73,7 +73,7 @@ class MobileHeader extends React.Component {
           </span>
         </ReactTappable>
 
-        <ReactTappable onTap={this._handleMenuBtnPress}>
+        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'mobileMenu')}>
           <span
             style={[
               styles.menuIcon,
@@ -97,14 +97,24 @@ class MobileHeader extends React.Component {
    *
    * @param {String} activeButton
    */
-  _toggleMobileMenu(activeButton) {
-    if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
-      Actions.setMobileMenuButtonValue(activeButton);
-      Actions.searchButtonActionValue('');
-      gaUtils._trackEvent('Click', `Mobile ${activeButton}`);
-    } else {
-      Actions.setMobileMenuButtonValue('');
-      Actions.searchButtonActionValue('');
+  _toggleMobileMenu(action) {
+    console.log(action);
+    if (action === 'clickSearch') {
+      if (HeaderStore._getSearchButtonActionValue() !== action) {
+        Actions.searchButtonActionValue(action);
+        Actions.setMobileMenuButtonValue('');
+        gaUtils._trackEvent('Click', `Mobile ${action}`);
+      } else {
+        Actions.searchButtonActionValue('');
+      }
+    } else if (action === 'mobileMenu') {
+      if (HeaderStore._getMobileMenuBtnValue() !== action) {
+        Actions.setMobileMenuButtonValue(action);
+        Actions.searchButtonActionValue('');
+        gaUtils._trackEvent('Click', `Mobile ${action}`);
+      } else {
+        Actions.setMobileMenuButtonValue('');
+      }
     }
   }
 
@@ -143,8 +153,8 @@ class MobileHeader extends React.Component {
    * Calls _toggleMobileMenu()
    * with the 'mobileMenu' as a param
    */
-  _handleMenuBtnPress() {
-    this._toggleMobileMenu('mobileMenu');
+  _handleMenuBtnPress(action) {
+    this._toggleMobileMenu(action);
   }
 }
 
