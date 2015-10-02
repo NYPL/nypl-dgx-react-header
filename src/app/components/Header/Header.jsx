@@ -14,6 +14,7 @@ import SimpleButton from '../Buttons/SimpleButton.jsx';
 import SubscribeButton from '../SubscribeButton/SubscribeButton.jsx';
 import NavMenu from '../NavMenu/NavMenu.jsx';
 import MobileHeader from './MobileHeader.jsx';
+import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.jsx';
 
 import gaUtils from '../../utils/gaUtils.js';
 
@@ -58,6 +59,7 @@ class Header extends React.Component {
 
     return (
       <header id={this.props.id} className={headerClasses}>
+        <GlobalAlerts className={`${this.props.className}-GlobalAlerts`} />
         <div className={`${this.props.className}-Wrapper`}>
           <MobileHeader className={`${this.props.className}-Mobile`} locatorUrl={'//www.nypl.org/locations/map?nearme=true'} />
           <div className={`${this.props.className}-TopWrapper`} style={styles.wrapper}>
@@ -67,6 +69,8 @@ class Header extends React.Component {
                 label='Get a Library Card' 
                 target='//catalog.nypl.org/screens/selfregpick.html' 
                 className='LibraryCardButton'
+                gaAction='Get a Library Card'
+                gaLabel=''
                 style={styles.libraryCardButton} />
               <SubscribeButton 
                 label='Get Email Updates'
@@ -75,7 +79,7 @@ class Header extends React.Component {
               <DonateButton
                 lang={this.props.lang}
                 style={styles.donateButton}
-                gaLabel={'Desktop Donate'} />
+                gaLabel={'Header Button'} />
             </div>
           </div>
           <NavMenu 
@@ -157,9 +161,6 @@ const styles = {
     right: '2px',
     textTransform: 'uppercase',
     display: 'block'
-  },
-  ssoContainer: {
-    display: 'inline-block'
   },
   libraryCardButton: {
     display: 'inline-block',

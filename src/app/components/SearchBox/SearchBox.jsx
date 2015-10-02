@@ -59,6 +59,38 @@ class SearchBox extends React.Component {
       pulseAnimation = cx({
         'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
         'keywords-pulse': this.state.placeholderAnimation === 'sequential'
+      }),
+      
+      // Render radio buttons with their own properties
+      inputOptions = inputOptionData.map((element, i) => {
+        return (
+          <div className={`${this.props.className}-Input-Option`} key={i}>
+            <InputField type='radio'
+            id={element.id}
+            name={element.name}
+            value = {element.value}
+            ref={element.ref}
+            checked={this.state.searchOption === element.value}
+            onChange={this._inputChange.bind(this, 'option')} />
+
+            <label htmlFor={element.id} className={`${this.props.className}-Input-Options-label`}>
+              {element.labelText}
+            </label>
+          </div>
+        );
+      }),
+
+      // Render submit buttons for the mobile version
+      mobileSubmitButtons = mobileSubmitButtonData.map((element, i) => {
+        return (
+          <div key={i}
+          className={`${this.props.className}-Mobile-Submit-Option ${element.columnClass}`}
+          value={element.value}
+          onClick={this._submitSearchRequest.bind(this, element.value)}>
+            {element.text}
+            <span className='nypl-icon-wedge-right icon'></span>
+          </div>
+        );
       });
 
     return (
@@ -66,7 +98,6 @@ class SearchBox extends React.Component {
         <div id={`${this.props.className}-Elements-Wrapper`} className={`${this.props.className}-Elements-Wrapper`}>
           <div id={`${this.props.className}-Elements-Input-Wrapper`}
           className={`${this.props.className}-Elements-Input-Wrapper`}>
-
             <div id={`${this.props.className}-Elements-Input-Keywords-Wrapper`}
             className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
               <span className='nypl-icon-magnifier-thin icon'></span>
@@ -83,49 +114,15 @@ class SearchBox extends React.Component {
             </div>
             <div id={`${this.props.className}-Elements-Input-Options-Wrapper`}
             className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
-              <div className={`${this.props.className}-Input-Options`}>
-                <InputField type='radio'
-                id='catalog'
-                name='inputOption'
-                value='catalog'
-                ref='option'
-                onChange={this._inputChange.bind(this, 'options')}
-                checked={this.state.searchOption === 'catalog'} />
-
-                <label htmlFor='catalog' className={`${this.props.className}-Input-Options-label`}>
-                  Search the Catalog
-                </label>
-
-                <InputField type='radio'
-                id='website'
-                name='inputOption'
-                value='website'
-                ref='option'
-                onChange={this._inputChange.bind(this, 'options')}
-                checked={this.state.searchOption === 'website'} />
-
-                <label htmlFor='website' className={`${this.props.className}-Input-Options-label`}>
-                  Search NYPL.org
-                </label>
-              </div>
+              {inputOptions}
             </div>
           </div>
 
           <div id={`${this.props.className}-Mobile-Submit`}
            className={`${this.props.className}-Mobile-Submit`}>
-            <div className={`${this.props.className}-Mobile-Submit-Option left-column`}
-            value='catalog'
-            onClick={this._submitSearchRequest.bind(this, 'catalog')}>
-              catalog
-              <span className='nypl-icon-wedge-right icon'></span>
-            </div>
-            <div className={`${this.props.className}-Mobile-Submit-Option`}
-            value='website'
-            onClick={this._submitSearchRequest.bind(this, 'website')}>
-              nypl.org
-              <span className='nypl-icon-wedge-right icon'></span>
-            </div>
+            {mobileSubmitButtons}
           </div>
+
           <button id={`${this.props.className}-Elements-SubmitButton`}
           className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
           onClick={this._submitSearchRequest.bind(this, null)}>
@@ -146,7 +143,7 @@ class SearchBox extends React.Component {
   _inputChange(field) {
     if (field === 'keywords') {
       this.setState({searchKeywords: event.target.value});
-    } else if (field === 'options') {
+    } else if (field === 'option') {
       this.setState({searchOption: event.target.value});
     }
   }
@@ -242,10 +239,42 @@ SearchBox.defaultProps = {
   className: 'SearchBox'
 };
 
-const styles = {
-  base: {
-  }
-};
+// Radio button properties
+const inputOptionData = [
+    {
+      id: 'catalog',
+      name: 'inputOption',
+      value: 'catalog',
+      ref: 'optionCatalog',
+      labelText: 'Search the Catalog'
+    },
+    {
+      id: 'website',
+      name: 'inputOption',
+      value: 'website',
+      ref: 'optionWebsite',
+      labelText: 'Search NYPL.org'
+    }
+  ],
+
+  // mobile submit button properties
+  mobileSubmitButtonData = [
+    {
+      columnClass: 'left-column',
+      value: 'catalog',
+      text: 'catalog'
+    },
+    {
+      columnClass: 'right-column',
+      value: 'website',
+      text: 'nypl.org'
+    }
+  ],
+
+  styles = {
+    base: {
+    }
+  };
 
 // Export the component
 module.exports = SearchBox;

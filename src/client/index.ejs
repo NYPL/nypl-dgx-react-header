@@ -19,11 +19,11 @@
   </head>
   <body>
     <div><%- headerApp %></div>
-  </body>
 
   <% if (isProduction) { %>
     <script async type='text/javascript' src="/<%= filename %>"></script>
   <% } else { %>
     <script async type='text/javascript' src="http://localhost:<%= webpackPort %>/<%= filename %>"></script>
   <% } %>
+  </body>
 </html>
