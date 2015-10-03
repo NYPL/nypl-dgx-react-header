@@ -31,22 +31,20 @@ class MobileHeader extends React.Component {
   }
 
   _onChange() {
-    this.setState({activeMobileButton: HeaderStore.getState().activeMobileButton});
-    this.setState({searchButtonAction: HeaderStore.getState().searchButtonAction});
+    this.setState({
+      activeMobileButton: HeaderStore.getState().activeMobileButton,
+      searchButtonAction: HeaderStore.getState().searchButtonAction
+    });
   }
 
   render () {
     let activeButton = this.state.activeMobileButton,
       searchButtonAction = this.state.searchButtonAction,
       locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true',
-      mobileSearchClass = cx({
-        'active nypl-icon-solo-x': searchButtonAction === 'clickSearch',
-        'nypl-icon-magnifier-thin': searchButtonAction !== 'clickSearch'
-      }),
-      mobileMenuClass = cx({
-        'active nypl-icon-solo-x': activeButton === 'mobileMenu', 
-        'nypl-icon-burger-nav': activeButton !== 'mobileMenu'
-      });
+      mobileSearchClass = (searchButtonAction === 'clickSearch') ?
+        'active nypl-icon-solo-x': 'nypl-icon-magnifier-thin',
+      mobileMenuClass = (activeButton === 'mobileMenu') ?
+        'active nypl-icon-solo-x': 'nypl-icon-burger-nav';
 
     return (
       <div className={this.props.className} style={styles.base}>
@@ -101,7 +99,6 @@ class MobileHeader extends React.Component {
       if (HeaderStore._getSearchButtonActionValue() !== activeButton) {
         Actions.searchButtonActionValue(activeButton);
         Actions.setMobileMenuButtonValue('');
-        gaUtils._trackEvent('Click', `Mobile ${activeButton}`);
       } else {
         Actions.searchButtonActionValue('');
       }
@@ -109,11 +106,11 @@ class MobileHeader extends React.Component {
       if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
         Actions.setMobileMenuButtonValue(activeButton);
         Actions.searchButtonActionValue('');
-        gaUtils._trackEvent('Click', `Mobile ${activeButton}`);
       } else {
         Actions.setMobileMenuButtonValue('');
       }
     }
+    gaUtils._trackEvent('Click', `Mobile ${activeButton}`);
   }
 
   /**

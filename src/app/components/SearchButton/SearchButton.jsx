@@ -25,7 +25,7 @@ class SearchButton extends React.Component {
   render () {
     // Give active class if the button is activated
     let classes = cx({
-          '--active': HeaderStore._getSearchButtonActionValue() === 'hoverSearch'
+        '--active': HeaderStore._getSearchButtonActionValue() === 'hoverSearch'
       });
 
     return (
@@ -62,18 +62,12 @@ class SearchButton extends React.Component {
    */
   _hoverClose() {
     Actions.searchButtonActionValue('');
-    console.log('no search');
   }
 }
 
 SearchButton.defaultProps = {
   lang: 'en',
   className: 'NavMenu'
-};
-
-const styles = {
-  base: {
-  }
 };
 
 // Export the component

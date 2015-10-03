@@ -21,7 +21,7 @@ class SearchBox extends React.Component {
       placeholder: 'What would you like to find?',
       placeholderAnimation: null,
       noAnimationBefore: true,
-      actionValue: null
+      actionValue: HeaderStore.getState().searchButtonAction
     };
 
     // The function listens to the changes of input fields
@@ -52,9 +52,9 @@ class SearchBox extends React.Component {
   render() {
     // Set active class if search button is hovered or clicked
     let classes = cx({
-      '--active': this.state.actionValue === 'hoverSearch',
-      '--mobileActive': this.state.actionValue === 'clickSearch'
-    }),
+        '--active': this.state.actionValue === 'hoverSearch',
+        '--mobileActive': this.state.actionValue === 'clickSearch'
+      }),
       // Classes for keywords input fields to activate pulse animation
       pulseAnimation = cx({
         'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
@@ -271,12 +271,7 @@ const inputOptionData = [
       value: 'website',
       text: 'nypl.org'
     }
-  ],
-
-  styles = {
-    base: {
-    }
-  };
+  ];
 
 // Export the component
 module.exports = SearchBox;
