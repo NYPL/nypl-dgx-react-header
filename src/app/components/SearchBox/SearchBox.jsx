@@ -20,7 +20,8 @@ class SearchBox extends React.Component {
       searchOption: 'catalog',
       placeholder: 'What would you like to find?',
       placeholderAnimation: null,
-      noAnimationBefore: true
+      noAnimationBefore: true,
+      actionValue: HeaderStore.getState().searchButtonAction
     };
 
     // The function listens to the changes of input fields
@@ -30,17 +31,30 @@ class SearchBox extends React.Component {
     // Listen to the event if enter is pressed
     this._triggerSubmit = this._triggerSubmit.bind(this);
     // The fucntion to trigger validation animation for keywords input
-    this._pulseAnimation = this._pulseAnimation.bind(this);
+    this._animationTimer = this._animationTimer.bind(this);
+  }
+
+  // Listen to the search button action changes in Store,
+  componentDidMount() {
+    HeaderStore.listen(this._onChange.bind(this));
+  }
+
+  componentWillUnmount() {
+    HeaderStore.unlisten(this._onChange.bind(this));
+  }
+
+  // Update the state of the class
+  _onChange() {
+    this.setState({actionValue: HeaderStore.getState().searchButtonAction});
   }
 
   // Dom Render Section
   render() {
     // Set active class if search button is hovered or clicked
     let classes = cx({
-        '--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
-        HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'
+        '--active': this.state.actionValue === 'hoverSearch',
+        '--mobileActive': this.state.actionValue === 'clickSearch'
       }),
-
       // Classes for keywords input fields to activate pulse animation
       pulseAnimation = cx({
         'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
@@ -169,7 +183,7 @@ class SearchBox extends React.Component {
       // The new placeholder that tells users there's no keywords input
       this.setState({placeholder: 'Please enter a search term.'});
       // Trigger the validation animation
-      this._pulseAnimation(inputKeywords);
+      this._animationTimer(inputKeywords);
     } else {
       // Go to the search page
       window.location.assign(requestUrl);
@@ -190,14 +204,14 @@ class SearchBox extends React.Component {
   }
 
   /**
-   * _pulseAnimation(element)
+   * _animationTimer(element)
    * Add the CSS animation to the placeholder of the keywords Input.
    * It adds the proper class to the html element to trigger the animation,
    * and then removes the class to stop it.
    *
    * @param {DOM Element} element
    */
-  _pulseAnimation(element) {
+  _animationTimer(element) {
     let frame = 0,
       animation = setInterval(() => {
         frame ++;
@@ -209,6 +223,7 @@ class SearchBox extends React.Component {
           this.setState({noAnimationBefore: false});
         }
       }, 100);
+
     // Decide which CSS animation is going to perform
     // by adding different classes to the element.
     // It is based on if it is the first time the validation to be triggered.
@@ -256,12 +271,7 @@ const inputOptionData = [
       value: 'website',
       text: 'nypl.org'
     }
-  ],
-
-  styles = {
-    base: {
-    }
-  };
+  ];
 
 // Export the component
 module.exports = SearchBox;

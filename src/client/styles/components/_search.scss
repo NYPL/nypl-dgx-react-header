@@ -68,6 +68,22 @@
 }
 
 &-SearchBox--active {
+  display: none;
+  @include desktop {
+    background-color: $BG_MENU_SEARCH;
+    color: #000000;
+    display: block;
+    height: 236px;
+    left: 0px;
+    margin: 0;
+    position: absolute;
+    top: 41.5px;
+    width: 100%;
+    z-index: 300;
+  }
+}
+
+&-SearchBox--mobileActive {
   background-color: $BG_MENU_SEARCH; 
   color: #000000;
   display: block;
@@ -78,9 +94,7 @@
   width: 100%;
   z-index: 300;
   @include desktop {
-    height: 236px;
-    margin: 0;
-    top: 41.5px;
+    display: none;
   }
 }
 
@@ -242,8 +256,6 @@
     display: inline-block;
   }
 }
-
-
 
 &-SearchBox-Input-Option {
   display: inline-block;
