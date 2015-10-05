@@ -66,7 +66,8 @@ class NavMenuItem extends React.Component {
    * & activeItem after set time.
    */
   _activateHover() {
-    this.props.hoverTimer = setTimeout(() => {
+
+    this.hoverTimer = setTimeout(() => {
       this.setState({lastActiveMenuItem: this.props.navId});
       this.setState({activeItem: this.props.index});
     }, 350);
@@ -81,7 +82,7 @@ class NavMenuItem extends React.Component {
   _deactivateHover() {
     // Will clear the set timer that activates the menu
     // from executing
-    clearTimeout(this.props.hoverTimer);
+    clearTimeout(this.hoverTimer);
 
     setTimeout(() => {
       this.setState({activeItem: null});
