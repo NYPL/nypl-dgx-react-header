@@ -27,7 +27,9 @@ class NavMenu extends React.Component {
         'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'
       }),
       donateButton = HeaderStore._getIsStickyValue() ?
-        <li><DonateButton style={styles.donateButton} gaLabel={'Mobile Donate'}/></li> : null,
+        <li className='NavMenuItem DonateButtonItem'>
+          <DonateButton style={styles.donateButton} gaLabel={'Mobile Donate'}/>
+        </li> : null,
       navMenu = navItems.map((item, index) => {
         return (
           <NavMenuItem
@@ -66,7 +68,7 @@ NavMenu.defaultProps = {
 const styles = {
   donateButton: {
     padding: '8px 15px',
-    margin: '0 5px 0 10px',
+    margin: '0 0 0 10px',
     textTransform: 'uppercase',
     borderRadius: '3px',
     fontSize: '12.5px',

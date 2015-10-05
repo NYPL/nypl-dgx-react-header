@@ -17,6 +17,24 @@ Copyright (c) 2015 Daniel Eden
   animation-fill-mode: both;
 }
 
+.animateMegaMenuEnter {
+   -webkit-animation-duration: .4s;
+  animation-duration: .4s;
+  -webkit-animation-delay: .25s;
+  animation-delay: .25s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.animateMegaMenuArrowEnter {
+   -webkit-animation-duration: .4s;
+  animation-duration: .4s;
+  -webkit-animation-delay: .25s;
+  animation-delay: .25s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
 .animatedFast {
   -webkit-animation-duration: .5s;
   animation-duration: .5s;
