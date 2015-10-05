@@ -10,13 +10,15 @@ class Store {
       handleHeaderDataFailedFetch: Actions.FAILED_HEADER_DATA,
       handleSetMobileMenuButtonValue: Actions.SET_MOBILE_MENU_BUTTON_VALUE,
       handleUpdateIsHeaderSticky: Actions.UPDATE_IS_HEADER_STICKY,
-      handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM
+      handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM,
+      handleToggleSubscribeFormVisible: Actions.TOGGLE_SUBSCRIBE_FORM_VISIBLE
     });
 
     this.exportPublicMethods({
       _getMobileMenuBtnValue: this._getMobileMenuBtnValue,
       _getIsStickyValue: this._getIsStickyValue,
-      _getLastActiveMenuItem: this._getLastActiveMenuItem
+      _getLastActiveMenuItem: this._getLastActiveMenuItem,
+      _getSubscribeFormVisible: this._getSubscribeFormVisible
     });
 
     this.state = {
@@ -24,7 +26,8 @@ class Store {
       errorMessage: null,
       isSticky: false,
       lastActiveMenuItem: '',
-      activeMobileButton: ''
+      activeMobileButton: '',
+      subscribeFormVisible: false
     };
   }
 
@@ -40,6 +43,16 @@ class Store {
   }
 
   /**
+   * _getSubscribeFormVisible()
+   * returns the current state.subscribeFormVisible
+   * value.
+   * @return {Boolean} true/falsse
+   */
+  _getSubscribeFormVisible() {
+    return this.state.subscribeFormVisible;
+  }
+
+  /**
    * _getIsStickyValue() 
    * returns the current state.isSticky value.
    *
@@ -49,6 +62,12 @@ class Store {
     return this.state.isSticky;
   }
 
+  /**
+   * _getLastActiveMenuItem()
+   * returns the current state.lastActiveMenuItem
+   * value.
+   * @return {String}
+   */
   _getLastActiveMenuItem() {
     return this.state.lastActiveMenuItem;
   }
@@ -77,7 +96,11 @@ class Store {
   handleSetLastActiveMenuItem(value) {
     this.setState({lastActiveMenuItem: value});
   }
+
+  handleToggleSubscribeFormVisible(value) {
+    this.setState({subscribeFormVisible: value});
+  }
 }
 
-// Export our newly created Store
+// Export ALT Store
 export default alt.createStore(Store, 'Store');

@@ -37,6 +37,10 @@ class Actions {
   updateIsHeaderSticky(value) {
     this.dispatch(value);
   }
+
+  toggleSubscribeFormVisible(value) {
+    this.dispatch(value);
+  }
 }
 
 export default alt.createActions(Actions);

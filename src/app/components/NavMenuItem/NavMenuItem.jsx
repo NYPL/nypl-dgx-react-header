@@ -15,7 +15,6 @@ class NavMenuItem extends React.Component {
       lastActiveMenuItem: ''
     };
 
-    // Allows binding methods that reference this
     this._activateHover = this._activateHover.bind(this);
     this._deactivateHover = this._deactivateHover.bind(this);
   }
@@ -48,7 +47,7 @@ class NavMenuItem extends React.Component {
           onMouseLeave={this._deactivateHover}
           className={'NavMenuItem-Link'}
           id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
-          <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Click', `Nav Item: ${this.props.label['en'].text}`)}>
+          <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Go to...', `${this.props.label['en'].text}`)}>
             {this.props.label[this.props.lang].text}
           </a>
           {megaMenuArrow}
@@ -58,18 +57,28 @@ class NavMenuItem extends React.Component {
     );
   }
 
-
+  /**
+   * _activateHover()
+   * Sets the state's lastActiveMenuItem
+   * & activeItem after set time.
+   */
   _activateHover() {
-    timer = setTimeout(() => {
+    this.hoverTimer = setTimeout(() => {
       this.setState({lastActiveMenuItem: this.props.navId});
       this.setState({activeItem: this.props.index});
     }, 400);
   }
 
+  /**
+   * _deactivateHover()
+   * Initially clears thhe hoverTimer.
+   * Then removes the state's activeItem
+   * after set time.
+   */
   _deactivateHover() {
     // Will clear the set timer that activates the menu
     // from executing
-    clearTimeout(timer);
+    clearTimeout(this.hoverTimer);
 
     setTimeout(() => {
       this.setState({activeItem: null});
@@ -77,8 +86,9 @@ class NavMenuItem extends React.Component {
   }
 }
 
-// Global variable to hold the reference to the timed events.
-let timer;
+// Used to assign the timer to control
+// the hover intent delay.
+NavMenuItem.hoverTimer = null;
 
 NavMenuItem.defaultProps = {
   target: '#',

@@ -1,6 +1,8 @@
 import React from 'react';
 import Radium from 'radium';
 
+import gaUtils from '../../utils/gaUtils.js';
+
 class Logo extends React.Component {
   // Constructor used in ES6
   constructor(props) {
@@ -13,6 +15,7 @@ class Logo extends React.Component {
       id={this.props.id}
       className={this.props.className}
       href={this.props.target}
+      onClick={gaUtils._trackEvent.bind(this, 'Click Logo', '')}
       style={[
         styles.base,
         this.props.style //allows for parent-to-child css styling

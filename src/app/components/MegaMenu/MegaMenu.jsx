@@ -1,14 +1,15 @@
 import React from 'react';
 import cx from 'classnames';
 
+// ALT Flux Store/Actions
 import HeaderStore from '../../stores/Store.js';
 import Actions from '../../actions/Actions.js';
 
+// Dependent NYPL React Components
 import MegaMenuSubNav from './MegaMenuSubNav.jsx';
 import MegaMenuFeatures from './MegaMenuFeatures.jsx';
 
 class MegaMenu extends React.Component {
-  // Constructor used in ES6
   constructor(props) {
     super(props);
 
@@ -26,7 +27,9 @@ class MegaMenu extends React.Component {
   }
 
   _onChange() {
-    this.setState({lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem});
+    this.setState({
+      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem
+    });
   }
 
   render() {
@@ -38,33 +41,48 @@ class MegaMenu extends React.Component {
 
     return (
       <div 
-      onMouseEnter={this._watchHoverIntentEnter.bind(this)}
-      onMouseLeave={this._watchHoverIntentLeave.bind(this)}
-      id={(this.props.navId) ? 'MegaMenu-' + this.props.navId : 'MegaMenu'}
+        onMouseEnter={this._watchHoverIntentEnter.bind(this)}
+        onMouseLeave={this._watchHoverIntentLeave.bind(this)}
+        id={(this.props.navId) ? 'MegaMenu-' + this.props.navId : 'MegaMenu'}
         className={classes}>
-          <div className='MegaMenu-LeftBgWrapper'></div>
-          <div className='MegaMenu-Wrapper'>
-            <div className='MegaMenu-SubNavWrapper'>
-              <MegaMenuSubNav
-                label={this.props.label} 
-                items={this.props.items} 
-                lang={this.props.lang}
-                navId={this.props.navId} />
-            </div>
-            <div className='MegaMenu-FeaturesWrapper'>
-              <MegaMenuFeatures navId={this.props.navId} features={this.props.features} />
-            </div>
+        <div className='MegaMenu-LeftBgWrapper'></div>
+        <div className='MegaMenu-Wrapper'>
+          <div className='MegaMenu-SubNavWrapper'>
+            <MegaMenuSubNav
+              label={this.props.label} 
+              items={this.props.items} 
+              lang={this.props.lang}
+              navId={this.props.navId} />
           </div>
+          <div className='MegaMenu-FeaturesWrapper'>
+            <MegaMenuFeatures 
+              navId={this.props.navId} 
+              features={this.props.features} 
+              navLabel={this.props.label['en'].text} />
+          </div>
+        </div>
       </div>
     );
   }
 
+  /**
+   * _watchHoverIntentEnter()
+   * If the lastActiveMenuItem passed as a prop
+   * matches the MegaMenu's navId. Then fire the
+   * Action to store a reference to thhe lastActiveMenuItem.
+   */
   _watchHoverIntentEnter() {
     if (this.props.lastActiveMenuItem === this.props.navId) {
       Actions.setLastActiveMenuItem(this.props.navId);
     }
   }
 
+  /**
+   * _watchHoverIntentLeave()
+   * Sets the Store's lastActiveMenuItem
+   * property to an empty string when
+   * hovered out.
+   */
   _watchHoverIntentLeave() {
     Actions.setLastActiveMenuItem('');
   }
@@ -74,4 +92,4 @@ MegaMenu.defaultProps = {
   lang: 'en'
 };
 
-module.exports = MegaMenu;
+export default MegaMenu;

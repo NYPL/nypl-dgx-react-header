@@ -8,6 +8,8 @@ import InputField from '../InputField/InputField.jsx';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
 import SubscribeMessageBox from './SubscribeMessageBox.jsx';
 
+import gaUtils from '../../utils/gaUtils.js';
+
 class EmailSubscription extends React.Component {
 
   // Constructor used in ES6
@@ -92,6 +94,7 @@ class EmailSubscription extends React.Component {
         </div>);
 
       if (status === 'success') {
+        gaUtils._trackEvent('Subscribe', 'Success');
         subscribeContent = (
           <div>
             <SubscribeMessageBox status={status} msg="Thank you for subscribing to our email updates." />
@@ -109,6 +112,7 @@ class EmailSubscription extends React.Component {
       }
 
       if (status === 'exists') {
+        gaUtils._trackEvent('Subscribe', 'Error -- already subscribed');
         subscribeContent = (
           <div>
             <SubscribeMessageBox status={status} msg="Looks like you're already signed up!" />
@@ -119,6 +123,7 @@ class EmailSubscription extends React.Component {
       }
 
       if (status === 'error' || status === 'Internal Server Error') {
+        gaUtils._trackEvent('Subscribe', 'Error');
         subscribeContent = (
           <div className={`${this.props.className}-Misc-Error`}>
             <div>Hmm...</div>

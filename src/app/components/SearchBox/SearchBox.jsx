@@ -119,14 +119,16 @@ class SearchBox extends React.Component {
   }
 
   /**
-   *  _inputChange(field)
+   *  _inputChange(field, event)
    * Listen to the changes on keywords input field and option input fields.
    * Grab the event value, and change the state.
    * The parameter indicates which input field has been changed.
+   * Passng event as the argument here as FireFox doesn't accept event
+   * as a global variable.
    *
-   * @param {String} field
+   * @param {String} field  {Event Object} event
    */
-  _inputChange(field) {
+  _inputChange(field, event) {
     if (field === 'keywords') {
       this.setState({searchKeywords: event.target.value});
     } else if (field === 'option') {
@@ -143,7 +145,7 @@ class SearchBox extends React.Component {
   _submitSearchRequest(value) {
     // Store the data that the user entered
     let requestParameters = {
-        keywords: encodeURIComponent(this.state.searchKeywords.trim()), 
+        keywords: encodeURIComponent(this.state.searchKeywords.trim()),
         // If the value is null, it indicates the function is triggered on desktop version.
         // Then it should get the value for option from state.
         option: value || this.state.searchOption

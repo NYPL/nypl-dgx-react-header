@@ -1,11 +1,11 @@
 import React from 'react';
 import cx from 'classnames';
 
+// ALT Flux Store/Actions
 import HeaderStore from '../../stores/Store.js';
 import Actions from '../../actions/Actions.js';
 
 class MegaMenuArrow extends React.Component {
-  // Constructor used in ES6
   constructor(props) {
     super(props);
   }
@@ -29,4 +29,4 @@ MegaMenuArrow.defaultProps = {
   lang: 'en'
 };
 
-module.exports = MegaMenuArrow;
+export default MegaMenuArrow;
