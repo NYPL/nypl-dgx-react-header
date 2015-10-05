@@ -30,6 +30,10 @@ class Actions {
     this.dispatch(currentActiveMobileButton);
   }
 
+  setLastActiveMenuItem(value) {
+    this.dispatch(value);
+  }
+
   searchButtonActionValue(actionValue) {
     this.dispatch(actionValue);
   }
