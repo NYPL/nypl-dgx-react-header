@@ -34,6 +34,10 @@ class Actions {
     this.dispatch(value);
   }
 
+  searchButtonActionValue(actionValue) {
+    this.dispatch(actionValue);
+  }
+
   updateIsHeaderSticky(value) {
     this.dispatch(value);
   }

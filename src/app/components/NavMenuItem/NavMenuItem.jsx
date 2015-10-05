@@ -1,12 +1,15 @@
 import React from 'react';
 import cx from 'classnames';
 
+// Google Analytics Utility Library
 import gaUtils from '../../utils/gaUtils.js';
+
+// NYPL Dependent React Components
 import MegaMenu from '../MegaMenu/MegaMenu.jsx';
 import MegaMenuArrow from '../MegaMenu/MegaMenuArrow';
 
 class NavMenuItem extends React.Component {
-  // Constructor used in ES6
+
   constructor(props) {
     super(props);
 
@@ -63,10 +66,10 @@ class NavMenuItem extends React.Component {
    * & activeItem after set time.
    */
   _activateHover() {
-    this.hoverTimer = setTimeout(() => {
+    this.props.hoverTimer = setTimeout(() => {
       this.setState({lastActiveMenuItem: this.props.navId});
       this.setState({activeItem: this.props.index});
-    }, 400);
+    }, 350);
   }
 
   /**
@@ -78,7 +81,7 @@ class NavMenuItem extends React.Component {
   _deactivateHover() {
     // Will clear the set timer that activates the menu
     // from executing
-    clearTimeout(this.hoverTimer);
+    clearTimeout(this.props.hoverTimer);
 
     setTimeout(() => {
       this.setState({activeItem: null});
@@ -86,15 +89,12 @@ class NavMenuItem extends React.Component {
   }
 }
 
-// Used to assign the timer to control
-// the hover intent delay.
-NavMenuItem.hoverTimer = null;
-
 NavMenuItem.defaultProps = {
   target: '#',
   root: '//www.nypl.org/',
   lang: 'en',
-  className: 'NavMenuItem'
+  className: 'NavMenuItem',
+  hoverTimer: null
 };
 
 export default NavMenuItem;

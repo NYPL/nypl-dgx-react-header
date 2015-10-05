@@ -9,6 +9,7 @@ class Store {
       handleFetchHeaderData: Actions.FETCH_HEADER_DATA,
       handleHeaderDataFailedFetch: Actions.FAILED_HEADER_DATA,
       handleSetMobileMenuButtonValue: Actions.SET_MOBILE_MENU_BUTTON_VALUE,
+      handleSearchButtonActionValue: Actions.SEARCH_BUTTON_ACTION_VALUE,
       handleUpdateIsHeaderSticky: Actions.UPDATE_IS_HEADER_STICKY,
       handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM,
       handleToggleSubscribeFormVisible: Actions.TOGGLE_SUBSCRIBE_FORM_VISIBLE
@@ -16,6 +17,7 @@ class Store {
 
     this.exportPublicMethods({
       _getMobileMenuBtnValue: this._getMobileMenuBtnValue,
+      _getSearchButtonActionValue: this._getSearchButtonActionValue,
       _getIsStickyValue: this._getIsStickyValue,
       _getLastActiveMenuItem: this._getLastActiveMenuItem,
       _getSubscribeFormVisible: this._getSubscribeFormVisible
@@ -27,13 +29,14 @@ class Store {
       isSticky: false,
       lastActiveMenuItem: '',
       activeMobileButton: '',
+      searchButtonAction:'',
       subscribeFormVisible: false
     };
   }
 
   /*** PUBLIC METHODS ***/
   /**
-   * _getMobileMenuBtnValue() 
+   * _getMobileMenuBtnValue()
    * returns the current state.activeMobileButton
    * value.
    * @return {String}
@@ -50,6 +53,16 @@ class Store {
    */
   _getSubscribeFormVisible() {
     return this.state.subscribeFormVisible;
+  }
+
+  /**
+   * _getSearchButtonActionValue()
+   * returns the current state.getSearchButtonActionValue
+   * value.
+   * @return {String}
+   */
+  _getSearchButtonActionValue() {
+    return this.state.searchButtonAction;
   }
 
   /**
@@ -87,6 +100,11 @@ class Store {
 
   handleSetMobileMenuButtonValue(currentActiveMobileButton) {
     this.setState({activeMobileButton: currentActiveMobileButton});
+  }
+
+  // The set search button action value to Store
+  handleSearchButtonActionValue(actionValue) {
+    this.setState({searchButtonAction: actionValue});
   }
 
   handleUpdateIsHeaderSticky(value) {
