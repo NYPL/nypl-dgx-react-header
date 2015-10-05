@@ -52,8 +52,8 @@ class SearchBox extends React.Component {
   render() {
     // Set active class if search button is hovered or clicked
     let classes = cx({
-        '--active': this.state.actionValue === 'hoverSearch',
-        '--mobileActive': this.state.actionValue === 'clickSearch'
+        'active': this.state.actionValue === 'hoverSearch',
+        'mobileActive': this.state.actionValue === 'clickSearch'
       }),
       // Classes for keywords input fields to activate pulse animation
       pulseAnimation = cx({
@@ -87,14 +87,14 @@ class SearchBox extends React.Component {
           className={`${this.props.className}-Mobile-Submit-Option ${element.columnClass}`}
           value={element.value}
           onClick={this._submitSearchRequest.bind(this, element.value)}>
-            {element.text}
+            <span className='title'>{element.text}</span>
             <span className='nypl-icon-wedge-right icon'></span>
           </div>
         );
       });
 
     return (
-      <div id={this.props.id} className={`${this.props.className}${classes}`} onKeyPress={this._triggerSubmit}>
+      <div id={this.props.id} className={`${this.props.className} ${classes}`} onKeyPress={this._triggerSubmit}>
         <div id={`${this.props.className}-Elements-Wrapper`} className={`${this.props.className}-Elements-Wrapper`}>
           <div id={`${this.props.className}-Elements-Input-Wrapper`}
           className={`${this.props.className}-Elements-Input-Wrapper`}>
