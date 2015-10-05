@@ -2,13 +2,13 @@
 &-SearchBox-Wrapper {
   display: block;
   @include desktop {
+    margin: 0 0 0 6px;
     display: inline-table;
     vertical-align: middle;
   }
 }
 
 /* CSS for Search button */
-
 &-SearchButton {
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -18,83 +18,64 @@
   border-width: 0px;
   display: none;
   font-size: 22px;
-  padding-bottom: 10px;
+  padding: 8px 8px 14px 8px;
+
   @include desktop {
     display: block;
   }
+
   &:before {
     border-bottom-color: $BG_MENU_SEARCH;
     border-bottom-style: none;
+
     @include desktop {
       border-bottom-color: $BG_MENU_SEARCH;
       border-bottom-style: solid;
       border-bottom-width: 2px;
-      line-height: 1.5;
-      padding: 0 3px 2px 3px;
+    }
+  }
+
+  /* ACTIVE STATE */
+  &.active {
+    background-color: $BG_MENU_SEARCH;
+    color: #78CCED;
+
+    @include desktop {
+      display: block;
     }
   }
 }
 
-&-SearchButton--active {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-  background-color: transparent;
-  background-color: $BG_MENU_SEARCH;
-  color: #78CCED;
-  border-width: 0px;
-  display: none;
-  font-size: 22px;
-  padding-bottom: 10px;
-  @include desktop {
-    display: block;
-  }
-  &:before {
-    border-bottom-color: $BG_MENU_SEARCH;
-    border-bottom-style: none;
-    @include desktop {
-      border-bottom-color: $BG_MENU_SEARCH;
-      border-bottom-style: none;
-      border-bottom-width: 2px;
-      line-height: 1.5;
-      padding: 0 3px 2px 3px;
-    }
-  }
-}
 
 /* CSS for Search box. It shows only activated. Default is not displayed. */
 &-SearchBox {
   display: none;
-}
-
-&-SearchBox--active {
-  display: none;
-  @include desktop {
-    background-color: $BG_MENU_SEARCH;
-    color: #000000;
-    display: block;
-    height: 236px;
-    left: 0px;
-    margin: 0;
-    position: absolute;
-    top: 41.5px;
-    width: 100%;
-    z-index: 300;
-  }
-}
-
-&-SearchBox--mobileActive {
-  background-color: $BG_MENU_SEARCH; 
+  background-color: $BG_MENU_SEARCH;
   color: #000000;
-  display: block;
   left: 0px;
-  margin: -1px 0 0 0;
+  margin: 0;
   position: absolute;
-  top: 0;
   width: 100%;
-  z-index: 300;
-  @include desktop {
-    display: none;
+  z-index: 3;
+
+  /* Rules for Desktop Active State */
+  &.active {
+    @include desktop {
+      display: block;
+      top: 42px;
+      height: 236px;
+    } 
+  }
+
+  /* Rules for Mobile Active State */
+  &.mobileActive {
+    display: block;
+    margin: -1px 0 0 0;
+    top: 0px;
+
+    @include desktop {
+      display: none;
+    }
   }
 }
 
@@ -175,6 +156,7 @@
   position: relative;
   width: 100%;
   text-align: center;
+
   @include desktop {
     border-bottom-style: none;
     display: inline-block;
@@ -199,10 +181,12 @@
     padding: 10px 5px;
     position: absolute;
     top: 9px;
+
     @include desktop {
       display:none;
     }
   }
+
   @include desktop {
     margin: 0 0 20px 0;
     width: 100%;
@@ -221,6 +205,7 @@
   height: 66px;
   padding: 0 0 0 35px;
   width: 100%;
+
   @include desktop {
     background-color: #1DA1D4;
     color: #FFFFFF;
@@ -238,6 +223,7 @@
   box-sizing: content-box;
   display: inline-block;
   @include calculation(width, '100% - 35px');
+
   @include desktop {
     border: none;
     border-bottom: solid;
@@ -252,6 +238,7 @@
   display: none;
   float: left;
   font-size: 15px;
+
   @include desktop {
     display: inline-block;
   }
@@ -273,6 +260,7 @@
 
 &-SearchBox-Elements-SubmitButton {
   display: none;
+
   &:before {
     font-size: 22px;
     padding: 22px;
@@ -280,6 +268,7 @@
     border-radius: 50%;
     border-width: 2px;
   }
+
   @include desktop {
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -306,28 +295,34 @@
   text-align: center;
   text-transform: uppercase;
   display: block;
+
   @include desktop {
     display: none;
   }
 }
 
 &-SearchBox-Mobile-Submit-Option {
+  cursor: pointer;
+  display: inline-block;
+  padding: 20px 0;
+  width: 49%;
+
   &.left-column {
     border-color: rgba(102, 102, 102, 0.21);
     border-right-style: solid;
     border-width: 1px;
   }
-  cursor: pointer;
-  display: inline-block;
-  padding: 20px 0;
-  width: 49%;
-  span {
+
+  .title {
+    display: inline-block;
     margin: 0 20px 0 0;
+    vertical-align: middle;
   }
+
   .icon {
+    display: inline-block;
     color: #78CCED;
     font-size: 30px;
-    position: absolute;
-    top: 90px;
+    vertical-align: middle;
   }
 }
