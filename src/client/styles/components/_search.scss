@@ -172,15 +172,16 @@
   position: relative;
   text-align: left;
   width: 93%;
+
   .icon {
     background-color: #FFFFFF;
     color: $BG_MENU_SEARCH;
     display: inline-block;
     font-size: 20px;
     left: 2px;
-    padding: 10px 5px;
+    padding: 0;
     position: absolute;
-    top: 12px;
+    top: 22px;
 
     @include desktop {
       display:none;
@@ -195,7 +196,7 @@
 
 &-SearchBox-Input-Keywords {
   background-color: #FFFFFF;
-  border: none;
+  border: none !important;
   box-sizing: content-box;
   color: #000000;
   display: inline-block;
@@ -203,7 +204,7 @@
   font-size: 18px;
   font-style: italic;
   height: 66px;
-  padding: 0 0 0 35px;
+  padding: 0 0 0 25px !important;
   width: 100%;
 
   &:focus {
@@ -217,14 +218,13 @@
     font-size: 66px;
     font-style: normal;
     letter-spacing: -0.8px;
-    padding: 0 0 16px 0;
+    padding: 0 0 16px 0 !important;
     width: 100%;
   }
 }
 
 &-SearchBox-Input-Keywords-Border {
-  border: none;
-  box-sizing: content-box;
+  border: none !important;
   display: inline-block;
   @include calculation(width, '100% - 35px');
 
