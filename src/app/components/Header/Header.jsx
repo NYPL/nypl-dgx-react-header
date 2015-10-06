@@ -69,6 +69,7 @@ class Header extends React.Component {
                 label='Get a Library Card' 
                 target='//catalog.nypl.org/screens/selfregpick.html' 
                 className='LibraryCardButton'
+                id='LibraryCardButton'
                 gaAction='Get a Library Card'
                 gaLabel=''
                 style={styles.libraryCardButton} />
