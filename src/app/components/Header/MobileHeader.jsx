@@ -15,11 +15,11 @@ class MobileHeader extends React.Component {
     super(props);
 
     this.state = {
-      activeMobileButton: HeaderStore.getState().activeMobileButton
+      activeMobileButton: HeaderStore.getState().activeMobileButton,
+      searchButtonAction: HeaderStore.getState().searchButtonAction
     };
 
     this._handleMenuBtnPress = this._handleMenuBtnPress.bind(this);
-    this._handleSearchBtnPress = this._handleSearchBtnPress.bind(this);
   }
 
   componentDidMount() {
@@ -31,21 +31,20 @@ class MobileHeader extends React.Component {
   }
 
   _onChange() {
-    this.setState({activeMobileButton: HeaderStore.getState().activeMobileButton});
+    this.setState({
+      activeMobileButton: HeaderStore.getState().activeMobileButton,
+      searchButtonAction: HeaderStore.getState().searchButtonAction
+    });
   }
 
   render () {
     let activeButton = this.state.activeMobileButton,
-
+      searchButtonAction = this.state.searchButtonAction,
       locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true',
-      mobileSearchClass = cx({
-        'active nypl-icon-solo-x': activeButton === 'clickSearch',
-        'nypl-icon-magnifier-thin': activeButton !== 'clickSearch'
-      }),
-      mobileMenuClass = cx({
-        'active nypl-icon-solo-x': activeButton === 'mobileMenu', 
-        'nypl-icon-burger-nav': activeButton !== 'mobileMenu'
-      });
+      mobileSearchClass = (searchButtonAction === 'clickSearch') ?
+        'active nypl-icon-solo-x': 'nypl-icon-magnifier-thin',
+      mobileMenuClass = (activeButton === 'mobileMenu') ?
+        'active nypl-icon-solo-x': 'nypl-icon-burger-nav';
 
     return (
       <div className={this.props.className} style={styles.base}>
@@ -60,18 +59,18 @@ class MobileHeader extends React.Component {
           className={`${this.props.className}-Locator nypl-icon-locator-large`}>
         </a>
 
-        <ReactTappable onTap={this._handleSearchBtnPress}>
+        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'clickSearch')}>
           <span
             style={[
               styles.searchIcon,
-              activeButton === 'clickSearch' ? styles.activeSearchIcon : ''
+              searchButtonAction === 'clickSearch' ? styles.activeSearchIcon : ''
             ]}
             className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
             ref='MobileSearchButton'>
           </span>
         </ReactTappable>
 
-        <ReactTappable onTap={this._handleMenuBtnPress}>
+        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'mobileMenu')}>
           <span
             style={[
               styles.menuIcon,
@@ -96,21 +95,22 @@ class MobileHeader extends React.Component {
    * @param {String} activeButton
    */
   _toggleMobileMenu(activeButton) {
-    if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
-      Actions.setMobileMenuButtonValue(activeButton);
-      gaUtils._trackEvent('Click', `Mobile ${activeButton}`);
-    } else {
-      Actions.setMobileMenuButtonValue('');
+    if (activeButton === 'clickSearch') {
+      if (HeaderStore._getSearchButtonActionValue() !== activeButton) {
+        Actions.searchButtonActionValue(activeButton);
+        Actions.setMobileMenuButtonValue('');
+      } else {
+        Actions.searchButtonActionValue('');
+      }
+    } else if (activeButton === 'mobileMenu') {
+      if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
+        Actions.setMobileMenuButtonValue(activeButton);
+        Actions.searchButtonActionValue('');
+      } else {
+        Actions.setMobileMenuButtonValue('');
+      }
     }
-  }
-
-  /**
-   * _handleSearchBtnPress() 
-   * Calls _toggleMobileMenu()
-   * with the 'mobileSearch' as a param
-   */
-  _handleSearchBtnPress() {
-    this._toggleMobileMenu('clickSearch');
+    gaUtils._trackEvent('Click', `Mobile ${activeButton}`);
   }
 
   /**
@@ -118,8 +118,8 @@ class MobileHeader extends React.Component {
    * Calls _toggleMobileMenu()
    * with the 'mobileMenu' as a param
    */
-  _handleMenuBtnPress() {
-    this._toggleMobileMenu('mobileMenu');
+  _handleMenuBtnPress(activeButton) {
+    this._toggleMobileMenu(activeButton);
   }
 }
 

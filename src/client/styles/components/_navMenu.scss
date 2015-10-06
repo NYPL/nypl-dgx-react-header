@@ -15,6 +15,9 @@
 		/* Controls the display of Mobile View */
 		&.mobileActive {
 			margin-top: -1px;
+			position: absolute;
+			width: 100%;
+			z-index: 3;
 
 			/* Displays NavMenu on Mobile with proper class on parent */
 			#NavMenu-List {
@@ -69,22 +72,45 @@
   		margin: 0;
 	  }
 
-  	/* Top level Link Rules */
-  	.NavMenuItem {
-  		padding: 5px 0;
-  		margin: 3.5px 15px 0px 0;
+	  .DonateButtonItem {
+	  	display: none;
 
   		@include desktop {
-  			padding: 0;
-  			margin: 0;
   			display: inline;
+  		}
+	  }
+
+  	/* Top level Link Rules */
+  	.NavMenuItem {
+  		padding: 8px 0;
+  		margin: 3.5px 15px 0px 0;
+  		display: block;
+
+  		@include desktop {
+  			display: inline;
+  			padding: 0;
+  			margin: 0 6px 0 0;
+
+  			&:last-child {
+  				margin-right: 0px;
+  			}
   		}
 
 			&-Link {
 	  		position: relative;
 	  		display: inline-block;
-	  		padding: 5px 8px 0;
+	  		padding: 0;
 	  		margin: 0;
+
+	  		&:hover {
+	  			cursor: pointer;
+	  		}
+
+	  		&.active {
+	  			& > a {
+	  				z-index: 3;
+	  			}
+	  		}
 
 	  		& > a {
 	  			display: block;
@@ -95,6 +121,7 @@
 	  			@include desktop {
 	  				color: #000;
 	  				font-size: 16px;
+	  				padding: 0px 7px;
 	  			}
 	  		}
 	  	}
@@ -107,49 +134,49 @@
 		  		/* BROWSE */
 		  		&-29a4b824-e084-4771-aafc-52b3586c5e49 {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_BROWSE_RIGHT, 33%, 'bottom', -12px, 12px);
+			  			@include up-arrow($BG_MENU_BROWSE_RIGHT, 30%, 'bottom', -13px, 13px);
 			  		}
 		  		}
 
 		  		/* LEARN */
-		  		&-925d1fa9-1138-403c-9990-38861902b02d{
+		  		&-925d1fa9-1138-403c-9990-38861902b02d {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_LEARN_RIGHT, 33%, 'bottom', -12px, 12px);
+			  			@include up-arrow($BG_MENU_LEARN_RIGHT, 30%, 'bottom', -13px, 13px);
 			  		}
 		  		}
 
 		  		/* ATTEND */
 		  		&-851ed351-08f5-43f0-9011-9c317f85f0ca {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_ATTEND_RIGHT, 33%, 'bottom', -12px, 12px);
+			  			@include up-arrow($BG_MENU_ATTEND_RIGHT, 30%, 'bottom', -13px, 13px);
 			  		}
 		  		}
 
 		  		/* FIND US */
 		  		&-df621833-4dd1-4223-83e5-6ad7f98ad26a {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_FINDUS_RIGHT, 33%, 'bottom', -12px, 12px);
+			  			@include up-arrow($BG_MENU_FINDUS_RIGHT, 30%, 'bottom', -13px, 13px);
 			  		}
 		  		}
 
 		  		/* RESEARCH */
 		  		&-4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9 {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_RESEARCH_RIGHT, 33%, 'bottom', -12px, 12px);
+			  			@include up-arrow($BG_MENU_RESEARCH_RIGHT, 30%, 'bottom', -13px, 13px);
 			  		}
 		  		}
 
 		  		/* GIVE */
 		  		&-1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1 {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_GIVE_RIGHT, 33%, 'bottom', -12px, 12px);
+			  			@include up-arrow($BG_MENU_GIVE_RIGHT, 30%, 'bottom', -13px, 13px);
 			  		}
 		  		}
 
 			  	/* GET HELP */
 			  	&-13d95ad5-f117-4415-ba2c-5c0b9618984d {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_HELP_RIGHT, 33%, 'bottom', -12px, 12px);
+			  			@include up-arrow($BG_MENU_HELP_RIGHT, 30%, 'bottom', -13px, 13px);
 			  		}  		
 			  	}
 			  }
@@ -162,13 +189,14 @@
 	  	color: #FFFFFF;
 	  	width: 100%;
   		position: absolute;
-	  	top: 41.5px;
+	  	top: 41.75px;
 	  	left: 0;
 
 	  	/* Only display MegaMenu's on Desktop */
 	  	&.active {
 	  		@include desktop {
 	  			display: block;
+	  			z-index: 3;
 	  		}
 	  	}
 

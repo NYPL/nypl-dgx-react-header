@@ -127,8 +127,7 @@ const styles = {
     fontSize: '15px',
     verticalAlign: 'text-bottom',
     marginLeft: '5px',
-    display: 'inline',
-    opacity: '0.8'
+    display: 'inline'
   },
   EmailSubscribeForm: {
     position: 'absolute',

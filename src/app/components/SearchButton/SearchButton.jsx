@@ -1,7 +1,6 @@
 // Import React libraries
 import React from 'react';
 import cx from 'classnames';
-import Radium from 'radium';
 
 // Import components
 import BasicButton from '../Buttons/BasicButton.jsx';
@@ -25,57 +24,44 @@ class SearchButton extends React.Component {
   // Dom Render Section
   render () {
     // Give active class if the button is activated
-    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
-      HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
-    // Change the icon based on the behavior either click or hover
-    let icon = cx({
-      'nypl-icon-solo-x': HeaderStore._getMobileMenuBtnValue() === 'clickSearch',
-      'nypl-icon-magnifier-fat': HeaderStore._getMobileMenuBtnValue() !== 'clickSearch'});
+    let classes = cx({
+      'active': HeaderStore._getSearchButtonActionValue() === 'hoverSearch'
+    });
 
     return (
       <div className={`${this.props.className}-SearchBox-Wrapper`}
-      onMouseEnter={this._activate.bind(this, 'hover')}
-      onMouseLeave={this._deactivate.bind(this)}>
+      onMouseEnter={this._hoverOpen.bind(this)}
+      onMouseLeave={this._hoverClose.bind(this)}>
         <BasicButton id={`${this.props.className}-SearchButton`}
-        className={`${icon} ${this.props.className}-SearchButton${classes}`}
+        className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
         name='Search Button'
-        label=''
-        onClick={this._activate.bind(this, 'click')} />
+        label='' />
         <SearchBox id={`${this.props.className}-SearchBox`}
         className={`${this.props.className}-SearchBox`} />
       </div>
     );
   }
 
-  // Set the function to active searchbox when the button is hovered or clicked
-  _activate(option) {
-    if (option === 'hover') {
-      // And activated by hover only when the button has not been activated yet
-      if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
-        Actions.setMobileMenuButtonValue('hoverSearch');
-      } 
-    } else {
-      // Click ignores the status of hover
-      this._toggle();
+  /**
+   * _hoverOpen()
+   * Make search button is able to be triggered by hovering in, but only when it hasn't been
+   * triggered by click method yet.
+   */
+  _hoverOpen() {
+    if (HeaderStore._getSearchButtonActionValue() !== 'hoverSearch') {
+      if (HeaderStore._getSearchButtonActionValue() !== 'clickSearch') {
+        Actions.searchButtonActionValue('hoverSearch');
+      }
     }
   }
 
-  // Deactivated the button only when it was activated by hovering
-  _deactivate() {
-    // _deactive function only works when it is on desktop version
-    if (HeaderStore._getMobileMenuBtnValue() === 'hoverSearch') {
-      Actions.setMobileMenuButtonValue('');
-    }
-  }
-
-  // The toggle for the interaction of clicking on the button
-  _toggle() {
-    // Only activated when the button has not been activated yet
-    if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
-      Actions.setMobileMenuButtonValue('clickSearch');
-    } else {
-      Actions.setMobileMenuButtonValue('');
-    }
+  /**
+   * _hoverClose()
+   * This function will close search box when the user hovers out
+   * from search button and search box.
+   */
+  _hoverClose() {
+    Actions.searchButtonActionValue('');
   }
 }
 
@@ -84,10 +70,5 @@ SearchButton.defaultProps = {
   className: 'NavMenu'
 };
 
-const styles = {
-  base: {
-  }
-};
-
 // Export the component
-export default Radium(SearchButton);
+export default SearchButton;
