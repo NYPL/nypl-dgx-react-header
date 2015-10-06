@@ -52,8 +52,6 @@ const styles = {
     fontSize: 0
   },
   dots: {
-    height: 0,
-    width: 0,
     margin: 0,
     height: '3px',
     width: '3px',
