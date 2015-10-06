@@ -6,8 +6,9 @@ import cx from 'classnames';
 import InputField from '../InputField/InputField.jsx';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 
-// Import HeaderStore
+// ALT Flux Store/Actions
 import HeaderStore from '../../stores/Store.js';
+import Actions from '../../actions/Actions.js';
 
 class SearchBox extends React.Component {
   // Constructor used in ES6
@@ -21,7 +22,8 @@ class SearchBox extends React.Component {
       placeholder: 'What would you like to find?',
       placeholderAnimation: null,
       noAnimationBefore: true,
-      actionValue: HeaderStore.getState().searchButtonAction
+      actionValue: HeaderStore.getState().searchButtonAction,
+      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem
     };
 
     // The function listens to the changes of input fields
@@ -45,14 +47,18 @@ class SearchBox extends React.Component {
 
   // Update the state of the class
   _onChange() {
-    this.setState({actionValue: HeaderStore.getState().searchButtonAction});
+    this.setState({
+      actionValue: HeaderStore.getState().searchButtonAction,
+      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem
+    });
   }
 
   // Dom Render Section
   render() {
     // Set active class if search button is hovered or clicked
     let classes = cx({
-        'active': this.state.actionValue === 'hoverSearch',
+        'active animateMegaMenuEnter fadeIn': this.state.actionValue === 'hoverSearch',
+        'active': HeaderStore._getLastActiveMenuItem() === 'hoverSearch',
         'mobileActive': this.state.actionValue === 'clickSearch'
       }),
       // Classes for keywords input fields to activate pulse animation
@@ -66,13 +72,12 @@ class SearchBox extends React.Component {
         return (
           <div className={`${this.props.className}-Input-Option`} key={i}>
             <InputField type='radio'
-            id={element.id}
-            name={element.name}
-            value = {element.value}
-            ref={element.ref}
-            checked={this.state.searchOption === element.value}
-            onChange={this._inputChange.bind(this, 'option')} />
-
+              id={element.id}
+              name={element.name}
+              value = {element.value}
+              ref={element.ref}
+              checked={this.state.searchOption === element.value}
+              onChange={this._inputChange.bind(this, 'option')} />
             <label htmlFor={element.id} className={`${this.props.className}-Input-Options-label`}>
               {element.labelText}
             </label>
@@ -94,7 +99,13 @@ class SearchBox extends React.Component {
       });
 
     return (
-      <div id={this.props.id} className={`${this.props.className} ${classes}`} onKeyPress={this._triggerSubmit}>
+      <div 
+        id={this.props.id} 
+        className={`${this.props.className} ${classes}`} 
+        onKeyPress={this._triggerSubmit}
+        onMouseEnter={this._watchHoverIntentEnter.bind(this)}
+        onMouseLeave={this._watchHoverIntentLeave.bind(this)}>
+
         <div id={`${this.props.className}-Elements-Wrapper`} className={`${this.props.className}-Elements-Wrapper`}>
           <div id={`${this.props.className}-Elements-Input-Wrapper`}
           className={`${this.props.className}-Elements-Input-Wrapper`}>
@@ -232,6 +243,28 @@ class SearchBox extends React.Component {
     } else {
       this.setState({placeholderAnimation: 'sequential'});
     }
+  }
+
+  /**
+   * _watchHoverIntentEnter()
+   * If the lastActiveMenuItem passed as a prop
+   * matches the search by hover. Then fire the
+   * Action to store a reference to the lastActiveMenuItem as hoverSearch.
+   */
+  _watchHoverIntentEnter() {
+    if (this.state.actionValue === 'hoverSearch') {
+      Actions.setLastActiveMenuItem(this.state.actionValue);
+    }
+  }
+
+  /**
+   * _watchHoverIntentLeave()
+   * Sets the Store's lastActiveMenuItem
+   * property to an empty string when
+   * hovered out.
+   */
+  _watchHoverIntentLeave() {
+    Actions.setLastActiveMenuItem('');
   }
 }
 
