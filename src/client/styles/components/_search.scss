@@ -197,10 +197,9 @@
 &-SearchBox-Input-Keywords {
   background-color: #FFFFFF;
   border: none !important;
-  box-sizing: content-box;
   color: #000000;
   display: inline-block;
-  font-family: Kievit-Light;
+  @include Kievit-Light;
   font-size: 18px;
   font-style: italic;
   height: 66px;
@@ -214,12 +213,11 @@
   @include desktop {
     background-color: #1DA1D4;
     color: #FFFFFF;
-    font-family: Kievit-Light;
+    @include Kievit-Light;
     font-size: 66px;
     font-style: normal;
     letter-spacing: -0.8px;
     padding: 0 0 16px 0 !important;
-    width: 100%;
   }
 }
 
@@ -238,8 +236,8 @@
 }
 
 &-SearchBox-Elements-Input-Options-Wrapper {
-  color: #FFFFFF;
   display: none;
+  color: #FFFFFF;
   float: left;
   font-size: 16px;
 
@@ -261,6 +259,7 @@
   display: inline-block;
   margin: 0 0 0 -10px;
   letter-spacing: .025em;
+  @include Kievit-Book;
 }
 
 &-SearchBox-Elements-SubmitButton {
@@ -322,6 +321,7 @@
     display: inline-block;
     margin: 0 20px 0 0;
     vertical-align: middle;
+    @include Kievit-Book;
   }
 
   .icon {
