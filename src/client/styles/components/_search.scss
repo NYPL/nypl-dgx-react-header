@@ -18,7 +18,7 @@
   border-width: 0px;
   display: none;
   font-size: 22px;
-  padding: 8px 8px 14px 8px;
+  padding: 8px 10px 14px 10px;
 
   @include desktop {
     display: block;
@@ -63,7 +63,7 @@
     @include desktop {
       display: block;
       top: 42px;
-      height: 236px;
+      height: 225px;
     } 
   }
 
@@ -83,11 +83,11 @@
 &-SearchBox-Elements-Wrapper {
   display: inline-block;
   margin: 20px 0 0 0;
-  max-width: 1312px;
+  max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
   position: relative;
   width: 100%;
   @include desktop {
-    margin: 66px auto 0 auto;
+    margin: 55px auto 0 auto;
     display: block;
     text-align: left;
   }
@@ -180,7 +180,7 @@
     left: 2px;
     padding: 10px 5px;
     position: absolute;
-    top: 9px;
+    top: 12px;
 
     @include desktop {
       display:none;
@@ -199,12 +199,16 @@
   box-sizing: content-box;
   color: #000000;
   display: inline-block;
-  font-family: Kievit-Book;
+  font-family: Kievit-Light;
   font-size: 18px;
   font-style: italic;
   height: 66px;
   padding: 0 0 0 35px;
   width: 100%;
+
+  &:focus {
+    outline: 0;
+  }
 
   @include desktop {
     background-color: #1DA1D4;
@@ -237,7 +241,7 @@
   color: #FFFFFF;
   display: none;
   float: left;
-  font-size: 15px;
+  font-size: 16px;
 
   @include desktop {
     display: inline-block;
@@ -256,6 +260,7 @@
   cursor: pointer;
   display: inline-block;
   margin: 0 0 0 -10px;
+  letter-spacing: .025em;
 }
 
 &-SearchBox-Elements-SubmitButton {
