@@ -224,7 +224,7 @@
 }
 
 &-SearchBox-Input-Keywords-Border {
-  border: none !important;
+  border: none;
   display: inline-block;
   @include calculation(width, '100% - 35px');
 
