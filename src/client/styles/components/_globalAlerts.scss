@@ -1,6 +1,7 @@
 &-GlobalAlerts {
 	position: absolute;
 	top: 60px;
+	z-index: 2;
 
 	@include desktop {
 		position: relative;
@@ -33,13 +34,13 @@
 
 		@include desktop {
 			top: -15px;
-			right: 0;
+			right: 5px;
 		}
 	}
 
 	&-Box {
 		position: relative;
-		margin: .75em 1.5em .5em 1.2em;
+		margin: .75em 1.75em .5em 1.2em;
 
 		@include desktop {
 			margin: .5em 0;
@@ -51,6 +52,7 @@
 
 			p {
 				line-height: 1.2em;
+				font-size: 16px;
 			}
 
 			a {

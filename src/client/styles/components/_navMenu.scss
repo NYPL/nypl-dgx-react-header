@@ -8,7 +8,7 @@
 	&-Wrapper {
 		@include desktop {
 			margin: 0 auto;
-			max-width: 1312px;
+			max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
 			text-align: right;
 		}
 
@@ -87,9 +87,10 @@
   		display: block;
 
   		@include desktop {
-  			display: inline;
+  			display: inline-block;
   			padding: 0;
   			margin: 0 6px 0 0;
+  			line-height: 0;
 
   			&:last-child {
   				margin-right: 0px;
@@ -134,49 +135,49 @@
 		  		/* BROWSE */
 		  		&-29a4b824-e084-4771-aafc-52b3586c5e49 {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_BROWSE_RIGHT, 30%, 'bottom', -13px, 13px);
+			  			@include up-arrow($BG_MENU_BROWSE_RIGHT, 30%, 'top', -5px, 13px);
 			  		}
 		  		}
 
 		  		/* LEARN */
 		  		&-925d1fa9-1138-403c-9990-38861902b02d {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_LEARN_RIGHT, 30%, 'bottom', -13px, 13px);
+			  			@include up-arrow($BG_MENU_LEARN_RIGHT, 30%, 'top', -5px, 13px);
 			  		}
 		  		}
 
 		  		/* ATTEND */
 		  		&-851ed351-08f5-43f0-9011-9c317f85f0ca {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_ATTEND_RIGHT, 30%, 'bottom', -13px, 13px);
+			  			@include up-arrow($BG_MENU_ATTEND_RIGHT, 30%, 'top', -5px, 13px);
 			  		}
 		  		}
 
 		  		/* FIND US */
 		  		&-df621833-4dd1-4223-83e5-6ad7f98ad26a {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_FINDUS_RIGHT, 30%, 'bottom', -13px, 13px);
+			  			@include up-arrow($BG_MENU_FINDUS_RIGHT, 30%, 'top', -5px, 13px);
 			  		}
 		  		}
 
 		  		/* RESEARCH */
 		  		&-4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9 {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_RESEARCH_RIGHT, 30%, 'bottom', -13px, 13px);
+			  			@include up-arrow($BG_MENU_RESEARCH_RIGHT, 30%, 'top', -5px, 13px);
 			  		}
 		  		}
 
 		  		/* GIVE */
 		  		&-1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1 {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_GIVE_RIGHT, 30%, 'bottom', -13px, 13px);
+			  			@include up-arrow($BG_MENU_GIVE_RIGHT, 30%, 'top', -5px, 13px);
 			  		}
 		  		}
 
 			  	/* GET HELP */
 			  	&-13d95ad5-f117-4415-ba2c-5c0b9618984d {
 			  		&.active {
-			  			@include up-arrow($BG_MENU_HELP_RIGHT, 30%, 'bottom', -13px, 13px);
+			  			@include up-arrow($BG_MENU_HELP_RIGHT, 30%, 'top', -5px, 13px);
 			  		}  		
 			  	}
 			  }
@@ -213,7 +214,7 @@
 		  	display: block;
 		  	min-height: $MAIN_MENU_DESKTOP_HEIGHT;
 		  	margin: 0 auto;
-		  	max-width: 1312px;
+		  	max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
 		  	z-index: 1;
 		  	position: relative;
 	  	}
@@ -229,7 +230,7 @@
 
 	  	&-SubNav {
 	  		position: absolute;
-	  		right: 32px;
+	  		right: $LEFT_NAV_RIGHT_MARGIN;
 	  		width: 140px;
 	  		text-align: left;
 
@@ -325,7 +326,7 @@
 				&-Wrapper {
 					display: block;
 					position: relative;
-					margin: 0 0 0 25px;
+					margin: 0 0 0 $RIGHT_NAV_CONTAINER_LEFT_MARGIN;
 					top: 50px;
 				}
 	  	}
@@ -453,8 +454,11 @@
 	  }
 	}
 
-	/* Feature Item
+	/* FEATURE ITEM
 	 * --------------
+	 * Specific SASS rules for
+	 * this reusable feature item
+	 * content box within the Header
 	*/ 
 	@import '_featureItem';
 
@@ -464,154 +468,13 @@
 	 * Specific SASS rules for
 	 * this widget within the Header.
 	*/ 
-	.FindUsWidget {
+	@import '_findUsWidget';
 
-		&-FindUsFeature {
-			display: inline-table;
-			width: 50%;
-			height: 100%;
-			margin: 0;
-			padding: 0;
 
-			&-Wrapper {
-				color: #FFFFFF;
-				display: block;
-				position: relative;
-				margin: 0 0 0 25px;
-				top: 50px;
-			}
-
-			&-Tag {
-				font-size: 13px;
-				@include Kievit-Medium;
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
-			}
-
-			&-Title {
-				font-size: 22px;
-				@include Milo-Light;
-				color: #FFF;
-				line-height: 1em;
-				margin: 0.8em 0 0.6em;
-				font-weight: normal;
-				letter-spacing: 0.05rem;
-			}
-
-			&-IntroText {
-				display: block;
-				margin: 1em 0;
-				@include Milo-Regular;
-				line-height: 1.25em;
-				font-size: 18px;
-				max-width: 65%;
-			}
-
-			&-Link {
-				margin-top: 10px;
-				position: absolute;
-				font-size: 13px;
-				@include Kievit-Book;
-				letter-spacing: 0.07em;
-				background-color: $libraryBlue;
-				color: #fff;
-				padding: 15px 13px 15px 25px;
-				margin: 10px 0;
-			}
-
-			&-SearchBox {
-				display: block;
-				margin: 10px 0 0 0;
-			}
-
-			#LocationFinder {
-				&-Input {
-					display: table-cell;
-					border: none;
-					height: 40px;
-					width: 65%;
-					padding: 2px 5px;
-					font-size: 15px;
-					color: #000;
-				}
-				&-Submit {
-					display: table-cell;
-					border: none;
-					padding: 0px 15px;
-					margin: 0px;
-					height: 44px;
-					background-color: $BG_MENU_SEARCH;
-					width: auto;
-					vertical-align: top;
-					font-size: 15px;
-				}
-			}
-		}
-	} /* End .FindUsWidget */
-
-	.DonateWidget {
-		&-DonateBox {
-			display: inline-table;
-			width: 50%;
-			height: 100%;
-			margin: 0;
-			padding: 0;
-
-			&-Wrapper {
-				color: #FFFFFF;
-				display: block;
-				position: relative;
-				margin: 0 0 0 25px;
-				top: 50px;
-			}
-
-			&-Tag {
-				font-size: 13px;
-				@include Kievit-Medium;
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
-			}
-			&-Title {
-				font-size: 30px;
-				@include Kievit-Book;
-				line-height: 1em;
-				margin: .75em 0;
-				font-weight: normal;
-				letter-spacing: 0.02em;
-			}
-
-			&-Desc {
-				@include Kievit-Regular;
-				font-size: 15.5px;
-				line-height: 1.5em;
-				letter-spacing: .01em;
-			}
-
-			&-DonationLinks {
-				list-style-type: none;
-				display: block;
-				margin: 1em 0;
-				padding: 0;
-
-				li {
-					display: inline-block;
-					margin: 0 15px 0 0;
-
-					&:last-child {
-						margin-right: 0px
-					}
-
-					a {
-						color: #FFF;
-						display: block;
-						font-size: 18px;
-						padding: 15px 20px;
-						margin: 0;
-						border: 2px solid #FFF;
-						border-radius: 5px;
-					}
-				}
-			}
-		}
-	}
+	/* DONATE WIDGET
+	 * --------------
+	 * Specific SASS rules for
+	 * this widget within the Header.
+	*/ 
+	@import '_donateWidget';
 }
