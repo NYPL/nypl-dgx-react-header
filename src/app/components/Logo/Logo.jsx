@@ -39,7 +39,7 @@ const styles = {
 
   },
   image: {
-    maxWidth: '100%'
+    maxWidth: '230px'
   },
   icon: {
     display: 'none'

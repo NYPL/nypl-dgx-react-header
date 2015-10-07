@@ -15,53 +15,55 @@ class SearchButton extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-
-    // Holds the initial state. The actived status is false
-    this.state = {
-    };
   }
 
-  // Dom Render Section
   render () {
-    // Give active class if the button is activated
+    // Give active class if the button is activated by hover
     let classes = cx({
-      'active': HeaderStore._getSearchButtonActionValue() === 'hoverSearch'
-    });
+        'active': HeaderStore._getSearchButtonActionValue() === 'hoverSearch' ||
+          HeaderStore._getLastActiveMenuItem() === 'hoverSearch'
+      });
 
     return (
-      <div className={`${this.props.className}-SearchBox-Wrapper`}
-      onMouseEnter={this._hoverOpen.bind(this)}
-      onMouseLeave={this._hoverClose.bind(this)}>
-        <BasicButton id={`${this.props.className}-SearchButton`}
-        className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
-        name='Search Button'
-        label='' />
-        <SearchBox id={`${this.props.className}-SearchBox`}
-        className={`${this.props.className}-SearchBox`} />
+      <div className={`${this.props.className}-SearchBox-Wrapper`}>
+        <BasicButton
+          onMouseEnter={this._activateHover.bind(this)}
+          onMouseLeave={this._deactivateHover.bind(this)}
+          id={`${this.props.className}-SearchButton`}
+          className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
+          name='Search Button'
+          label='' />
+        <SearchBox 
+          id={`${this.props.className}-SearchBox`}
+          className={`${this.props.className}-SearchBox`} />
       </div>
     );
   }
 
   /**
-   * _hoverOpen()
-   * Make search button is able to be triggered by hovering in, but only when it hasn't been
-   * triggered by click method yet.
+   * _activateHover()
+   * Update the Store's searchButtonActionValue
+   * with hoverSearch after a set time delay.
    */
-  _hoverOpen() {
-    if (HeaderStore._getSearchButtonActionValue() !== 'hoverSearch') {
-      if (HeaderStore._getSearchButtonActionValue() !== 'clickSearch') {
-        Actions.searchButtonActionValue('hoverSearch');
-      }
-    }
+  _activateHover() {
+
+    this.hoverTimer = setTimeout(() => {
+      Actions.searchButtonActionValue('hoverSearch');
+    }, 350);
   }
 
   /**
    * _hoverClose()
-   * This function will close search box when the user hovers out
-   * from search button and search box.
+   * Clear the activateHover timer if it exists.
+   * Reset the Store's searchButtonActionValue to empty
+   * after a set time delay.
    */
-  _hoverClose() {
-    Actions.searchButtonActionValue('');
+  _deactivateHover() {
+    clearTimeout(this.hoverTimer);
+
+    setTimeout(() => {
+      Actions.searchButtonActionValue('');
+    }, 250);
   }
 }
 

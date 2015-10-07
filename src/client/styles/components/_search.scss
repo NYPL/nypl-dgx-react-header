@@ -18,7 +18,7 @@
   border-width: 0px;
   display: none;
   font-size: 22px;
-  padding: 8px 8px 14px 8px;
+  padding: 8px 10px 14px 10px;
 
   @include desktop {
     display: block;
@@ -39,6 +39,8 @@
   &.active {
     background-color: $BG_MENU_SEARCH;
     color: #78CCED;
+    -webkit-transition: background-color .3s linear .25s, color .3s linear .25s; /* Safari */
+    transition: background-color .3s linear .25s, color .3s linear .25s;
 
     @include desktop {
       display: block;
@@ -63,7 +65,7 @@
     @include desktop {
       display: block;
       top: 42px;
-      height: 236px;
+      height: 225px;
     } 
   }
 
@@ -83,11 +85,11 @@
 &-SearchBox-Elements-Wrapper {
   display: inline-block;
   margin: 20px 0 0 0;
-  max-width: 1312px;
+  max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
   position: relative;
   width: 100%;
   @include desktop {
-    margin: 66px auto 0 auto;
+    margin: 55px auto 0 auto;
     display: block;
     text-align: left;
   }
@@ -172,15 +174,16 @@
   position: relative;
   text-align: left;
   width: 93%;
+
   .icon {
     background-color: #FFFFFF;
     color: $BG_MENU_SEARCH;
     display: inline-block;
     font-size: 20px;
     left: 2px;
-    padding: 10px 5px;
+    padding: 0;
     position: absolute;
-    top: 9px;
+    top: 22px;
 
     @include desktop {
       display:none;
@@ -195,32 +198,33 @@
 
 &-SearchBox-Input-Keywords {
   background-color: #FFFFFF;
-  border: none;
-  box-sizing: content-box;
+  border: none !important;
   color: #000000;
   display: inline-block;
-  font-family: Kievit-Book;
+  @include Kievit-Light;
   font-size: 18px;
   font-style: italic;
   height: 66px;
-  padding: 0 0 0 35px;
+  padding: 0 0 0 25px !important;
   width: 100%;
+
+  &:focus {
+    outline: 0;
+  }
 
   @include desktop {
     background-color: #1DA1D4;
     color: #FFFFFF;
-    font-family: Kievit-Light;
+    @include Kievit-Light;
     font-size: 66px;
     font-style: normal;
     letter-spacing: -0.8px;
-    padding: 0 0 16px 0;
-    width: 100%;
+    padding: 0 0 16px 0 !important;
   }
 }
 
 &-SearchBox-Input-Keywords-Border {
   border: none;
-  box-sizing: content-box;
   display: inline-block;
   @include calculation(width, '100% - 35px');
 
@@ -234,10 +238,10 @@
 }
 
 &-SearchBox-Elements-Input-Options-Wrapper {
-  color: #FFFFFF;
   display: none;
+  color: #FFFFFF;
   float: left;
-  font-size: 15px;
+  font-size: 16px;
 
   @include desktop {
     display: inline-block;
@@ -256,6 +260,8 @@
   cursor: pointer;
   display: inline-block;
   margin: 0 0 0 -10px;
+  letter-spacing: .025em;
+  @include Kievit-Book;
 }
 
 &-SearchBox-Elements-SubmitButton {
@@ -317,6 +323,7 @@
     display: inline-block;
     margin: 0 20px 0 0;
     vertical-align: middle;
+    @include Kievit-Book;
   }
 
   .icon {
