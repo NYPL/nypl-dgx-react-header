@@ -1,6 +1,7 @@
 &-GlobalAlerts {
 	position: absolute;
 	top: 60px;
+	z-index: 2;
 
 	@include desktop {
 		position: relative;
