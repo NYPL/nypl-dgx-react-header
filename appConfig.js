@@ -4,7 +4,7 @@ let config = {
 	port: 3001,
 	webpackDevServerPort: 3000,
 	favIconPath: 'http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/images/favicon.ico',
-	apiUrl: 'http://dev.refinery.aws.nypl.org/api/nypl/ndo/v0.1/site-data/header-items?filter%5Brelationships%5D%5Bparent%5D=null&include=children,related-mega-menu-panes.current-mega-menu-items.images',
+	apiUrl: 'http://dev-refinery.nypl.org/api/nypl/ndo/v0.1/site-data/header-items?filter%5Brelationships%5D%5Bparent%5D=null&include=children,related-mega-menu-panes.current-mega-menu-items.images',
 	alertsApiUrl: 'https://refinery.nypl.org/api/nypl/ndo/v0.1/content/alerts?filter%5Bscope%5D=all',
 	navTopLinks: [
 		{
@@ -155,9 +155,9 @@ let config = {
 	],
 	refineryApi: {
 		root: {
-			development: 'http://dev.refinery.aws.nypl.org',
-			qa: 'http://qa.refinery.aws.nypl.org',
-			production: 'http://refinery.aws.nypl.org'
+			development: 'http://dev-refinery.nypl.org',
+			qa: 'http://qa-refinery.nypl.org',
+			production: 'http://refinery.nypl.org'
 		},
 		endpoint: '/api/nypl/ndo/v0.1/site-data/header-items',
 		includes: [
