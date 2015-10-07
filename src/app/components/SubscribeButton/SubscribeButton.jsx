@@ -132,7 +132,7 @@ const styles = {
     zIndex: 1000,
     right: '0',
     width: '250px',
-    height: '210px',
+    minHeight: '210px',
     backgroundColor: '#1DA1D4',
     padding: '25px 30px'
   },
