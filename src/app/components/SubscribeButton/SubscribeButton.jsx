@@ -37,7 +37,8 @@ class SubscribeButton extends React.Component {
     let showDialog = this.state.subscribeFormVisible;
 
     // Dynamic class assignment based on boolean flag
-    const classes = cx({
+    const buttonClasses = cx({'active': showDialog}),
+      emailFormClasses = cx({
         'active animatedFast fadeIn': showDialog
       }),
       iconClass = cx({
@@ -55,7 +56,7 @@ class SubscribeButton extends React.Component {
 
         <a
           id={'SubscribeButton'}
-          className={`SubscribeButton ${classes}`}
+          className={`SubscribeButton ${buttonClasses}`}
           href={this.props.target}
           onClick={this._handleClick}
           style={[
@@ -66,7 +67,7 @@ class SubscribeButton extends React.Component {
           <span className={`${iconClass} icon`} style={styles.SubscribeIcon}></span>
         </a>
 
-        <div className={`EmailSubscription-Wrapper ${classes}`}
+        <div className={`EmailSubscription-Wrapper ${emailFormClasses}`}
           style={[
             styles.EmailSubscribeForm
           ]}>

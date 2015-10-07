@@ -7,6 +7,8 @@
 		&.active {
 			background-color: #1980A9;
 			color: #FFF;
+	    -webkit-transition: background-color .2s linear 0s, color .2s linear 0s; /* Safari */
+	    transition: background-color .2s linear 0s, color .2s linear 0s;
 
 			&:visited {
 				color: #FFF;
