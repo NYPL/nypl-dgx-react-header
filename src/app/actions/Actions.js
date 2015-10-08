@@ -30,6 +30,7 @@ class Actions {
 
         if (response instanceof Error) {
           console.log(response.message);
+          self.actions.updateHeaderData([]);
         } else {
           // The request was made, but the server responded with a status code
           // that falls out of the range of 2xx
