@@ -25,7 +25,7 @@ if (typeof window !== 'undefined') {
 	  if (!isRenderedByServer) {
 	  	// Wrap in closure
 	  	(function (global, doc) {
-		  	let styleTag, allScriptTags, scriptTag, htmlElement, nyplHeaderObject, i;
+		  	let styleTag, allScriptTags, scriptTag, htmlElement, nyplHeaderObject, i, appEnv;
 
 	  		// create element to hold the single header instance.
 	  		htmlElement = doc.createElement('div');
@@ -33,7 +33,7 @@ if (typeof window !== 'undefined') {
 
 		  	// Make a global object to store the instances of nyplHeader
 		  	if (!global.nyplHeader) { 
-		  		global.nyplHeader = {}; 
+		  		global.nyplHeader = {};
 		  	};
 
 		  	// Short-name reference to global.nyplHeader
@@ -66,6 +66,15 @@ if (typeof window !== 'undefined') {
 		      [].forEach.call(allScriptTags, function(value, index) {
 		      	if (value.src.indexOf('dgx-header.min.js') !== -1) {
 		      		scriptTag = value;
+
+		      		if (scriptTag.src.indexOf('dev-header.nypl.org') !== -1) {
+		      			appEnv = 'development';
+		      		} else if (scriptTag.src.indexOf('qa-header.nypl.org') !== -1) {
+		      			appEnv = 'qa';
+		      		} else {
+		      			appEnv = 'production';
+		      		}
+
 		      		scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
 		      		nyplHeaderObject.processedScripts.push(scriptTag);
 		      	}
@@ -80,8 +89,15 @@ if (typeof window !== 'undefined') {
 				  	styleTag = document.createElement('link');
 				  	styleTag.rel = 'stylesheet';
 				    styleTag.type = 'text/css';
-				    styleTag.href = '//qa-header.nypl.org/styles.css';
 				    styleTag.media = "all";
+
+				    if (appEnv === 'development') {
+				    	styleTag.href = '//dev-header.nypl.org/styles.css';
+				    } else if (appEnv === 'qa') {
+				    	styleTag.href = '//qa-header.nypl.org/styles.css';
+				    } else {
+				    	styleTag.href = '//header.nypl.org/styles.css';
+				    }
 
 		  			doc.getElementsByTagName('head')[0].appendChild(styleTag);
 				    nyplHeaderObject.styleTags.push(styleTag);
@@ -97,7 +113,7 @@ if (typeof window !== 'undefined') {
 	  			// the <Header /> component renders with data already
 	  			// loaded. There is a fallback method in the <Header />
 	  			// component that checks the Store data then fetches.
-	  			Actions.fetchHeaderData();
+	  			Actions.fetchHeaderData(appEnv);
 
 		  		setTimeout(() => {
 		  			// Once rendered, React should populate the state
