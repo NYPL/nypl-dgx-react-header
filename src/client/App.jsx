@@ -23,113 +23,110 @@ if (typeof window !== 'undefined') {
 
 	  // Render Client Side Only
 	  if (!isRenderedByServer) {
-	  	// Wrap in closure
-	  	//(function (global, doc) {
-		  	let styleTag, allScriptTags, scriptTag, htmlElement, nyplHeaderObject, i, appEnv;
+	  	let styleTag, allScriptTags, scriptTag, htmlElement, nyplHeaderObject, i, appEnv;
 
-	  		// create element to hold the single header instance.
-	  		htmlElement = document.createElement('div');
-	  		htmlElement.id = 'nypl-dgx-header';
+  		// create element to hold the single header instance.
+  		htmlElement = document.createElement('div');
+  		htmlElement.id = 'nypl-dgx-header';
 
-		  	// Make a global object to store the instances of nyplHeader
-		  	if (!window.nyplHeader) { 
-		  		window.nyplHeader = {};
-		  	};
+	  	// Make a global object to store the instances of nyplHeader
+	  	if (!window.nyplHeader) { 
+	  		window.nyplHeader = {};
+	  	};
 
-		  	// Short-name reference to global.nyplHeader
-		  	nyplHeaderObject = window.nyplHeader;
+	  	// Short-name reference to global.nyplHeader
+	  	nyplHeaderObject = window.nyplHeader;
 
-		  	// Let's keep track of the processed scripts within nyplHeader
-		  	if (!nyplHeaderObject.processedScripts) {
-		  		nyplHeaderObject.processedScripts = []; 
-		  	};
+	  	// Let's keep track of the processed scripts within nyplHeader
+	  	if (!nyplHeaderObject.processedScripts) {
+	  		nyplHeaderObject.processedScripts = []; 
+	  	};
 
-		  	// Let's keep track of the processed style tags within nyplHeader
-		  	if (!nyplHeaderObject.styleTags) {
-		  		nyplHeaderObject.styleTags = [];
-		  	};
+	  	// Let's keep track of the processed style tags within nyplHeader
+	  	if (!nyplHeaderObject.styleTags) {
+	  		nyplHeaderObject.styleTags = [];
+	  	};
 
-		  	// Only create the nyplHeader if the global.nyplHeaderObject.scripts is empty
-		  	if (nyplHeaderObject.processedScripts.length === 0) {
+	  	// Only create the nyplHeader if the global.nyplHeaderObject.scripts is empty
+	  	if (nyplHeaderObject.processedScripts.length === 0) {
 
-		      /*
-		       * Loop through all <script> tags in the DOM.
-		       * Find the match which contains 'dgx-header.min.js'.
-		       * Insert the markup holding the NYPL Header
-		       * right before the <script> tag matched.
-		       */
-		      allScriptTags = document.getElementsByTagName('script');
+	      /*
+	       * Loop through all <script> tags in the DOM.
+	       * Find the match which contains 'dgx-header.min.js'.
+	       * Insert the markup holding the NYPL Header
+	       * right before the <script> tag matched.
+	       */
+	      allScriptTags = document.getElementsByTagName('script');
 
-		      /* Since getElementsBy is an array-like structure,
-		     	 * we need to use call to iterate with forEach.
-		     	 */
-		      [].forEach.call(allScriptTags, function(value, index) {
-		      	if (value.src.indexOf('dgx-header.min.js') !== -1) {
-		      		scriptTag = value;
+	      /* Since getElementsBy is an array-like structure,
+	     	 * we need to use call to iterate with forEach.
+	     	 */
+	      [].forEach.call(allScriptTags, function(value, index) {
+	      	if (value.src.indexOf('dgx-header.min.js') !== -1) {
+	      		scriptTag = value;
 
-		      		if (scriptTag.src.indexOf('dev-header.nypl.org') !== -1) {
-		      			appEnv = 'development';
-		      		} else if (scriptTag.src.indexOf('qa-header.nypl.org') !== -1) {
-		      			appEnv = 'qa';
-		      		} else {
-		      			appEnv = 'production';
-		      		}
+	      		if (scriptTag.src.indexOf('dev-header.nypl.org') !== -1) {
+	      			appEnv = 'development';
+	      		} else if (scriptTag.src.indexOf('qa-header.nypl.org') !== -1) {
+	      			appEnv = 'qa';
+	      		} else {
+	      			appEnv = 'production';
+	      		}
 
-		      		scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
-		      		nyplHeaderObject.processedScripts.push(scriptTag);
-		      	}
-		      });
+	      		scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
+	      		nyplHeaderObject.processedScripts.push(scriptTag);
+	      	}
+	      });
 
-		      /*
-		       * Only create one instance of the <style> tag for the Header.
-		       * Append the <head> element with the new <style> tag
-		       * Add the newly created tag to the nyplHeaderObject for tracking
-		       */
-		      if (nyplHeaderObject.styleTags.length === 0) {
-				  	styleTag = document.createElement('link');
-				  	styleTag.rel = 'stylesheet';
-				    styleTag.type = 'text/css';
-				    styleTag.media = "all";
+	      /*
+	       * Only create one instance of the <style> tag for the Header.
+	       * Append the <head> element with the new <style> tag
+	       * Add the newly created tag to the nyplHeaderObject for tracking
+	       */
+	      if (nyplHeaderObject.styleTags.length === 0) {
+			  	styleTag = document.createElement('link');
+			  	styleTag.rel = 'stylesheet';
+			    styleTag.type = 'text/css';
+			    styleTag.media = "all";
 
-				    if (appEnv === 'development') {
-				    	styleTag.href = '//dev-header.nypl.org/styles.css';
-				    } else if (appEnv === 'qa') {
-				    	styleTag.href = '//qa-header.nypl.org/styles.css';
-				    } else {
-				    	styleTag.href = '//header.nypl.org/styles.css';
-				    }
+			    if (appEnv === 'development') {
+			    	styleTag.href = '//dev-header.nypl.org/styles.css';
+			    } else if (appEnv === 'qa') {
+			    	styleTag.href = '//qa-header.nypl.org/styles.css';
+			    } else {
+			    	styleTag.href = '//header.nypl.org/styles.css';
+			    }
 
-		  			document.getElementsByTagName('head')[0].appendChild(styleTag);
-				    nyplHeaderObject.styleTags.push(styleTag);
-		      }
-		  	}
+	  			document.getElementsByTagName('head')[0].appendChild(styleTag);
+			    nyplHeaderObject.styleTags.push(styleTag);
+	      }
+	  	}
 
-		  	// Now we ensure that only ONE <script> tag and ONE <style> tag have been created
-		  	// before allowing React to Render the Header.
-		  	if (nyplHeaderObject.processedScripts.length === 1 && nyplHeaderObject.styleTags.length === 1) {
+	  	// Now we ensure that only ONE <script> tag and ONE <style> tag have been created
+	  	// before allowing React to Render the Header.
+	  	/*if (nyplHeaderObject.processedScripts.length === 1 && nyplHeaderObject.styleTags.length === 1) {
 
-	  			// Fetch the data first before Render
-	  			// This allows us to populate the Store so that
-	  			// the <Header /> component renders with data already
-	  			// loaded. There is a fallback method in the <Header />
-	  			// component that checks the Store data then fetches.
-	  			//Actions.fetchHeaderData(appEnv);
+  			// Fetch the data first before Render
+  			// This allows us to populate the Store so that
+  			// the <Header /> component renders with data already
+  			// loaded. There is a fallback method in the <Header />
+  			// component that checks the Store data then fetches.
+  			//Actions.fetchHeaderData(appEnv);
 
-		  		//setTimeout(() => {
-		  			// Once rendered, React should populate the state
-		  			// based off the Store.
-		      	React.render(<Header/>, htmlElement);
+	  		setTimeout(() => {
+	  			// Once rendered, React should populate the state
+	  			// based off the Store.
+	      	React.render(<Header/>, htmlElement);
 
-		      	console.log('Application rendered via Client');
-		  		//}, 250);
-		  	}
-	  	//})(window, document);
+	      	console.log('Application rendered via Client');
+	  		}, 250);
+	  	}*/
 	  }
 
-	  /*if (!window.ga) {
+	  if (!window.ga) {
 			console.log('Analytics not available - loading through React.');
 			let gaOpts = { debug: true };
 			ga.initialize('UA-1420324-122', gaOpts);
-		}*/
+		}
 	}
 }
