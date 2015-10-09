@@ -4,7 +4,7 @@ import axios from 'axios';
 import appConfig from '../../../appConfig.js';
 
 class Actions {
-  // TODO: Clean this method with new API methods
+
   fetchHeaderData(environment) {
     let self = this,
       appEnv = environment,

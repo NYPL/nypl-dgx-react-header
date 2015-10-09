@@ -98,7 +98,7 @@ function ContentModel() {
     item.category = data.category ? data.category[lang].text : item.headline;
     item.imgSrc = data.images ? data.images[0].uri : '';
     // Assuming that the text is already trimmed we should redo this:
-    item.description = data.description ? data.description[lang].text.substring(0, '100') : '';
+    item.description = data.description ? data.description[lang].text.substring(0, '175') : '';
     item.link = data.link ? data.link[lang].text : '';
 
     if (data.content) {
