@@ -32,17 +32,17 @@ class Header extends React.Component {
 
     // If the Store is not populated with
     // the proper Data, then fetch.
-    this._fetchDataIfNeeded();
+    //this._fetchDataIfNeeded();
 
     // Assign method for proper scope
     let handleHeaderScroll = this._handleStickyHeader.bind(this);
 
     // Allows us to use window only after component has mounted
-    window.addEventListener('scroll',
+    /*window.addEventListener('scroll',
       function() {
         handleHeaderScroll();
       }
-    );
+    );*/
   }
 
   componentWillUnmount() {
