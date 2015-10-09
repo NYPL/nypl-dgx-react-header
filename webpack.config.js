@@ -35,11 +35,7 @@ var commonSettings = {
 		  {
         test: /\.scss$/,
         include: path.resolve(ROOT_PATH, 'src'),
-        loader: ExtractTextPlugin.extract(
-          // activate source maps via loader query
-          'css?sourceMap!' +
-          'sass?sourceMap'
-        )
+        loaders: ["style", "css", "sass"]
 		  }
 		]
 	},
@@ -47,8 +43,7 @@ var commonSettings = {
 		// Cleans the Dist folder after every build.
 		// Alternately, we can run rm -rf dist/ as
 		// part of the package.json scripts.
-		new cleanBuild(['dist']),
-		new ExtractTextPlugin('styles.css')
+		new cleanBuild(['dist'])
 	]
 };
 
@@ -111,8 +106,11 @@ if (ENV === 'production') {
 		plugins: [
 			// Minification (Utilized in Production)
 			new webpack.optimize.UglifyJsPlugin({
+				output: {
+					comments: false
+				},
 				compress: {
-					warnings: false
+					warnings: true
 				}
 			})
 		]

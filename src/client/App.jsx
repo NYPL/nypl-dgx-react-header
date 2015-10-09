@@ -9,6 +9,7 @@ import ga from 'react-ga';
 import './styles/main.scss';
 
 if (typeof window !== 'undefined') {
+	"use strict";
 
 	let isRenderedByServer = false;
 
@@ -34,17 +35,12 @@ if (typeof window !== 'undefined') {
 	  		window.nyplHeader = {};
 	  	};
 
-	  	// Short-name reference to global.nyplHeader
+	  	// Short-name reference to window.nyplHeader
 	  	nyplHeaderObject = window.nyplHeader;
 
 	  	// Let's keep track of the processed scripts within nyplHeader
 	  	if (!nyplHeaderObject.processedScripts) {
 	  		nyplHeaderObject.processedScripts = []; 
-	  	};
-
-	  	// Let's keep track of the processed style tags within nyplHeader
-	  	if (!nyplHeaderObject.styleTags) {
-	  		nyplHeaderObject.styleTags = [];
 	  	};
 
 	  	// Only create the nyplHeader if the global.nyplHeaderObject.scripts is empty
@@ -61,7 +57,8 @@ if (typeof window !== 'undefined') {
 	      /* Since getElementsBy is an array-like structure,
 	     	 * we need to use call to iterate with forEach.
 	     	 */
-	      /*[].forEach.call(allScriptTags, function(value, index) {
+	      [].forEach.call(allScriptTags, function(value, index) {
+	      	console.log('In allScriptTags array');
 	      	if (value.src.indexOf('dgx-header.min.js') !== -1) {
 	      		scriptTag = value;
 
@@ -76,51 +73,8 @@ if (typeof window !== 'undefined') {
 	      		scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
 	      		nyplHeaderObject.processedScripts.push(scriptTag);
 	      	}
-	      });*/
-
-	      /*
-	       * Only create one instance of the <style> tag for the Header.
-	       * Append the <head> element with the new <style> tag
-	       * Add the newly created tag to the nyplHeaderObject for tracking
-	       */
-	      if (nyplHeaderObject.styleTags.length === 0) {
-			  	styleTag = document.createElement('link');
-			  	styleTag.rel = 'stylesheet';
-			    styleTag.type = 'text/css';
-			    styleTag.media = "all";
-
-			    if (appEnv === 'development') {
-			    	styleTag.href = '//dev-header.nypl.org/styles.css';
-			    } else if (appEnv === 'qa') {
-			    	styleTag.href = '//qa-header.nypl.org/styles.css';
-			    } else {
-			    	styleTag.href = '//header.nypl.org/styles.css';
-			    }
-
-	  			document.getElementsByTagName('head')[0].appendChild(styleTag);
-			    nyplHeaderObject.styleTags.push(styleTag);
-	      }
+	      });
 	  	}
-
-	  	// Now we ensure that only ONE <script> tag and ONE <style> tag have been created
-	  	// before allowing React to Render the Header.
-	  	/*if (nyplHeaderObject.processedScripts.length === 1 && nyplHeaderObject.styleTags.length === 1) {
-
-  			// Fetch the data first before Render
-  			// This allows us to populate the Store so that
-  			// the <Header /> component renders with data already
-  			// loaded. There is a fallback method in the <Header />
-  			// component that checks the Store data then fetches.
-  			//Actions.fetchHeaderData(appEnv);
-
-	  		setTimeout(() => {
-	  			// Once rendered, React should populate the state
-	  			// based off the Store.
-	      	React.render(<Header/>, htmlElement);
-
-	      	console.log('Application rendered via Client');
-	  		}, 250);
-	  	}*/
 	  }
 
 	  if (!window.ga) {
