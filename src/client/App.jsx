@@ -24,7 +24,7 @@ if (typeof window !== 'undefined') {
 
 	  // Render Client Side Only
 	  if (!isRenderedByServer) {
-	  	let styleTag, allScriptTags, scriptTag, htmlElement, nyplHeaderObject, i, appEnv;
+	  	let allScriptTags, scriptTag, htmlElement, nyplHeaderObject, appEnv;
 
   		// create element to hold the single header instance.
   		htmlElement = document.createElement('div');
@@ -58,7 +58,6 @@ if (typeof window !== 'undefined') {
 	     	 * we need to use call to iterate with forEach.
 	     	 */
 	      [].forEach.call(allScriptTags, function(value, index) {
-	      	console.log('In allScriptTags array');
 	      	if (value.src.indexOf('dgx-header.min.js') !== -1) {
 	      		scriptTag = value;
 
@@ -75,12 +74,14 @@ if (typeof window !== 'undefined') {
 	      	}
 	      });
 	  	}
+
+	  	console.log(nyplHeaderObject);
 	  }
 
-	  if (!window.ga) {
+	  /*if (!window.ga) {
 			console.log('Analytics not available - loading through React.');
 			let gaOpts = { debug: true };
 			ga.initialize('UA-1420324-122', gaOpts);
-		}
+		}*/
 	}
 }
