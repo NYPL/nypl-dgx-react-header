@@ -11,7 +11,6 @@ if (typeof window !== 'undefined') {
 	"use strict";
 
 	window.onload = () => {
-		(function(window, document) {
 
 			let isRenderedByServer = false;
 
@@ -81,6 +80,5 @@ if (typeof window !== 'undefined') {
 		      console.log(nyplHeaderObject);
 		  	}
 		  }
-		})(window, document);  
 	}
 }
