@@ -115,21 +115,21 @@ if (typeof window !== 'undefined') {
 	  			// component that checks the Store data then fetches.
 	  			//Actions.fetchHeaderData(appEnv);
 
-		  		setTimeout(() => {
+		  		//setTimeout(() => {
 		  			// Once rendered, React should populate the state
 		  			// based off the Store.
 		      	React.render(<Header/>, htmlElement);
 
 		      	console.log('Application rendered via Client');
-		  		}, 250);
+		  		//}, 250);
 		  	}
 	  	//})(window, document);
 	  }
 
-	  if (!window.ga) {
+	  /*if (!window.ga) {
 			console.log('Analytics not available - loading through React.');
 			let gaOpts = { debug: true };
 			ga.initialize('UA-1420324-122', gaOpts);
-		}
+		}*/
 	}
 }

@@ -148,7 +148,7 @@ class Header extends React.Component {
 Header.defaultProps = {
   lang: 'en',
   className: 'Header',
-  id: 'Header'
+  id: 'nyplHeader'
 };
 
 const styles = {
