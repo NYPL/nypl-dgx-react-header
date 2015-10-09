@@ -75,9 +75,26 @@ if (typeof window !== 'undefined') {
 		      	}
 		      });
 
-		      console.log(window);
-		      console.log(document);
-		      console.log(nyplHeaderObject);
+
+			  	// Now we ensure that only ONE <script> tag has been created
+			  	// before allowing React to Render the Header.
+			  	if (nyplHeaderObject.processedScripts.length === 1 && htmlElement) {
+
+		  			// Fetch the data first before Render
+		  			// This allows us to populate the Store so that
+		  			// the <Header /> component renders with data already
+		  			// loaded. There is a fallback method in the <Header />
+		  			// component that checks the Store data then fetches.
+		  			//Actions.fetchHeaderData();
+
+			  		setTimeout(() => {
+			  			// Once rendered, React should populate the state
+			  			// based off the Store.
+			      	React.render(React.createElement(Header), htmlElement);
+
+			      	console.log('nypl-dgx-header rendered via client');
+			  		}, 250);
+			  	}
 		  	}
 		  }
 	}
