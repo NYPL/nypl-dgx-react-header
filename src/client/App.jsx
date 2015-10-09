@@ -61,7 +61,7 @@ if (typeof window !== 'undefined') {
 	      /* Since getElementsBy is an array-like structure,
 	     	 * we need to use call to iterate with forEach.
 	     	 */
-	      [].forEach.call(allScriptTags, function(value, index) {
+	      /*[].forEach.call(allScriptTags, function(value, index) {
 	      	if (value.src.indexOf('dgx-header.min.js') !== -1) {
 	      		scriptTag = value;
 
@@ -76,7 +76,7 @@ if (typeof window !== 'undefined') {
 	      		scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
 	      		nyplHeaderObject.processedScripts.push(scriptTag);
 	      	}
-	      });
+	      });*/
 
 	      /*
 	       * Only create one instance of the <style> tag for the Header.
