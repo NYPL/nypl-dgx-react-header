@@ -5,8 +5,9 @@ import appConfig from '../../../appConfig.js';
 
 class Actions {
   // TODO: Clean this method with new API methods
-  fetchHeaderData(appEnv) {
+  fetchHeaderData(environment) {
     let self = this,
+      appEnv = environment,
       headerRootUrl;
 
     // Set the proper URL to fetch the Header Data model.
@@ -54,6 +55,10 @@ class Actions {
   }
 
   setLastActiveMenuItem(value) {
+    this.dispatch(value);
+  }
+
+  setClientAppEnv(value) {
     this.dispatch(value);
   }
 

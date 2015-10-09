@@ -15,10 +15,10 @@ if (typeof window !== 'undefined') {
 
 		// Render Isomorphically
 	  Iso.bootstrap(function (state, meta, container) {
-	  	console.log('nypl-dgx-header rendered isomorphically.');
 	    alt.bootstrap(state);
 	    React.render(React.createElement(Header), container);
 	    isRenderedByServer = true;
+	    console.log('nypl-dgx-header rendered isomorphically.');
 	  });
 
 	  // Render Client Side Only
@@ -85,7 +85,8 @@ if (typeof window !== 'undefined') {
   			// the <Header /> component renders with data already
   			// loaded. There is a fallback method in the <Header />
   			// component that checks the Store data then fetches.
-  			//Actions.fetchHeaderData(appEnv);
+  			Actions.setClientAppEnv(appEnv);
+  			Actions.fetchHeaderData(appEnv);
 
 	  		setTimeout(() => {
 	  			// Once rendered, React should populate the state

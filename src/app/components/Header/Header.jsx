@@ -38,11 +38,13 @@ class Header extends React.Component {
     let handleHeaderScroll = this._handleStickyHeader.bind(this);
 
     // Allows us to use window only after component has mounted
-    /*window.addEventListener('scroll',
-      function() {
-        handleHeaderScroll();
-      }
-    );*/
+    if (window && window.scrollY) {
+      window.addEventListener('scroll',
+        function() {
+          handleHeaderScroll();
+        }
+      );
+    }
   }
 
   componentWillUnmount() {
@@ -102,7 +104,7 @@ class Header extends React.Component {
    */
   _fetchDataIfNeeded() {
     if (Store.getState().headerData.length < 1) {
-      Actions.fetchHeaderData();
+      Actions.fetchHeaderData(Store._getClientAppEnv());
     }
   }
 
