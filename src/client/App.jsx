@@ -24,7 +24,7 @@ if (typeof window !== 'undefined') {
 	  // Render Client Side Only
 	  if (!isRenderedByServer) {
 	  	// Wrap in closure
-	  	(function (global, doc) {
+	  	//(function (global, doc) {
 		  	let styleTag, allScriptTags, scriptTag, htmlElement, nyplHeaderObject, i, appEnv;
 
 	  		// create element to hold the single header instance.
@@ -118,12 +118,12 @@ if (typeof window !== 'undefined') {
 		  		setTimeout(() => {
 		  			// Once rendered, React should populate the state
 		  			// based off the Store.
-		      	React.render(React.createElement(Header), htmlElement);
+		      	React.render(<Header/>, htmlElement);
 
 		      	console.log('Application rendered via Client');
 		  		}, 250);
 		  	}
-	  	})(window, document);
+	  	//})(window, document);
 	  }
 
 	  if (!window.ga) {
