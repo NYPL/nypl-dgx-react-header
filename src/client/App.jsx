@@ -8,7 +8,6 @@ import ga from 'react-ga';
 import './styles/main.scss';
 
 if (typeof window !== 'undefined') {
-	"use strict";
 
 	window.onload = () => {
 
@@ -16,7 +15,7 @@ if (typeof window !== 'undefined') {
 
 		// Render Isomorphically
 	  Iso.bootstrap(function (state, meta, container) {
-	  	console.log('Application rendered Isomorphically.');
+	  	console.log('nypl-dgx-header rendered isomorphically.');
 	    alt.bootstrap(state);
 	    React.render(React.createElement(Header), container);
 	    isRenderedByServer = true;
@@ -43,8 +42,6 @@ if (typeof window !== 'undefined') {
 	  	if (!nyplHeaderObject.processedScripts) {
 	  		nyplHeaderObject.processedScripts = []; 
 	  	};
-
-	  	console.log(window);
 
 	  	// Only create the nyplHeader if the global.nyplHeaderObject.scripts is empty
 	  	if (nyplHeaderObject.processedScripts.length === 0) {
@@ -76,6 +73,27 @@ if (typeof window !== 'undefined') {
 	      		nyplHeaderObject.processedScripts.push(scriptTag);
 	      	}
 	      });
+
+	    }
+
+	  	// Now we ensure that only ONE <script> tag has been created
+	  	// before allowing React to Render the Header.
+	  	if (nyplHeaderObject.processedScripts.length === 1 && htmlElement) {
+
+  			// Fetch the data first before Render
+  			// This allows us to populate the Store so that
+  			// the <Header /> component renders with data already
+  			// loaded. There is a fallback method in the <Header />
+  			// component that checks the Store data then fetches.
+  			Actions.fetchHeaderData(appEnv);
+
+	  		setTimeout(() => {
+	  			// Once rendered, React should populate the state
+	  			// based off the Store.
+	      	React.render(React.createElement(Header), htmlElement);
+
+	      	console.log('nypl-dgx-header rendered via client');
+	  		}, 250);
 	  	}
 	  }
 	}

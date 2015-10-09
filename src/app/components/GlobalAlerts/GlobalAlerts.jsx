@@ -23,7 +23,7 @@ class GlobalAlerts extends React.Component{
 
   componentDidMount() {
     //Fetch the Global Alerts via Client
-    //this._fetchGlobalAlerts();
+    this._fetchGlobalAlerts();
   }
 
   render () {
