@@ -85,7 +85,7 @@ if (typeof window !== 'undefined') {
   			// the <Header /> component renders with data already
   			// loaded. There is a fallback method in the <Header />
   			// component that checks the Store data then fetches.
-  			Actions.fetchHeaderData(appEnv);
+  			//Actions.fetchHeaderData(appEnv);
 
 	  		setTimeout(() => {
 	  			// Once rendered, React should populate the state
