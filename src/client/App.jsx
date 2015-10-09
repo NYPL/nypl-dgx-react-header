@@ -28,16 +28,16 @@ if (typeof window !== 'undefined') {
 		  	let styleTag, allScriptTags, scriptTag, htmlElement, nyplHeaderObject, i, appEnv;
 
 	  		// create element to hold the single header instance.
-	  		htmlElement = doc.createElement('div');
+	  		htmlElement = document.createElement('div');
 	  		htmlElement.id = 'nypl-dgx-header';
 
 		  	// Make a global object to store the instances of nyplHeader
-		  	if (!global.nyplHeader) { 
-		  		global.nyplHeader = {};
+		  	if (!window.nyplHeader) { 
+		  		window.nyplHeader = {};
 		  	};
 
 		  	// Short-name reference to global.nyplHeader
-		  	nyplHeaderObject = global.nyplHeader;
+		  	nyplHeaderObject = window.nyplHeader;
 
 		  	// Let's keep track of the processed scripts within nyplHeader
 		  	if (!nyplHeaderObject.processedScripts) {
@@ -58,7 +58,7 @@ if (typeof window !== 'undefined') {
 		       * Insert the markup holding the NYPL Header
 		       * right before the <script> tag matched.
 		       */
-		      allScriptTags = doc.getElementsByTagName('script');
+		      allScriptTags = document.getElementsByTagName('script');
 
 		      /* Since getElementsBy is an array-like structure,
 		     	 * we need to use call to iterate with forEach.
@@ -99,7 +99,7 @@ if (typeof window !== 'undefined') {
 				    	styleTag.href = '//header.nypl.org/styles.css';
 				    }
 
-		  			doc.getElementsByTagName('head')[0].appendChild(styleTag);
+		  			document.getElementsByTagName('head')[0].appendChild(styleTag);
 				    nyplHeaderObject.styleTags.push(styleTag);
 		      }
 		  	}
