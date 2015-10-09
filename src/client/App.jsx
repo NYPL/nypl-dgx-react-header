@@ -3,7 +3,6 @@ import Iso from 'iso';
 import alt from '../app/alt.js';
 import Actions from '../app/actions/Actions.js';
 import Header from '../app/components/Header/Header.jsx';
-
 import ga from 'react-ga';
 
 import './styles/main.scss';
@@ -11,77 +10,77 @@ import './styles/main.scss';
 if (typeof window !== 'undefined') {
 	"use strict";
 
-	let isRenderedByServer = false;
-
 	window.onload = () => {
-		// Render Isomorphically
-	  Iso.bootstrap(function (state, meta, container) {
-	  	console.log('Application rendered Isomorphically.');
-	    alt.bootstrap(state);
-	    React.render(React.createElement(Header), container);
-	    isRenderedByServer = true;
-	  });
+		(function(window, document) {
 
-	  // Render Client Side Only
-	  if (!isRenderedByServer) {
-	  	let allScriptTags, scriptTag, htmlElement, nyplHeaderObject, appEnv;
+			let isRenderedByServer = false;
 
-  		// create element to hold the single header instance.
-  		htmlElement = document.createElement('div');
-  		htmlElement.id = 'nypl-dgx-header';
+			// Render Isomorphically
+		  Iso.bootstrap(function (state, meta, container) {
+		  	console.log('Application rendered Isomorphically.');
+		    alt.bootstrap(state);
+		    React.render(React.createElement(Header), container);
+		    isRenderedByServer = true;
+		  });
 
-	  	// Make a global object to store the instances of nyplHeader
-	  	if (!window.nyplHeader) { 
-	  		window.nyplHeader = {};
-	  	};
+		  // Render Client Side Only
+		  if (!isRenderedByServer) {
 
-	  	// Short-name reference to window.nyplHeader
-	  	nyplHeaderObject = window.nyplHeader;
+		  	let allScriptTags, scriptTag, htmlElement, nyplHeaderObject, appEnv;
 
-	  	// Let's keep track of the processed scripts within nyplHeader
-	  	if (!nyplHeaderObject.processedScripts) {
-	  		nyplHeaderObject.processedScripts = []; 
-	  	};
+	  		// create element to hold the single header instance.
+	  		htmlElement = document.createElement('div');
+	  		htmlElement.id = 'nypl-dgx-header';
 
-	  	// Only create the nyplHeader if the global.nyplHeaderObject.scripts is empty
-	  	if (nyplHeaderObject.processedScripts.length === 0) {
+		  	// Make a global object to store the instances of nyplHeader
+		  	if (!window.nyplHeader) { 
+		  		window.nyplHeader = {};
+		  	};
 
-	      /*
-	       * Loop through all <script> tags in the DOM.
-	       * Find the match which contains 'dgx-header.min.js'.
-	       * Insert the markup holding the NYPL Header
-	       * right before the <script> tag matched.
-	       */
-	      allScriptTags = document.getElementsByTagName('script');
+		  	// Short-name reference to window.nyplHeader
+		  	nyplHeaderObject = window.nyplHeader;
 
-	      /* Since getElementsBy is an array-like structure,
-	     	 * we need to use call to iterate with forEach.
-	     	 */
-	      [].forEach.call(allScriptTags, function(value, index) {
-	      	if (value.src.indexOf('dgx-header.min.js') !== -1) {
-	      		scriptTag = value;
+		  	// Let's keep track of the processed scripts within nyplHeader
+		  	if (!nyplHeaderObject.processedScripts) {
+		  		nyplHeaderObject.processedScripts = []; 
+		  	};
 
-	      		if (scriptTag.src.indexOf('dev-header.nypl.org') !== -1) {
-	      			appEnv = 'development';
-	      		} else if (scriptTag.src.indexOf('qa-header.nypl.org') !== -1) {
-	      			appEnv = 'qa';
-	      		} else {
-	      			appEnv = 'production';
-	      		}
+		  	// Only create the nyplHeader if the global.nyplHeaderObject.scripts is empty
+		  	if (nyplHeaderObject.processedScripts.length === 0) {
 
-	      		scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
-	      		nyplHeaderObject.processedScripts.push(scriptTag);
-	      	}
-	      });
-	  	}
+		      /*
+		       * Loop through all <script> tags in the DOM.
+		       * Find the match which contains 'dgx-header.min.js'.
+		       * Insert the markup holding the NYPL Header
+		       * right before the <script> tag matched.
+		       */
+		      allScriptTags = document.getElementsByTagName('script');
 
-	  	console.log(nyplHeaderObject);
-	  }
+		      /* Since getElementsBy is an array-like structure,
+		     	 * we need to use call to iterate with forEach.
+		     	 */
+		      [].forEach.call(allScriptTags, function(value, index) {
+		      	if (value.src.indexOf('dgx-header.min.js') !== -1) {
+		      		scriptTag = value;
 
-	  /*if (!window.ga) {
-			console.log('Analytics not available - loading through React.');
-			let gaOpts = { debug: true };
-			ga.initialize('UA-1420324-122', gaOpts);
-		}*/
+		      		if (scriptTag.src.indexOf('dev-header.nypl.org') !== -1) {
+		      			appEnv = 'development';
+		      		} else if (scriptTag.src.indexOf('qa-header.nypl.org') !== -1) {
+		      			appEnv = 'qa';
+		      		} else {
+		      			appEnv = 'production';
+		      		}
+
+		      		scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
+		      		nyplHeaderObject.processedScripts.push(scriptTag);
+		      	}
+		      });
+
+		      console.log(window);
+		      console.log(document);
+		      console.log(nyplHeaderObject);
+		  	}
+		  }
+		})(window, document);  
 	}
 }
