@@ -1,0 +1,29 @@
+&-GlobalAlerts {
+	position: absolute;
+	top: 60px;
+
+	@include desktop {
+		position: relative;
+		top: inherit;
+	}
+
+	&-Box {
+
+		@include desktop {
+  		display: block;
+  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+  		margin: 0 auto;
+		}
+
+		&-Item {
+			p {
+				margin: .5em 0;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+			}
+		}
+	}
+}

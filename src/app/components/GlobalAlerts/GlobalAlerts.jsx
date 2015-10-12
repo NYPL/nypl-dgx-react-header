@@ -7,7 +7,7 @@ import _ from 'underscore';
 import axios from 'axios';
 import config from '../../../../appConfig.js';
 
-import AlertsBox from './AlertsBox.jsx';
+import AlertsBox from '../AlertsBox/AlertsBox.jsx';
 
 class GlobalAlerts extends React.Component{
 
@@ -25,14 +25,15 @@ class GlobalAlerts extends React.Component{
   }
 
   render () {
-    let currentGlobalAlerts = this.state.globalAlerts;
+    let currentGlobalAlerts = this._filterCurrentClosingAlerts(this.state.globalAlerts);
 
     return currentGlobalAlerts && currentGlobalAlerts.length ? (
-      <AlertsBox 
-        alerts={currentGlobalAlerts} 
-        id={`${this.props.className}-Box`}
-        className={`${this.props.className}-Box`} 
-        style={styles.base} />
+      <div className={this.props.className} id={this.props.id} style={styles.base}>
+        <AlertsBox 
+          alerts={currentGlobalAlerts} 
+          id={`${this.props.className}-Box`}
+          className={`${this.props.className}-Box`} />
+      </div>
     ) : null;
   }
 
@@ -44,7 +45,7 @@ class GlobalAlerts extends React.Component{
       .then(result => {
         if (result.data && result.data.data) {
           self.setState({
-            globalAlerts: this._filterCurrentClosingAlerts(result.data.data)
+            globalAlerts: result.data.data
           });
         }
       })
@@ -89,7 +90,7 @@ GlobalAlerts.defaultProps = {
 
 const styles = {
   base: {
-    backgroundColor: 'yellow',
+    backgroundColor: '#fee24a',
     textAlign: 'center',
     width: '100%',
     margin: 0,
