@@ -87,7 +87,7 @@ class SubscribeButton extends React.Component {
   _handleClick(e) {
     e.preventDefault();
 
-    if (this.props.target === '') {
+    if (this.props.target === '#') {
       let visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
       Actions.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
       
@@ -108,7 +108,7 @@ class SubscribeButton extends React.Component {
 SubscribeButton.defaultProps = {
   lang: 'en',
   label: 'Subscribe',
-  target: ''
+  target: '#'
 };
 
 const styles = {
