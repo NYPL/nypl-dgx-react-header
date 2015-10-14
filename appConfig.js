@@ -171,6 +171,11 @@ let config = {
     filters: {
       'relationships': {'parent': 'null'}
     }
+	},
+	headerClientEnv: {
+		production: 'https://header.nypl.org',
+		qa: 'https://qa-header.nypl.org',
+		development: 'https://dev-header.nypl.org'
 	}
 };
 

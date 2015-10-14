@@ -12,6 +12,7 @@ class Store {
       handleSearchButtonActionValue: Actions.SEARCH_BUTTON_ACTION_VALUE,
       handleUpdateIsHeaderSticky: Actions.UPDATE_IS_HEADER_STICKY,
       handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM,
+      handleSetClientAppEnv: Actions.SET_CLIENT_APP_ENV,
       handleToggleSubscribeFormVisible: Actions.TOGGLE_SUBSCRIBE_FORM_VISIBLE
     });
 
@@ -20,7 +21,8 @@ class Store {
       _getSearchButtonActionValue: this._getSearchButtonActionValue,
       _getIsStickyValue: this._getIsStickyValue,
       _getLastActiveMenuItem: this._getLastActiveMenuItem,
-      _getSubscribeFormVisible: this._getSubscribeFormVisible
+      _getSubscribeFormVisible: this._getSubscribeFormVisible,
+      _getClientAppEnv: this._getClientAppEnv
     });
 
     this.state = {
@@ -30,7 +32,8 @@ class Store {
       lastActiveMenuItem: '',
       activeMobileButton: '',
       searchButtonAction:'',
-      subscribeFormVisible: false
+      subscribeFormVisible: false,
+      clientAppEnv: ''
     };
   }
 
@@ -85,6 +88,10 @@ class Store {
     return this.state.lastActiveMenuItem;
   }
 
+  _getClientAppEnv() {
+    return this.state.clientAppEnv;
+  }
+
   /*** PRIVATE METHODS ***/
   handleUpdateHeaderData(data) {
     this.setState({headerData: data});
@@ -113,6 +120,10 @@ class Store {
 
   handleSetLastActiveMenuItem(value) {
     this.setState({lastActiveMenuItem: value});
+  }
+
+  handleSetClientAppEnv(value) {
+    this.setState({clientAppEnv: value});
   }
 
   handleToggleSubscribeFormVisible(value) {
