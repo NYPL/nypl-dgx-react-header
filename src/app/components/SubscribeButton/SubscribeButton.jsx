@@ -19,9 +19,6 @@ class SubscribeButton extends React.Component {
     this.state = {
       subscribeFormVisible: Store._getSubscribeFormVisible()
     };
-
-    // Allows binding methods that reference this
-    this._handleClick = this._handleClick.bind(this);
   }
 
   componentDidMount() {
