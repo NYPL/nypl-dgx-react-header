@@ -58,7 +58,7 @@ class SubscribeButton extends React.Component {
           id={'SubscribeButton'}
           className={`SubscribeButton ${buttonClasses}`}
           href={this.props.target}
-          onClick={this._handleClick}
+          onClick={this._handleClick.bind(this)}
           style={[
             styles.SimpleButton,
             this.props.style
@@ -84,13 +84,12 @@ class SubscribeButton extends React.Component {
   // Toggles the visibility of the form. Sends an Action update
   // to the Header Store that will triggger a global update
   // to the reference in the Header Constants.
-  _handleClick(event) {
-    if(this.props.target === '') {
-      event.preventDefault();
+  _handleClick(e) {
+    e.preventDefault();
 
-      Actions.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
-
+    if (this.props.target === '') {
       let visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
+      Actions.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
       
       gaUtils._trackEvent('Click', `Subscribe - ${visibleState}`);
     }
