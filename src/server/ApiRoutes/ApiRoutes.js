@@ -6,7 +6,7 @@ import Model from '../../app/utils/HeaderItemModel.js';
 import {refineryApi} from '../../../appConfig.js';
 
 let router = express.Router(),
-  appEnvironment = process.env.APP_ENV || 'development',
+  appEnvironment = process.env.APP_ENV || 'production',
   apiRoot = refineryApi.root[appEnvironment],
   options = {
     endpoint: `${apiRoot}${refineryApi.endpoint}`,
@@ -16,17 +16,13 @@ let router = express.Router(),
 
 const completeApiUrl = parser.getCompleteApi(options);
 
-// Set the actual children relationships you want to create
-// for the embedded properties.
-parser.setChildrenObjects(options);
-
 router
   .route('/')
   .get((req, res, next) => {
     axios
       .get(completeApiUrl)
       .then(data => {
-        let parsed = parser.parse(data.data),
+        let parsed = parser.parse(data.data, options),
           modelData = Model.build(parsed);
 
         res.locals.data = {
@@ -60,7 +56,7 @@ router
     axios
       .get(completeApiUrl)
       .then(data => {
-        let parsed = parser.parse(data.data),
+        let parsed = parser.parse(data.data, options),
           modelData = Model.build(parsed);
 
         res.json(modelData);
