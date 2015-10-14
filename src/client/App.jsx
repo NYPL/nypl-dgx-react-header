@@ -23,7 +23,7 @@ import './styles/main.scss';
 
 		  // Render Client Side Only
 		  if (!isRenderedByServer) {
-		  	let allScriptTags, scriptTag, htmlElement, nyplHeaderObject, appEnv;
+		  	let allScriptTags, styleTag, scriptTag, htmlElement, nyplHeaderObject, appEnv;
 
 	  		// create element to hold the single header instance.
 	  		htmlElement = document.createElement('div');
@@ -40,6 +40,11 @@ import './styles/main.scss';
 		  	// Let's keep track of the processed scripts within nyplHeader
 		  	if (!nyplHeaderObject.processedScripts) {
 		  		nyplHeaderObject.processedScripts = []; 
+		  	};
+
+		  	// Let's keep track of the processed style tags within nyplHeader
+		  	if (!nyplHeaderObject.styleTags) {
+		  		nyplHeaderObject.styleTags = [];
 		  	};
 
 		  	// Only create the nyplHeader if the global.nyplHeaderObject.scripts is empty
@@ -74,11 +79,34 @@ import './styles/main.scss';
 		      		nyplHeaderObject.processedScripts.push(scriptTag);
 		      	}
 		      });
+
+		      /*
+		       * Only create one instance of the <style> tag for the Header.
+		       * Append the <head> element with the new <style> tag
+		       * Add the newly created tag to the nyplHeaderObject for tracking
+		       */
+		      if (nyplHeaderObject.styleTags.length === 0) {
+				  	styleTag = document.createElement('link');
+				  	styleTag.rel = 'stylesheet';
+				    styleTag.type = 'text/css';
+				    styleTag.media = "all";
+
+				    if (appEnv === 'development') {
+				    	styleTag.href = '//dev-header.nypl.org/styles.css';
+				    } else if (appEnv === 'qa') {
+				    	styleTag.href = '//qa-header.nypl.org/styles.css';
+				    } else {
+				    	styleTag.href = '//header.nypl.org/styles.css';
+				    }
+
+		  			document.getElementsByTagName('head')[0].appendChild(styleTag);
+				    nyplHeaderObject.styleTags.push(styleTag);
+		      }
 		    }
 
 		  	// Now we ensure that only ONE <script> tag has been created
 		  	// before allowing React to Render the Header.
-		  	if (nyplHeaderObject.processedScripts.length === 1 && htmlElement) {
+		  	if (nyplHeaderObject.processedScripts.length === 1 && nyplHeaderObject.styleTags.length === 1 && htmlElement) {
 
 	  			// Fetch the data first before Render
 	  			// This allows us to populate the Store so that
@@ -99,6 +127,11 @@ import './styles/main.scss';
 		  		}, 250);
 		  	}
 		  }
+
+		  if (!window.ga) {
+				let gaOpts = { debug: true };
+				ga.initialize('UA-1420324-122', gaOpts);
+			}
 		}
 	}
 })(window, document);
