@@ -107,17 +107,16 @@
 	  			cursor: pointer;
 	  		}
 
-	  		&.active {
-	  			& > a {
-	  				z-index: 3;
-	  			}
-	  		}
-
 	  		& > a {
 	  			display: block;
 	  			color: #FFF;
 	  			@include Kievit-Book;
 	  			font-size: 18px;
+
+		  		&:visited, &:active, &:focus, &:hover {
+		  			text-decoration: none;
+		  			border: none;
+		  		}
 
 	  			@include desktop {
 	  				color: #000;
