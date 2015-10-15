@@ -1,29 +1,15 @@
 import React from 'react';
 import Radium from 'radium';
 import axios from 'axios';
+import cx from 'classnames';
+
+import config from '../../../../appConfig.js';
 import InputField from '../InputField/InputField.jsx';
+import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
+import SubscribeMessageBox from './SubscribeMessageBox.jsx';
+import DotsLoader from '../Loaders/DotsLoader.jsx';
 
-//import HeaderStore from '../../stores/HeaderStore';
-//import HeaderActions from '../../actions/HeaderActions';
-
-class SubscribeMessageBox extends React.Component {
-  // Constructor used in ES6
-  constructor(props) {
-    super(props);
-  }
-
-  render () {
-    return (
-      <div className={'EmailMessageBox ' + this.props.status }>
-        <p>{this.props.msg}</p>
-      </div>
-    );
-  }
-}
-
-SubscribeMessageBox.defaultProps = {
-  msg: 'You have been added successfully.'
-};
+import gaUtils from '../../utils/gaUtils.js';
 
 class EmailSubscription extends React.Component {
 
@@ -34,64 +20,46 @@ class EmailSubscription extends React.Component {
     // Holds the initial state, replaces getInitialState() method
     this.state = {
       formProcessing: false,
-      formStatus: ''
-      //formStatus: HeaderStore.getSubscribeFormStatus()
+      formStatus: '',
+      notValidEmail: false
     };
 
     this._validateForm = this._validateForm.bind(this);
   }
 
-  /*componentDidMount () {
-    HeaderStore.addChangeListener(this._onChange.bind(this));
-  }
-
-  componentWillUnmount () {
-    HeaderStore.removeChangeListener(this._onChange.bind(this));
-  }*/
-
   render () {
     let status = this.state.formStatus,
-      isLoading = this.state.formProcessing;
+      isLoading = this.state.formProcessing,
+      notValidEmail = this.state.notValidEmail,
+      formClass = 'EmailSubscribeForm',
+      subscribeContent;
 
-    //console.log(isLoading, status);
+    const errorClass = cx({'active': notValidEmail, '': !notValidEmail });
 
     if (!isLoading) {
-      if (status === 'success') {
-        return (
-          <SubscribeMessageBox status={status} msg="Thank you for subscribing to our newsletter. 
-          You'll now receive the best of NYPL in your inbox." />
-        );     
-      }
-
-      if (status === 'exists') {
-        return (
-          <SubscribeMessageBox status={status} msg="You are already subscribed to our newsletter. 
-          If you're not receiving the best of NYPL in your inbox, please check your spam folder." />
-        );
-      }
-
-      if (status === 'error') {
-        return (
-          <SubscribeMessageBox status={status} msg="There was an error while performing your
-          request, please try again later." />
-        );     
-      }
-
-      return (
+      // The default view
+      subscribeContent = (
         <div>
+          <div className={`SubscribeMessageBox ${status}`}>
+            <div className={'SubscribeMessageBox-Eyebrow'}></div>
+            <div className={'SubscribeMessageBox-Title'}>
+              Get the <span className={'SubscribeMessageBox-Title-BestNYPL'}>best of NYPL</span> in your inbox
+            </div>
+          </div>
+
           <form 
-          ref='EmailSubscribeForm'
-          id={this.props.id}
-          className={this.props.className}
-          action={this.props.target} 
-          method={this.props.form_method}
-          name={this.props.form_name}
-          onSubmit={this._validateForm}
-          style={[
-            styles.base,
-            this.props.style
-          ]}>
-            <div className='EmailSubscribeForm-fields'>
+            ref='EmailSubscribeForm'
+            id='EmailSubscribeForm'
+            className={formClass}
+            action={this.props.target} 
+            method={this.props.form_method}
+            name={this.props.form_name}
+            onSubmit={this._validateForm}
+            style={[
+              styles.base,
+              this.props.style
+            ]}>
+            <div className={`${formClass}-fields`}>
               <InputField type='hidden' name='thx' value='http://pages.email.nypl.org/confirmation' />
               <InputField type='hidden' name='err' value='http://pages.email.nypl.org/confirmation' />
               <InputField type='hidden' name='SubAction' value='sub_add_update' />
@@ -99,35 +67,101 @@ class EmailSubscription extends React.Component {
               <InputField type='hidden' name='Email Type' value='HTML' />
               <InputField type='hidden' name='lid' value='1061' />
               
-              <InputField 
-              type='email'
-              name='Email Address'
-              placeholder={this.props.placeholder}
-              style={styles.emailField}
-              ref='emailAddressField'
-              required={true} />
+              <InputField
+                className={`${formClass}-Input`} 
+                type='email'
+                name='Email Address'
+                placeholder={this.props.placeholder}
+                style={styles.emailField}
+                ref='emailAddressField'
+                isRequired={true} />
 
-              <InputField 
-              type='submit'
-              name='submit'
-              value='Sign Up'
-              style={styles.submitButton} />
+              <div className={`${formClass}-Error ` + errorClass}>
+                <span className='nypl-icon-solo-x icon'></span><span>Please enter a valid email address</span>
+              </div>
+
+              <div className={`${formClass}-Submit`}>
+                <span className='nypl-icon-check-solo icon'></span>
+                <InputField
+                  type='submit'
+                  name='submit'
+                  value='SIGN UP'
+                  style={styles.submitButton} />
+              </div>
 
               <InputField type='hidden' name='Source Code' value='Homepage' />
             </div>
           </form>
+        </div>);
+
+      if (status === 'success') {
+        gaUtils._trackEvent('Subscribe', 'Success');
+        subscribeContent = (
+          <div>
+            <SubscribeMessageBox status={status} msg="Thank you for subscribing to our email updates." />
+            <div className={`${this.props.className}-NewEmail`}>
+              <a href='' onClick={this._initForm.bind(this)}>Enter another email address</a>
+            </div>
+            <div className={`${this.props.className}-FollowUs`}>
+              <p>Follow us:</p>
+              <SocialMediaLinksWidget
+                className={`${this.props.className}-SocialMediaWidget`}
+                links={config.socialMediaLinks} 
+                displayOnly={['facebook', 'twitter']} />
+            </div>
+          </div>);
+      }
+
+      if (status === 'exists') {
+        gaUtils._trackEvent('Subscribe', 'Error -- already subscribed');
+        subscribeContent = (
+          <div>
+            <SubscribeMessageBox status={status} msg="Looks like you're already signed up!" />
+            <div className={`${this.props.className}-NewEmail`}>
+              <a href='' onClick={this._initForm.bind(this)}>Enter a different email address</a>
+            </div>
+          </div>);
+      }
+
+      if (status === 'error' || status === 'Internal Server Error') {
+        gaUtils._trackEvent('Subscribe', 'Error');
+        subscribeContent = (
+          <div className={`${this.props.className}-Misc-Error`}>
+            <div>Hmm...</div>
+            <div>Something isn&apos;t quite right.</div>
+            <div>Please try again.</div>
+            <a href='' onClick={this._initForm.bind(this)} style={styles.tryAgainButton}>
+              <span className='nypl-icon-arrow-left icon'></span>
+              TRY AGAIN
+            </a>
+          </div>);     
+      }
+
+      // Always show the privacy link except in the loading phase.
+      return (
+        <div className={this.props.className}>
+          {subscribeContent}
           <a href={this.props.policyUrl}
-          className='EmailSubscribeForm-pp-link'
-          style={styles.privacyLink}>
+            className={`${this.props.className}-pp-link`}
+            style={styles.privacyLink}>
             Privacy Policy
           </a>
-        </div>
-      );
+        </div>);
     } else {
       return (
-        <div>Loading results...</div>
+        <div className={this.props.className}>
+          <DotsLoader />
+        </div>
       );
     }
+  }
+
+  _initForm(e) {
+    e.preventDefault();
+    this.setState({
+      formProcessing: false,
+      formStatus: ''
+    });
   }
 
   // Store changes are funky, need to look into it
@@ -136,17 +170,22 @@ class EmailSubscription extends React.Component {
   }*/
 
   _validateForm (e) {
-    let userInput = React.findDOMNode(this.refs.emailAddressField);
-
     // Prevent re-direct, handle validation
     e.preventDefault();
 
+    let userInput = React.findDOMNode(this.refs.emailAddressField);
+
     if (!this._isValidEmail(userInput.value)) {
       userInput.value = '';
-      userInput.placeholder = 'Ops, invalid e-mail try again.';
       userInput.focus();
-
+      this.setState({
+        notValidEmail: true
+      });
     } else {
+      this.setState({
+        notValidEmail: false
+      });
+
       // Send as a POST request
       this._addSubscriberToList(
         userInput.value,
@@ -158,7 +197,10 @@ class EmailSubscription extends React.Component {
 
   _isValidEmail (value) {
     const emailRegex = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i);
-    if (!value) { return false; }
+    if (!value) {
+      return false;
+    }
+
     return emailRegex.test(value);
   }
 
@@ -166,41 +208,45 @@ class EmailSubscription extends React.Component {
     const postUrl = `${url}/add-subscriber/${listid}`;
 
     // Display loader while processing finalizes.
-    this.setState({formProcessing: true});
-
-    axios.post(postUrl, {
-      email: email
-    })
-    .then((response) => {
-      this.setState({
-        formStatus: response.data.responseStatus,
-        formProcessing: false
-      });
-    })
-   .catch((response) => {
-      this.setState({
-        formStatus: response.data.responseStatus
-      });   
+    this.setState({
+      formProcessing: true
     });
+
+    axios
+      .post(postUrl, {
+        email: email
+      })
+      .then(response => {
+        this.setState({
+          formStatus: response.data.responseStatus,
+          formProcessing: false
+        });
+      })
+      .catch(response => {
+        this.setState({
+          formStatus: response.data.responseStatus || response.statusText,
+          formProcessing: false
+        });   
+      });
   }
 };
 
 /* Default Component Properties */
 EmailSubscription.defaultProps = {
-  id: 'EmailSubscribeForm',
-  className: 'EmailSubscribeForm',
+  id: 'EmailSubscription',
+  className: 'EmailSubscription',
   lang: 'en',
   target: 'http://cl.exct.net/subscribe.aspx',
   form_name: 'subscribeForm',
   list_id: '1061',
   form_method: 'POST',
-  placeholder: 'Get the best of NYPL in your inbox!',
+  placeholder: 'Your email address',
   policyUrl: 'http://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'
 };
 
 const styles = {
   base: {
-    backgroundColor: '#EEE',
+    backgroundColor: '#1DA1D4',
     padding: '0px',
     width: 'auto'
   },
@@ -210,33 +256,39 @@ const styles = {
   hide: {
     display: 'none'
   },
-  emailField: {
-    display: 'table-cell',
-    padding: '2px 5px',
-    height: '35px',
-    margin: '0',
-    width: '220px',
-    fontSize: '12.5px',
-    border: 'none'
-  },
+  emailField: {},
   submitButton: {
-    display: 'table-cell',
-    backgroundColor: '#666',
-    border: 'none',
+    marginTop: '50px',
+    border: '2px solid #fff',
     color: 'white',
-    height: '38.5px',
-    verticalAlign: 'top',
-    width: '70px',
-    margin: '0 0 0 5px',
-    fontSize: '13px' 
+    height: '38px',
+    paddingLeft: '15px',
+    width: '100px',
+    borderRadius: '20px',
+    fontSize: '12px',
+    backgroundColor: '#1DA1D4',
+    fontFamily: 'Kievit-Book'
+  },
+  tryAgainButton: {
+    display: 'inline-block',
+    border: '2px solid #fff',
+    color: 'white',
+    padding: '5px 15px 5px 5px',
+    width: '90px',
+    borderRadius: '20px',
+    fontSize: '12px',
+    backgroundColor: '#1DA1D4',
+    fontFamily: 'Kievit-Book',
+    marginTop: '25px'
   },
   privacyLink: {
     textDecoration: 'underline',
-    display: 'inline-block',
-    margin: '10px 0 0 0',
-    fontSize: '9px',
-    color: '#a5a5a5',
-    fontWeight: '200'
+    fontSize: '12px',
+    color: 'rgba(255, 255, 255, 0.5)',
+    fontWeight: '200',
+    position: 'absolute',
+    bottom: '26px',
+    right: '30px'
   }
 };
 

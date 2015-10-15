@@ -21,14 +21,12 @@ $ npm install
 ### Development
 Passing in no NODE_ENV, defaults to using the development config.
 ```sh
-$ npm run build-start
+$ npm run start
 ```
 
 
 ### Production
 To run the server in ***Production Mode***, use the following options:
-
-1) Run a two part command that will build the assets and then fire up the server.
 
 ```sh
 $ npm run build  (builds the assets to /dist path)
@@ -36,11 +34,6 @@ $ npm run build  (builds the assets to /dist path)
 
 ```sh
 $ NODE_ENV=production npm run start  (starts the Node Server with proper environment) 
-```
-
-2) Run in a single command
-```sh
-$ NODE_ENV=production npm run build-start
 ```
 
 

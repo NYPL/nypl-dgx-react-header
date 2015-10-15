@@ -28,7 +28,7 @@ var commonSettings = {
 		path: path.resolve(ROOT_PATH, 'dist'),
 		// Sets the name of the bundled application files
 		// Additionally we can isolate vendor files as well
-		filename: 'bundle.js'
+		filename: 'dgx-header.min.js'
 	},
 	module: {
 		loaders: [
@@ -65,12 +65,22 @@ var commonSettings = {
 if (ENV === 'development') {
 	module.exports = merge(commonSettings, {
 		devtool: 'eval',
+		entry: [
+	    'webpack-dev-server/client?http://localhost:3000',
+	    'webpack/hot/only-dev-server'
+	  ],
+	  plugins: [
+	    new webpack.HotModuleReplacementPlugin(),
+	    new webpack.NoErrorsPlugin()
+	  ],
+	  resolve: {
+	    extensions: ['', '.js', '.jsx', 'scss']
+	  },
 		module: {
 			loaders: [
 				{
 			    test: /\.jsx?$/,
 			    exclude: /(node_modules|bower_components)/,
-			    include: path.resolve(ROOT_PATH, 'src'),
 			    loaders: ['react-hot', 'babel']
 			  }
 			]
@@ -94,7 +104,6 @@ if (ENV === 'production') {
 				{
 			    test: /\.jsx?$/,
 			    exclude: /(node_modules|bower_components)/,
-			    include: path.resolve(ROOT_PATH, 'src'),
 			    loaders: ['babel']
 			  }
 			]
@@ -102,8 +111,11 @@ if (ENV === 'production') {
 		plugins: [
 			// Minification (Utilized in Production)
 			new webpack.optimize.UglifyJsPlugin({
+				output: {
+					comments: false
+				},
 				compress: {
-					warnings: false
+					warnings: true
 				}
 			})
 		]
