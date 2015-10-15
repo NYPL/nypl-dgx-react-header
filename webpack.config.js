@@ -35,7 +35,11 @@ var commonSettings = {
 		  {
         test: /\.scss$/,
         include: path.resolve(ROOT_PATH, 'src'),
-        loaders: ["style", "css", "sass"]
+        loader: ExtractTextPlugin.extract(
+          // activate source maps via loader query
+          'css?sourceMap!' +
+          'sass?sourceMap'
+        )
 		  }
 		]
 	},
@@ -43,7 +47,8 @@ var commonSettings = {
 		// Cleans the Dist folder after every build.
 		// Alternately, we can run rm -rf dist/ as
 		// part of the package.json scripts.
-		new cleanBuild(['dist'])
+		new cleanBuild(['dist']),
+		new ExtractTextPlugin('styles.css')
 	]
 };
 
