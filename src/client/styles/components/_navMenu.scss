@@ -118,6 +118,10 @@
 		  			border: none;
 		  		}
 
+		  		&:focus {
+		  			outline: initial;
+		  		}
+
 	  			@include desktop {
 	  				color: #000;
 	  				font-size: 16px;
