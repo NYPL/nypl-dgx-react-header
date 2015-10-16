@@ -198,8 +198,6 @@ class SearchBox extends React.Component {
       // Trigger the validation animation
       this._animationTimer(inputKeywords);
     } else {
-      console.log(requestUrl);
-
       // Go to the search page
       window.location.assign(requestUrl);
     }
