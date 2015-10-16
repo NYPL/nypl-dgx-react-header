@@ -153,10 +153,10 @@
 
 /* The wrapper for input fields */
 &-SearchBox-Elements-Input-Wrapper {
-  display: inline-block;
+  display: block;
   padding: 0 0 18px 0;
+  margin: 0 20px;
   position: relative;
-  width: 100%;
   text-align: center;
 
   @include desktop {
@@ -173,7 +173,7 @@
   margin: 0 auto;
   position: relative;
   text-align: left;
-  width: 93%;
+  width: 100%;
 
   .icon {
     background-color: #FFFFFF;
@@ -210,6 +210,8 @@
 
   &:focus {
     outline: 0;
+    border: none;
+    box-shadow:
   }
 
   @include desktop {
@@ -225,10 +227,11 @@
 
 &-SearchBox-Input-Keywords-Border {
   border: none;
-  display: inline-block;
-  @include calculation(width, '100% - 35px');
+  display: block;
+  width: 100%;
 
   @include desktop {
+    display: inline-block;
     border-bottom: solid;
     border-bottom-width: 2px;
     border-color: #FFFFFF;
