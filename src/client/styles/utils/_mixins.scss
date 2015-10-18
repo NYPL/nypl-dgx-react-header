@@ -14,27 +14,14 @@
   }
 }
 
-/* Calculate REM FUNCTION
- * ----------------------
- * Usage: calculate-rem(12px);
- * Desc: Calculates REM size for RWD
- * Rem is similar to the em value, but instead 
- * of being relative to the parent element it’s
- * relative to the font-size set in the <html>.
+/* BORDER RADIUS MIXIN
+ * -------------------
+ * Usage: @include border-radius(5px);
+ * Desc: Creates a border radius
 */ 
-@function calculate-rem($size) {
-  $remSize: $size / 16px;
-  @return $remSize * 1rem;
-}
-
-/* FONT SIZE MIXIN
- * ---------------
- * Usage: @include font-size(16px);
- * Desc: Calculates REM size and PX size for RWD
-*/
-@mixin font-size($size) {
-  font-size: $size;
-  font-size: calculate-rem($size);
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
 }
 
 /* OPACITY MIXIN
@@ -103,4 +90,17 @@
   &:after {
     clear: both;
   }
+}
+
+/* VALUE CALCULATION MIXIN
+ * ---------------------
+ * Usage: Makes the properties of an element
+ * can be defined by both percentage
+ * and pixels.
+*/
+
+@mixin calculation($property, $expression) {
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: calc(#{$expression});
 }

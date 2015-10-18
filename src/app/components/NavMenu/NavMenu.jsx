@@ -1,73 +1,79 @@
 import Radium from 'radium';
 import React from 'react';
-import _ from 'underscore';
+import cx from 'classnames';
+import appConfig from '../../../../appConfig.js';
+
+// Header Store
+import HeaderStore from '../../stores/Store.js';
+
+// Dependent Components
+import SearchButton from '../SearchButton/SearchButton.jsx';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.jsx';
-import MegaMenu from '../MegaMenu/MegaMenu.jsx';
+import NavMenuBottomButtons from '../NavMenuBottomButtons/NavMenuBottomButtons.jsx';
+import DonateButton from '../DonateButton/DonateButton.jsx';
 
 class NavMenu extends React.Component {
 
   // Constructor used in ES6
   constructor(props) {
     super(props);
-
-    // Holds the initial state, replaces getInitialState() method
-    this.state = {
-      activeItem: null
-    };
-
-    // Allows binding methods that reference this
-    this._activate = this._activate.bind(this);
-    this._deactivate = this._deactivate.bind(this);
   }
 
   render () {
-    let items = _.map(this.props.items, function(m, i) {
-      return (
-        <NavMenuItem
-          label={m.label}
-          lang={this.props.lang}
-          target={m.target}
-          key={i}
-          index={i}
-          isActive={i === this.state.activeItem}
-          activate={this._activate} />
-      );
-    }, this),
-      megas = _.map(this.props.items, function(m, i) {
+
+    let navItems = (this.props.items && this.props.items.length) ? 
+        this.props.items : appConfig.navTopLinks,
+      mobileActiveClass = cx({
+        'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'
+      }),
+      donateButton = HeaderStore._getIsStickyValue() ?
+        <li className='NavMenuItem DonateButtonItem'>
+          <DonateButton style={styles.donateButton} gaLabel={'Mobile Donate'}/>
+        </li> : null,
+      navMenu = navItems.map((item, index) => {
         return (
-          <MegaMenu
-            label={m.label}
+          <NavMenuItem
+            label={item.name}
             lang={this.props.lang}
-            items={m.subnav}
-            features={m.features}
-            key={i}
-            index={i}
-            isActive={i === this.state.activeItem} />
+            target={item.link.en.text}
+            navId={item.id}
+            features={item.features}
+            subNav={item.subnav}
+            key={index}
+            index={index} />
         );
-    }, this);
+      });
+
     return (
-      <nav className='NavMenu' onMouseLeave={this._deactivate}>
-        <ul className='NavMenu-TopLevelLinks'>
-          {items}
-        </ul>
-        {megas}
+      <nav className={this.props.className}>
+        <div className={`${this.props.className}-Wrapper ${mobileActiveClass}`}>
+          <span className='MobileLogoText nypl-icon-logo-type'></span>
+          <ul className={`${this.props.className}-List`} id='NavMenu-List'>
+            {navMenu}
+            {donateButton}
+          </ul>
+          <SearchButton className={`${this.props.className}`} />
+          <NavMenuBottomButtons className='MobileBottomButtons' />
+        </div>
       </nav>
     );
-  }
-
-  _activate (i) {
-    this.setState({
-      activeItem: i
-    });
-  }
-
-  _deactivate () {
-    this._activate(null);
   }
 }
 
 NavMenu.defaultProps = {
-  lang: 'en'
+  lang: 'en',
+  className: 'NavMenu'
+};
+
+const styles = {
+  donateButton: {
+    padding: '8px 15px',
+    margin: '0px 7px 0px 6px',
+    textTransform: 'uppercase',
+    borderRadius: '3px',
+    fontSize: '12.5px',
+    letterSpacing: '.04em'
+  }
 };
 
 export default Radium(NavMenu);
