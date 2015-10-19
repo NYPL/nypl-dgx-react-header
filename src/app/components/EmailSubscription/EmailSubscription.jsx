@@ -7,6 +7,7 @@ import config from '../../../../appConfig.js';
 import InputField from '../InputField/InputField.jsx';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.jsx';
 import SubscribeMessageBox from './SubscribeMessageBox.jsx';
+import DotsLoader from '../Loaders/DotsLoader.jsx';
 
 import gaUtils from '../../utils/gaUtils.js';
 
@@ -33,13 +34,13 @@ class EmailSubscription extends React.Component {
       formClass = 'EmailSubscribeForm',
       subscribeContent;
 
-    const errorClass =  cx({ 'active': notValidEmail, '': !notValidEmail });
+    const errorClass = cx({'active': notValidEmail, '': !notValidEmail });
 
     if (!isLoading) {
       // The default view
       subscribeContent = (
         <div>
-          <div className={'SubscribeMessageBox ' + status}>
+          <div className={`SubscribeMessageBox ${status}`}>
             <div className={'SubscribeMessageBox-Eyebrow'}></div>
             <div className={'SubscribeMessageBox-Title'}>
               Get the <span className={'SubscribeMessageBox-Title-BestNYPL'}>best of NYPL</span> in your inbox
@@ -75,7 +76,7 @@ class EmailSubscription extends React.Component {
                 ref='emailAddressField'
                 isRequired={true} />
 
-              <div className={`${formClass}-Error error ` + errorClass}>
+              <div className={`${formClass}-Error ` + errorClass}>
                 <span className='nypl-icon-solo-x icon'></span><span>Please enter a valid email address</span>
               </div>
 
@@ -149,7 +150,7 @@ class EmailSubscription extends React.Component {
     } else {
       return (
         <div className={this.props.className}>
-          <SubscribeMessageBox status={status} msg="Loading..." />
+          <DotsLoader />
         </div>
       );
     }
@@ -287,7 +288,7 @@ const styles = {
     fontWeight: '200',
     position: 'absolute',
     bottom: '26px',
-    right: '25px'
+    right: '30px'
   }
 };
 

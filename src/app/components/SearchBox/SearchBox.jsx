@@ -6,8 +6,9 @@ import cx from 'classnames';
 import InputField from '../InputField/InputField.jsx';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 
-// Import HeaderStore
+// ALT Flux Store/Actions
 import HeaderStore from '../../stores/Store.js';
+import Actions from '../../actions/Actions.js';
 
 class SearchBox extends React.Component {
   // Constructor used in ES6
@@ -20,7 +21,9 @@ class SearchBox extends React.Component {
       searchOption: 'catalog',
       placeholder: 'What would you like to find?',
       placeholderAnimation: null,
-      noAnimationBefore: true
+      noAnimationBefore: true,
+      actionValue: HeaderStore.getState().searchButtonAction,
+      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem
     };
 
     // The function listens to the changes of input fields
@@ -30,17 +33,34 @@ class SearchBox extends React.Component {
     // Listen to the event if enter is pressed
     this._triggerSubmit = this._triggerSubmit.bind(this);
     // The fucntion to trigger validation animation for keywords input
-    this._pulseAnimation = this._pulseAnimation.bind(this);
+    this._animationTimer = this._animationTimer.bind(this);
+  }
+
+  // Listen to the search button action changes in Store,
+  componentDidMount() {
+    HeaderStore.listen(this._onChange.bind(this));
+  }
+
+  componentWillUnmount() {
+    HeaderStore.unlisten(this._onChange.bind(this));
+  }
+
+  // Update the state of the class
+  _onChange() {
+    this.setState({
+      actionValue: HeaderStore.getState().searchButtonAction,
+      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem
+    });
   }
 
   // Dom Render Section
   render() {
     // Set active class if search button is hovered or clicked
     let classes = cx({
-        '--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
-        HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'
+        'active animateMegaMenuEnter fadeIn': this.state.actionValue === 'hoverSearch',
+        'active': HeaderStore._getLastActiveMenuItem() === 'hoverSearch',
+        'mobileActive': this.state.actionValue === 'clickSearch'
       }),
-
       // Classes for keywords input fields to activate pulse animation
       pulseAnimation = cx({
         'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
@@ -52,13 +72,12 @@ class SearchBox extends React.Component {
         return (
           <div className={`${this.props.className}-Input-Option`} key={i}>
             <InputField type='radio'
-            id={element.id}
-            name={element.name}
-            value = {element.value}
-            ref={element.ref}
-            checked={this.state.searchOption === element.value}
-            onChange={this._inputChange.bind(this, 'option')} />
-
+              id={element.id}
+              name={element.name}
+              value = {element.value}
+              ref={element.ref}
+              checked={this.state.searchOption === element.value}
+              onChange={this._inputChange.bind(this, 'option')} />
             <label htmlFor={element.id} className={`${this.props.className}-Input-Options-label`}>
               {element.labelText}
             </label>
@@ -73,21 +92,27 @@ class SearchBox extends React.Component {
           className={`${this.props.className}-Mobile-Submit-Option ${element.columnClass}`}
           value={element.value}
           onClick={this._submitSearchRequest.bind(this, element.value)}>
-            {element.text}
+            <span className='title'>{element.text}</span>
             <span className='nypl-icon-wedge-right icon'></span>
           </div>
         );
       });
 
     return (
-      <div id={this.props.id} className={`${this.props.className}${classes}`} onKeyPress={this._triggerSubmit}>
+      <div 
+        id={this.props.id} 
+        className={`${this.props.className} ${classes}`} 
+        onKeyPress={this._triggerSubmit}
+        onMouseEnter={this._watchHoverIntentEnter.bind(this)}
+        onMouseLeave={this._watchHoverIntentLeave.bind(this)}>
+
         <div id={`${this.props.className}-Elements-Wrapper`} className={`${this.props.className}-Elements-Wrapper`}>
           <div id={`${this.props.className}-Elements-Input-Wrapper`}
           className={`${this.props.className}-Elements-Input-Wrapper`}>
             <div id={`${this.props.className}-Elements-Input-Keywords-Wrapper`}
             className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
-              <span className='nypl-icon-magnifier-thin icon'></span>
               <div className={`${this.props.className}-Input-Keywords-Border`}>
+                <span className='nypl-icon-magnifier-thin icon'></span>
                 <InputField type='text'
                 id={`${this.props.id}-Input-Keywords`}
                 className={`${this.props.className}-Input-Keywords ${pulseAnimation}`}
@@ -145,21 +170,23 @@ class SearchBox extends React.Component {
   _submitSearchRequest(value) {
     // Store the data that the user entered
     let requestParameters = {
-        keywords: encodeURIComponent(this.state.searchKeywords.trim()),
+        keywords: this.state.searchKeywords.trim(),
         // If the value is null, it indicates the function is triggered on desktop version.
         // Then it should get the value for option from state.
         option: value || this.state.searchOption
       },
       // The variable for request URL
       requestUrl,
+      encoreBaseUrl = 'http://browse.nypl.org/iii/encore/search/',
+      catalogBaseUrl = 'http://www.nypl.org/search/apachesolr_search/',
       inputKeywords,
       pulse;
 
     // Decide the search option based on which button the user clicked on mobile version search box
     if (requestParameters.option === 'catalog') {
-      requestUrl = `https://nypl.bibliocommons.com/search?t=smart&q=${requestParameters.keywords}&commit=Search&searchOpt=catalogue`;
+      requestUrl = this._setEncoreUrl(requestParameters.keywords, encoreBaseUrl, 'eng');
     }  else if (requestParameters.option === 'website') {
-      requestUrl = `http://www.nypl.org/search/apachesolr_search/${requestParameters.keywords}`;
+      requestUrl = this._setCatalogUrl(requestParameters.keywords, catalogBaseUrl);
     }
 
     // This portion is for the interactions if the user doesn't enter any input
@@ -169,7 +196,7 @@ class SearchBox extends React.Component {
       // The new placeholder that tells users there's no keywords input
       this.setState({placeholder: 'Please enter a search term.'});
       // Trigger the validation animation
-      this._pulseAnimation(inputKeywords);
+      this._animationTimer(inputKeywords);
     } else {
       // Go to the search page
       window.location.assign(requestUrl);
@@ -190,14 +217,14 @@ class SearchBox extends React.Component {
   }
 
   /**
-   * _pulseAnimation(element)
+   * _animationTimer(element)
    * Add the CSS animation to the placeholder of the keywords Input.
    * It adds the proper class to the html element to trigger the animation,
    * and then removes the class to stop it.
    *
    * @param {DOM Element} element
    */
-  _pulseAnimation(element) {
+  _animationTimer(element) {
     let frame = 0,
       animation = setInterval(() => {
         frame ++;
@@ -209,6 +236,7 @@ class SearchBox extends React.Component {
           this.setState({noAnimationBefore: false});
         }
       }, 100);
+
     // Decide which CSS animation is going to perform
     // by adding different classes to the element.
     // It is based on if it is the first time the validation to be triggered.
@@ -217,6 +245,98 @@ class SearchBox extends React.Component {
     } else {
       this.setState({placeholderAnimation: 'sequential'});
     }
+  }
+
+  /**
+   * _watchHoverIntentEnter()
+   * If the lastActiveMenuItem passed as a prop
+   * matches the search by hover. Then fire the
+   * Action to store a reference to the lastActiveMenuItem as hoverSearch.
+   */
+  _watchHoverIntentEnter() {
+    if (this.state.actionValue === 'hoverSearch') {
+      Actions.setLastActiveMenuItem(this.state.actionValue);
+    }
+  }
+
+  /**
+   * _watchHoverIntentLeave()
+   * Sets the Store's lastActiveMenuItem
+   * property to an empty string when
+   * hovered out.
+   */
+  _watchHoverIntentLeave() {
+    Actions.setLastActiveMenuItem('');
+  }
+
+  /**
+   * _setCatalogUrl(searchString, catalogBaseUrl)
+   * Returns the final URL for the catalog search.
+   */
+  _setCatalogUrl(searchString, catalogBaseUrl) {
+    let catalogUrl = catalogBaseUrl || 'http://www.nypl.org/search/apachesolr_search/';
+
+    if (searchString) {
+      return catalogUrl + encodeURIComponent(searchString);
+    }
+  }
+
+  /**
+   * _encoreEncodeSearchString(string)
+   * base64_encoding_map includes special characters that need to be
+   * encoded using base64 - these chars are "=","/", "\", "?"
+   * character : base64 encoded 
+   */
+  _encoreEncodeSearchString(string) {
+    let base64_enc_map = {
+        '=': 'PQ==',
+        '/': 'Lw==',
+        '\\': 'XA==',
+        '?': 'Pw=='
+      },
+      encodedString = string,
+      charRegExString,
+      base64Regex;
+
+    Object.keys(base64_enc_map).forEach((specialChar) => {
+      charRegExString = specialChar.replace(/([\.\*\+\?\^\=\!\:\$\{\}\(\)\|\[\]\/\\])/g, '\\$1');
+      base64Regex = new RegExp(charRegExString, 'g');
+      encodedString = encodedString.replace(base64Regex, base64_enc_map[specialChar]);
+    });
+
+    return encodedString;
+  }
+
+  /**
+   * _setEncoreUrl(searchInput, baseUrl, language)
+   * Returns the final URL for encore search which,
+   * is first encoded, then concatenated by the
+   * base encore root url. An optional scope and
+   * language may be concatenated as well.
+   */
+  _setEncoreUrl(searchInput, baseUrl, language, scopeString) {
+    let searchTerm = this._encoreEncodeSearchString(searchInput),
+      rootUrl = baseUrl || 'http://browse.nypl.org/iii/encore/search/',
+      defaultLang = (language) ? `?lang=${language}` : '',
+      finalEncoreUrl;
+
+    if (searchTerm) {
+      finalEncoreUrl = this._encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang;
+    }
+
+    return finalEncoreUrl;
+  }
+
+  /**
+   * _encoreAddScope(baseUrl, searchString, scopeString)
+   * Enchances the encore url with a possible scope.
+   * If no scope is set, adds the required string to
+   * be returned as the final url.
+   */
+  _encoreAddScope(baseUrl, searchString, scopeString) {
+    return scopeString ? 
+      `${baseUrl}C__S${searchString}${scopeString}__Orightresult__U` :
+      `${baseUrl}C__S${searchString}__Orightresult__U`;
   }
 }
 
@@ -256,12 +376,7 @@ const inputOptionData = [
       value: 'website',
       text: 'nypl.org'
     }
-  ],
-
-  styles = {
-    base: {
-    }
-  };
+  ];
 
 // Export the component
 module.exports = SearchBox;

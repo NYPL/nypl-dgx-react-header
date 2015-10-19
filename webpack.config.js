@@ -111,8 +111,11 @@ if (ENV === 'production') {
 		plugins: [
 			// Minification (Utilized in Production)
 			new webpack.optimize.UglifyJsPlugin({
+				output: {
+					comments: false
+				},
 				compress: {
-					warnings: false
+					warnings: true
 				}
 			})
 		]

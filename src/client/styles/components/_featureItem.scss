@@ -23,7 +23,7 @@
 		&.with-image {
 			display: block;
 			padding: 0;
-			margin: 0 10px 0 110px;
+			margin: 0 0 0 112px;
 			width: auto;
 			max-width: 100%;
 		}
@@ -57,17 +57,22 @@
 			font-size: 15px;
 			text-transform: uppercase;
 			letter-spacing: 0.05em;
-			margin-bottom: 0.5em;
+			margin-bottom: 1.5em;
 		}
 
 		&-Author {
 			&-Name {
+				display: block;
 				font-size: 17px;
 				font-weight: normal;
-				margin-bottom: 0.3em;
+				margin: 0 0 0.3em 0;
+				line-height: normal;
 			}
 			&-Title {
+				display: block;
 				font-size: 14px;
+				line-height: normal;
+				margin: 0;
 			}
 		}
 	}

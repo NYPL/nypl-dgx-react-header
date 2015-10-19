@@ -1,10 +1,9 @@
 &-GlobalAlerts {
-	position: absolute;
-	top: 60px;
+	position: relative;
+	border-bottom: 1px solid #908034;
 
 	@include desktop {
-		position: relative;
-		top: inherit;
+		border-bottom: none;
 	}
 
 	&.hide {
@@ -22,6 +21,7 @@
 		}
 	}
 
+	/* NOTE: Temoporarily removed */
 	&-CloseButton {
 		position: absolute;
 		font-size: 24px;
@@ -29,35 +29,37 @@
 		top: 15px;
 		color: #908034;
 		display: block;
-		z-index: 2;
+		z-index: 1;
 
 		@include desktop {
 			top: -15px;
-			right: 0;
+			right: 5px;
 		}
 	}
 
 	&-Box {
 		position: relative;
-		margin: .75em 1.5em .5em 1.2em;
+		margin: .75em 1.2em .5em 1.2em;
 
 		@include desktop {
-			margin: .5em 0;
-			left: 105px;
+			margin: .5em 0 .5em 105px;
 		}
 
 		&-Item {
 			margin: .5em 0;
 
 			p {
+				display: block;
 				line-height: 1.2em;
+				font-size: 16px;
+				max-width: 100% !important;
 			}
 
 			a {
 				text-decoration: underline;
 				color: #333;
 
-				&:visited, {
+				&:visited, &:active {
 					color: #333;
 				}
 			}

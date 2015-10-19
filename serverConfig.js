@@ -28,16 +28,15 @@ const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
 // Boolean flag that determines if we are running
 // our application in Production Mode.
 // Assigning as let variables, since they are mutable
-let isProduction = process.env.NODE_ENV === 'production';
-let serverPort = process.env.PORT || (isProduction ? 3001 : appConfig.port);
-// Assign API Routes
-let apiRoutes = require('./src/server/ApiRoutes/ApiRoutes.js');
-
-/* Express Server Configuration
- * ----------------------------
- * - Using .EJS as the view engine
-*/
-let app = express();
+let isProduction = process.env.NODE_ENV === 'production',
+  serverPort = process.env.PORT || (isProduction ? 3001 : appConfig.port),
+  // Assign API Routes
+  apiRoutes = require('./src/server/ApiRoutes/ApiRoutes.js'),
+  /* Express Server Configuration
+   * ----------------------------
+   * - Using .EJS as the view engine
+  */
+  app = express();
 
 app.use(compression());
 
@@ -71,7 +70,7 @@ app.get('/', (req, res) => {
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   iso = new Iso();
-  
+
   headerApp = React.renderToString(React.createElement(Header));
   iso.add(headerApp, alt.flush());
 
@@ -84,13 +83,16 @@ app.get('/', (req, res) => {
     favicon: appConfig.favIconPath,
     isProduction: isProduction,
     webpackPort: WEBPACK_DEV_PORT,
-    filename: webpackConfig.output.filename
+    filename: webpackConfig.output.filename,
+    nodeEnv: process.env.NODE_ENV,
+    appEnv: process.env.APP_ENV,
+    apiUrl: res.locals.data.completeApiUrl
   });
 
 });
 
 // Start the server.
-app.listen(serverPort, (err, result) => {
+let server = app.listen(serverPort, (err, result) => {
   if (err) {
     console.log(colors.red(err));
   }
@@ -98,6 +100,24 @@ app.listen(serverPort, (err, result) => {
   console.log(colors.green('Express server is listening at'), colors.cyan('localhost:' + serverPort));
 });
 
+// this function is called when you want the server to die gracefully
+// i.e. wait for existing connections
+let gracefulShutdown = function() {
+  console.log("Received kill signal, shutting down gracefully.");
+  server.close(function() {
+    console.log("Closed out remaining connections.");
+    process.exit(0);
+  }); 
+  // if after 
+  setTimeout(function() {
+    console.error("Could not close connections in time, forcefully shutting down");
+    process.exit()
+  }, 10*1000);
+}
+// listen for TERM signal .e.g. kill 
+process.on('SIGTERM', gracefulShutdown);
+// listen for INT signal e.g. Ctrl-C
+process.on('SIGINT', gracefulShutdown);
 
 /* Development Environment Configuration
  * -------------------------------------

@@ -7,23 +7,30 @@
     <!--[if IE]><link rel="shortcut icon" href="<%- favicon %>"><![endif]-->
     <!-- Possibly include a png version of the favicon -->
     <link rel="icon" type="image/png" href="<%- favicon %>">
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <% if (isProduction) { %>
       <!-- Minified Styles -->
       <link rel="stylesheet" type="text/css" href="/styles.css">
     <% } else { %>
       <link rel="stylesheet" type="text/css" href="http://localhost:<%= webpackPort %>/styles.css">
     <% } %>
-
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <div><%- headerApp %></div>
 
+  <script type="text/javascript">
+    var nodeEnv = "<%- nodeEnv %>";
+    var appEnv = "<%- appEnv %>";
+    var apiUrl = "<%- apiUrl %>";
+  </script>
+
   <% if (isProduction) { %>
-    <script async type='text/javascript' src="/<%= filename %>"></script>
+    <script async type="text/javascript" src="/<%= filename %>"></script>
   <% } else { %>
-    <script async type='text/javascript' src="http://localhost:<%= webpackPort %>/<%= filename %>"></script>
+    <script async type="text/javascript" src="http://localhost:<%= webpackPort %>/<%= filename %>"></script>
   <% } %>
+  <!-- loadstorm-7a0d62b0f1 -->
   </body>
 </html>

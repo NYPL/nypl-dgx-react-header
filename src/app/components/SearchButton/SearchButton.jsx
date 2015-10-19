@@ -1,7 +1,6 @@
 // Import React libraries
 import React from 'react';
 import cx from 'classnames';
-import Radium from 'radium';
 
 // Import components
 import BasicButton from '../Buttons/BasicButton.jsx';
@@ -16,66 +15,55 @@ class SearchButton extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-
-    // Holds the initial state. The actived status is false
-    this.state = {
-    };
   }
 
-  // Dom Render Section
   render () {
-    // Give active class if the button is activated
-    let classes = cx({'--active': HeaderStore._getMobileMenuBtnValue() === 'clickSearch' ||
-      HeaderStore._getMobileMenuBtnValue() === 'hoverSearch'});
-    // Change the icon based on the behavior either click or hover
-    let icon = cx({
-      'nypl-icon-solo-x': HeaderStore._getMobileMenuBtnValue() === 'clickSearch',
-      'nypl-icon-magnifier-fat': HeaderStore._getMobileMenuBtnValue() !== 'clickSearch'});
+    // Give active class if the button is activated by hover
+    let classes = cx({
+        'active': HeaderStore._getSearchButtonActionValue() === 'hoverSearch' ||
+          HeaderStore._getLastActiveMenuItem() === 'hoverSearch'
+      });
 
     return (
-      <div className={`${this.props.className}-SearchBox-Wrapper`}
-      onMouseEnter={this._activate.bind(this, 'hover')}
-      onMouseLeave={this._deactivate.bind(this)}>
-        <BasicButton id={`${this.props.className}-SearchButton`}
-        className={`${icon} ${this.props.className}-SearchButton${classes}`}
-        name='Search Button'
-        label=''
-        onClick={this._activate.bind(this, 'click')} />
-        <SearchBox id={`${this.props.className}-SearchBox`}
-        className={`${this.props.className}-SearchBox`} />
+      <div className={`${this.props.className}-SearchBox-Wrapper`}>
+        <BasicButton
+          onMouseEnter={this._activateHover.bind(this)}
+          onMouseLeave={this._deactivateHover.bind(this)}
+          id={`${this.props.className}-SearchButton`}
+          className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
+          name='Search Button'
+          label='' />
+        <SearchBox 
+          id={`${this.props.className}-SearchBox`}
+          className={`${this.props.className}-SearchBox`} />
       </div>
     );
   }
 
-  // Set the function to active searchbox when the button is hovered or clicked
-  _activate(option) {
-    if (option === 'hover') {
-      // And activated by hover only when the button has not been activated yet
-      if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
-        Actions.setMobileMenuButtonValue('hoverSearch');
-      } 
-    } else {
-      // Click ignores the status of hover
-      this._toggle();
-    }
+  /**
+   * _activateHover()
+   * Update the Store's searchButtonActionValue
+   * with hoverSearch after a set time delay.
+   */
+  _activateHover() {
+
+    this.hoverTimer = setTimeout(() => {
+      Actions.searchButtonActionValue('hoverSearch');
+    }, 350);
   }
 
-  // Deactivated the button only when it was activated by hovering
-  _deactivate() {
-    // _deactive function only works when it is on desktop version
-    if (HeaderStore._getMobileMenuBtnValue() === 'hoverSearch') {
-      Actions.setMobileMenuButtonValue('');
-    }
-  }
+  /**
+   * _hoverClose()
+   * Clear the activateHover timer if it exists.
+   * Reset the Store's searchButtonActionValue to empty
+   * after a set time delay.
+   */
+  _deactivateHover() {
+    clearTimeout(this.hoverTimer);
 
-  // The toggle for the interaction of clicking on the button
-  _toggle() {
-    // Only activated when the button has not been activated yet
-    if (HeaderStore._getMobileMenuBtnValue() !== 'clickSearch') {
-      Actions.setMobileMenuButtonValue('clickSearch');
-    } else {
-      Actions.setMobileMenuButtonValue('');
-    }
+    setTimeout(() => {
+      Actions.searchButtonActionValue('');
+    }, 250);
   }
 }
 
@@ -84,10 +72,5 @@ SearchButton.defaultProps = {
   className: 'NavMenu'
 };
 
-const styles = {
-  base: {
-  }
-};
-
 // Export the component
-export default Radium(SearchButton);
+export default SearchButton;

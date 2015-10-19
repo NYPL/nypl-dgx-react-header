@@ -36,9 +36,6 @@ class GlobalAlerts extends React.Component{
     return currentGlobalAlerts && currentGlobalAlerts.length ? (
       <div className={`${this.props.className} ${classes}`} id={this.props.id} style={styles.base}>
         <div className={`${this.props.className}-Wrapper`}>
-          <ReactTappable 
-            className={`${this.props.className}-CloseButton nypl-icon-circle-x`} 
-            onTap={this._closeAlertsBox.bind(this)} />
           <AlertsBox 
             alerts={currentGlobalAlerts} 
             id={`${this.props.className}-Box`}
@@ -53,6 +50,7 @@ class GlobalAlerts extends React.Component{
    * updates both state properties
    * (animateAlertsBox & hideAlertsBox)
    * with a setTimeout to allow css transition.
+   * NOTE: Disabled for now until further notice.
    */
   _closeAlertsBox() {
     this.setState({animateAlertsBox: true});
@@ -77,9 +75,18 @@ class GlobalAlerts extends React.Component{
           });
         }
       })
-      .catch(error => {
-        console.warn('Error on Global Alerts fetch.');
-        console.log(error);
+      .catch(response => {
+        console.warn('Error on Axios GET request: ' + config.alertsApiUrl);
+        if (response instanceof Error) {
+          console.log(response.message);
+        } else {
+          // The request was made, but the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(response.data);
+          console.log(response.status);
+          console.log(response.headers);
+          console.log(response.config);
+        }
       });
   }
 

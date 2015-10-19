@@ -34,15 +34,12 @@ class Header extends React.Component {
     // the proper Data, then fetch.
     this._fetchDataIfNeeded();
 
-    // Assign method for proper scope
-    let handleHeaderScroll = this._handleStickyHeader.bind(this);
+    // Once the component mounts,
+    // enable the sticky header depending on position.
+    this._handleStickyHeader();
 
-    // Allows us to use window only after component has mounted
-    window.addEventListener('scroll',
-      function() {
-        handleHeaderScroll();
-      }
-    );
+    // Listen to the scroll event for the sticky header.
+    window.addEventListener('scroll', this._handleStickyHeader.bind(this));
   }
 
   componentWillUnmount() {
@@ -55,20 +52,22 @@ class Header extends React.Component {
 
   render () {
     let isHeaderSticky = this.state.isSticky,
-      headerClasses = cx(this.props.className, {'sticky': isHeaderSticky});
+      headerClass = this.props.className || 'Header',
+      headerClasses = cx(headerClass, {'sticky': isHeaderSticky});
 
     return (
       <header id={this.props.id} className={headerClasses}>
-        <GlobalAlerts className={`${this.props.className}-GlobalAlerts`} />
-        <div className={`${this.props.className}-Wrapper`}>
-          <MobileHeader className={`${this.props.className}-Mobile`} locatorUrl={'//www.nypl.org/locations/map?nearme=true'} />
-          <div className={`${this.props.className}-TopWrapper`} style={styles.wrapper}>
-            <Logo className={`${this.props.className}-Logo`} />
-            <div className={`${this.props.className}-Buttons`} style={styles.topButtons}>
+        <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
+        <div className={`${headerClass}-Wrapper`}>
+          <MobileHeader className={`${headerClass}-Mobile`} locatorUrl={'//www.nypl.org/locations/map?nearme=true'} />
+          <div className={`${headerClass}-TopWrapper`} style={styles.wrapper}>
+            <Logo className={`${headerClass}-Logo`} />
+            <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
               <SimpleButton 
                 label='Get a Library Card' 
                 target='//catalog.nypl.org/screens/selfregpick.html' 
                 className='LibraryCardButton'
+                id='LibraryCardButton'
                 gaAction='Get a Library Card'
                 gaLabel=''
                 style={styles.libraryCardButton} />
@@ -83,7 +82,7 @@ class Header extends React.Component {
             </div>
           </div>
           <NavMenu 
-            className={`${this.props.className}-NavMenu`}
+            className={`${headerClass}-NavMenu`}
             lang={this.props.lang}
             items={this.state.headerData}  />
         </div>
@@ -100,7 +99,7 @@ class Header extends React.Component {
    */
   _fetchDataIfNeeded() {
     if (Store.getState().headerData.length < 1) {
-      Actions.fetchHeaderData();
+      Actions.fetchHeaderData(Store._getClientAppEnv());
     }
   }
 
@@ -147,7 +146,7 @@ class Header extends React.Component {
 Header.defaultProps = {
   lang: 'en',
   className: 'Header',
-  id: 'Header'
+  id: 'nyplHeader'
 };
 
 const styles = {
