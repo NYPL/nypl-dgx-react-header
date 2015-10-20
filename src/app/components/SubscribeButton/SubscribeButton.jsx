@@ -114,8 +114,8 @@ class SubscribeButton extends React.Component {
   * as a fallback.
   */
   _callMailinglistApi() {
-    axios.
-      get('https://mailinglistapi.nypl.org')
+    axios
+      .get('https://mailinglistapi.nypl.org')
       .then(response => {
         if(response.status === 200 && response.status < 300) {
           this.setState({target: '#'});
