@@ -29,6 +29,10 @@
 		display: block;
 		
   	/* Hide MobileHeader on Desktop and larger viewports */
+  	@include tablet-landscape {
+  		display: none;
+  	}
+
   	@include desktop {
   		display: none;
   	}
@@ -87,6 +91,11 @@
 	*/
 	&-TopWrapper {
   	display: none;
+
+  	@include tablet-landscape {
+  		display: block;
+  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP; /* revisit max-width on tablet landscape */	
+  	}
 
   	@include desktop {
   		display: block;

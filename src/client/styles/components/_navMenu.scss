@@ -6,6 +6,13 @@
 
 	/* Wrapper for the NavMenu */
 	&-Wrapper {
+
+		@include tablet-landscape {
+			margin: 0 auto;
+			max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+			text-align: right;
+		}
+
 		@include desktop {
 			margin: 0 auto;
 			max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
@@ -35,6 +42,11 @@
 			/* Only display BottomButtons on Mobile */
 			.MobileBottomButtons {
 				display: block;
+
+				@include tablet-landscape {
+					display: none;
+				}
+
 				@include desktop {
 					display: none;
 				}
@@ -65,6 +77,13 @@
   	list-style-type: none;
   	text-align: right;
 
+  	@include tablet-landscape {
+  		display: inline-table;
+  		background-color: transparent;
+  		padding: 0;
+  		margin: 0;		
+  	}
+
   	@include desktop {
   		display: inline-table;
   		background-color: transparent;
@@ -81,10 +100,25 @@
 		  &.DonateButtonItem {
 		  	display: none;
 
+		  	@include tablet-landscape {
+		  		display: inline-block;
+		  	}
+
 	  		@include desktop {
 	  			display: inline-block;
 	  		}
 		  }
+
+	  	@include tablet-landscape {
+  			display: inline-block;
+  			padding: 0;
+  			margin: 0 6px 0 0;
+  			line-height: normal !important;
+
+  			&:last-child {
+  				margin-right: 0px;
+  			}
+	  	}
 
   		@include desktop {
   			display: inline-block;
@@ -122,6 +156,12 @@
 		  			outline: initial;
 		  		}
 
+		  		@include tablet-landscape {
+	  				color: #000;
+	  				font-size: 18px;
+	  				padding: 0px 7px;
+		  		}
+
 	  			@include desktop {
 	  				color: #000;
 	  				font-size: 16px;
@@ -131,6 +171,57 @@
 	  	}
 
 	  	&-Arrow {
+
+	  		@include tablet-landscape {
+		  		/* BROWSE */
+		  		&-29a4b824-e084-4771-aafc-52b3586c5e49 {
+			  		&.active {
+			  			@include up-arrow($BG_MENU_BROWSE_RIGHT, 30%, 'top', 5px, 13px);
+			  		}
+		  		}
+
+		  		/* LEARN */
+		  		&-925d1fa9-1138-403c-9990-38861902b02d {
+			  		&.active {
+			  			@include up-arrow($BG_MENU_LEARN_RIGHT, 30%, 'top', 5px, 13px);
+			  		}
+		  		}
+
+		  		/* ATTEND */
+		  		&-851ed351-08f5-43f0-9011-9c317f85f0ca {
+			  		&.active {
+			  			@include up-arrow($BG_MENU_ATTEND_RIGHT, 30%, 'top', 5px, 13px);
+			  		}
+		  		}
+
+		  		/* FIND US */
+		  		&-df621833-4dd1-4223-83e5-6ad7f98ad26a {
+			  		&.active {
+			  			@include up-arrow($BG_MENU_FINDUS_RIGHT, 30%, 'top', 5px, 13px);
+			  		}
+		  		}
+
+		  		/* RESEARCH */
+		  		&-4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9 {
+			  		&.active {
+			  			@include up-arrow($BG_MENU_RESEARCH_RIGHT, 30%, 'top', 5px, 13px);
+			  		}
+		  		}
+
+		  		/* GIVE */
+		  		&-1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1 {
+			  		&.active {
+			  			@include up-arrow($BG_MENU_GIVE_RIGHT, 30%, 'top', 5px, 13px);
+			  		}
+		  		}
+
+			  	/* GET HELP */
+			  	&-13d95ad5-f117-4415-ba2c-5c0b9618984d {
+			  		&.active {
+			  			@include up-arrow($BG_MENU_HELP_RIGHT, 30%, 'top', 5px, 13px);
+			  		}  		
+			  	}
+	  		}
 
 				/* Arrow Assignment for Desktop and up */
 				@include desktop {
@@ -196,8 +287,13 @@
 	  	top: 41.75px;
 	  	left: 0;
 
-	  	/* Only display MegaMenu's on Desktop */
+	  	/* Only display MegaMenu's on  Tablet Landscape/Desktop and up */
 	  	&.active {
+	  		@include tablet-landscape {
+	  			display: block;
+	  			z-index: 3;
+	  		}
+
 	  		@include desktop {
 	  			display: block;
 	  			z-index: 3;
