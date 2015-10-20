@@ -7,6 +7,8 @@ import EmailSubscription from '../EmailSubscription/EmailSubscription.jsx';
 import Store from '../../stores/Store.js';
 import Actions from '../../actions/Actions.js';
 
+import axios from 'axios';
+
 import gaUtils from '../../utils/gaUtils.js';
 
 class SubscribeButton extends React.Component {
@@ -17,12 +19,27 @@ class SubscribeButton extends React.Component {
 
     // Holds the initial state, replaces getInitialState() method
     this.state = {
-      subscribeFormVisible: Store._getSubscribeFormVisible()
+      subscribeFormVisible: Store._getSubscribeFormVisible(),
+      target: this.props.target
     };
   }
 
   componentDidMount() {
     Store.listen(this._onChange.bind(this));
+
+    // An axios call to the mailinglist API server. If the server works,
+    // change the link of the button to '#' so it will open the subscribe box.
+    // If the server doesn't work, the button will link to subscribe landing page
+    // as a fallback.
+    axios.
+      get('https://mailinglistapi.nypl.org')
+      .then(response => {
+        if(response.status === 200 && response.status < 300) {
+          this.setState({target: '#'});
+        }
+      })
+      .catch(response => {
+      });
   }
 
   componentWillUnmount() {
@@ -54,7 +71,7 @@ class SubscribeButton extends React.Component {
         <a
           id={'SubscribeButton'}
           className={`SubscribeButton ${buttonClasses}`}
-          href={this.props.target}
+          href={this.state.target}
           onClick={this._handleClick.bind(this)}
           style={[
             styles.SimpleButton,
@@ -82,14 +99,15 @@ class SubscribeButton extends React.Component {
   // to the Header Store that will triggger a global update
   // to the reference in the Header Constants.
   _handleClick(e) {
-    e.preventDefault();
 
-    if (this.props.target === '#') {
+    if (this.state.target === '#') {
+      e.preventDefault();
       let visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
       Actions.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
       
       gaUtils._trackEvent('Click', `Subscribe - ${visibleState}`);
     }
+
   }
 
   // Updates the state of the form based off the Header Store.
@@ -105,7 +123,7 @@ class SubscribeButton extends React.Component {
 SubscribeButton.defaultProps = {
   lang: 'en',
   label: 'Subscribe',
-  target: '#'
+  target: 'http://pages.email.nypl.org/page.aspx?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7'
 };
 
 const styles = {
