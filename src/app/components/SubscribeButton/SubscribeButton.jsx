@@ -27,19 +27,9 @@ class SubscribeButton extends React.Component {
   componentDidMount() {
     Store.listen(this._onChange.bind(this));
 
-    // An axios call to the mailinglist API server. If the server works,
-    // change the link of the button to '#' so it will open the subscribe box.
-    // If the server doesn't work, the button will link to subscribe landing page
-    // as a fallback.
-    axios.
-      get('https://mailinglistapi.nypl.org')
-      .then(response => {
-        if(response.status === 200 && response.status < 300) {
-          this.setState({target: '#'});
-        }
-      })
-      .catch(response => {
-      });
+    // Make an axios call to the mailinglist API server to check it th server is working.
+    // And determine the behavior of subscribe button based on the status of the server.
+    this._callMailinglistApi();
   }
 
   componentWillUnmount() {
@@ -114,6 +104,31 @@ class SubscribeButton extends React.Component {
   // The central point of access to the value is in the Store.
   _onChange() {
     this.setState({subscribeFormVisible: Store._getSubscribeFormVisible()});
+  }
+
+  /**
+  * _callMailinglistApi()
+  * An axios call to the mailinglist API server. If the server works,
+  * change the link of the button to '#' so it will open the subscribe box.
+  * If the server doesn't work, the button will link to subscribe landing page
+  * as a fallback.
+  */
+  _callMailinglistApi() {
+    axios.
+      get('https://mailinglistapi.nypl.org')
+      .then(response => {
+        if(response.status === 200 && response.status < 300) {
+          this.setState({target: '#'});
+        }
+      })
+      .catch(response => {
+        console.warn('Error on Axios GET request: https://mailinglistapi.nypl.org');
+        if (response instanceof Error) {
+          console.warn(response.message);
+        } else {
+          console.warn('The Axios GET request has a status of: ' + response.status);
+        }
+      });
   }
 }
 
