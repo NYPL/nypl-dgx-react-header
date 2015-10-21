@@ -49,7 +49,7 @@ class SearchButton extends React.Component {
 
     this.hoverTimer = setTimeout(() => {
       Actions.searchButtonActionValue('hoverSearch');
-    }, 350);
+    }, 150);
   }
 
   /**
