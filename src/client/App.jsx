@@ -106,7 +106,9 @@ import './styles/main.scss';
 
 		  	// Now we ensure that only ONE <script> tag has been created
 		  	// before allowing React to Render the Header.
-		  	if (nyplHeaderObject.processedScripts.length === 1 && nyplHeaderObject.styleTags.length === 1 && htmlElement) {
+		  	if (nyplHeaderObject.processedScripts.length === 1 
+		  		&& nyplHeaderObject.styleTags.length === 1 
+		  		&& htmlElement && appEnv) {
 
 	  			// Fetch the data first before Render
 	  			// This allows us to populate the Store so that
