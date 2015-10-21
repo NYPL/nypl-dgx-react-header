@@ -8,6 +8,8 @@ import EmailSubscription from '../EmailSubscription/EmailSubscription.jsx';
 import Store from '../../stores/Store.js';
 import Actions from '../../actions/Actions.js';
 
+import axios from 'axios';
+
 import gaUtils from '../../utils/gaUtils.js';
 
 class SubscribeButton extends React.Component {
@@ -16,12 +18,16 @@ class SubscribeButton extends React.Component {
     super(props);
 
     this.state = {
-      subscribeFormVisible: Store._getSubscribeFormVisible()
+      subscribeFormVisible: Store._getSubscribeFormVisible(),
+      target: this.props.target
     };
   }
 
   componentDidMount() {
     Store.listen(this._onChange.bind(this));
+    // Make an axios call to the mailinglist API server to check it th server is working.
+    // And determine the behavior of subscribe button based on the status of the server.
+    this._callMailinglistApi();
   }
 
   componentWillUnmount() {
@@ -81,14 +87,14 @@ class SubscribeButton extends React.Component {
    * that will dispatch an event to the Header Store.
    */
   _handleClick(e) {
-    e.preventDefault();
 
-    if (this.props.target === '#') {
+    if (this.state.target === '#') {
+      e.preventDefault();
       let visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
-
       Actions.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
       gaUtils._trackEvent('Click', `Subscribe - ${visibleState}`);
     }
+
   }
 
   /**
@@ -97,10 +103,12 @@ class SubscribeButton extends React.Component {
    * currently visible.
    */
   _handleOnClickOut(e) {
+
     if (Store._getSubscribeFormVisible()) {
       Actions.toggleSubscribeFormVisible(false);
       gaUtils._trackEvent('Click', 'Subscribe - Closed');
     }
+    
   }
 
   /**
@@ -110,12 +118,37 @@ class SubscribeButton extends React.Component {
   _onChange() {
     this.setState({subscribeFormVisible: Store._getSubscribeFormVisible()});
   }
+
+  /**
+  * _callMailinglistApi()
+  * An axios call to the mailinglist API server. If the server works,
+  * change the link of the button to '#' so it will open the subscribe box.
+  * If the server doesn't work, the button will link to subscribe landing page
+  * as a fallback.
+  */
+  _callMailinglistApi() {
+    axios
+      .get('https://mailinglistapi.nypl.org')
+      .then(response => {
+        if(response.status === 200 && response.status < 300) {
+          this.setState({target: '#'});
+        }
+      })
+      .catch(response => {
+        console.warn('Error on Axios GET request: https://mailinglistapi.nypl.org');
+        if (response instanceof Error) {
+          console.warn(response.message);
+        } else {
+          console.warn('The Axios GET request has a status of: ' + response.status);
+        }
+      });
+  }
 }
 
 SubscribeButton.defaultProps = {
   lang: 'en',
   label: 'Subscribe',
-  target: '#'
+  target: 'http://pages.email.nypl.org/page.aspx?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7'
 };
 
 const styles = {
