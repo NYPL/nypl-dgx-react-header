@@ -1,6 +1,7 @@
 import Radium from 'radium';
 import React from 'react';
 import cx from 'classnames';
+import ClickOutHandler from 'react-onclickout';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 import EmailSubscription from '../EmailSubscription/EmailSubscription.jsx';
 
@@ -13,11 +14,9 @@ import gaUtils from '../../utils/gaUtils.js';
 
 class SubscribeButton extends React.Component {
 
-  // Constructor used in ES6
   constructor(props) {
     super(props);
 
-    // Holds the initial state, replaces getInitialState() method
     this.state = {
       subscribeFormVisible: Store._getSubscribeFormVisible(),
       target: this.props.target
@@ -26,7 +25,6 @@ class SubscribeButton extends React.Component {
 
   componentDidMount() {
     Store.listen(this._onChange.bind(this));
-
     // Make an axios call to the mailinglist API server to check it th server is working.
     // And determine the behavior of subscribe button based on the status of the server.
     this._callMailinglistApi();
@@ -36,12 +34,10 @@ class SubscribeButton extends React.Component {
     Store.unListen(this._onChange.bind(this));
   }
 
-  render () {
+  render() {
     // Assign a variable to hold the reference of state boolean
-    let showDialog = this.state.subscribeFormVisible;
-
-    // Dynamic class assignment based on boolean flag
-    const buttonClasses = cx({'active': showDialog}),
+    let showDialog = this.state.subscribeFormVisible,
+      buttonClasses = cx({'active': showDialog}),
       emailFormClasses = cx({
         'active animatedFast fadeIn': showDialog
       }),
@@ -51,57 +47,74 @@ class SubscribeButton extends React.Component {
       });
 
     return (
-      <div className='SubscribeButton-Wrapper'
-        ref='SubscribeButton'
-        style={[
-          styles.base,
-          this.props.style
-        ]}>
-
-        <a
-          id={'SubscribeButton'}
-          className={`SubscribeButton ${buttonClasses}`}
-          href={this.state.target}
-          onClick={this._handleClick.bind(this)}
+      <ClickOutHandler onClickOut={this._handleOnClickOut.bind(this)}>
+        <div className='SubscribeButton-Wrapper'
+          ref='SubscribeButton'
           style={[
-            styles.SimpleButton,
+            styles.base,
             this.props.style
           ]}>
-          {this.props.label}
-          <span className={`${iconClass} icon`} style={styles.SubscribeIcon}></span>
-        </a>
 
-        <div className={`EmailSubscription-Wrapper ${emailFormClasses}`}
-          style={[
-            styles.EmailSubscribeForm
-          ]}>
-          <EmailSubscription
-            list_id='1061'
-            target='https://mailinglistapi.nypl.org' />
+          <a
+            id={'SubscribeButton'}
+            className={`SubscribeButton ${buttonClasses}`}
+            href={this.props.target}
+            onClick={this._handleClick.bind(this)}
+            style={[
+              styles.SimpleButton,
+              this.props.style
+            ]}>
+            {this.props.label}
+            <span className={`${iconClass} icon`} style={styles.SubscribeIcon}></span>
+          </a>
+
+          <div className={`EmailSubscription-Wrapper ${emailFormClasses}`}
+            style={[
+              styles.EmailSubscribeForm
+            ]}>
+            <EmailSubscription
+              list_id='1061'
+              target='https://mailinglistapi.nypl.org' />
+          </div>
         </div>
-      </div>
+      </ClickOutHandler>
     );
   }
 
-  /* Utility Methods should be declared below the render method */
-
-  // Toggles the visibility of the form. Sends an Action update
-  // to the Header Store that will triggger a global update
-  // to the reference in the Header Constants.
+  /**
+   * _handleClick(e) 
+   * Toggles the visibility of the form. Sends an Action
+   * that will dispatch an event to the Header Store.
+   */
   _handleClick(e) {
 
     if (this.state.target === '#') {
       e.preventDefault();
       let visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
       Actions.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
-      
       gaUtils._trackEvent('Click', `Subscribe - ${visibleState}`);
     }
 
   }
 
-  // Updates the state of the form based off the Header Store.
-  // The central point of access to the value is in the Store.
+  /**
+   * _handleOnClickOut(e) 
+   * Handles closing the Subscribe form if it is
+   * currently visible.
+   */
+  _handleOnClickOut(e) {
+
+    if (Store._getSubscribeFormVisible()) {
+      Actions.toggleSubscribeFormVisible(false);
+      gaUtils._trackEvent('Click', 'Subscribe - Closed');
+    }
+    
+  }
+
+  /**
+   * _onChange()
+   * Updates the state of the form based off the Header Store.
+   */
   _onChange() {
     this.setState({subscribeFormVisible: Store._getSubscribeFormVisible()});
   }
@@ -132,9 +145,6 @@ class SubscribeButton extends React.Component {
   }
 }
 
-// Set Component's Default Properties
-// In ES6 properties cannot be defined in classes, only methods.
-/* Default Component Properties */
 SubscribeButton.defaultProps = {
   lang: 'en',
   label: 'Subscribe',
