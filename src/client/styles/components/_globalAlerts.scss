@@ -2,10 +2,6 @@
 	position: relative;
 	border-bottom: 1px solid #908034;
 
-	@include tablet-landscape {
-		border-bottom: none;
-	}
-
 	@include desktop {
 		border-bottom: none;
 	}
@@ -16,13 +12,6 @@
 
 	&-Wrapper {
 		margin: 0;
-
-		@include tablet-landscape {
-  		display: block;
-  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-  		margin: 0 auto;
-  		position: relative;	
-		}
 
 		@include desktop {
   		display: block;
@@ -51,10 +40,6 @@
 	&-Box {
 		position: relative;
 		margin: .75em 1.2em .5em 1.2em;
-
-		@include tablet-landscape {
-			margin: .5em 0 .5em 105px;
-		}
 		
 		@include desktop {
 			margin: .5em 0 .5em 105px;

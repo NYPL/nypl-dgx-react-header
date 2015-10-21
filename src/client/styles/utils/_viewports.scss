@@ -16,7 +16,7 @@ $LARGE_DISPLAY_WIDTH: 1280px;
 /*
  * Viewport: 321px - 767px
 */
-@mixin phone-regular {
+@mixin phone-large {
   @media (min-width: #{$SMALL_PHONE_WIDTH + 1px})
   and (max-width: #{$TABLET_WIDTH - 1px}) 
   and (-webkit-min-device-pixel-ratio: 2) {
@@ -24,6 +24,9 @@ $LARGE_DISPLAY_WIDTH: 1280px;
   } 
 }
 
+/*
+ * Viewport: 768px - 1024px
+*/
 @mixin tablet {
   @media (min-width: #{$TABLET_WIDTH})
   and (max-width: #{$DESKTOP_WIDTH - 1px}) {
@@ -31,6 +34,9 @@ $LARGE_DISPLAY_WIDTH: 1280px;
   }
 }
 
+/*
+ * Viewport: 768px - 1024px (portrait orientation)
+*/
 @mixin tablet-portrait {
   @media (min-width: #{$TABLET_WIDTH})
   and (max-width: #{$DESKTOP_WIDTH - 1px})
@@ -40,6 +46,9 @@ $LARGE_DISPLAY_WIDTH: 1280px;
   }
 }
 
+/*
+ * Viewport: 768px - 1024px (landscape orientation)
+*/
 @mixin tablet-landscape {
   @media (min-width: #{$TABLET_WIDTH})
   and (max-width: #{$DESKTOP_WIDTH - 1px})
@@ -49,12 +58,18 @@ $LARGE_DISPLAY_WIDTH: 1280px;
   }
 }
 
+/*
+ * Viewport: 1025px and up
+*/
 @mixin desktop {
   @media (min-width: #{$DESKTOP_WIDTH}) {
     @content;
   }
 }
 
+/*
+ * Viewport: 1280px and up
+*/
 @mixin large-display {
   @media (min-width: #{$LARGE_DISPLAY_WIDTH}) {
     @content;
