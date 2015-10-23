@@ -132,7 +132,7 @@ import './styles/main.scss';
 
 		  if (!window.ga) {
 				let gaOpts = { debug: false };
-				ga.initialize('UA-1420324-122', gaOpts);
+				ga.initialize('UA-1420324-3', gaOpts);
 			}
 		}
 	}
