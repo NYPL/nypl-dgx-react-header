@@ -30,7 +30,7 @@ class MyNyplButton extends React.Component {
   }
 
   componentWillUnmount() {
-    Store.unListen(this._onChange.bind(this));
+    Store.unlisten(this._onChange.bind(this));
   }
 
   render() {
@@ -140,7 +140,7 @@ const styles = {
     position: 'absolute',
     zIndex: 1000,
     left: '0',
-    width: '250px',
+    minWidth: '250px',
     minHeight: '215px',
     backgroundColor: '#1DA1D4',
     padding: '25px 30px'

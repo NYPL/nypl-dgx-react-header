@@ -78,7 +78,7 @@ const styles = {
   selectExp: {
     fontStyle: 'italic',
     fontSize: '25px',
-    padding: '20px',
+    padding: '25px 20px',
     margin: '0px',
     color: '#959595'
   },

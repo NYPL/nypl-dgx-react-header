@@ -76,12 +76,12 @@ const styles = {
     display: 'inline-block',
     border: '2px solid #fff',
     color: 'white',
-    padding: '7px 15px',
+    padding: '7px 10px',
     borderRadius: '20px',
-    fontSize: '13px',
+    fontSize: '12px',
     backgroundColor: '#1DA1D4',
     fontFamily: 'Kievit-Book',
-    marginTop: '25px'
+    marginTop: '20px'
   },
 };
 
