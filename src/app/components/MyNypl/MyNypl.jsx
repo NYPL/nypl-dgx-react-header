@@ -64,20 +64,20 @@ const styles = {
     display: 'none'
   },
   catalogInfo: {
-    borderBottom: '1px solid #fff',
     fontSize: '12px',
-    color: '#fff',
+    color: 'rgba(255, 255, 255, 0.5)',
     fontWeight: '200',
     position: 'absolute',
     bottom: '26px',
-    right: '30px'
+    right: '30px',
+    textDecoration: 'underline'
   },
   loginButtons: {
     display: 'inline-block',
     border: '2px solid #fff',
     color: 'white',
-    padding: '7px 10px',
-    borderRadius: '20px',
+    padding: '9px 10px 7px',
+    borderRadius: '28px',
     fontSize: '12px',
     backgroundColor: '#1DA1D4',
     fontFamily: 'Kievit-Book',

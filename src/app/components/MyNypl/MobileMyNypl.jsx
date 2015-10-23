@@ -94,16 +94,17 @@ const styles = {
     textAlign: 'center',
     padding: '35px',
     fontSize: '18px',
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    textDecoration: 'underline'
   },
   classicLinkWrapper: {
-    borderLeft: '1.25px solid #252525'
+    borderLeft: '1.25px solid #b92b1a'
   },
   classicLinkLabel: {
     width: '135px'
   },
   catalogLinkWrapper: {
-    borderRight: '1.25px solid #252525'
+    borderRight: '1.25px solid #b92b1a'
   },
   catalogLinkLabel: {
     width: '102px'
