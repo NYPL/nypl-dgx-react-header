@@ -68,7 +68,7 @@ class MyNyplButton extends React.Component {
 
           <div className={`MyNypl-Wrapper ${myNyplClasses}`}
             style={[
-              styles.MyNypl
+              styles.MyNyplWrapper
             ]}>
             <MyNypl />
           </div>
@@ -136,14 +136,15 @@ const styles = {
     marginLeft: '5px',
     display: 'inline'
   },
-  MyNypl: {
+  MyNyplWrapper: {
     position: 'absolute',
     zIndex: 1000,
     left: '0',
     minWidth: '250px',
     minHeight: '215px',
     backgroundColor: '#1DA1D4',
-    padding: '25px 30px'
+    padding: '25px 30px',
+    boxSizing: 'content-box'
   },
   hide: {
     display: 'none'
