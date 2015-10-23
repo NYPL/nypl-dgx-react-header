@@ -34,7 +34,7 @@ class MobileMyNypl extends React.Component{
             </span>
           </span>
         </a>
-        <a className='Mobile-Catalog-Info' href='#' lang={this.props.lang}
+        <a className='Mobile-Catalog-Info' href={this.props.infoLink} lang={this.props.lang}
           onClick={gaUtils._trackEvent.bind(this, 'Click', 'MyNypl - Mobile Catalog Info')}
           style={[
             styles.catalogInfoLink,
@@ -49,8 +49,9 @@ class MobileMyNypl extends React.Component{
 MobileMyNypl.defaultProps = {
   lang: 'en',
   className: 'MobileMyNypl',
-  catalogLink: '#',
-  classicLink: '#'
+  catalogLink: 'https://browse.nypl.org/iii/encore/myaccount',
+  classicLink: 'http://catalog.nypl.org/patroninfo',
+  infoLink: 'http://www.nypl.org/online-catalog-changes'
 };
 
 const styles = {

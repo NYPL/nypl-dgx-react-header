@@ -22,20 +22,20 @@ class MyNypl extends React.Component {
         <div className={this.props.className + '-Title'}>Select your experience</div>
         <ul className={`${this.props.className}-Login-List`}>
           <li>
-            <a href='' style={styles.loginButtons} className={this.props.className + '-Catalog-Btn'}>
+            <a href={this.props.catalogLink} style={styles.loginButtons} className={this.props.className + '-Catalog-Btn'}>
               <span className='nypl-icon-login icon'></span>
               LOG INTO THE CATALOG
             </a>
           </li>
           <li>
-            <a href='' style={styles.loginButtons} className={this.props.className + '-Classic-Btn'}>
+            <a href={this.props.classicLink} style={styles.loginButtons} className={this.props.className + '-Classic-Btn'}>
               <span className='nypl-icon-bldg icon'></span>
               LOG INTO THE CLASSIC CATALOG
             </a>
           </li>
         </ul>
 
-        <a href='#' className={`${this.props.className}-Catalog-Link`}
+        <a href={this.props.infoLink} className={`${this.props.className}-Catalog-Link`}
           style={styles.catalogInfo}>
           Catalog Info
         </a>
@@ -48,7 +48,10 @@ class MyNypl extends React.Component {
 MyNypl.defaultProps = {
   id: 'MyNypl',
   className: 'MyNypl',
-  lang: 'en'
+  lang: 'en',
+  catalogLink: 'https://browse.nypl.org/iii/encore/myaccount',
+  classicLink: 'http://catalog.nypl.org/patroninfo',
+  infoLink: 'http://www.nypl.org/online-catalog-changes'
 };
 
 const styles = {
@@ -81,7 +84,8 @@ const styles = {
     fontSize: '12px',
     backgroundColor: '#1DA1D4',
     fontFamily: 'Kievit-Book',
-    marginTop: '20px'
+    marginTop: '20px',
+    boxSizing: 'content-box'
   },
 };
 
