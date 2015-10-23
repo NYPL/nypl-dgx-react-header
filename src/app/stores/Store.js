@@ -9,19 +9,23 @@ class Store {
       handleFetchHeaderData: Actions.FETCH_HEADER_DATA,
       handleHeaderDataFailedFetch: Actions.FAILED_HEADER_DATA,
       handleSetMobileMenuButtonValue: Actions.SET_MOBILE_MENU_BUTTON_VALUE,
+      handleSetMobileMyNyplButtonValue: Actions.SET_MOBILE_MY_NYPL_BUTTON_VALUE,
       handleSearchButtonActionValue: Actions.SEARCH_BUTTON_ACTION_VALUE,
       handleUpdateIsHeaderSticky: Actions.UPDATE_IS_HEADER_STICKY,
       handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM,
       handleSetClientAppEnv: Actions.SET_CLIENT_APP_ENV,
-      handleToggleSubscribeFormVisible: Actions.TOGGLE_SUBSCRIBE_FORM_VISIBLE
+      handleToggleSubscribeFormVisible: Actions.TOGGLE_SUBSCRIBE_FORM_VISIBLE,
+      handleToggleMyNyplVisible: Actions.TOGGLE_MY_NYPL_VISIBLE
     });
 
     this.exportPublicMethods({
       _getMobileMenuBtnValue: this._getMobileMenuBtnValue,
       _getSearchButtonActionValue: this._getSearchButtonActionValue,
+      _getMobileMyNyplButtonValue: this._getMobileMyNyplButtonValue,
       _getIsStickyValue: this._getIsStickyValue,
       _getLastActiveMenuItem: this._getLastActiveMenuItem,
       _getSubscribeFormVisible: this._getSubscribeFormVisible,
+      _getMyNyplVisible: this._getMyNyplVisible,
       _getClientAppEnv: this._getClientAppEnv
     });
 
@@ -32,7 +36,9 @@ class Store {
       lastActiveMenuItem: '',
       activeMobileButton: '',
       searchButtonAction:'',
+      mobileMyNyplButton: '',
       subscribeFormVisible: false,
+      myNyplVisible: false,
       clientAppEnv: ''
     };
   }
@@ -49,13 +55,33 @@ class Store {
   }
 
   /**
+   * _getMobileMyNyplButtonValue()
+   * returns the current state.mobileMyNyplButton
+   * value.
+   * @return {String}
+   */
+  _getMobileMyNyplButtonValue() {
+    return this.state.mobileMyNyplButton;
+  }
+
+  /**
    * _getSubscribeFormVisible()
    * returns the current state.subscribeFormVisible
    * value.
-   * @return {Boolean} true/falsse
+   * @return {Boolean} true/false
    */
   _getSubscribeFormVisible() {
     return this.state.subscribeFormVisible;
+  }
+
+  /**
+   * _getMyNyplVisible()
+   * returns the current state.myNYPLVisible
+   * value.
+   * @return {Boolean} true/false
+   */
+  _getMyNyplVisible() {
+    return this.state.myNyplVisible;
   }
 
   /**
@@ -109,6 +135,10 @@ class Store {
     this.setState({activeMobileButton: currentActiveMobileButton});
   }
 
+  handleSetMobileMyNyplButtonValue(value) {
+    this.setState({mobileMyNyplButton: value});
+  }
+
   // The set search button action value to Store
   handleSearchButtonActionValue(actionValue) {
     this.setState({searchButtonAction: actionValue});
@@ -128,6 +158,10 @@ class Store {
 
   handleToggleSubscribeFormVisible(value) {
     this.setState({subscribeFormVisible: value});
+  }
+
+  handleToggleMyNyplVisible(value) {
+    this.setState({myNyplVisible: value});
   }
 }
 

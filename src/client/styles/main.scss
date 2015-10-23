@@ -134,10 +134,16 @@
 
 	/* EMAIL SUBSCRIBE BUTTON/FORM
 	 * ---------------------------
-	 * - Includes Button rules
+	 * - Includes Button rules (also for MyNYPL)
 	 * - Includes Email Signup rules
 	*/
 	@import 'components/_emailSubscribeButton';
+
+  /* MYNYPL LOGIN BUTTON
+   * ---------------------------
+   * - Includes MyNypl Login rules
+  */
+  @import 'components/_myNypl';
 
 	/* MAIN NAVIGATION
 	 * ---------------

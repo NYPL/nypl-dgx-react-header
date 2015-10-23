@@ -28,7 +28,8 @@ router
         res.locals.data = {
           Store: {
             headerData: modelData,
-            subscribeFormVisible: false
+            subscribeFormVisible: false,
+            myNyplVisible: false
           },
           // Set the API URL here so we can access it when we
           // render in the EJS file.
