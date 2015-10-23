@@ -131,7 +131,7 @@ import './styles/main.scss';
 		  }
 
 		  if (!window.ga) {
-				let gaOpts = { debug: true };
+				let gaOpts = { debug: false };
 				ga.initialize('UA-1420324-122', gaOpts);
 			}
 		}
