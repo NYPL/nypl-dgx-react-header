@@ -132,7 +132,7 @@ class MobileHeader extends React.Component {
         Actions.setMobileMenuButtonValue('');
       }
     } else if (activeButton === 'clickMyNypl') {
-      if (HeaderStore._getMobileMyNyplButtonValue() != activeButton) {
+      if (HeaderStore._getMobileMyNyplButtonValue() !== activeButton) {
         Actions.toggleMyNyplVisible(true);
         Actions.setMobileMyNyplButtonValue(activeButton);
         Actions.searchButtonActionValue('');

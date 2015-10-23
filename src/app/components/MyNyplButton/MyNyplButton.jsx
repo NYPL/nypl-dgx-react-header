@@ -99,8 +99,7 @@ class MyNyplButton extends React.Component {
    * currently visible.
    */
   _handleOnClickOut(e) {
-    if (Store._getMyNyplVisible() && Store._getMobileMyNyplButtonValue() === '') {
-      console.log('test');
+    if (Store._getMyNyplVisible() || Store._getMobileMyNyplButtonValue() === '') {
       Actions.toggleMyNyplVisible(false);
       gaUtils._trackEvent('Click', 'MyNyplButton - Closed');
     }

@@ -100,7 +100,7 @@ const styles = {
     borderLeft: '1.25px solid #252525'
   },
   classicLinkLabel: {
-    width: '150px'
+    width: '135px'
   },
   catalogLinkWrapper: {
     borderRight: '1.25px solid #252525'
