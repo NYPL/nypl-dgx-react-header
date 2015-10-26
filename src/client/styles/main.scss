@@ -15,6 +15,7 @@
 	@include Kievit-Book;
   width: 100%;
   background-color: #FFF;
+  border-bottom: 2px solid #ED1C24;
   @extend %clearfix;
 
   /* Global rules for repetitive link elements */
