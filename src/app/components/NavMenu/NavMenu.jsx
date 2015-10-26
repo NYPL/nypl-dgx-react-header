@@ -11,6 +11,7 @@ import SearchButton from '../SearchButton/SearchButton.jsx';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.jsx';
 import NavMenuBottomButtons from '../NavMenuBottomButtons/NavMenuBottomButtons.jsx';
 import DonateButton from '../DonateButton/DonateButton.jsx';
+import MyNyplButton from '../MyNyplButton/StickyMyNyplButton.jsx';
 
 class NavMenu extends React.Component {
 
@@ -26,10 +27,17 @@ class NavMenu extends React.Component {
       mobileActiveClass = cx({
         'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'
       }),
+      myNyplActiveClass = cx('NavMenuItem stickyLogin', {
+        'active': HeaderStore._getIsStickyValue()
+      }),
       donateButton = HeaderStore._getIsStickyValue() ?
         <li className='NavMenuItem DonateButtonItem'>
           <DonateButton style={styles.donateButton} gaLabel={'Mobile Donate'}/>
         </li> : null,
+      myNyplButton =
+        <li className={myNyplActiveClass}>
+          <MyNyplButton />
+        </li>,
       navMenu = navItems.map((item, index) => {
         return (
           <NavMenuItem
@@ -50,6 +58,7 @@ class NavMenu extends React.Component {
           <span className='MobileLogoText nypl-icon-logo-type'></span>
           <ul className={`${this.props.className}-List`} id='NavMenu-List'>
             {navMenu}
+            {myNyplButton}
             {donateButton}
           </ul>
           <SearchButton className={`${this.props.className}`} />
