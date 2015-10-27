@@ -128,6 +128,7 @@ const styles = {
   },
   SimpleButton: {
     display: 'block',
+    textTransform: 'uppercase',
     padding: '9px 10px 11px 20px'
   },
   MyNyplIcon: {
