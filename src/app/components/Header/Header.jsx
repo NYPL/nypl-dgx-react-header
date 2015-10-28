@@ -123,14 +123,14 @@ class Header extends React.Component {
     let headerHeight = this._getHeaderHeight(),
       windowVerticalDistance = this._getWindowVerticalScroll();
 
-    console.log(headerHeight, windowVerticalDistance);
-
     if (windowVerticalDistance > headerHeight) {
+      // Fire GA Event when Header is in Sticky Mode
       gaUtils._trackEvent.bind(this, 'scroll', 'Sticky Header');
-    }
 
-    return (windowVerticalDistance > headerHeight)
-      ? Actions.updateIsHeaderSticky(true) : Actions.updateIsHeaderSticky(false);
+      return Actions.updateIsHeaderSticky(true);
+    } else {
+      return Actions.updateIsHeaderSticky(false);
+    }
   }
 
   /**
@@ -149,8 +149,8 @@ class Header extends React.Component {
    * scroll position in pixels.
    */
   _getWindowVerticalScroll() {
-    return window.scrollY 
-      || window.pageYOffset || document.documentElement.scrollTop;
+    return window.scrollY || window.pageYOffset 
+      || document.documentElement.scrollTop;
   }
 };
 
