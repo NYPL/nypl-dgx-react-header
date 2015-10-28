@@ -60,7 +60,7 @@ class Header extends React.Component {
       mobileMyNyplClasses = cx({'active': showDialog});
 
     return (
-      <header id={this.props.id} className={headerClasses}>
+      <header id={this.props.id} className={headerClasses} ref='nyplHeader'>
         <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
         <div className={`${headerClass}-Wrapper`}>
           <MobileHeader className={`${headerClass}-Mobile`} locatorUrl={'//www.nypl.org/locations/map?nearme=true'} />
@@ -139,7 +139,8 @@ class Header extends React.Component {
    * element in pixels.
    */
   _getHeaderHeight() {
-    let headerContainer = document.getElementById(this.props.id);
+    let headerContainer = React.findDOMNode(this.refs.nyplHeader);
+
     return headerContainer.clientHeight;
   }
 
