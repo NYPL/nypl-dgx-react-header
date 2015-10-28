@@ -123,6 +123,8 @@ class Header extends React.Component {
     let headerHeight = this._getHeaderHeight(),
       windowVerticalDistance = this._getWindowVerticalScroll();
 
+    console.log(headerHeight, windowVerticalDistance);
+
     if (windowVerticalDistance > headerHeight) {
       gaUtils._trackEvent.bind(this, 'scroll', 'Sticky Header');
     }
