@@ -149,7 +149,8 @@ class Header extends React.Component {
    * scroll position in pixels.
    */
   _getWindowVerticalScroll() {
-    return window.scrollY;
+    return window.scrollY 
+      || window.pageYOffset || document.documentElement.scrollTop;
   }
 };
 
