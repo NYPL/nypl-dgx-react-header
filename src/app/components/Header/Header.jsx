@@ -127,9 +127,9 @@ class Header extends React.Component {
       // Fire GA Event when Header is in Sticky Mode
       gaUtils._trackEvent.bind(this, 'scroll', 'Sticky Header');
 
-      return Actions.updateIsHeaderSticky(true);
+      Actions.updateIsHeaderSticky(true);
     } else {
-      return Actions.updateIsHeaderSticky(false);
+      Actions.updateIsHeaderSticky(false);
     }
   }
 
@@ -150,7 +150,8 @@ class Header extends React.Component {
    * scroll position in pixels.
    */
   _getWindowVerticalScroll() {
-    return window.scrollY || window.pageYOffset 
+    return window.scrollY 
+      || window.pageYOffset 
       || document.documentElement.scrollTop;
   }
 };
