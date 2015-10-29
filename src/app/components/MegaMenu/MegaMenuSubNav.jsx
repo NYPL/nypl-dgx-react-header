@@ -45,7 +45,7 @@ class MegaMenuSubNav extends React.Component {
     return (
       <div className='MegaMenu-SubNav'>
         <h2>
-          <a style={styles.topLink} href={this.props.topLink || '#'}>
+          <a style={styles.topLink} href={this.props.topLink}>
             {this.props.label[this.props.lang].text}
           </a>
         </h2>
@@ -57,7 +57,8 @@ class MegaMenuSubNav extends React.Component {
 }
 
 MegaMenuSubNav.defaultProps = {
-  lang: 'en'
+  lang: 'en',
+  topLink: '#'
 };
 
 const styles = {
