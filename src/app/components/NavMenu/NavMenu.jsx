@@ -11,7 +11,7 @@ import SearchButton from '../SearchButton/SearchButton.jsx';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.jsx';
 import NavMenuBottomButtons from '../NavMenuBottomButtons/NavMenuBottomButtons.jsx';
 import DonateButton from '../DonateButton/DonateButton.jsx';
-import MyNyplButton from '../MyNyplButton/StickyMyNyplButton.jsx';
+import StickyMyNyplButton from '../MyNyplButton/StickyMyNyplButton.jsx';
 
 class NavMenu extends React.Component {
 
@@ -36,7 +36,7 @@ class NavMenu extends React.Component {
         </li> : null,
       myNyplButton =
         <li className={myNyplActiveClass}>
-          <MyNyplButton />
+          <StickyMyNyplButton />
         </li>,
       navMenu = navItems.map((item, index) => {
         return (
