@@ -110,15 +110,10 @@ import './styles/main.scss';
 		  		&& nyplHeaderObject.styleTags.length === 1 
 		  		&& htmlElement && appEnv) {
 
-	  			// Fetch the data first before Render
-	  			// This allows us to populate the Store so that
-	  			// the <Header /> component renders with data already
-	  			// loaded. There is a fallback method in the <Header />
-	  			// component that checks the Store data then fetches.
-	  			// Set the clientAppEnv so that the <Header> knows what
-	  			// /header-data url to fetch.
+	  			/* Set the proper environment in the Store
+	  			 * so that the component will know what to fetch
+	  			 */
 	  			Actions.setClientAppEnv(appEnv);
-	  			Actions.fetchHeaderData(appEnv);
 
 		  		setTimeout(() => {
 		  			// Once rendered, React should populate the state
