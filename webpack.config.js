@@ -67,8 +67,12 @@ if (ENV === 'development') {
 		devtool: 'eval',
 		entry: [
 	    'webpack-dev-server/client?http://localhost:3000',
-	    'webpack/hot/only-dev-server'
+	    'webpack/hot/only-dev-server',
+	    path.resolve(ROOT_PATH, 'src/client/App.jsx')
 	  ],
+    output: {
+      publicPath: 'http://localhost:3000/'
+    },
 	  plugins: [
 	    new webpack.HotModuleReplacementPlugin(),
 	    new webpack.NoErrorsPlugin()

@@ -128,7 +128,11 @@ if (!isProduction) {
     publicPath: webpackConfig.output.publicPath,
     hot: true,
     stats: false,
-    historyApiFallback: true
+    historyApiFallback: true,
+    headers: {
+      'Access-Control-Allow-Origin': 'http://localhost:3001',
+      'Access-Control-Allow-Headers': 'X-Requested-With'
+    }
   }).listen(WEBPACK_DEV_PORT, 'localhost', (err, result) => {
     if (err) {
       console.log(colors.red(err));
