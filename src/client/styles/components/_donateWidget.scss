@@ -12,6 +12,10 @@
 			position: relative;
 			margin: 0 0 0 $RIGHT_NAV_CONTAINER_LEFT_MARGIN;
 			top: 50px;
+
+			@include tablet-landscape {
+				margin: 0 0 0 31px;
+			}
 		}
 
 		&-Tag {
@@ -62,6 +66,10 @@
 					margin: 0;
 					border: 2px solid #FFF;
 					border-radius: 5px;
+
+					@include tablet-landscape {
+						padding: 12px 15px;
+					}
 
 					@include large-display {
 						font-size: 18px;

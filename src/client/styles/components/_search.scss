@@ -1,8 +1,15 @@
 /* The Wrapper for putting in the icon for search button and search box */
 &-SearchBox-Wrapper {
   display: block;
-  @include desktop {
+
+  @include tablet-landscape {
     margin: 0 0 0 6px;
+    display: inline-table;
+    vertical-align: middle;
+  }
+
+  @include desktop {
+    margin: 0 20px 0 6px;
     display: inline-table;
     vertical-align: middle;
   }
@@ -20,6 +27,10 @@
   font-size: 22px;
   padding: 8px 10px 14px 10px;
 
+  @include tablet-landscape {
+    display: block;
+  }
+
   @include desktop {
     display: block;
   }
@@ -27,6 +38,12 @@
   &:before {
     border-bottom-color: $BG_MENU_SEARCH;
     border-bottom-style: none;
+
+    @include tablet-landscape {
+      border-bottom-color: $BG_MENU_SEARCH;
+      border-bottom-style: solid;
+      border-bottom-width: 2px;
+    }
 
     @include desktop {
       border-bottom-color: $BG_MENU_SEARCH;
@@ -41,6 +58,10 @@
     color: #78CCED;
     -webkit-transition: background-color .3s linear .25s, color .3s linear .25s; /* Safari */
     transition: background-color .3s linear .25s, color .3s linear .25s;
+
+    @include tablet-landscape {
+      display: block;
+    }
 
     @include desktop {
       display: block;
@@ -62,6 +83,13 @@
 
   /* Rules for Desktop Active State */
   &.active {
+
+    @include tablet-landscape {
+      display: block;
+      top: 42px;
+      height: 225px;
+    }
+
     @include desktop {
       display: block;
       top: 42px;
@@ -74,6 +102,10 @@
     display: block;
     margin: -1px 0 0 0;
     top: 0px;
+
+    @include tablet-landscape {
+      display: none;
+    }
 
     @include desktop {
       display: none;
@@ -88,15 +120,27 @@
   max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
   position: relative;
   width: 100%;
+
+  @include tablet-landscape {
+    margin: 60px auto 0px;
+    display: table;
+    width: auto; 
+  }
+
   @include desktop {
-    margin: 55px auto 0 auto;
-    display: block;
-    text-align: left;
+    margin: 60px auto 0px;
+    display: table;
+    width: 100%;
   }
 
   /* The style of placehold text */
   input::-webkit-input-placeholder {
     color: #A3A19E;
+
+    @include tablet-landscape {
+      color: #FFFFFF;
+    }
+
     @include desktop {
       color: #FFFFFF;
     }
@@ -104,6 +148,11 @@
 
   input:-moz-placeholder { /* Firefox 18- */
     color: #A3A19E;
+
+    @include tablet-landscape {
+      color: #FFFFFF;
+    }
+
     @include desktop {
       color: #FFFFFF;
     } 
@@ -111,6 +160,11 @@
 
   input:-moz-placeholder {  /* Firefox 19+ */
     color: #A3A19E;
+
+    @include tablet-landscape {
+      color: #FFFFFF;
+    }
+
     @include desktop {
       color: #FFFFFF;
     }
@@ -118,6 +172,11 @@
 
   input:-ms-input-placeholder {
     color: #A3A19E;
+
+    @include tablet-landscape {
+      color: #FFFFFF;
+    }
+
     @include desktop {
       color: #FFFFFF;
     }
@@ -159,13 +218,20 @@
   position: relative;
   text-align: center;
 
+  @include tablet-landscape {
+    border-bottom-style: none;
+    display: table-cell;
+    padding: 0 0 0 115px;
+    margin: 0;
+    width: 100%;
+  }
+
   @include desktop {
     border-bottom-style: none;
-    display: inline-block;
-    left: 0px;
+    display: table-cell;
     padding: 0 0 0 110px;
-    width: 82%;
     margin: 0;
+    width: 100%;
   }
 }
 
@@ -187,15 +253,23 @@
     position: absolute;
     top: 22px;
 
+    @include tablet-landscape {
+      display: none;
+    }
+
     @include desktop {
       display:none;
     }
   }
 
+  @include tablet-landscape {
+    margin: 0 0 25px 0;
+    display: block;
+  }
+
   @include desktop {
-    margin: 0 0 20px 0;
-    width: 100%;
-    min-height: 70px;
+    margin: 0 0 25px 0;
+    display: block;
   }
 }
 
@@ -217,6 +291,16 @@
     box-shadow: none;
   }
 
+  @include tablet-landscape {
+    background-color: #1DA1D4;
+    color: #FFFFFF;
+    @include Kievit-Light;
+    font-size: 66px;
+    font-style: normal;
+    letter-spacing: -0.8px;
+    padding: 0px !important;
+  }  
+
   @include desktop {
     background-color: #1DA1D4;
     color: #FFFFFF;
@@ -233,6 +317,14 @@
   display: block;
   width: 100%;
 
+  @include tablet-landscape {
+    display: inline-block;
+    border-bottom: solid;
+    border-bottom-width: 2px;
+    border-color: #FFFFFF;
+    width: 100%;
+  }
+
   @include desktop {
     display: inline-block;
     border-bottom: solid;
@@ -247,6 +339,10 @@
   color: #FFFFFF;
   float: left;
   font-size: 16px;
+
+  @include tablet-landscape {
+    display: inline-block;
+  }
 
   @include desktop {
     display: inline-block;
@@ -280,6 +376,23 @@
     border-width: 2px;
   }
 
+  @include tablet-landscape {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border-width: 0px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: table-cell;
+    height: 80px;
+    width: 70px;
+    margin: 0 20px 0 20px;
+    padding: 0;
+    position: relative;
+    bottom: 5px;
+  }
+
   @include desktop {
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -288,11 +401,13 @@
     border-width: 0px;
     color: #FFFFFF;
     cursor: pointer;
-    display: inline-block;
-    float: right;
+    display: table-cell;
     height: 80px;
+    width: 70px;
+    margin: 0 20px 0 20px;
     padding: 0;
     position: relative;
+    bottom: 5px;
   }
 }
 
@@ -306,6 +421,10 @@
   text-align: center;
   text-transform: uppercase;
   display: block;
+
+  @include tablet-landscape {
+    display: none;
+  }
 
   @include desktop {
     display: none;

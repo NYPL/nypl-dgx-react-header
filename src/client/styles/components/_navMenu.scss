@@ -1,11 +1,22 @@
 &-NavMenu {
 	position: relative;
 	display: block;
+	@include tablet-landscape {
+		position: absolute;
+		width: 100%;
+		bottom: 15px;
+	}
 
 	@import '_search';
 
 	/* Wrapper for the NavMenu */
 	&-Wrapper {
+
+		@include tablet-landscape {
+			margin: 0px 20px;
+			max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+			text-align: right;	
+		}
 
 		@include desktop {
 			margin: 0 auto;
@@ -28,6 +39,11 @@
 			/* Only display Logo Text on Mobile */
 			.MobileLogoText {
 				display: block;
+
+				@include tablet-landscape {
+					display: none;
+				}
+
 				@include desktop {
 					display: none;
 				}
@@ -36,6 +52,10 @@
 			/* Only display BottomButtons on Mobile */
 			.MobileBottomButtons {
 				display: block;
+
+				@include tablet-landscape {
+					display: none;
+				}
 
 				@include desktop {
 					display: none;
@@ -67,6 +87,13 @@
   	list-style-type: none;
   	text-align: right;
 
+		@include tablet-landscape {
+  		display: inline-table;
+  		background-color: transparent;
+  		padding: 0;
+  		margin: 0;
+		}
+
   	@include desktop {
   		display: inline-table;
   		background-color: transparent;
@@ -86,6 +113,17 @@
 	  		@include desktop {
 	  			display: inline-block;
 	  		}
+		  }
+
+		  @include tablet-landscape {
+  			display: inline-block;
+  			padding: 0;
+  			margin: 0 17px 0 0;
+  			line-height: normal !important;
+
+  			&:last-child {
+  				margin-right: 0px;
+  			}
 		  }
 
   		@include desktop {
@@ -124,6 +162,12 @@
 		  			outline: initial;
 		  		}
 
+		  		@include tablet-landscape {
+	  				color: #000;
+	  				font-size: 18px;
+	  				padding: 0px 0px;
+		  		}
+
 	  			@include desktop {
 	  				color: #000;
 	  				font-size: 16px;
@@ -138,8 +182,66 @@
 	  		position: absolute;
 	  		left: 30%;
 	  		top: 15px;
+	  		@include tablet-landscape {
+	  			top: 19px;
+	  		}
 
-				/* Arrow Assignment for Desktop and up */
+				/* Arrow Assignment for Tablet Landscape, Desktop and up */
+				@include tablet-landscape {
+					&.active {
+						display: block;
+					}
+
+		  		/* BROWSE */
+		  		&-29a4b824-e084-4771-aafc-52b3586c5e49 {
+			  		&.active {
+			  			color: $BG_MENU_BROWSE_RIGHT;
+			  		}
+		  		}
+
+		  		/* LEARN */
+		  		&-925d1fa9-1138-403c-9990-38861902b02d {
+			  		&.active {
+			  			color: $BG_MENU_LEARN_RIGHT;
+			  		}
+		  		}
+
+		  		/* ATTEND */
+		  		&-851ed351-08f5-43f0-9011-9c317f85f0ca {
+			  		&.active {
+			  			color: $BG_MENU_ATTEND_RIGHT;
+			  		}
+		  		}
+
+		  		/* FIND US */
+		  		&-df621833-4dd1-4223-83e5-6ad7f98ad26a {
+			  		&.active {
+			  			color: $BG_MENU_FINDUS_RIGHT;
+			  		}
+		  		}
+
+		  		/* RESEARCH */
+		  		&-4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9 {
+			  		&.active {
+			  			color: $BG_MENU_RESEARCH_RIGHT;
+			  		}
+		  		}
+
+		  		/* GIVE */
+		  		&-1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1 {
+			  		&.active {
+			  			color: $BG_MENU_GIVE_RIGHT;
+			  		}
+		  		}
+
+			  	/* GET HELP */
+			  	&-13d95ad5-f117-4415-ba2c-5c0b9618984d {
+			  		&.active {
+			  			color: $BG_MENU_HELP_RIGHT;
+			  		}  		
+			  	}
+				}
+
 				@include desktop {
 
 					&.active {
@@ -204,14 +306,20 @@
 	  	color: #FFFFFF;
 	  	width: 100%;
   		position: absolute;
-	  	top: 41.75px;
 	  	left: 0;
 
 	  	/* Only display MegaMenu's on  Tablet Landscape/Desktop and up */
 	  	&.active {
+	  		@include tablet-landscape {
+	  			display: block;
+	  			z-index: 3;
+	  			top: 43px;
+	  		}
+
 	  		@include desktop {
 	  			display: block;
 	  			z-index: 3;
+	  			top: 41.75px;
 	  		}
 	  	}
 
@@ -247,6 +355,10 @@
 	  		right: $LEFT_NAV_RIGHT_MARGIN;
 	  		width: 140px;
 	  		text-align: left;
+
+	  		@include tablet-landscape {
+	  			width: 138px;
+	  		}
 
 	  		a {
 	  			color: #FFFFFF;
@@ -320,6 +432,10 @@
 	  		padding: 0;
 	  		height: $MAIN_MENU_DESKTOP_HEIGHT;
 	  		text-align: left;
+
+	  		@include tablet-landscape {
+	  			margin: 0 20px 0 280px;
+	  		}
 	  	}
 
 	  	&-Features {
@@ -342,6 +458,10 @@
 					position: relative;
 					margin: 0 0 0 $RIGHT_NAV_CONTAINER_LEFT_MARGIN;
 					top: 50px;
+
+					@include tablet-landscape {
+						margin: 0 0 0 31px;
+					}
 				}
 	  	}
 	  }
