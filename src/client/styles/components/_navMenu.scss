@@ -18,7 +18,7 @@
 			margin-top: -1px;
 			position: absolute;
 			width: 100%;
-			z-index: 3;
+			z-index: 1000;
 
 			/* Displays NavMenu on Mobile with proper class on parent */
 			#NavMenu-List {
@@ -256,7 +256,7 @@
 	  			color: #FFFFFF;
 	  			border-top: 2px solid #FFFFFF;
 	  			margin: 35px 0 0px;
-	  			padding: 21px 0 35px;
+	  			padding: 12px 0 30px;
 					font-weight: 400;
 					font-size: 22px;
 	  		}

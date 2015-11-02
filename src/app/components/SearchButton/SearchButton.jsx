@@ -6,8 +6,12 @@ import cx from 'classnames';
 import BasicButton from '../Buttons/BasicButton.jsx';
 import SearchBox from '../SearchBox/SearchBox.jsx';
 
+// ALT Flux Store/Actions
 import HeaderStore from '../../stores/Store.js';
 import Actions from '../../actions/Actions.js';
+
+// GA Utility Library
+import gaUtils from '../../utils/gaUtils.js';
 
 // Create React class
 class SearchButton extends React.Component {
@@ -46,9 +50,11 @@ class SearchButton extends React.Component {
    * with hoverSearch after a set time delay.
    */
   _activateHover() {
-
     this.hoverTimer = setTimeout(() => {
       Actions.searchButtonActionValue('hoverSearch');
+
+      // Fire GA event to track when the Search Menu is open
+      gaUtils._trackEvent('Search', 'Open Menu');
     }, 150);
   }
 

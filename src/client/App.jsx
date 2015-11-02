@@ -106,17 +106,14 @@ import './styles/main.scss';
 
 		  	// Now we ensure that only ONE <script> tag has been created
 		  	// before allowing React to Render the Header.
-		  	if (nyplHeaderObject.processedScripts.length === 1 && nyplHeaderObject.styleTags.length === 1 && htmlElement) {
+		  	if (nyplHeaderObject.processedScripts.length === 1 
+		  		&& nyplHeaderObject.styleTags.length === 1 
+		  		&& htmlElement && appEnv) {
 
-	  			// Fetch the data first before Render
-	  			// This allows us to populate the Store so that
-	  			// the <Header /> component renders with data already
-	  			// loaded. There is a fallback method in the <Header />
-	  			// component that checks the Store data then fetches.
-	  			// Set the clientAppEnv so that the <Header> knows what
-	  			// /header-data url to fetch.
+	  			/* Set the proper environment in the Store
+	  			 * so that the component will know what to fetch
+	  			 */
 	  			Actions.setClientAppEnv(appEnv);
-	  			Actions.fetchHeaderData(appEnv);
 
 		  		setTimeout(() => {
 		  			// Once rendered, React should populate the state
@@ -129,8 +126,8 @@ import './styles/main.scss';
 		  }
 
 		  if (!window.ga) {
-				let gaOpts = { debug: true };
-				ga.initialize('UA-1420324-122', gaOpts);
+				let gaOpts = { debug: false };
+				ga.initialize('UA-1420324-3', gaOpts);
 			}
 		}
 	}

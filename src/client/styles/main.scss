@@ -15,6 +15,7 @@
 	@include Kievit-Book;
   width: 100%;
   background-color: #FFF;
+  border-bottom: 2px solid #ED1C24;
   @extend %clearfix;
 
   /* Global rules for repetitive link elements */
@@ -42,7 +43,7 @@
   	@include desktop {
 	  	.Header {
 	  		&-Wrapper{
-	  			border-top: 2px solid #EA212E;
+	  			border-top: 2px solid #ED1C24;
 	  			z-index: 999;
 					width: 100%;
 					position: fixed;
@@ -135,10 +136,16 @@
 
 	/* EMAIL SUBSCRIBE BUTTON/FORM
 	 * ---------------------------
-	 * - Includes Button rules
+	 * - Includes Button rules (also for MyNYPL)
 	 * - Includes Email Signup rules
 	*/
 	@import 'components/_emailSubscribeButton';
+
+  /* MYNYPL LOGIN BUTTON
+   * ---------------------------
+   * - Includes MyNypl Login rules
+  */
+  @import 'components/_myNypl';
 
 	/* MAIN NAVIGATION
 	 * ---------------

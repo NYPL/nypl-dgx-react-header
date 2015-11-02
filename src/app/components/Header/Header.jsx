@@ -12,6 +12,8 @@ import Logo from '../Logo/Logo.jsx';
 import DonateButton from '../DonateButton/DonateButton.jsx';
 import SimpleButton from '../Buttons/SimpleButton.jsx';
 import SubscribeButton from '../SubscribeButton/SubscribeButton.jsx';
+import MyNyplButton from '../MyNyplButton/MyNyplButton.jsx';
+import MobileMyNypl from '../MyNypl/MobileMyNypl.jsx';
 import NavMenu from '../NavMenu/NavMenu.jsx';
 import MobileHeader from './MobileHeader.jsx';
 import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.jsx';
@@ -53,16 +55,22 @@ class Header extends React.Component {
   render () {
     let isHeaderSticky = this.state.isSticky,
       headerClass = this.props.className || 'Header',
-      headerClasses = cx(headerClass, {'sticky': isHeaderSticky});
+      headerClasses = cx(headerClass, {'sticky': isHeaderSticky}),
+      showDialog = Store._getMobileMyNyplButtonValue(),
+      mobileMyNyplClasses = cx({'active': showDialog});
 
     return (
-      <header id={this.props.id} className={headerClasses}>
+      <header id={this.props.id} className={headerClasses} ref='nyplHeader'>
         <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
         <div className={`${headerClass}-Wrapper`}>
           <MobileHeader className={`${headerClass}-Mobile`} locatorUrl={'//www.nypl.org/locations/map?nearme=true'} />
+          <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
+            <MobileMyNypl />
+          </div>
           <div className={`${headerClass}-TopWrapper`} style={styles.wrapper}>
             <Logo className={`${headerClass}-Logo`} />
             <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
+              <MyNyplButton label='Log In' />
               <SimpleButton 
                 label='Get a Library Card' 
                 target='//catalog.nypl.org/screens/selfregpick.html' 
@@ -116,11 +124,13 @@ class Header extends React.Component {
       windowVerticalDistance = this._getWindowVerticalScroll();
 
     if (windowVerticalDistance > headerHeight) {
+      // Fire GA Event when Header is in Sticky Mode
       gaUtils._trackEvent.bind(this, 'scroll', 'Sticky Header');
-    }
 
-    return (windowVerticalDistance > headerHeight)
-      ? Actions.updateIsHeaderSticky(true) : Actions.updateIsHeaderSticky(false);
+      Actions.updateIsHeaderSticky(true);
+    } else {
+      Actions.updateIsHeaderSticky(false);
+    }
   }
 
   /**
@@ -129,7 +139,8 @@ class Header extends React.Component {
    * element in pixels.
    */
   _getHeaderHeight() {
-    let headerContainer = document.getElementById(this.props.id);
+    let headerContainer = React.findDOMNode(this.refs.nyplHeader);
+
     return headerContainer.clientHeight;
   }
 
@@ -139,7 +150,9 @@ class Header extends React.Component {
    * scroll position in pixels.
    */
   _getWindowVerticalScroll() {
-    return window.scrollY;
+    return window.scrollY 
+      || window.pageYOffset 
+      || document.documentElement.scrollTop;
   }
 };
 
@@ -174,6 +187,15 @@ const styles = {
     display: 'inline-block',
     padding: '11px 18px 9px 18px',
     borderRadius: '4px'
+  },
+  mobileMyNypl: {
+    position: 'absolute',
+    zIndex: 1000,
+    right: '0',
+    width: '220px',
+    minHeight: '130px',
+    backgroundColor: '#1DA1D4',
+    padding: '25px 30px'
   }
 };
 
