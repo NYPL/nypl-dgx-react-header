@@ -113,10 +113,12 @@
 
 		  	@include tablet-landscape {
 		  		display: inline-block;
+		  		margin-left: 15px;
 		  	}
 
 	  		@include desktop {
 	  			display: inline-block;
+	  			margin-left: 13px;
 	  		}
 		  }
 
