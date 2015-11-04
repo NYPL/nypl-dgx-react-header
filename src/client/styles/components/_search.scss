@@ -3,13 +3,13 @@
   display: block;
 
   @include tablet-landscape {
-    margin: 0 0 0 6px;
+    margin: 0 0 0 15px;
     display: inline-table;
     vertical-align: middle;
   }
 
   @include desktop {
-    margin: 0 20px 0 6px;
+    margin: 0 20px 0 15px;
     display: inline-table;
     vertical-align: middle;
   }
@@ -229,7 +229,7 @@
   @include desktop {
     border-bottom-style: none;
     display: table-cell;
-    padding: 0 0 0 110px;
+    padding: 0 0 0 135px;
     margin: 0;
     width: 100%;
   }

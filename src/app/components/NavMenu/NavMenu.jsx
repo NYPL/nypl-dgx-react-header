@@ -68,7 +68,6 @@ NavMenu.defaultProps = {
 const styles = {
   donateButton: {
     padding: '8px 15px',
-    margin: '0px 7px 0px 6px',
     textTransform: 'uppercase',
     borderRadius: '3px',
     fontSize: '12.5px',

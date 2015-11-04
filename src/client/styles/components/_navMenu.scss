@@ -110,6 +110,10 @@
 		  &.DonateButtonItem {
 		  	display: none;
 
+		  	@include tablet-landscape {
+		  		display: inline-block;
+		  	}
+
 	  		@include desktop {
 	  			display: inline-block;
 	  		}
@@ -118,22 +122,22 @@
 		  @include tablet-landscape {
   			display: inline-block;
   			padding: 0;
-  			margin: 0 17px 0 0;
+  			margin: 0 0 0 17px;
   			line-height: normal !important;
 
-  			&:last-child {
-  				margin-right: 0px;
+  			&:first-child {
+  				margin-left: 0px;
   			}
 		  }
 
   		@include desktop {
   			display: inline-block;
   			padding: 0;
-  			margin: 0 6px 0 0;
+  			margin: 0 0 0 8px;
   			line-height: normal !important;
 
-  			&:last-child {
-  				margin-right: 0px;
+  			&:first-child {
+  				margin-left: 0px;
   			}
   		}
 
@@ -165,7 +169,7 @@
 		  		@include tablet-landscape {
 	  				color: #000;
 	  				font-size: 18px;
-	  				padding: 0px 0px;
+	  				padding: 0px;
 		  		}
 
 	  			@include desktop {
@@ -343,11 +347,15 @@
 
 	  	&-SubNavWrapper {
 	  		position: absolute;
-	  		width: 280px;
+	  		width: 310px;
 	  		display: block;
 	  		margin: 0;
 	  		padding: 0;
 	  		height: $MAIN_MENU_DESKTOP_HEIGHT;
+
+	  		@include tablet-landscape {
+	  			width: 280px;
+	  		}
 	  	}
 
 	  	&-SubNav {
@@ -428,7 +436,7 @@
 	  	&-FeaturesWrapper {
 	  		display: block;
 	  		width: auto;
-	  		margin: 0 0 0 280px;
+	  		margin: 0 0 0 310px;
 	  		padding: 0;
 	  		height: $MAIN_MENU_DESKTOP_HEIGHT;
 	  		text-align: left;
