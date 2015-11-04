@@ -1,10 +1,11 @@
 &-NavMenu {
 	position: relative;
 	display: block;
+
 	@include tablet-landscape {
 		position: absolute;
 		width: 100%;
-		bottom: 15px;
+		bottom: 6px;
 	}
 
 	@import '_search';
@@ -122,7 +123,7 @@
 		  @include tablet-landscape {
   			display: inline-block;
   			padding: 0;
-  			margin: 0 0 0 17px;
+  			margin: 0 0 0 10px;
   			line-height: normal !important;
 
   			&:first-child {
@@ -169,7 +170,7 @@
 		  		@include tablet-landscape {
 	  				color: #000;
 	  				font-size: 18px;
-	  				padding: 0px;
+	  				padding: 0px 4px;
 		  		}
 
 	  			@include desktop {
@@ -436,7 +437,7 @@
 	  	&-FeaturesWrapper {
 	  		display: block;
 	  		width: auto;
-	  		margin: 0 0 0 310px;
+	  		margin: 0 20px 0 310px;
 	  		padding: 0;
 	  		height: $MAIN_MENU_DESKTOP_HEIGHT;
 	  		text-align: left;
