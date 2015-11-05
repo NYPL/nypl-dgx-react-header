@@ -336,6 +336,10 @@
 				position: absolute;
 				left: 0;
 				z-index: 0;
+
+				@include tablet-landscape {
+					height: $MAIN_MENU_TABLET_HEIGHT;
+				}
 	  	}
 
 	  	&-Wrapper {
@@ -346,6 +350,10 @@
 		  	max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
 		  	z-index: 1;
 		  	position: relative;
+
+				@include tablet-landscape {
+					height: $MAIN_MENU_TABLET_HEIGHT;
+				}
 	  	}
 
 	  	&-SubNavWrapper {
@@ -358,6 +366,7 @@
 
 	  		@include tablet-landscape {
 	  			width: 280px;
+	  			height: $MAIN_MENU_TABLET_HEIGHT;
 	  		}
 	  	}
 
@@ -446,6 +455,7 @@
 
 	  		@include tablet-landscape {
 	  			margin: 0 20px 0 280px;
+					height: $MAIN_MENU_TABLET_HEIGHT;
 	  		}
 	  	}
 
