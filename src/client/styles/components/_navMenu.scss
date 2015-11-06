@@ -38,9 +38,18 @@
 			width: 100%;
 			z-index: 1000;
 
+			@include tablet-landscape-and-desktop {
+				position: initial;
+				margin-top: 0px;
+			}
+
 			/* Displays NavMenu on Mobile with proper class on parent */
 			#NavMenu-List {
 				display: block;
+
+				@include tablet-landscape-and-desktop {
+					display: inline-table;
+				}
 			}
 			
 			/* Only display Logo Text on Mobile */
