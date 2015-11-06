@@ -29,17 +29,21 @@
 	&-Mobile {
 		display: block;
 		
-  	/* Hide MobileHeader on Desktop and larger viewports */
-  	@include desktop {
+  	/* Hide MobileHeader on Tablet Landscape, Desktop and larger viewports */
+  	@include tablet-landscape-and-desktop {
   		display: none;
   	}
+	}
+
+	&-Wrapper {
+		position: relative;
 	}
 
 	/* STICKY HEADER
 	 * -------------
 	*/
   &.sticky {
-  	@include desktop {
+  	@include tablet-landscape-and-desktop {
 	  	.Header {
 	  		&-Wrapper{
 	  			border-top: 2px solid #ED1C24;
@@ -53,6 +57,10 @@
 					transition: all 0.4s ease;
 	  		}
 
+	  		&-TopWrapper {
+	  			min-height: initial;
+	  		}
+
 	  		&-Buttons {
 	  			display: none !important;
 	  		}
@@ -61,6 +69,7 @@
 	  			display: inline-block;
 	  			left: 0;
 	  			width: auto;
+	  			z-index: 3;
 
 	  			img {
 	  				display: none;
@@ -89,9 +98,19 @@
 	&-TopWrapper {
   	display: none;
 
-  	@include desktop {
+  	@include tablet-landscape-and-desktop {
   		display: block;
   		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+  	}
+
+  	@include tablet-landscape {
+  		margin: 0px 20px;
+  		min-height: 136px;
+  	}
+
+  	@include desktop {
+  		margin: 0px auto;
+  		min-height: inherit;
   	}
 	}
 
@@ -101,10 +120,23 @@
 	 * position adjustments left.
 	*/
 	&-Logo {
-    display: block;
-    width: 230px;
-    position: relative;
-    left: -8px;
+
+		@include tablet-landscape-and-desktop {
+			display: block;
+			position: relative;
+		}
+
+		@include tablet-landscape {
+	    width: 158px;
+	    left: 15px;
+	    margin: 0;
+		}
+
+		@include desktop {
+	    width: 230px;
+	    margin: 0 0 0 20px;
+	    left: inherit;
+	  }
 	}
 
 	/* TOP HEADER BUTTONS (excludes subscribe)
