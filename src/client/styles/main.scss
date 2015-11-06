@@ -30,11 +30,7 @@
 		display: block;
 		
   	/* Hide MobileHeader on Tablet Landscape, Desktop and larger viewports */
-  	@include tablet-landscape {
-  		display: none;
-  	}
-
-  	@include desktop {
+  	@include tablet-landscape-and-desktop {
   		display: none;
   	}
 	}
@@ -47,50 +43,7 @@
 	 * -------------
 	*/
   &.sticky {
-
-  	@include tablet-landscape {
-	  	.Header {
-	  		&-Wrapper{
-	  			border-top: 2px solid #ED1C24;
-	  			z-index: 999;
-					width: 100%;
-					position: fixed;
-					top: 0;
-					background-color: #FFF;
-					height: 65px;
-					box-shadow: 0px 2px 2.5px 0px rgba(50, 50, 50, 0.25);
-					transition: all 0.4s ease;
-	  		}
-
-	  		&-Buttons {
-	  			display: none !important;
-	  		}
-
-	  		&-Logo {
-	  			display: inline-block;
-	  			left: 0;
-	  			width: auto;
-
-	  			img {
-	  				display: none;
-	  			}
-
-	  			span {
-	  				display: block !important;
-	  				font-size: 65px;
-	  				color: #000;
-	  			}
-	  		}
-
-	  		&-NavMenu {
-	  			position: absolute;
-	  			width: 100%;
-	  			bottom: 5px;
-	  		}
-	  	}
-  	}
-
-  	@include desktop {
+  	@include tablet-landscape-and-desktop {
 	  	.Header {
 	  		&-Wrapper{
 	  			border-top: 2px solid #ED1C24;
@@ -140,17 +93,19 @@
 	&-TopWrapper {
   	display: none;
 
-  	@include tablet-landscape {
+  	@include tablet-landscape-and-desktop {
   		display: block;
   		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+  	}
+
+  	@include tablet-landscape {
   		margin: 0px 20px;
   		min-height: 136px;
   	}
 
   	@include desktop {
-  		display: block;
-  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
   		margin: 0px auto;
+  		min-height: inherit;
   	}
 	}
 
@@ -160,18 +115,22 @@
 	 * position adjustments left.
 	*/
 	&-Logo {
+
+		@include tablet-landscape-and-desktop {
+			display: block;
+			position: relative;
+		}
+
 		@include tablet-landscape {
-	    display: block;
 	    width: 158px;
-	    position: relative;
 	    left: 15px;
+	    margin: 0;
 		}
 
 		@include desktop {
-	    display: block;
 	    width: 230px;
-	    position: relative;
 	    margin: 0 0 0 20px;
+	    left: inherit;
 	  }
 	}
 

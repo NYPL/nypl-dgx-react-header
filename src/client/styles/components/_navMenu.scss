@@ -8,21 +8,27 @@
 		bottom: 6px;
 	}
 
+	@include desktop {
+		position: relative;
+		width: auto;
+		bottom: inherit;
+	}
+
 	@import '_search';
 
 	/* Wrapper for the NavMenu */
 	&-Wrapper {
 
+		@include tablet-landscape-and-desktop {
+			max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+			text-align: right;		
+		}
 		@include tablet-landscape {
 			margin: 0px 20px;
-			max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-			text-align: right;	
 		}
 
 		@include desktop {
 			margin: 0 auto;
-			max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-			text-align: right;
 		}
 
 		/* Controls the display of Mobile View */
@@ -41,11 +47,7 @@
 			.MobileLogoText {
 				display: block;
 
-				@include tablet-landscape {
-					display: none;
-				}
-
-				@include desktop {
+				@include tablet-landscape-and-desktop {
 					display: none;
 				}
 			}
@@ -54,11 +56,7 @@
 			.MobileBottomButtons {
 				display: block;
 
-				@include tablet-landscape {
-					display: none;
-				}
-
-				@include desktop {
+				@include tablet-landscape-and-desktop {
 					display: none;
 				}
 			}
@@ -88,19 +86,15 @@
   	list-style-type: none;
   	text-align: right;
 
-		@include tablet-landscape {
-  		display: inline-table;
-  		background-color: transparent;
-  		padding: 0;
+  	@include tablet-and-up {
   		margin: 0;
-		}
+  	}
 
-  	@include desktop {
+		@include tablet-landscape-and-desktop {
   		display: inline-table;
   		background-color: transparent;
   		padding: 0;
-  		margin: 0;
-	  }
+		}
 
   	/* Top level Link Rules */
   	.NavMenuItem {
@@ -111,21 +105,22 @@
 		  &.DonateButtonItem {
 		  	display: none;
 
-		  	@include tablet-landscape {
+		  	@include tablet-landscape-and-desktop {
 		  		display: inline-block;
-		  		margin-left: 15px;
+		  	}
+
+		  	@include tablet-landscape {
+		  		margin-left: 15px;	  		
 		  	}
 
 	  		@include desktop {
-	  			display: inline-block;
 	  			margin-left: 13px;
 	  		}
 		  }
 
-		  @include tablet-landscape {
+		  @include tablet-landscape-and-desktop {
   			display: inline-block;
   			padding: 0;
-  			margin: 0 0 0 10px;
   			line-height: normal !important;
 
   			&:first-child {
@@ -133,15 +128,12 @@
   			}
 		  }
 
-  		@include desktop {
-  			display: inline-block;
-  			padding: 0;
-  			margin: 0 0 0 8px;
-  			line-height: normal !important;
+		  @include tablet-landscape {
+		  	margin: 0 0 0 10px;
+		  }
 
-  			&:first-child {
-  				margin-left: 0px;
-  			}
+  		@include desktop {
+  			margin: 0 0 0 8px;
   		}
 
 			&-Link {
@@ -169,14 +161,16 @@
 		  			outline: initial;
 		  		}
 
-		  		@include tablet-landscape {
+		  		@include tablet-landscape-and-desktop {
 	  				color: #000;
-	  				font-size: 18px;
+		  		}
+
+		  		@include tablet-landscape {
+		  			font-size: 18px;
 	  				padding: 0px 4px;
 		  		}
 
 	  			@include desktop {
-	  				color: #000;
 	  				font-size: 16px;
 	  				padding: 0px 7px;
 	  			}
@@ -188,13 +182,17 @@
 	  		font-size: 25px;
 	  		position: absolute;
 	  		left: 30%;
-	  		top: 15px;
+
 	  		@include tablet-landscape {
 	  			top: 19px;
 	  		}
 
+	  		@include desktop {
+	  			top: 15px;	
+	  		}
+
 				/* Arrow Assignment for Tablet Landscape, Desktop and up */
-				@include tablet-landscape {
+				@include tablet-landscape-and-desktop {
 					&.active {
 						display: block;
 					}
@@ -248,62 +246,6 @@
 			  		}  		
 			  	}
 				}
-
-				@include desktop {
-
-					&.active {
-						display: block;
-					}
-
-		  		/* BROWSE */
-		  		&-29a4b824-e084-4771-aafc-52b3586c5e49 {
-			  		&.active {
-			  			color: $BG_MENU_BROWSE_RIGHT;
-			  		}
-		  		}
-
-		  		/* LEARN */
-		  		&-925d1fa9-1138-403c-9990-38861902b02d {
-			  		&.active {
-			  			color: $BG_MENU_LEARN_RIGHT;
-			  		}
-		  		}
-
-		  		/* ATTEND */
-		  		&-851ed351-08f5-43f0-9011-9c317f85f0ca {
-			  		&.active {
-			  			color: $BG_MENU_ATTEND_RIGHT;
-			  		}
-		  		}
-
-		  		/* FIND US */
-		  		&-df621833-4dd1-4223-83e5-6ad7f98ad26a {
-			  		&.active {
-			  			color: $BG_MENU_FINDUS_RIGHT;
-			  		}
-		  		}
-
-		  		/* RESEARCH */
-		  		&-4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9 {
-			  		&.active {
-			  			color: $BG_MENU_RESEARCH_RIGHT;
-			  		}
-		  		}
-
-		  		/* GIVE */
-		  		&-1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1 {
-			  		&.active {
-			  			color: $BG_MENU_GIVE_RIGHT;
-			  		}
-		  		}
-
-			  	/* GET HELP */
-			  	&-13d95ad5-f117-4415-ba2c-5c0b9618984d {
-			  		&.active {
-			  			color: $BG_MENU_HELP_RIGHT;
-			  		}  		
-			  	}
-			  }
 	  	}
   	}
 
@@ -317,67 +259,81 @@
 
 	  	/* Only display MegaMenu's on  Tablet Landscape/Desktop and up */
 	  	&.active {
-	  		@include tablet-landscape {
+
+	  		@include tablet-landscape-and-desktop {
 	  			display: block;
 	  			z-index: 3;
+	  		}
+
+	  		@include tablet-landscape {
 	  			top: 43px;
 	  		}
 
 	  		@include desktop {
-	  			display: block;
-	  			z-index: 3;
 	  			top: 41.75px;
 	  		}
 	  	}
 
 	  	&-LeftBgWrapper {
-				height: $MAIN_MENU_DESKTOP_HEIGHT;
 				width: 50%;
 				position: absolute;
 				left: 0;
 				z-index: 0;
 
 				@include tablet-landscape {
-					height: $MAIN_MENU_TABLET_HEIGHT;
+					min-height: $MAIN_MENU_TABLET_HEIGHT;
+				}
+
+				@include desktop {
+					min-height: $MAIN_MENU_DESKTOP_HEIGHT;
 				}
 	  	}
 
 	  	&-Wrapper {
 	  		width: 100%;
 		  	display: block;
-		  	min-height: $MAIN_MENU_DESKTOP_HEIGHT;
 		  	margin: 0 auto;
 		  	max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
 		  	z-index: 1;
 		  	position: relative;
 
 				@include tablet-landscape {
-					height: $MAIN_MENU_TABLET_HEIGHT;
+					min-height: $MAIN_MENU_TABLET_HEIGHT;
+				}
+
+				@include desktop {
+					min-height: $MAIN_MENU_DESKTOP_HEIGHT;
 				}
 	  	}
 
 	  	&-SubNavWrapper {
 	  		position: absolute;
-	  		width: 310px;
 	  		display: block;
 	  		margin: 0;
 	  		padding: 0;
-	  		height: $MAIN_MENU_DESKTOP_HEIGHT;
 
 	  		@include tablet-landscape {
 	  			width: 280px;
-	  			height: $MAIN_MENU_TABLET_HEIGHT;
+	  			min-height: $MAIN_MENU_TABLET_HEIGHT;
+	  		}
+
+	  		@include desktop {
+	  			width: 310px;
+	  			min-height: $MAIN_MENU_DESKTOP_HEIGHT;
 	  		}
 	  	}
 
 	  	&-SubNav {
 	  		position: absolute;
 	  		right: $LEFT_NAV_RIGHT_MARGIN;
-	  		width: 140px;
 	  		text-align: left;
 
 	  		@include tablet-landscape {
 	  			width: 138px;
+	  		}
+
+	  		@include desktop {
+	  			width: 140px;
 	  		}
 
 	  		a {
@@ -448,14 +404,17 @@
 	  	&-FeaturesWrapper {
 	  		display: block;
 	  		width: auto;
-	  		margin: 0 20px 0 310px;
 	  		padding: 0;
-	  		height: $MAIN_MENU_DESKTOP_HEIGHT;
 	  		text-align: left;
 
 	  		@include tablet-landscape {
 	  			margin: 0 20px 0 280px;
-					height: $MAIN_MENU_TABLET_HEIGHT;
+					min-height: $MAIN_MENU_TABLET_HEIGHT;
+	  		}
+
+	  		@include desktop {
+	  			margin: 0 20px 0 310px;
+	  			min-height: $MAIN_MENU_DESKTOP_HEIGHT;
 	  		}
 	  	}
 
@@ -477,136 +436,20 @@
 				&-Wrapper {
 					display: block;
 					position: relative;
-					margin: 0 0 0 $RIGHT_NAV_CONTAINER_LEFT_MARGIN;
 					top: 50px;
 
 					@include tablet-landscape {
 						margin: 0 0 0 31px;
 					}
+
+					@include desktop {
+						margin: 0 0 0 $RIGHT_NAV_CONTAINER_LEFT_MARGIN;				
+					}
 				}
 	  	}
 	  }
 
-	  /* Dynamic Background Color Assignments */
-	  #MegaMenu {
-	  	/* BROWSE */
-	  	&-29a4b824-e084-4771-aafc-52b3586c5e49{
-	  		background-color: $BG_MENU_BROWSE_RIGHT;
-
-	  		.MegaMenu {
-					&-LeftBgWrapper {
-						background-color: $BG_MENU_BROWSE_LEFT;
-					}
-					&-SubNavWrapper {
-	  				background-color: $BG_MENU_BROWSE_LEFT;
-					}
-					&-FeaturesWrapper {
-						background-color: $BG_MENU_BROWSE_RIGHT;
-					}
-	  		}
-	  	}
-
-	  	/* LEARN */
-	  	&-925d1fa9-1138-403c-9990-38861902b02d {
-	  		background-color: $BG_MENU_LEARN_RIGHT;
-
-	  		.MegaMenu {
-					&-LeftBgWrapper {
-						background-color: $BG_MENU_LEARN_LEFT;
-					}
-					&-SubNavWrapper {
-	  				background-color: $BG_MENU_LEARN_LEFT;
-					}
-					&-FeaturesWrapper {
-						background-color: $BG_MENU_LEARN_RIGHT;
-					}
-	  		}
-	  	}
-
-	  	/* ATTEND */
-	  	&-851ed351-08f5-43f0-9011-9c317f85f0ca {
-	  		background-color: $BG_MENU_ATTEND_RIGHT;
-
-	  		.MegaMenu {
-					&-LeftBgWrapper {
-						background-color: $BG_MENU_ATTEND_LEFT;
-					}
-					&-SubNavWrapper {
-	  				background-color: $BG_MENU_ATTEND_LEFT;
-					}
-					&-FeaturesWrapper {
-						background-color: $BG_MENU_ATTEND_RIGHT;
-					}
-	  		}	
-	  	}
-
-	  	/* FIND US */
-	  	&-df621833-4dd1-4223-83e5-6ad7f98ad26a {
-	  		background-color: $BG_MENU_FINDUS_RIGHT;
-
-	  		.MegaMenu {
-					&-LeftBgWrapper {
-						background-color: $BG_MENU_FINDUS_LEFT;
-					}
-					&-SubNavWrapper {
-	  				background-color: $BG_MENU_FINDUS_LEFT;
-					}
-					&-FeaturesWrapper {
-						background-color: $BG_MENU_FINDUS_RIGHT;
-					}
-	  		}
-	  	}
-
-	  	/* RESEARCH */
-	  	&-4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9 {
-	  		background-color: $BG_MENU_RESEARCH_RIGHT;
-
-	  		.MegaMenu {
-					&-LeftBgWrapper {
-						background-color: $BG_MENU_RESEARCH_LEFT;
-					}
-					&-SubNavWrapper {
-	  				background-color: $BG_MENU_RESEARCH_LEFT;
-					}
-					&-FeaturesWrapper {
-						background-color: $BG_MENU_RESEARCH_RIGHT;
-					}
-	  		}
-	  	}
-
-	  	/* GIVE */
-	  	&-1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1 {
-	  		background-color: $BG_MENU_GIVE_RIGHT;
-
-	  		.MegaMenu {
-					&-LeftBgWrapper {
-						background-color: $BG_MENU_GIVE_LEFT;
-					}
-					&-SubNavWrapper {
-	  				background-color: $BG_MENU_GIVE_LEFT;
-					}
-					&-FeaturesWrapper {
-						background-color: $BG_MENU_GIVE_RIGHT;
-					}
-	  		}
-	  	}
-	  	/* GET HELP */
-	  	&-13d95ad5-f117-4415-ba2c-5c0b9618984d {
-	  		background-color: $BG_MENU_HELP_RIGHT;
-
-	  		.MegaMenu {
-					&-LeftBgWrapper {
-						background-color: $BG_MENU_HELP_LEFT;
-					}
-					&-SubNavWrapper {
-	  				background-color: $BG_MENU_HELP_LEFT;
-					}
-					&-FeaturesWrapper {
-						background-color: $BG_MENU_HELP_RIGHT;
-					}
-	  		}
-	  	}
-	  }
+	  @import '_megaMenuColors';
 	}
 
 	/* FEATURE ITEM

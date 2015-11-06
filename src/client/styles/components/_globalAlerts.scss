@@ -3,11 +3,7 @@
 	border-bottom: 1px solid #908034;
 
 	/* No red bottom-border on tablet landscape, desktop and up */
-	@include tablet-landscape {
-		border-bottom: none;
-	}
-
-	@include desktop {
+	@include tablet-landscape-and-desktop {
 		border-bottom: none;
 	}
 
@@ -18,18 +14,11 @@
 	&-Wrapper {
 		margin: 0;
 
-		@include tablet-landscape {
+		@include tablet-and-up {
   		display: block;
   		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
   		margin: 0 auto;
   		position: relative;		
-		}
-
-		@include desktop {
-  		display: block;
-  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-  		margin: 0 auto;
-  		position: relative;
 		}
 	}
 

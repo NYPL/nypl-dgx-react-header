@@ -2,16 +2,17 @@
 &-SearchBox-Wrapper {
   display: block;
 
-  @include tablet-landscape {
-    margin: 0 0 0 15px;
+  @include tablet-landscape-and-desktop {
     display: inline-table;
     vertical-align: middle;
   }
 
+  @include tablet-landscape {
+    margin: 0 0 0 15px;
+  }
+
   @include desktop {
     margin: 0 20px 0 15px;
-    display: inline-table;
-    vertical-align: middle;
   }
 }
 
@@ -27,11 +28,7 @@
   font-size: 22px;
   padding: 8px 10px 14px 10px;
 
-  @include tablet-landscape {
-    display: block;
-  }
-
-  @include desktop {
+  @include tablet-landscape-and-desktop {
     display: block;
   }
 
@@ -39,13 +36,7 @@
     border-bottom-color: $BG_MENU_SEARCH;
     border-bottom-style: none;
 
-    @include tablet-landscape {
-      border-bottom-color: $BG_MENU_SEARCH;
-      border-bottom-style: solid;
-      border-bottom-width: 2px;
-    }
-
-    @include desktop {
+    @include tablet-landscape-and-desktop {
       border-bottom-color: $BG_MENU_SEARCH;
       border-bottom-style: solid;
       border-bottom-width: 2px;
@@ -59,11 +50,7 @@
     -webkit-transition: background-color .3s linear .25s, color .3s linear .25s; /* Safari */
     transition: background-color .3s linear .25s, color .3s linear .25s;
 
-    @include tablet-landscape {
-      display: block;
-    }
-
-    @include desktop {
+    @include tablet-landscape-and-desktop {
       display: block;
     }
   }
@@ -84,17 +71,11 @@
   /* Rules for Desktop Active State */
   &.active {
 
-    @include tablet-landscape {
+    @include tablet-landscape-and-desktop {
       display: block;
       top: 42px;
       height: 225px;
     }
-
-    @include desktop {
-      display: block;
-      top: 42px;
-      height: 225px;
-    } 
   }
 
   /* Rules for Mobile Active State */
@@ -103,11 +84,7 @@
     margin: -1px 0 0 0;
     top: 0px;
 
-    @include tablet-landscape {
-      display: none;
-    }
-
-    @include desktop {
+    @include tablet-landscape-and-desktop {
       display: none;
     }
   }
@@ -121,15 +98,16 @@
   position: relative;
   width: 100%;
 
-  @include tablet-landscape {
+  @include tablet-landscape-and-desktop {
     margin: 60px auto 0px;
     display: table;
-    width: auto; 
+  }
+
+  @include tablet-landscape {
+    width: auto;
   }
 
   @include desktop {
-    margin: 60px auto 0px;
-    display: table;
     width: 100%;
   }
 
@@ -137,11 +115,7 @@
   input::-webkit-input-placeholder {
     color: #A3A19E;
 
-    @include tablet-landscape {
-      color: #FFFFFF;
-    }
-
-    @include desktop {
+    @include tablet-landscape-and-desktop {
       color: #FFFFFF;
     }
   }
@@ -149,23 +123,15 @@
   input:-moz-placeholder { /* Firefox 18- */
     color: #A3A19E;
 
-    @include tablet-landscape {
+    @include tablet-landscape-and-desktop {
       color: #FFFFFF;
     }
-
-    @include desktop {
-      color: #FFFFFF;
-    } 
   }
 
   input:-moz-placeholder {  /* Firefox 19+ */
     color: #A3A19E;
 
-    @include tablet-landscape {
-      color: #FFFFFF;
-    }
-
-    @include desktop {
+    @include tablet-landscape-and-desktop {
       color: #FFFFFF;
     }
   }
@@ -173,11 +139,7 @@
   input:-ms-input-placeholder {
     color: #A3A19E;
 
-    @include tablet-landscape {
-      color: #FFFFFF;
-    }
-
-    @include desktop {
+    @include tablet-landscape-and-desktop {
       color: #FFFFFF;
     }
   }
@@ -218,20 +180,19 @@
   position: relative;
   text-align: center;
 
-  @include tablet-landscape {
+  @include tablet-landscape-and-desktop {
     border-bottom-style: none;
     display: table-cell;
-    padding: 0 0 0 115px;
     margin: 0;
     width: 100%;
   }
 
+  @include tablet-landscape {
+    padding: 0 0 0 115px;
+  }
+
   @include desktop {
-    border-bottom-style: none;
-    display: table-cell;
     padding: 0 0 0 135px;
-    margin: 0;
-    width: 100%;
   }
 }
 
@@ -253,23 +214,14 @@
     position: absolute;
     top: 22px;
 
-    @include tablet-landscape {
+    @include tablet-landscape-and-desktop {
       display: none;
     }
-
-    @include desktop {
-      display:none;
-    }
   }
 
-  @include tablet-landscape {
+  @include tablet-landscape-and-desktop {
     margin: 0 0 25px 0;
-    display: block;
-  }
-
-  @include desktop {
-    margin: 0 0 25px 0;
-    display: block;
+    display: block; 
   }
 }
 
@@ -291,17 +243,7 @@
     box-shadow: none;
   }
 
-  @include tablet-landscape {
-    background-color: #1DA1D4;
-    color: #FFFFFF;
-    @include Kievit-Light;
-    font-size: 66px;
-    font-style: normal;
-    letter-spacing: -0.8px;
-    padding: 0px !important;
-  }  
-
-  @include desktop {
+  @include tablet-landscape-and-desktop {
     background-color: #1DA1D4;
     color: #FFFFFF;
     @include Kievit-Light;
@@ -317,15 +259,7 @@
   display: block;
   width: 100%;
 
-  @include tablet-landscape {
-    display: inline-block;
-    border-bottom: solid;
-    border-bottom-width: 2px;
-    border-color: #FFFFFF;
-    width: 100%;
-  }
-
-  @include desktop {
+  @include tablet-landscape-and-desktop {
     display: inline-block;
     border-bottom: solid;
     border-bottom-width: 2px;
@@ -340,11 +274,7 @@
   float: left;
   font-size: 16px;
 
-  @include tablet-landscape {
-    display: inline-block;
-  }
-
-  @include desktop {
+  @include tablet-landscape-and-desktop {
     display: inline-block;
   }
 }
@@ -376,24 +306,7 @@
     border-width: 2px;
   }
 
-  @include tablet-landscape {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: transparent;
-    border-width: 0px;
-    color: #FFFFFF;
-    cursor: pointer;
-    display: table-cell;
-    height: 80px;
-    width: 70px;
-    margin: 0 20px 0 20px;
-    padding: 0;
-    position: relative;
-    bottom: 5px;
-  }
-
-  @include desktop {
+  @include tablet-landscape-and-desktop {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
@@ -422,11 +335,7 @@
   text-transform: uppercase;
   display: block;
 
-  @include tablet-landscape {
-    display: none;
-  }
-
-  @include desktop {
+  @include tablet-landscape-and-desktop {
     display: none;
   }
 }
