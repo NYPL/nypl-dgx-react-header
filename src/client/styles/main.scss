@@ -57,6 +57,10 @@
 					transition: all 0.4s ease;
 	  		}
 
+	  		&-TopWrapper {
+	  			min-height: initial;
+	  		}
+
 	  		&-Buttons {
 	  			display: none !important;
 	  		}
@@ -65,6 +69,7 @@
 	  			display: inline-block;
 	  			left: 0;
 	  			width: auto;
+	  			z-index: 3;
 
 	  			img {
 	  				display: none;
