@@ -28,7 +28,7 @@ class NavMenu extends React.Component {
       }),
       donateButton = HeaderStore._getIsStickyValue() ?
         <li className='NavMenuItem DonateButtonItem'>
-          <DonateButton style={styles.donateButton} gaLabel={'Mobile Donate'}/>
+          <DonateButton style={styles.donateButton} gaLabel={'Collapsed Donate Button'}/>
         </li> : null,
       navMenu = navItems.map((item, index) => {
         return (
