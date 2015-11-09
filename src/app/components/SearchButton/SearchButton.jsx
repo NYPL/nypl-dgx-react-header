@@ -29,7 +29,7 @@ class SearchButton extends React.Component {
       });
 
     return (
-      <li className={`${this.props.className}-SearchBox-Wrapper`}>
+      <div className={`${this.props.className}-SearchBox-Wrapper`}>
         <BasicButton
           onMouseEnter={this._activateHover.bind(this)}
           onMouseLeave={this._deactivateHover.bind(this)}
@@ -40,7 +40,7 @@ class SearchButton extends React.Component {
         <SearchBox 
           id={`${this.props.className}-SearchBox`}
           className={`${this.props.className}-SearchBox`} />
-      </li>
+      </div>
     );
   }
 

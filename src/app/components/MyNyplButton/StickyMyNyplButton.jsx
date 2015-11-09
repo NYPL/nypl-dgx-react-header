@@ -122,7 +122,7 @@ StickyMyNyplButton.defaultProps = {
 
 const styles = {
   base: {
-    margin: '0px',
+    margin: '0px 10px',
     position: 'relative',
     display: 'inline-block'
   },

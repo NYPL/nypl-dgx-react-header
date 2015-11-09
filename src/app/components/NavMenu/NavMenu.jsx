@@ -27,21 +27,15 @@ class NavMenu extends React.Component {
       mobileActiveClass = cx({
         'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'
       }),
-      myNyplActiveClass = cx('NavMenuItem stickyLogin', {
+      stickyItemsClass = cx('StickyItems', {
         'active': HeaderStore._getIsStickyValue()
       }),
-      donateButton = HeaderStore._getIsStickyValue() ?
-        <li className='NavMenuItem DonateButtonItem'>
-          <DonateButton style={styles.donateButton} gaLabel={'Collapsed Donate Button'}/>
-        </li> : null,
-      lineSeparator = HeaderStore._getIsStickyValue() ?
-        <li className='NavMenuItem lineSeparator-wrapper' style={styles.lineSeparatorWrapper}>
+      stickyNavItems =
+        <div className={stickyItemsClass}>
           <span className='lineSeparator' style={styles.lineSeparator}></span>
-        </li> : null,
-      myNyplButton =
-        <li className={myNyplActiveClass}>
           <StickyMyNyplButton />
-        </li>,
+          <DonateButton style={styles.donateButton} gaLabel={'Collapsed Donate Button'}/>
+        </div>,
       navMenu = navItems.map((item, index) => {
         return (
           <NavMenuItem
@@ -62,11 +56,9 @@ class NavMenu extends React.Component {
           <span className='MobileLogoText nypl-icon-logo-type'></span>
           <ul className={`${this.props.className}-List`} id='NavMenu-List'>
             {navMenu}
-            <SearchButton className={`${this.props.className}`} />
-            {lineSeparator}
-            {myNyplButton}
-            {donateButton}
           </ul>
+          <SearchButton className={`${this.props.className}`} />
+          {stickyNavItems}
           <NavMenuBottomButtons className='MobileBottomButtons' />
         </div>
       </nav>
@@ -87,12 +79,9 @@ const styles = {
     fontSize: '12.5px',
     letterSpacing: '.04em'
   },
-  lineSeparatorWrapper: {
-    marginLeft: '20px'
-  },
   lineSeparator: {
-    display: 'block',
-    marginBottom: '-10px',
+    display: 'inline-block',
+    margin: '0 0 -10px 0',
     width: '2px',
     height: '30px',
     opacity: '0.65',

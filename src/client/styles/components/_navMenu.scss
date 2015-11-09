@@ -23,13 +23,6 @@
 			max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
 			text-align: right;		
 		}
-		@include tablet-landscape {
-			margin: 0px 20px;
-		}
-
-		@include desktop {
-			margin: 0 auto;
-		}
 
 		/* Controls the display of Mobile View */
 		&.mobileActive {
@@ -107,7 +100,7 @@
 		}
 
 		@include desktop {
-			margin-right: 20px;
+			margin-right: 10px;
 		}
 
   	/* Top level Link Rules */
@@ -464,6 +457,17 @@
 	  }
 
 	  @import '_megaMenuColors';
+	}
+
+	.StickyItems {
+		display: none;
+		margin-right: 20px;
+
+		@include tablet-and-up {
+			&.active {
+				display: inline-block;
+			}
+		}
 	}
 
 	/* FEATURE ITEM
