@@ -41,14 +41,14 @@ class Header extends React.Component {
     this._handleStickyHeader();
 
     // Check if the sticky header covers the anchor link
-    if (this.state.isSticky === true) {
+    if (Store.getState().isSticky === true) {
       this._offsetStickyHeader();
     }
 
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this._handleStickyHeader.bind(this));
 
-    console.log(this.state.isSticky);
+    console.log(Store.getState().isSticky);
   }
 
   componentWillUnmount() {
