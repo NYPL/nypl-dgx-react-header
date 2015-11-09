@@ -41,10 +41,14 @@ class Header extends React.Component {
     this._handleStickyHeader();
 
     // Check if the sticky header covers the anchor link
-    this._offsetStickyHeader();
+    if (this.state.isHeaderSticky === true) {
+      this._offsetStickyHeader();
+    }
 
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this._handleStickyHeader.bind(this));
+
+    console.log('>>>>>test');
   }
 
   componentWillUnmount() {
@@ -166,11 +170,9 @@ class Header extends React.Component {
    * 68px is the height of stiky header.
    */
   _offsetStickyHeader() {
-    if (this.state.isHeaderSticky === true) {
-      if (window.location.hash) {
-        window.scrollBy(0, 68+10);
-        console.log('scroll!!!!!!');
-      }
+    if (window.location.hash) {
+      window.scrollBy(0, 68+10);
+      console.log('scroll!!!!!!');
     }
   }
 };
