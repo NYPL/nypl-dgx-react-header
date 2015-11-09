@@ -31,7 +31,7 @@ class SubscribeButton extends React.Component {
   }
 
   componentWillUnmount() {
-    Store.unListen(this._onChange.bind(this));
+    Store.unlisten(this._onChange.bind(this));
   }
 
   render() {

@@ -164,13 +164,11 @@ Header.defaultProps = {
 
 const styles = {
   wrapper: {
-    position: 'relative',
-    margin: '0 auto'
+    position: 'relative'
   },
   topButtons: {
     position: 'absolute',
     top: '20px',
-    right: '2px',
     textTransform: 'uppercase',
     display: 'block'
   },
