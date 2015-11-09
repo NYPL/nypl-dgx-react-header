@@ -62,11 +62,11 @@ class NavMenu extends React.Component {
           <span className='MobileLogoText nypl-icon-logo-type'></span>
           <ul className={`${this.props.className}-List`} id='NavMenu-List'>
             {navMenu}
+            <SearchButton className={`${this.props.className}`} />
             {lineSeparator}
             {myNyplButton}
             {donateButton}
           </ul>
-          <SearchButton className={`${this.props.className}`} />
           <NavMenuBottomButtons className='MobileBottomButtons' />
         </div>
       </nav>
