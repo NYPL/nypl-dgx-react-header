@@ -34,6 +34,10 @@ class NavMenu extends React.Component {
         <li className='NavMenuItem DonateButtonItem'>
           <DonateButton style={styles.donateButton} gaLabel={'Collapsed Donate Button'}/>
         </li> : null,
+      lineSeparator = HeaderStore._getIsStickyValue() ?
+        <li className='NavMenuItem lineSeparator'>
+          <span style={styles.lineSeparator}></span>
+        </li> : null,
       myNyplButton =
         <li className={myNyplActiveClass}>
           <StickyMyNyplButton />
@@ -58,6 +62,7 @@ class NavMenu extends React.Component {
           <span className='MobileLogoText nypl-icon-logo-type'></span>
           <ul className={`${this.props.className}-List`} id='NavMenu-List'>
             {navMenu}
+            {lineSeparator}
             {myNyplButton}
             {donateButton}
           </ul>
@@ -81,6 +86,14 @@ const styles = {
     borderRadius: '3px',
     fontSize: '12.5px',
     letterSpacing: '.04em'
+  },
+  lineSeparator: {
+    display: 'block',
+    marginBottom: '-10px',
+    width: '2px',
+    height: '30px',
+    opacity: '0.65',
+    backgroundColor: '#837377'
   }
 };
 

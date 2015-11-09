@@ -129,20 +129,19 @@ const styles = {
   SimpleButton: {
     display: 'block',
     textTransform: 'uppercase',
-    padding: '9px 10px 11px 20px'
+    padding: '14px 13px 21px 20px'
   },
   MyNyplIcon: {
     fontSize: '15px',
     verticalAlign: 'text-bottom',
-    marginLeft: '5px',
+    marginLeft: '3px',
     display: 'inline'
   },
   MyNyplWrapper: {
     position: 'absolute',
-    zIndex: 1000,
     right: '0',
-    minWidth: '250px',
-    minHeight: '190px',
+    minWidth: '218px',
+    minHeight: '185px',
     backgroundColor: '#1DA1D4',
     padding: '25px 30px',
     boxSizing: 'content-box'
