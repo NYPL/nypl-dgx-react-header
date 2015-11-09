@@ -129,7 +129,7 @@ const styles = {
   SimpleButton: {
     display: 'block',
     textTransform: 'uppercase',
-    padding: '14px 13px 20px 20px'
+    padding: '14px 13px 16px 20px'
   },
   MyNyplIcon: {
     fontSize: '15px',

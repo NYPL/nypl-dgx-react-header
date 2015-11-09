@@ -106,6 +106,10 @@
   		padding: 0;
 		}
 
+		@include desktop {
+			margin-right: 20px;
+		}
+
   	/* Top level Link Rules */
   	.NavMenuItem {
   		padding: 8px 0;

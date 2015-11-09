@@ -35,8 +35,8 @@ class NavMenu extends React.Component {
           <DonateButton style={styles.donateButton} gaLabel={'Collapsed Donate Button'}/>
         </li> : null,
       lineSeparator = HeaderStore._getIsStickyValue() ?
-        <li className='NavMenuItem lineSeparator'>
-          <span style={styles.lineSeparator}></span>
+        <li className='NavMenuItem lineSeparator-wrapper' style={styles.lineSeparatorWrapper}>
+          <span className='lineSeparator' style={styles.lineSeparator}></span>
         </li> : null,
       myNyplButton =
         <li className={myNyplActiveClass}>
@@ -86,6 +86,9 @@ const styles = {
     borderRadius: '3px',
     fontSize: '12.5px',
     letterSpacing: '.04em'
+  },
+  lineSeparatorWrapper: {
+    marginLeft: '20px'
   },
   lineSeparator: {
     display: 'block',
