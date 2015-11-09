@@ -135,8 +135,10 @@ class Header extends React.Component {
       gaUtils._trackEvent.bind(this, 'scroll', 'Sticky Header');
 
       Actions.updateIsHeaderSticky(true);
+      console.log('updated sticky header true');
     } else {
       Actions.updateIsHeaderSticky(false);
+      console.log('updated sticky header false');
     }
   }
 
