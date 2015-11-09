@@ -52,10 +52,6 @@ class Header extends React.Component {
 
   _onChange() {
     this.setState(Store.getState());
-    // Check if the sticky header covers the anchor link
-    if (this.state.isSticky === true) {
-      this._offsetStickyHeader();
-    }
   }
 
   render () {
@@ -102,6 +98,10 @@ class Header extends React.Component {
         </div>
       </header>
     );
+   // Check if the sticky header covers the anchor link
+    if (this.state.isSticky === true) {
+      this._offsetStickyHeader();
+    }
   }
 
   /**
