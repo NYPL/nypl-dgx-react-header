@@ -168,7 +168,8 @@ class Header extends React.Component {
   _offsetStickyHeader() {
     if (this.state.isHeaderSticky === true) {
       if (window.location.hash) {
-        window.scroll(0, 68+10);
+        window.scrollBy(0, 68+10);
+        console.log('scroll!!!!!!');
       }
     }
   }
