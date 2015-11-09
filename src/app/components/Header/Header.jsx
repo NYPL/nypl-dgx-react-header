@@ -40,6 +40,9 @@ class Header extends React.Component {
     // enable the sticky header depending on position.
     this._handleStickyHeader();
 
+    // Check if the sticky header covers the anchor link
+    this._offsetStickyHeader();
+
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this._handleStickyHeader.bind(this));
   }
@@ -153,6 +156,21 @@ class Header extends React.Component {
     return window.scrollY 
       || window.pageYOffset 
       || document.documentElement.scrollTop;
+  }
+
+  /**
+   * _offsetStickyHeader()
+   * change the sticky header's vertical postion so it won't 
+   * cover the title of the anchor if the user got to the page by
+   * type in the URL with anchor in it. 
+   * 68px is the height of stiky header.
+   */
+  _offsetStickyHeader() {
+    if (isHeaderSticky == true) {
+      if (window.location.hash) {
+        window.scroll(0, 68+10);
+      }
+    }
   }
 };
 
