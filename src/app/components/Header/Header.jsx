@@ -40,6 +40,8 @@ class Header extends React.Component {
     // enable the sticky header depending on position.
     this._handleStickyHeader();
 
+    // Wait until Header is fully rendered, then check if Sticky Header
+    // covers the anchor link
     setTimeout(() => {
       console.log('CCC');
       this._offsetStickyHeader();
@@ -47,6 +49,8 @@ class Header extends React.Component {
 
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this._handleStickyHeader.bind(this));
+
+    window.addEventListener('hashchange', this._offsetStickyHeader.bind(this));
   }
 
   componentWillUnmount() {
@@ -135,12 +139,9 @@ class Header extends React.Component {
       gaUtils._trackEvent.bind(this, 'scroll', 'Sticky Header');
 
       Actions.updateIsHeaderSticky(true);
-      console.log('updated sticky header true');
-      // Check if the sticky header covers the anchor link
       console.log('AAA');
     } else {
       Actions.updateIsHeaderSticky(false);
-      console.log('updated sticky header false');
     }
   }
 
