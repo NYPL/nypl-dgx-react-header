@@ -42,6 +42,7 @@ class Header extends React.Component {
 
     setTimeout(() => {
       console.log('CCC');
+      this._offsetStickyHeader();
     }, 500);
 
     // Listen to the scroll event for the sticky header.
@@ -50,10 +51,6 @@ class Header extends React.Component {
 
   componentWillUnmount() {
     Store.unlisten(this._onChange.bind(this));
-  }
-
-  componentDidUpdate() {
-    console.log('BBB');
   }
 
   _onChange() {
@@ -175,9 +172,11 @@ class Header extends React.Component {
    * 68px is the height of stiky header.
    */
   _offsetStickyHeader() {
-    if (window.location.hash) {
-      window.scrollBy(0, this._getWindowVerticalScroll() + 10);
-      console.log('scroll!!!!!!');
+    if(this.getState().isSticky === true) {
+      if (window.location.hash) {
+        window.scrollBy(0, this._getWindowVerticalScroll() + 10);
+        console.log('scroll!!!!!!');
+      }
     }
   }
 };
