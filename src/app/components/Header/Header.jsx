@@ -30,6 +30,8 @@ class Header extends React.Component {
   }
 
   componentDidMount() {
+    let currentHash = window.location.hash;
+
     Store.listen(this._onChange.bind(this));
 
     // If the Store is not populated with
@@ -66,8 +68,7 @@ class Header extends React.Component {
       headerClass = this.props.className || 'Header',
       headerClasses = cx(headerClass, {'sticky': isHeaderSticky}),
       showDialog = Store._getMobileMyNyplButtonValue(),
-      mobileMyNyplClasses = cx({'active': showDialog}),
-      currentHash = window.location.hash;
+      mobileMyNyplClasses = cx({'active': showDialog});
 
     return (
       <header id={this.props.id} className={headerClasses} ref='nyplHeader'>
@@ -148,6 +149,7 @@ class Header extends React.Component {
     if (currentHash !== window.location.hash) {
       this._offsetStickyHeader();
       console.log('DDD');
+      currentHash = window.location.hash;
     }
   }
 
