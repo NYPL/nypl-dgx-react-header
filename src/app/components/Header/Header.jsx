@@ -43,10 +43,7 @@ class Header extends React.Component {
 
     // Wait until Header is fully rendered, then check if Sticky Header
     // covers the anchor link
-    setTimeout(() => {
-      console.log('CCC');
-      this._offsetStickyHeader();
-    }, 500);
+    this._offsetStickyHeader();
 
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this._handleStickyHeader.bind(this));
@@ -178,8 +175,10 @@ class Header extends React.Component {
   _offsetStickyHeader() {
     if(Store.getState().isSticky === true) {
       if (window.location.hash) {
-        window.scrollBy(0, -78);
-        console.log('scroll!!!!!!');
+        setTimeout(() => {
+          window.scrollBy(0, -78);
+          console.log('scroll!!!!!!');
+        }, 500);
       }
     }
   }
