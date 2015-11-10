@@ -48,6 +48,10 @@ class Header extends React.Component {
     Store.unlisten(this._onChange.bind(this));
   }
 
+  componentDidUpdate() {
+    console.log('BBB');
+  }
+
   _onChange() {
     this.setState(Store.getState());
   }
@@ -130,7 +134,7 @@ class Header extends React.Component {
       Actions.updateIsHeaderSticky(true);
       console.log('updated sticky header true');
       // Check if the sticky header covers the anchor link
-      this._offsetStickyHeader();
+      console.log('AAA');
     } else {
       Actions.updateIsHeaderSticky(false);
       console.log('updated sticky header false');
