@@ -40,6 +40,10 @@ class Header extends React.Component {
     // enable the sticky header depending on position.
     this._handleStickyHeader();
 
+    setTimeout(() => {
+      console.log('CCC');
+    }, 500);
+
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this._handleStickyHeader.bind(this));
   }
