@@ -30,7 +30,6 @@ class Header extends React.Component {
   }
 
   componentDidMount() {
-    // let currentHash = window.location.hash;
 
     Store.listen(this._onChange.bind(this));
 
@@ -51,8 +50,6 @@ class Header extends React.Component {
 
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this._handleStickyHeader.bind(this));
-
-    // window.addEventListener('hashchange', setTimeout(this._offsetStickyHeader.bind(this), 250), false);
   }
 
   componentWillUnmount() {
@@ -145,12 +142,6 @@ class Header extends React.Component {
     } else {
       Actions.updateIsHeaderSticky(false);
     }
-
-    // if (currentHash !== window.location.hash) {
-    //   this._offsetStickyHeader();
-    //   console.log('DDD');
-    //   currentHash = window.location.hash;
-    // }
   }
 
   /**
