@@ -42,8 +42,6 @@ class Header extends React.Component {
 
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this._handleStickyHeader.bind(this));
-
-    console.log(Store.getState().isSticky);
   }
 
   componentWillUnmount() {
@@ -98,10 +96,6 @@ class Header extends React.Component {
         </div>
       </header>
     );
-   // Check if the sticky header covers the anchor link
-    if (this.state.isSticky === true) {
-      this._offsetStickyHeader();
-    }
   }
 
   /**
@@ -135,6 +129,8 @@ class Header extends React.Component {
 
       Actions.updateIsHeaderSticky(true);
       console.log('updated sticky header true');
+      // Check if the sticky header covers the anchor link
+      this._offsetStickyHeader();
     } else {
       Actions.updateIsHeaderSticky(false);
       console.log('updated sticky header false');
