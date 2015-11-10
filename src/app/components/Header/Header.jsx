@@ -128,6 +128,8 @@ class Header extends React.Component {
     let headerHeight = this._getHeaderHeight(),
       windowVerticalDistance = this._getWindowVerticalScroll();
 
+      console.log(windowVerticalDistance);
+
     if (windowVerticalDistance > headerHeight) {
       // Fire GA Event when Header is in Sticky Mode
       gaUtils._trackEvent.bind(this, 'scroll', 'Sticky Header');
@@ -174,7 +176,7 @@ class Header extends React.Component {
   _offsetStickyHeader() {
     if(Store.getState().isSticky === true) {
       if (window.location.hash) {
-        window.scrollBy(0, this._getWindowVerticalScroll() + 10);
+        window.scrollBy(0, 78);
         console.log('scroll!!!!!!');
       }
     }
