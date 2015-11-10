@@ -172,9 +172,9 @@ class Header extends React.Component {
    * 68px is the height of stiky header.
    */
   _offsetStickyHeader() {
-    if(this.getState().isSticky === true) {
+    if(Store.getState().isSticky === true) {
       if (window.location.hash) {
-        window.scrollBy(0, Store._getWindowVerticalScroll() + 10);
+        window.scrollBy(0, this._getWindowVerticalScroll() + 10);
         console.log('scroll!!!!!!');
       }
     }
