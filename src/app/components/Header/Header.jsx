@@ -50,7 +50,7 @@ class Header extends React.Component {
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this._handleStickyHeader.bind(this));
 
-    window.addEventListener('hashchange', setTimeout(this._offsetStickyHeader.bind(this), 250), false);
+    // window.addEventListener('hashchange', setTimeout(this._offsetStickyHeader.bind(this), 250), false);
   }
 
   componentWillUnmount() {
@@ -66,7 +66,8 @@ class Header extends React.Component {
       headerClass = this.props.className || 'Header',
       headerClasses = cx(headerClass, {'sticky': isHeaderSticky}),
       showDialog = Store._getMobileMyNyplButtonValue(),
-      mobileMyNyplClasses = cx({'active': showDialog});
+      mobileMyNyplClasses = cx({'active': showDialog}),
+      currentHash = window.location.hash;
 
     return (
       <header id={this.props.id} className={headerClasses} ref='nyplHeader'>
@@ -142,6 +143,11 @@ class Header extends React.Component {
       console.log('AAA');
     } else {
       Actions.updateIsHeaderSticky(false);
+    }
+
+    if (currentHash !== window.location.hash) {
+      this._offsetStickyHeader();
+      console.log('DDD');
     }
   }
 
