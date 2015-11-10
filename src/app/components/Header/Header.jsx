@@ -50,6 +50,8 @@ class Header extends React.Component {
 
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this._handleStickyHeader.bind(this));
+
+    window.addEventListener('hashchange', this._offsetStickyHeader, false);
   }
 
   componentWillUnmount() {
