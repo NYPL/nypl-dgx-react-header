@@ -30,7 +30,7 @@ class Header extends React.Component {
   }
 
   componentDidMount() {
-    let currentHash = window.location.hash;
+    // let currentHash = window.location.hash;
 
     Store.listen(this._onChange.bind(this));
 
@@ -146,11 +146,11 @@ class Header extends React.Component {
       Actions.updateIsHeaderSticky(false);
     }
 
-    if (currentHash !== window.location.hash) {
-      this._offsetStickyHeader();
-      console.log('DDD');
-      currentHash = window.location.hash;
-    }
+    // if (currentHash !== window.location.hash) {
+    //   this._offsetStickyHeader();
+    //   console.log('DDD');
+    //   currentHash = window.location.hash;
+    // }
   }
 
   /**
