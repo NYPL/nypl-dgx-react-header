@@ -41,13 +41,12 @@ class Header extends React.Component {
     // enable the sticky header depending on position.
     this._handleStickyHeader();
 
-    // Wait until Header is fully rendered, then check if Sticky Header
-    // covers the anchor link
+    // Check if the sticky header covers the anchor
     this._offsetStickyHeader();
 
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this._handleStickyHeader.bind(this));
-
+    // Listen to hash change and check if the sticky header covers the anchor
     window.addEventListener('hashchange', this._offsetStickyHeader, false);
   }
 
@@ -130,14 +129,10 @@ class Header extends React.Component {
     let headerHeight = this._getHeaderHeight(),
       windowVerticalDistance = this._getWindowVerticalScroll();
 
-      console.log(windowVerticalDistance);
-
     if (windowVerticalDistance > headerHeight) {
       // Fire GA Event when Header is in Sticky Mode
       gaUtils._trackEvent.bind(this, 'scroll', 'Sticky Header');
-
       Actions.updateIsHeaderSticky(true);
-      console.log('AAA');
     } else {
       Actions.updateIsHeaderSticky(false);
     }
@@ -173,14 +168,16 @@ class Header extends React.Component {
    * 68px is the height of stiky header.
    */
   _offsetStickyHeader() {
-    if(Store.getState().isSticky === true) {
-      if (window.location.hash) {
-        setTimeout(() => {
+    // Wait until the header is fully rendered,
+    // and then check the position of the header to decide
+    // if it needs to scroll the page
+    setTimeout(() => {
+      if(Store.getState().isSticky === true) {
+        if (window.location.hash) {
           window.scrollBy(0, -78);
-          console.log('scroll!!!!!!');
-        }, 500);
+        }
       }
-    }
+    }, 500);
   }
 };
 
