@@ -169,7 +169,7 @@ class Header extends React.Component {
    */
   _offsetStickyHeader() {
     // Wait until the header is fully rendered,
-    // and then check the position of the header to decide
+    // and check the position of the header to decide
     // if it needs to scroll the page
     setTimeout(() => {
       if(Store.getState().isSticky === true) {
