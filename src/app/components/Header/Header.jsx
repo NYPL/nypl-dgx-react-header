@@ -171,8 +171,7 @@ class Header extends React.Component {
     // Get current header's height and add 10px distance
     let offsetDistance = this._getHeaderHeight() + 10,
       headerWrapper = React.findDOMNode(this.refs.headerWrapper),
-      headerWrapperStyle = headerWrapper.currentStyle.position ||
-        getComputedStyle(headerWrapper, null).position;
+      headerWrapperPosition = headerWrapper.currentStyle.position;
 
     console.log(offsetDistance);
     console.log(headerWrapperStyle);
@@ -181,7 +180,7 @@ class Header extends React.Component {
     // and check the position of the header to decide
     // if it needs to scroll the page
     setTimeout(() => {
-      if(Store.getState().isSticky && headerWrapperStyle == 'fixed') {
+      if(Store.getState().isSticky && headerWrapperPosition == 'fixed') {
         if (window.location.hash) {
           window.scrollBy(0, -(offsetDistance));
         }
