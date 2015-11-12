@@ -173,13 +173,13 @@ class Header extends React.Component {
       headerWrapper = React.findDOMNode(this.refs.headerWrapper);
 
     console.log(offsetDistance);
-    console.log(headerWrapper);
+    console.log(headerWrapper.style);
 
     // Wait until the header is fully rendered,
     // and check the position of the header to decide
     // if it needs to scroll the page
     setTimeout(() => {
-      if(Store.getState().isSticky && headerWrapper.position == 'fixed') {
+      if(Store.getState().isSticky && headerWrapper.style.position == 'fixed') {
         if (window.location.hash) {
           window.scrollBy(0, -(offsetDistance));
         }
