@@ -170,16 +170,18 @@ class Header extends React.Component {
   _offsetStickyHeader() {
     // Get current header's height and add 10px distance
     let offsetDistance = this._getHeaderHeight() + 10,
-      headerWrapper = React.findDOMNode(this.refs.headerWrapper);
+      headerWrapper = React.findDOMNode(this.refs.headerWrapper),
+      headerWrapperStyle = headerWrapper.currentStyle.position ||
+        getComputedStyle(headerWrapper, null).position;
 
     console.log(offsetDistance);
-    console.log(headerWrapper.style);
+    console.log(headerWrapperStyle);
 
     // Wait until the header is fully rendered,
     // and check the position of the header to decide
     // if it needs to scroll the page
     setTimeout(() => {
-      if(Store.getState().isSticky && headerWrapper.style.position == 'fixed') {
+      if(Store.getState().isSticky && headerWrapperStyle == 'fixed') {
         if (window.location.hash) {
           window.scrollBy(0, -(offsetDistance));
         }
