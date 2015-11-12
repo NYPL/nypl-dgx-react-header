@@ -68,7 +68,7 @@ class Header extends React.Component {
     return (
       <header id={this.props.id} className={headerClasses} ref='nyplHeader'>
         <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
-        <div className={`${headerClass}-Wrapper`}>
+        <div className={`${headerClass}-Wrapper`} ref='headerWrapper'>
           <MobileHeader className={`${headerClass}-Mobile`} locatorUrl={'//www.nypl.org/locations/map?nearme=true'} />
           <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
             <MobileMyNypl />
@@ -169,13 +169,17 @@ class Header extends React.Component {
    */
   _offsetStickyHeader() {
     // Get current header's height and add 10px distance
-    let offsetDistance = _getHeaderHeight() + 10;
+    let offsetDistance = this._getHeaderHeight() + 10,
+      headerWrapper = React.findDOMNode(this.refs.headerWrapper);
+
+    console.log(offsetDistance);
+    console.log(headerWrapper.position);
 
     // Wait until the header is fully rendered,
     // and check the position of the header to decide
     // if it needs to scroll the page
     setTimeout(() => {
-      if(Store.getState().isSticky) {
+      if(Store.getState().isSticky && headerWrapper.position == 'fixed') {
         if (window.location.hash) {
           window.scrollBy(0, -(offsetDistance));
         }
