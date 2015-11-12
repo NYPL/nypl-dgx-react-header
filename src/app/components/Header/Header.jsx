@@ -173,7 +173,7 @@ class Header extends React.Component {
       headerWrapper = React.findDOMNode(this.refs.headerWrapper);
 
     console.log(offsetDistance);
-    console.log(headerWrapper.position);
+    console.log(headerWrapper);
 
     // Wait until the header is fully rendered,
     // and check the position of the header to decide
