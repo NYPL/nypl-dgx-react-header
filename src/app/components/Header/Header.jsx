@@ -171,7 +171,7 @@ class Header extends React.Component {
    */
   _offsetStickyHeader() {
     // Get current header's height and add 10px distance
-    let offsetDistance = 68 + 10,
+    let offsetDistance = this._getHeaderHeight().bind(this) + 10,
       headerMobile = React.findDOMNode(this.refs.headerMobile),
       // headerWrapper = document.getElementsByClassName('Header-Wrapper')[0],
       headerMobileDisplay;
