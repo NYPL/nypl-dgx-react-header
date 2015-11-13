@@ -169,7 +169,7 @@ class Header extends React.Component {
    */
   _offsetStickyHeader() {
     // Get current header's height and add 10px distance
-    let offsetDistance = this._getHeaderHeight() + 10,
+    let offsetDistance = this._getHeaderHeight().bind(this) + 10,
       headerWrapper = React.findDOMNode(this.refs.test),
         headerWrapperPosition;
 
@@ -180,7 +180,7 @@ class Header extends React.Component {
     //     .getPropertyValue('position');
     // }
 
-    // console.log(offsetDistance);
+    console.log(offsetDistance);
     // console.log(headerWrapperPosition);
 
     // Wait until the header is fully rendered,
