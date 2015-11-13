@@ -187,8 +187,7 @@ class Header extends React.Component {
     // and check the position of the header to decide
     // if it needs to scroll the page
     setTimeout(() => {
-      // if(Store.getState().isSticky && headerWrapperPosition == 'fixed') {
-      if(Store.getState().isSticky) {
+      if(Store.getState().isSticky && headerWrapperPosition == 'fixed') {
         if (window.location.hash) {
           window.scrollBy(0, -(offsetDistance));
           console.log('>>>>>>>>>>>');
