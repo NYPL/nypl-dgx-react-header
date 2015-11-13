@@ -266,7 +266,7 @@
 
 	  		@include tablet-landscape-and-desktop {
 	  			display: block;
-	  			z-index: 3;
+	  			z-index: 999;
 	  		}
 
 	  		@include tablet-landscape {
