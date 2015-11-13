@@ -68,8 +68,10 @@ class Header extends React.Component {
     return (
       <header id={this.props.id} className={headerClasses} ref='nyplHeader'>
         <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
-        <div className={`${headerClass}-Wrapper`} ref='headerWrapper'>
-          <MobileHeader className={`${headerClass}-Mobile`} locatorUrl={'//www.nypl.org/locations/map?nearme=true'} />
+        <div className={`${headerClass}-Wrapper`}>
+          <MobileHeader className={`${headerClass}-Mobile`}
+            locatorUrl={'//www.nypl.org/locations/map?nearme=true'} 
+             ref='headerMobile'/>
           <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
             <MobileMyNypl />
           </div>
@@ -170,25 +172,25 @@ class Header extends React.Component {
   _offsetStickyHeader() {
     // Get current header's height and add 10px distance
     let offsetDistance = 68 + 10,
-      // headerWrapper = React.findDOMNode(this.refs.headerWrapper),
-      headerWrapper = document.getElementsByClassName('Header-Wrapper')[0],
-      headerWrapperPosition;
+      headerMobile = React.findDOMNode(this.refs.headerMobile),
+      // headerWrapper = document.getElementsByClassName('Header-Wrapper')[0],
+      headerMobileDisplay;
 
-    if (headerWrapper.currentStyle) {
-      headerWrapperPosition = headerWrapper.currentStyle.position;
+    if (headerMobile.currentStyle) {
+      headerMobileDisplay = headerWrapper.currentStyle.display;
     } else if (window.getComputedStyle) {
-      headerWrapperPosition = window.getComputedStyle(headerWrapper, null)
-        .getPropertyValue('position');
+      headerMobileDisplay = window.getComputedStyle(headerMobile, null)
+        .getPropertyValue('display');
     }
 
     // console.log(offsetDistance);
-    console.log(headerWrapperPosition);
+    console.log(headerMobileDisplay);
 
     // Wait until the header is fully rendered,
     // and check the position of the header to decide
     // if it needs to scroll the page
     setTimeout(() => {
-      if(Store.getState().isSticky && headerWrapperPosition == 'fixed') {
+      if(Store.getState().isSticky && headerMobileDisplay == 'none') {
         if (window.location.hash) {
           window.scrollBy(0, -(offsetDistance));
           console.log('>>>>>>>>>>>');
