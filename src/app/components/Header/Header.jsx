@@ -177,6 +177,8 @@ class Header extends React.Component {
       headerMobile = React.findDOMNode(this.refs.headerMobile),
       headerMobileDisplay;
 
+    console.log(headerTopWrapper.clientHeight);
+
     if (headerMobile.currentStyle) {
       headerMobileDisplay = headerWrapper.currentStyle.display;
     } else if (window.getComputedStyle) {
@@ -193,8 +195,8 @@ class Header extends React.Component {
     setTimeout(() => {
       if(Store.getState().isSticky && headerMobileDisplay == 'none') {
         if (window.location.hash) {
-          offsetDistance = headerTopWrapper.clientHeight + 10;
-          console.log(headerTopWrapper.clientHeight);
+          offsetDistance = 78;
+          // console.log(headerTopWrapper.clientHeight);
           window.scrollBy(0, -(offsetDistance));
           console.log('>>>>>>>>>>>');
         }
