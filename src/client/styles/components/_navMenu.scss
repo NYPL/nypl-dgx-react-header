@@ -186,6 +186,7 @@
 	  		font-size: 25px;
 	  		position: absolute;
 	  		left: 30%;
+	  		z-index: 999;
 
 	  		@include tablet-landscape {
 	  			top: 19px;
