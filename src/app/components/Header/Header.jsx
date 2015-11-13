@@ -172,13 +172,14 @@ class Header extends React.Component {
    * 68px is the height of sticky header.
    */
   _offsetStickyHeader() {
-    // Get current header's height and add 10px distance
-    let headerTopWrapper = React.findDOMNode(this.refs.headerTopWrapper),
+    // Get sticky header's height: 68px and add 10px distance
+    let stickyHeaderHeight = 68;
+      offsetDistance = stickyHeaderHeight + 10;
       headerMobile = React.findDOMNode(this.refs.headerMobile),
       headerMobileDisplay;
 
-    console.log(headerTopWrapper.clientHeight);
-
+    // Get the display CSS feature of mobile header to see if we are on mobile view
+    // currentStyle is for IE, and getComputedStyle is for other browsers
     if (headerMobile.currentStyle) {
       headerMobileDisplay = headerWrapper.currentStyle.display;
     } else if (window.getComputedStyle) {
@@ -186,19 +187,14 @@ class Header extends React.Component {
         .getPropertyValue('display');
     }
 
-    // console.log(offsetDistance);
-    console.log(headerMobileDisplay);
-
-    // Wait until the header is fully rendered,
-    // and check the position of the header to decide
-    // if it needs to scroll the page
+    // Wait until the header is fully rendered.
+    // We set 250 ms before the header to be rendered in App.jsx
+    // And then we check if the header is sticky or on mobile view to decide
+    // if we need to scroll the page
     setTimeout(() => {
       if(Store.getState().isSticky && headerMobileDisplay == 'none') {
         if (window.location.hash) {
-          offsetDistance = 78;
-          // console.log(headerTopWrapper.clientHeight);
           window.scrollBy(0, -(offsetDistance));
-          console.log('>>>>>>>>>>>');
         }
       }
     }, 500);
