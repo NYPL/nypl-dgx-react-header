@@ -75,7 +75,9 @@ class Header extends React.Component {
           <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
             <MobileMyNypl />
           </div>
-          <div className={`${headerClass}-TopWrapper`} style={styles.wrapper}>
+          <div className={`${headerClass}-TopWrapper`}
+            style={styles.wrapper}
+            ref='headerTopWrapper'>
             <Logo className={`${headerClass}-Logo`} />
             <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
               <MyNyplButton label='Log In' />
@@ -171,9 +173,8 @@ class Header extends React.Component {
    */
   _offsetStickyHeader() {
     // Get current header's height and add 10px distance
-    let offsetDistance = this._getHeaderHeight().bind(this) + 10,
+    let headerTopWrapper = React.findDOMNode(this.refs.headerTopWrapper),
       headerMobile = React.findDOMNode(this.refs.headerMobile),
-      // headerWrapper = document.getElementsByClassName('Header-Wrapper')[0],
       headerMobileDisplay;
 
     if (headerMobile.currentStyle) {
@@ -192,6 +193,8 @@ class Header extends React.Component {
     setTimeout(() => {
       if(Store.getState().isSticky && headerMobileDisplay == 'none') {
         if (window.location.hash) {
+          offsetDistance = headerTopWrapper.clientHeight + 10;
+          console.log(headerTopWrapper.clientHeight);
           window.scrollBy(0, -(offsetDistance));
           console.log('>>>>>>>>>>>');
         }
