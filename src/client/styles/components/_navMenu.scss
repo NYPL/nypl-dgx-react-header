@@ -96,7 +96,6 @@
   		display: inline-table;
   		background-color: transparent;
   		padding: 0;
-  		vertical-align: 1px;
   	}
 
   	/* Top level Link Rules */
@@ -182,7 +181,7 @@
 	  		}
 
 	  		@include min-screen(1025px) {
-	  			top: 17px;	
+	  			top: 15.75px;
 	  		}
 
 				/* Arrow Assignment for Tablets and up */
@@ -257,11 +256,11 @@
 	  		@include min-screen(769px) {
 	  			display: block;
 	  			z-index: 3;
-	  			top: 43px;
+	  			top: 45px;
 	  		}
 
 	  		@include min-screen(1025px) {
-	  			top: 43.75px;
+	  			top: 43.5px;
 	  		}
 	  	}
 
