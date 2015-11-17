@@ -140,6 +140,8 @@ class Header extends React.Component {
     } else {
       Actions.updateIsHeaderSticky(false);
     }
+
+    console.log('done scrolling');
   }
 
   /**
@@ -195,9 +197,10 @@ class Header extends React.Component {
       if(Store.getState().isSticky && headerMobileDisplay == 'none') {
         if (window.location.hash) {
           window.scrollBy(0, -(offsetDistance));
+          console.log('done offset');
         }
       }
-    }, 500);
+    }, 1000);
   }
 };
 
