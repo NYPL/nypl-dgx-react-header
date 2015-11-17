@@ -200,7 +200,7 @@ class Header extends React.Component {
           console.log('done offset');
         }
       }
-    }, 1000);
+    }, 0);
   }
 };
 
