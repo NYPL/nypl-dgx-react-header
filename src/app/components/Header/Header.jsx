@@ -189,18 +189,14 @@ class Header extends React.Component {
         .getPropertyValue('display');
     }
 
-    // Wait until the header is fully rendered.
-    // We set 250 ms before the header to be rendered in App.jsx
-    // And then we check if the header is sticky or on mobile view to decide
+    // We check here to see if the header is sticky or on mobile view to decide
     // if we need to scroll the page
-    setTimeout(() => {
-      if(Store.getState().isSticky && headerMobileDisplay == 'none') {
-        if (window.location.hash) {
-          window.scrollBy(0, -(offsetDistance));
-          console.log('done offset');
-        }
+    if(Store.getState().isSticky && headerMobileDisplay == 'none') {
+      if (window.location.hash) {
+        window.scroll(0, offsetDistance);
+        console.log('done offset');
       }
-    }, 1000);
+    }
   }
 };
 
