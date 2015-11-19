@@ -26,7 +26,7 @@ router
           modelData = Model.build(parsed);
 
         res.locals.data = {
-          Store: {
+          HeaderStore: {
             headerData: modelData,
             subscribeFormVisible: false,
             myNyplVisible: false
