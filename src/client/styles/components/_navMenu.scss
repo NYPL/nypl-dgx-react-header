@@ -433,7 +433,7 @@
 						margin: 0 0 0 31px;
 					}
 
-					@include min-screen(1025px) {
+					@include min-screen(1140px) {
 						margin: 0 0 0 $RIGHT_NAV_CONTAINER_LEFT_MARGIN;				
 					}
 				}
@@ -445,12 +445,24 @@
 
 	.StickyItems {
 		display: none;
-		margin-right: 20px;
 
-		@include min-screen(769px) {
+		.DonateButton {
+			display: none;
+
+			@include min-screen(870px) {
+				display: inline-block;
+			}
+		}
+
+		@include min-screen(769px) {	
 			&.active {
 				display: inline-block;
 			}
+		}
+
+		@include min-screen(870px) {
+			// Used with the above DonateButton class to display correctly.	
+			margin-right: 20px;
 		}
 	}
 
