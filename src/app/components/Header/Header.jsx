@@ -18,7 +18,7 @@ import NavMenu from '../NavMenu/NavMenu.jsx';
 import MobileHeader from './MobileHeader.jsx';
 import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.jsx';
 
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 class Header extends React.Component {
 
@@ -125,7 +125,7 @@ class Header extends React.Component {
 
     if (windowVerticalDistance > headerHeight) {
       // Fire GA Event when Header is in Sticky Mode
-      gaUtils._trackEvent.bind(this, 'scroll', 'Sticky Header');
+      utils._trackHeader.bind(this, 'scroll', 'Sticky Header');
 
       Actions.updateIsHeaderSticky(true);
     } else {
