@@ -449,7 +449,7 @@
 		.DonateButton {
 			display: none;
 
-			@include min-screen(870px) {
+			@include min-screen(892px) {
 				display: inline-block;
 			}
 		}

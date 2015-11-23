@@ -17,7 +17,7 @@
 				margin: 0 0 0 31px;
 			}
 
-			@include min-screen(1025px) {
+			@include min-screen(1115px) {
 				margin: 0 0 0 $RIGHT_NAV_CONTAINER_LEFT_MARGIN;
 			}
 		}
@@ -58,7 +58,7 @@
 			margin: .5em 0 0 0;
 			padding: 0;
 
-			@include min-screen(870px) {
+			@include min-screen(892px) {
 				display: block;
 			}
 
