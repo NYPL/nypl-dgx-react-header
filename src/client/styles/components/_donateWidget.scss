@@ -91,6 +91,11 @@
 					border: 2px solid #FFF;
 					border-radius: 5px;
 
+					&:hover {
+						color: $BG_MENU_BROWSE_RIGHT;
+						background: #fff;
+					}
+
 					@include min-screen(769px) {
 						padding: 7px 8px;
 					}
