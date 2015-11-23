@@ -175,6 +175,7 @@
 	  		font-size: 25px;
 	  		position: absolute;
 	  		left: 30%;
+	  		z-index: 999;
 
 	  		@include min-screen(769px) {
 	  			top: 19px;
@@ -255,8 +256,8 @@
 
 	  		@include min-screen(769px) {
 	  			display: block;
-	  			z-index: 3;
 	  			top: 45px;
+	  			z-index: 999;
 	  		}
 
 	  		@include min-screen(1025px) {

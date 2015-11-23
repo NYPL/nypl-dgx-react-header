@@ -1,7 +1,7 @@
 import alt from '../alt.js';
 import Actions from '../actions/Actions.js';
 
-class Store {
+class HeaderStore {
   constructor(){
 
     this.bindListeners({
@@ -183,4 +183,4 @@ class Store {
 }
 
 // Export ALT Store
-export default alt.createStore(Store, 'Store');
+export default alt.createStore(HeaderStore, 'HeaderStore');

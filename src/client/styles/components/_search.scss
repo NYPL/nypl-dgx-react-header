@@ -59,7 +59,7 @@
   margin: 0;
   position: absolute;
   width: 100%;
-  z-index: 3;
+  z-index: 999;
 
   /* Rules for Desktop Active State */
   &.active {
