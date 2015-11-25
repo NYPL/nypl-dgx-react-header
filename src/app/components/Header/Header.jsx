@@ -141,7 +141,7 @@ class Header extends React.Component {
       Actions.updateIsHeaderSticky(false);
     }
 
-    console.log('done scrolling');
+    console.log('scrolling>>>>' + this._getWindowVerticalScroll());
   }
 
   /**
@@ -193,8 +193,10 @@ class Header extends React.Component {
     // if we need to scroll the page
     if(Store.getState().isSticky && headerMobileDisplay == 'none') {
       if (window.location.hash) {
-        window.scroll(0, offsetDistance);
-        console.log('done offset');
+        setTimeout(() => {
+          window.scrollBy(0, -offsetDistance);
+          console.log('done offset');
+        }, 1000);
       }
     }
   }
