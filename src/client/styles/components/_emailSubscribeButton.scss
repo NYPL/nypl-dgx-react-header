@@ -1,9 +1,9 @@
 &-Buttons {
-	@include tablet-landscape {
+	@include min-screen(769px) {
 		right: 0px;
 	}
 
-	@include desktop {
+	@include min-screen(1025px) {
 		right: 20px;	
 	}
 
