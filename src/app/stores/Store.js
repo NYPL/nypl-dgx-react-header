@@ -1,7 +1,7 @@
 import alt from '../alt.js';
 import Actions from '../actions/Actions.js';
 
-class Store {
+class HeaderStore {
   constructor(){
 
     this.bindListeners({
@@ -15,7 +15,8 @@ class Store {
       handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM,
       handleSetClientAppEnv: Actions.SET_CLIENT_APP_ENV,
       handleToggleSubscribeFormVisible: Actions.TOGGLE_SUBSCRIBE_FORM_VISIBLE,
-      handleToggleMyNyplVisible: Actions.TOGGLE_MY_NYPL_VISIBLE
+      handleToggleMyNyplVisible: Actions.TOGGLE_MY_NYPL_VISIBLE,
+      handleToggleStickyMyNyplVisible: Actions.TOGGLE_STICKY_MY_NYPL_VISIBLE
     });
 
     this.exportPublicMethods({
@@ -26,6 +27,7 @@ class Store {
       _getLastActiveMenuItem: this._getLastActiveMenuItem,
       _getSubscribeFormVisible: this._getSubscribeFormVisible,
       _getMyNyplVisible: this._getMyNyplVisible,
+      _getStickyMyNyplVisible: this._getStickyMyNyplVisible,
       _getClientAppEnv: this._getClientAppEnv
     });
 
@@ -39,6 +41,7 @@ class Store {
       mobileMyNyplButton: '',
       subscribeFormVisible: false,
       myNyplVisible: false,
+      stickyLoginVisible: false,
       clientAppEnv: ''
     };
   }
@@ -82,6 +85,16 @@ class Store {
    */
   _getMyNyplVisible() {
     return this.state.myNyplVisible;
+  }
+
+  /**
+   * _getStickyMyNyplVisible()
+   * returns the current state.stickyLoginVisible
+   * value.
+   * @return {Boolean} true/false
+   */
+  _getStickyMyNyplVisible() {
+    return this.state.stickyLoginVisible;
   }
 
   /**
@@ -163,7 +176,11 @@ class Store {
   handleToggleMyNyplVisible(value) {
     this.setState({myNyplVisible: value});
   }
+
+  handleToggleStickyMyNyplVisible(value) {
+    this.setState({stickyLoginVisible: value});
+  }
 }
 
 // Export ALT Store
-export default alt.createStore(Store, 'Store');
+export default alt.createStore(HeaderStore, 'HeaderStore');
