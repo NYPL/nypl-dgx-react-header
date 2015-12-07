@@ -182,7 +182,7 @@ class Header extends React.Component {
     // Get the display CSS feature of mobile header to see if we are on mobile view
     // currentStyle is for IE, and getComputedStyle is for other browsers
     if (headerMobile.currentStyle) {
-      headerMobileDisplay = headerWrapper.currentStyle.display;
+      headerMobileDisplay = headerMobile.currentStyle.display;
     } else if (window.getComputedStyle) {
       headerMobileDisplay = window.getComputedStyle(headerMobile, null)
         .getPropertyValue('display');
