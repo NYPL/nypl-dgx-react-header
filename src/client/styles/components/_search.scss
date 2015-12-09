@@ -44,6 +44,15 @@
       color: #78CCED;
     }
 
+    &.isSticky {
+      display: none;
+
+      @include min-screen(850px) {
+        display: inline-block;
+      }
+
+    }
+
     @include min-screen(1025px) {
       font-size: 16px;
       padding: 0px 7px;
