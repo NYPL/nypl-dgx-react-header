@@ -8,9 +8,6 @@
     margin: 0 10 0 0px;
   }
 
-  @include min-screen(793px) {
-    margin: 0 20px 0 10px;
-  }
 }
 
 /* CSS for Search button */
@@ -79,12 +76,6 @@
 
   @include min-screen(769px) {
     display: block;
-  }
-
-  @include min-screen(793px) {
-    display: block;
-    margin: 0 -10px;
-    padding: 8px 10px 14px 10px;
   }
 
   &:before {
