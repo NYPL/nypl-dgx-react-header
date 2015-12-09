@@ -43,12 +43,23 @@
     &.active {
       color: #78CCED;
     }
-
+    /* Make search text not shown if the width is smaller than 850px
+    on sticky header */
     &.isSticky {
-      display: none;
+      position: absolute;
+      left: -10000px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
 
       @include min-screen(850px) {
-        display: inline-block;
+        position: relative;
+        left: 0;
+        top: auto;
+        width: auto;
+        height: auto;
+        overflow: hidden;
       }
 
     }

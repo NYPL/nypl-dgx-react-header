@@ -27,6 +27,7 @@ class SearchButton extends React.Component {
         'active': HeaderStore._getSearchButtonActionValue() === 'hoverSearch' ||
           HeaderStore._getLastActiveMenuItem() === 'hoverSearch',
       }),
+      // Detect if the header is sticky now
       stickyStatus = cx({
         'isSticky': HeaderStore.getState().isSticky === true
       });
