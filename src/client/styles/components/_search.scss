@@ -37,6 +37,7 @@
     line-height: 22px;
     margin: 0 6px 0 0;
     padding: 0;
+    top: 2px;
 
     &.active {
       color: #78CCED;
@@ -57,7 +58,7 @@
       @include min-screen(850px) {
         position: relative;
         left: 0;
-        top: auto;
+        top: 2px;
         width: auto;
         height: auto;
         overflow: hidden;
@@ -106,7 +107,7 @@
     @include min-screen(769px) {
       display: block;
     }
-    
+
   }
 }
 
