@@ -43,6 +43,12 @@
     &.active {
       color: #78CCED;
     }
+
+    @include min-screen(1025px) {
+      font-size: 16px;
+      padding: 0px 7px;
+    }
+
   }
 
   @include min-screen(769px) {
