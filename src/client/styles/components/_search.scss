@@ -38,14 +38,12 @@
     margin: 0 6px 0 0;
     padding: 0;
 
-    &:hover {
-      color: #78CCED;
-      cursor: pointer;
-    }
-
     &.active {
       color: #78CCED;
+      -webkit-transition: color .3s linear .25s, color .3s linear .25s; /* Safari */
+      transition: color .3s linear .25s, color .3s linear .25s;
     }
+
     /* Make search text not shown if the width is smaller than 850px
     on sticky header */
     &.isSticky {
@@ -108,6 +106,7 @@
     @include min-screen(769px) {
       display: block;
     }
+    
   }
 }
 
