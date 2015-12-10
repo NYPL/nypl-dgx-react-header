@@ -1,5 +1,6 @@
 /* The Wrapper for putting in the icon for search button and search box */
 &-SearchBox-Wrapper {
+  border-radius: 0;
   display: block;
 
   @include min-screen(769px) {
