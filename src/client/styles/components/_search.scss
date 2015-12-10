@@ -5,7 +5,11 @@
   @include min-screen(769px) {
     display: inline-table;
     vertical-align: middle;
-    margin: 0 10 0 0px;
+    margin: 0 10px 0 4px;
+  }
+
+  @include min-screen(1025px) {
+    margin: 0 10px 0 5px;
   }
 
 }
@@ -20,11 +24,21 @@
   border-width: 0px;
   display: none;
   font-size: 22px;
-  padding: 8px 20px 14px 10px;
+  padding: 8px 10px 14px 10px;
 
   & .Search-Text {
 
     @include Kievit-Book;
+
+/*
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+*/
+
 
     position: relative;
     color: $BG_MENU_SEARCH;
@@ -36,14 +50,16 @@
     padding: 0;
     top: 2px;
 
+
     &.active {
       color: #78CCED;
-      -webkit-transition: color .3s linear .25s, color .3s linear .25s; /* Safari */
+      -webkit-transition: color .3s linear .25s, color .3s linear .25s;
       transition: color .3s linear .25s, color .3s linear .25s;
     }
 
-    /* Make search text not shown if the width is smaller than 850px
-    on sticky header */
+    /*Make search text not shown if the width is smaller than 850px
+    on sticky header
+    */
     &.isSticky {
       position: absolute;
       left: -10000px;
@@ -63,15 +79,9 @@
 
     }
 
-    @include min-screen(769px) {
-      padding: 0px 4px;
-    }
-
     @include min-screen(1025px) {
       font-size: 16px;
-      padding: 0px 7px;
     }
-
   }
 
   @include min-screen(769px) {
