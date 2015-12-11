@@ -5,11 +5,11 @@
   @include min-screen(769px) {
     display: inline-table;
     vertical-align: middle;
-    margin: 0 10px 0 4px;
+    margin: 0 20px 0 10px;
   }
 
   @include min-screen(1025px) {
-    margin: 0 10px 0 5px;
+    margin: 0 20px 0 10px;
   }
 
 }
@@ -49,12 +49,22 @@
     }
 
     &.isSticky {
-      position: absolute;
+
+      height: 1px;
       left: -10000px;
+      overflow: hidden;
+      position: absolute;
       top: auto;
       width: 1px;
-      height: 1px;
-      overflow: hidden;
+
+      &.visuallyHidden {
+        height: 1px;
+        left: -10000px;
+        overflow: hidden;
+        position: absolute;
+        top: auto;
+        width: 1px;
+      }
 
       @include min-screen(892px) {
         position: relative;
