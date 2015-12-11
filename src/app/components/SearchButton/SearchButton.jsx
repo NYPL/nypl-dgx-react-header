@@ -40,7 +40,7 @@ class SearchButton extends React.Component {
           id={`${this.props.className}-SearchButton`}
           className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
           name='Search Button'
-          label={<div className={`Search-Text ${classes} ${stickyStatus}`}>Search</div>} />
+          label={<div className={`Search-Text ${classes} ${stickyStatus} visuallyHidden`}>Search</div>} />
         <SearchBox 
           id={`${this.props.className}-SearchBox`}
           className={`${this.props.className}-SearchBox`} />
