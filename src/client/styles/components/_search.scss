@@ -31,14 +31,6 @@
 
     @include Kievit-Book;
 
-    position: absolute;
-    left: -10000px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-
-    /*
     position: relative;
     color: $BG_MENU_SEARCH;
     display: inline-block;
@@ -55,9 +47,6 @@
       -webkit-transition: color .3s linear .25s, color .3s linear .25s;
       transition: color .3s linear .25s, color .3s linear .25s;
     }
-
-    Make search text not shown if the width is smaller than 850px
-    on sticky header
 
     &.isSticky {
       position: absolute;
@@ -81,7 +70,7 @@
     @include min-screen(1025px) {
       font-size: 16px;
     }
-    */
+
   }
 
   @include min-screen(769px) {
