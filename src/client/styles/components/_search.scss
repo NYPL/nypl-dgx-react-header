@@ -5,10 +5,10 @@
   @include min-screen(769px) {
     display: inline-table;
     vertical-align: middle;
-    margin: 0 20px 0 10px;
+    margin: 0 10 0 0px;
   }
 
-  @include min-screen(1025px) {
+  @include min-screen(793px) {
     margin: 0 20px 0 10px;
   }
 
@@ -37,7 +37,6 @@
     float: left;
     font-size: 18px;
     line-height: 22px;
-    margin: 0 3px 0 0;
     padding: 0;
     top: 2px;
 
