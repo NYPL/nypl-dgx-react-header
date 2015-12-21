@@ -18,17 +18,17 @@
   <body>
     <div><%- headerApp %></div>
 
-  <script type="text/javascript">
-    var nodeEnv = "<%- nodeEnv %>";
-    var appEnv = "<%- appEnv %>";
-    var apiUrl = "<%- apiUrl %>";
-  </script>
+    <script type="text/javascript">
+      var nodeEnv = "<%- nodeEnv %>";
+      var appEnv = "<%- appEnv %>";
+      var apiUrl = "<%- apiUrl %>";
+    </script>
 
-  <% if (isProduction) { %>
-    <script async type="text/javascript" src="/<%= filename %>"></script>
-  <% } else { %>
-    <script async type="text/javascript" src="http://localhost:<%= webpackPort %>/<%= filename %>"></script>
-  <% } %>
+    <% if (isProduction) { %>
+      <script async type="text/javascript" src="/<%= filename %>"></script>
+    <% } else { %>
+      <script async type="text/javascript" src="http://localhost:<%= webpackPort %>/<%= filename %>"></script>
+    <% } %>
   <!-- loadstorm-7a0d62b0f1 -->
   </body>
 </html>
