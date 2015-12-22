@@ -182,3 +182,14 @@
 	*/
 	@import 'components/_navMenu';
 }
+
+
+/* CSS for Screen Reader Texts */
+.visuallyHidden {
+  height: 1px;
+  left: -10000px;
+  overflow: hidden;
+  position: absolute;
+  top: auto;
+  width: 1px;
+}
