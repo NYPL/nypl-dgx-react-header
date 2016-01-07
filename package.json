@@ -4,10 +4,10 @@
   "description": "NYPL Isomorphic React Header with Navigation",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV=production webpack --config webpack.config.js",
-    "docs": "./node_modules/.bin/esdoc -c esdoc.json",
     "start": "node index.js",
-    "postinstall": "npm run build"
+    "docs": "./node_modules/.bin/esdoc -c esdoc.json",
+    "dist": "NODE_ENV=production webpack --config webpack.config.js",
+    "postinstall": "npm run dist"
   },
   "keywords": [
     "react",
