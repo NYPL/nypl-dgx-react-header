@@ -7,7 +7,7 @@ import parser from 'jsonapi-parserinator';
 // React
 import React from 'react';
 import Iso from 'iso';
-import alt from './src/app/alt.js';
+import alt from 'dgx-alt-center';
 
 // Server Configurations
 import appConfig from './appConfig.js';
@@ -16,7 +16,7 @@ import WebpackDevServer from 'webpack-dev-server';
 import webpackConfig from './webpack.config.js';
 
 // Header Component
-import Header from './src/app/components/Header/Header.jsx';
+import Header from 'dgx-header-component';
 
 // Global Config Variables
 const ROOT_PATH = __dirname;
