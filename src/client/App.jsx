@@ -1,8 +1,8 @@
 import React from 'react';
 import Iso from 'iso';
-import alt from '../app/alt.js';
+import alt from 'dgx-alt-center';
 import Actions from '../app/actions/Actions.js';
-import Header from '../app/components/Header/Header.jsx';
+import Header from 'dgx-header-component';
 import ga from 'react-ga';
 
 import './styles/main.scss';
