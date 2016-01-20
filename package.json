@@ -7,6 +7,7 @@
     "start": "node index.js",
     "docs": "./node_modules/.bin/esdoc -c esdoc.json",
     "dist": "NODE_ENV=production webpack --config webpack.config.js",
+    "build": "npm run dist",
     "postinstall": "npm run dist"
   },
   "keywords": [
