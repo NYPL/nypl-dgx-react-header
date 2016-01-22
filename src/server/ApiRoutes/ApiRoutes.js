@@ -16,8 +16,12 @@ let router = express.Router(),
 
 const completeApiUrl = parser.getCompleteApi(options);
 
+/* Match the root or /isolated-header path
+ * to populate the HeaderStore data and
+ * correctly parse/build the model.
+ */
 router
-  .route('/')
+  .route('/:var(header-markup)?')
   .get((req, res, next) => {
     axios
       .get(completeApiUrl)
