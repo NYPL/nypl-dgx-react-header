@@ -55,7 +55,7 @@
     "colors": "^1.1.2",
     "compression": "^1.5.2",
     "dgx-alt-center": "git+ssh://git@bitbucket.org/NYPL/dgx-alt-center.git#master",
-    "dgx-header-component": "git+ssh://bitbucket.org/NYPL/dgx-header-component.git#v1.1.1",
+    "dgx-header-component": "git+ssh://bitbucket.org/NYPL/dgx-header-component.git#v1.1.2",
     "dgx-react-ga": "git+ssh://git@bitbucket.org/NYPL/dgx-react-ga.git#master",
     "ejs": "^2.3.3",
     "eventemitter3": "^1.1.1",
