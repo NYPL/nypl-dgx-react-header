@@ -91,6 +91,24 @@ app.get('/', (req, res) => {
 
 });
 
+/* Setup the isolated header route
+ * to serve only the Header DOM with
+ * a populated server-side Store.
+*/
+app.get('/header-markup', (req, res) => {
+  let headerApp, iso;
+
+  alt.bootstrap(JSON.stringify(res.locals.data || {}));
+  iso = new Iso();
+
+  headerApp = React.renderToString(React.createElement(Header));
+  iso.add(headerApp, alt.flush());
+
+  res.render('isolatedHeader', {
+    headerApp: iso.render()
+  });
+});
+
 // Start the server.
 let server = app.listen(serverPort, (err, result) => {
   if (err) {
