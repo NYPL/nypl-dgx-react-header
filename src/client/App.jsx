@@ -4,6 +4,7 @@ import alt from 'dgx-alt-center';
 import Actions from '../app/actions/Actions.js';
 import Header from 'dgx-header-component';
 import ga from 'react-ga';
+import FeatureFlags from 'dgx-feature-flags';
 
 import './styles/main.scss';
 
@@ -128,6 +129,10 @@ import './styles/main.scss';
 		  if (!window.ga) {
 				let gaOpts = { debug: false };
 				ga.initialize('UA-1420324-3', gaOpts);
+			}
+
+			if (!window.dgxFeatureFlags) {
+				window.dgxFeatureFlags = FeatureFlags.utils;
 			}
 		}
 	}
