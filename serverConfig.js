@@ -18,6 +18,38 @@ import webpackConfig from './webpack.config.js';
 // Header Component
 import Header from 'dgx-header-component';
 
+// Logging
+import morgan from 'morgan';
+import winston from 'winston';
+import 'winston-loggly';
+
+const logglyToken = process.env.LOGGLY_TOKEN;
+
+let logger = new winston.Logger({
+  transports: [
+    new winston.transports.Console({
+      level: 'debug',
+      handleExceptions: true,
+      json: false,
+      colorize: false,
+    }),
+    new winston.transports.Loggly({
+      inputToken: logglyToken,
+      subdomain: 'nypl',
+      tags: ['Winston-NodeJS'],
+      json: false,
+    }),
+  ],
+  exitOnError: false
+});
+
+logger.stream = {
+  write: function(message, encoding){
+    logger.info(message);
+  }
+};
+
+
 // Global Config Variables
 const ROOT_PATH = __dirname;
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
@@ -53,6 +85,8 @@ app.set('views', INDEX_PATH);
 // Assign the proper path where the
 // application's dist files are located.
 app.use(express.static(DIST_PATH));
+
+app.use(morgan('combined', { "stream": logger.stream }));
 
 
 /* Isomporphic Rendering of React App
