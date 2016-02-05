@@ -56,7 +56,7 @@
     "compression": "^1.5.2",
     "dgx-alt-center": "git+ssh://git@bitbucket.org/NYPL/dgx-alt-center.git#master",
     "dgx-feature-flags": "git+ssh://bitbucket.org/NYPL/dgx-feature-flags.git#master",
-    "dgx-header-component": "git+ssh://bitbucket.org/NYPL/dgx-header-component.git#WEB-1771-add-ab-testing-support",
+    "dgx-header-component": "git+ssh://bitbucket.org/NYPL/dgx-header-component.git#v1.1.3",
     "dgx-react-ga": "git+ssh://git@bitbucket.org/NYPL/dgx-react-ga.git#master",
     "ejs": "^2.3.3",
     "eventemitter3": "^1.1.1",
