@@ -86,7 +86,12 @@ app.set('views', INDEX_PATH);
 // application's dist files are located.
 app.use(express.static(DIST_PATH));
 
-app.use(morgan('combined', { "stream": logger.stream }));
+app.use(morgan('combined', {
+  skip: function (req, res) {
+      return res.statusCode < 400
+  }},
+  {stream: logger.stream}
+));
 
 
 /* Isomporphic Rendering of React App
