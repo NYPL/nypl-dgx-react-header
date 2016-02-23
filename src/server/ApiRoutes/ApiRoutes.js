@@ -5,6 +5,7 @@ import parser from 'jsonapi-parserinator';
 import Model from '../../app/utils/HeaderItemModel.js';
 import {refineryApi} from '../../../appConfig.js';
 
+
 let router = express.Router(),
   appEnvironment = process.env.APP_ENV || 'production',
   apiRoot = refineryApi.root[appEnvironment],
@@ -15,6 +16,7 @@ let router = express.Router(),
   };
 
 const completeApiUrl = parser.getCompleteApi(options);
+// const completeApiUrl = '';
 
 /* Match the root or /isolated-header path
  * to populate the HeaderStore data and
@@ -44,12 +46,13 @@ router
       .catch(error => {
         console.log('error calling API : ' + error);
         console.log('Attempted to call : ' + completeApiUrl);
-
-        res.locals.data = {
-          completeApiUrl
-        };
+        // Set completeApiUrl for client side calling, if server side calling failed
+        // res.locals.data = {
+        //   completeApiUrl
+        // };
         next();
-      }); /* end Axios call */
+      }
+      ); /* end Axios call */
   });
 
 router

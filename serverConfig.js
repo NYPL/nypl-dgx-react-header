@@ -20,35 +20,44 @@ import Header from 'dgx-header-component';
 
 // Logging
 import morgan from 'morgan';
-import winston from 'winston';
-import 'winston-loggly';
+import Logger from './src/app/utils/Logger.js';
 
 const logglyToken = process.env.LOGGLY_TOKEN;
+const logger = Logger.build();
 
-let logger = new winston.Logger({
-  transports: [
-    new winston.transports.Console({
-      level: 'debug',
-      handleExceptions: true,
-      json: false,
-      colorize: false,
-    }),
-    new winston.transports.Loggly({
-      inputToken: logglyToken,
-      subdomain: 'nypl',
-      tags: ['Winston-NodeJS'],
-      json: false,
-    }),
-  ],
-  exitOnError: false
-});
+logger.info('test');
+
+// let logger = new Logger();
+// import winston from 'winston';
+// import 'winston-loggly';
+
+// const logglyToken = process.env.LOGGLY_TOKEN;
+
+// let logger = new winston.Logger({
+//   transports: [
+//     new winston.transports.Console({
+//       level: 'debug',
+//       handleExceptions: true,
+//       json: false,
+//       colorize: true,
+//     }),
+//     new winston.transports.Loggly({
+//       level: 'debug',
+//       handleExceptions: true,
+//       inputToken: logglyToken,
+//       subdomain: 'nypl',
+//       tags: ['Winston-NodeJS'],
+//       json: false,
+//     }),
+//   ],
+//   exitOnError: false
+// });
 
 logger.stream = {
   write: function(message, encoding){
     logger.info(message);
   }
 };
-
 
 // Global Config Variables
 const ROOT_PATH = __dirname;
@@ -86,12 +95,12 @@ app.set('views', INDEX_PATH);
 // application's dist files are located.
 app.use(express.static(DIST_PATH));
 
-app.use(morgan('combined', {
-  skip: function (req, res) {
-      return res.statusCode < 400
-  }},
-  {stream: logger.stream}
-));
+// app.use(morgan('combined', {
+//   skip: function (req, res) {
+//       return res.statusCode < 400;
+//   }},
+//   {stream: logger.stream}
+// ));
 
 
 /* Isomporphic Rendering of React App
@@ -169,7 +178,7 @@ let gracefulShutdown = function() {
   setTimeout(function() {
     console.error("Could not close connections in time, forcefully shutting down");
     process.exit()
-  }, 10*1000);
+  }, 1*1000);
 }
 // listen for TERM signal .e.g. kill 
 process.on('SIGTERM', gracefulShutdown);
