@@ -1,9 +1,8 @@
 import winston from 'winston';
 import 'winston-loggly';
 
-function Logger() {
-// console.log('this is token', token);
-  this.build = function() {
+function Logger(token) {
+  this.build = function(token) {
     return new winston.Logger({
       transports: [
         new winston.transports.Console({
@@ -12,14 +11,14 @@ function Logger() {
           json: false,
           colorize: true,
         }),
-        // new winston.transports.Loggly({
-        //   level: 'debug',
-        //   handleExceptions: true,
-        //   inputToken: token,
-        //   subdomain: 'nypl',
-        //   tags: ['Winston-NodeJS'],
-        //   json: false,
-        // }),
+        new winston.transports.Loggly({
+          level: 'debug',
+          handleExceptions: true,
+          inputToken: token,
+          subdomain: 'nypl',
+          tags: ['Winston-NodeJS'],
+          json: false,
+        }),
       ],
       exitOnError: false
     });

@@ -23,7 +23,7 @@ import morgan from 'morgan';
 import Logger from './src/app/utils/Logger.js';
 
 const logglyToken = process.env.LOGGLY_TOKEN;
-const logger = Logger.build();
+const logger = Logger.build(logglyToken);
 
 logger.info('test');
 
