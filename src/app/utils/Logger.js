@@ -6,7 +6,7 @@ function Logger(token) {
     return new winston.Logger({
       transports: [
         new winston.transports.Console({
-          level: 'info',
+          level: 'debug',
           handleExceptions: true,
           json: false,
           colorize: true,
@@ -23,6 +23,12 @@ function Logger(token) {
       exitOnError: false
     });
   }
+
+  this.build.stream = {
+    write: function(message, encoding){
+      logger.info(message);
+    }
+  };
 }
 
 export default new Logger();

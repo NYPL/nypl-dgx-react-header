@@ -5,6 +5,12 @@ import parser from 'jsonapi-parserinator';
 import Model from '../../app/utils/HeaderItemModel.js';
 import {refineryApi} from '../../../appConfig.js';
 
+// Logging
+import morgan from 'morgan';
+import Logger from './../../app/utils/Logger.js';
+
+const logglyToken = process.env.LOGGLY_TOKEN;
+const logger = Logger.build(logglyToken);
 
 let router = express.Router(),
   appEnvironment = process.env.APP_ENV || 'production',
@@ -15,8 +21,8 @@ let router = express.Router(),
     filters: refineryApi.filters
   };
 
-const completeApiUrl = parser.getCompleteApi(options);
-// const completeApiUrl = '';
+// const completeApiUrl = parser.getCompleteApi(options);
+const completeApiUrl = '';
 
 /* Match the root or /isolated-header path
  * to populate the HeaderStore data and
@@ -44,12 +50,12 @@ router
         next();
       })
       .catch(error => {
-        console.log('error calling API : ' + error);
-        console.log('Attempted to call : ' + completeApiUrl);
+        logger.error('error calling API : ' + error);
+        logger.error('Attempted to call : ' + completeApiUrl);
         // Set completeApiUrl for client side calling, if server side calling failed
-        // res.locals.data = {
-        //   completeApiUrl
-        // };
+        res.locals.data = {
+          completeApiUrl
+        };
         next();
       }
       ); /* end Axios call */
@@ -70,7 +76,7 @@ router
         res.json(modelData);
       })
       .catch(error => {
-        console.log('error calling API');
+        logger.log('error calling API');
         res.json({'error': 'error calling API'});
       }); /* end Axios call */
   });

@@ -25,40 +25,6 @@ import Logger from './src/app/utils/Logger.js';
 const logglyToken = process.env.LOGGLY_TOKEN;
 const logger = Logger.build(logglyToken);
 
-logger.info('test');
-
-// let logger = new Logger();
-// import winston from 'winston';
-// import 'winston-loggly';
-
-// const logglyToken = process.env.LOGGLY_TOKEN;
-
-// let logger = new winston.Logger({
-//   transports: [
-//     new winston.transports.Console({
-//       level: 'debug',
-//       handleExceptions: true,
-//       json: false,
-//       colorize: true,
-//     }),
-//     new winston.transports.Loggly({
-//       level: 'debug',
-//       handleExceptions: true,
-//       inputToken: logglyToken,
-//       subdomain: 'nypl',
-//       tags: ['Winston-NodeJS'],
-//       json: false,
-//     }),
-//   ],
-//   exitOnError: false
-// });
-
-logger.stream = {
-  write: function(message, encoding){
-    logger.info(message);
-  }
-};
-
 // Global Config Variables
 const ROOT_PATH = __dirname;
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
@@ -95,13 +61,12 @@ app.set('views', INDEX_PATH);
 // application's dist files are located.
 app.use(express.static(DIST_PATH));
 
-// app.use(morgan('combined', {
-//   skip: function (req, res) {
-//       return res.statusCode < 400;
-//   }},
-//   {stream: logger.stream}
-// ));
-
+app.use(morgan('combined', {
+  skip: function (req, res) {
+      return res.statusCode < 400;
+  }},
+  {stream: logger.stream}
+));
 
 /* Isomporphic Rendering of React App
  * ----------------------------------
@@ -160,7 +125,7 @@ app.get('/header-markup', (req, res) => {
 // Start the server.
 let server = app.listen(serverPort, (err, result) => {
   if (err) {
-    console.log(colors.red(err));
+    logger.error(colors.red(err));
   }
   console.log(colors.yellow.underline(appConfig.appName));
   console.log(colors.green('Express server is listening at'), colors.cyan('localhost:' + serverPort));
@@ -169,14 +134,14 @@ let server = app.listen(serverPort, (err, result) => {
 // this function is called when you want the server to die gracefully
 // i.e. wait for existing connections
 let gracefulShutdown = function() {
-  console.log("Received kill signal, shutting down gracefully.");
+  logger.info("Received kill signal, shutting down gracefully.");
   server.close(function() {
-    console.log("Closed out remaining connections.");
+    logger.info("Closed out remaining connections.");
     process.exit(0);
   }); 
   // if after 
   setTimeout(function() {
-    console.error("Could not close connections in time, forcefully shutting down");
+    logger.warn("Could not close connections in time, forcefully shutting down");
     process.exit()
   }, 1*1000);
 }
@@ -202,7 +167,7 @@ if (!isProduction) {
     }
   }).listen(WEBPACK_DEV_PORT, 'localhost', (err, result) => {
     if (err) {
-      console.log(colors.red(err));
+      logger.error(colors.red(err));
     }
     console.log(colors.magenta('Webpack Dev Server listening at'), colors.cyan('localhost' + WEBPACK_DEV_PORT));
   });
