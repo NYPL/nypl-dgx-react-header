@@ -22,9 +22,6 @@ import Header from 'dgx-header-component';
 import morgan from 'morgan';
 import Logger from './src/app/utils/Logger.js';
 
-const logglyToken = process.env.LOGGLY_TOKEN;
-const logger = Logger.build(logglyToken);
-
 // Global Config Variables
 const ROOT_PATH = __dirname;
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
@@ -61,16 +58,22 @@ app.set('views', INDEX_PATH);
 // application's dist files are located.
 app.use(express.static(DIST_PATH));
 
+// Create Logger instance
+const logglyToken = process.env.LOGGLY_TOKEN;
+const logger = Logger.build(logglyToken);
+
 // Have morgan here to log reponse code above 400 to  console and loggly
 app.use(morgan('combined',
-  {skip: function (req, res) {
-    return res.statusCode < 400;
-  }},
-  {stream: {
-    write: function(message, encoding) {
-        logger.info(message);
+  {
+    stream: {
+      write: function(message, encoding) {
+        logger.error(message);
+      }
+    },
+    skip: function(req, res) {
+      return res.statusCode < 400;
     }
-  }}
+  }
 ));
 
 /* Isomporphic Rendering of React App

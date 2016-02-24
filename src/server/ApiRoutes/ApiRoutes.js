@@ -20,8 +20,7 @@ let router = express.Router(),
     filters: refineryApi.filters
   };
 
-// const completeApiUrl = parser.getCompleteApi(options);
-const completeApiUrl = '';
+const completeApiUrl = parser.getCompleteApi(options);
 
 /* Match the root or /isolated-header path
  * to populate the HeaderStore data and
