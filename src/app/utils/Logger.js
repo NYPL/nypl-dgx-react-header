@@ -18,6 +18,7 @@ function Logger(token) {
           subdomain: 'nypl',
           tags: ['Winston-NodeJS'],
           json: false,
+          stripColors: true,
         }),
       ],
       exitOnError: false
