@@ -54,7 +54,8 @@ router
         };
         next();
       }
-      ); /* end Axios call */
+      );
+      /* end Axios call */
   });
 
 router
