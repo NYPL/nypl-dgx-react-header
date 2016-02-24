@@ -6,7 +6,7 @@ import Model from '../../app/utils/HeaderItemModel.js';
 import {refineryApi} from '../../../appConfig.js';
 
 // Logging
-import Logger from './../../app/utils/Logger.js';
+import Logger from './../../utils/Logger.js';
 
 const logger = Logger.build();
 

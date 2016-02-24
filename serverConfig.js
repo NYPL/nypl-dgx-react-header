@@ -20,7 +20,7 @@ import Header from 'dgx-header-component';
 
 // Logging
 import morgan from 'morgan';
-import Logger from './src/app/utils/Logger.js';
+import Logger from './src/utils/Logger.js';
 
 // Global Config Variables
 const ROOT_PATH = __dirname;

@@ -30,4 +30,3 @@ function Logger() {
 }
 
 export default new Logger();
-
