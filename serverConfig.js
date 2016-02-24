@@ -61,11 +61,16 @@ app.set('views', INDEX_PATH);
 // application's dist files are located.
 app.use(express.static(DIST_PATH));
 
-app.use(morgan('combined', {
-  skip: function (req, res) {
-      return res.statusCode < 400;
+// Have morgan here to log reponse code above 400 to  console and loggly
+app.use(morgan('combined',
+  {skip: function (req, res) {
+    return res.statusCode < 400;
   }},
-  {stream: logger.stream}
+  {stream: {
+    write: function(message, encoding) {
+        logger.info(message);
+    }
+  }}
 ));
 
 /* Isomporphic Rendering of React App

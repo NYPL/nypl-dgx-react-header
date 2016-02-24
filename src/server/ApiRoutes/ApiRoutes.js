@@ -6,7 +6,6 @@ import Model from '../../app/utils/HeaderItemModel.js';
 import {refineryApi} from '../../../appConfig.js';
 
 // Logging
-import morgan from 'morgan';
 import Logger from './../../app/utils/Logger.js';
 
 const logglyToken = process.env.LOGGLY_TOKEN;

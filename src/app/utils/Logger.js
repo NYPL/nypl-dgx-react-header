@@ -23,12 +23,6 @@ function Logger(token) {
       exitOnError: false
     });
   }
-
-  this.build.stream = {
-    write: function(message, encoding){
-      logger.info(message);
-    }
-  };
 }
 
 export default new Logger();
