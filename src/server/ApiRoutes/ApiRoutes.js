@@ -76,7 +76,8 @@ router
       .catch(error => {
         logger.log('error calling API');
         res.json({'error': 'error calling API'});
-      }); /* end Axios call */
+      });
+      /* end Axios call */
   });
 
 export default router;

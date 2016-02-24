@@ -66,11 +66,11 @@ const logger = Logger.build(logglyToken);
 app.use(morgan('combined',
   {
     stream: {
-      write: function(message, encoding) {
+      write: (message, encoding) => {
         logger.error(message);
       }
     },
-    skip: function(req, res) {
+    skip: (req, res) => {
       return res.statusCode < 400;
     }
   }
@@ -151,7 +151,7 @@ let gracefulShutdown = function() {
   setTimeout(function() {
     logger.warn("Could not close connections in time, forcefully shutting down");
     process.exit()
-  }, 1*1000);
+  }, 1000);
 }
 // listen for TERM signal .e.g. kill 
 process.on('SIGTERM', gracefulShutdown);
