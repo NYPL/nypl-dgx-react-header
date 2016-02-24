@@ -48,8 +48,7 @@ router
         next();
       })
       .catch(error => {
-        logger.error('error calling API : ' + error);
-        logger.error('Attempted to call : ' + completeApiUrl);
+        logger.error('error calling API : ' + completeApiUrl + '. ' + error);
         // Set completeApiUrl for client side calling, if server side calling failed
         res.locals.data = {
           completeApiUrl
