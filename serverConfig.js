@@ -59,8 +59,7 @@ app.set('views', INDEX_PATH);
 app.use(express.static(DIST_PATH));
 
 // Create Logger instance
-const logglyToken = process.env.LOGGLY_TOKEN;
-const logger = Logger.build(logglyToken);
+const logger = Logger.build();
 
 // Have morgan here to log reponse code above 400 to  console and loggly
 app.use(morgan('combined',

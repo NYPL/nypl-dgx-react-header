@@ -8,8 +8,7 @@ import {refineryApi} from '../../../appConfig.js';
 // Logging
 import Logger from './../../app/utils/Logger.js';
 
-const logglyToken = process.env.LOGGLY_TOKEN;
-const logger = Logger.build(logglyToken);
+const logger = Logger.build();
 
 let router = express.Router(),
   appEnvironment = process.env.APP_ENV || 'production',
