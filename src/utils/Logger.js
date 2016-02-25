@@ -4,8 +4,8 @@ import 'winston-loggly';
 const nodeEnv = process.env.NODE_ENV;
 
 function Logger() {
-  const logglyToken = process.env.LOGGLY_TOKEN;
-  const logglyDomain = process.env.LOGGLY_SUBDOMAIN;
+  const logglyToken = process.env.LOGGLY_TOKEN || null;
+  const logglyDomain = process.env.LOGGLY_SUBDOMAIN || null;
   const loggly = new Winston.transports.Loggly({
     level: 'error',
     handleExceptions: true,
@@ -24,7 +24,8 @@ function Logger() {
 
   this.build = function() {
     return new Winston.Logger({
-      transports: (nodeEnv === 'production') ? [loggly, console]:[console],
+      transports: (nodeEnv !== 'development' && logglyToken && logglyDomain) ?
+        [loggly, console]:[console],
       exitOnError: false
     });
   }
