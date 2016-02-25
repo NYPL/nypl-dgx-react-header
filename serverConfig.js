@@ -106,7 +106,9 @@ app.get('/', (req, res) => {
     filename: webpackConfig.output.filename,
     nodeEnv: process.env.NODE_ENV,
     appEnv: process.env.APP_ENV,
-    apiUrl: res.locals.data.completeApiUrl
+    apiUrl: res.locals.data.completeApiUrl,
+    logglyToken: process.env.LOGGLY_TOKEN,
+    logglySubdomain: process.env.LOGGLY_SUBDOMAIN
   });
 
 });
