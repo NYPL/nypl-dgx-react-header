@@ -5,11 +5,12 @@ const nodeEnv = process.env.NODE_ENV;
 
 function Logger() {
   const logglyToken = process.env.LOGGLY_TOKEN;
+  const logglyDomain = process.env.LOGGLY_SUBDOMAIN;
   const loggly = new Winston.transports.Loggly({
     level: 'error',
     handleExceptions: true,
     inputToken: logglyToken,
-    subdomain: 'nypl',
+    subdomain: logglyDomain,
     tags: ['React-Header-App'],
     json: false,
     stripColors: true,
