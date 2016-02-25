@@ -11,7 +11,7 @@ function Logger() {
     handleExceptions: true,
     inputToken: logglyToken,
     subdomain: logglyDomain,
-    tags: ['React-Header-App'],
+    tags: ['Header-App'],
     json: false,
     stripColors: true,
   });
