@@ -3,15 +3,15 @@ import 'winston-loggly';
 
 const nodeEnv = process.env.NODE_ENV;
 const logglyToken = process.env.LOGGLY_TOKEN || null;
-const logglyDomain = process.env.LOGGLY_SUBDOMAIN || null;
+const logglySubdomain = process.env.LOGGLY_SUBDOMAIN || null;
 
 function Logger() {
-  const loggly = (logglyToken && logglyDomain) ?
+  const loggly = (logglyToken && logglySubdomain) ?
     new Winston.transports.Loggly({
       level: 'error',
       handleExceptions: true,
       inputToken: logglyToken,
-      subdomain: logglyDomain,
+      subdomain: logglySubdomain,
       tags: ['Header-App'],
       json: false,
       stripColors: true,
