@@ -58,7 +58,7 @@ app.set('views', INDEX_PATH);
 // application's dist files are located.
 app.use(express.static(DIST_PATH));
 
-// Create Logger instance
+// Create winston logger instance
 const logger = Logger.build();
 
 // Have morgan here to log reponse code above 400 to  console and loggly
