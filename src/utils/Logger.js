@@ -35,7 +35,7 @@ class Logger {
 
   build() {
     return new Winston.Logger({
-      transports: (this.nodeEnv !== 'development' && this.buildLoggly()) ?
+      transports: (this.nodeEnv === 'production' && this.buildLoggly()) ?
         [this.buildLoggly(), this.buildConsole()]:[this.buildConsole()],
       exitOnError: false
     });
