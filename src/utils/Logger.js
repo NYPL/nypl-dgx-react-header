@@ -34,8 +34,9 @@ class Logger {
   }
 
   build() {
+    const logglyTransport = this.buildLoggly();
     // If lack of token or subdomain, just don't stat any transport on production
-    let transportsArray = (this.buildLoggly()) ? [this.buildLoggly()] : [];
+    let transportsArray = (logglyTransport) ? [logglyTransport] : [];
 
     // Always have Winston.transports.Console with on development
     if (this.nodeEnv !== 'production') {
