@@ -109,7 +109,6 @@ app.get('/', (req, res) => {
     apiUrl: res.locals.data.completeApiUrl,
     logglyToken: process.env.LOGGLY_TOKEN,
     logglySubdomain: process.env.LOGGLY_SUBDOMAIN,
-    processEnvs: process.env
   });
 
 });
