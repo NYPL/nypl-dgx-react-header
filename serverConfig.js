@@ -53,11 +53,10 @@ app.set('view engine', 'ejs');
 // Set the path where to find EJS files
 app.set('views', INDEX_PATH);
 
-// Assign the proper path where the
-// application's dist files are located.
+// Assign the proper path where the application's dist files are located.
 app.use(express.static(DIST_PATH));
 
-// Create winston logger instance
+// Set logger parameters
 const logger = getLogger({
   env: process.env.NODE_ENV,
   appTag: 'Header-App',
@@ -100,8 +99,6 @@ app.get('/', (req, res) => {
     nodeEnv: process.env.NODE_ENV,
     appEnv: process.env.APP_ENV,
     apiUrl: res.locals.data.completeApiUrl,
-    logglyToken: process.env.LOGGLY_TOKEN,
-    logglySubdomain: process.env.LOGGLY_SUBDOMAIN,
   });
 
 });
