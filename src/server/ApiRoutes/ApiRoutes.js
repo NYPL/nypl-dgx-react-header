@@ -6,9 +6,15 @@ import Model from '../../app/utils/HeaderItemModel.js';
 import {refineryApi} from '../../../appConfig.js';
 
 // Logging
-import Logger from './../../utils/Logger.js';
+import { getLogger, initMorgan } from 'dgx-loggly';
 
-const logger = Logger.build();
+// Create winston logger instance
+const logger = getLogger({
+  env: process.env.NODE_ENV,
+  appTag: 'Header-App',
+  token: process.env.LOGGLY_TOKEN,
+  subdomain: process.env.LOGGLY_SUBDOMAIN,
+});
 
 let router = express.Router(),
   appEnvironment = process.env.APP_ENV || 'production',

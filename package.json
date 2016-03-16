@@ -58,6 +58,7 @@
     "dgx-feature-flags": "git+ssh://bitbucket.org/NYPL/dgx-feature-flags.git#master",
     "dgx-header-component": "git+ssh://bitbucket.org/NYPL/dgx-header-component.git#master",
     "dgx-react-ga": "git+ssh://git@bitbucket.org/NYPL/dgx-react-ga.git#master",
+    "dgx-loggly": "git+ssh://git@bitbucket.org/NYPL/dgx-loggly.git#master",
     "ejs": "^2.3.3",
     "eventemitter3": "^1.1.1",
     "express": "^4.13.1",

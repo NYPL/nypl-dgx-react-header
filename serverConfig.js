@@ -19,8 +19,7 @@ import webpackConfig from './webpack.config.js';
 import Header from 'dgx-header-component';
 
 // Logging
-import morgan from 'morgan';
-import Logger from './src/utils/Logger.js';
+import { getLogger, initMorgan } from 'dgx-loggly';
 
 // Global Config Variables
 const ROOT_PATH = __dirname;
@@ -59,21 +58,15 @@ app.set('views', INDEX_PATH);
 app.use(express.static(DIST_PATH));
 
 // Create winston logger instance
-const logger = Logger.build();
+const logger = getLogger({
+  env: process.env.NODE_ENV,
+  appTag: 'Header-App',
+  token: process.env.LOGGLY_TOKEN,
+  subdomain: process.env.LOGGLY_SUBDOMAIN,
+});
 
-// Have morgan here to log reponse code above 400 to  console and loggly
-app.use(morgan('combined',
-  {
-    stream: {
-      write: (message, encoding) => {
-        logger.error(message);
-      }
-    },
-    skip: (req, res) => {
-      return res.statusCode < 400;
-    }
-  }
-));
+// Have morgan here to stream reponse code above 400 to console and loggly
+app.use(initMorgan(logger));
 
 /* Isomporphic Rendering of React App
  * ----------------------------------
