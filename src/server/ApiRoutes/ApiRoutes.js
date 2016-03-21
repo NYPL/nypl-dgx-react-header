@@ -5,6 +5,17 @@ import parser from 'jsonapi-parserinator';
 import Model from '../../app/utils/HeaderItemModel.js';
 import {refineryApi} from '../../../appConfig.js';
 
+// Logging
+import { getLogger, initMorgan } from 'dgx-loggly';
+
+// Create winston logger instance
+const logger = getLogger({
+  env: process.env.NODE_ENV,
+  appTag: 'Header-App',
+  token: process.env.LOGGLY_TOKEN,
+  subdomain: process.env.LOGGLY_SUBDOMAIN,
+});
+
 let router = express.Router(),
   appEnvironment = process.env.APP_ENV || 'production',
   apiRoot = refineryApi.root[appEnvironment],
@@ -42,14 +53,15 @@ router
         next();
       })
       .catch(error => {
-        console.log('error calling API : ' + error);
-        console.log('Attempted to call : ' + completeApiUrl);
-
+        logger.error('error calling API : ' + completeApiUrl + '. ' + error);
+        // Set completeApiUrl for client side calling, if server side calling failed
         res.locals.data = {
           completeApiUrl
         };
         next();
-      }); /* end Axios call */
+      }
+      );
+      /* end Axios call */
   });
 
 router
@@ -67,9 +79,10 @@ router
         res.json(modelData);
       })
       .catch(error => {
-        console.log('error calling API');
+        logger.log('error calling API');
         res.json({'error': 'error calling API'});
-      }); /* end Axios call */
+      });
+      /* end Axios call */
   });
 
 export default router;

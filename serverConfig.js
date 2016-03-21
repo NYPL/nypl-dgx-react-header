@@ -18,6 +18,9 @@ import webpackConfig from './webpack.config.js';
 // Header Component
 import Header from 'dgx-header-component';
 
+// Logging
+import { getLogger, initMorgan } from 'dgx-loggly';
+
 // Global Config Variables
 const ROOT_PATH = __dirname;
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
@@ -50,10 +53,19 @@ app.set('view engine', 'ejs');
 // Set the path where to find EJS files
 app.set('views', INDEX_PATH);
 
-// Assign the proper path where the
-// application's dist files are located.
+// Assign the proper path where the application's dist files are located.
 app.use(express.static(DIST_PATH));
 
+// Set logger parameters
+const logger = getLogger({
+  env: process.env.NODE_ENV,
+  appTag: 'Header-App',
+  token: process.env.LOGGLY_TOKEN,
+  subdomain: process.env.LOGGLY_SUBDOMAIN,
+});
+
+// Have morgan here to stream reponse code above 400 to console and loggly
+app.use(initMorgan(logger));
 
 /* Isomporphic Rendering of React App
  * ----------------------------------
@@ -86,7 +98,7 @@ app.get('/', (req, res) => {
     filename: webpackConfig.output.filename,
     nodeEnv: process.env.NODE_ENV,
     appEnv: process.env.APP_ENV,
-    apiUrl: res.locals.data.completeApiUrl
+    apiUrl: res.locals.data.completeApiUrl,
   });
 
 });
@@ -112,7 +124,7 @@ app.get('/header-markup', (req, res) => {
 // Start the server.
 let server = app.listen(serverPort, (err, result) => {
   if (err) {
-    console.log(colors.red(err));
+    logger.error(colors.red(err));
   }
   console.log(colors.yellow.underline(appConfig.appName));
   console.log(colors.green('Express server is listening at'), colors.cyan('localhost:' + serverPort));
@@ -121,16 +133,16 @@ let server = app.listen(serverPort, (err, result) => {
 // this function is called when you want the server to die gracefully
 // i.e. wait for existing connections
 let gracefulShutdown = function() {
-  console.log("Received kill signal, shutting down gracefully.");
+  logger.info("Received kill signal, shutting down gracefully.");
   server.close(function() {
-    console.log("Closed out remaining connections.");
+    logger.info("Closed out remaining connections.");
     process.exit(0);
   }); 
   // if after 
   setTimeout(function() {
-    console.error("Could not close connections in time, forcefully shutting down");
+    logger.warn("Could not close connections in time, forcefully shutting down");
     process.exit()
-  }, 10*1000);
+  }, 1000);
 }
 // listen for TERM signal .e.g. kill 
 process.on('SIGTERM', gracefulShutdown);
@@ -154,7 +166,7 @@ if (!isProduction) {
     }
   }).listen(WEBPACK_DEV_PORT, 'localhost', (err, result) => {
     if (err) {
-      console.log(colors.red(err));
+      logger.error(colors.red(err));
     }
     console.log(colors.magenta('Webpack Dev Server listening at'), colors.cyan('localhost' + WEBPACK_DEV_PORT));
   });
