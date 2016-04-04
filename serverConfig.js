@@ -58,7 +58,7 @@ app.use(express.static(DIST_PATH));
 
 // Set logger parameters
 const logger = getLogger({
-  env: process.env.NODE_ENV,
+  env: process.env.APP_ENV,
   appTag: 'Header-App',
   token: process.env.LOGGLY_TOKEN,
   subdomain: process.env.LOGGLY_SUBDOMAIN,
