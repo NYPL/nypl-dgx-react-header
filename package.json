@@ -72,7 +72,7 @@
     "compression": "^1.5.2",
     "dgx-alt-center": "git+ssh://git@bitbucket.org/NYPL/dgx-alt-center.git#master",
     "dgx-feature-flags": "git+ssh://git@bitbucket.org/NYPL/dgx-feature-flags.git#master",
-    "dgx-header-component": "git+ssh://git@bitbucket.org/NYPL/dgx-header-component.git#WEB-2423-megamenu-feature-item",
+    "dgx-header-component": "git+ssh://git@bitbucket.org/NYPL/dgx-header-component.git#master",
     "dgx-loggly": "git+ssh://git@bitbucket.org/NYPL/dgx-loggly.git#master",
     "dgx-react-ga": "git+ssh://git@bitbucket.org/NYPL/dgx-react-ga.git#master",
     "ejs": "^2.3.3",
