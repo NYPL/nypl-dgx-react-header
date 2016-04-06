@@ -3,7 +3,7 @@ let config = {
 	appName: 'NYPL DGX React Header',
 	port: 3001,
 	webpackDevServerPort: 3000,
-	favIconPath: 'https://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/images/favicon.ico',
+	favIconPath: '//ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/images/favicon.ico',
 	apiUrl: 'https://dev-refinery.nypl.org/api/nypl/ndo/v0.1/site-data/header-items?filter%5Brelationships%5D%5Bparent%5D=null&include=children,related-mega-menu-panes.current-mega-menu-items.images',
 	alertsApiUrl: 'https://refinery.nypl.org/api/nypl/ndo/v0.1/content/alerts?filter%5Bscope%5D=all',
 	navTopLinks: [
