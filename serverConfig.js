@@ -6,13 +6,13 @@ import parser from 'jsonapi-parserinator';
 
 // React
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import Iso from 'iso';
 import alt from 'dgx-alt-center';
 
 // Server Configurations
 import appConfig from './appConfig.js';
 import webpack from 'webpack';
-import WebpackDevServer from 'webpack-dev-server';
 import webpackConfig from './webpack.config.js';
 
 // Header Component
@@ -58,7 +58,7 @@ app.use(express.static(DIST_PATH));
 
 // Set logger parameters
 const logger = getLogger({
-  env: process.env.NODE_ENV,
+  env: process.env.APP_ENV,
   appTag: 'Header-App',
   token: process.env.LOGGLY_TOKEN,
   subdomain: process.env.LOGGLY_SUBDOMAIN,
@@ -83,7 +83,7 @@ app.get('/', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   iso = new Iso();
 
-  headerApp = React.renderToString(React.createElement(Header));
+  headerApp = ReactDOMServer.renderToString(<Header />);
   iso.add(headerApp, alt.flush());
 
   // First parameter references the ejs filename
@@ -113,7 +113,7 @@ app.get('/header-markup', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   iso = new Iso();
 
-  headerApp = React.renderToString(React.createElement(Header));
+  headerApp = ReactDOMServer.renderToString(<Header />);
   iso.add(headerApp, alt.flush());
 
   res.render('isolatedHeader', {
@@ -137,14 +137,14 @@ let gracefulShutdown = function() {
   server.close(function() {
     logger.info("Closed out remaining connections.");
     process.exit(0);
-  }); 
-  // if after 
+  });
+  // if after
   setTimeout(function() {
     logger.warn("Could not close connections in time, forcefully shutting down");
     process.exit()
   }, 1000);
 }
-// listen for TERM signal .e.g. kill 
+// listen for TERM signal .e.g. kill
 process.on('SIGTERM', gracefulShutdown);
 // listen for INT signal e.g. Ctrl-C
 process.on('SIGINT', gracefulShutdown);
@@ -154,6 +154,8 @@ process.on('SIGINT', gracefulShutdown);
  * - Using Webpack Dev Server
 */
 if (!isProduction) {
+  const WebpackDevServer = require('webpack-dev-server');
+  
   new WebpackDevServer(webpack(webpackConfig), {
     publicPath: webpackConfig.output.publicPath,
     hot: true,

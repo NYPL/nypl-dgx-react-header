@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Iso from 'iso';
 import alt from 'dgx-alt-center';
 import Actions from '../app/actions/Actions.js';
@@ -17,7 +18,7 @@ import './styles/main.scss';
 			// Render Isomorphically
 		  Iso.bootstrap(function (state, meta, container) {
 		    alt.bootstrap(state);
-		    React.render(React.createElement(Header), container);
+		    ReactDOM.render(<Header />, container);
 		    isRenderedByServer = true;
 		    console.log('nypl-dgx-header rendered isomorphically.');
 		  });
@@ -31,7 +32,7 @@ import './styles/main.scss';
 	  		htmlElement.id = 'nypl-dgx-header';
 
 		  	// Make a global object to store the instances of nyplHeader
-		  	if (!window.nyplHeader) { 
+		  	if (!window.nyplHeader) {
 		  		window.nyplHeader = {};
 		  	};
 
@@ -40,7 +41,7 @@ import './styles/main.scss';
 
 		  	// Let's keep track of the processed scripts within nyplHeader
 		  	if (!nyplHeaderObject.processedScripts) {
-		  		nyplHeaderObject.processedScripts = []; 
+		  		nyplHeaderObject.processedScripts = [];
 		  	};
 
 		  	// Let's keep track of the processed style tags within nyplHeader
@@ -107,8 +108,8 @@ import './styles/main.scss';
 
 		  	// Now we ensure that only ONE <script> tag has been created
 		  	// before allowing React to Render the Header.
-		  	if (nyplHeaderObject.processedScripts.length === 1 
-		  		&& nyplHeaderObject.styleTags.length === 1 
+		  	if (nyplHeaderObject.processedScripts.length === 1
+		  		&& nyplHeaderObject.styleTags.length === 1
 		  		&& htmlElement && appEnv) {
 
 	  			/* Set the proper environment in the Store
@@ -119,7 +120,7 @@ import './styles/main.scss';
 		  		setTimeout(() => {
 		  			// Once rendered, React should populate the state
 		  			// based off the Store.
-		      	React.render(React.createElement(Header), htmlElement);
+		      	ReactDOM.render(<Header />, htmlElement);
 
 		      	console.log('nypl-dgx-header rendered via client');
 		  		}, 250);
