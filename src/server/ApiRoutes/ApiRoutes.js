@@ -17,7 +17,7 @@ const logger = getLogger({
 });
 
 let router = express.Router(),
-  appEnvironment = 'production', // process.env.APP_ENV || 'production',
+  appEnvironment = process.env.APP_ENV || 'production',
   apiRoot = refineryApi.root[appEnvironment],
   options = {
     endpoint: `${apiRoot}${refineryApi.endpoint}`,
