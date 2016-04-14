@@ -67,6 +67,8 @@ router
 router
   .route('/header-data')
   .get((req, res) => {
+    const query = req.query.urls || '';
+
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 
@@ -74,7 +76,8 @@ router
       .get(completeApiUrl)
       .then(data => {
         let parsed = parser.parse(data.data, options),
-          modelData = Model.build(parsed);
+          modelData = (query === 'absolute') ?
+            Model.build(parsed, { urlsAbsolute: true }) : Model.build(parsed);
 
         res.json(modelData);
       })

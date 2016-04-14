@@ -3,11 +3,17 @@ import ContentModel from './ContentModel.js';
 
 function Model() {
 
+  this.setModelSettings = (opts = {}) => {
+    this.urlsAbsolute = opts.urlsAbsolute || false;
+  };
+
   // Build an array of header item models or a single one
-  this.build = (data) => {
+  this.build = (data, opts = {}) => {
     if (!data) {
       return;
     }
+
+    this.setModelSettings(opts);
 
     if (_.isArray(data) && data.length > 0) {
       return _.map(data, this.headerItemModel);
@@ -19,13 +25,14 @@ function Model() {
   };
 
   // The main modeling function
-  this.headerItemModel = data => {
+  this.headerItemModel = (data) => {
     let headerItem = {};
-    
+
     // Top level header-item attributes
     headerItem.id = data.id;
     headerItem.type = data.type;
-    headerItem.link = data.attributes.link;
+    headerItem.link = this.urlsAbsolute ?
+      data.attributes.link : this.validateUrlObjWithKey(data.attributes.link, 'text');
     headerItem.name = data.attributes.name;
     headerItem.sort = data.attributes.sort;
 
@@ -71,7 +78,7 @@ function Model() {
     return feature;
   };
 
-  this.createFeatureItem = data => {
+  this.createFeatureItem = (data) => {
     if (!data) {
       return;
     }
@@ -81,7 +88,8 @@ function Model() {
     featuredItem.id = data.id;
     featuredItem.type = data.type;
     featuredItem.category = data.attributes.category;
-    featuredItem.link = data.attributes.link;
+    featuredItem.link = this.urlsAbsolute ?
+      data.attributes.link : this.validateUrlObjWithKey(data.attributes.link, 'text');
     featuredItem.description = data.attributes.description;
     featuredItem.headline = data.attributes.headline;
     featuredItem.dates = {
@@ -94,6 +102,32 @@ function Model() {
     }
 
     return featuredItem;
+  };
+
+  this.validateUrlObjWithKey = (obj, key) => {
+    if (_.isObject(obj) && !_.isEmpty(obj)) {
+      _.each(obj, (v, k) => {
+        if (k === key && typeof v === 'string') {
+        	obj[k] = this.convertUrlRelative(v);
+        } else {
+        	this.validateUrlObjWithKey(v, key);
+        }
+      });
+    }
+
+   return obj;
+  };
+
+  this.convertUrlRelative = (url) => {
+    // Validate existence and type
+    if (!url || typeof url !== 'string') {
+      return '#';
+    }
+
+    const regex = new RegExp(/^http(s)?\:\/\/(www.)?nypl.org/i);
+
+    // Test regex matching pattern
+    return (regex.test(url)) ? url.replace(regex, "") : url;
   };
 }
 
