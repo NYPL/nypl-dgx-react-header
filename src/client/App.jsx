@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Iso from 'iso';
 import alt from 'dgx-alt-center';
-import Actions from '../app/actions/Actions.js';
 import Header from 'dgx-header-component';
 import ga from 'react-ga';
 import FeatureFlags from 'dgx-feature-flags';
@@ -25,7 +24,8 @@ import './styles/main.scss';
 
 		  // Render Client Side Only
 		  if (!isRenderedByServer) {
-		  	let allScriptTags, styleTag, scriptTag, htmlElement, nyplHeaderObject, appEnv;
+				let urlType = '';
+		  	let allScriptTags, styleTag, scriptTag, urlTypes, htmlElement, nyplHeaderObject, appEnv;
 
 	  		// create element to hold the single header instance.
 	  		htmlElement = document.createElement('div');
@@ -77,6 +77,10 @@ import './styles/main.scss';
 		      			appEnv = 'production';
 		      		}
 
+							if (scriptTag.src.indexOf('?urls=absolute') !== -1) {
+								urlType = 'absolute';
+							}
+
 		      		scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
 		      		nyplHeaderObject.processedScripts.push(scriptTag);
 		      	}
@@ -112,15 +116,10 @@ import './styles/main.scss';
 		  		&& nyplHeaderObject.styleTags.length === 1
 		  		&& htmlElement && appEnv) {
 
-	  			/* Set the proper environment in the Store
-	  			 * so that the component will know what to fetch
-	  			 */
-	  			Actions.setClientAppEnv(appEnv);
-
 		  		setTimeout(() => {
 		  			// Once rendered, React should populate the state
 		  			// based off the Store.
-		      	ReactDOM.render(<Header />, htmlElement);
+		      	ReactDOM.render(<Header env={appEnv} urls={urlType} />, htmlElement);
 
 		      	console.log('nypl-dgx-header rendered via client');
 		  		}, 250);

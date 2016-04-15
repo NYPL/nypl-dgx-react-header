@@ -1,7 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
-
+// Model and Config
 import Model from '../../app/utils/HeaderItemModel.js';
 import {refineryApi} from '../../../appConfig.js';
 
@@ -16,14 +16,14 @@ const logger = getLogger({
   subdomain: process.env.LOGGLY_SUBDOMAIN,
 });
 
-let router = express.Router(),
-  appEnvironment = process.env.APP_ENV || 'production',
-  apiRoot = refineryApi.root[appEnvironment],
-  options = {
-    endpoint: `${apiRoot}${refineryApi.endpoint}`,
-    includes: refineryApi.includes,
-    filters: refineryApi.filters
-  };
+const router = express.Router();
+const appEnvironment = process.env.APP_ENV || 'production';
+const apiRoot = refineryApi.root[appEnvironment];
+const options = {
+  endpoint: `${apiRoot}${refineryApi.endpoint}`,
+  includes: refineryApi.includes,
+  filters: refineryApi.filters,
+};
 
 const completeApiUrl = parser.getCompleteApi(options);
 
