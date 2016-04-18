@@ -39,12 +39,12 @@ import './styles/main.scss';
 		  	// Short-name reference to window.nyplHeader
 		  	nyplHeaderObject = window.nyplHeader;
 
-		  	// Let's keep track of the processed scripts within nyplHeader
+		  	// Keep track of the processed scripts within nyplHeader
 		  	if (!nyplHeaderObject.processedScripts) {
 		  		nyplHeaderObject.processedScripts = [];
 		  	};
 
-		  	// Let's keep track of the processed style tags within nyplHeader
+		  	// Keep track of the processed style tags within nyplHeader
 		  	if (!nyplHeaderObject.styleTags) {
 		  		nyplHeaderObject.styleTags = [];
 		  	};
@@ -77,6 +77,7 @@ import './styles/main.scss';
 		      			appEnv = 'production';
 		      		}
 
+							// Parse urls param from src string.
 							if (scriptTag.src.indexOf('?urls=absolute') !== -1) {
 								urlType = 'absolute';
 							}
@@ -120,7 +121,6 @@ import './styles/main.scss';
 		  			// Once rendered, React should populate the state
 		  			// based off the Store.
 		      	ReactDOM.render(<Header env={appEnv} urls={urlType} />, htmlElement);
-
 		      	console.log('nypl-dgx-header rendered via client');
 		  		}, 250);
 		  	}

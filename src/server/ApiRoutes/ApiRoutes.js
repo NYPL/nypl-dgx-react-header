@@ -7,15 +7,7 @@ import {refineryApi} from '../../../appConfig.js';
 // Logging
 import { getLogger, initMorgan } from 'dgx-loggly';
 
-// Create winston logger instance
-const logger = getLogger({
-  env: process.env.NODE_ENV,
-  appTag: 'Header-App',
-  token: process.env.LOGGLY_TOKEN,
-  subdomain: process.env.LOGGLY_SUBDOMAIN,
-});
-
-const router = express.Router();
+// App environment settings
 const appEnvironment = process.env.APP_ENV || 'production';
 const apiRoot = refineryApi.root[appEnvironment];
 const options = {
@@ -24,11 +16,25 @@ const options = {
   filters: refineryApi.filters,
 };
 
+// Create winston logger instance
+const logger = getLogger({
+  env: appEnvironment,
+  appTag: 'Header-App',
+  token: process.env.LOGGLY_TOKEN,
+  subdomain: process.env.LOGGLY_SUBDOMAIN,
+});
+
+// Initialize Express Router
+const router = express.Router();
+
+// Assign full API url
 const completeApiUrl = parser.getCompleteApi(options);
 
 /* Match the root or /isolated-header path
  * to populate the HeaderStore data and
  * correctly parse/build the model.
+ * Optionally reads query (?urls=absolute)
+ * to deliver a Model with all absolute links
  */
 router
   .route('/:var(header-markup)?')
@@ -38,9 +44,9 @@ router
     axios
       .get(completeApiUrl)
       .then(data => {
-        let parsed = parser.parse(data.data, options),
-          modelData = (query === 'absolute') ?
-            Model.build(parsed, { urlsAbsolute: true }) : Model.build(parsed);
+        const parsed = parser.parse(data.data, options);
+        const modelData = (query === 'absolute') ?
+          Model.build(parsed, { urlsAbsolute: true }) : Model.build(parsed);
 
         res.locals.data = {
           HeaderStore: {
@@ -55,14 +61,13 @@ router
         next();
       })
       .catch(error => {
-        logger.error('error calling API : ' + completeApiUrl + '. ' + error);
+        logger.error(`Error calling API : ${completeApiUrl}. ${error}`);
         // Set completeApiUrl for client side calling, if server side calling failed
         res.locals.data = {
           completeApiUrl
         };
         next();
-      }
-      );
+      });
       /* end Axios call */
   });
 
@@ -77,9 +82,9 @@ router
     axios
       .get(completeApiUrl)
       .then(data => {
-        let parsed = parser.parse(data.data, options),
-          modelData = (query === 'absolute') ?
-            Model.build(parsed, { urlsAbsolute: true }) : Model.build(parsed);
+        const parsed = parser.parse(data.data, options);
+        const modelData = (query === 'absolute') ?
+          Model.build(parsed, { urlsAbsolute: true }) : Model.build(parsed);
 
         res.json(modelData);
       })

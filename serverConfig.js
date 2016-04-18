@@ -78,18 +78,15 @@ app.use('/', apiRoutes);
 
 // Match all routes to render the index page.
 app.get('/', (req, res) => {
-  let headerApp, iso;
-
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
-  iso = new Iso();
 
-  headerApp = ReactDOMServer.renderToString(<Header />);
+  const iso = new Iso();
+  const headerApp = ReactDOMServer.renderToString(<Header />);
+
   iso.add(headerApp, alt.flush());
 
   // First parameter references the ejs filename
   res.render('index', {
-    // Assign the Header String to the
-    // proper EJS variable
     headerApp: iso.render(),
     appTitle: appConfig.appTitle,
     favicon: appConfig.favIconPath,
@@ -100,7 +97,6 @@ app.get('/', (req, res) => {
     appEnv: process.env.APP_ENV,
     apiUrl: res.locals.data.completeApiUrl,
   });
-
 });
 
 /* Setup the isolated header route
@@ -108,12 +104,15 @@ app.get('/', (req, res) => {
  * a populated server-side Store.
 */
 app.get('/header-markup', (req, res) => {
-  let headerApp, iso;
+  const query = req.query.urls || '';
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
-  iso = new Iso();
 
-  headerApp = ReactDOMServer.renderToString(<Header />);
+  const iso = new Iso();
+  const headerApp = ReactDOMServer.renderToString(
+    <Header urls={(query === 'absolute') ? "absolute": ""} />
+  );
+
   iso.add(headerApp, alt.flush());
 
   res.render('isolatedHeader', {
@@ -122,26 +121,29 @@ app.get('/header-markup', (req, res) => {
 });
 
 // Start the server.
-let server = app.listen(serverPort, (err, result) => {
+const server = app.listen(serverPort, (err, result) => {
   if (err) {
     logger.error(colors.red(err));
   }
   console.log(colors.yellow.underline(appConfig.appName));
-  console.log(colors.green('Express server is listening at'), colors.cyan('localhost:' + serverPort));
+  console.log(
+    colors.green('Express Server is listening at'),
+    colors.cyan(`localhost:${serverPort}`)
+  );
 });
 
 // this function is called when you want the server to die gracefully
 // i.e. wait for existing connections
-let gracefulShutdown = function() {
+const gracefulShutdown = () => {
   logger.info("Received kill signal, shutting down gracefully.");
-  server.close(function() {
+  server.close(() => {
     logger.info("Closed out remaining connections.");
     process.exit(0);
   });
   // if after
-  setTimeout(function() {
+  setTimeout(() => {
     logger.warn("Could not close connections in time, forcefully shutting down");
-    process.exit()
+    process.exit();
   }, 1000);
 }
 // listen for TERM signal .e.g. kill
@@ -170,6 +172,10 @@ if (!isProduction) {
     if (err) {
       logger.error(colors.red(err));
     }
-    console.log(colors.magenta('Webpack Dev Server listening at'), colors.cyan('localhost' + WEBPACK_DEV_PORT));
+
+    console.log(
+      colors.magenta('Webpack Development Server listening at'),
+      colors.cyan(`localhost:${WEBPACK_DEV_PORT}`)
+    );
   });
 }
