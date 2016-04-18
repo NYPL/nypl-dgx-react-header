@@ -4,7 +4,6 @@ import parser from 'jsonapi-parserinator';
 // Model and Config
 import Model from '../../app/utils/HeaderItemModel.js';
 import {refineryApi} from '../../../appConfig.js';
-
 // Logging
 import { getLogger, initMorgan } from 'dgx-loggly';
 
@@ -17,7 +16,7 @@ const logger = getLogger({
 });
 
 const router = express.Router();
-const appEnvironment = 'production'; //process.env.APP_ENV || 'production';
+const appEnvironment = process.env.APP_ENV || 'production';
 const apiRoot = refineryApi.root[appEnvironment];
 const options = {
   endpoint: `${apiRoot}${refineryApi.endpoint}`,
@@ -34,11 +33,14 @@ const completeApiUrl = parser.getCompleteApi(options);
 router
   .route('/:var(header-markup)?')
   .get((req, res, next) => {
+    const query = req.query.urls || '';
+
     axios
       .get(completeApiUrl)
       .then(data => {
         let parsed = parser.parse(data.data, options),
-          modelData = Model.build(parsed);
+          modelData = (query === 'absolute') ?
+            Model.build(parsed, { urlsAbsolute: true }) : Model.build(parsed);
 
         res.locals.data = {
           HeaderStore: {
