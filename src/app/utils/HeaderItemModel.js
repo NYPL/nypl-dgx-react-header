@@ -121,7 +121,7 @@ function Model() {
       });
     }
 
-   return obj;
+    return obj;
   };
 
   this.convertUrlRelative = (url) => {
