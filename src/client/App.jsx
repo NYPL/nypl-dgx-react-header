@@ -39,7 +39,7 @@ import './styles/main.scss';
 
 		    // Make a global object to store the instances of nyplHeader
 		    if (!window.nyplHeader) {
-	        window.nyplHeader = {};
+					window.nyplHeader = {};
 		    };
 
 		    // Short-name reference to window.nyplHeader
