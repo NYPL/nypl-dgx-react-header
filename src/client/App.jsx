@@ -22,8 +22,8 @@ import './styles/main.scss';
 		    console.log('nypl-dgx-header rendered isomorphically.');
 		  });
 
-			// Render Client Side Only
-			if (!isRenderedByServer) {
+      // Render Client Side Only
+      if (!isRenderedByServer) {
 		    let urlType = '';
 		    let allScriptTags;
 		    let styleTag;
@@ -39,7 +39,7 @@ import './styles/main.scss';
 
 				// Make a global object to store the instances of nyplHeader
 				if (!window.nyplHeader) {
-					window.nyplHeader = {};
+          window.nyplHeader = {};
 				};
 
 		    // Short-name reference to window.nyplHeader
