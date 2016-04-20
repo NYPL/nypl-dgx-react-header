@@ -114,9 +114,9 @@ function Model() {
     if (_isObject(obj) && !_isEmpty(obj)) {
       _each(obj, (v, k) => {
         if (k === key && typeof v === 'string') {
-        	obj[k] = this.convertUrlRelative(v);
+          obj[k] = this.convertUrlRelative(v);
         } else {
-        	this.validateUrlObjWithKey(v, key);
+          this.validateUrlObjWithKey(v, key);
         }
       });
     }
