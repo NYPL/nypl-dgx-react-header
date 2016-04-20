@@ -136,6 +136,4 @@ function Model() {
   };
 }
 
-
-
 export default new Model();
