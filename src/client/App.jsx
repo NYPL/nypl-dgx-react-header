@@ -37,10 +37,10 @@ import './styles/main.scss';
 		    htmlElement = document.createElement('div');
 		    htmlElement.id = 'nypl-dgx-header';
 
-		    // Make a global object to store the instances of nyplHeader
-		    if (!window.nyplHeader) {
+				// Make a global object to store the instances of nyplHeader
+				if (!window.nyplHeader) {
 					window.nyplHeader = {};
-		    };
+				};
 
 		    // Short-name reference to window.nyplHeader
 		    nyplHeaderObject = window.nyplHeader;
