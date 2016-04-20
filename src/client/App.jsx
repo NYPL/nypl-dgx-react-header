@@ -24,14 +24,14 @@ import './styles/main.scss';
 
 		  // Render Client Side Only
 		  if (!isRenderedByServer) {
-				let urlType = '';
-				let allScriptTags;
-				let styleTag;
-				let scriptTag;
-				let urlTypes;
-				let htmlElement;
-				let nyplHeaderObject;
-				let appEnv;
+        let urlType = '';
+        let allScriptTags;
+        let styleTag;
+        let scriptTag;
+        let urlTypes;
+        let htmlElement;
+        let nyplHeaderObject;
+        let appEnv;
 
 	  		// create element to hold the single header instance.
 	  		htmlElement = document.createElement('div');
