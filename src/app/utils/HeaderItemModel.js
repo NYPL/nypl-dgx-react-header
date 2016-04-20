@@ -1,4 +1,10 @@
-import _ from 'underscore';
+import {
+  isObject as _isObject,
+  isArray as _isArray,
+  isEmpty as _isEmpty,
+  each as _each,
+  map as _map
+} from 'underscore';
 import ContentModel from './ContentModel.js';
 
 function Model() {
@@ -15,9 +21,9 @@ function Model() {
 
     this.setModelSettings(opts);
 
-    if (_.isArray(data) && data.length > 0) {
-      return _.map(data, this.headerItemModel);
-    } else if (_.isObject(data) && !_.isEmpty(data)) {
+    if (_isArray(data) && data.length > 0) {
+      return _map(data, this.headerItemModel);
+    } else if (_isObject(data) && !_isEmpty(data)) {
       return this.headerItemModel(data);
     } else {
       return;
@@ -52,11 +58,11 @@ function Model() {
 
   // Map a data set to a function.
   this.mapArrayData = (data, fn) => {
-    if (!data || !_.isArray(data)) {
+    if (!data || !_isArray(data)) {
       return;
     }
 
-    return _.map(data, fn);
+    return _map(data, fn);
   };
 
   // Create the featured slot in the mega menu
@@ -98,15 +104,15 @@ function Model() {
     };
 
     if (data.images) {
-      featuredItem.images = _.map(data.images, ContentModel.image);
+      featuredItem.images = _map(data.images, ContentModel.image);
     }
 
     return featuredItem;
   };
 
   this.validateUrlObjWithKey = (obj, key) => {
-    if (_.isObject(obj) && !_.isEmpty(obj)) {
-      _.each(obj, (v, k) => {
+    if (_isObject(obj) && !_isEmpty(obj)) {
+      _each(obj, (v, k) => {
         if (k === key && typeof v === 'string') {
         	obj[k] = this.convertUrlRelative(v);
         } else {
