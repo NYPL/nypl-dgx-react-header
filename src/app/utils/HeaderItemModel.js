@@ -125,8 +125,7 @@ function Model() {
   };
 
   this.convertUrlRelative = (url) => {
-    // Validate existence and type
-    if (!url || typeof url !== 'string') {
+    if (typeof url !== 'string') {
       return '#';
     }
 
