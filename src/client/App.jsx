@@ -58,18 +58,18 @@ import './styles/main.scss';
         // Only create the nyplHeader if the global.nyplHeaderObject.scripts is empty
         if (nyplHeaderObject.processedScripts.length === 0) {
           /*
-        	* Loop through all <script> tags in the DOM.
-        	* Find the match which contains 'dgx-header.min.js'.
-        	* Insert the markup holding the NYPL Header
-        	* right before the <script> tag matched.
-        	* In addition, setup the proper client appEnv
-        	* to fetch the modeled data endpoint.
-        	*/
+          * Loop through all <script> tags in the DOM.
+          * Find the match which contains 'dgx-header.min.js'.
+          * Insert the markup holding the NYPL Header
+          * right before the <script> tag matched.
+          * In addition, setup the proper client appEnv
+          * to fetch the modeled data endpoint.
+          */
           allScriptTags = document.getElementsByTagName('script');
 
           /* Since getElementsBy is an array-like structure,
-        	* we need to use call to iterate with forEach.
-        	*/
+          * we need to use call to iterate with forEach.
+          */
           [].forEach.call(allScriptTags, function(value, index) {
             if (value.src.indexOf('dgx-header.min.js') !== -1) {
               scriptTag = value;
@@ -93,10 +93,10 @@ import './styles/main.scss';
           });
 
           /*
-        	* Only create one instance of the <style> tag for the Header.
-        	* Append the <head> element with the new <style> tag
-        	* Add the newly created tag to the nyplHeaderObject for tracking
-        	*/
+          * Only create one instance of the <style> tag for the Header.
+          * Append the <head> element with the new <style> tag
+          * Add the newly created tag to the nyplHeaderObject for tracking
+          */
           if (nyplHeaderObject.styleTags.length === 0) {
             styleTag = document.createElement('link');
             styleTag.rel = 'stylesheet';
