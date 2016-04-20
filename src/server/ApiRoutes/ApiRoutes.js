@@ -39,14 +39,14 @@ const completeApiUrl = parser.getCompleteApi(options);
 router
   .route('/:var(header-markup)?')
   .get((req, res, next) => {
-    const query = req.query.urls || '';
+    const urlType = req.query.urls || '';
 
     axios
       .get(completeApiUrl)
       .then(data => {
+        const opts = { urlsAbsolute: (urlType === 'absolute') };
         const parsed = parser.parse(data.data, options);
-        const modelData = (query === 'absolute') ?
-          Model.build(parsed, { urlsAbsolute: true }) : Model.build(parsed);
+        const modelData = Model.build(parsed, opts);
 
         res.locals.data = {
           HeaderStore: {
@@ -74,7 +74,7 @@ router
 router
   .route('/header-data')
   .get((req, res) => {
-    const query = req.query.urls || '';
+    const urlType = req.query.urls || '';
 
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -82,9 +82,9 @@ router
     axios
       .get(completeApiUrl)
       .then(data => {
+        const opts = { urlsAbsolute: (urlType === 'absolute') };
         const parsed = parser.parse(data.data, options);
-        const modelData = (query === 'absolute') ?
-          Model.build(parsed, { urlsAbsolute: true }) : Model.build(parsed);
+        const modelData = Model.build(parsed, opts);
 
         res.json(modelData);
       })

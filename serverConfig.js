@@ -104,13 +104,13 @@ app.get('/', (req, res) => {
  * a populated server-side Store.
 */
 app.get('/header-markup', (req, res) => {
-  const query = req.query.urls || '';
+  const urlType = req.query.urls || '';
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
 
   const iso = new Iso();
   const headerApp = ReactDOMServer.renderToString(
-    <Header urls={(query === 'absolute') ? "absolute": ""} />
+    <Header urls={(urlType === 'absolute') ? "absolute": ""} />
   );
 
   iso.add(headerApp, alt.flush());
