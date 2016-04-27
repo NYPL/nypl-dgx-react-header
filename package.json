@@ -1,6 +1,6 @@
 {
   "name": "nypl-dgx-react-header",
-  "version": "1.0.10",
+  "version": "1.2.4",
   "description": "NYPL Isomorphic React Header with Navigation",
   "main": "index.js",
   "scripts": {
