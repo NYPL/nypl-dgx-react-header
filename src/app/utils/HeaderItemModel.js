@@ -49,8 +49,8 @@ function Model() {
     }
 
     // The features if they are available
-    if (data['related-mega-menu-panes']) {
-      headerItem.features = this.mapArrayData(data['related-mega-menu-panes'], this.feature);
+    if (data['related-container-slots']) {
+      headerItem.features = this.mapArrayData(data['related-container-slots'], this.feature);
     }
 
     return headerItem;
@@ -72,9 +72,9 @@ function Model() {
     }
 
     let feature = {},
-      featuredItem = data['current-mega-menu-item'] ?
-        data['current-mega-menu-item'] :
-        data['default-mega-menu-item'];
+      featuredItem = data['current-item'] ?
+        data['current-item'] :
+        data['default-item'];
 
     feature.id = data.id;
     feature.type = data.type;
@@ -95,16 +95,13 @@ function Model() {
     featuredItem.type = data.type;
     featuredItem.category = data.attributes.category;
     featuredItem.link = this.urlsAbsolute ?
-      data.attributes.link : this.validateUrlObjWithKey(data.attributes.link, 'text');
+      data.attributes.url : this.validateUrlObjWithKey(data.attributes.url, 'url');
     featuredItem.description = data.attributes.description;
-    featuredItem.headline = data.attributes.headline;
-    featuredItem.dates = {
-      start: data.attributes['display-date-start'],
-      end: data.attributes['display-date-end'],
-    };
+    featuredItem.dates = data.attributes.date;
+    featuredItem.location = data.attributes.location;
 
-    if (data.images) {
-      featuredItem.images = _map(data.images, ContentModel.image);
+    if (data['square-image']) {
+      featuredItem.images = ContentModel.image(data['square-image']);
     }
 
     return featuredItem;

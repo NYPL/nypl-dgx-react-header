@@ -11,8 +11,8 @@ function ContentModel() {
 
     image.id = data.id;
     image.type = data.type;
-    image.created = data.attributes['date-created'];
-    image.uri = data.attributes.uri['full-uri'];
+    image.created = data.attributes ? data.attributes['date-created'] : '';
+    image.uri = data.attributes ? data.attributes.uri['full-uri'] : '';
 
     return image;
   };
