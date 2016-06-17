@@ -8,19 +8,19 @@ import FeatureFlags from 'dgx-feature-flags';
 
 import './styles/main.scss';
 
-(function (window, document) {
-	if (typeof window !== 'undefined') {
+(function(window, document) {
+  if (typeof window !== 'undefined') {
 
-		window.onload = () => {
-			let isRenderedByServer = false;
+    window.onload = () => {
+      let isRenderedByServer = false;
 
-			// Render Isomorphically
-		  Iso.bootstrap(function (state, meta, container) {
-		    alt.bootstrap(state);
-		    ReactDOM.render(<Header />, container);
-		    isRenderedByServer = true;
-		    console.log('nypl-dgx-header rendered isomorphically.');
-		  });
+      // Render Isomorphically
+      Iso.bootstrap(function(state, meta, container) {
+        alt.bootstrap(state);
+        ReactDOM.render(<Header/>, container);
+        isRenderedByServer = true;
+        console.log('nypl-dgx-header rendered isomorphically.');
+      });
 
       // Render Client Side Only
       if (!isRenderedByServer) {
@@ -118,8 +118,9 @@ import './styles/main.scss';
 
         // Now we ensure that only ONE <script> tag has been created
         // before allowing React to Render the Header.
-        if (nyplHeaderObject.processedScripts.length === 1 && nyplHeaderObject.styleTags.length === 1
-          && htmlElement && appEnv) {
+        if (nyplHeaderObject.processedScripts.length === 1 &&
+          nyplHeaderObject.styleTags.length === 1 &&
+          htmlElement && appEnv) {
 
           setTimeout(() => {
             // Once rendered, React should populate the state
@@ -130,14 +131,15 @@ import './styles/main.scss';
         }
       }
 
-		  if (!window.ga) {
-				let gaOpts = { debug: false };
-				ga.initialize('UA-1420324-3', gaOpts);
-			}
+      if (!window.ga) {
+        let gaOpts = { debug: false };
+        ga.initialize('UA-1420324-3', gaOpts);
+      }
 
-			if (!window.dgxFeatureFlags) {
-				window.dgxFeatureFlags = FeatureFlags.utils;
-			}
-		}
-	}
+      // Assign the FeatureFlags utility methods to the Global window object
+      if (!window.dgxFeatureFlags) {
+        window.dgxFeatureFlags = FeatureFlags.utils;
+      }
+    }
+  }
 })(window, document);
