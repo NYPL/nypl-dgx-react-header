@@ -3,12 +3,11 @@ import {
   isArray as _isArray,
   isEmpty as _isEmpty,
   each as _each,
-  map as _map
+  map as _map,
 } from 'underscore';
 import ContentModel from './ContentModel.js';
 
 function Model() {
-
   this.setModelSettings = (opts = {}) => {
     this.urlsAbsolute = opts.urlsAbsolute || false;
   };
@@ -25,14 +24,14 @@ function Model() {
       return _map(data, this.headerItemModel);
     } else if (_isObject(data) && !_isEmpty(data)) {
       return this.headerItemModel(data);
-    } else {
-      return;
     }
+
+    return;
   };
 
   // The main modeling function
   this.headerItemModel = (data) => {
-    let headerItem = {};
+    const headerItem = {};
 
     // Top level header-item attributes
     headerItem.id = data.id;
@@ -49,8 +48,8 @@ function Model() {
     }
 
     // The features if they are available
-    if (data['related-mega-menu-panes']) {
-      headerItem.features = this.mapArrayData(data['related-mega-menu-panes'], this.feature);
+    if (data['related-container-slots']) {
+      headerItem.features = this.mapArrayData(data['related-container-slots'], this.feature);
     }
 
     return headerItem;
@@ -71,10 +70,10 @@ function Model() {
       return;
     }
 
-    let feature = {},
-      featuredItem = data['current-mega-menu-item'] ?
-        data['current-mega-menu-item'] :
-        data['default-mega-menu-item'];
+    const feature = {};
+    const featuredItem = data['current-item'] ?
+        data['current-item'] :
+        data['default-item'];
 
     feature.id = data.id;
     feature.type = data.type;
@@ -89,22 +88,25 @@ function Model() {
       return;
     }
 
-    let featuredItem = {};
+    const featuredItem = {};
 
     featuredItem.id = data.id;
     featuredItem.type = data.type;
-    featuredItem.category = data.attributes.category;
+    featuredItem.title = data.attributes.title;
     featuredItem.link = this.urlsAbsolute ?
-      data.attributes.link : this.validateUrlObjWithKey(data.attributes.link, 'text');
+      data.attributes.url : this.validateUrlObjWithKey(data.attributes.url, 'url');
+    featuredItem.category = data.attributes.category;
     featuredItem.description = data.attributes.description;
-    featuredItem.headline = data.attributes.headline;
-    featuredItem.dates = {
-      start: data.attributes['display-date-start'],
-      end: data.attributes['display-date-end'],
+    featuredItem.date = data.attributes.date;
+    featuredItem.location = data.attributes.location;
+    featuredItem.person = {
+      firstName: data.attributes['person-first-name'],
+      lastName: data.attributes['person-last-name'],
+      title: data.attributes['person-title'],
     };
 
-    if (data.images) {
-      featuredItem.images = _map(data.images, ContentModel.image);
+    if (data['square-image']) {
+      featuredItem.images = ContentModel.image(data['square-image']);
     }
 
     return featuredItem;
@@ -132,7 +134,7 @@ function Model() {
     const regex = new RegExp(/^http(s)?\:\/\/(www.)?nypl.org/i);
 
     // Test regex matching pattern
-    return (regex.test(url)) ? url.replace(regex, "") : url;
+    return (regex.test(url)) ? url.replace(regex, '') : url;
   };
 }
 

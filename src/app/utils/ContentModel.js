@@ -1,18 +1,32 @@
 import _ from 'underscore';
 
-function ContentModel() {  
+function ContentModel() {
   // Function to get image object.
   this.image = data => {
     if (!data) {
       return;
     }
 
-    let image = {};
+    const image = {};
 
     image.id = data.id;
     image.type = data.type;
-    image.created = data.attributes['date-created'];
-    image.uri = data.attributes.uri['full-uri'];
+    try {
+      const {
+        attributes: {
+          ['date-created']: dateCreated = '',
+          uri: {
+            ['full-uri']: uri = '',
+          },
+        },
+      } = data;
+
+      image.created = dateCreated;
+      image.uri = uri;
+    } catch (e) {
+      image.created = '';
+      image.uri = '';
+    }
 
     return image;
   };
@@ -23,7 +37,7 @@ function ContentModel() {
       return;
     }
 
-    let content = {};
+    const content = {};
 
     content.id = data.id;
     content.type = data.type;
@@ -31,7 +45,7 @@ function ContentModel() {
     content.uri = data.attributes.uri['full-uri'];
 
     if (data.type === 'blog') {
-      this.blog(content, data)
+      this.blog(content, data);
     }
 
     if (data.type === 'event-program' || data.type === 'event-exhibition') {
@@ -49,7 +63,7 @@ function ContentModel() {
   };
 
   this.authors = data => {
-    let authors = {};
+    const authors = {};
 
     authors.id = data.id;
     authors.type = data.type;
@@ -82,7 +96,7 @@ function ContentModel() {
   };
 
   this.location = data => {
-    let location = {};
+    const location = {};
 
     location.type = data.type;
     location.id = data.id;
@@ -93,15 +107,33 @@ function ContentModel() {
     return location;
   };
 
-  this.featureItem = (data, lang) => {
-    return {
-      headline: data.headline ? data.headline[lang].text : '',
+  this.featureItem = (data, lang = 'en') => {
+    if (!data) {
+      return {
+        title: '',
+        link: '',
+        category: '',
+        description: '',
+        date: '',
+        location: '',
+        person: {},
+        image: '',
+      };
+    }
+
+    const item = {
+      title: data.title ? data.title[lang].text : '',
+      link: data.link || '',
       category: data.category ? data.category[lang].text : '',
-      imgSrc: data.images ? data.images[0].uri : '',
-      // Assuming that the text is already trimmed we should redo this:
-      description: data.description ? data.description[lang].text.substring(0, '175') : '',
-      link: data.link ? data.link[lang].text : '',
+      description: data.description && data.description[lang] ?
+        data.description[lang].text : '',
+      date: data.date ? data.date[lang].text : '',
+      location: data.location || '',
+      person: data.person || '',
+      image: data.images || {},
     };
+
+    return item;
   };
 }
 
