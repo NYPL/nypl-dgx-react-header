@@ -3,23 +3,21 @@ import compression from 'compression';
 import express from 'express';
 import colors from 'colors';
 import parser from 'jsonapi-parserinator';
-
 // React
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Iso from 'iso';
 import alt from 'dgx-alt-center';
-
 // Server Configurations
 import appConfig from './appConfig.js';
 import webpack from 'webpack';
 import webpackConfig from './webpack.config.js';
-
 // Header Component
 import Header from 'dgx-header-component';
-
 // Logging
 import { getLogger, initMorgan } from 'dgx-loggly';
+// Feature Flags Module
+import FeatureFlags from 'dgx-feature-flags';
 
 // Global Config Variables
 const ROOT_PATH = __dirname;
@@ -27,7 +25,6 @@ const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
 const INDEX_PATH = path.resolve(ROOT_PATH, 'src/client');
 const API_URL = process.env.API_URL || appConfig.apiUrl;
 const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
-
 // Boolean flag that determines if we are running
 // our application in Production Mode.
 const isProduction = process.env.NODE_ENV === 'production';
@@ -83,6 +80,9 @@ app.get('/', (req, res) => {
   const iso = new Iso();
   const headerApp = ReactDOMServer.renderToString(<Header />);
 
+  // Fire off the Feature Flag prior to render
+  FeatureFlags.utils.activateFeature('shop-link');
+
   iso.add(headerApp, alt.flush());
 
   // First parameter references the ejs filename
@@ -112,6 +112,9 @@ app.get('/header-markup', (req, res) => {
   const headerApp = ReactDOMServer.renderToString(
     <Header urls={(urlType === 'absolute') ? "absolute": ""} />
   );
+
+  // Fire off the Feature Flag prior to render
+  FeatureFlags.utils.activateFeature('shop-link');
 
   iso.add(headerApp, alt.flush());
 
