@@ -2,8 +2,8 @@ import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 // Model and Config
-import Model from '../../app/utils/HeaderItemModel.js';
-import {refineryApi} from '../../../appConfig.js';
+import { HeaderItemModel }  from 'dgx-model-data';
+import { refineryApi } from '../../../appConfig.js';
 // Logging
 import { getLogger, initMorgan } from 'dgx-loggly';
 
@@ -46,7 +46,7 @@ router
       .then(data => {
         const opts = { urlsAbsolute: (urlType === 'absolute') };
         const parsed = parser.parse(data.data, options);
-        const modelData = Model.build(parsed, opts);
+        const modelData = HeaderItemModel.build(parsed, opts);
 
         res.locals.data = {
           HeaderStore: {
@@ -84,7 +84,7 @@ router
       .then(data => {
         const opts = { urlsAbsolute: (urlType === 'absolute') };
         const parsed = parser.parse(data.data, options);
-        const modelData = Model.build(parsed, opts);
+        const modelData = HeaderItemModel.build(parsed, opts);
 
         res.json(modelData);
       })
