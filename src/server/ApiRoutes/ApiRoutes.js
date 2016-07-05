@@ -3,7 +3,7 @@ import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 import { navConfig } from 'dgx-header-component';
 // Model and Config
-import Model from '../../app/utils/HeaderItemModel.js';
+import { HeaderItemModel }  from 'dgx-model-data';
 import { refineryApi } from '../../../appConfig.js';
 // Logging
 import { getLogger } from 'dgx-loggly';
@@ -45,7 +45,7 @@ const getHeaderData = (urlType, iaType, apiResponse) => {
   const opts = { urlsAbsolute: (urlType === 'absolute') };
   const iaArray = (iaType === 'upcoming') ? navConfig.upcoming : navConfig.current;
   const parsed = parser.parse(apiResponse, options);
-  const modelData = Model.build(parsed, opts);
+  const modelData = HeaderItemModel.build(parsed, opts);
 
   _map(iaArray, headerItem => {
     const item = _findWhere(modelData, { id: headerItem.id });
