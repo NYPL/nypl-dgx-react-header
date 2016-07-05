@@ -8,7 +8,10 @@ import { refineryApi } from '../../../appConfig.js';
 // Logging
 import { getLogger } from 'dgx-loggly';
 
-import { findWhere as _findWhere } from 'underscore';
+import {
+  map as _map,
+  findWhere as _findWhere,
+} from 'underscore';
 
 // App environment settings
 const appEnvironment = process.env.APP_ENV || 'production';
@@ -33,7 +36,7 @@ const router = express.Router();
 // Assign full API url
 const completeApiUrl = parser.getCompleteApi(options);
 
-/* 
+/*
  * getHeaderData()
  * Parse the header endpoint response and add featured items to the selected IA array
  * from the config, but based on the url query.
@@ -44,7 +47,7 @@ const getHeaderData = (urlType, iaType, apiResponse) => {
   const parsed = parser.parse(apiResponse, options);
   const modelData = Model.build(parsed, opts);
 
-  _.map(iaArray, headerItem => {
+  _map(iaArray, headerItem => {
     const item = _findWhere(modelData, { id: headerItem.id });
 
     if (item) {
@@ -74,11 +77,11 @@ router
           HeaderStore: {
             headerData,
             subscribeFormVisible: false,
-            myNyplVisible: false
+            myNyplVisible: false,
           },
           // Set the API URL here so we can access it when we
           // render in the EJS file.
-          completeApiUrl
+          completeApiUrl,
         };
         next();
       })
@@ -86,7 +89,7 @@ router
         logger.error(`Error calling API : ${completeApiUrl}. ${error}`);
         // Set completeApiUrl for client side calling, if server side calling failed
         res.locals.data = {
-          completeApiUrl
+          completeApiUrl,
         };
         next();
       });
