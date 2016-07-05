@@ -2,7 +2,6 @@ import path from 'path';
 import compression from 'compression';
 import express from 'express';
 import colors from 'colors';
-import parser from 'jsonapi-parserinator';
 // React
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -13,7 +12,7 @@ import appConfig from './appConfig.js';
 import webpack from 'webpack';
 import webpackConfig from './webpack.config.js';
 // Header Component
-import Header from 'dgx-header-component';
+import { Header } from 'dgx-header-component';
 // Logging
 import { getLogger, initMorgan } from 'dgx-loggly';
 // Feature Flags Module
@@ -23,7 +22,6 @@ import FeatureFlags from 'dgx-feature-flags';
 const ROOT_PATH = __dirname;
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
 const INDEX_PATH = path.resolve(ROOT_PATH, 'src/client');
-const API_URL = process.env.API_URL || appConfig.apiUrl;
 const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
 // Boolean flag that determines if we are running
 // our application in Production Mode.
@@ -90,7 +88,7 @@ app.get('/', (req, res) => {
     headerApp: iso.render(),
     appTitle: appConfig.appTitle,
     favicon: appConfig.favIconPath,
-    isProduction: isProduction,
+    isProduction,
     webpackPort: WEBPACK_DEV_PORT,
     filename: webpackConfig.output.filename,
     nodeEnv: process.env.NODE_ENV,
@@ -110,7 +108,7 @@ app.get('/header-markup', (req, res) => {
 
   const iso = new Iso();
   const headerApp = ReactDOMServer.renderToString(
-    <Header urls={(urlType === 'absolute') ? "absolute": ""} />
+    <Header urls={(urlType === 'absolute') ? 'absolute' : ''} />
   );
 
   // Fire off the Feature Flag prior to render
@@ -119,7 +117,7 @@ app.get('/header-markup', (req, res) => {
   iso.add(headerApp, alt.flush());
 
   res.render('isolatedHeader', {
-    headerApp: iso.render()
+    headerApp: iso.render(),
   });
 });
 
@@ -138,17 +136,17 @@ const server = app.listen(serverPort, (err, result) => {
 // this function is called when you want the server to die gracefully
 // i.e. wait for existing connections
 const gracefulShutdown = () => {
-  logger.info("Received kill signal, shutting down gracefully.");
+  logger.info('Received kill signal, shutting down gracefully.');
   server.close(() => {
-    logger.info("Closed out remaining connections.");
+    logger.info('Closed out remaining connections.');
     process.exit(0);
   });
   // if after
   setTimeout(() => {
-    logger.warn("Could not close connections in time, forcefully shutting down");
+    logger.warn('Could not close connections in time, forcefully shutting down');
     process.exit();
   }, 1000);
-}
+};
 // listen for TERM signal .e.g. kill
 process.on('SIGTERM', gracefulShutdown);
 // listen for INT signal e.g. Ctrl-C
@@ -169,8 +167,8 @@ if (!isProduction) {
     historyApiFallback: true,
     headers: {
       'Access-Control-Allow-Origin': 'http://localhost:3001',
-      'Access-Control-Allow-Headers': 'X-Requested-With'
-    }
+      'Access-Control-Allow-Headers': 'X-Requested-With',
+    },
   }).listen(WEBPACK_DEV_PORT, 'localhost', (err, result) => {
     if (err) {
       logger.error(colors.red(err));
