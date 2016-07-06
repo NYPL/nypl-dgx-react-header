@@ -3,7 +3,7 @@ import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 import { navConfig } from 'dgx-header-component';
 // Model and Config
-import { HeaderItemModel }  from 'dgx-model-data';
+import { HeaderItemModel } from 'dgx-model-data';
 import { refineryApi } from '../../../appConfig.js';
 // Logging
 import { getLogger } from 'dgx-loggly';
@@ -58,9 +58,9 @@ const getHeaderData = (urlType, iaType, apiResponse) => {
   return iaArray;
 };
 
-/* Match the root or /isolated-header path
+/* Match the root (/) or /isolated-header path
  * to populate the HeaderStore data from
- * the Header navConfig file's current IA.
+ * the static navConfig file's current IA.
  */
 router
   .route('/:var(header-markup)?')
