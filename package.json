@@ -73,6 +73,7 @@
     "dgx-feature-flags": "git+ssh://git@bitbucket.org/NYPL/dgx-feature-flags.git#master",
     "dgx-header-component": "git+ssh://git@bitbucket.org/NYPL/dgx-header-component.git#WEB-3074-export-navconfig",
     "dgx-loggly": "git+ssh://git@bitbucket.org/NYPL/dgx-loggly.git#master",
+    "dgx-model-data": "git+ssh://bitbucket.org/NYPL/dgx-model-data.git#master",
     "dgx-react-ga": "git+ssh://git@bitbucket.org/NYPL/dgx-react-ga.git#master",
     "ejs": "^2.3.3",
     "express": "^4.13.1",

@@ -3,7 +3,7 @@ import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 import { navConfig } from 'dgx-header-component';
 // Model and Config
-import Model from '../../app/utils/HeaderItemModel.js';
+import { HeaderItemModel } from 'dgx-model-data';
 import { refineryApi } from '../../../appConfig.js';
 // Logging
 import { getLogger } from 'dgx-loggly';
@@ -49,37 +49,6 @@ router
       completeApiUrl,
     };
     next();
-
-    // const urlType = req.query.urls || '';
-    //
-    // axios
-    //   .get(completeApiUrl)
-    //   .then(data => {
-    //     const opts = { urlsAbsolute: (urlType === 'absolute') };
-    //     const parsed = parser.parse(data.data, options);
-    //     const modelData = Model.build(parsed, opts);
-    //
-    //     res.locals.data = {
-    //       HeaderStore: {
-    //         headerData: modelData,
-    //         subscribeFormVisible: false,
-    //         myNyplVisible: false
-    //       },
-    //       // Set the API URL here so we can access it when we
-    //       // render in the EJS file.
-    //       completeApiUrl
-    //     };
-    //     next();
-    //   })
-    //   .catch(error => {
-    //     logger.error(`Error calling API : ${completeApiUrl}. ${error}`);
-    //     // Set completeApiUrl for client side calling, if server side calling failed
-    //     res.locals.data = {
-    //       completeApiUrl
-    //     };
-    //     next();
-    //   });
-      /* end Axios call */
   });
 
 // This will need to be re-factored to provide an endpoint containing the full header data for both
@@ -97,7 +66,7 @@ router
       .then(data => {
         const opts = { urlsAbsolute: (urlType === 'absolute') };
         const parsed = parser.parse(data.data, options);
-        const modelData = Model.build(parsed, opts);
+        const modelData = HeaderItemModel.build(parsed, opts);
 
         res.json(modelData);
       })
