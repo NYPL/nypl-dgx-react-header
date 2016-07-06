@@ -36,30 +36,43 @@ const router = express.Router();
 // Assign full API url
 const completeApiUrl = parser.getCompleteApi(options);
 
-const updateUrls = (nav, opts) => {
-
-};
+const deepCopy = (obj) => JSON.parse(JSON.stringify(obj));
 
 /*
  * getHeaderData()
  * Parse the header endpoint response and add featured items to the selected IA array
  * from the config, but based on the url query.
  */
-const getHeaderData = (urlType, iaType, apiResponse) => {
+const getHeaderData = (urlType, iaNavArray, apiResponse) => {
+  const iaNavCopy = iaNavArray;
+  let nav = [];
   const opts = { urlsAbsolute: (urlType === 'absolute') };
-  const iaArray = (iaType === 'upcoming') ? navConfig.upcoming : navConfig.current;
   const parsed = parser.parse(apiResponse, options);
   const modelData = HeaderItemModel.build(parsed, opts);
 
-  _map(iaArray, headerItem => {
+  const urlsAbsolute = opts.urlsAbsolute || false;
+
+  nav = _map(iaNavCopy, headerItem => {
     const item = _findWhere(modelData, { id: headerItem.id });
 
     if (item) {
       headerItem.features = item.features;
     }
+
+    headerItem.link = urlsAbsolute ? headerItem.link :
+      HeaderItemModel.validateUrlObjWithKey(headerItem.link, 'text');
+
+    _map(headerItem.subnav, sub => {
+      sub.link = urlsAbsolute ? sub.link :
+        HeaderItemModel.validateUrlObjWithKey(sub.link, 'text');
+
+      return sub;
+    });
+
+    return headerItem;
   });
 
-  return iaArray;
+  return nav;
 };
 
 /* Match the root (/) or /isolated-header path
@@ -69,34 +82,20 @@ const getHeaderData = (urlType, iaType, apiResponse) => {
 router
   .route('/:var(header-markup)?')
   .get((req, res, next) => {
-    axios
-      .get(completeApiUrl)
-      .then(data => {
-        res.locals.data = {
-          HeaderStore: {
-            headerData: navConfig.current,
-            subscribeFormVisible: false,
-            myNyplVisible: false,
-          },
-          // Set the API URL here so we can access it when we
-          // render in the EJS file.
-          completeApiUrl,
-        };
-        next();
-      })
-      .catch(error => {
-        logger.error(`Error calling API : ${completeApiUrl}. ${error}`);
-        // Set completeApiUrl for client side calling, if server side calling failed
-        res.locals.data = {
-          completeApiUrl,
-        };
-        next();
-      });
+    res.locals.data = {
+      HeaderStore: {
+        headerData: navConfig.current,
+        subscribeFormVisible: false,
+        myNyplVisible: false,
+      },
+      // Set the API URL here so we can access it when we
+      // render in the EJS file.
+      completeApiUrl,
+    };
+    next();
       /* end Axios call */
   });
 
-// This will need to be re-factored to provide an endpoint containing the full header data for both
-// current and upcoming structures with featured items.
 router
   .route('/header-data')
   .get((req, res) => {
@@ -109,7 +108,10 @@ router
     axios
       .get(completeApiUrl)
       .then(data => {
-        const headerData = getHeaderData(urlType, iaType, data.data);
+        const iaNavArray = (iaType === 'upcoming') ?
+          _map(navConfig.upcoming, deepCopy) :
+          _map(navConfig.current, deepCopy);
+        const headerData = getHeaderData(urlType, iaNavArray, data.data);
 
         res.json(headerData);
       })
