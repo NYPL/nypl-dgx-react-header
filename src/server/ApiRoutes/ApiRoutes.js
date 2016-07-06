@@ -36,6 +36,10 @@ const router = express.Router();
 // Assign full API url
 const completeApiUrl = parser.getCompleteApi(options);
 
+const updateUrls = (nav, opts) => {
+
+};
+
 /*
  * getHeaderData()
  * Parse the header endpoint response and add featured items to the selected IA array
@@ -65,17 +69,12 @@ const getHeaderData = (urlType, iaType, apiResponse) => {
 router
   .route('/:var(header-markup)?')
   .get((req, res, next) => {
-    const urlType = req.query.urls || '';
-    const iaType = req.query.ia || '';
-
     axios
       .get(completeApiUrl)
       .then(data => {
-        const headerData = getHeaderData(urlType, iaType, data.data);
-
         res.locals.data = {
           HeaderStore: {
-            headerData,
+            headerData: navConfig.current,
             subscribeFormVisible: false,
             myNyplVisible: false,
           },
