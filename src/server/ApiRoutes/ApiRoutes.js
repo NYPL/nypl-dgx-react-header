@@ -31,9 +31,9 @@ const router = express.Router();
 // Assign full API url
 const completeApiUrl = parser.getCompleteApi(options);
 
-/* Match the root or /isolated-header path
+/* Match the root (/) or /isolated-header path
  * to populate the HeaderStore data from
- * the Header navConfig file's current IA.
+ * the static navConfig file's current IA.
  */
 router
   .route('/:var(header-markup)?')
@@ -44,8 +44,6 @@ router
         subscribeFormVisible: false,
         myNyplVisible: false,
       },
-      // Set the API URL here so we can access it when we
-      // render in the EJS file.
       completeApiUrl,
     };
     next();
