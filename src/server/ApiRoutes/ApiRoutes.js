@@ -1,11 +1,12 @@
 import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
+import { navConfig } from 'dgx-header-component';
 // Model and Config
-import { HeaderItemModel }  from 'dgx-model-data';
+import { HeaderItemModel } from 'dgx-model-data';
 import { refineryApi } from '../../../appConfig.js';
 // Logging
-import { getLogger, initMorgan } from 'dgx-loggly';
+import { getLogger } from 'dgx-loggly';
 
 // App environment settings
 const appEnvironment = process.env.APP_ENV || 'production';
@@ -30,47 +31,26 @@ const router = express.Router();
 // Assign full API url
 const completeApiUrl = parser.getCompleteApi(options);
 
-/* Match the root or /isolated-header path
- * to populate the HeaderStore data and
- * correctly parse/build the model.
- * Optionally reads query (?urls=absolute)
- * to deliver a Model with all absolute links
+/* Match the root (/) or /isolated-header path
+ * to populate the HeaderStore data from
+ * the static navConfig file's current IA.
  */
 router
   .route('/:var(header-markup)?')
   .get((req, res, next) => {
-    const urlType = req.query.urls || '';
-
-    axios
-      .get(completeApiUrl)
-      .then(data => {
-        const opts = { urlsAbsolute: (urlType === 'absolute') };
-        const parsed = parser.parse(data.data, options);
-        const modelData = HeaderItemModel.build(parsed, opts);
-
-        res.locals.data = {
-          HeaderStore: {
-            headerData: modelData,
-            subscribeFormVisible: false,
-            myNyplVisible: false
-          },
-          // Set the API URL here so we can access it when we
-          // render in the EJS file.
-          completeApiUrl
-        };
-        next();
-      })
-      .catch(error => {
-        logger.error(`Error calling API : ${completeApiUrl}. ${error}`);
-        // Set completeApiUrl for client side calling, if server side calling failed
-        res.locals.data = {
-          completeApiUrl
-        };
-        next();
-      });
-      /* end Axios call */
+    res.locals.data = {
+      HeaderStore: {
+        headerData: navConfig.current,
+        subscribeFormVisible: false,
+        myNyplVisible: false,
+      },
+      completeApiUrl,
+    };
+    next();
   });
 
+// This will need to be re-factored to provide an endpoint containing the full header data for both
+// current and upcoming structures with featured items.
 router
   .route('/header-data')
   .get((req, res) => {
@@ -89,8 +69,8 @@ router
         res.json(modelData);
       })
       .catch(error => {
-        logger.log('error calling API');
-        res.json({'error': 'error calling API'});
+        logger.log('Error calling API', error);
+        res.json({ error: 'error calling API' });
       });
       /* end Axios call */
   });
