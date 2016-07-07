@@ -10,14 +10,10 @@ const config = {
       qa: 'https://qa-refinery.nypl.org',
       production: 'https://refinery.nypl.org',
     },
-    endpoint: '/api/nypl/ndo/v0.1/site-data/header-items',
+    endpoint: '/api/nypl/ndo/v0.1/site-data/containers',
     includes: [
-      'children',
-      'related-container-slots.current-item.square-image',
+      'slots.current-item.square-image',
     ],
-    filters: {
-      relationships: { parent: 'null' },
-    },
   },
 };
 
