@@ -17,7 +17,7 @@ import './styles/main.scss';
         alt.bootstrap(state);
         // Fire off the Feature Flag prior to render
         FeatureFlags.utils.activateFeature('shop-link');
-        ReactDOM.render(<Header />, container);
+        ReactDOM.render(<Header env="local" />, container);
         isRenderedByServer = true;
         console.log('nypl-dgx-header rendered isomorphically.');
       });

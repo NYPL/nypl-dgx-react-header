@@ -14,7 +14,7 @@ import {
 } from 'underscore';
 
 // App environment settings
-const appEnvironment = process.env.APP_ENV || 'production';
+const appEnvironment = 'production';
 const apiRoot = refineryApi.root[appEnvironment];
 const options = {
   endpoint: `${apiRoot}${refineryApi.endpoint}`,
