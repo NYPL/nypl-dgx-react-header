@@ -8,8 +8,13 @@ import { refineryApi } from '../../../appConfig.js';
 // Logging
 import { getLogger } from 'dgx-loggly';
 
+import {
+  map as _map,
+  findWhere as _findWhere,
+} from 'underscore';
+
 // App environment settings
-const appEnvironment = process.env.APP_ENV || 'production';
+const appEnvironment = 'production';
 const apiRoot = refineryApi.root[appEnvironment];
 const options = {
   endpoint: `${apiRoot}${refineryApi.endpoint}`,
@@ -31,6 +36,45 @@ const router = express.Router();
 // Assign full API url
 const completeApiUrl = parser.getCompleteApi(options);
 
+const deepCopy = (obj) => JSON.parse(JSON.stringify(obj));
+
+/*
+ * getHeaderData()
+ * Parse the header endpoint response and add featured items to the selected IA array
+ * from the config, but based on the url query.
+ */
+const getHeaderData = (urlType, iaNavArray, apiResponse) => {
+  const iaNavCopy = iaNavArray;
+  let nav = [];
+  const opts = { urlsAbsolute: (urlType === 'absolute') };
+  const parsed = parser.parse(apiResponse, options);
+  const modelData = HeaderItemModel.build(parsed, opts);
+
+  const urlsAbsolute = opts.urlsAbsolute || false;
+
+  nav = _map(iaNavCopy, headerItem => {
+    const item = _findWhere(modelData, { id: headerItem.id });
+
+    if (item) {
+      headerItem.features = item.features;
+    }
+
+    headerItem.link = urlsAbsolute ? headerItem.link :
+      HeaderItemModel.validateUrlObjWithKey(headerItem.link, 'text');
+
+    _map(headerItem.subnav, sub => {
+      sub.link = urlsAbsolute ? sub.link :
+        HeaderItemModel.validateUrlObjWithKey(sub.link, 'text');
+
+      return sub;
+    });
+
+    return headerItem;
+  });
+
+  return nav;
+};
+
 /* Match the root (/) or /isolated-header path
  * to populate the HeaderStore data from
  * the static navConfig file's current IA.
@@ -44,17 +88,19 @@ router
         subscribeFormVisible: false,
         myNyplVisible: false,
       },
+      // Set the API URL here so we can access it when we
+      // render in the EJS file.
       completeApiUrl,
     };
     next();
+      /* end Axios call */
   });
 
-// This will need to be re-factored to provide an endpoint containing the full header data for both
-// current and upcoming structures with featured items.
 router
   .route('/header-data')
   .get((req, res) => {
     const urlType = req.query.urls || '';
+    const iaType = req.query.ia || '';
 
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -62,11 +108,12 @@ router
     axios
       .get(completeApiUrl)
       .then(data => {
-        const opts = { urlsAbsolute: (urlType === 'absolute') };
-        const parsed = parser.parse(data.data, options);
-        const modelData = HeaderItemModel.build(parsed, opts);
+        const iaNavArray = (iaType === 'upcoming') ?
+          _map(navConfig.upcoming, deepCopy) :
+          _map(navConfig.current, deepCopy);
+        const headerData = getHeaderData(urlType, iaNavArray, data.data);
 
-        res.json(modelData);
+        res.json(headerData);
       })
       .catch(error => {
         logger.log('Error calling API', error);
