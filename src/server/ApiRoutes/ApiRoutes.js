@@ -82,6 +82,8 @@ const getHeaderData = (urlType, iaNavArray, apiResponse) => {
 router
   .route('/:var(header-markup)?')
   .get((req, res, next) => {
+    res.header('Cache-Control', 'max-age=3600');
+
     res.locals.data = {
       HeaderStore: {
         headerData: navConfig.current,
@@ -104,6 +106,7 @@ router
 
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Cache-Control', 'max-age=3600');
 
     axios
       .get(completeApiUrl)
