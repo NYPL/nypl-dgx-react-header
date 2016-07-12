@@ -82,8 +82,6 @@ const getHeaderData = (urlType, iaNavArray, apiResponse) => {
 router
   .route('/:var(header-markup)?')
   .get((req, res, next) => {
-    res.header('Cache-Control', 'max-age=3600');
-
     res.locals.data = {
       HeaderStore: {
         headerData: navConfig.current,
