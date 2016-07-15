@@ -1,24 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Iso from 'iso';
-import alt from 'dgx-alt-center';
-import Header from 'dgx-header-component';
 import ga from 'react-ga';
+import alt from 'dgx-alt-center';
+import { Header } from 'dgx-header-component';
 import FeatureFlags from 'dgx-feature-flags';
 import './styles/main.scss';
 
-(function(window, document) {
+(function (window, document) {
   if (typeof window !== 'undefined') {
-
     window.onload = () => {
       let isRenderedByServer = false;
 
       // Render Isomorphically
-      Iso.bootstrap(function(state, meta, container) {
+      Iso.bootstrap((state, meta, container) => {
         alt.bootstrap(state);
         // Fire off the Feature Flag prior to render
         FeatureFlags.utils.activateFeature('shop-link');
-        ReactDOM.render(<Header/>, container);
+        ReactDOM.render(<Header />, container);
         isRenderedByServer = true;
         console.log('nypl-dgx-header rendered isomorphically.');
       });
@@ -29,32 +28,29 @@ import './styles/main.scss';
         let allScriptTags;
         let styleTag;
         let scriptTag;
-        let urlTypes;
-        let htmlElement;
-        let nyplHeaderObject;
         let appEnv;
 
         // create element to hold the single header instance.
-        htmlElement = document.createElement('div');
+        const htmlElement = document.createElement('div');
         htmlElement.id = 'nypl-dgx-header';
 
         // Make a global object to store the instances of nyplHeader
         if (!window.nyplHeader) {
           window.nyplHeader = {};
-        };
+        }
 
         // Short-name reference to window.nyplHeader
-        nyplHeaderObject = window.nyplHeader;
+        const nyplHeaderObject = window.nyplHeader;
 
         // Keep track of the processed scripts within nyplHeader
         if (!nyplHeaderObject.processedScripts) {
           nyplHeaderObject.processedScripts = [];
-        };
+        }
 
         // Keep track of the processed style tags within nyplHeader
         if (!nyplHeaderObject.styleTags) {
           nyplHeaderObject.styleTags = [];
-        };
+        }
 
         // Only create the nyplHeader if the global.nyplHeaderObject.scripts is empty
         if (nyplHeaderObject.processedScripts.length === 0) {
@@ -71,7 +67,7 @@ import './styles/main.scss';
           /* Since getElementsBy is an array-like structure,
           * we need to use call to iterate with forEach.
           */
-          [].forEach.call(allScriptTags, function(value, index) {
+          [].forEach.call(allScriptTags, (value, index) => {
             if (value.src.indexOf('dgx-header.min.js') !== -1) {
               scriptTag = value;
 
@@ -102,7 +98,7 @@ import './styles/main.scss';
             styleTag = document.createElement('link');
             styleTag.rel = 'stylesheet';
             styleTag.type = 'text/css';
-            styleTag.media = "all";
+            styleTag.media = 'all';
 
             if (appEnv === 'development') {
               styleTag.href = '//dev-header.nypl.org/styles.css';
@@ -122,20 +118,19 @@ import './styles/main.scss';
         if (nyplHeaderObject.processedScripts.length === 1 &&
           nyplHeaderObject.styleTags.length === 1 &&
           htmlElement && appEnv) {
-
           // Fire off the Feature Flag prior to render
           FeatureFlags.utils.activateFeature('shop-link');
           setTimeout(() => {
             // Once rendered, React should populate the state
             // based off the Store.
-            ReactDOM.render(<Header env={appEnv} urls={urlType}/>, htmlElement);
+            ReactDOM.render(<Header env={appEnv} urls={urlType} />, htmlElement);
             console.log('nypl-dgx-header rendered via client');
           }, 250);
         }
       }
 
       if (!window.ga) {
-        let gaOpts = { debug: false };
+        const gaOpts = { debug: false };
         ga.initialize('UA-1420324-3', gaOpts);
       }
 
@@ -143,6 +138,6 @@ import './styles/main.scss';
       if (!window.dgxFeatureFlags) {
         window.dgxFeatureFlags = FeatureFlags.utils;
       }
-    }
+    };
   }
 })(window, document);
