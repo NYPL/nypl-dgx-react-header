@@ -104,6 +104,7 @@ router
 
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Cache-Control', 'max-age=3600');
 
     axios
       .get(completeApiUrl)
