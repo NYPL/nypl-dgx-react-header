@@ -71,7 +71,7 @@
     "compression": "1.5.2",
     "dgx-alt-center": "git+ssh://git@bitbucket.org/NYPL/dgx-alt-center.git#master",
     "dgx-feature-flags": "git+ssh://git@bitbucket.org/NYPL/dgx-feature-flags.git#master",
-    "dgx-header-component": "git+ssh://git@bitbucket.org/NYPL/dgx-header-component.git#master",
+    "dgx-header-component": "git+ssh://git@bitbucket.org/NYPL/dgx-header-component.git#hotfix-nypl-base-overrides",
     "dgx-loggly": "git+ssh://git@bitbucket.org/NYPL/dgx-loggly.git#master",
     "dgx-model-data": "git+ssh://bitbucket.org/NYPL/dgx-model-data.git#master",
     "ejs": "2.3.3",
