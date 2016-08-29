@@ -12,11 +12,11 @@ import appConfig from './appConfig.js';
 import webpack from 'webpack';
 import webpackConfig from './webpack.config.js';
 // Header Component
-import { Header } from 'dgx-header-component';
+import { Header, navConfig } from 'dgx-header-component';
 // Logging
 import { getLogger, initMorgan } from 'dgx-loggly';
 // Feature Flags Module
-import FeatureFlags from 'dgx-feature-flags';
+// import FeatureFlags from 'dgx-feature-flags';
 
 // Global Config Variables
 const ROOT_PATH = __dirname;
@@ -28,7 +28,7 @@ const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
 const isProduction = process.env.NODE_ENV === 'production';
 const serverPort = process.env.PORT || (isProduction ? 3001 : appConfig.port);
 // Assign API Routes
-const apiRoutes = require('./src/server/ApiRoutes/ApiRoutes.js');
+// const apiRoutes = require('./src/server/ApiRoutes/ApiRoutes.js');
 
 /* Express Server Configuration
  * ----------------------------
@@ -69,17 +69,17 @@ app.use(initMorgan(logger));
  *    proper data
  * 3. Render the <Header> as a string in the EJS template
 */
-app.use('/', apiRoutes);
+// app.use('/', apiRoutes);
 
 // Match all routes to render the index page.
 app.get('/', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
 
   const iso = new Iso();
-  const headerApp = ReactDOMServer.renderToString(<Header />);
+  const headerApp = ReactDOMServer.renderToString(<Header navData={navConfig.upcoming} />);
 
   // Fire off the Feature Flag prior to render
-  FeatureFlags.utils.activateFeature('shop-link');
+  // FeatureFlags.utils.activateFeature('shop-link');
 
   iso.add(headerApp, alt.flush());
 
@@ -93,7 +93,6 @@ app.get('/', (req, res) => {
     filename: webpackConfig.output.filename,
     nodeEnv: process.env.NODE_ENV,
     appEnv: process.env.APP_ENV,
-    apiUrl: res.locals.data.completeApiUrl,
   });
 });
 
@@ -108,11 +107,11 @@ app.get('/header-markup', (req, res) => {
 
   const iso = new Iso();
   const headerApp = ReactDOMServer.renderToString(
-    <Header urls={(urlType === 'absolute') ? 'absolute' : ''} />
+    <Header urlType={(urlType === 'absolute') ? 'absolute' : ''} navData={navConfig.upcoming} />
   );
 
   // Fire off the Feature Flag prior to render
-  FeatureFlags.utils.activateFeature('shop-link');
+  // FeatureFlags.utils.activateFeature('shop-link');
 
   iso.add(headerApp, alt.flush());
 
