@@ -21,7 +21,6 @@
     "babel",
     "alt",
     "flux",
-    "radium",
     "es6"
   ],
   "repository": {
@@ -69,7 +68,7 @@
     "colors": "1.1.2",
     "compression": "1.5.2",
     "dgx-alt-center": "git+ssh://git@bitbucket.org/NYPL/dgx-alt-center.git#master",
-    "dgx-header-component": "git+ssh://git@bitbucket.org/NYPL/dgx-header-component.git#WEB-3385-remove-cookie-update-store",
+    "dgx-header-component": "git+ssh://git@bitbucket.org/NYPL/dgx-header-component.git#master",
     "dgx-loggly": "git+ssh://git@bitbucket.org/NYPL/dgx-loggly.git#master",
     "ejs": "2.3.3",
     "express": "4.13.1",
