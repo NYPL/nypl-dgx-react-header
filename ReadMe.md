@@ -3,14 +3,12 @@
 React NYPL Header Web Application.
 
 ### Version
-1.3.1
+1.3.3
 
 ### Node Configuration
 Pass in the following environment variables:  
 
 - `PORT`: Desired port where the server will reside (default: 3001).
-
-- `APP_ENV`: Sets up Refinery URL `development`, `production` or `qa` (default: production).
 
 - `NODE_ENV`: Sets up the app to be minified using `production`. Otherwise, it will default to development mode in Webpack.
 
@@ -23,11 +21,15 @@ $ npm install
 ```
 
 ### Development
-Passing in no NODE_ENV, defaults to using the development config.
-Passing in APP_ENV allows the API calls to the Refinery to be defined.
+Passing in no NODE_ENV, defaults to using development mode.
+
+**As of 08/2016 the Header App relies on a navConfig JSON file contained within the
+Header component which populates the Header navigation links.**
+
+***No Ajax calls are executed by the Header App.***
 
 ```sh
-$ APP_ENV=(development/qa/production) npm start
+$ npm start
 ```
 
 
@@ -39,9 +41,8 @@ $ npm run dist (builds the minified assets to /dist path)
 ```
 
 ```sh
-$ APP_ENV=production NODE_ENV=production npm start  (starts the Node Server with proper environment)
+$ NODE_ENV=production npm start  (starts the Node Server with proper environment)
 ```
-
 
 License
 ----
