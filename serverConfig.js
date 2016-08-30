@@ -72,7 +72,7 @@ app.use(initMorgan(logger));
 app.get('/', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   const iso = new Iso();
-  const headerApp = ReactDOMServer.renderToString(<Header navData={navConfig.upcoming} />);
+  const headerApp = ReactDOMServer.renderToString(<Header navData={navConfig.current} />);
   iso.add(headerApp, alt.flush());
 
   // First parameter references the ejs filename
@@ -99,7 +99,7 @@ app.get('/header-markup', (req, res) => {
 
   const iso = new Iso();
   const headerApp = ReactDOMServer.renderToString(
-    <Header urlType={(urlType === 'absolute') ? 'absolute' : ''} navData={navConfig.upcoming} />
+    <Header urlType={(urlType === 'absolute') ? 'absolute' : ''} navData={navConfig.current} />
   );
 
   iso.add(headerApp, alt.flush());
