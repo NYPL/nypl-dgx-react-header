@@ -26,10 +26,6 @@ const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
 const isProduction = process.env.NODE_ENV === 'production';
 const serverPort = process.env.PORT || (isProduction ? 3001 : appConfig.port);
 
-// NOTE: As of 08/30/2016 the Header will no longer use an API for it's data
-// All data will come from the imported navConfig file.
-// const apiRoutes = require('./src/server/ApiRoutes/ApiRoutes.js');
-
 /* Express Server Configuration
  * ----------------------------
  * - Using .EJS as the view engine
