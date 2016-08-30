@@ -2,16 +2,16 @@
 
 React NYPL Header Web Application.
 
-### Version
+## Version
 1.3.3
 
-### Release Notes
-**As of 08/2016 the Header App relies on a navConfig JSON file contained within the
-Header component which populates the Header navigation links.**
+## Release Notes
+As of **08/2016** the Header App relies on a navConfig JSON file contained within the
+Header component which populates the Header navigation links.
 
 ***No Ajax calls are executed by the Header App.***
 
-### Node Configuration
+## Node Configuration
 Pass in the following environment variables:  
 
 - `PORT`: Desired port where the server will reside (default: 3001).
@@ -19,14 +19,14 @@ Pass in the following environment variables:
 - `NODE_ENV`: Sets up the app to be minified using `production`. Otherwise, it will default to development mode in Webpack.
 
 
-### Installation
+## Installation
 To install all npm dependencies, run:
 
 ```sh
 $ npm install
 ```
 
-### Development
+## Development
 Passing in no NODE_ENV, defaults to using development mode.
 
 ```sh
@@ -34,7 +34,7 @@ $ npm start
 ```
 
 
-### Production
+## Production
 To run the server in ***Production Mode***, use the following options:
 
 ```sh
