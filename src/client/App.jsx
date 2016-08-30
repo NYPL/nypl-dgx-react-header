@@ -15,8 +15,6 @@ import './styles/main.scss';
       // Render Isomorphically
       Iso.bootstrap((state, meta, container) => {
         alt.bootstrap(state);
-        // Fire off the Feature Flag prior to render
-        // FeatureFlags.utils.activateFeature('shop-link');
         ReactDOM.render(<Header navData={navConfig.upcoming} />, container);
         isRenderedByServer = true;
         console.log('nypl-dgx-header rendered isomorphically.');
@@ -118,8 +116,6 @@ import './styles/main.scss';
         if (nyplHeaderObject.processedScripts.length === 1 &&
           nyplHeaderObject.styleTags.length === 1 &&
           htmlElement && appEnv) {
-          // Fire off the Feature Flag prior to render
-          // FeatureFlags.utils.activateFeature('shop-link');
           setTimeout(() => {
             // Once rendered, React should populate the state
             // based off the Store.
