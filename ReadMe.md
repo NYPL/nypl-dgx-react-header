@@ -5,6 +5,12 @@ React NYPL Header Web Application.
 ### Version
 1.3.3
 
+### Release Notes
+**As of 08/2016 the Header App relies on a navConfig JSON file contained within the
+Header component which populates the Header navigation links.**
+
+***No Ajax calls are executed by the Header App.***
+
 ### Node Configuration
 Pass in the following environment variables:  
 
@@ -22,11 +28,6 @@ $ npm install
 
 ### Development
 Passing in no NODE_ENV, defaults to using development mode.
-
-**As of 08/2016 the Header App relies on a navConfig JSON file contained within the
-Header component which populates the Header navigation links.**
-
-***No Ajax calls are executed by the Header App.***
 
 ```sh
 $ npm start
