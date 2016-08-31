@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import Iso from 'iso';
 import ga from 'react-ga';
 import alt from 'dgx-alt-center';
-import { Header } from 'dgx-header-component';
-import FeatureFlags from 'dgx-feature-flags';
+import { Header, navConfig } from 'dgx-header-component';
 import './styles/main.scss';
 
 (function (window, document) {
@@ -15,9 +14,7 @@ import './styles/main.scss';
       // Render Isomorphically
       Iso.bootstrap((state, meta, container) => {
         alt.bootstrap(state);
-        // Fire off the Feature Flag prior to render
-        FeatureFlags.utils.activateFeature('shop-link');
-        ReactDOM.render(<Header />, container);
+        ReactDOM.render(<Header navData={navConfig.current} />, container);
         isRenderedByServer = true;
         console.log('nypl-dgx-header rendered isomorphically.');
       });
@@ -118,12 +115,10 @@ import './styles/main.scss';
         if (nyplHeaderObject.processedScripts.length === 1 &&
           nyplHeaderObject.styleTags.length === 1 &&
           htmlElement && appEnv) {
-          // Fire off the Feature Flag prior to render
-          FeatureFlags.utils.activateFeature('shop-link');
           setTimeout(() => {
             // Once rendered, React should populate the state
             // based off the Store.
-            ReactDOM.render(<Header env={appEnv} urls={urlType} />, htmlElement);
+            ReactDOM.render(<Header urlType={urlType} navData={navConfig.current} />, htmlElement);
             console.log('nypl-dgx-header rendered via client');
           }, 250);
         }
@@ -132,11 +127,6 @@ import './styles/main.scss';
       if (!window.ga) {
         const gaOpts = { debug: false };
         ga.initialize('UA-1420324-3', gaOpts);
-      }
-
-      // Assign the FeatureFlags utility methods to the Global window object
-      if (!window.dgxFeatureFlags) {
-        window.dgxFeatureFlags = FeatureFlags.utils;
       }
     };
   }
