@@ -12,11 +12,9 @@ import appConfig from './appConfig.js';
 import webpack from 'webpack';
 import webpackConfig from './webpack.config.js';
 // Header Component
-import { Header } from 'dgx-header-component';
+import { Header, navConfig } from 'dgx-header-component';
 // Logging
 import { getLogger, initMorgan } from 'dgx-loggly';
-// Feature Flags Module
-import FeatureFlags from 'dgx-feature-flags';
 
 // Global Config Variables
 const ROOT_PATH = __dirname;
@@ -27,15 +25,12 @@ const WEBPACK_DEV_PORT = appConfig.webpackDevServerPort || 3000;
 // our application in Production Mode.
 const isProduction = process.env.NODE_ENV === 'production';
 const serverPort = process.env.PORT || (isProduction ? 3001 : appConfig.port);
-// Assign API Routes
-const apiRoutes = require('./src/server/ApiRoutes/ApiRoutes.js');
 
 /* Express Server Configuration
  * ----------------------------
  * - Using .EJS as the view engine
 */
 const app = express();
-
 app.use(compression());
 
 // Disables the Server response from
@@ -64,23 +59,16 @@ app.use(initMorgan(logger));
 
 /* Isomporphic Rendering of React App
  * ----------------------------------
- * 1. Bootstrap the FLUX Store with API Data
- * 2. Use ISO to add the <Header> component with
- *    proper data
- * 3. Render the <Header> as a string in the EJS template
+ * 1. Use ISO to add the <Header> component with
+ *    proper data from navConfig JSON.
+ * 2. Render the <Header> as a string in the EJS template
 */
-app.use('/', apiRoutes);
 
 // Match all routes to render the index page.
 app.get('/', (req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
-
   const iso = new Iso();
-  const headerApp = ReactDOMServer.renderToString(<Header />);
-
-  // Fire off the Feature Flag prior to render
-  FeatureFlags.utils.activateFeature('shop-link');
-
+  const headerApp = ReactDOMServer.renderToString(<Header navData={navConfig.current} />);
   iso.add(headerApp, alt.flush());
 
   // First parameter references the ejs filename
@@ -93,7 +81,6 @@ app.get('/', (req, res) => {
     filename: webpackConfig.output.filename,
     nodeEnv: process.env.NODE_ENV,
     appEnv: process.env.APP_ENV,
-    apiUrl: res.locals.data.completeApiUrl,
   });
 });
 
@@ -108,11 +95,8 @@ app.get('/header-markup', (req, res) => {
 
   const iso = new Iso();
   const headerApp = ReactDOMServer.renderToString(
-    <Header urls={(urlType === 'absolute') ? 'absolute' : ''} />
+    <Header urlType={(urlType === 'absolute') ? 'absolute' : ''} navData={navConfig.current} />
   );
-
-  // Fire off the Feature Flag prior to render
-  FeatureFlags.utils.activateFeature('shop-link');
 
   iso.add(headerApp, alt.flush());
 
