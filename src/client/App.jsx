@@ -116,8 +116,6 @@ import './styles/main.scss';
           nyplHeaderObject.styleTags.length === 1 &&
           htmlElement && appEnv) {
           setTimeout(() => {
-            // Once rendered, React should populate the state
-            // based off the Store.
             ReactDOM.render(<Header urlType={urlType} navData={navConfig.current} />, htmlElement);
             console.log('nypl-dgx-header rendered via client');
           }, 250);
