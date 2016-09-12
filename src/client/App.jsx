@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Iso from 'iso';
-import ga from 'react-ga';
+import { ga } from 'dgx-react-ga';
 import alt from 'dgx-alt-center';
 import { Header, navConfig } from 'dgx-header-component';
 import './styles/main.scss';
@@ -123,7 +123,7 @@ import './styles/main.scss';
       }
 
       if (!window.ga) {
-        const gaOpts = { debug: false };
+        const gaOpts = { debug: true };
         ga.initialize('UA-1420324-3', gaOpts);
       }
     };
