@@ -70,7 +70,7 @@
     "colors": "1.1.2",
     "compression": "1.5.2",
     "dgx-alt-center": "git+ssh://git@bitbucket.org/NYPL/dgx-alt-center.git#master",
-    "dgx-header-component": "git+ssh://git@bitbucket.org/NYPL/dgx-header-component.git#WEB-3415-updated-ga-module",
+    "dgx-header-component": "git+ssh://git@bitbucket.org/NYPL/dgx-header-component.git#master",
     "dgx-loggly": "git+ssh://git@bitbucket.org/NYPL/dgx-loggly.git#master",
     "dgx-react-ga": "git+ssh://git@bitbucket.org/NYPL/dgx-react-ga.git#WEb-3415-improved-ga",
     "ejs": "2.3.3",
