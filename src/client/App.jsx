@@ -123,7 +123,7 @@ import './styles/main.scss';
       }
 
       if (!window.ga) {
-        const gaOpts = { debug: true };
+        const gaOpts = { debug: false };
         ga.initialize('UA-1420324-3', gaOpts);
       }
     };
