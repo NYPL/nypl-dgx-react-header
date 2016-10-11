@@ -12,7 +12,7 @@ import appConfig from './appConfig.js';
 import webpack from 'webpack';
 import webpackConfig from './webpack.config.js';
 // Header Component
-import { Header, navConfig } from 'dgx-header-component';
+import { Header, navConfig } from '@nypl/dgx-header-component';
 // Logging
 import { getLogger, initMorgan } from 'dgx-loggly';
 
