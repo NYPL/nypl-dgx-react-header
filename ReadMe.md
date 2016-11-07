@@ -1,15 +1,20 @@
-# NYPL React Header
+# NYPL React Header App
 
 React NYPL Header Web Application.
 
 ## Version
-1.3.3
+> 1.3.5
 
-## Release Notes
-As of **08/2016** the Header App relies on a navConfig JSON file contained within the
+## Change Log
+
+#### v1.3.5
+> Using NPM version of Header with updated donation url's
+
+#### v1.3.4 and below
+> As of **08/2016** the Header App relies on a navConfig JSON file contained within the
 Header component which populates the Header navigation links.
 
-***No Ajax calls are executed by the Header App.***
+> ***No Ajax calls are executed by the Header App.***
 
 ## Node Configuration
 Pass in the following environment variables:  
