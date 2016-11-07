@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Iso from 'iso';
 import { ga } from 'dgx-react-ga';
 import alt from 'dgx-alt-center';
-import { Header, navConfig } from 'dgx-header-component';
+import { Header, navConfig } from '@nypl/dgx-header-component';
 import './styles/main.scss';
 
 (function (window, document) {
