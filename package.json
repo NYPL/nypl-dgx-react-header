@@ -66,7 +66,7 @@
     "webpack-dev-server": "1.15.0"
   },
   "dependencies": {
-    "@nypl/dgx-header-component": "git+ssh://git@bitbucket.org/NYPL/dgx-header-component#beta-oauth-login",
+    "@nypl/dgx-header-component": "git+ssh://git@bitbucket.org/NYPL/dgx-header-component#test-axios-version",
     "clean-webpack-plugin": "0.1.10",
     "colors": "1.1.2",
     "compression": "1.5.2",
