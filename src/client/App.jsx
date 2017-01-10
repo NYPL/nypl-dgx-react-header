@@ -1,6 +1,10 @@
+// Polyfill Promise for legacy browsers
+import "babel-polyfill";
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Iso from 'iso';
+import FeatureFlags from 'dgx-feature-flags';
 import { ga } from 'dgx-react-ga';
 import alt from 'dgx-alt-center';
 import { Header, navConfig } from '@nypl/dgx-header-component';
@@ -126,6 +130,11 @@ import './styles/main.scss';
         const gaOpts = { debug: false };
         ga.initialize('UA-1420324-3', gaOpts);
       }
+
+      // Used to activate/deactivate AB tests on global namespace.
+       if (!window.dgxFeatureFlags) {
+         window.dgxFeatureFlags = FeatureFlags.utils;
+       }
     };
   }
 })(window, document);
