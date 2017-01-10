@@ -67,7 +67,7 @@
     "webpack-dev-server": "1.15.0"
   },
   "dependencies": {
-    "@nypl/dgx-header-component": "git+ssh://git@bitbucket.org/NYPL/dgx-header-component#style-render-fix",
+    "@nypl/dgx-header-component": "1.5.0",
     "clean-webpack-plugin": "0.1.10",
     "colors": "1.1.2",
     "compression": "1.5.2",
