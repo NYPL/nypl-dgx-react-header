@@ -18,6 +18,7 @@ var commonSettings = {
   // This is the path and file of our top level
   // React App that is to be rendered.
   entry: [
+    'babel-polyfill',
     path.resolve(ROOT_PATH, 'src/client/App.jsx')
   ],
   resolve: {
@@ -55,6 +56,7 @@ if (ENV === 'development') {
     entry: [
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
+      'babel-polyfill',
       path.resolve(ROOT_PATH, 'src/client/App.jsx')
     ],
     output: {
