@@ -3,9 +3,12 @@
 React NYPL Header Web Application.
 
 ## Version
-> 1.3.5
+> 1.3.6
 
 ## Change Log
+
+### v1.3.6
+- Added Optimizely script in the index.ejs file.
 
 #### v1.3.5
 > Using NPM version of Header with updated donation url's
