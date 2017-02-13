@@ -8,7 +8,7 @@ React NYPL Header Web Application.
 ## Change Log
 
 ### v1.3.8
-> Added HTTPS fix and the JavaScript fallback for log in button on the Header Component.
+> Updated the Header Component to v1.5.1. The update includes HTTPS fix and the JavaScript fallback for the log in button on the Header Component.
 
 ### v1.3.7
 - Added Optimizely script in the index.ejs file.
