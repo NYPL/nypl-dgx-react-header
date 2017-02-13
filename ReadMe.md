@@ -3,9 +3,12 @@
 React NYPL Header Web Application.
 
 ## Version
-> 1.3.7
+> 1.3.8
 
 ## Change Log
+
+### v1.3.8
+> Updated the Header Component to v1.5.1. The update includes HTTPS fix and the JavaScript fallback for the log in button on the Header Component.
 
 ### v1.3.7
 - Added Optimizely script in the index.ejs file.
