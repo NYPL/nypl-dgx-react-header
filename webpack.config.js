@@ -29,15 +29,15 @@ var commonSettings = {
     path: path.resolve(ROOT_PATH, 'dist'),
     // Sets the name of the bundled application files
     // Additionally we can isolate vendor files as well
-    filename: 'dgx-header.min.js'
+    filename: 'dgx-header.min.js',
   },
   plugins: [
     // Cleans the Dist folder after every build.
     // Alternately, we can run rm -rf dist/ as
     // part of the package.json scripts.
     new cleanBuild(['dist']),
-    new ExtractTextPlugin('styles.css')
-  ]
+    new ExtractTextPlugin('styles.css'),
+  ],
 };
 
 /**
@@ -57,32 +57,35 @@ if (ENV === 'development') {
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
       'babel-polyfill',
-      path.resolve(ROOT_PATH, 'src/client/App.jsx')
+      path.resolve(ROOT_PATH, 'src/client/App.jsx'),
     ],
     output: {
-      publicPath: 'http://localhost:3000/'
+      publicPath: 'http://localhost:3000/',
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin()
+      new webpack.NoErrorsPlugin(),
     ],
     resolve: {
-      extensions: ['', '.js', '.jsx', 'scss']
+      extensions: ['', '.js', '.jsx', 'scss'],
     },
     module: {
-      loaders: [{
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
-        query: {
-          presets: ['react', 'es2015']
-        }
-      }, {
-        test: /\.scss?$/,
-        loader: 'style!css!sass',
-        include: path.resolve(ROOT_PATH, 'src')
-      }]
-    }
+      loaders: [
+        {
+          test: /\.jsx?$/,
+          exclude: /(node_modules|bower_components)/,
+          loader: 'babel',
+          query: {
+            presets: ['react', 'es2015'],
+          },
+        },
+        {
+          test: /\.scss?$/,
+          loader: 'style!css!sass',
+          include: path.resolve(ROOT_PATH, 'src'),
+        },
+      ],
+    },
   });
 }
 
@@ -98,33 +101,41 @@ if (ENV === 'production') {
   module.exports = merge(commonSettings, {
     devtool: 'source-map',
     module: {
-      loaders: [{
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
-        query: {
-          presets: ['react', 'es2015']
-        }
-      }, {
-        test: /\.scss$/,
-        include: path.resolve(ROOT_PATH, 'src'),
-        loader: ExtractTextPlugin.extract(
-          // activate source maps via loader query
-          'css?sourceMap!' +
-          'sass?sourceMap'
-        )
-      }]
+      loaders: [
+        {
+          test: /\.jsx?$/,
+          exclude: /(node_modules|bower_components)/,
+          loader: 'babel',
+          query: {
+            presets: ['react', 'es2015'],
+          },
+        },
+        {
+          test: /\.scss$/,
+          include: path.resolve(ROOT_PATH, 'src'),
+          loader: ExtractTextPlugin.extract(
+            // activate source maps via loader query
+            'css?sourceMap!' +
+            'sass?sourceMap'
+          ),
+        },
+      ],
     },
     plugins: [
       // Minification (Utilized in Production)
       new webpack.optimize.UglifyJsPlugin({
         output: {
-          comments: false
+          comments: false,
         },
         compress: {
-          warnings: true
-        }
-      })
-    ]
+          warnings: false,
+        },
+      }),
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('production'),
+        },
+      }),
+    ],
   });
 }
