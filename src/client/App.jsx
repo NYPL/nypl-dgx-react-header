@@ -1,5 +1,5 @@
 // Polyfill Promise for legacy browsers
-import "babel-polyfill";
+import 'babel-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -10,7 +10,7 @@ import alt from 'dgx-alt-center';
 import { Header, navConfig } from '@nypl/dgx-header-component';
 import './styles/main.scss';
 
-(function (window, document) {
+(function renderApp(window, document) {
   if (typeof window !== 'undefined') {
     window.onload = () => {
       let isRenderedByServer = false;
@@ -18,7 +18,10 @@ import './styles/main.scss';
       // Render Isomorphically
       Iso.bootstrap((state, meta, container) => {
         alt.bootstrap(state);
-        ReactDOM.render(<Header navData={navConfig.current} />, container);
+        ReactDOM.render(
+          <Header navData={navConfig.current} location={window.location.href} />,
+          container
+        );
         isRenderedByServer = true;
         console.log('nypl-dgx-header rendered isomorphically.');
       });
@@ -132,9 +135,9 @@ import './styles/main.scss';
       }
 
       // Used to activate/deactivate AB tests on global namespace.
-       if (!window.dgxFeatureFlags) {
-         window.dgxFeatureFlags = FeatureFlags.utils;
-       }
+      if (!window.dgxFeatureFlags) {
+        window.dgxFeatureFlags = FeatureFlags.utils;
+      }
     };
   }
-})(window, document);
+}(window, document));
