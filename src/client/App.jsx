@@ -19,7 +19,7 @@ import './styles/main.scss';
       Iso.bootstrap((state, meta, container) => {
         alt.bootstrap(state);
         ReactDOM.render(
-          <Header navData={navConfig.current} location={window.location.href} />,
+          <Header navData={navConfig.current} />,
           container
         );
         isRenderedByServer = true;
