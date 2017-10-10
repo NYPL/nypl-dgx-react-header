@@ -3,7 +3,7 @@
 React NYPL Header Web Application.
 
 ## Version
-> 1.4.1
+> 1.4.2
 
 ## Node Configuration
 Pass in the following environment variables:  
