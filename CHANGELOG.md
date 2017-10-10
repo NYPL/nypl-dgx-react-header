@@ -1,5 +1,8 @@
 ## Change Log
 
+### v1.4.2
+> Updating Header component to v2.1.1.
+
 ### v1.4.1
 > Updating Header component to v2.1.0.
 
