@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Iso from 'iso';
 import FeatureFlags from 'dgx-feature-flags';
-import { gaUtils } from 'dgx-react-ga';
+import { config, gaUtils } from 'dgx-react-ga';
 import alt from 'dgx-alt-center';
 import { Header, navConfig } from '@nypl/dgx-header-component';
 import './styles/main.scss';
@@ -130,9 +130,10 @@ import './styles/main.scss';
       }
 
       if (!window.ga) {
-        const gaOpts = { debug: false, titleCase: false };
+        const isProd = process.env.NODE_ENV === 'production';
+        const gaOpts = { debug: !isProd, titleCase: false };
 
-        gaUtils.initialize('UA-1420324-3', gaOpts);
+        gaUtils.initialize(config.google.code(isProd), gaOpts);
       }
 
       // Used to activate/deactivate AB tests on global namespace.
