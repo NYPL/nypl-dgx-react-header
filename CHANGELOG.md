@@ -1,5 +1,9 @@
 ## Change Log
 
+### v1.4.3
+> Updating Header component to v2.2.0.
+> Updating GA initialization configurations.
+
 ### v1.4.2
 > Updating Header component to v2.1.1.
 
