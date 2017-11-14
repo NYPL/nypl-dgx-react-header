@@ -130,7 +130,7 @@ import './styles/main.scss';
       }
 
       if (!window.ga) {
-        const gaOpts = { debug: false };
+        const gaOpts = { debug: false, titleCase: false };
         ga.initialize('UA-1420324-3', gaOpts);
       }
 
