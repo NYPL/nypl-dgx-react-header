@@ -1,6 +1,6 @@
 ## Change Log
 
-### v1.4.3
+### v1.4.4
 > Updating Header component to v2.3.0 -- Integrating Fundraising Banner.
 
 ### v1.4.3
