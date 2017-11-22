@@ -1,6 +1,9 @@
 ## Change Log
 
 ### v1.4.3
+> Updating Header component to v2.3.0 -- Integrating Fundraising Banner.
+
+### v1.4.3
 > Updating Header component to v2.2.0.
 > Updating GA initialization configurations.
 
