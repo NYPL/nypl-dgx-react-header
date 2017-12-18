@@ -1,6 +1,6 @@
 {
   "name": "nypl-dgx-react-header",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "NYPL Isomorphic React Header with Navigation",
   "main": "index.js",
   "scripts": {
@@ -67,7 +67,7 @@
     "webpack-dev-server": "1.15.0"
   },
   "dependencies": {
-    "@nypl/dgx-header-component": "2.3.0",
+    "@nypl/dgx-header-component": "2.4.0",
     "clean-webpack-plugin": "0.1.10",
     "colors": "1.1.2",
     "compression": "1.5.2",
