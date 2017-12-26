@@ -68,7 +68,7 @@ import './styles/main.scss';
           * to fetch the modeled data endpoint.
           */
           allScriptTags = document.getElementsByTagName('script');
-          console.log(allScriptTags);
+
           /* Since getElementsBy is an array-like structure,
           * we need to use call to iterate with forEach.
           */
