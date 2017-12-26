@@ -16,15 +16,15 @@ import './styles/main.scss';
       let isRenderedByServer = false;
 
       // Render Isomorphically
-      // Iso.bootstrap((state, meta, container) => {
-      //   alt.bootstrap(state);
-      //   ReactDOM.render(
-      //     <Header navData={navConfig.current} />,
-      //     container
-      //   );
-      //   isRenderedByServer = true;
-      //   console.log('nypl-dgx-header rendered isomorphically.');
-      // });
+      Iso.bootstrap((state, meta, container) => {
+        alt.bootstrap(state);
+        ReactDOM.render(
+          <Header navData={navConfig.current} />,
+          container
+        );
+        isRenderedByServer = true;
+        console.log('nypl-dgx-header rendered isomorphically.');
+      });
 
       // Render Client Side Only
       if (!isRenderedByServer) {
