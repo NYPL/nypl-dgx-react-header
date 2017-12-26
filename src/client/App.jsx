@@ -16,15 +16,15 @@ import './styles/main.scss';
       let isRenderedByServer = false;
 
       // Render Isomorphically
-      Iso.bootstrap((state, meta, container) => {
-        alt.bootstrap(state);
-        ReactDOM.render(
-          <Header navData={navConfig.current} />,
-          container
-        );
-        isRenderedByServer = true;
-        console.log('nypl-dgx-header rendered isomorphically.');
-      });
+      // Iso.bootstrap((state, meta, container) => {
+      //   alt.bootstrap(state);
+      //   ReactDOM.render(
+      //     <Header navData={navConfig.current} />,
+      //     container
+      //   );
+      //   isRenderedByServer = true;
+      //   console.log('nypl-dgx-header rendered isomorphically.');
+      // });
 
       // Render Client Side Only
       if (!isRenderedByServer) {
@@ -33,6 +33,7 @@ import './styles/main.scss';
         let styleTag;
         let scriptTag;
         let appEnv;
+        let skipNavElem;
 
         // create element to hold the single header instance.
         const htmlElement = document.createElement('div');
@@ -67,7 +68,7 @@ import './styles/main.scss';
           * to fetch the modeled data endpoint.
           */
           allScriptTags = document.getElementsByTagName('script');
-
+          console.log(allScriptTags);
           /* Since getElementsBy is an array-like structure,
           * we need to use call to iterate with forEach.
           */
@@ -86,6 +87,17 @@ import './styles/main.scss';
               // Parse urls param from src string.
               if (scriptTag.src.indexOf('?urls=absolute') !== -1) {
                 urlType = 'absolute';
+              }
+
+              // With the assumption that the skipNav query is the last option in the URL:
+              const skipNavIndex = scriptTag.src.indexOf('skipNav');
+              if (skipNavIndex !== -1) {
+                // Plus 8 since the query is in the form of `skipNav=[id-of-element]`
+                // and we want everything after that since we do not know
+                // how long the id will be.
+                skipNavElem = {
+                  target: scriptTag.src.substr(skipNavIndex + 8),
+                };
               }
 
               scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
@@ -123,7 +135,10 @@ import './styles/main.scss';
           nyplHeaderObject.styleTags.length === 1 &&
           htmlElement && appEnv) {
           setTimeout(() => {
-            ReactDOM.render(<Header urlType={urlType} navData={navConfig.current} />, htmlElement);
+            ReactDOM.render(
+              <Header urlType={urlType} navData={navConfig.current} skipNav={skipNavElem} />,
+              htmlElement
+            );
             console.log('nypl-dgx-header rendered via client');
           }, 250);
         }
