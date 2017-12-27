@@ -10,6 +10,25 @@ import alt from 'dgx-alt-center';
 import { Header, navConfig } from '@nypl/dgx-header-component';
 import './styles/main.scss';
 
+const getQueryParam = (fullUrl = '', variableToFind) => {
+  const cleanedUrl = fullUrl.indexOf('?') !== -1 ? fullUrl.substring(fullUrl.indexOf('?') + 1) : '';
+  if (!cleanedUrl) {
+    return '';
+  }
+
+  const queryParams = cleanedUrl.split('&');
+  let value = '';
+
+  queryParams.forEach((query) => {
+    const pair = query.split('=');
+    if (pair[0] === variableToFind) {
+      value = pair[1];
+    }
+  });
+
+  return value;
+};
+
 (function renderApp(window, document) {
   if (typeof window !== 'undefined') {
     window.onload = () => {
@@ -85,18 +104,15 @@ import './styles/main.scss';
               }
 
               // Parse urls param from src string.
-              if (scriptTag.src.indexOf('?urls=absolute') !== -1) {
-                urlType = 'absolute';
+              const urlTypeAdded = getQueryParam(scriptTag.src, 'urls');
+              if (urlTypeAdded) {
+                urlType = urlTypeAdded;
               }
 
-              // With the assumption that the skipNav query is the last option in the URL:
-              const skipNavIndex = scriptTag.src.indexOf('skipNav');
-              if (skipNavIndex !== -1) {
-                // Plus 8 since the query is in the form of `skipNav=[id-of-element]`
-                // and we want everything after that since we do not know
-                // how long the id will be.
+              const skipNavAdded = getQueryParam(scriptTag.src, 'skipNav');
+              if (skipNavAdded) {
                 skipNavElem = {
-                  target: scriptTag.src.substr(skipNavIndex + 8),
+                  target: skipNavAdded,
                 };
               }
 
