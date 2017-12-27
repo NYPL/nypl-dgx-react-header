@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "build": "npm run dist",
     "docs": "./node_modules/.bin/esdoc -c esdoc.json",
     "dist": "NODE_ENV=production webpack --config webpack.config.js",
-    "build": "npm run dist"
+    "eb-start": "npm run dist && npm run start"
   },
   "keywords": [
     "react",
