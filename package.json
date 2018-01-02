@@ -26,7 +26,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/NYPL/nypl-dgx-react-header"
+    "url": "https://github.com/NYPL/nypl-dgx-react-header"
   },
   "engines": {
     "node": "0.10.x",
@@ -49,6 +49,10 @@
     {
       "name": "Sean Redmond",
       "email": "seanredmond@nypl.org"
+    },
+    {
+      "name": "Paul Beaudoin",
+      "email": ""
     }
   ],
   "license": "MIT",
@@ -58,7 +62,7 @@
     "webpack-dev-server": "1.15.0"
   },
   "dependencies": {
-    "@nypl/dgx-header-component": "git+https://github.com/NYPL/dgx-header-component#development",
+    "@nypl/dgx-header-component": "2.4.0",
     "babel-core": "6.14.0",
     "babel-loader": "6.2.5",
     "babel-polyfill": "6.20.0",
