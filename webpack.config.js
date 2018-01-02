@@ -17,12 +17,14 @@ var commonSettings = {
   // path.resolve - resolves to an absolute path
   // This is the path and file of our top level
   // React App that is to be rendered.
-  entry: [
-    'babel-polyfill',
-    path.resolve(ROOT_PATH, 'src/client/App.jsx')
-  ],
+  entry: {
+    app: [
+      'babel-polyfill',
+      path.resolve(ROOT_PATH, 'src/client/App.jsx')
+    ],
+  },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
   output: {
     // Sets the output path to ROOT_PATH/dist
@@ -53,35 +55,35 @@ var commonSettings = {
 if (ENV === 'development') {
   module.exports = merge(commonSettings, {
     devtool: 'eval',
-    entry: [
-      'webpack-dev-server/client?http://localhost:3000',
-      'webpack/hot/only-dev-server',
-      'babel-polyfill',
-      path.resolve(ROOT_PATH, 'src/client/App.jsx'),
-    ],
+    entry: {
+      app: [
+        'webpack-dev-server/client?http://localhost:3000',
+        'webpack/hot/only-dev-server',
+      ],
+    },
     output: {
       publicPath: 'http://localhost:3000/',
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin(),
     ],
     resolve: {
-      extensions: ['', '.js', '.jsx', 'scss'],
+      extensions: ['.js', '.jsx', 'scss'],
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          loader: 'babel',
-          query: {
-            presets: ['react', 'es2015'],
-          },
+          use: 'babel-loader',
         },
         {
           test: /\.scss?$/,
-          loader: 'style!css!sass',
+          use: [
+            'style-loader',
+            'css-loader',
+            'sass-loader',
+          ],
           include: path.resolve(ROOT_PATH, 'src'),
         },
       ],
@@ -98,26 +100,36 @@ if (ENV === 'development') {
  *
  **/
 if (ENV === 'production') {
+  const loaders = [
+    {
+      loader: 'css-loader',
+      options: {
+        sourceMap: true,
+      },
+    },
+    {
+      loader: 'sass-loader',
+      options: {
+        sourceMap: true,
+      },
+    },
+  ];
   module.exports = merge(commonSettings, {
     devtool: 'source-map',
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          loader: 'babel',
-          query: {
-            presets: ['react', 'es2015'],
-          },
+          use: 'babel-loader',
         },
         {
           test: /\.scss$/,
           include: path.resolve(ROOT_PATH, 'src'),
-          loader: ExtractTextPlugin.extract(
-            // activate source maps via loader query
-            'css?sourceMap!' +
-            'sass?sourceMap'
-          ),
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: loaders,
+          }),
         },
       ],
     },
