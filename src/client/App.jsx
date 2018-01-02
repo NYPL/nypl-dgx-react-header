@@ -10,6 +10,25 @@ import alt from 'dgx-alt-center';
 import { Header, navConfig } from '@nypl/dgx-header-component';
 import './styles/main.scss';
 
+const getQueryParam = (fullUrl = '', variableToFind) => {
+  const cleanedUrl = fullUrl.indexOf('?') !== -1 ? fullUrl.substring(fullUrl.indexOf('?') + 1) : '';
+  if (!cleanedUrl) {
+    return '';
+  }
+
+  const queryParams = cleanedUrl.split('&');
+  let value = '';
+
+  queryParams.forEach((query) => {
+    const pair = query.split('=');
+    if (pair[0] === variableToFind) {
+      value = pair[1];
+    }
+  });
+
+  return value;
+};
+
 (function renderApp(window, document) {
   if (typeof window !== 'undefined') {
     window.onload = () => {
@@ -33,6 +52,7 @@ import './styles/main.scss';
         let styleTag;
         let scriptTag;
         let appEnv;
+        let skipNavElem;
 
         // create element to hold the single header instance.
         const htmlElement = document.createElement('div');
@@ -84,8 +104,16 @@ import './styles/main.scss';
               }
 
               // Parse urls param from src string.
-              if (scriptTag.src.indexOf('?urls=absolute') !== -1) {
-                urlType = 'absolute';
+              const urlTypeAdded = getQueryParam(scriptTag.src, 'urls');
+              if (urlTypeAdded) {
+                urlType = urlTypeAdded;
+              }
+
+              const skipNavAdded = getQueryParam(scriptTag.src, 'skipNav');
+              if (skipNavAdded) {
+                skipNavElem = {
+                  target: skipNavAdded,
+                };
               }
 
               scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
@@ -123,7 +151,10 @@ import './styles/main.scss';
           nyplHeaderObject.styleTags.length === 1 &&
           htmlElement && appEnv) {
           setTimeout(() => {
-            ReactDOM.render(<Header urlType={urlType} navData={navConfig.current} />, htmlElement);
+            ReactDOM.render(
+              <Header urlType={urlType} navData={navConfig.current} skipNav={skipNavElem} />,
+              htmlElement
+            );
             console.log('nypl-dgx-header rendered via client');
           }, 250);
         }
