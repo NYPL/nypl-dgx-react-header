@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+  - "6"
+cache:
+  directories:
+    - node_modules
+install: npm install
+before_script: "echo 'No unit test coverage for Header App; Will attempt to build distribution assets as a safety'"
+script: npm run dist
+before_deploy: "echo 'Successfully built distribution assets; Preparing to deploy Header App to AWS'"
+deploy:
+  skip_cleanup: true
+  provider: elasticbeanstalk
+  access_key_id: $AWS_PRODUCTION_ACCESS_KEY_ID
+  secret_access_key: "$AWS_PRODUCTION_ACCESS_SECRET"
+  region: us-east-1
+  app: $AWS_APP_NAME
+  env: $AWS_ENVIRONMENT_NAME
+  bucket_name: elasticbeanstalk-us-east-1-946183545209
+  bucket_path: $AWS_APP_NAME
+  on:
+    repo: NYPL/nypl-dgx-react-header
+    branch: setup-travis-ci-aws
+after_deploy: "echo 'Successfully executed deploy trigger for Header App on AWS'"
