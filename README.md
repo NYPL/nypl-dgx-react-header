@@ -5,6 +5,12 @@ React NYPL Header Web Application.
 ## Version
 > v1.4.6
 
+| Branch         | Status|  
+|:---------------|:---------------------------------------------------------------------------------------------------------------------------|  
+| `master`   | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=master)](https://travis-ci.org/NYPL/nypl-dgx-react-header) |  
+| `qa`           | [![Build Status](https://travis-ci.org/NYPL/dgx-homepage.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-dgx-react-header)   |  
+| `development`  | [![Build Status](https://travis-ci.org/NYPL/dgx-homepage.svg?branch=development)](https://travis-ci.org/NYPL/nypl-dgx-react-header)       |
+
 ## Node Configuration
 Pass in the following environment variables:  
 
@@ -50,7 +56,7 @@ We follow a [feature-branch](https://www.atlassian.com/git/tutorials/comparing-w
 * All releases merged into `master`, `MUST` be tagged and pushed to Github with their corresponding `version`
 
 ## AWS Elastic Beanstalk Application Settings
-By using the `aws-cli`, developers can deploy the Homepage App to the desired AWS application environments listed below:
+By using the `aws-cli`, developers can deploy the Header App to the desired AWS application environments listed below:
 
 | AWS Profile | Application Name | Environment |
 |---|---|---|
