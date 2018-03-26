@@ -1,11 +1,10 @@
 {
   "name": "nypl-dgx-react-header",
   "version": "1.4.7",
-  "description": "NYPL Isomorphic React Header with Navigation",
+  "description": "NYPL Universal Javascript React Header App",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build": "npm run dist",
     "docs": "./node_modules/.bin/esdoc -c esdoc.json",
     "dist": "NODE_ENV=production webpack --config webpack.config.js",
     "eb-start": "npm run dist && npm run start"
@@ -52,7 +51,11 @@
     },
     {
       "name": "Paul Beaudoin",
-      "email": ""
+      "email": "paulbeaudoin@nypl.org"
+    },
+    {
+      "name": "Ho-Ling Poon",
+      "email": "holingpoon@nypl.org"
     }
   ],
   "license": "MIT",
