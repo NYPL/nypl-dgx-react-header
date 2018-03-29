@@ -1,6 +1,10 @@
 ## Change Log
 
+### v1.4.9
+> Updating Header component to v2.4.7.
+
 ### v1.4.8
+> Updating Header component to v2.4.5.
 > Adding Travis CI and AWS CI/CD configuration.
 
 ### v1.4.7
