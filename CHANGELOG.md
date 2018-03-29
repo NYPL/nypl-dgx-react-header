@@ -2,6 +2,7 @@
 
 ### v1.4.8
 > Updating Header component to v2.4.7.
+> Adding Travis CI and AWS CI/CD configuration.
 
 ### v1.4.7
 > Updating Header component to v2.4.5.
