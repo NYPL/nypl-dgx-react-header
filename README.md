@@ -68,7 +68,7 @@ By using the `aws-cli`, developers can deploy the Header App to the desired AWS 
 ## AWS Deployment
 
 #### QA/Development
-Developers `SHOULD` target the proper environment when deploying the application for review. Using their proper profile credentials, developers will execute the `eb deploy` command to deploy a new version of the application on AWS.
+Developers `SHOULD` deploy via pushing code into `developer` and `qa` branches mentioned in AWS Elastic Beanstalk Application Settings. Travis CI will be triggered and CI/CD pipeline will start from build to auto deployment to `development` and `qa` environments.
 
 #### Production
 In our AWS production environment, we have defined a CI/CD pipeline via Travis CI to automatically:
