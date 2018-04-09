@@ -44,7 +44,9 @@ app.set('view engine', 'ejs');
 app.set('views', INDEX_PATH);
 
 // Assign the proper path where the application's dist files are located.
-app.use(express.static(DIST_PATH));
+app.use(express.static(DIST_PATH, {
+  maxage: '5m'
+}));
 
 // Set logger parameters
 const logger = getLogger({

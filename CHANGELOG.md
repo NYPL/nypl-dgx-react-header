@@ -1,5 +1,8 @@
 ## Change Log
 
+### v1.4.10
+> Add cache header.
+
 ### v1.4.9
 > Updating Header component to v2.4.7.
 
