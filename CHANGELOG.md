@@ -1,5 +1,11 @@
 ## Change Log
 
+### v1.4.11
+> Updating @nypl/dgx-header-component to 2.4.8.
+
+### v1.4.10
+> Add cache header.
+
 ### v1.4.9
 > Updating Header component to v2.4.7.
 
