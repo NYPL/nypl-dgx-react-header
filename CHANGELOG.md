@@ -1,5 +1,9 @@
 ## Change Log
 
+### v1.4.12
+> Updating @nypl/dgx-header-component to 2.4.9.
+> Adding module dgx-feature-flags.
+
 ### v1.4.11
 > Updating @nypl/dgx-header-component to 2.4.8.
 
