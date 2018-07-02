@@ -1,5 +1,5 @@
 // Polyfill Promise for legacy browsers
-import 'babel-polyfill';
+import './require-babel-polyfill.js';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
