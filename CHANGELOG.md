@@ -1,5 +1,8 @@
 ## Change Log
 
+### v1.4.12
+> Fix Babel polyfill issue.
+
 ### v1.4.11
 > Updating @nypl/dgx-header-component to 2.4.8.
 
