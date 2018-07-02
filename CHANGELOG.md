@@ -1,5 +1,8 @@
 ## Change Log
 
+### v1.4.13
+> Documentation added to help with feature branch deployment.
+
 ### v1.4.12
 > Fix Babel polyfill issue.
 
