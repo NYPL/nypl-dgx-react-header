@@ -1,5 +1,8 @@
 ## Change Log
 
+### v1.4.12
+> Documentation added to help with feature branch deployment. Added `dgx-feature-branch` as a package to help with building the app.
+
 ### v1.4.11
 > Updating @nypl/dgx-header-component to 2.4.8.
 
