@@ -40,9 +40,9 @@ deploy:
   secret_access_key: "$AWS_SECRET_ACCESS_KEY_DEVELOPMENT"
   region: us-east-1
   app: nypl-header-app
-  env: nypl-header-dev
+  env: nypl-header-development
   bucket_name: elasticbeanstalk-us-east-1-224280085904
-  bucket_path: nypl-header-dev
+  bucket_path: nypl-header-development
   on:
     repo: NYPL/nypl-dgx-react-header
     branch: development
