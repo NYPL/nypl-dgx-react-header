@@ -2,6 +2,8 @@
 
 ### v1.4.13
 > Documentation added to help with feature branch deployment.
+> Updating @nypl/dgx-header-component to 2.4.10.
+> Adding module dgx-feature-flags.
 
 ### v1.4.12
 > Fix Babel polyfill issue.
