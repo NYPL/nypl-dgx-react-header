@@ -92,12 +92,17 @@ app.get('/', (req, res) => {
 */
 app.get('/header-markup', (req, res) => {
   const urlType = req.query.urls || '';
+  const skipNav = req.query.skipNav || '';
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
 
   const iso = new Iso();
   const headerApp = ReactDOMServer.renderToString(
-    <Header urlType={(urlType === 'absolute') ? 'absolute' : ''} navData={navConfig.current} />
+    <Header
+      urlType={(urlType === 'absolute') ? 'absolute' : ''}
+      navData={navConfig.current}
+      skipNav={skipNav ? { target: skipNav } : null}
+    />
   );
 
   iso.add(headerApp, alt.flush());
