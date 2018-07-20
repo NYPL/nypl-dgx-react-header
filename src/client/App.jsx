@@ -100,7 +100,6 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
           /* Since getElementsBy is an array-like structure,
           * we need to use call to iterate with forEach.
           */
-          console.log(allScriptTags);
           [].forEach.call(allScriptTags, (value, index) => {
             if (value.src.indexOf('dgx-header.min.js') !== -1) {
               scriptTag = value;
