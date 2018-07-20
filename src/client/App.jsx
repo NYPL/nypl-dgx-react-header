@@ -172,14 +172,19 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
             // mounted on the client side, to make sure it's actually there.
             if (skipNavAdded) {
               const skipElement = document.getElementById("skip");
-              const skipAnchor = skipElement.getElementsByTagName("a")[0];
-              skipAnchor.addEventListener("keydown", (e) => {
-                const key = e.which || e.keyCode;
+              const mainElement = document.getElementById(skipNavAdded);
 
-                if (key === 13) {
-                  document.getElementById(skipNavAdded).focus();
-                }
-              });
+              if (skipElement && mainElement) {
+                const skipAnchor = skipElement.getElementsByTagName("a")[0];
+
+                skipAnchor.addEventListener("keydown", (e) => {
+                  const key = e.which || e.keyCode;
+
+                  if (key === 13) {
+                    document.getElementById(skipNavAdded).focus();
+                  }
+                });
+              }
             }
           }, 250);
         }
