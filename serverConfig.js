@@ -68,6 +68,7 @@ app.use(initMorgan(logger));
 
 // Match all routes to render the index page.
 app.get('/', (req, res) => {
+  const iso = new Iso();
   const skipNav = req.query.skipNav || '';
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
