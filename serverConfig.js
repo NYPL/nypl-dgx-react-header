@@ -68,9 +68,12 @@ app.use(initMorgan(logger));
 
 // Match all routes to render the index page.
 app.get('/', (req, res) => {
+  const skipNav = req.query.skipNav || '';
+
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
-  const iso = new Iso();
-  const headerApp = ReactDOMServer.renderToString(<Header navData={navConfig.current} />);
+  const headerApp = ReactDOMServer.renderToString(
+    <Header navData={navConfig.current} skipNav={skipNav ? { target: skipNav } : null} />
+  );
   iso.add(headerApp, alt.flush());
 
   // First parameter references the ejs filename
