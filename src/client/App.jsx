@@ -36,17 +36,9 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
 
       // Render Isomorphically
       Iso.bootstrap((state, meta, container) => {
-        let skipNavElem;
-        const skipNavAdded = getQueryParam(scriptTag.src, 'skipNav');
-        if (skipNavAdded) {
-          skipNavElem = {
-            target: skipNavAdded,
-          };
-        }
-
         alt.bootstrap(state);
         ReactDOM.render(
-          <Header navData={navConfig.current} skipNav={skipNavElem} />,
+          <Header navData={navConfig.current} />,
           container
         );
         isRenderedByServer = true;
