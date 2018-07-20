@@ -44,7 +44,13 @@ Locations, Staff Profiles, and Research Divisions all pull in the Header through
 There are configurations that can be passed into the header script to enable/configure a few features.
 
 * `urls` - The accepted values are `relative`/`absolute` and `relative` is the default. This outputs the main navigation links as either relative to the app or absolute. For apps that will not live on a `nypl.org/...` path, it's best to pass `urls=absolute` into the configuration. Otherwise, the navigation will render links that will be relative to the app and that may not exist.
-* `skipNav` - The id of the `<main>` element on the app where the Header is being imported.
+* `skipNav` - The id of the `<main>` element on the app where the Header is being imported. If this configuration is being enabled, make sure to also add a `tabindex` attribute of `-1` to the main element. This will allow the Header to programmatically focus on the main content.
+
+```HTML
+<main id="main-content" tabindex="-1">
+  <!-- app goes here -->
+</main>
+```
 
 ### Drupal Import
 We call this the Drupal import way of rendering the Header because it's the only site that imports the Header in this following way. This app has a `/header-markup` endpoint that can be used to get _only_ the HTML markup for the header. Any app can use that markup as they wish, but it won't be interactive or styled unless they import the corresponding CSS and JS files as well.
