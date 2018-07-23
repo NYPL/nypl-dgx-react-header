@@ -18,6 +18,48 @@ Pass in the following environment variables:
 
 - `NODE_ENV`: Sets up the app to be minified using `production`. Otherwise, it will default to development mode in Webpack.
 
+## Dynamic Embedded Header Usage
+The Header is a standalone application that can potentially be picked up by many different applications. Currently, Locations, Staff Profiles, Research Divisions, Old Drupal, and New Drupal use the production build of this repo to import the Header into their application. There are differences in how the Header is pulled in and configurations for the nav links and skip navigation.
+
+### Embeddable Script
+Locations, Staff Profiles, and Research Divisions all pull in the Header through an embeddable standalone script tag that should be used in the `<body>` element of the main HTML file (or any other HTML files in the app). Since the Header loads dynamically, the script is surrounded by optional HTML markup and styles so that the top part of the page doesn't jump and cause a flash. It is suggested that the Header be imported as a whole with the following markup:
+
+```HTML
+<!-- Header -->
+<div id="Header-Placeholder">
+    <style>
+        #Header-Placeholder {
+            min-height: 70px;
+        }
+        @media screen and (min-width: 1024px) {
+            #Header-Placeholder {
+                min-height: 230px;
+            }
+        }
+    </style>
+    <script type="text/javascript" src="https://header.nypl.org/dgx-header.min.js?skipNav=main-content" async></script>
+</div>
+```
+
+There are configurations that can be passed into the header script to enable/configure a few features.
+
+* `urls` - The accepted values are `relative`/`absolute`, with `relative` as the default. This outputs the main navigation links as either relative to the app or absolute. For apps that will not live on an `nypl.org/...` path, it's best to pass `urls=absolute` into the configuration. Otherwise, the navigation will render links relative to the app which may not exist.
+* `skipNav` - The id of the `<main>` element on the app where the Header is being imported. If this configuration is being enabled, make sure to also add a `tabindex` attribute of `-1` to the main element. This will allow the Header to programmatically focus on the main content.
+
+```HTML
+<main id="main-content" tabindex="-1">
+  <!-- app goes here -->
+</main>
+```
+
+### Drupal Import
+We call this the Drupal import way of rendering the Header because it's the only site that imports the Header in this way. This app has a `/header-markup` endpoint that can be used to get _only_ the HTML markup for the header. Any app can use that markup as they wish, but it won't be interactive or styled unless they import the corresponding CSS and JS files as well.
+
+* JS - https://header.nypl.org/dgx-header.min.js
+* CSS - https://header.nypl.org/styles.css
+
+*NOTE* - It is important to know that if you follow this approach, you are free to but responsible for importing all the files together and rendering them correctly along with your own app's production build.
+
 ## Installation
 Install all NPM dependencies listed under `package.json`
 ```sh
