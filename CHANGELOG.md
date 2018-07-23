@@ -1,5 +1,8 @@
 ## Change Log
 
+### v1.4.14
+> Updating @nypl/dgx-header-component to 2.4.11.
+
 ### v1.4.13
 > Documentation added to help with feature branch deployment.
 > Updating @nypl/dgx-header-component to 2.4.10.
