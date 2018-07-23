@@ -43,7 +43,7 @@ Locations, Staff Profiles, and Research Divisions all pull in the Header through
 
 There are configurations that can be passed into the header script to enable/configure a few features.
 
-* `urls` - The accepted values are `relative`/`absolute` and `relative` is the default. This outputs the main navigation links as either relative to the app or absolute. For apps that will not live on a `nypl.org/...` path, it's best to pass `urls=absolute` into the configuration. Otherwise, the navigation will render links that will be relative to the app and that may not exist.
+* `urls` - The accepted values are `relative`/`absolute`, with `relative` as the default. This outputs the main navigation links as either relative to the app or absolute. For apps that will not live on an `nypl.org/...` path, it's best to pass `urls=absolute` into the configuration. Otherwise, the navigation will render links relative to the app which may not exist.
 * `skipNav` - The id of the `<main>` element on the app where the Header is being imported. If this configuration is being enabled, make sure to also add a `tabindex` attribute of `-1` to the main element. This will allow the Header to programmatically focus on the main content.
 
 ```HTML
@@ -53,12 +53,12 @@ There are configurations that can be passed into the header script to enable/con
 ```
 
 ### Drupal Import
-We call this the Drupal import way of rendering the Header because it's the only site that imports the Header in this following way. This app has a `/header-markup` endpoint that can be used to get _only_ the HTML markup for the header. Any app can use that markup as they wish, but it won't be interactive or styled unless they import the corresponding CSS and JS files as well.
+We call this the Drupal import way of rendering the Header because it's the only site that imports the Header in this way. This app has a `/header-markup` endpoint that can be used to get _only_ the HTML markup for the header. Any app can use that markup as they wish, but it won't be interactive or styled unless they import the corresponding CSS and JS files as well.
 
 * JS - https://header.nypl.org/dgx-header.min.js
 * CSS - https://header.nypl.org/styles.css
 
-*NOTE* - It is important to know that if you follow this approach, you are free but responsible to import all the files together and render them correctly along with your own app's production build.
+*NOTE* - It is important to know that if you follow this approach, you are free to but responsible for importing all the files together and rendering them correctly along with your own app's production build.
 
 ## Installation
 Install all NPM dependencies listed under `package.json`
