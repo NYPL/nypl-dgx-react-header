@@ -53,6 +53,7 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
         let scriptTag;
         let appEnv;
         let skipNavElem;
+        let skipNavAdded;
 
         // create element to hold the single header instance.
         const htmlElement = document.createElement('div');
@@ -109,7 +110,7 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
                 urlType = urlTypeAdded;
               }
 
-              const skipNavAdded = getQueryParam(scriptTag.src, 'skipNav');
+              skipNavAdded = getQueryParam(scriptTag.src, 'skipNav');
               if (skipNavAdded) {
                 skipNavElem = {
                   target: skipNavAdded,
@@ -155,7 +156,28 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
               <Header urlType={urlType} navData={navConfig.current} skipNav={skipNavElem} />,
               htmlElement
             );
+
             console.log('nypl-dgx-header rendered via client');
+
+            // We want to programmatically focus on the skip nav id if it was
+            // passed as an argument. Do this after the component has been
+            // mounted on the client side, to make sure it's actually there.
+            if (skipNavAdded) {
+              const skipElement = document.getElementById("skip");
+              const mainElement = document.getElementById(skipNavAdded);
+
+              if (skipElement && mainElement) {
+                const skipAnchor = skipElement.getElementsByTagName("a")[0];
+
+                skipAnchor.addEventListener("keydown", (e) => {
+                  const key = e.which || e.keyCode;
+
+                  if (key === 13) {
+                    document.getElementById(skipNavAdded).focus();
+                  }
+                });
+              }
+            }
           }, 250);
         }
       }
