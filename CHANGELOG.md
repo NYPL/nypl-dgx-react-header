@@ -1,4 +1,7 @@
 ## Change Log
+### v1.4.15
+> Updating @nypl/dgx-header-component to 2.4.13.
+
 ### v1.4.14
 > Updating @nypl/dgx-header-component to 2.4.12.
 
