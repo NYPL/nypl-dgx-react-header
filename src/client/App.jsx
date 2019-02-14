@@ -153,7 +153,12 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
           htmlElement && appEnv) {
           setTimeout(() => {
             ReactDOM.render(
-              <Header urlType={urlType} navData={navConfig.current} skipNav={skipNavElem} />,
+              <Header
+                urlType={urlType}
+                navData={navConfig.current}
+                skipNav={skipNavElem}
+                currentLocation={window.location}
+              />,
               htmlElement
             );
 
