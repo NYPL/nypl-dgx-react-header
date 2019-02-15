@@ -157,7 +157,6 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
                 urlType={urlType}
                 navData={navConfig.current}
                 skipNav={skipNavElem}
-                currentLocation={window.location}
               />,
               htmlElement
             );
