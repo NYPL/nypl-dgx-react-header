@@ -33,7 +33,7 @@ deploy:
   bucket_path: nypl-header-qa
   on:
     repo: NYPL/nypl-dgx-react-header
-    branch: test-header
+    branch: qa
 - provider: elasticbeanstalk
   skip_cleanup: true
   access_key_id: "$AWS_ACCESS_KEY_ID_DEVELOPMENT"
@@ -45,7 +45,7 @@ deploy:
   bucket_path: nypl-header-development
   on:
     repo: NYPL/nypl-dgx-react-header
-    branch: development
+    branch: test-header
 after_deploy: echo 'Successfully executed deploy trigger for Header App on AWS'
 env:
   global:
