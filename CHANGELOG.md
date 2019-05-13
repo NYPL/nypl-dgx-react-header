@@ -1,5 +1,11 @@
 ## Change Log
 
+### v1.4.23
+> Updating @nypl/dgx-header-component to 2.5.4.
+
+### v1.4.22
+> Adding Falcon Crowdstrike to operating system.
+
 ### v1.4.21
 > Updating @nypl/dgx-header-component to 2.4.19.
 
