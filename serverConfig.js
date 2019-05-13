@@ -44,7 +44,9 @@ app.set('view engine', 'ejs');
 app.set('views', INDEX_PATH);
 
 // Assign the proper path where the application's dist files are located.
-app.use(express.static(DIST_PATH));
+app.use(express.static(DIST_PATH, {
+  maxage: '5m'
+}));
 
 // Set logger parameters
 const logger = getLogger({
@@ -66,9 +68,13 @@ app.use(initMorgan(logger));
 
 // Match all routes to render the index page.
 app.get('/', (req, res) => {
-  alt.bootstrap(JSON.stringify(res.locals.data || {}));
   const iso = new Iso();
-  const headerApp = ReactDOMServer.renderToString(<Header navData={navConfig.current} />);
+  const skipNav = req.query.skipNav || '';
+
+  alt.bootstrap(JSON.stringify(res.locals.data || {}));
+  const headerApp = ReactDOMServer.renderToString(
+    <Header navData={navConfig.current} skipNav={skipNav ? { target: skipNav } : null} />
+  );
   iso.add(headerApp, alt.flush());
 
   // First parameter references the ejs filename
@@ -90,12 +96,17 @@ app.get('/', (req, res) => {
 */
 app.get('/header-markup', (req, res) => {
   const urlType = req.query.urls || '';
+  const skipNav = req.query.skipNav || '';
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
 
   const iso = new Iso();
   const headerApp = ReactDOMServer.renderToString(
-    <Header urlType={(urlType === 'absolute') ? 'absolute' : ''} navData={navConfig.current} />
+    <Header
+      urlType={(urlType === 'absolute') ? 'absolute' : ''}
+      navData={navConfig.current}
+      skipNav={skipNav ? { target: skipNav } : null}
+    />
   );
 
   iso.add(headerApp, alt.flush());

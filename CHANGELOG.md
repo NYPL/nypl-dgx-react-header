@@ -1,5 +1,45 @@
 ## Change Log
 
+### v1.4.21
+> Updating @nypl/dgx-header-component to 2.4.19.
+
+### v1.4.20
+> Updating @nypl/dgx-header-component to 2.4.18.
+
+### v1.4.19
+> Updating @nypl/dgx-header-component to 2.4.17.
+
+### v1.4.18
+> Updating @nypl/dgx-header-component to 2.4.16.
+
+### v1.4.17
+> Updating @nypl/dgx-header-component to 2.4.15 and checking for QA in APP_ENV.
+
+### v1.4.16
+> Updating @nypl/dgx-header-component to 2.4.14.
+
+### v1.4.15
+> Updating @nypl/dgx-header-component to 2.4.13.
+
+### v1.4.14
+> Updating @nypl/dgx-header-component to 2.4.12.
+
+### v1.4.13
+> Documentation added to help with feature branch deployment.
+> Updating @nypl/dgx-header-component to 2.4.11.
+> Adding module dgx-feature-flags.
+> Adding documentation on how to configure the embeddable Header with URL queries.
+> Adding better configuration for skip nav focusing and rendering.
+
+### v1.4.12
+> Fix Babel polyfill issue.
+
+### v1.4.11
+> Updating @nypl/dgx-header-component to 2.4.8.
+
+### v1.4.10
+> Add cache header.
+
 ### v1.4.9
 > Updating Header component to v2.4.7.
 
