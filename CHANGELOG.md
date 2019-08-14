@@ -1,5 +1,8 @@
 ## Change Log
 
+### v1.4.25
+> Updating @nypl/dgx-header-component to 2.5.6.
+
 ### v1.4.24
 > Adding fix for Falcon Crowdstrike.
 > Reverse @nypl/dgx-header-component to 2.4.19.
