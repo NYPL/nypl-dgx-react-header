@@ -3,6 +3,25 @@
 ### v1.4.27
 > Updating @nypl/dgx-header-component to 2.6.0
 
+### v1.4.26
+> Updating @nypl/dgx-header-component to 2.5.8.
+
+### v1.4.25
+> Updating @nypl/dgx-header-component to 2.5.6.
+
+### v1.4.24
+> Adding fix for Falcon Crowdstrike.
+> Reverse @nypl/dgx-header-component to 2.4.19.
+
+### v1.4.23
+> Updating @nypl/dgx-header-component to 2.5.4.
+
+### v1.4.22
+> Adding Falcon Crowdstrike to operating system.
+
+### v1.4.21
+> Updating @nypl/dgx-header-component to 2.4.19.
+
 ### v1.4.20
 > Updating @nypl/dgx-header-component to 2.4.18.
 
