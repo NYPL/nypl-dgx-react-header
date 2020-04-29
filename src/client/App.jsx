@@ -1,6 +1,3 @@
-// Polyfill Promise for legacy browsers
-import './require-babel-polyfill.js';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Iso from 'iso';
