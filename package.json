@@ -1,6 +1,6 @@
 {
   "name": "nypl-dgx-react-header",
-  "version": "1.4.27",
+  "version": "1.4.28",
   "description": "NYPL Universal Javascript React Header App",
   "main": "index.js",
   "scripts": {

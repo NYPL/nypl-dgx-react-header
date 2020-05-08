@@ -1,5 +1,8 @@
 ## Change Log
 
+### v1.4.28
+> Updating Falcon CrowdStrike to 5.29.
+
 ### v1.4.27
 > Updating @nypl/dgx-header-component to 2.6.0
 
