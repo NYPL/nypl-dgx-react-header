@@ -3,16 +3,16 @@
 React NYPL Header Web Application.
 
 ## Version
-> v1.4.27
+> v1.5.0
 
-| Branch         | Status|  
-|:---------------|:---------------------------------------------------------------------------------------------------------------------------|  
-| `master`   | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=master)](https://travis-ci.org/NYPL/nypl-dgx-react-header) |  
-| `qa`           | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-dgx-react-header)   |  
+| Branch         | Status|
+|:---------------|:---------------------------------------------------------------------------------------------------------------------------|
+| `master`   | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=master)](https://travis-ci.org/NYPL/nypl-dgx-react-header) |
+| `qa`           | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-dgx-react-header)   |
 | `development`  | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=development)](https://travis-ci.org/NYPL/nypl-dgx-react-header)       |
 
 ## Node Configuration
-Pass in the following environment variables:  
+Pass in the following environment variables:
 
 - `PORT`: Desired port where the server will reside (default: 3001).
 

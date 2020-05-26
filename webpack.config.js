@@ -21,10 +21,11 @@ const commonSettings = {
   // This is the path and file of our top level
   // React App that is to be rendered.
   entry: [
-    path.resolve(ROOT_PATH, 'src/client/App.jsx')
+    path.resolve(ROOT_PATH, 'src/client/App.jsx'),
+    path.resolve(ROOT_PATH, 'src/client/styles/main.scss'),
   ],
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx'],
   },
   output: {
     // Sets the output path to ROOT_PATH/dist
@@ -38,9 +39,11 @@ const commonSettings = {
     // Alternately, we can run rm -rf dist/ as
     // part of the package.json scripts.
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin('styles.css'),
+    new MiniCssExtractPlugin({
+      filename: 'styles.css',
+    }),
     new webpack.DefinePlugin({
-      'AppEnv': JSON.stringify(appEnv)
+      AppEnv: JSON.stringify(appEnv),
     }),
   ],
 };
@@ -52,16 +55,20 @@ const commonSettings = {
  * the common app configuration with the
  * additional development specific settings.
  *
- **/
+ */
 // Need to configure webpack-dev-server and hot-reload
 // module correctly.
 if (ENV === 'development') {
   module.exports = merge(commonSettings, {
+    mode: 'development',
     devtool: 'eval',
     entry: [
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
     ],
+    devServer: {
+      sockPort: 3001,
+    },
     output: {
       publicPath: 'http://localhost:3000/',
     },
@@ -80,13 +87,17 @@ if (ENV === 'development') {
           options: {
             presets: [
               '@babel/preset-env',
-              '@babel/preset-react'
+              '@babel/preset-react',
             ],
           },
         },
         {
           test: /\.scss?$/,
-          loader: 'style-loader!css-loader!sass-loader',
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            'sass-loader',
+          ],
           include: path.resolve(ROOT_PATH, 'src'),
         },
       ],
@@ -101,17 +112,17 @@ if (ENV === 'development') {
  * the common app configuration with the
  * additional production specific settings.
  *
- **/
+ */
 if (ENV === 'production') {
   module.exports = merge(commonSettings, {
+    mode: 'production',
     devtool: 'source-map',
     // Minification (Utilized in Production)
     optimization: {
+      minimize: true,
       minimizer: [
         new TerserWebpackPlugin({
-          terserOptions: {
-            warnings: false,
-          },
+          test: /\.js(\?.*)?$/i,
         }),
       ],
     },
@@ -124,7 +135,7 @@ if (ENV === 'production') {
           options: {
             presets: [
               '@babel/preset-env',
-              '@babel/preset-react'
+              '@babel/preset-react',
             ],
           },
         },
@@ -132,7 +143,7 @@ if (ENV === 'production') {
           test: /\.scss$/,
           include: path.resolve(ROOT_PATH, 'src'),
           use: [
-            'style-loader',
+            MiniCssExtractPlugin.loader,
             'css-loader',
             'sass-loader',
           ],
