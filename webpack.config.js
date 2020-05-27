@@ -29,7 +29,7 @@ const commonSettings = {
   },
   output: {
     // Sets the output path to ROOT_PATH/dist
-    path: path.resolve(ROOT_PATH, 'dist'),
+    path: path.join(__dirname, '/dist'),
     // Sets the name of the bundled application files
     // Additionally we can isolate vendor files as well
     filename: 'dgx-header.min.js',
@@ -66,9 +66,6 @@ if (ENV === 'development') {
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
     ],
-    devServer: {
-      sockPort: 3001,
-    },
     output: {
       publicPath: 'http://localhost:3000/',
     },
