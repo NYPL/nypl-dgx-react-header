@@ -22,7 +22,6 @@ const commonSettings = {
   // React App that is to be rendered.
   entry: [
     path.resolve(ROOT_PATH, 'src/client/App.jsx'),
-    path.resolve(ROOT_PATH, 'src/client/styles/main.scss'),
   ],
   resolve: {
     extensions: ['*', '.js', '.jsx'],
@@ -91,7 +90,7 @@ if (ENV === 'development') {
         {
           test: /\.scss?$/,
           use: [
-            MiniCssExtractPlugin.loader,
+            'style-loader',
             'css-loader',
             'sass-loader',
           ],

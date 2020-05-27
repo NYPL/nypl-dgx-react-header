@@ -6,6 +6,8 @@ import reactGA from 'dgx-react-ga';
 import alt from 'dgx-alt-center';
 import { Header, navConfig } from '@nypl/dgx-header-component';
 
+import "./styles/main.scss";
+
 const getQueryParam = (fullUrl = '', variableToFind) => {
   const cleanedUrl = fullUrl.indexOf('?') !== -1 ? fullUrl.substring(fullUrl.indexOf('?') + 1) : '';
   if (!cleanedUrl) {
