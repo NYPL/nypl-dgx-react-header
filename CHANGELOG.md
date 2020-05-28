@@ -8,7 +8,6 @@
 > Updating express v4.17.1
 > Updating ejs v3
 > Updating node-sass v4.14
-> Updating esdoc v1.1
 > Updating babel-loader v8.1
 > Updating clean-webpack-plugin v3
 > Updating css-loader v4.14
@@ -24,6 +23,7 @@
 > Add webpack-cli v3
 > Replace dgx-loggly with winston v3 custom logger
 > Bump node version to v10
+> Remove esdoc and config; not implemented
 
 ### v1.4.28
 > Updating Falcon CrowdStrike to 5.29.

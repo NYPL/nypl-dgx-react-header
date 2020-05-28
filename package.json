@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "docs": "./node_modules/.bin/esdoc -c esdoc.json",
     "dist": "NODE_ENV=production webpack --config webpack.config.js",
     "eb-start": "npm run dist && npm run start",
     "lint": "eslint ./"
@@ -67,7 +66,6 @@
     "@babel/preset-react": "7.9.4",
     "clean-webpack-plugin": "3.0.0",
     "css-loader": "3.5.3",
-    "esdoc": "1.1.0",
     "eslint": "^7.0.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-loader": "1.3.0",

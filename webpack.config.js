@@ -60,7 +60,7 @@ const commonSettings = {
 if (ENV === 'development') {
   module.exports = merge(commonSettings, {
     mode: 'development',
-    devtool: 'eval',
+    devtool: 'eval-source-map',
     entry: [
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
