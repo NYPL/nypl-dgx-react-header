@@ -11,7 +11,7 @@ import webpack from 'webpack';
 // Header Component
 import { Header, navConfig } from '@nypl/dgx-header-component';
 // Logging
-import { getLogger, initMorgan } from 'dgx-loggly';
+import logger from './logger';
 // Server Configurations
 import appConfig from './appConfig';
 import webpackConfig from './webpack.config';
@@ -47,17 +47,6 @@ app.set('views', INDEX_PATH);
 app.use(express.static(DIST_PATH, {
   maxage: '5m',
 }));
-
-// Set logger parameters
-const logger = getLogger({
-  env: process.env.APP_ENV,
-  appTag: 'Header-App',
-  token: process.env.LOGGLY_TOKEN,
-  subdomain: process.env.LOGGLY_SUBDOMAIN,
-});
-
-// Have morgan here to stream reponse code above 400 to console and loggly
-app.use(initMorgan(logger));
 
 /* Isomporphic Rendering of React App
  * ----------------------------------
@@ -138,7 +127,7 @@ const gracefulShutdown = () => {
   });
   // if after
   setTimeout(() => {
-    logger.warn('Could not close connections in time, forcefully shutting down');
+    logger.warning('Could not close connections in time, forcefully shutting down');
     process.exit();
   }, 1000);
 };
@@ -167,7 +156,7 @@ if (!isProduction) {
     sockPort: 3000,
   }).listen(WEBPACK_DEV_PORT, 'localhost', (err, result) => {
     if (err) {
-      logger.error(colors.red(err));
+      logger.error(err);
     }
 
     console.log(

@@ -91,7 +91,6 @@
     "core-js": "3.6.5",
     "dgx-alt-center": "git+https://git@github.com/NYPL/dgx-alt-center.git#master",
     "dgx-feature-flags": "git+https://git@github.com/NYPL/dgx-feature-flags.git#master",
-    "dgx-loggly": "git+https://git@github.com/NYPL/dgx-loggly.git#master",
     "dgx-react-ga": "git+https://git@github.com/NYPL/dgx-react-ga.git#master",
     "ejs": "3.1.2",
     "express": "4.17.1",
@@ -101,6 +100,7 @@
     "react-dom": "15.5.4",
     "rootpath": "0.1.2",
     "webpack": "4.43.0",
-    "webpack-merge": "4.2.2"
+    "webpack-merge": "4.2.2",
+    "winston": "3.2.1"
   }
 }
