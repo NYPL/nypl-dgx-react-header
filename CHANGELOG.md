@@ -25,6 +25,9 @@
 > Replace dgx-loggly with winston v3 custom logger
 > Bump node version to v10
 
+### v1.4.28
+> Updating Falcon CrowdStrike to 5.29.
+
 ### v1.4.27
 > Updating @nypl/dgx-header-component to 2.6.0
 
