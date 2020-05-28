@@ -1,5 +1,30 @@
 ## Change Log
 
+### v1.5.0
+> Updating webpack v4.43
+> Updating webpack-dev-server v3
+> Updating webpack-merge v4.2.2
+> Updating babel packages to v7
+> Updating express v4.17.1
+> Updating ejs v3
+> Updating node-sass v4.14
+> Updating esdoc v1.1
+> Updating babel-loader v8.1
+> Updating clean-webpack-plugin v3
+> Updating css-loader v4.14
+> Updating sass-loader v8.0.2
+> Updating style-loader v1.2.1
+> Updating react-hot-loader v4
+> Updating iso v5
+> Updating node-sass v4.14
+> Updating node-sass v4.14
+> Add eslint v7 libraries and config
+> Add terser-webpack-plugin v2
+> Add core-js v3
+> Add webpack-cli v3
+> Replace dgx-loggly with winston v3 custom logger
+> Bump node version to v10
+
 ### v1.4.27
 > Updating @nypl/dgx-header-component to 2.6.0
 

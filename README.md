@@ -128,7 +128,7 @@ There are changes we'd like to deploy that can't always be tested locally for a 
 In order to make changes and deploy them, update the reference to `@nypl/dgx-header-component` in `package.json` to point to the working branch in Github. For example, update:
 
 ```
-"@nypl/dgx-header-component": "2.4.11",
+"@nypl/dgx-header-component": "2.6.0",
 ```
 
 to
