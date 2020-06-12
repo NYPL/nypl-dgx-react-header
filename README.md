@@ -3,16 +3,16 @@
 React NYPL Header Web Application.
 
 ## Version
-> v1.4.28
+> v1.5.0
 
-| Branch         | Status|  
-|:---------------|:---------------------------------------------------------------------------------------------------------------------------|  
-| `master`   | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=master)](https://travis-ci.org/NYPL/nypl-dgx-react-header) |  
-| `qa`           | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-dgx-react-header)   |  
+| Branch         | Status|
+|:---------------|:---------------------------------------------------------------------------------------------------------------------------|
+| `master`   | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=master)](https://travis-ci.org/NYPL/nypl-dgx-react-header) |
+| `qa`           | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-dgx-react-header)   |
 | `development`  | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=development)](https://travis-ci.org/NYPL/nypl-dgx-react-header)       |
 
 ## Node Configuration
-Pass in the following environment variables:  
+Pass in the following environment variables:
 
 - `PORT`: Desired port where the server will reside (default: 3001).
 
@@ -128,7 +128,7 @@ There are changes we'd like to deploy that can't always be tested locally for a 
 In order to make changes and deploy them, update the reference to `@nypl/dgx-header-component` in `package.json` to point to the working branch in Github. For example, update:
 
 ```
-"@nypl/dgx-header-component": "2.4.11",
+"@nypl/dgx-header-component": "2.6.0",
 ```
 
 to

@@ -1,13 +1,11 @@
-// Polyfill Promise for legacy browsers
-import './require-babel-polyfill.js';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Iso from 'iso';
 import FeatureFlags from 'dgx-feature-flags';
-import { config, gaUtils } from 'dgx-react-ga';
+import reactGA from 'dgx-react-ga';
 import alt from 'dgx-alt-center';
 import { Header, navConfig } from '@nypl/dgx-header-component';
+
 import './styles/main.scss';
 
 const getQueryParam = (fullUrl = '', variableToFind) => {
@@ -35,7 +33,7 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
       let isRenderedByServer = false;
 
       // Render Isomorphically
-      Iso.bootstrap((state, meta, container) => {
+      Iso.bootstrap((state, container) => {
         alt.bootstrap(state);
         ReactDOM.render(
           <Header navData={navConfig.current} />,
@@ -56,7 +54,7 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
         let skipNavAdded;
 
         // create element to hold the single header instance.
-        const htmlElement = document.createElement('div');
+        const htmlElement = document.createElement(React.createElement('div'));
         htmlElement.id = 'nypl-dgx-header';
 
         // Make a global object to store the instances of nyplHeader
@@ -186,7 +184,7 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
         const isProd = process.env.NODE_ENV === 'production';
         const gaOpts = { debug: !isProd, titleCase: false };
 
-        gaUtils.initialize(config.google.code(isProd), gaOpts);
+        reactGA.gaUtils.initialize(reactGA.config.google.code(isProd), gaOpts);
       }
 
       // Used to activate/deactivate AB tests on global namespace.
