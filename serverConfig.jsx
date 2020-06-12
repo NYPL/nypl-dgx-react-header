@@ -154,7 +154,7 @@ if (!isProduction) {
       'Access-Control-Allow-Headers': 'X-Requested-With',
     },
     sockPort: 3000,
-  }).listen(WEBPACK_DEV_PORT, 'localhost', (err, result) => {
+  }).listen(WEBPACK_DEV_PORT, 'local.nypl.org', (err, result) => {
     if (err) {
       logger.error(err);
     }
