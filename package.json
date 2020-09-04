@@ -84,7 +84,7 @@
     "express": "4.13.1",
     "extract-text-webpack-plugin": "1.0.1",
     "iso": "4.1.0",
-    "node-sass": "3.8.0",
+    "node-sass": "4.13.1",
     "prop-types": "15.5.10",
     "react": "15.5.4",
     "react-dom": "15.5.4",
