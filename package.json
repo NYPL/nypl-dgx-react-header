@@ -86,7 +86,7 @@
   },
   "dependencies": {
     "@babel/register": "7.9.0",
-    "@nypl/dgx-header-component": "2.6.0",
+    "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component.git#qa-testing",
     "colors": "1.4.0",
     "compression": "1.7.4",
     "core-js": "3.6.5",
