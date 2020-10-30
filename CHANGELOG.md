@@ -24,6 +24,8 @@
 > Replace dgx-loggly with winston v3 custom logger
 > Bump node version to v10
 > Remove esdoc and config; not implemented
+> Bump dgx-header-component to v2.7.0
+> Add eb configurations for new Node server
 
 ### v1.4.28
 > Updating Falcon CrowdStrike to 5.29.
