@@ -137,4 +137,4 @@ to
 "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component#name-of-feature-branch",
 ```
 
-Make sure that `name-of-feature-branch` is pushed to Github and public in order for Travis and AWS to pick it up. This repo for the Header app should have it's own feature branch with this updated header component feature branch change. Then a developer can manually deploy to `development` or `qa` for testing.
+Make sure that `name-of-feature-branch` is pushed to Github and public in order for Travis and AWS to pick it up. This repo for the Header app should have its own feature branch with this updated header component feature branch change. Then a developer can manually deploy to `development` or `qa` for testing.
