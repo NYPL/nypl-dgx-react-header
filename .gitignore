@@ -12,6 +12,7 @@ bower_components
 npm-debug.log
 .DS_STORE
 assets.json
+log/*.log
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
