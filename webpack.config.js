@@ -32,7 +32,7 @@ const commonSettings = {
     // Sets the name of the bundled application files
     // Additionally we can isolate vendor files as well
     filename: 'dgx-header.min.js',
-    globalObject: 'this',
+    globalObject: 'document',
   },
   plugins: [
     // Cleans the Dist folder after every build.
