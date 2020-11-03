@@ -54,7 +54,7 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
         let skipNavAdded;
 
         // create element to hold the single header instance.
-        const htmlElement = document.createElement(React.createElement('div'));
+        const htmlElement = document.createElement('div');
         htmlElement.id = 'nypl-dgx-header';
 
         // Make a global object to store the instances of nyplHeader
