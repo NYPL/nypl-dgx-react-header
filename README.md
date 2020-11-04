@@ -7,9 +7,9 @@ React NYPL Header Web Application.
 
 | Branch         | Status|
 |:---------------|:---------------------------------------------------------------------------------------------------------------------------|
-| `master`   | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=master)](https://travis-ci.org/NYPL/nypl-dgx-react-header) |
-| `qa`           | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-dgx-react-header)   |
-| `development`  | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=development)](https://travis-ci.org/NYPL/nypl-dgx-react-header)       |
+| `master`   | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=master)](https://travis-ci.com/NYPL/nypl-dgx-react-header) |
+| `qa`           | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=qa)](https://travis-ci.com/NYPL/nypl-dgx-react-header)   |
+| `development`  | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=development)](https://travis-ci.com/NYPL/nypl-dgx-react-header)       |
 
 ## Node Configuration
 Pass in the following environment variables:
