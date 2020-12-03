@@ -3,7 +3,7 @@
 React NYPL Header Web Application.
 
 ## Version
-> v1.5.0
+> v1.5.1
 
 | Branch         | Status|
 |:---------------|:---------------------------------------------------------------------------------------------------------------------------|
@@ -128,7 +128,7 @@ There are changes we'd like to deploy that can't always be tested locally for a 
 In order to make changes and deploy them, update the reference to `@nypl/dgx-header-component` in `package.json` to point to the working branch in Github. For example, update:
 
 ```
-"@nypl/dgx-header-component": "2.6.0",
+"@nypl/dgx-header-component": "2.7.1",
 ```
 
 to

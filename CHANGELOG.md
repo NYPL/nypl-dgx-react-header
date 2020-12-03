@@ -1,5 +1,8 @@
 ## Change Log
 
+### v1.5.1
+> Bump dgx-header-component to version 2.7.1
+
 ### v1.5.0
 > Updating webpack v4.43
 > Updating webpack-dev-server v3
