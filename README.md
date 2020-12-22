@@ -3,16 +3,16 @@
 React NYPL Header Web Application.
 
 ## Version
-> v1.4.27
+> v1.5.1
 
-| Branch         | Status|  
-|:---------------|:---------------------------------------------------------------------------------------------------------------------------|  
-| `master`   | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=master)](https://travis-ci.org/NYPL/nypl-dgx-react-header) |  
-| `qa`           | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-dgx-react-header)   |  
-| `development`  | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=development)](https://travis-ci.org/NYPL/nypl-dgx-react-header)       |
+| Branch         | Status|
+|:---------------|:---------------------------------------------------------------------------------------------------------------------------|
+| `master`   | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=master)](https://travis-ci.com/NYPL/nypl-dgx-react-header) |
+| `qa`           | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=qa)](https://travis-ci.com/NYPL/nypl-dgx-react-header)   |
+| `development`  | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=development)](https://travis-ci.com/NYPL/nypl-dgx-react-header)       |
 
 ## Node Configuration
-Pass in the following environment variables:  
+Pass in the following environment variables:
 
 - `PORT`: Desired port where the server will reside (default: 3001).
 
@@ -128,7 +128,7 @@ There are changes we'd like to deploy that can't always be tested locally for a 
 In order to make changes and deploy them, update the reference to `@nypl/dgx-header-component` in `package.json` to point to the working branch in Github. For example, update:
 
 ```
-"@nypl/dgx-header-component": "2.4.11",
+"@nypl/dgx-header-component": "2.7.1",
 ```
 
 to
@@ -137,4 +137,4 @@ to
 "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component#name-of-feature-branch",
 ```
 
-Make sure that `name-of-feature-branch` is pushed to Github and public in order for Travis and AWS to pick it up. This repo for the Header app should have it's own feature branch with this updated header component feature branch change. Then a developer can manually deploy to `development` or `qa` for testing.
+Make sure that `name-of-feature-branch` is pushed to Github and public in order for Travis and AWS to pick it up. This repo for the Header app should have its own feature branch with this updated header component feature branch change. Then a developer can manually deploy to `development` or `qa` for testing.

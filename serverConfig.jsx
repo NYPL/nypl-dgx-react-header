@@ -7,14 +7,14 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Iso from 'iso';
 import alt from 'dgx-alt-center';
-// Server Configurations
-import appConfig from './appConfig.js';
 import webpack from 'webpack';
-import webpackConfig from './webpack.config.js';
 // Header Component
 import { Header, navConfig } from '@nypl/dgx-header-component';
 // Logging
-import { getLogger, initMorgan } from 'dgx-loggly';
+import logger from './logger';
+// Server Configurations
+import appConfig from './appConfig';
+import webpackConfig from './webpack.config';
 
 // Global Config Variables
 const ROOT_PATH = __dirname;
@@ -45,19 +45,8 @@ app.set('views', INDEX_PATH);
 
 // Assign the proper path where the application's dist files are located.
 app.use(express.static(DIST_PATH, {
-  maxage: '5m'
+  maxage: '5m',
 }));
-
-// Set logger parameters
-const logger = getLogger({
-  env: process.env.APP_ENV,
-  appTag: 'Header-App',
-  token: process.env.LOGGLY_TOKEN,
-  subdomain: process.env.LOGGLY_SUBDOMAIN,
-});
-
-// Have morgan here to stream reponse code above 400 to console and loggly
-app.use(initMorgan(logger));
 
 /* Isomporphic Rendering of React App
  * ----------------------------------
@@ -73,7 +62,7 @@ app.get('/', (req, res) => {
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
   const headerApp = ReactDOMServer.renderToString(
-    <Header navData={navConfig.current} skipNav={skipNav ? { target: skipNav } : null} />
+    <Header navData={navConfig.current} skipNav={skipNav ? { target: skipNav } : null} />,
   );
   iso.add(headerApp, alt.flush());
 
@@ -106,7 +95,7 @@ app.get('/header-markup', (req, res) => {
       urlType={(urlType === 'absolute') ? 'absolute' : ''}
       navData={navConfig.current}
       skipNav={skipNav ? { target: skipNav } : null}
-    />
+    />,
   );
 
   iso.add(headerApp, alt.flush());
@@ -124,7 +113,7 @@ const server = app.listen(serverPort, (err, result) => {
   console.log(colors.yellow.underline(appConfig.appName));
   console.log(
     colors.green('Express Server is listening at'),
-    colors.cyan(`localhost:${serverPort}`)
+    colors.cyan(`localhost:${serverPort}`),
   );
 });
 
@@ -138,7 +127,7 @@ const gracefulShutdown = () => {
   });
   // if after
   setTimeout(() => {
-    logger.warn('Could not close connections in time, forcefully shutting down');
+    logger.warning('Could not close connections in time, forcefully shutting down');
     process.exit();
   }, 1000);
 };
@@ -164,14 +153,15 @@ if (!isProduction) {
       'Access-Control-Allow-Origin': 'http://localhost:3001',
       'Access-Control-Allow-Headers': 'X-Requested-With',
     },
-  }).listen(WEBPACK_DEV_PORT, 'localhost', (err, result) => {
+    sockPort: 3000,
+  }).listen(WEBPACK_DEV_PORT, 'local.nypl.org', (err, result) => {
     if (err) {
-      logger.error(colors.red(err));
+      logger.error(err);
     }
 
     console.log(
       colors.magenta('Webpack Development Server listening at'),
-      colors.cyan(`localhost:${WEBPACK_DEV_PORT}`)
+      colors.cyan(`localhost:${WEBPACK_DEV_PORT}`),
     );
   });
 }
