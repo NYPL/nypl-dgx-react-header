@@ -1,5 +1,8 @@
 ## Change Log
 
+### v1.5.2
+> Security Update: change CDN URL to point to ux-static.nypl.org.
+
 ### v1.5.1
 > Bump dgx-header-component to version 2.7.1
 
