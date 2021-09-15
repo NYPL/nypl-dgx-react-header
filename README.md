@@ -7,9 +7,9 @@ React NYPL Header Web Application.
 
 | Branch         | Status|
 |:---------------|:---------------------------------------------------------------------------------------------------------------------------|
-| `master`   | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=master)](https://travis-ci.org/NYPL/nypl-dgx-react-header) |
-| `qa`           | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-dgx-react-header)   |
-| `development`  | [![Build Status](https://travis-ci.org/NYPL/nypl-dgx-react-header.svg?branch=development)](https://travis-ci.org/NYPL/nypl-dgx-react-header)       |
+| `master`   | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=master)](https://travis-ci.com/NYPL/nypl-dgx-react-header) |
+| `qa`           | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=qa)](https://travis-ci.com/NYPL/nypl-dgx-react-header)   |
+| `development`  | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=development)](https://travis-ci.com/NYPL/nypl-dgx-react-header)       |
 
 ## Node Configuration
 Pass in the following environment variables:
@@ -137,4 +137,4 @@ to
 "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component#name-of-feature-branch",
 ```
 
-Make sure that `name-of-feature-branch` is pushed to Github and public in order for Travis and AWS to pick it up. This repo for the Header app should have it's own feature branch with this updated header component feature branch change. Then a developer can manually deploy to `development` or `qa` for testing.
+Make sure that `name-of-feature-branch` is pushed to Github and public in order for Travis and AWS to pick it up. This repo for the Header app should have its own feature branch with this updated header component feature branch change. Then a developer can manually deploy to `development` or `qa` for testing.
