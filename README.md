@@ -102,7 +102,7 @@ By using the `aws-cli`, developers can deploy the Header App to the desired AWS 
 
 | AWS Profile | Application Name | Environment |
 |---|---|---|
-| `nypl-digital-dev` | `nypl-header-app` | **QA**: `nypl-header-qa` <br><br> **Production**: `nypl-header-production` |
+| `nypl-digital-dev` | `nypl-header-app` | **QA**: `nypl-header-qa` <br /><br /> **Production**: `nypl-header-production` |
 | `nypl-sandbox` | `nypl-header-app` | **Development**: `nypl-header-development` |
 
 > Note: All QA and Development servers should be configured with only 1 instance. Production servers are typically setup with auto-scaling supporting 2 or more instances.
