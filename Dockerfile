@@ -1,4 +1,4 @@
-FROM node:10.0.0
+FROM node:10.0.0 as production
 
 RUN apt-get update
 RUN apt-get upgrade -y
