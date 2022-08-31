@@ -12,6 +12,8 @@ branches:
     - production
 env:
   global:
+    - REMOTE_IMAGE_URL_NYPLHEADER_DEV=491147561046.dkr.ecr.us-east-1.amazonaws.com/nyplheader
+    - REMOTE_IMAGE_URL_NYPLHEADER_PRODUCTION=463786892988.dkr.ecr.us-east-1.amazonaws.com/nyplheader
     # AWS dev
     - secure: G+V56oyMAzIhns1kg/M4vgmapgw9WMTrKJDceT+f05Dxdp3dApevBqlvmwS34xtDZPblI8UcCGEGuFjzqQ0EVrPe1lmrghdN9nA2pkpzfyAFRTVAQigFWmIR7kWCo/gJQHKHrKKnp7Up1Lpf6spz6rkzK1eExrs9UzlvCaNNbREi4WIGaE2KJXuTNgngHzvgBvalEHl0ttbww/yrkl47T+SR4sQT4A2PSP/LzZcPSfk3GhZ9QvvYdTc+PFevr0k7pghZbWOPUAuSfg6Dqn4SiFhBNrDl5GoxymdLyoERcdo7MZD5d3zVHY+MpYjUDNGP30ZDH15L9qPf/AZ13YvpH2Yd0gqFIrJEitNWT+zJj2+UW5hBvwEY8xNjsAFygYb4TYLHqjb4LXPAaDC/1q6h27D+rrRo0pcfty2VrJOIQ/qUdZvFv3gVjD8o9K7E+AclYdGybpbu7bBozBHK8B8wf0OWEEE8L3X9MKDFYuabXwlCtR9LB6iVJ9QgrVdz4cCX4EgwEZkOmFaJM4+xL2rOHToaP87N941F0wrsNzWu82USKsy94hI521+wPcQ3BAMaScE4o0KUTMHnjG2Um/Cz6jbKjl1zN6xakaRwNbN66zLNVOZ7UDeSF5/Sl8QjBKb334fSZFdUejI917i9SddQnJcjYVIbt3OI7+T0mZ5v/kY=
     # AWS prod
