@@ -6,7 +6,7 @@ services:
   - docker
 
 branches:
-  only:    
+  only:
     - qa
     - production
 env:
