@@ -1,52 +1,39 @@
 language: node_js
 node_js:
-  - "10.15.3"
-cache:
-  directories:
-  - node_modules
-install: npm install
-before_script: "echo 'No unit test coverage for Header App; Will attempt to build distribution assets as a safety'"
-script: npm run dist
-before_deploy: "echo 'Successfully built distribution assets; Preparing to deploy Header
-  App to AWS'"
-deploy:
-- provider: elasticbeanstalk
-  skip_cleanup: true
-  access_key_id: "$AWS_ACCESS_KEY_ID_PRODUCTION"
-  secret_access_key: "$AWS_SECRET_ACCESS_KEY_PRODUCTION"
-  region: us-east-1
-  app: nypl-header-app
-  env: nypl-header-production-1
-  bucket_name: elasticbeanstalk-us-east-1-946183545209
-  bucket_path: nypl-header-production
-  on:
-    repo: NYPL/nypl-dgx-react-header
-    branch: master
-- provider: elasticbeanstalk
-  skip_cleanup: true
-  access_key_id: "$AWS_ACCESS_KEY_ID_PRODUCTION"
-  secret_access_key: "$AWS_SECRET_ACCESS_KEY_PRODUCTION"
-  region: us-east-1
-  app: nypl-header-app
-  env: nypl-header-qa-1
-  bucket_name: elasticbeanstalk-us-east-1-946183545209
-  bucket_path: nypl-header-qa
-  on:
-    repo: NYPL/nypl-dgx-react-header
-    branch: qa
-# - provider: elasticbeanstalk
-#   skip_cleanup: true
-#   access_key_id: "$AWS_ACCESS_KEY_ID_DEVELOPMENT"
-#   secret_access_key: "$AWS_SECRET_ACCESS_KEY_DEVELOPMENT"
-#   region: us-east-1
-#   app: nypl-header-app
-#   env: nypl-header-development
-#   bucket_name: elasticbeanstalk-us-east-1-224280085904
-#   bucket_path: nypl-header-development
-#   on:
-#     repo: NYPL/nypl-dgx-react-header
-#     branch: development
-after_deploy: echo 'Successfully executed deploy trigger for Header App on AWS'
+  - 10.15.3
+
+services:
+  - docker
+
+branches:
+  only:    
+    - qa
+    - production
 env:
   global:
-    secure: TpnWUemRm5VO+fuUvpsOivelxwPzWiB6PsNo1jSgERZOnMBkA+K7UqsWqeLP9uzNcsaY1FP1oduLkB/bFYZksRB3sCefskXAEUk356kQLUhkn36beT0rAhPWM1yUMurLPRpTTX+bH05KC6H3KSDCfiusuaeBc1My5DakSGwQNlrscf9LViam+TO3nr/I6RrXPd1ncIVENSo10NyLZGIv1X8zHeU4gLoX6HBrofmZPJWC2wZNZ37tI7QXQn9CmzESWpZEL7Rfx8ThUEeFvxVNxPldYOQY3GWCzaxf2AK2seT7PmxkRsEP2qvwLR1phKHIOLBOClBoVjpZiaP/9yJqBxiKDxk5elarY8TLUpn7jN0xFGByOfi1rTfbdoV+6tMaooVYR9vdeLlzE2jOGikO2WMKVomFTFCLUoVN4OLzNmUbFSRqtQLPlZ1x5eGd3+JyTsAAZZjf/C7wKZs/H92GPLXAo3dJKTACl71FlC2Xk5KPFq0HXRK+vdvTWDSXSCJ47Xns6vFZeDrKoG6GfO0/U4h8qYJbW70DRfksxDXrZf75TwxclbRyZzyUV6ZT2sr+LvS5I0kzQrTbjPs/2lxsNSr13trVU5fico40t4sc+QCK1faB6b1tvOaCCFa2fUJrYxhZTez01IyBEiEKj6ZgVOz88VXNIEvfP1XCZujgYpk=
+    - REMOTE_IMAGE_URL_NYPLHEADER_DEV=491147561046.dkr.ecr.us-east-1.amazonaws.com/nyplheader
+    - REMOTE_IMAGE_URL_NYPLHEADER_PRODUCTION=463786892988.dkr.ecr.us-east-1.amazonaws.com/nyplheader
+    # AWS dev
+    - secure: OhqeYc2DwKTLG4ywviFdiZextb+8Mae+XuIXYKX1lfeFIiQC9tflAmCz5y/TzKp+Mz9BfZwo7uZeW0XmMlVIKAhqjIShC4gM7cqX9p1xEkWUj6OwRtC0yT2rlv210NT/tsPDnTZo3KdD/+dBeNlknOax5H0/EqMqhw5pKJuLj6fLn3Tjgrgj4OFQR/JhFCbrCzpbAzJmlwGqP3QOlX181dbmPkUgQEuS2R05qujCwsWrzk0X9Kcm7BYCoxI1PfymDV4ZY0sR9TZGSqziRQsAIyMgm1yIY3o9sffar7oooxBqySU2Del/CoKFr1xfecdDL5xd5PbqpHFsUh3swZu2Qny5Ef4XYq6y0YOdQ8xC7bYUJEgvRv6EZxo7ZsS+eqCx3HIWtQyKXrT7qU8ChJtcCDj8jRZKrKtmR6xV3orlZCIzj4WVBj8L6IAd5ypUCkk+RrdhHFN69o19dR77ZIQ4dsX4cqQfwO+LnQtefHpF5kLS6vYJqd5WifAl6UA+84KfDspz32cIEXuuUqJqNGcG/0Ef1OTif7beENxkGsYOh1ujxG/tyW44ZeYW8Ep5jOEHa8iUCH5m3pvmnQBsgFvAxe1+lDnA1+pqIJus3gYKeByBEZoo06haOynsDBY4xNQZxtiC2V6uKzgUgKkrQf2iaitvqH9NMMzKZuGcBvwA648=
+    # AWS prod
+    - secure: cubP7e/Qs/LH31WGQTt3QSYgsBECmaZH4JOUSYVAOD8Axk0YTpCFVBbIzXd7XAfkEu7JMlDD2pvoc0WaIUAwDjh4wQ6Wx0wMpXfsREurdtEqkXyzdy8ECLSDix1rCFirlaEgDL0Auvp9my3hNpq16+NBP+08RizfRVzcKyaovw6e+VP6bKkZOk3m6dkTwH/u5iLR99oi+Q9s/KLHZmPMN8/R9p2OeXyWpR02IVOwkyywv/7A4D+5vd//+B7L1sn/+BcKVQvxDUaUiZdSXszd5HdwTv/zIozWn9rlontx92XQs7Cn6aMUPVxY0zH/4bA8kC54UrBxYN3eLyEWdH4DSz7FjVtO7v3Gh71659+kUjur0piFvYYDHIxWjRMue8vuo7Dd7jMdDimVBmBpfk2Cs6gp538RDC7FYE9cNpvE1m9bL8GcVzhp7iaGnFhqKl/zwx4V8zwb6UIbw10AkhowU/fxBtm9Y5jA9owgOGKXDrTSaOo83LK2uM37aOgdzxozKT1/e9rmBH+ZSvfGKo4G/sG2aOyhjRgQtB2dBaRJxySW6VJi6hldBd/idfkIw7oTE7oZFjBoRXZHrVgqr+qt/bmNk+eq2yZYgmm0c5lXjowsaGtL+qFcUSsU7mg1NVEQReYOt/xJa4tb7kcp7DOTfTqky1wl5HgD98ds1epkSao=
+
+install: npm install
+
+after_success:
+  - cd $TRAVIS_BUILD_DIR
+  - provisioning/deploy
+
+script: echo "npm test temporarily disabled"
+
+after_failure:
+  - if [ -f $HOME/server.log ] ; then echo "Server log:" && cat $HOME/server.log ; fi
+
+after_script:
+  - rm -f $HOME/server.log
+
+notifications:
+  email:
+    recipients: sysadmin@nypl.org
+    on_success: always
+    on_failure: always
