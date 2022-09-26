@@ -5,11 +5,11 @@ React NYPL Header Web Application.
 ## Version
 > v1.5.2
 
-| Branch         | Status|
-|:---------------|:---------------------------------------------------------------------------------------------------------------------------|
-| `master`   | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=master)](https://travis-ci.com/NYPL/nypl-dgx-react-header) |
-| `qa`           | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=qa)](https://travis-ci.com/NYPL/nypl-dgx-react-header)   |
-| `development`  | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=development)](https://travis-ci.com/NYPL/nypl-dgx-react-header)       |
+| Branch        | Status|
+|:--------------|:---------------------------------------------------------------------------------------------------------------------------|
+| `production`  | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=production)](https://travis-ci.com/NYPL/nypl-dgx-react-header) |
+| `qa`          | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=qa)](https://travis-ci.com/NYPL/nypl-dgx-react-header)   |
+| `development` | [![Build Status](https://travis-ci.com/NYPL/nypl-dgx-react-header.svg?branch=development)](https://travis-ci.com/NYPL/nypl-dgx-react-header)       |
 
 ## Node Configuration
 Pass in the following environment variables:
@@ -94,28 +94,16 @@ We follow a [feature-branch](https://www.atlassian.com/git/tutorials/comparing-w
 * Send a PR pointing to the `development` branch upon completion
 * Once the PR is approved, it should be merged into the `development` branch
 * If there are several PR's in process, a release should be scheduled by merging all completed PR's into the `development` branch
-* When a release is to be deployed, the `development` branch will be merged into `master`
-* All releases merged into `master`, `MUST` be tagged and pushed to Github with their corresponding `version`
+* When a release is to be deployed, the `development` branch will be merged into `production`
+* All releases merged into `production`, `MUST` be tagged and pushed to Github with their corresponding `version`
 
-## AWS Elastic Beanstalk Application Settings
-By using the `aws-cli`, developers can deploy the Header App to the desired AWS application environments listed below:
+## Deployment
 
-| AWS Profile | Application Name | Environment |
-|---|---|---|
-| `nypl-digital-dev` | `nypl-header-app` | **QA**: `nypl-header-qa` <br /><br /> **Production**: `nypl-header-production` |
-| `nypl-sandbox` | `nypl-header-app` | **Development**: `nypl-header-development` |
-
-> Note: All QA and Development servers should be configured with only 1 instance. Production servers are typically setup with auto-scaling supporting 2 or more instances.
-
-## AWS Deployment
-
-#### QA/Development
-Developers `SHOULD` target the proper environment when deploying the application for review. Using their proper profile credentials, developers will execute the `eb deploy` command to deploy a new version of the application on AWS.
+We use TravisCI for continuous integration and delivery. Builds are started on git push to a target branch per environment (`development`, `qa`, `production`). Deployment to AWS will occur on successful build to an Elastic Container Service cluster.
 
 #### Production
 In our AWS production environment, we have defined a CI/CD pipeline via Travis CI to automatically:
 * Run the npm task to build the distribution assets as a safety prior to deployment
-* Execute the `deploy` hook only for `production` for AWS Elastic Beanstalk to deploy the new updates merged into `master`. This occurs only if the `build` phase is successful
 * Developers do not need to manually deploy the application unless an error occurred via Travis
 
 ## Header Component Development
