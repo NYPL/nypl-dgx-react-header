@@ -74,7 +74,7 @@
     "@babel/core": "7.9.0",
     "@babel/preset-env": "7.9.5",
     "@babel/preset-react": "7.9.4",
-    "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component.git#oauth-login-qa",
+    "@nypl/dgx-header-component": "2.8.0-rc-2",
     "@types/react": "^15.0.0",
     "babel-loader": "8.1.0",
     "clean-webpack-plugin": "3.0.0",
