@@ -1,7 +1,7 @@
 FROM node:10.0.0 as production
 
-RUN apt-get update
-RUN apt-get upgrade -y
+# RUN apt-get update
+# RUN apt-get upgrade -y
 
 # Create app directory
 WORKDIR /usr/src/app
