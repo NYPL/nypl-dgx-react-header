@@ -18,8 +18,6 @@ env:
     # AWS prod
     - secure: cubP7e/Qs/LH31WGQTt3QSYgsBECmaZH4JOUSYVAOD8Axk0YTpCFVBbIzXd7XAfkEu7JMlDD2pvoc0WaIUAwDjh4wQ6Wx0wMpXfsREurdtEqkXyzdy8ECLSDix1rCFirlaEgDL0Auvp9my3hNpq16+NBP+08RizfRVzcKyaovw6e+VP6bKkZOk3m6dkTwH/u5iLR99oi+Q9s/KLHZmPMN8/R9p2OeXyWpR02IVOwkyywv/7A4D+5vd//+B7L1sn/+BcKVQvxDUaUiZdSXszd5HdwTv/zIozWn9rlontx92XQs7Cn6aMUPVxY0zH/4bA8kC54UrBxYN3eLyEWdH4DSz7FjVtO7v3Gh71659+kUjur0piFvYYDHIxWjRMue8vuo7Dd7jMdDimVBmBpfk2Cs6gp538RDC7FYE9cNpvE1m9bL8GcVzhp7iaGnFhqKl/zwx4V8zwb6UIbw10AkhowU/fxBtm9Y5jA9owgOGKXDrTSaOo83LK2uM37aOgdzxozKT1/e9rmBH+ZSvfGKo4G/sG2aOyhjRgQtB2dBaRJxySW6VJi6hldBd/idfkIw7oTE7oZFjBoRXZHrVgqr+qt/bmNk+eq2yZYgmm0c5lXjowsaGtL+qFcUSsU7mg1NVEQReYOt/xJa4tb7kcp7DOTfTqky1wl5HgD98ds1epkSao=
 
-install: npm install
-
 after_success:
   - cd $TRAVIS_BUILD_DIR
   - provisioning/deploy
