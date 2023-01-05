@@ -1,12 +1,12 @@
 {
   "name": "nypl-dgx-react-header",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "description": "NYPL Universal Javascript React Header App",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dist": "NODE_ENV=production webpack --config webpack.config.js",
-    "eb-start": "npm run dist && npm run start",
+    "eb-start": "npm run dist && NODE_ENV=production npm run start",
     "lint": "eslint ./"
   },
   "keywords": [
@@ -74,7 +74,7 @@
     "@babel/core": "7.9.0",
     "@babel/preset-env": "7.9.5",
     "@babel/preset-react": "7.9.4",
-    "@nypl/dgx-header-component": "2.8.0-rc-3",
+    "@nypl/dgx-header-component": "2.8.0",
     "@types/react": "^15.0.0",
     "babel-loader": "8.1.0",
     "clean-webpack-plugin": "3.0.0",
