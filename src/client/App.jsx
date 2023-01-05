@@ -27,9 +27,19 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
   return value;
 };
 
-(function renderApp(window, document) {
-  if (typeof window !== 'undefined') {
-    window.onload = () => {
+(function renderHeaderApp(window, document) {
+  function loadHeader(fn) {
+    // When the DOM is not loading, we can access the DOM and the elements
+    // on the page. If it's still loading, we can listen for the
+    // DOMContentLoaded event and then run the function.
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+  function header() {
+    if (typeof window !== 'undefined') {
       let isRenderedByServer = false;
 
       // Render Isomorphically
@@ -55,6 +65,7 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
 
         // create element to hold the single header instance.
         const htmlElement = document.createElement('div');
+        let containerId;
         htmlElement.id = 'nypl-dgx-header';
 
         // Make a global object to store the instances of nyplHeader
@@ -115,7 +126,15 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
                 };
               }
 
-              scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
+              containerId = getQueryParam(scriptTag.src, 'containerId');
+
+              // If an element id is passed in, append the header to that
+              // element. This assumes the element is already on the page.
+              // Otherwise, append the header to the body on the element
+              // that was created in this script.
+              if (!containerId) {
+                scriptTag.parentNode.insertBefore(htmlElement, scriptTag);
+              }
               nyplHeaderObject.processedScripts.push(scriptTag);
             }
           });
@@ -148,13 +167,12 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
         // before allowing React to Render the Header.
         if (nyplHeaderObject.processedScripts.length === 1 &&
           nyplHeaderObject.styleTags.length === 1 &&
-          htmlElement && appEnv) {
+          (containerId || htmlElement) && appEnv) {
           setTimeout(() => {
             ReactDOM.render(
               <Header urlType={urlType} navData={navConfig.current} skipNav={skipNavElem} />,
-              htmlElement
+              containerId ? document.getElementById(containerId) : htmlElement,
             );
-
             console.log('nypl-dgx-header rendered via client');
 
             // We want to programmatically focus on the skip nav id if it was
@@ -191,6 +209,7 @@ const getQueryParam = (fullUrl = '', variableToFind) => {
       if (!window.dgxFeatureFlags) {
         window.dgxFeatureFlags = FeatureFlags.utils;
       }
-    };
+    }
   }
+  loadHeader(header);
 }(window, document));
