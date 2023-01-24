@@ -3,7 +3,7 @@
 React NYPL Header Web Application.
 
 ## Version
-> v1.5.2
+> v1.6.0
 
 | Branch        | Status|
 |:--------------|:---------------------------------------------------------------------------------------------------------------------------|
@@ -19,10 +19,30 @@ Pass in the following environment variables:
 - `NODE_ENV`: Sets up the app to be minified using `production`. Otherwise, it will default to development mode in Webpack.
 
 ## Dynamic Embedded Header Usage
-The Header is a standalone application that can potentially be picked up by many different applications. Currently, Locations, Staff Profiles, Research Divisions, Old Drupal, and New Drupal use the production build of this repo to import the Header into their application. There are differences in how the Header is pulled in and configurations for the nav links and skip navigation.
+The Header is a standalone application that can potentially be picked up by many different applications. Currently, Library Card App, Staff Profiles, Old Drupal, and New Drupal use the production build of this repo to import the Header into their application. There are differences in how the Header is pulled in and configurations for the nav links and skip navigation.
 
 ### Embeddable Script
-Locations, Staff Profiles, and Research Divisions all pull in the Header through an embeddable standalone script tag that should be used in the `<body>` element of the main HTML file (or any other HTML files in the app). Since the Header loads dynamically, the script is surrounded by optional HTML markup and styles so that the top part of the page doesn't jump and cause a flash. It is suggested that the Header be imported as a whole with the following markup:
+Any app can pull in the Header through an embeddable standalone script tag that should be used in the `<body>` element of the main HTML file (or any other HTML files in the app). Since the Header loads dynamically, the script is surrounded by optional HTML markup and styles so that the top part of the page doesn't jump and cause a flash. It is suggested that the Header be imported as a whole with the following markup:
+
+```HTML
+<!-- Header -->
+<div id="Header-Placeholder">
+    <style>
+        #Header-Placeholder {
+            min-height: 70px;
+        }
+        @media screen and (min-width: 1024px) {
+            #Header-Placeholder {
+                min-height: 230px;
+            }
+        }
+    </style>
+    <div id="nypl-header"></div>
+    <script type="text/javascript" src="https://header.nypl.org/dgx-header.min.js?skipNav=main-content&containerId=nypl-header" async></script>
+</div>
+```
+
+Note: The previous markup is still supported but it's recommended to use the new markup above. The older markup does not contain the `containerId` configuration or the div with the `id` of `nypl-header`:
 
 ```HTML
 <!-- Header -->
@@ -41,9 +61,13 @@ Locations, Staff Profiles, and Research Divisions all pull in the Header through
 </div>
 ```
 
-There are configurations that can be passed into the header script to enable/configure a few features.
+
+There are URL query param configurations that can be passed into the header script URL to enable/configure a few features.
 
 * `urls` - The accepted values are `relative`/`absolute`, with `relative` as the default. This outputs the main navigation links as either relative to the app or absolute. For apps that will not live on an `nypl.org/...` path, it's best to pass `urls=absolute` into the configuration. Otherwise, the navigation will render links relative to the app which may not exist.
+
+Example: `https://header.nypl.org/dgx-header.min.js?urls=absolute`
+
 * `skipNav` - The id of the `<main>` element on the app where the Header is being imported. If this configuration is being enabled, make sure to also add a `tabindex` attribute of `-1` to the main element. This will allow the Header to programmatically focus on the main content.
 
 ```HTML
@@ -51,6 +75,13 @@ There are configurations that can be passed into the header script to enable/con
   <!-- app goes here -->
 </main>
 ```
+
+Example: `https://header.nypl.org/dgx-header.min.js?skipNav=main-content`
+
+* `containerId` - The id of the element where the Header will be rendered. This is optional and if no value is passed, the script will create a `<div>` element with an `id` of `nypl-dgx-header`. The recommended approach is to pass an `id` with value `nypl-header` to the configuration.
+
+Example: `https://header.nypl.org/dgx-header.min.js?containerId=nypl-header`
+
 
 ### Drupal Import
 We call this the Drupal import way of rendering the Header because it's the only site that imports the Header in this way. This app has a `/header-markup` endpoint that can be used to get _only_ the HTML markup for the header. Any app can use that markup as they wish, but it won't be interactive or styled unless they import the corresponding CSS and JS files as well.
@@ -101,7 +132,7 @@ We follow a [feature-branch](https://www.atlassian.com/git/tutorials/comparing-w
 
 We use TravisCI for continuous integration and delivery. Builds are started on git push to a target branch per environment (`development`, `qa`, `production`). Deployment to AWS will occur on successful build to an Elastic Container Service cluster.
 
-#### Production
+### Production
 In our AWS production environment, we have defined a CI/CD pipeline via Travis CI to automatically:
 * Run the npm task to build the distribution assets as a safety prior to deployment
 * Developers do not need to manually deploy the application unless an error occurred via Travis
