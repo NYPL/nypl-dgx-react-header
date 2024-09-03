@@ -1,3 +1,9 @@
+# Deprecated
+
+As of September 2024, this repo is deprecated. See the instructions in the [`nypl-header-app`](https://github.com/NYPL/nypl-header-app) repo for using the new NYPL Header and Footer.
+
+---
+
 # NYPL React Header App
 
 React NYPL Header Web Application.
